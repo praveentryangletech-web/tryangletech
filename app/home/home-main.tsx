@@ -7,7 +7,7 @@ import FeatureIntro from './components/about';
 import Brands from './components/Brands';
 import Benefits from './components/Benefits';
 import Workflow from './components/Workflow';
-import Integrations from './components/Integrations';
+import Integrations from './components/Integration';
 import Testimonials from './components/Testimonials';
 import Pricing from './components/Pricing';
 import Faq from './components/Faq';

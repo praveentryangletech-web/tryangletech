@@ -52,24 +52,24 @@ export default function Footer() {
               </div>
               <div className="w-layout-vflex rt-footer-link-box">
                 <a
-                  href="https://taskopia.webflow.io/home-one"
+                  href="/home-one"
                   aria-current="page"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 w--current"
                   >Home</a
                 ><a
-                  href="https://taskopia.webflow.io/about"
+                  href="/about"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >About </a
                 ><a
-                  href="https://taskopia.webflow.io/blog-one"
+                  href="/blog-one"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Blog</a
                 ><a
-                  href="https://taskopia.webflow.io/service-one"
+                  href="/service-one"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Service</a
                 ><a
-                  href="https://taskopia.webflow.io/pricing"
+                  href="/pricing"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Pricing</a
                 >
@@ -82,25 +82,25 @@ export default function Footer() {
               </div>
               <div className="w-layout-vflex rt-footer-link-box">
                 <a
-                  href="https://taskopia.webflow.io/license"
+                  href="/license"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >License</a
                 ><a
-                  href="https://taskopia.webflow.io/style-guide"
+                  href="/style-guide"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Style guide</a
                 ><a
-                  href="https://taskopia.webflow.io/401"
+                  href="/401"
                   target="_blank"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Password protected</a
                 ><a
-                  href="https://taskopia.webflow.io/404"
+                  href="/404"
                   target="_blank"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >404</a
                 ><a
-                  href="https://taskopia.webflow.io/changelog"
+                  href="/changelog"
                   className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Changelog</a
                 >
@@ -118,8 +118,8 @@ export default function Footer() {
                   className="rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-gap-off rt-gap">
                   <span
                     className="rt-text-color-white rt-bark w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                    >Letâ€™s discuss your next project</span
-                  >â€”connect with our team today for tailored solutions.
+                    >Let’s discuss your next project</span
+                  >—connect with our team today for tailored solutions.
                 </p>
               </div>
               <div
@@ -135,7 +135,7 @@ export default function Footer() {
                   </div>
                   <div
                     className="rt-button-body-overlay rt-blue-white"
-                    style={{"transform":"translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)","transformStyle":"preserve-3d"}}></div
+                    style={{"transform":"translate3d(0px, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)","transformStyle":"preserve-3d"}}></div
                 ></a>
               </div>
               <div
@@ -147,7 +147,7 @@ export default function Footer() {
                   ><div className="rt-button-text">Schedule a call</div>
                   <div
                     className="rt-button-body-overlay"
-                    style={{"transform":"translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)","transformStyle":"preserve-3d"}}></div
+                    style={{"transform":"translate3d(0px, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)","transformStyle":"preserve-3d"}}></div
                 ></a>
               </div>
             </div>
@@ -163,15 +163,17 @@ export default function Footer() {
               alt=""
               src="/Taskopia_files/69269a3ea5e20bf6f3f40183_top logo.svg"
               loading="lazy" />
-            <div className="rt-link-discernible">link<br />â€</div></a
+            <div className="rt-link-discernible">link<br />â€ </div></a
           >
           <p
             className="rt-no-margin rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-mobile-text-center">
-            Designed by{" "}<a
+            Designed by{" "}
+            <a
               href="https://www.radianttemplates.com/"
               className="rt-bottom-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
               >Radiant Templates</a
-            >, Powered by{" "}<a
+            >, Powered by{" "}
+            <a
               href="https://webflow.com/"
               className="rt-bottom-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
               >Webflow</a
@@ -192,7 +194,7 @@ export default function Footer() {
                   alt=""
                   className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
               </div>
-              <div className="rt-link-discernible">link<br />â€</div></a
+              <div className="rt-link-discernible">link<br />â€ </div></a
             ><a
               href="https://www.instagram.com/"
               className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
@@ -203,7 +205,7 @@ export default function Footer() {
                   alt=""
                   className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
               </div>
-              <div className="rt-link-discernible">link<br />â€</div></a
+              <div className="rt-link-discernible">link<br />â€ </div></a
             ><a
               href="https://www.pinterest.com/"
               className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
@@ -214,7 +216,7 @@ export default function Footer() {
                   alt=""
                   className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
               </div>
-              <div className="rt-link-discernible">link<br />â€</div></a
+              <div className="rt-link-discernible">link<br />â€ </div></a
             >
           </div>
         </div>

@@ -61,9 +61,7 @@ export default function RootLayout({
     <link
       href="/Taskopia_files/taskopia.webflow.shared.f0926b53b.css"
       rel="stylesheet"
-      type="text/css"
-      integrity="sha384-8JJrU7tLlVgimUPEA4C2bRzJtoYNX2XX9OcP8Q03uju9Mcq90eyonXeBQUB7635b"
-      crossorigin="anonymous" />
+      type="text/css" />
     <style>
       @media (min-width: 992px) {
         html.w-mod-js:not(.w-mod-ix)
@@ -841,6 +839,7 @@ export default function RootLayout({
       <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
         {children}
         <Script src="/Taskopia_files/jquery-3.5.1.min.dc5e7f18c8.js" strategy="beforeInteractive" />
+        <Script src="/Taskopia_files/webflow.achunk.d92d62cb0de340ea.js" strategy="afterInteractive" />
         <Script src="/Taskopia_files/webflow.34d39e86.24c5208c8961105d.js" strategy="afterInteractive" />
       </body>
     </html>

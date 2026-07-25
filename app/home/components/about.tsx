@@ -1,0 +1,117 @@
+"use client";
+import React from 'react';
+
+export default function About() {
+  return (
+    <section className="rt-about-v1">
+      <div className="w-layout-blockcontainer rt-container-main w-container">
+        <div className="rt-about-v1-wrapper">
+          <div
+            data-w-id="7f0fa30b-3b22-eb95-178c-a03559ed5c7a"
+            style={{ "opacity": "0" }}
+            className="rt-about-v1-left">
+            <div
+              data-w-id="ff0a139f-98ea-ffdb-dd98-ba887e27c7b1"
+              style={{ "opacity": "0" }}>
+              <img
+                src="/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"
+                loading="lazy"
+                alt=""
+                className="rt-width-height-full" />
+            </div>
+            <div
+              data-w-id="dde1b63a-3928-b16b-6972-084ad79fec04"
+              style={{ "opacity": "0" }}>
+              <img
+                src="/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"
+                loading="lazy"
+                alt="taskopia-hero-one-dashbord-daily"
+                className="rt-width-height-full" />
+            </div>
+          </div>
+          <div className="rt-about-v1-right">
+            <div
+              data-w-id="4edacbd8-6b56-f889-45a6-f171ca5873b4"
+              style={{ "opacity": "0" }}
+              className="rt-sub-gap">
+              <div className="rt-sub-text rt-sub-gredient">who we are</div>
+            </div>
+            <div className="rt-heading-para-gap">
+              <h2
+                data-w-id="e56a7671-e1ec-e100-8312-33edf2c12738"
+                style={{ "opacity": "0" }}
+                className="rt-gap-off">
+                Reduce errors streamline work,
+                <span className="rt-color-periwinkle-gray">stay productive</span>
+              </h2>
+            </div>
+            <p
+              data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
+              style={{ "opacity": "0" }}
+              className="rt-gap-off">
+              Experience simplified task management with intuitive tools
+              designed to remove friction. Keep work organized, accelerate
+              progress.
+            </p>
+            <div className="rt-about-v1-right-inner">
+              <div
+                data-w-id="bb09800e-4a4e-6e34-85a6-12c87a12f13f"
+                style={{ "opacity": "0" }}
+                className="rt-about-v1-right-item">
+                <div className="rt-about-v1-right-item-icon">
+                  <img
+                    src="/Taskopia_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
+                    loading="lazy"
+                    alt="" />
+                </div>
+                <p className="rt-gap-off">
+                  <span className="rt-color-dark-indigo"
+                  >Consistent performance:</span
+                  >
+                  {" "}Ensures smooth, reliable output for every task,
+                  helping teams maintain accuracy and stability.
+                </p>
+              </div>
+              <div
+                data-w-id="c70e8fec-520b-f71e-2e11-c83017c1d6eb"
+                style={{ "width": "0%" }}
+                className="rt-about-v1-right-line"></div>
+              <div
+                data-w-id="09ab31ad-e88f-ce65-e18d-db54c7228b6d"
+                style={{ "opacity": "0" }}
+                className="rt-about-v1-right-item rt-bottom-padding-of">
+                <div className="rt-about-v1-right-item-icon">
+                  <img
+                    src="/Taskopia_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
+                    loading="lazy"
+                    alt="" />
+                </div>
+                <p className="rt-gap-off">
+                  <span className="rt-color-dark-indigo"
+                  >Data-driven decisions:</span
+                  >
+                  {" "}Offers clear insights that support smarter choices and
+                  improve overall decision quality.
+                </p>
+              </div>
+            </div>
+            <div
+              data-w-id="3a13a58c-8b59-09d0-895e-d85627d01dae"
+              style={{ "opacity": "0" }}
+              className="rt-button-para-gap rt-overflow-hidden rt-button-left">
+              <a
+                data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
+                href="https://taskopia.webflow.io/contact"
+                className="rt-button-body w-inline-block"
+              ><div className="rt-button-text">Get started today</div>
+                <div
+                  className="rt-button-body-overlay"
+                  style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
+                ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

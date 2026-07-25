@@ -3,18 +3,16 @@ import React, { useEffect } from 'react';
 import Navbar from '@/app/common/Navbar';
 import Footer from '@/app/common/Footer';
 import Hero from './components/Hero';
-import FeatureIntro from './components/about';
-import Brands from './components/Brands';
+import About from './components/about';
 import Benefits from './components/Benefits';
 import Workflow from './components/Workflow';
 import Integrations from './components/Integration';
 import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
 import Faq from './components/Faq';
 import Cta from './components/Cta';
 
 export default function HomeMain() {
-  useEffect(() => {
+ useEffect(() => {
     const triggerWebflow = () => {
       if (typeof window !== 'undefined') {
         document.documentElement.classList.add('w-mod-ix');
@@ -61,22 +59,25 @@ export default function HomeMain() {
     };
   }, []);
 
+
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <FeatureIntro />
-        <Brands />
-        <Benefits />
-        <Workflow />
-        <Integrations />
-        <Testimonials />
-        <Pricing />
-        <Faq />
-        <Cta />
-      </main>
-      <Footer />
+     <Navbar />
+    
+          <main>
+          <Hero/>
+            
+           <Benefits/>
+           <About/>
+         
+            {/* <WhyChooseUs /> */}
+            <Workflow />
+            <Integrations />
+            <Testimonials />
+            <Faq />
+            <Cta />
+          </main>
+          <Footer />
     </>
   );
 }

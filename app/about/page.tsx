@@ -1,39 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
-/* ─── Local public asset base path ─── */
 const A = '/about-assets';
 
-/* ─── Reusable components ─── */
-const NavArrow = () => (
-  <img
-    width={10}
-    height={6}
-    alt="dropdown arrow"
-    src={`${A}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-    loading="lazy"
-  />
-);
-
-const MenuLinkArrow = () => (
-  <img
-    width={9}
-    height={8}
-    alt=""
-    src={`${A}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`}
-    loading="lazy"
-    className="rt-pages-menu-link-arrow"
-  />
-);
-
-/* ─── Main Component ─── */
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    // Webflow requires these attributes on the <html> tag to initialize page-specific animations
     document.documentElement.setAttribute('data-wf-page', '68eddb57e406830358a1f29d');
     document.documentElement.setAttribute('data-wf-site', '68c3feed3b3e541e7d5c098a');
 
@@ -46,6 +22,7 @@ export default function AboutPage() {
           Webflow.destroy();
           Webflow.ready();
           ix2.init();
+          document.dispatchEvent(new Event('readystatechange'));
         }
       }
     }, 100);
@@ -55,269 +32,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: `document.documentElement.setAttribute("data-wf-page", "68eddb57e406830358a1f29d");` }} />
-      {/* Webflow CSS — served locally */}
-      <link
-        href={`${A}/taskopia.webflow.shared.f0926b53b.css`}
-        rel="stylesheet"
-        type="text/css"
-      />
-
-      {/* Webflow animation initial states */}
-      <style>{`
-        @media (min-width:992px) {
-          html.w-mod-js:not(.w-mod-ix) [data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc918"] {
-            -webkit-transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(0) skew(0,0);
-            transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(0) skew(0,0);
-          }
-          html.w-mod-js:not(.w-mod-ix) [data-w-id="bcfd77a1-c414-9dba-e50b-0935c10eca41"] { width:0%; }
-        }
-      `}</style>
-
-      {/* ══════════════════ NAVBAR ══════════════════ */}
-      <div
-        data-wf--rt-nav--variant="base"
-        data-w-id="b07e93b6-139e-136c-8189-3251b36d9225"
-        className="rt-top-nav rt-bg-color"
-      >
-        <div
-          data-w-id="b07e93b6-139e-136c-8189-3251b36d9226"
-          data-animation="default"
-          data-collapse="medium"
-          data-duration="400"
-          data-easing="ease"
-          data-easing2="ease"
-          role="banner"
-          className="rt-nav w-nav"
-        >
-          <div className="w-layout-blockcontainer rt-container-nav rt-position-relative w-container">
-            <div className="rt-navbar-wrapper rt-position-relative">
-
-              {/* Logo */}
-              <div className="rt-navbar-logo-wrap">
-                <a href="/" className="rt-navbar-logo rt-position-relative w-nav-brand">
-                  <img
-                    width={191}
-                    height={40}
-                    alt="Logo"
-                    src={`${A}/69269a3ea5e20bf6f3f40183_top logo.svg`}
-                    loading="lazy"
-                    className="rt-auto-fit rt-desktop-image-full-width"
-                  />
-                  <div className="rt-link-discernible">link<br />&#x200D;</div>
-                </a>
-              </div>
-
-              {/* Desktop Menu */}
-              <div className="w-layout-hflex rt-navbar-v1-menu-desktop">
-
-                {/* Home */}
-                <div data-delay="300" data-hover="true" data-w-id="b07e93b6-139e-136c-8189-3251b36d922d" className="rt-navbar-dropdown w-dropdown">
-                  <div className="rt-navbar-dropdown-toggle w-dropdown-toggle">
-                    <div className="rt-menu-text">Home</div>
-                    <div className="rt-nav-menu-arrow-holder rt-position-relative"><NavArrow /></div>
-                  </div>
-                  <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list">
-                    <a href="/home-one" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link">Home one</a>
-                    <a href="/home-two" className="rt-nav-menu-link w-dropdown-link">Home two</a>
-                    <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link">Home three</a>
-                  </nav>
-                </div>
-
-                {/* About (active) */}
-                <a href="/about" aria-current="page" className="rt-navbar-dropdown-toggle w-inline-block w--current">
-                  <div className="rt-menu-text">About</div>
-                </a>
-
-                {/* Service */}
-                <div data-delay="300" data-hover="true" data-w-id="b07e93b6-139e-136c-8189-3251b36d92ab" className="rt-navbar-dropdown w-dropdown">
-                  <div className="rt-navbar-dropdown-toggle w-dropdown-toggle">
-                    <div className="rt-menu-text">Service</div>
-                    <div className="rt-nav-menu-arrow-holder rt-position-relative"><NavArrow /></div>
-                  </div>
-                  <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list">
-                    <a href="/service-one" className="rt-nav-menu-link rt-first w-dropdown-link">Service one</a>
-                    <a href="/service-two" className="rt-nav-menu-link w-dropdown-link">Service two</a>
-                    <a href="/service-three" className="rt-nav-menu-link rt-last w-dropdown-link">Service three</a>
-                  </nav>
-                </div>
-
-                {/* Pages Mega Menu */}
-                <div data-delay="300" data-hover="true" data-w-id="b07e93b6-139e-136c-8189-3251b36d9247" className="rt-navber-dropdown rt-pages-dropdown w-dropdown">
-                  <div className="rt-navbar-dropdown-toggle w-dropdown-toggle">
-                    <div className="rt-menu-text">Pages</div>
-                    <div className="rt-nav-menu-arrow-holder rt-position-relative"><NavArrow /></div>
-                  </div>
-                  <nav className="rt-navbar-menu-dropdown rt-overflow-hidden rt-pages-menu w-dropdown-list">
-                    <div className="w-layout-hflex rt-mega-menu-wrap">
-                      <div className="w-layout-vflex rt-pages-menu-left">
-                        <div className="w-layout-vflex rt-pages-menu-left-top">
-                          <div>
-                            <img width={27} height={39} alt="" src={`${A}/68ff54083b9a1440134bda1b_Vector 1557.svg`} loading="lazy" className="rt-mega-menu-icon" />
-                          </div>
-                          <div className="rt-text-style-h6 rt-text-color-white">Connect your favorite tools and apps seamlessly with our AI agent</div>
-                        </div>
-                        <div className="w-layout-hflex rt-pages-menu-left-button">
-                          <a href="/service-one" className="rt-button-body rt-nav-btn w-inline-block">
-                            <div className="rt-button-text rt-btn-color-nav">See integrations</div>
-                            <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="w-layout-hflex rt-pages-menu-wrap">
-                        <div className="w-layout-vflex rt-pages-menu-list-wrap border">
-                          {[
-                            { href: '/home-one', iconSuffix: 'ce', label: 'Home page', sub: 'Connect, collaborate and stay' },
-                            { href: '/about', iconSuffix: 'd4', label: 'About page', sub: 'Learn about our story, mission', current: true },
-                            { href: '/service-one', iconSuffix: 'd3', label: 'Service page', sub: 'Explore our services effortlessly' },
-                            { href: '/blog-one', iconSuffix: 'd5', label: 'Blog page', sub: 'Update the latest articles' },
-                          ].map(({ href, iconSuffix, label, sub, current }) => (
-                            <a key={label} href={href} aria-current={current ? 'page' : undefined} className={`rt-pages-menu-link-wrap w-inline-block${current ? ' w--current' : ''}`}>
-                              <div className="w-layout-hflex rt-pages-menu-content">
-                                <div>
-                                  <img width={14} height={14} alt="" src={`${A}/68ff46366a330717f35394${iconSuffix}_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
-                                </div>
-                                <div className="w-layout-vflex rt-pages-menu-link">
-                                  <div className="rt-nav-menu-link rt-padding-off">{label}</div>
-                                  <div className="rt-pages-menu-small-text rt-text-medium">{sub}</div>
-                                </div>
-                              </div>
-                              <MenuLinkArrow />
-                            </a>
-                          ))}
-                        </div>
-                        <div className="w-layout-vflex rt-pages-menu-list-wrap">
-                          {[
-                            { href: '/contact', iconSuffix: 'd2', label: 'Contact page', sub: "We're here to help you 24/7" },
-                            { href: '/pricing', iconSuffix: 'c9', label: 'Pricing page', sub: 'Choose the option made for you' },
-                            { href: '/faq', iconSuffix: 'd5', label: 'FAQ', sub: 'Collaboration, trust, and shared goals' },
-                          ].map(({ href, iconSuffix, label, sub }) => (
-                            <a key={label} href={href} className="rt-pages-menu-link-wrap w-inline-block">
-                              <div className="w-layout-hflex rt-pages-menu-content">
-                                <div>
-                                  <img width={14} height={14} alt="" src={`${A}/68ff46366a330717f35394${iconSuffix}_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
-                                </div>
-                                <div className="w-layout-vflex rt-pages-menu-link">
-                                  <div className="rt-nav-menu-link rt-padding-off">{label}</div>
-                                  <div className="rt-pages-menu-small-text rt-text-medium">{sub}</div>
-                                </div>
-                              </div>
-                              <MenuLinkArrow />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-
-                {/* Blog */}
-                <div data-delay="300" data-hover="true" data-w-id="b07e93b6-139e-136c-8189-3251b36d92b8" className="rt-navbar-dropdown w-dropdown">
-                  <div className="rt-navbar-dropdown-toggle w-dropdown-toggle">
-                    <div className="rt-menu-text">Blog</div>
-                    <div className="rt-nav-menu-arrow-holder rt-position-relative"><NavArrow /></div>
-                  </div>
-                  <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list">
-                    <a href="/blog-one" className="rt-nav-menu-link rt-first w-dropdown-link">Blog one</a>
-                    <a href="/blog-two" className="rt-nav-menu-link w-dropdown-link">Blog two</a>
-                    <a href="/blog-three" className="rt-nav-menu-link w-dropdown-link">Blog three</a>
-                    <a href="/blog-post" className="rt-nav-menu-link rt-last w-dropdown-link">Blog post</a>
-                  </nav>
-                </div>
-
-                {/* Contact */}
-                <a href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
-                  <div className="rt-menu-text">Contact</div>
-                </a>
-              </div>
-
-              {/* Mobile Menu */}
-              <nav role="navigation" className="rt-navbar-v1-menu-mobile w-nav-menu">
-                <div className="w-layout-vflex rt-mobile-menu-main">
-                  <div className="w-layout-vflex rt-mobile-menu-content-main">
-                    <div className="rt-mobile-navbar">
-                      <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown">
-                        <div className="rt-navbar-dropdown-toggle w-dropdown-toggle">
-                          <div className="rt-menu-text">Home</div>
-                          <div className="rt-nav-menu-arrow-holder rt-position-relative"><NavArrow /></div>
-                        </div>
-                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list">
-                          <a href="/home-one" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link">Home one</a>
-                          <a href="/home-two" className="rt-nav-menu-link w-dropdown-link">Home two</a>
-                          <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link">Home three</a>
-                        </nav>
-                      </div>
-                      <a href="/about" aria-current="page" className="rt-navbar-dropdown-toggle w-inline-block w--current">
-                        <div className="rt-menu-text">About</div>
-                      </a>
-                      <a href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
-                        <div className="rt-menu-text">Contact</div>
-                      </a>
-                    </div>
-                    <div className="rt-mobile-menu-button-wrap">
-                      <a href="/sign-in" target="_blank" rel="noreferrer" className="rt-button-v1-main rt-position-relative w-inline-block">
-                        <div className="rt-button-v1"><div className="rt-button-text">Sign in</div></div>
-                        <div className="rt-button-overlay"></div>
-                      </a>
-                      <a href="/sign-up" target="_blank" rel="noreferrer" className="rt-button-v1-main rt-position-relative background-white-5 w-inline-block">
-                        <div className="rt-button-v1 background-white-6"><div className="rt-button-text rt-btn-color">Sign up</div></div>
-                        <div className="rt-button-overlay background-white-8"></div>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="w-layout-vflex rt-mobile-menu-bottom-part">
-                    <div className="w-layout-vflex rt-mobile-menu-llink-main">
-                      <div className="rt-text-style-h5">Follow us</div>
-                      <div className="w-layout-hflex rt-social-link-wrap">
-                        <a href="https://www.instagram.com/" className="rt-mega-menu-icon w-inline-block">
-                          <img width={10} height={18} alt="Instagram" src={`${A}/68ff46366a330717f35394cc_Kloudera-team-icon.svg`} loading="lazy" />
-                        </a>
-                        <a href="https://x.com/" className="rt-mega-menu-icon w-inline-block">
-                          <img width={14} height={14} alt="X" src={`${A}/68ff46366a330717f35394d6_kloudera-mega-menu-icon.svg`} loading="lazy" />
-                        </a>
-                        <a href="https://www.linkedin.com/" className="rt-mega-menu-icon w-inline-block">
-                          <img width={14} height={15} alt="LinkedIn" src={`${A}/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg`} loading="lazy" />
-                        </a>
-                        <a href="https://www.facebook.com/" className="rt-mega-menu-icon w-inline-block">
-                          <img width={10} height={18} alt="Facebook" src={`${A}/68ff46366a330717f35394d0_Kloudera-team-icon.svg`} loading="lazy" />
-                        </a>
-                      </div>
-                    </div>
-                    <div className="w-layout-vflex rt-mobile-menu-link-text-mian">
-                      <a href="tel:8884567890" className="rt-text-style-h5">(888) 456 7890</a>
-                      <a href="mailto:info@example.com" className="rt-text-style-h5">info@example.com</a>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-
-              {/* Hamburger */}
-              <div data-w-id="b07e93b6-139e-136c-8189-3251b36d939b" className="rt-menu-button-main w-nav-button">
-                <div className="rt-menu-line rt-top-line"></div>
-                <div className="rt-menu-line rt-middle-line"></div>
-                <div className="rt-menu-line rt-bottom-line"></div>
-              </div>
-
-              {/* Desktop CTA */}
-              <div className="w-layout-hflex rt-navbar-button-wrap rt-tab-display-none">
-                <div className="rt-signin-wrap">
-                  <a href="/sign-in" target="_blank" rel="noreferrer" className="rt-menu-text rt-navbar-signin">Sign in</a>
-                </div>
-                <a
-                  data-wf--rt-border-button--variant="padding"
-                  data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-                  href="/contact"
-                  className="rt-button-body rt-nav-btn w-variant-1b2d9ec2-3fdd-1f2f-c0ef-d11a45cf51a4 w-inline-block"
-                >
-                  <div className="rt-button-text rt-btn-color-nav">Start free trial</div>
-                  <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="rt-nav-shadows rt-opacite-on"></div>
-      </div>
+      <Navbar />
 
       {/* ══════════════════ MAIN ══════════════════ */}
       <main>
@@ -375,18 +90,10 @@ export default function AboutPage() {
               {/* Right */}
               <div data-w-id="6da1e0e9-8679-bd2c-933d-50714d290b3b" className="rt-hero-v4-right rt-mobile-l-display-none">
                 <div>
-                  <img
-                    src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`}
-                    loading="lazy"
-                    alt="about hero"
-                  />
+                  <img src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`} loading="lazy" alt="about hero" />
                 </div>
                 <div className="rt-hero-v4-right-image-two">
-                  <img
-                    src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`}
-                    loading="lazy"
-                    alt="Mobile about"
-                  />
+                  <img src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`} loading="lazy" alt="Mobile about" />
                 </div>
               </div>
             </div>
@@ -433,11 +140,7 @@ export default function AboutPage() {
 
           {/* Banner image */}
           <div className="rt-hero-v4-image">
-            <img
-              src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`}
-              loading="lazy"
-              alt="taskopiya-about-banner"
-            />
+            <img src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`} loading="lazy" alt="taskopiya-about-banner" />
           </div>
           <div className="rt-hero-v4-dot one"></div>
           <div className="rt-hero-v4-dot two"></div>
@@ -468,11 +171,7 @@ export default function AboutPage() {
                   <p className="rt-color-pale-periwinkle rt-gap-off">Real-Time Progress Tracking gives teams complete visibility into every task, milestone, and deadline.</p>
                 </div>
                 <div data-w-id="62508c73-e31b-0068-13cd-79c365633cb0" className="rt-features-v1-inner-image">
-                  <img
-                    src={`${A}/690c408d17e948acfd9dd61a_taskopia- about-features-1.webp`}
-                    loading="lazy"
-                    alt="about-features-1"
-                  />
+                  <img src={`${A}/690c408d17e948acfd9dd61a_taskopia- about-features-1.webp`} loading="lazy" alt="about-features-1" />
                   <div className="rt-features-v1-inner-image-over">
                     <div data-w-id="bcfd77a1-c414-9dba-e50b-0935c10eca41" className="rt-features-v1-inner-image-inner">
                       <img src={`${A}/690c411f1386eb9e04e8adb7_Mask group (9).webp`} loading="lazy" alt="line-animation" className="rt-image-min-width" />
@@ -490,18 +189,10 @@ export default function AboutPage() {
                 </div>
                 <div className="rt-features-v1-inner-image-2">
                   <div data-w-id="7a0ae718-492b-9c68-43b4-75a267c14680" className="rt-features-v1-right-image-one">
-                    <img
-                      src={`${A}/690c465f3c3aa6146c8e184d_Group 2147225572.png`}
-                      loading="lazy"
-                      alt="collaboration"
-                    />
+                    <img src={`${A}/690c465f3c3aa6146c8e184d_Group 2147225572.png`} loading="lazy" alt="collaboration" />
                   </div>
                   <div data-w-id="cf38d222-3eb1-22c6-4716-782e02464715" className="rt-features-v1-right-image">
-                    <img
-                      src={`${A}/690c408c3798540bf3f8932b_taskopia- about-features-3.webp`}
-                      loading="lazy"
-                      alt="about-features-3"
-                    />
+                    <img src={`${A}/690c408c3798540bf3f8932b_taskopia- about-features-3.webp`} loading="lazy" alt="about-features-3" />
                   </div>
                 </div>
               </div>
@@ -589,13 +280,7 @@ export default function AboutPage() {
 
                   <div className="rt-our-goal-right rt-position-relative">
                     <div className="rt-our-goal-right-image-wrap">
-                      <img
-                        width={424}
-                        height={519}
-                        alt="goal-1"
-                        src={`${A}/690c6ad1d102d19b352ee0d0_Taskopia-about-goal-1.webp`}
-                        loading="lazy"
-                      />
+                      <img width={424} height={519} alt="goal-1" src={`${A}/690c6ad1d102d19b352ee0d0_Taskopia-about-goal-1.webp`} loading="lazy" />
                     </div>
                     <div data-w-id="9c1d7b40-2e15-4a4c-54e5-f1fd08a7e199" className="rt-our-goal-overlay"></div>
                     <div data-w-id="9c1d7b40-2e15-4a4c-54e5-f1fd08a7e19a" className="rt-our-goal-absolute-image rt-mobile-l-display-none">
@@ -628,36 +313,20 @@ export default function AboutPage() {
             <div className="rt-process-main rt-position-relative">
               {/* Step tabs */}
               <div className="rt-process-wrapper">
-                <div className="rt-process-item">
-                  <div data-w-id="baf8e5e7-49ac-4f7f-ad09-58deaac1a659" className="rt-process-text"><div>Plan assign</div></div>
-                  <div data-w-id="55254470-bac2-0dd8-dd5a-5cfe717a3c25" className="rt-process-item-line-main">
-                    <div className="rt-process-item-line one"></div>
+                {[
+                  { wid1: 'baf8e5e7-49ac-4f7f-ad09-58deaac1a659', wid2: '55254470-bac2-0dd8-dd5a-5cfe717a3c25', label: 'Plan assign', cls: 'one' },
+                  { wid1: 'e48fada5-0185-92fe-c33e-d6a7c98377b3', wid2: 'e48fada5-0185-92fe-c33e-d6a7c98377b6', label: 'Workflows', cls: 'two' },
+                  { wid1: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1f7', wid2: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1fa', label: 'Seamless tracking', cls: 'three' },
+                  { wid1: 'b4ca4a0e-d949-d77f-5378-a8300d077e81', wid2: 'b4ca4a0e-d949-d77f-5378-a8300d077e84', label: 'Execute', cls: 'four' },
+                  { wid1: 'e54f59c9-a53c-e843-6644-89e2987b9f51', wid2: 'e54f59c9-a53c-e843-6644-89e2987b9f54', label: 'Analyze', cls: 'five' },
+                ].map(({ wid1, wid2, label, cls }) => (
+                  <div key={cls} className="rt-process-item">
+                    <div data-w-id={wid1} className="rt-process-text"><div>{label}</div></div>
+                    <div data-w-id={wid2} className="rt-process-item-line-main">
+                      <div className={`rt-process-item-line ${cls}`}></div>
+                    </div>
                   </div>
-                </div>
-                <div className="rt-process-item">
-                  <div data-w-id="e48fada5-0185-92fe-c33e-d6a7c98377b3" className="rt-process-text"><div>Workflows</div></div>
-                  <div data-w-id="e48fada5-0185-92fe-c33e-d6a7c98377b6" className="rt-process-item-line-main">
-                    <div className="rt-process-item-line two"></div>
-                  </div>
-                </div>
-                <div className="rt-process-item">
-                  <div data-w-id="0d8e4976-b51c-d283-cc1a-5a60ed5dc1f7" className="rt-process-text"><div>Seamless tracking</div></div>
-                  <div data-w-id="0d8e4976-b51c-d283-cc1a-5a60ed5dc1fa" className="rt-process-item-line-main">
-                    <div className="rt-process-item-line three"></div>
-                  </div>
-                </div>
-                <div className="rt-process-item">
-                  <div data-w-id="b4ca4a0e-d949-d77f-5378-a8300d077e81" className="rt-process-text"><div>Execute</div></div>
-                  <div data-w-id="b4ca4a0e-d949-d77f-5378-a8300d077e84" className="rt-process-item-line-main">
-                    <div className="rt-process-item-line four"></div>
-                  </div>
-                </div>
-                <div className="rt-process-item">
-                  <div data-w-id="e54f59c9-a53c-e843-6644-89e2987b9f51" className="rt-process-text"><div>Analyze</div></div>
-                  <div data-w-id="e54f59c9-a53c-e843-6644-89e2987b9f54" className="rt-process-item-line-main">
-                    <div className="rt-process-item-line five"></div>
-                  </div>
-                </div>
+                ))}
               </div>
 
               {/* Process detail boxes */}
@@ -781,27 +450,15 @@ export default function AboutPage() {
                   </a>
                 </div>
               </div>
-              <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc1b" className="rt-collaborate-card-line-1 rt-tab-display-none">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={`line1-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                    <div><img src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt="" /></div>
-                  </div>
-                ))}
-              </div>
-              <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc28" className="rt-collaborate-card-line-2 rt-tab-display-none">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={`line2-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                    <div><img src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt="" /></div>
-                  </div>
-                ))}
-              </div>
-              <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc35" className="rt-collaborate-card-line-3 rt-tab-display-none">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={`line3-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                    <div><img src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt="" /></div>
-                  </div>
-                ))}
-              </div>
+              {[1, 2, 3].map((lineNum) => (
+                <div key={lineNum} data-w-id={`7e10f033-b0ef-59d7-53ae-aed6bd65fc${lineNum + 26}`} className={`rt-collaborate-card-line-${lineNum} rt-tab-display-none`}>
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i}`}>
+                      <div><img src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt="" /></div>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -820,35 +477,14 @@ export default function AboutPage() {
             <div className="w-dyn-list">
               <div role="list" className="rt-blog-v4-card-main w-dyn-items">
                 {[
-                  {
-                    href: '/blog-post/simplify-projects-through-intelligent-task-management',
-                    img: '690334392ba1ea2dde7061fb_blog-three-G.png',
-                    date: '29 Oct 2025',
-                    title: 'Simplify projects through intelligent task management',
-                    authorImg: '692578b4c0960e6fd75eecf4_blog-four.webp',
-                    author: 'Phyllis Juniper'
-                  },
-                  {
-                    href: '/blog-post/empowering-teams-through-organized-workflows',
-                    img: '69033491fe6b91fcc7c657c1_blog-three-F.png',
-                    date: '29 Oct 2025',
-                    title: 'Empowering teams through organized workflows',
-                    authorImg: '692578949272463827cff5ff_blog-five.webp',
-                    author: 'Nadia Dulac'
-                  },
-                  {
-                    href: '/blog-post/efficiency-starts-with-effective-task-management',
-                    img: '690334d31c75da8a7738d07f_blog-three-E.png',
-                    date: '29 Oct 2025',
-                    title: 'Efficiency starts with effective task management',
-                    authorImg: '692578854278fc2eb9bf2c9e_blog-two.webp',
-                    author: 'Alyssa Ireae'
-                  }
+                  { href: '/blog-post/simplify-projects-through-intelligent-task-management', img: '690334392ba1ea2dde7061fb_blog-three-G.png', date: '29 Oct 2025', title: 'Simplify projects through intelligent task management', authorImg: '692578b4c0960e6fd75eecf4_blog-four.webp', author: 'Phyllis Juniper' },
+                  { href: '/blog-post/empowering-teams-through-organized-workflows', img: '69033491fe6b91fcc7c657c1_blog-three-F.png', date: '29 Oct 2025', title: 'Empowering teams through organized workflows', authorImg: '692578949272463827cff5ff_blog-five.webp', author: 'Nadia Dulac' },
+                  { href: '/blog-post/efficiency-starts-with-effective-task-management', img: '690334d31c75da8a7738d07f_blog-three-E.png', date: '29 Oct 2025', title: 'Efficiency starts with effective task management', authorImg: '692578854278fc2eb9bf2c9e_blog-two.webp', author: 'Alyssa Ireae' },
                 ].map((post, idx) => (
                   <div key={idx} role="listitem" className="w-dyn-item">
                     <a data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc916" href={post.href} className="rt-blog-v3-card rt-border-radius-medium w-inline-block">
                       <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
-                        <img className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={`${A}/${post.img}`} width="410" height="348" alt="" data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc918" loading="lazy" />
+                        <img className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={`${A}/${post.img}`} width="410" height="348" alt="" loading="lazy" />
                       </div>
                       <div className="rt-blog-v3-card-bottom-part">
                         <div className="w-layout-hflex rt-blog-v3-publish-date">
@@ -874,91 +510,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── FOOTER ── */}
-        <section data-wf--rt-footer-v1--variant="base" className="rt-footer rt-color-change rt-position-relative">
-          <div className="w-layout-blockcontainer rt-container-main w-container">
-            <div data-w-id="e6ec5761-f4fc-4af6-536f-a4c3f63a640a" className="rt-footer-wrap rt-position-relative">
-              <div className="w-layout-grid rt-footer-link-grid">
-                <div id="w-node-e6ec5761-f4fc-4af6-536f-a4c3f63a640c-fe735dda" className="w-layout-vflex rt-footer-link-wrap">
-                  <div className="rt-small-name rt-text-color-white">Need help?</div>
-                  <div className="w-layout-vflex rt-footer-link-box rt-change">
-                    <div className="rt-footer-link">
-                      <div className="rt-text-color-white rt-color-change">Call us directly</div>
-                      <a href="tel:8884567890" className="rt-text-color-white rt-bark rt-footer-link">(888) 456 7890</a>
-                    </div>
-                    <div>
-                      <div className="rt-text-color-white rt-color-change">Email us directly</div>
-                      <a href="mailto:info@example.com" className="rt-text-color-white rt-emil rt-color-blue rt-footer-link">info@example.com</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-layout-vflex rt-footer-link-wrap">
-                  <div className="rt-small-name rt-text-color-white">Quick links</div>
-                  <div className="w-layout-vflex rt-footer-link-box">
-                    <a href="/home-one" className="rt-footer-link">Home</a>
-                    <a href="/about" aria-current="page" className="rt-footer-link">About </a>
-                    <a href="/blog-one" className="rt-footer-link">Blog</a>
-                    <a href="/service-one" className="rt-footer-link">Service</a>
-                    <a href="/pricing" className="rt-footer-link">Pricing</a>
-                  </div>
-                </div>
-                <div className="w-layout-vflex rt-footer-link-wrap rt-border-none">
-                  <div className="rt-small-name rt-text-color-white">Utilities</div>
-                  <div className="w-layout-vflex rt-footer-link-box">
-                    <a href="/license" className="rt-footer-link">License</a>
-                    <a href="/style-guide" className="rt-footer-link">Style guide</a>
-                    <a href="https://taskopia.webflow.io/401" target="_blank" className="rt-footer-link">Password protected</a>
-                    <a href="https://taskopia.webflow.io/404" target="_blank" className="rt-footer-link">404</a>
-                    <a href="/changelog" className="rt-footer-link">Changelog</a>
-                  </div>
-                </div>
-                <div id="w-node-e6ec5761-f4fc-4af6-536f-a4c3f63a6430-fe735dda" className="w-layout-vflex rt-footer-link-main">
-                  <div className="w-layout-vflex rt-footer-text-wrap">
-                    <div className="rt-small-name rt-text-color-white">Get in touch</div>
-                    <p className="rt-color-pale-periwinkle rt-gap-off rt-gap"><span className="rt-text-color-white rt-bark">Let’s discuss your next project</span>—connect with our team today for tailored solutions.</p>
-                  </div>
-                  <div className="rt-black-footer">
-                    <a data-w-id="c8a9123b-e737-6c41-a0a9-96ac3b2f975c" href="tel:8884567890" className="rt-button-body w-inline-block">
-                      <div className="rt-button-text rt-blue-white" style={{ color: '#fff' }}>Schedule a call</div>
-                      <div className="rt-button-body-overlay rt-blue-white"></div>
-                    </a>
-                  </div>
-                  <div className="rt-white-footer">
-                    <a data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="tel:8884567890" className="rt-button-body w-inline-block">
-                      <div className="rt-button-text">Schedule a call</div>
-                      <div className="rt-button-body-overlay"></div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-layout-hflex rt-footer-bottom-part">
-              <a href="/" className="rt-navbar-logo rt-position-relative w-nav-brand">
-                <img width="191" height="40" alt="" src={`${A}/691451006ceea5f04fa24c51_footer logo.svg`} loading="lazy" />
-                <div className="rt-link-discernible">link<br />‍</div>
-              </a>
-              <p className="rt-no-margin rt-color-pale-periwinkle rt-mobile-text-center">Designed by&nbsp;<a href="https://www.radianttemplates.com/" className="rt-bottom-link">Radiant Templates</a>, Powered by&nbsp;<a href="https://webflow.com/" className="rt-bottom-link">Webflow</a></p>
-              <div className="rt-social-media">
-                <div className="rt-color-pale-periwinkle">Social media :</div>
-                <a href="https://dribbble.com/" className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
-                  <div className="rt-social-media-link"><img src={`${A}/6914525ddeeb169b19ad1aa4_Vector (29).svg`} loading="lazy" alt="" className="rt-nivert" /></div>
-                  <div className="rt-link-discernible">link<br />‍</div>
-                </a>
-                <a href="https://www.instagram.com/" className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
-                  <div className="rt-social-media-link"><img src={`${A}/6914525d5095fa32d625e19c_Vector (30).svg`} loading="lazy" alt="" className="rt-nivert" /></div>
-                  <div className="rt-link-discernible">link<br />‍</div>
-                </a>
-                <a href="https://www.pinterest.com/" className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
-                  <div className="rt-social-media-link"><img src={`${A}/6914525d8e53e345a9c4d809_Vector (31).svg`} loading="lazy" alt="" className="rt-nivert" /></div>
-                  <div className="rt-link-discernible">link<br />‍</div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="rt-footer-bottom-line"></div>
-        </section>
       </main>
 
+      <Footer />
     </>
   );
 }

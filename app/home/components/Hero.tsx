@@ -85,7 +85,7 @@ export default function Hero() {
                   className="rt-button-para-gap rt-overflow-hidden">
                   <a
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                    href="https://taskopia.webflow.io/home-one#"
+                    href="/home-one#"
                     className="rt-button-body w-inline-block"
                   ><div className="rt-button-text">Get started today</div>
                     <div
@@ -251,7 +251,7 @@ export default function Hero() {
                   className="rt-button-para-gap rt-hero-between">
                   <a
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                    href="https://taskopia.webflow.io/contact"
+                    href="/contact"
                     className="rt-button-body w-inline-block"
                   ><div className="rt-button-text">Get started today</div>
                     <div

@@ -52,16 +52,15 @@ export default function Footer() {
                 </div>
                 <div className="w-layout-vflex rt-footer-link-box">
                   <a
-                  href="/home-one"
-                    aria-current="page"
-                    className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 w--current"
+                  href="/"
+                    className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Home</a
                   ><a
                   href="/about"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >About </a
                   ><a
-                  href="/blog-one"
+                  href="#"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Blog</a
                   ><a
@@ -69,7 +68,7 @@ export default function Footer() {
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Service</a
                   ><a
-                  href="/pricing"
+                  href="#"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Pricing</a
                   >
@@ -82,25 +81,25 @@ export default function Footer() {
                 </div>
                 <div className="w-layout-vflex rt-footer-link-box">
                   <a
-                  href="/license"
+                  href="#"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >License</a
                   ><a
-                  href="/style-guide"
+                  href="#"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Style guide</a
                   ><a
-                  href="/401"
+                  href="#"
                     target="_blank"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Password protected</a
                   ><a
-                  href="/404"
+                  href="#"
                     target="_blank"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >404</a
                   ><a
-                  href="/changelog"
+                  href="#"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Changelog</a
                   >
@@ -163,7 +162,7 @@ export default function Footer() {
                 alt=""
                 src="/Taskopia_files/69269a3ea5e20bf6f3f40183_top logo.svg"
                 loading="lazy" />
-              <div className="rt-link-discernible">link<br />â€ </div></a
+              <div className="rt-link-discernible">link<br />&#x200D;</div></a
             >
             <p
               className="rt-no-margin rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-mobile-text-center">
@@ -194,7 +193,7 @@ export default function Footer() {
                     alt=""
                     className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
                 </div>
-                <div className="rt-link-discernible">link<br />â€ </div></a
+                <div className="rt-link-discernible">link<br />&#x200D;</div></a
               ><a
                 href="https://www.instagram.com/"
                 className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
@@ -205,7 +204,7 @@ export default function Footer() {
                     alt=""
                     className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
                 </div>
-                <div className="rt-link-discernible">link<br />â€ </div></a
+                <div className="rt-link-discernible">link<br />&#x200D;</div></a
               ><a
                 href="https://www.pinterest.com/"
                 className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"

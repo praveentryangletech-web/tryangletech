@@ -322,10 +322,10 @@ export default function Navbar() {
                     id="w-dropdown-list-3"
                     aria-labelledby="w-dropdown-toggle-3"
                     style={{ width: "100%", height: "0px" }}>
-                    <a href="#" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Blog one</a>
-                    <a href="#" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</a>
-                    <a href="#" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</a>
-                    <a href="#" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
+                    <a href="/blog" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Blog one</a>
+                    <a href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</a>
+                    <a href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</a>
+                    <a href="/blog" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
                   </nav>
                 </div>
 

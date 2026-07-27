@@ -41,6 +41,8 @@ const faqs = [
   { q: 'Is customer support available?', a: 'Yes, we provide 24/7 live chat and email support for all plans, with dedicated account managers for enterprise customers.' },
 ];
 
+import WebflowInit from "../common/WebflowInit";
+
 export default function ServiceTwoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -59,6 +61,8 @@ export default function ServiceTwoPage() {
 
   return (
     <>
+      <WebflowInit pageId="68eddb96ee2e53b120952722" />
+      <WebflowInit pageId="68eddb96ee2e53b120952722" />
       <Navbar />
 
       <main>

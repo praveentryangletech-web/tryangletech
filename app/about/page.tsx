@@ -6,6 +6,8 @@ import Footer from '../common/Footer';
 
 const A = '/about-assets';
 
+import WebflowInit from "../common/WebflowInit";
+
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -32,6 +34,8 @@ export default function AboutPage() {
 
   return (
     <>
+      <WebflowInit pageId="68eddb57e406830358a1f29d" />
+      <WebflowInit pageId="68eddb57e406830358a1f29d" />
       <Navbar />
 
       {/* ══════════════════ MAIN ══════════════════ */}

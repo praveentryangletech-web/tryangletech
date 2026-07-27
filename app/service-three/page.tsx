@@ -50,6 +50,8 @@ const testimonials = [
   },
 ];
 
+import WebflowInit from "../common/WebflowInit";
+
 export default function ServiceThreePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -75,6 +77,8 @@ export default function ServiceThreePage() {
 
   return (
     <>
+      <WebflowInit pageId="68eddba421ea11fa0687f4f0" />
+      <WebflowInit pageId="68eddba421ea11fa0687f4f0" />
       <Navbar />
 
       <main>

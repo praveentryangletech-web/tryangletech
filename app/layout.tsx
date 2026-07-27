@@ -15,7 +15,6 @@ export default function RootLayout({
     <html 
       lang="en" 
       className="w-mod-js" 
-      data-wf-page="68eddb146961691d5aa6086f"
       data-wf-site="68c3feed3b3e541e7d5c098a"
       suppressHydrationWarning>
       <head 

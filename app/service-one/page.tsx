@@ -41,6 +41,8 @@ const faqs = [
   { q: 'How secure is my data?', a: 'Your data is encrypted at rest and in transit. We are SOC 2 Type II certified and follow industry best practices for data security.' },
 ];
 
+import WebflowInit from "../common/WebflowInit";
+
 export default function ServiceOnePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -59,6 +61,8 @@ export default function ServiceOnePage() {
 
   return (
     <>
+      <WebflowInit pageId="68eddb6fb6de895fcd6c3914" />
+      <WebflowInit pageId="68eddb6fb6de895fcd6c3914" />
       <Navbar />
 
       <main>

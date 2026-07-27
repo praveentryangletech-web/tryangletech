@@ -64,7 +64,7 @@ export default function Footer() {
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Blog</a
                   ><a
-                  href="/service-one"
+                  href="/service/service-one"
                     className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
                   >Service</a
                   ><a

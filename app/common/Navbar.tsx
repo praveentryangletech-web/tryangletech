@@ -113,9 +113,9 @@ export default function Navbar() {
                     id="w-dropdown-list-1"
                     aria-labelledby="w-dropdown-toggle-1"
                     style={{ width: "100%", height: "0px" }}>
-                    <a href="/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
-                    <a href="/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
-                    <a href="/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
+                    <a href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
+                    <a href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
+                    <a href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
                   </nav>
                 </div>
 
@@ -168,7 +168,7 @@ export default function Navbar() {
                           <a
                             data-wf--rt-border-button--variant="base"
                             data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-                            href="/service-one"
+                            href="/service/service-one"
                             className="rt-button-body rt-nav-btn w-inline-block"
                             tabIndex={0}>
                             <div className="rt-button-text rt-btn-color-nav">See integrations</div>
@@ -210,7 +210,7 @@ export default function Navbar() {
                             </div>
                           </a>
                           {/* Service page */}
-                          <a href="/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <a href="/service/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="14" height="12" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -366,9 +366,9 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5">
-                          <a href="/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
-                          <a href="/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
-                          <a href="/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
+                          <a href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
+                          <a href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
+                          <a href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
                         </nav>
                       </div>
 
@@ -408,7 +408,7 @@ export default function Navbar() {
                                 </div>
                                 <div><img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </a>
-                              <a href="/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              <a href="/service/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="14" height="12" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">

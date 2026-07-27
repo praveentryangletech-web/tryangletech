@@ -35,7 +35,6 @@ export default function AboutPage() {
   return (
     <>
       <WebflowInit pageId="68eddb57e406830358a1f29d" />
-      <WebflowInit pageId="68eddb57e406830358a1f29d" />
       <Navbar />
 
       {/* ══════════════════ MAIN ══════════════════ */}

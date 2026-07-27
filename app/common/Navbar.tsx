@@ -180,7 +180,7 @@ export default function Navbar() {
                         {/* Left column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap border">
                           {/* Home page */}
-                          <a href="/home" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <a href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -351,7 +351,7 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4">
-                          <a href="/home" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
+                          <a href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
                           <a href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</a>
                           <a href="#" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
                         </nav>
@@ -388,7 +388,7 @@ export default function Navbar() {
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-6" aria-labelledby="w-dropdown-toggle-6">
                           <div className="w-layout-hflex rt-pages-menu-wrap rt-padding">
                             <div className="w-layout-vflex rt-pages-menu-list-wrap border">
-                              <a href="/home" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              <a href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">

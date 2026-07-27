@@ -62,7 +62,6 @@ export default function ContactPage() {
   return (
     <>
       <WebflowInit pageId="68eddcfa0d76f97cdbb8c1e5" />
-      <WebflowInit pageId="68eddcfa0d76f97cdbb8c1e5" />
       <Navbar />
 
       <main>

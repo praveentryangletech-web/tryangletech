@@ -10,7 +10,7 @@ export default function Navbar() {
       <div
         data-wf--rt-nav--variant="base"
         data-w-id="b07e93b6-139e-136c-8189-3251b36d9225"
-        className="rt-top-nav rt-bg-color">
+        className="rt-top-nav rt-bg-color relative z-[999]">
         <div
           data-w-id="b07e93b6-139e-136c-8189-3251b36d9226"
           data-animation="default"
@@ -19,8 +19,7 @@ export default function Navbar() {
           data-easing="ease"
           data-easing2="ease"
           role="banner"
-          className="rt-nav w-nav"
-          style={{  }}>
+          className="rt-nav w-nav">
           <div className="w-layout-blockcontainer rt-container-nav rt-position-relative w-container">
             <div className="rt-navbar-wrapper rt-position-relative">
 

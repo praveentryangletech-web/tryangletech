@@ -1,27 +1,42 @@
-'use client';
-import React, { useEffect } from 'react';
+"use client";
+import React, { useEffect } from "react";
 
+import HomeTwoHero from './components/HomeTwoHero';
+import HomeTwoMarquee from './components/HomeTwoMarquee';
+import HomeTwoAIAgents from './components/HomeTwoAIAgents';
+import HomeTwoAbout from './components/HomeTwoAbout';
+import HomeTwoChoose from './components/HomeTwoChoose';
+import HomeTwoBenefits from './components/HomeTwoBenefits';
+import HomeTwoToolsIcon from './components/HomeTwoToolsIcon';
+import HomeTwoFAQ from './components/HomeTwoFAQ';
+import HomeTwoTestimonial from './components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
-import Navbar from '../common/Navbar';
-import Footer from '../common/Footer';
+import Navbar from "../common/Navbar";
+import Footer from "../common/Footer";
 
 export default function HomeTwo() {
   useEffect(() => {
     // Set the specific page ID so Webflow triggers the right animations
-    document.documentElement.setAttribute('data-wf-page', '68eddb21f14a8338ce862110');
-    document.documentElement.setAttribute('data-wf-site', '68c3feed3b3e541e7d5c098a');
+    document.documentElement.setAttribute(
+      "data-wf-page",
+      "68eddb21f14a8338ce862110",
+    );
+    document.documentElement.setAttribute(
+      "data-wf-site",
+      "68c3feed3b3e541e7d5c098a",
+    );
 
     // Re-initialize Webflow interactions after Next.js client-side routing
     const initWebflow = setInterval(() => {
       const Webflow = (window as any).Webflow;
-      if (typeof window !== 'undefined' && Webflow && Webflow.require) {
-        const ix2 = Webflow.require('ix2');
+      if (typeof window !== "undefined" && Webflow && Webflow.require) {
+        const ix2 = Webflow.require("ix2");
         if (ix2) {
           clearInterval(initWebflow);
           Webflow.destroy();
           Webflow.ready();
           ix2.init();
-          document.dispatchEvent(new Event('readystatechange'));
+          document.dispatchEvent(new Event("readystatechange"));
         }
       }
     }, 100);
@@ -32,8 +47,261 @@ export default function HomeTwo() {
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
       <Navbar />
-      <main><div className="rt-hero-v2-wrapper"><section data-w-id="d3f5d731-f45f-6040-b304-e8f46b7cbf87" className="rt-hero-v2 rt-position-relative"><div className="w-layout-blockcontainer rt-container-extra-large w-container"><div className="rt-hero-v2-top rt-desktop-text-center"><div data-w-id="494ef8ba-faf0-3127-98fb-da43bfc087b6" className="rt-small-btn-wrap rt-hero-v1-small rt-hero-v2-smal-btn"><div className="rt-small-btn-main rt-tab-display-none" ><div className="rt-small-btn-text">Workflow</div><div className="rt-btn-arrow-v2 rt-hero-v1-small"><img src="/Home2_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg" loading="lazy" alt="small icon" /></div></div></div><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403e8" className="rt-hero-v1-top-sub"><div className="rt-overflow-hidden"><div className="w-layout-hflex rt-hero-v2-client-img-wrap"><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403eb" className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image"><img width="62" height="47" alt="Kloudera-home-two-hero-image" src="/Home2_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp" loading="lazy" /></div><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ed" className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"><img width="59.5" height="79" alt="Kloudera-home-two-hero-image" src="/Home2_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp" loading="lazy" /></div><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ef" className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"><img width="59.5" height="79" alt="Kloudera-home-two-hero-image" src="/Home2_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp" loading="lazy" /></div></div></div><div className="rt-overflow-hidden"><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f2" className="rt-sub-text rt-sub-gredient">Task management</div></div></div><div className="rt-hero-heading-gap"><h1 data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f5" className="rt-gap-off">Boost productivity with smarter task tools for teams</h1></div><p data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f7" className="rt-padding-hero-v2 rt-gap-off">Achieve more with intelligent task tools that streamline workflows and maximize team productivity every day.</p><div data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f9" className="w-layout-hflex rt-hero-v7-button-wrap"><a data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Get started today</div><div className="rt-button-body-overlay" ></div></a><a data-wf--rt-border-button--variant="base" data-w-id="9067a903-cf07-9614-de57-af0aba677203" href="/pricing" className="rt-button-body rt-nav-btn w-inline-block"><div className="rt-button-text rt-btn-color-nav" >View pricing</div><div className="rt-button-body-overlay rt-nav-overlay" ></div></a></div><div data-w-id="e614267b-345c-6f68-39fe-7fe900653232" className="rt-pricing-itop-samll-text rt-hero-v2-top-gap"><div className="rt-pricing-samll-text"><div><img src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg" loading="lazy" alt="" /></div><div className="rt-color-dark-indigo">Streamlined workflows</div></div><div className="rt-pricing-samll-text"><div><img src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg" loading="lazy" alt="" /></div><div className="rt-color-dark-indigo">Enhance collaboration</div></div><div className="rt-pricing-samll-text"><div><img src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg" loading="lazy" alt="" /></div><div className="rt-color-dark-indigo">Achieve goals faster</div></div></div></div><div className="rt-hero-v2-content"><div data-w-id="11d58063-9804-40c1-9e7d-d67bfd38af74" className="rt-hero-v2-card-v1"><img src="/Home2_files/691432fc2dbfd7373d92627c_taskopia-home-two-hero-left.webp" loading="lazy" alt="taskopia-home-two-hero-left" className="rt-shadow rt-border-radius-medium rt-border-line" /></div><div data-w-id="dcecf02b-225d-a6bb-a12c-4ac9b21d3821" className="rt-hero-v2-card-2"><img src="/Home2_files/6912c4bdaae7aed5d10b828e_taskopia-hero-v2-2.webp" loading="lazy" alt="taskopia-hero-v2-2" className="rt-shadow rt-border-radius-medium rt-border-line" /></div><div data-w-id="8c510f67-e449-acf5-7671-3a4a269a89b7" className="rt-hero-v2-card-v3"><img src="/Home2_files/69144db3d5bfa45112b0ac9f_taskopia-home-two-hero-right-2.webp" loading="lazy" alt="taskopia-home-two-hero-right-2" className="rt-shadow rt-border-radius-medium rt-border-line" /></div></div></div><div className="rt-landing-absolute-imgae-two rt-tab-display-none" ><img width="101" height="118" alt="" src="/Home2_files/6911b9467f26f096826792ff_Kloudera-landing-hero-icon.svg" loading="lazy" /></div></section></div><div data-w-id="bb2028c0-8868-4d90-ae7b-80ecef8e422a" className="rt-marquee-v2 rt-hero-v5-marquee"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-text-marquee-wrapper rt-overflow-hidden"><div className="rt-text-marquee-train" ><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27127d946b9cb9fdcbce_logo.svg" loading="lazy" width="100" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg" loading="lazy" alt="" /></div></div><div className="rt-text-marquee-train" ><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27127d946b9cb9fdcbce_logo.svg" loading="lazy" width="100" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg" loading="lazy" alt="" /></div></div><div className="rt-text-marquee-train" ><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27127d946b9cb9fdcbce_logo.svg" loading="lazy" width="100" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg" loading="lazy" alt="" /></div><div className="rt-text-marquee-iteme"><img src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg" loading="lazy" alt="" /></div></div></div></div><div className="rt-marquee-bottom-line"></div></div><section className="rt-ai-agents"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-ai-agents-top rt-desktop-text-center"><div data-w-id="918b4a53-ea98-4cef-a9ea-d29a8a9488a3" className="rt-sub-gap"><div className="rt-sub-text rt-sub-gredient">What Are AI Agents?</div></div><div data-w-id="210b67c9-6862-56e7-c0f8-af3ecc920bca" className="rt-position-relative rt-overflow-hidden"><h2 className="rt-gap-off">Simplify workflows, collaborate seamlessly, and manage tasks effectively for better business growth</h2><div data-w-id="210b67c9-6862-56e7-c0f8-af3ecc920bcd" className="rt-position-absolute rt-text-overlay"><div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden" ><div className="rt-position-absolute rt-text-overlay-inner one"></div></div><div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden" ><div className="rt-position-absolute rt-text-overlay-inner two"></div></div><div className="rt-position-relative rt-text-wrap-overlay three rt-overflow-hidden" ><div className="rt-position-absolute rt-text-overlay-inner three"></div></div><div className="rt-position-relative rt-text-wrap-overlay four rt-overflow-hidden" ><div className="rt-position-absolute rt-text-overlay-inner four"></div></div></div></div></div><div className="w-layout-grid rt-benefits-v2-card-wrap"><div data-w-id="3a0e692a-85f3-6585-a105-145552d14388" className="w-layout-vflex rt-benefits-v2-card"><div className="rt-benefits-icon"><img width="38" height="38" alt="databaseicon-1" src="/Home2_files/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg" loading="lazy" /></div><div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center"><div className="rt-text-style-h6">Simplify workflows</div><p className="rt-gap-off">Monitor task status, deadlines, and team performance instantly.</p></div></div><div data-w-id="3a0e692a-85f3-6585-a105-145552d14390" className="w-layout-vflex rt-benefits-v2-card"><div><img width="38" height="38" alt="" src="/Home2_files/6916ec6339f890a80905a69b_Vector (33).svg" loading="lazy" className="rt-benefits-icon" /></div><div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center"><div className="rt-text-style-h6">Boost team collaboration</div><p className="rt-gap-off">Never miss deadlines with smart alerts and notifications.</p></div></div><div data-w-id="3a0e692a-85f3-6585-a105-145552d14398" className="w-layout-vflex rt-benefits-v2-card"><div><img width="42" height="38" alt="" src="/Home2_files/6916ef876682eed2b2fd5911_Vector (34).svg" loading="lazy" className="rt-benefits-icon" /></div><div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center"><div className="rt-text-style-h6">Achieve goals faster</div><p className="rt-gap-off">Manage tasks anytime from desktop, mobile, or tablet.</p></div></div></div></div></section><section className="rt-about-v4 rt-overflow-hidden"><div className="w-layout-blockcontainer rt-container-extra-large w-container"><div className="rt-about-v4-contanner rt-overflow-hidden"><div className="rt-about-v4-main"><div data-w-id="70c45100-f145-3c18-c43c-49629dffa554" className="rt-about-v4-left rt-position-relative"><div className="rt-about-v4-box-samll rt-tab-display-none" ></div><div data-w-id="70c45100-f145-3c18-c43c-49629dffa555" className="rt-position-relative rt-4"><img src="/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp" loading="lazy" alt="taskopiya-home-two-project-over" /><div className="rt-about-v4-left-line rt-tab-display-none"><img src="/Home2_files/6912cb4109692fed844d1f39_taskopia-home-two-who-3.webp" loading="lazy" alt="taskopia-home-two-who-3" /></div></div><div data-w-id="b033537f-357f-c026-0852-3db8a224feb4" className="rt-about-v4-left-small-image rt-border-radius-medium rt-overflow-hidden"><img src="/Home2_files/6912cb4228402e3879fa5f10_taskopia-home-two-who.webp" loading="lazy" alt="taskopia-home-two-who" /></div></div><div className="rt-about-v4-right"><div className="rt-sub-gap"><div data-w-id="70c45100-f145-3c18-c43c-49629dffa55a" className="rt-sub-text">Key Highlights</div></div><div className="rt-heading-para-gap"><h2 data-w-id="70c45100-f145-3c18-c43c-49629dffa55d" className="rt-gap-off rt-text-color-white">Stay focused, minimize delays, maximize results</h2></div><div data-w-id="0887166c-6ff5-5063-35c2-ef02801acebd" className="rt-about-v1-right-item rt-top-bottom-of"><div className="rt-about-v1-right-item-icon"><img src="/Home2_files/68ef800270f70b566b665b2f_Vector (23).svg" loading="lazy" alt="" /></div><div><div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white">Smarter task organization</div><p className="rt-gap-off rt-color-pale-periwinkle rt-heading-para-gap">Keep projects structured with clear task lists, deadlines, and priorities, ensuring nothing slips through the cracks.</p></div></div><div data-w-id="9c930d49-2f8d-e219-52ce-0a9ae72f08cc" className="rt-about-v1-right-line"></div><div data-w-id="ba857511-b04a-d2aa-41cb-a56aa7cbb4fa" className="rt-about-v1-right-item rt-bottom-padding-of"><div className="rt-about-v1-right-item-icon"><img src="/Home2_files/68ef800270f70b566b665b2f_Vector (23).svg" loading="lazy" alt="" /></div><div><div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white">Boosted productivity</div><p className="rt-gap-off rt-color-pale-periwinkle">Eliminate distractions, manage workloads effectively, and meet deadlines with tools designed to accelerate performance.</p></div></div><div data-w-id="70c45100-f145-3c18-c43c-49629dffa573" className="rt-button-para-gap rt-overflow-hidden rt-button-left"><a data-wf--rt-border-button--variant="base" data-w-id="9067a903-cf07-9614-de57-af0aba677203" href="/contact" className="rt-button-body rt-nav-btn w-inline-block"><div className="rt-button-text rt-btn-color-nav" >&nbsp;Get started today</div><div className="rt-button-body-overlay rt-nav-overlay" ></div></a></div></div></div></div></div></section><section className="rt-choose-v5"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-choose-v5-wrapper"><div className="rt-choose-v5-left"><div className="rt-sub-gap"><div data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf2a" className="rt-sub-text rt-sub-gredient">intelligent analytics</div></div><div className="rt-heading-para-gap"><h2 data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf2d" className="rt-gap-off">Stay organized, meet deadlines, <span className="rt-color-periwinkle-gray">boost productivity</span></h2></div><div data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf2f" className="rt-analytics-v2-para-wrap rt-gap-large"><p className="rt-gap-off">We transform automation into real-time business outcomes, streamlining processes, boosting efficiency, and delivering measurable results for your company.</p></div><div className="w-layout-grid rt-analytics-v2-box-wrap"><div data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf33" className="w-layout-vflex rt-analytics-v2-box"><div><img width="45" height="45" alt="" src="/Home2_files/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg" loading="lazy" /></div><div className="w-layout-vflex rt-analytics-v2-text-wrap"><div className="rt-text-style-h6">Collaboration</div><p className="rt-no-margin">Enhance team productivity with seamless collaboration</p></div></div><div data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf3b" className="w-layout-vflex rt-analytics-v2-box"><div><img width="45" height="45" alt="" src="/Home2_files/6916ed30dcc91e4de385f200_specialiti-icon-3 (1).svg" loading="lazy" /></div><div className="w-layout-vflex rt-analytics-v2-text-wrap"><div className="rt-text-style-h6">Innovation</div><p className="rt-no-margin">Drive progress with innovative task management solutions</p></div></div></div><div data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf43" className="rt-button-para-gap rt-overflow-hidden rt-button-left"><a data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/about" className="rt-button-body w-inline-block"><div className="rt-button-text">Explore benefits</div><div className="rt-button-body-overlay" ></div></a></div></div><div className="rt-choose-v5-right rt-position-relative"><div><img src="/Home2_files/6912d92ac62cc1c666f241bd_Group 2085663563 (1).webp" alt="" data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf47" loading="lazy" /></div><div data-w-id="ead067ea-e922-1d89-199c-e48c526ba8ad" className="rt-choose-v5-image-1"><img src="/Home2_files/6912d929c3345daf963571e2_taskopia-total-hours.webp" loading="lazy" alt="taskopia-total-hours" /></div><div data-w-id="6313cade-b2bd-e44b-493f-1b18d69a9459" className="_2t-choose-v5-image-1"><img src="/Home2_files/6912d9292005865758903bcf_taskopia-total-hours-2.webp" loading="lazy" alt="taskopia-total-hours-2" /></div><div data-w-id="56c9eafc-11c7-fc5e-d3d4-bc177bc4e039" className="rt-choose-v5-image-3 rt-up-down"><img src="/Home2_files/69156be83cce6dbc951c4727_taskopiya-home-two-productivity.webp" loading="lazy" alt="taskopiya-home-two-productivity" /></div></div></div></div></section><section className="rt-benefits"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-tools-iconheading rt-heading-bottom-gap"><div data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774a7" className="rt-sub-gap"><div className="rt-sub-text rt-sub-gredient">our benefits</div></div><h2 data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774aa" className="rt-gap-off rt-desktop-text-center">Streamline workflows, save time, <span className="rt-color-periwinkle-gray">enhance performance</span></h2></div><div data-w-id="fa309af7-4c74-82d9-d77a-6bc987988f62" className="rt-benefits-wrapper"><div className="w-layout-grid rt-benefits-content-one"><div data-w-id="2c971d5c-ac96-ff1c-d7cf-032f3df14684" className="rt-benefits-item"><div data-w-id="b11a6bba-0fb6-b2a9-72b2-ecde0332d0e1" className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative"><img src="/Home2_files/6912f62c82b64389f32cf4f2_taskopia-benefits-home-two-1.webp" loading="lazy" alt="taskopia-benefits-home-two-1" /><div className="rt-benefits-small-image rt-1" ><img src="/Home2_files/6912f62cac10df5f2a6eba6b_Group 2085663570.webp" loading="lazy" alt="taskopia-home-two-small-30%" /></div></div><div className="rt-benefits-item-text"><div className="rt-text-style-h6">Boosted productivity</div><p>Boost productivity by organizing tasks, setting clear priorities, automating routine work.</p></div></div><div data-w-id="71d233e7-17e3-e29f-6260-499af23458fb" className="rt-benefits-item"><div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative"><img src="/Home2_files/6912f62c1b2810c6c1ca5837_taskopia-benefits-home-two-2.webp" loading="lazy" alt="taskopia-benefits-home-two-2" /><div className="rt-benefits-small-image rt-2" ><img src="/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp" loading="lazy" alt="taskopia-benefits-home-two-complete" /></div></div><div className="rt-benefits-item-text"><div className="rt-text-style-h6">Streamlined task organization</div><p>Keep projects structured with task lists, deadlines, and priorities, so nothing slips through the cracks.</p></div></div><div data-w-id="c5ff7e0a-813a-bab5-0c99-87ff995a45e8" className="rt-benefits-item"><div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden"><img src="/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp" loading="lazy" alt="taskopia-benefits-home-two-3" /></div><div className="rt-benefits-item-text"><div className="rt-text-style-h6">Real-time progress tracking</div><p>Monitor task completion, visualize timelines, and track milestones to ensure projects stay on schedule.</p></div></div></div><div data-w-id="aa7bae47-4e38-6bed-00a4-c7402dde4e24" className="w-layout-grid rt-benefits-content-two"><div className="rt-benefits-item rt-bottom"><div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative"><img src="/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp" loading="lazy" alt="taskopia-benefits-home-two-4" /><div className="rt-benefits-small-image rt-3" ><img src="/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp" loading="lazy" alt="taskopia-home-two-0.55" /></div></div><div className="rt-benefits-item-text"><div className="rt-text-style-h6">Deadline &amp; progress tracking</div><p>Smart tracking helps identify bottlenecks early, ensuring projects are delivered on time without last-minute stress.</p></div></div><div className="rt-benefits-item rt-bottom"><div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden"><img src="/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp" loading="lazy" alt="taskopia-benefits-home-two-5" /></div><div className="rt-benefits-item-text"><div className="rt-text-style-h6">Improved team collaboration</div><p>Enable seamless communication across teams by sharing tasks, updates, and progress in real-time. With everyone on the same page,</p></div></div></div></div></div></section><section className="rt-tools-icon-v1"><div className="w-layout-blockcontainer rt-container-extra-large w-container"><div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative"><div className="rt-tools-icon-container"><div className="rt-tools-iconheading rt-heading-bottom-gap"><div data-w-id="7c7434fc-1621-344c-6221-d25b72c0bdc6" className="rt-sub-gap"><div className="rt-sub-text rt-sub-gredient">integration</div></div><div className="rt-overflow-hidden"><h2 data-w-id="7c7434fc-1621-344c-6221-d25b72c0bdc9" className="rt-gap-off rt-desktop-text-center">Streamline workflows, save time, enhance performance</h2></div></div><div data-w-id="7c7434fc-1621-344c-6221-d25b72c0bdcb" className="w-layout-hflex rt-tools-icon-wrapper"><div className="w-layout-vflex rt-tools-icon one" ><div className="rt-tools-icon-image"><img src="/Home2_files/690addfe1d0a8b4dac6fd942_Group 2147225566.svg" loading="lazy" alt="taskopia-home-two-icon-1" /></div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-small-name">Clarityworks</div><div className="rt-tools-icon-text-box"><div className="rt-tag">Efficiency consultant</div></div></div></div><div className="w-layout-vflex rt-tools-icon two" ><div className="rt-tools-icon-image"><img width="135" height="135" alt="" src="/Home2_files/690ae03efa396b38eb292fe4_Towers.svg" loading="lazy" /></div><div className="rt-small-name">Flowbridge</div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-tools-icon-text-box"><div className="rt-tag">Scrum master</div></div></div></div><div className="w-layout-vflex rt-tools-icon one" ><div className="rt-tools-icon-image"><img width="112" height="112" alt="" src="/Home2_files/691d8bb1729b52a1f8ffd65a_icon-service-i.svg" loading="lazy" /></div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-small-name">Plansync</div><div className="rt-tools-icon-text-box"><div className="rt-tag">Project coordinator</div></div></div></div><div className="w-layout-vflex rt-tools-icon two" ><div className="rt-tools-icon-image"><img width="115" height="115" alt="" src="/Home2_files/690adf8b2d64b64c03d7f792_Nira.svg" loading="lazy" /></div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-small-name">Collabtrack</div><div className="rt-tools-icon-text-box"><div className="rt-tag">Team lead</div></div></div></div><div className="w-layout-vflex rt-tools-icon one" ><div className="rt-tools-icon-image"><img width="126" height="126" alt="" src="/Home2_files/691d8c2797ae7dee4fdd46cd_taskopia-integration-icon.svg" loading="lazy" /></div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-small-name">Worksphere</div><div className="rt-tools-icon-text-box"><div className="rt-tag">Productivity analyst</div></div></div></div><div className="w-layout-vflex rt-tools-icon two" ><div className="rt-tools-icon-image"><img width="138" height="138" alt="" src="/Home2_files/690adf8af33dd03d1823e581_Aven.svg" loading="lazy" /></div><div className="w-layout-vflex rt-tools-icon-text"><div className="rt-small-name">Tasknest</div><div className="rt-tools-icon-text-box"><div className="rt-tag">Project manager</div></div></div></div></div></div><div className="rt-tools-icon-overlay"><img src="/Home2_files/690adbc5bfed3c0fa7e49213_Vector 1530.webp" loading="lazy" alt="taskopia-home-two-overlay-integration" /></div></div></div></section><section className="rt-faq"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-faq-content-main-v2"><div className="w-layout-hflex rt-faq-heading-main rt-faq-2-main-left"><div className="w-layout-vflex rt-faq-heading-wrap rt-faq-v2"><div className="rt-sub-gap"><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb877" className="rt-sub-text rt-sub-gredient" >Frequently asked questions</div></div><h2 data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb879" className="rt-no-margin" >Everything you want to know <span className="rt-color-periwinkle-gray">explained clearly</span></h2><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb87d" className="rt-button-para-gap" ><a data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Contact us today</div><div className="rt-button-body-overlay" ></div></a></div></div></div><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880" className="rt-faq-main rt-margin-auto rt-faq-2-main" ><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb881" className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag rt-top-gap-of" ><div className="w-layout-hflex rt-faq-top-part"><div className="w-layout-hflex r-faq-text-wrap rt-faq-v2"><div className="rt-text-style-h6">Does it integrate with other tools?</div></div><div className="rt-faq-right-part"><div className="rt-faq-minus"></div><div className="rt-faq-plus" ></div></div></div><div className="rt-faq-bottom-part rt-overflow-hidden" ><div className="rt-faq-para-wrap"><p className="rt-gap-off">AI automation uses artificial intelligence to perform repetitive tasks, analyze data, and optimize processes, enabling businesses to save time, reduce errors, and make smarter, faster decisions efficiently.</p></div></div></div><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f" className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag" ><div className="w-layout-hflex rt-faq-top-part"><div className="w-layout-hflex r-faq-text-wrap rt-faq-v2"><div className="rt-text-style-h6">How can task management software improve productivity?</div></div><div className="rt-faq-right-part"><div className="rt-faq-minus"></div><div className="rt-faq-plus" ></div></div></div><div className="rt-faq-bottom-part rt-overflow-hidden" ><div className="rt-faq-para-wrap rt-faq-v2"><p className="rt-gap-off">AI can automate repetitive tasks like data entry, customer support, report generation, inventory management, and workflow optimization, allowing teams to focus on strategic, high-value activities and business growth.</p></div></div></div><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d" className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag" ><div className="w-layout-hflex rt-faq-top-part"><div className="w-layout-hflex r-faq-text-wrap rt-faq-v2"><div className="rt-text-style-h6">Can I collaborate with my team using this platform?</div></div><div className="rt-faq-right-part"><div className="rt-faq-minus"></div><div className="rt-faq-plus" ></div></div></div><div className="rt-faq-bottom-part rt-overflow-hidden" ><div className="rt-faq-para-wrap"><p className="rt-gap-off">Yes, AI automation is ideal for small businesses. It streamlines operations, reduces manual work, improves efficiency, and provides actionable insights, helping smaller teams compete and grow effectively.</p></div></div></div><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab" className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag" ><div className="w-layout-hflex rt-faq-top-part"><div className="w-layout-hflex r-faq-text-wrap rt-faq-v2"><div className="rt-text-style-h6">Is this suitable for small teams and enterprises?</div></div><div className="rt-faq-right-part"><div className="rt-faq-minus"></div><div className="rt-faq-plus" ></div></div></div><div className="rt-faq-bottom-part rt-overflow-hidden" ><div className="rt-faq-para-wrap"><p className="rt-gap-off">Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors.</p></div></div></div><div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9" className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag" ><div className="w-layout-hflex rt-faq-top-part"><div className="w-layout-hflex r-faq-text-wrap rt-faq-v2"><div className="rt-text-style-h6">Can I track project deadlines?</div></div><div className="rt-faq-right-part"><div className="rt-faq-minus"></div><div className="rt-faq-plus" ></div></div></div><div className="rt-faq-bottom-part rt-overflow-hidden" ><div className="rt-faq-para-wrap rt-faq-v2"><p className="rt-gap-off">Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations.</p></div></div></div></div></div></div></section><div className="rt-position-relative"><section data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e67" className="rt-testimonial-v2"><div className="w-layout-blockcontainer rt-container-main w-container"><div className="rt-overflow-hidden"><div className="w-layout-hflex rt-our-benefits-heading"><div className="rt-testimonial-v2-heading-wrap rt-desktop-text-center rt-heading-bottom-gap"><div className="rt-sub-gap"><div data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e6d" className="rt-sub-text rt-sub-gredient" >our testimonials</div></div><h2 data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e6f" className="rt-gap-off" >Customer experiences that speak <span className="rt-color-periwinkle-gray">for themselves</span></h2></div></div><div data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e73" className="w-layout-hflex rt-testimonial-v2-card-main rt-overflow-hidden rt-position-relative"><div className="rt-testimonial-v2-marquee-train" ><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-position-relative"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Rebecca Lin</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative"><div className="rt-text-style-h6">“Faster support”</div><p className="rt-gap-off">“This tool transformed how our team works! Tasks are organized, deadlines are clear, and collaboration is smoother than ever. Productivity has never been this high.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Jonathan Keller</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Good sales growth”</div><p className="rt-gap-off">“An absolute game-changer for project management. We can track progress in real-time, avoid delays, and deliver projects on schedule with less stress.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonila-client-image" src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Mark Wilson</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Smooth workflow”</div><p className="rt-gap-off">“Simple, intuitive, and powerful—our team now manages tasks without confusion. It keeps everyone aligned and helps us achieve more in less time.”</p></div></div></div><div className="rt-testimonial-v2-marquee-train" ><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-position-relative"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Rebecca Lin</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative"><div className="rt-text-style-h6">“Faster support”</div><p className="rt-gap-off">“This tool transformed how our team works! Tasks are organized, deadlines are clear, and collaboration is smoother than ever. Productivity has never been this high.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Jonathan Keller</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Good sales growth”</div><p className="rt-gap-off">“An absolute game-changer for project management. We can track progress in real-time, avoid delays, and deliver projects on schedule with less stress.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonila-client-image" src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Mark Wilson</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Smooth workflow”</div><p className="rt-gap-off">“Simple, intuitive, and powerful—our team now manages tasks without confusion. It keeps everyone aligned and helps us achieve more in less time.”</p></div></div></div><div className="rt-testimonial-v2-marquee-train" ><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-position-relative"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Rebecca Lin</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative"><div className="rt-text-style-h6">“Faster support”</div><p className="rt-gap-off">“This tool transformed how our team works! Tasks are organized, deadlines are clear, and collaboration is smoother than ever. Productivity has never been this high.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonial-client-image" src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="w-layout-vflex rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Jonathan Keller</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Good sales growth”</div><p className="rt-gap-off">“An absolute game-changer for project management. We can track progress in real-time, avoid delays, and deliver projects on schedule with less stress.”</p></div></div><div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden"><div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40"><div className="rt-testimonial-v3-client-wrap"><img width="55" height="55" alt="Kloudera-home-one-testimonila-client-image" src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp" loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" /></div><div className="rt-testimonial-v3-client-details"><div className="rt-testimonial-star"><img width="91" height="91" alt="" src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg" loading="lazy" className="rt-height-auto" /></div><div className="rt-text-style-h6"><div><span className="rt-color-blue-yonder">By</span> Mark Wilson</div></div></div></div><div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center"><div className="rt-text-style-h6">“Smooth workflow”</div><p className="rt-gap-off">“Simple, intuitive, and powerful—our team now manages tasks without confusion. It keeps everyone aligned and helps us achieve more in less time.”</p></div></div></div><div className="rt-testimonial-overlay-v2"></div></div></div></div></section><div data-w-id="a84e8a22-ebb6-6e61-bd26-6377f2be75ad" className="w-layout-hflex rt-section-line-wrap rt-margin-auto"><div className="rt-section-overlay"></div></div></div></main>
-      <Footer /><div></div><div className="rt-vlt-root" ><button className="rt-vlt-trigger" id="rtVltOpen" aria-label="Open the vault"><span className="rt-vlt-mark">190</span><span><b>Open the vault</b><br /><span className="rt-vlt-sub">190 templates · 3 new this week</span></span><span className="rt-vlt-pulse"></span></button><div className="rt-vlt-overlay" id="rtVltOverlay" role="dialog" aria-modal="true" aria-label="Radiant vault"><div className="rt-vlt-modal"><div className="rt-vlt-promo">Founding launch · first 500 members get the $2399 lifetime for $599</div><button className="rt-vlt-x" id="rtVltClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"></path></svg></button><div className="rt-vlt-wall"><div className="rt-vlt-row rt-vlt-r1"><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp" alt="Arodesk template" loading="lazy" data-c="#a06a7a" /></div><div className="rt-vlt-cap"><strong>Arodesk</strong><em>Saas</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png" alt="Avelety template" loading="lazy" data-c="#6f8f7f" /></div><div className="rt-vlt-cap"><strong>Avelety</strong><em>Technology</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp" alt="Soltio template" loading="lazy" data-c="#8a7256" /></div><div className="rt-vlt-cap"><strong>Soltio</strong><em>Saas</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp" alt="Applyze template" loading="lazy" data-c="#8a8256" /></div><div className="rt-vlt-cap"><strong>Applyze</strong><em>Saas</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp" alt="Arodesk template" loading="lazy" data-c="#a06a7a" /></div><div className="rt-vlt-cap"><strong>Arodesk</strong><em>Saas</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png" alt="Avelety template" loading="lazy" data-c="#6f8f7f" /></div><div className="rt-vlt-cap"><strong>Avelety</strong><em>Technology</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp" alt="Soltio template" loading="lazy" data-c="#8a7256" /></div><div className="rt-vlt-cap"><strong>Soltio</strong><em>Saas</em></div></div><div className="rt-vlt-card"><div className="rt-vlt-shot rt-vlt-shot--img"><img src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp" alt="Applyze template" loading="lazy" data-c="#8a8256" /></div><div className="rt-vlt-cap"><strong>Applyze</strong><em>Saas</em></div></div></div></div><div className="rt-vlt-body"><span className="rt-vlt-ey"><span className="rt-vlt-dot"></span>Radiant vault · 3 new this week</span><h3>Stop buying templates<br />one at a time.</h3><p className="rt-vlt-lead"><b>$18,000+</b> of premium templates. Own the whole vault for the price of one — or let two land in your account every month.</p><div className="rt-vlt-anchor">Buy them one by one: <s>$18,000+</s> · own all 190 for <b>$499</b>.</div><div className="rt-vlt-tiers"><div className="rt-vlt-tier"><div className="rt-vlt-nm">Yearly</div><span className="rt-vlt-price">$499</span> <span className="rt-vlt-per">/yr · $41.58 mo billed yearly</span><p className="rt-vlt-td"><b>3 templates every month</b> — 36 a year. Yours to keep, forever.</p><a className="rt-vlt-cta g" href="https://www.radianttemplates.com/template-vault" target="_blank" rel="noopener">Start yearly</a></div><div className="rt-vlt-tier feat"><span className="rt-vlt-badge">Most popular</span><div className="rt-vlt-nm">Lifetime</div><span className="rt-vlt-price">$599</span> <span className="rt-vlt-per"><s>$2399</s> founding · all 190</span><div><span className="rt-vlt-once">∞ Pay once. Yours forever.</span></div><p className="rt-vlt-td2">All 190 today + every future template. Source files, sections library, priority. No renewals.</p><a className="rt-vlt-cta p" href="https://www.radianttemplates.com/template-vault" target="_blank" rel="noopener">Own the vault →</a></div></div><div className="rt-vlt-note"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5c1 2.5 3 3.5 3 6a3 3 0 11-6 0c0-2.5 2-3.5 3-6z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"></path></svg><span>First <b>500</b> members only — then lifetime returns to its regular $2399.</span></div><div className="rt-vlt-reassure"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 13.5S2.5 10 2.5 6.2A2.7 2.7 0 018 4.3a2.7 2.7 0 015.5 1.9C13.5 10 8 13.5 8 13.5z" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round"></path></svg><span><b>Already a customer?</b> The $179 you paid credits toward any plan — go yearly for $120 more, or own it for life for $320.</span></div></div></div></div></div>
+      <main>
+        <HomeTwoHero />
+        <HomeTwoMarquee />
+        <HomeTwoAIAgents />
+        <HomeTwoAbout />
+        <HomeTwoChoose />
+        <HomeTwoBenefits />
+        <HomeTwoToolsIcon />
+        <HomeTwoFAQ />
+        <HomeTwoTestimonial />
+      </main>
+      <Footer />
+      <div></div>
+      <div className="rt-vlt-root">
+        <button
+          className="rt-vlt-trigger"
+          id="rtVltOpen"
+          aria-label="Open the vault">
+          <span className="rt-vlt-mark">190</span>
+          <span>
+            <b>Open the vault</b>
+            <br />
+            <span className="rt-vlt-sub">190 templates · 3 new this week</span>
+          </span>
+          <span className="rt-vlt-pulse"></span>
+        </button>
+        <div
+          className="rt-vlt-overlay"
+          id="rtVltOverlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Radiant vault">
+          <div className="rt-vlt-modal">
+            <div className="rt-vlt-promo">
+              Founding launch · first 500 members get the $2399 lifetime for
+              $599
+            </div>
+            <button className="rt-vlt-x" id="rtVltClose" aria-label="Close">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M4 4l8 8M12 4l-8 8"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"></path>
+              </svg>
+            </button>
+            <div className="rt-vlt-wall">
+              <div className="rt-vlt-row rt-vlt-r1">
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp"
+                      alt="Arodesk template"
+                      loading="lazy"
+                      data-c="#a06a7a"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Arodesk</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png"
+                      alt="Avelety template"
+                      loading="lazy"
+                      data-c="#6f8f7f"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Avelety</strong>
+                    <em>Technology</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp"
+                      alt="Soltio template"
+                      loading="lazy"
+                      data-c="#8a7256"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Soltio</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp"
+                      alt="Applyze template"
+                      loading="lazy"
+                      data-c="#8a8256"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Applyze</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp"
+                      alt="Arodesk template"
+                      loading="lazy"
+                      data-c="#a06a7a"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Arodesk</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png"
+                      alt="Avelety template"
+                      loading="lazy"
+                      data-c="#6f8f7f"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Avelety</strong>
+                    <em>Technology</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp"
+                      alt="Soltio template"
+                      loading="lazy"
+                      data-c="#8a7256"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Soltio</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+                <div className="rt-vlt-card">
+                  <div className="rt-vlt-shot rt-vlt-shot--img">
+                    <img
+                      src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp"
+                      alt="Applyze template"
+                      loading="lazy"
+                      data-c="#8a8256"
+                    />
+                  </div>
+                  <div className="rt-vlt-cap">
+                    <strong>Applyze</strong>
+                    <em>Saas</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rt-vlt-body">
+              <span className="rt-vlt-ey">
+                <span className="rt-vlt-dot"></span>Radiant vault · 3 new this
+                week
+              </span>
+              <h3>
+                Stop buying templates
+                <br />
+                one at a time.
+              </h3>
+              <p className="rt-vlt-lead">
+                <b>$18,000+</b> of premium templates. Own the whole vault for
+                the price of one — or let two land in your account every month.
+              </p>
+              <div className="rt-vlt-anchor">
+                Buy them one by one: <s>$18,000+</s> · own all 190 for{" "}
+                <b>$499</b>.
+              </div>
+              <div className="rt-vlt-tiers">
+                <div className="rt-vlt-tier">
+                  <div className="rt-vlt-nm">Yearly</div>
+                  <span className="rt-vlt-price">$499</span>{" "}
+                  <span className="rt-vlt-per">
+                    /yr · $41.58 mo billed yearly
+                  </span>
+                  <p className="rt-vlt-td">
+                    <b>3 templates every month</b> — 36 a year. Yours to keep,
+                    forever.
+                  </p>
+                  <a
+                    className="rt-vlt-cta g"
+                    href="https://www.radianttemplates.com/template-vault"
+                    target="_blank"
+                    rel="noopener">
+                    Start yearly
+                  </a>
+                </div>
+                <div className="rt-vlt-tier feat">
+                  <span className="rt-vlt-badge">Most popular</span>
+                  <div className="rt-vlt-nm">Lifetime</div>
+                  <span className="rt-vlt-price">$599</span>{" "}
+                  <span className="rt-vlt-per">
+                    <s>$2399</s> founding · all 190
+                  </span>
+                  <div>
+                    <span className="rt-vlt-once">
+                      ∞ Pay once. Yours forever.
+                    </span>
+                  </div>
+                  <p className="rt-vlt-td2">
+                    All 190 today + every future template. Source files,
+                    sections library, priority. No renewals.
+                  </p>
+                  <a
+                    className="rt-vlt-cta p"
+                    href="https://www.radianttemplates.com/template-vault"
+                    target="_blank"
+                    rel="noopener">
+                    Own the vault →
+                  </a>
+                </div>
+              </div>
+              <div className="rt-vlt-note">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M8 1.5c1 2.5 3 3.5 3 6a3 3 0 11-6 0c0-2.5 2-3.5 3-6z"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinejoin="round"></path>
+                </svg>
+                <span>
+                  First <b>500</b> members only — then lifetime returns to its
+                  regular $2399.
+                </span>
+              </div>
+              <div className="rt-vlt-reassure">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M8 13.5S2.5 10 2.5 6.2A2.7 2.7 0 018 4.3a2.7 2.7 0 015.5 1.9C13.5 10 8 13.5 8 13.5z"
+                    stroke="currentColor"
+                    strokeWidth="1.1"
+                    strokeLinejoin="round"></path>
+                </svg>
+                <span>
+                  <b>Already a customer?</b> The $179 you paid credits toward
+                  any plan — go yearly for $120 more, or own it for life for
+                  $320.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

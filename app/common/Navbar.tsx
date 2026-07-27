@@ -58,7 +58,7 @@ export default function Navbar() {
                     aria-expanded="false"
                     role="button"
                     tabIndex={0}>
-                    <div className="rt-menu-text">Home</div>
+                    <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
                     <div
                       className="rt-nav-menu-arrow-holder rt-position-relative">
                       <img
@@ -346,7 +346,7 @@ export default function Navbar() {
                       {/* Mobile – Home */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
                         <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
-                          <div className="rt-menu-text">Home</div>
+                          <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <img width="10" height="6" alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>

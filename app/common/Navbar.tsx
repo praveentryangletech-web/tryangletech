@@ -20,7 +20,7 @@ export default function Navbar() {
           data-easing2="ease"
           role="banner"
           className="rt-nav w-nav"
-          style={{ willChange: "background", backgroundColor: "rgba(249, 251, 255, 0)" }}>
+          style={{  }}>
           <div className="w-layout-blockcontainer rt-container-nav rt-position-relative w-container">
             <div className="rt-navbar-wrapper rt-position-relative">
 
@@ -179,7 +179,7 @@ export default function Navbar() {
                       </div>
                       <div className="w-layout-hflex rt-pages-menu-wrap">
                         {/* Left column */}
-                        <div className="w-layout-vflex rt-pages-menu-list-wrap border">
+                        <div className="w-layout-vflex rt-pages-menu-list-wrap">
                           {/* Home page */}
                           <a href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
@@ -388,7 +388,7 @@ export default function Navbar() {
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-6" aria-labelledby="w-dropdown-toggle-6">
                           <div className="w-layout-hflex rt-pages-menu-wrap rt-padding">
-                            <div className="w-layout-vflex rt-pages-menu-list-wrap border">
+                            <div className="w-layout-vflex rt-pages-menu-list-wrap">
                               <a href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>

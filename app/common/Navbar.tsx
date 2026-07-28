@@ -75,7 +75,7 @@ export default function Navbar() {
                     style={{ width: "100%", height: "0px" }}>
                     <a href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
                     <a href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</a>
-                    <a href="#" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
+                    <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
                   </nav>
                 </div>
 
@@ -353,7 +353,7 @@ export default function Navbar() {
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4">
                           <a href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
                           <a href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</a>
-                          <a href="#" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
+                          <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
                         </nav>
                       </div>
 

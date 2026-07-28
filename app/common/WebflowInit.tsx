@@ -1,12 +1,35 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function WebflowInit({ pageId }: { pageId?: string }) {
   const pathname = usePathname();
 
+  // Remove w-mod-ix synchronously before paint on route change
+  // This allows Webflow's native CSS (html.w-mod-js:not(.w-mod-ix)) to hide animated 
+  // elements before ix2.init() takes over, preventing a flash of visible content.
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  useIsomorphicLayoutEffect(() => {
+    // Add a strict hiding class to prevent any 1-frame micro-flashes during route changes.
+    // This perfectly bridges the gap between React rendering and Webflow applying its inline start states.
+    document.documentElement.classList.add('wf-initializing');
+    document.documentElement.classList.remove('w-mod-ix');
+  }, [pathname]);
+
   useEffect(() => {
+    // Inject the anti-flash CSS rules if they don't exist yet
+    if (!document.getElementById('wf-anti-flash')) {
+      const style = document.createElement('style');
+      style.id = 'wf-anti-flash';
+      style.innerHTML = `
+        html.wf-initializing [data-w-id] {
+          opacity: 0 !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     // If a specific page ID is provided, set it on the HTML element
     if (pageId) {
       document.documentElement.setAttribute('data-wf-page', pageId);
@@ -17,6 +40,12 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
     const initWebflow = () => {
       const Webflow = (window as any).Webflow;
       if (Webflow && Webflow.require) {
+        // Prevent React 18 Strict Mode from double-firing the initialization and causing a jump
+        if ((window as any).__wf_loaded_page === pageId) {
+          return;
+        }
+        (window as any).__wf_loaded_page = pageId;
+
         Webflow.destroy();
         Webflow.ready();
         const ix2 = Webflow.require('ix2');
@@ -28,23 +57,11 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
           }
         }
         document.dispatchEvent(new Event('readystatechange'));
-        
-        // Dispatch a scroll event immediately so Webflow triggers animations for elements already in view
+        // Give Webflow 50ms to fully calculate and apply all initial inline styles,
+        // then remove the strict hiding class so the animations can play.
         setTimeout(() => {
-          window.dispatchEvent(new Event('scroll'));
+          document.documentElement.classList.remove('wf-initializing');
         }, 50);
-
-        // Dispatch resize and scroll events once when window fully loads (images loaded) to fix coordinates.
-        const handleLoad = () => {
-          window.dispatchEvent(new Event('resize'));
-          window.dispatchEvent(new Event('scroll'));
-        };
-
-        if (document.readyState === 'complete') {
-          handleLoad();
-        } else {
-          window.addEventListener('load', handleLoad);
-        }
       } else if (attempts < 50) { // Try for up to 2.5 seconds
         attempts++;
         setTimeout(initWebflow, 50);
@@ -55,7 +72,6 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
     const timer = setTimeout(initWebflow, 50);
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('load', () => window.dispatchEvent(new Event('resize')));
     };
   }, [pathname, pageId]);
 

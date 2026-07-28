@@ -27,13 +27,24 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
             console.warn("Webflow ix2 init error (safe to ignore):", e);
           }
         }
-
-        // Dispatch resize and scroll events to force Webflow to evaluate elements on load 
-        // (This prevents the issue where animations only trigger after you start scrolling)
+        document.dispatchEvent(new Event('readystatechange'));
+        
+        // Dispatch a scroll event immediately so Webflow triggers animations for elements already in view
         setTimeout(() => {
+          window.dispatchEvent(new Event('scroll'));
+        }, 50);
+
+        // Dispatch resize and scroll events once when window fully loads (images loaded) to fix coordinates.
+        const handleLoad = () => {
           window.dispatchEvent(new Event('resize'));
           window.dispatchEvent(new Event('scroll'));
-        }, 100);
+        };
+
+        if (document.readyState === 'complete') {
+          handleLoad();
+        } else {
+          window.addEventListener('load', handleLoad);
+        }
       } else if (attempts < 50) { // Try for up to 2.5 seconds
         attempts++;
         setTimeout(initWebflow, 50);
@@ -42,7 +53,10 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
     
     // Slight delay to allow DOM to settle
     const timer = setTimeout(initWebflow, 50);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('load', () => window.dispatchEvent(new Event('resize')));
+    };
   }, [pathname, pageId]);
 
   return null;

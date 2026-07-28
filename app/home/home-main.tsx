@@ -7,9 +7,11 @@ import About from './components/about';
 import Benefits from './components/Benefits';
 import Workflow from './components/Workflow';
 import Integrations from './components/Integration';
+import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
 import Faq from './components/Faq';
 import Cta from './components/Cta';
+import Collaboration from './components/Collaboration';
 
 export default function HomeMain() {
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function HomeMain() {
             console.warn("Webflow ix2 init error (safe to ignore):", e);
           }
         }
-        
+
         // Dispatch resize and scroll events to force Webflow to evaluate elements on load 
         // (This prevents the issue where animations only trigger after you start scrolling)
         setTimeout(() => {
@@ -45,29 +47,30 @@ export default function HomeMain() {
     };
 
     const timer = setTimeout(initWebflow, 50);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
 
   return (
     <>
-     <Navbar />
-    
-          <main>
-          <Hero/>
-            
-           <Benefits/>
-           <About/>
-         
-            {/* <WhyChooseUs /> */}
-            <Workflow />
-            <Integrations />
-            <Testimonials />
-            <Faq />
-            <Cta />
-          </main>
-          <Footer />
+      <Navbar />
+
+      <main>
+        <Hero />
+
+        <Benefits />
+        <About />
+
+        <WhyChooseUs />
+        <Collaboration />
+        {/* <Workflow /> */}
+        <Integrations />
+        <Testimonials />
+        <Faq />
+        {/* <Cta /> */}
+      </main>
+      <Footer />
     </>
   );
 }

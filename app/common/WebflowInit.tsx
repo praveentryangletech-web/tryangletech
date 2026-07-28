@@ -57,11 +57,14 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
           }
         }
         document.dispatchEvent(new Event('readystatechange'));
-        // Give Webflow 50ms to fully calculate and apply all initial inline styles,
-        // then remove the strict hiding class so the animations can play.
+        // Give Webflow 50ms to fully calculate and apply all initial inline styles.
+        // Then remove the strict hiding class and dispatch a scroll event so Webflow 
+        // immediately triggers animations for elements already in the viewport.
         setTimeout(() => {
           document.documentElement.classList.remove('wf-initializing');
-        }, 50);
+          window.dispatchEvent(new Event('resize'));
+          window.dispatchEvent(new Event('scroll'));
+        }, 100);
       } else if (attempts < 50) { // Try for up to 2.5 seconds
         attempts++;
         setTimeout(initWebflow, 50);

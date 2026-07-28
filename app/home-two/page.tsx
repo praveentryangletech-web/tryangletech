@@ -15,33 +15,7 @@ import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 
 export default function HomeTwo() {
-  useEffect(() => {
-    // Set the specific page ID so Webflow triggers the right animations
-    document.documentElement.setAttribute(
-      "data-wf-page",
-      "68eddb21f14a8338ce862110",
-    );
-    document.documentElement.setAttribute(
-      "data-wf-site",
-      "68c3feed3b3e541e7d5c098a",
-    );
 
-    // Re-initialize Webflow interactions after Next.js client-side routing
-    const initWebflow = setInterval(() => {
-      const Webflow = (window as any).Webflow;
-      if (typeof window !== "undefined" && Webflow && Webflow.require) {
-        const ix2 = Webflow.require("ix2");
-        if (ix2) {
-          clearInterval(initWebflow);
-          Webflow.destroy();
-          Webflow.ready();
-          ix2.init();
-          document.dispatchEvent(new Event("readystatechange"));
-        }
-      }
-    }, 100);
-    return () => clearInterval(initWebflow);
-  }, []);
 
   return (
     <>

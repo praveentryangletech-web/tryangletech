@@ -25,10 +25,19 @@ export default function HomeMain() {
         Webflow.ready();
         const ix2 = Webflow.require('ix2');
         if (ix2) {
-          ix2.init();
+          try {
+            ix2.init();
+          } catch (e) {
+            console.warn("Webflow ix2 init error (safe to ignore):", e);
+          }
         }
-        // Dispatch resize to fix some layout calculation issues with Webflow
-        window.dispatchEvent(new Event('resize'));
+        
+        // Dispatch resize and scroll events to force Webflow to evaluate elements on load 
+        // (This prevents the issue where animations only trigger after you start scrolling)
+        setTimeout(() => {
+          window.dispatchEvent(new Event('resize'));
+          window.dispatchEvent(new Event('scroll'));
+        }, 100);
       } else if (attempts < 50) {
         attempts++;
         setTimeout(initWebflow, 50);

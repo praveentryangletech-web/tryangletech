@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import { useRouter } from 'next/navigation';
@@ -8,12 +8,23 @@ const NAV_ASSETS = '/Taskopia_files';
 
 export default function Navbar() {
   const router = useRouter();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <div
         data-wf--rt-nav--variant="base"
         data-w-id="b07e93b6-139e-136c-8189-3251b36d9225"
-        className="rt-top-nav rt-bg-color relative z-[999]">
+        className={`rt-top-nav relative z-[999] transition-colors duration-300 ${scrolled ? 'bg-white shadow-sm' : 'rt-bg-color'}`}>
         <div
           data-w-id="b07e93b6-139e-136c-8189-3251b36d9226"
           data-animation="default"

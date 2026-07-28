@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React from 'react';
 
@@ -28,13 +29,13 @@ export default function HomeTwoFAQ() {
                   <div
                     data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb87d"
                     className="rt-button-para-gap">
-                    <a
+                    <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/contact"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Contact us today</div>
                       <div className="rt-button-body-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

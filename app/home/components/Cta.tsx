@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from 'react';
 
 export default function Cta() {
@@ -13,7 +14,7 @@ export default function Cta() {
             <p className="rt-color-pale-periwinkle">Start your 14-day free trial today. No credit card required.</p>
           </div>
           <div className="rt-desktop-text-center">
-            <a href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Get Started Free</div></a>
+            <Link href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Get Started Free</div></Link>
           </div>
         </div>
       </div>

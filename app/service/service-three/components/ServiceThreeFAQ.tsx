@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -61,13 +62,13 @@ export default function ServiceThreeFAQ() {
                 <div
                   data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80bf"
                   className="w-layout-hflex rt-hero-v7-button-wrap">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                   <div className="w-layout-hflex rt-hero-v2-client-wrap">
                     <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                       <div
@@ -493,7 +494,7 @@ export default function ServiceThreeFAQ() {
                     <div
                       data-w-id="33b12b78-8729-722c-56a6-c9b1a508f1b5"
                       className="rt-button-para-gap">
-                      <a
+                      <Link
                         data-wf--rt-white-button--variant="base"
                         data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
                         href="/service-one"
@@ -502,7 +503,7 @@ export default function ServiceThreeFAQ() {
                           Organize my tasks
                         </div>
                         <div className="rt-button-body-overlay rt-color-blue rt-color-change"></div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -544,13 +545,13 @@ export default function ServiceThreeFAQ() {
                   <div
                     data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401ea"
                     className="rt-button-para-gap">
-                    <a
+                    <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/service-one"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Explore benefits</div>
                       <div className="rt-button-body-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div
@@ -908,13 +909,13 @@ Taskopia-service-happy-two
                 <div
                   data-w-id="ae5c502b-6188-46fa-bc36-1f7b3f7289fa"
                   className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Collaborate smarter</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -1376,13 +1377,13 @@ taskopia-testimonials-author-v1
                   <div
                     data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb87d"
                     className="rt-button-para-gap">
-                    <a
+                    <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/contact"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Contact us today</div>
                       <div className="rt-button-body-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

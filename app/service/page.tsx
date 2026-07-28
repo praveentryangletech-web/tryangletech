@@ -226,14 +226,14 @@ export default function ServicesMainPage() {
           {/* CTAs */}
           <div data-reveal="up" data-delay="280"
             className="flex flex-wrap gap-4 justify-center">
-            <a href="/contact" className="rt-button-body w-inline-block">
+            <Link href="/contact" className="rt-button-body w-inline-block">
               <div className="rt-button-text">Get started today</div>
               <div className="rt-button-body-overlay"/>
-            </a>
-            <a href="/about" data-wf--rt-border-button--variant="base" className="rt-button-body rt-nav-btn w-inline-block">
+            </Link>
+            <Link href="/about" data-wf--rt-border-button--variant="base" className="rt-button-body rt-nav-btn w-inline-block">
               <div className="rt-button-text rt-btn-color-nav">Learn more</div>
               <div className="rt-button-body-overlay rt-nav-overlay"/>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -481,14 +481,14 @@ export default function ServicesMainPage() {
               Our team is here to help you find the perfect solution for your business size, goals, and workflow.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a href="/contact" className="rt-button-body w-inline-block">
+              <Link href="/contact" className="rt-button-body w-inline-block">
                 <div className="rt-button-text">Talk to our team</div>
                 <div className="rt-button-body-overlay"/>
-              </a>
-              <a href="/about" data-wf--rt-border-button--variant="base" className="rt-button-body rt-nav-btn w-inline-block">
+              </Link>
+              <Link href="/about" data-wf--rt-border-button--variant="base" className="rt-button-body rt-nav-btn w-inline-block">
                 <div className="rt-button-text rt-btn-color-nav">Read our story</div>
                 <div className="rt-button-body-overlay rt-nav-overlay"/>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

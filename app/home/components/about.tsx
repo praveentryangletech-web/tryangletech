@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from 'react';
 
 export default function About() {
@@ -99,7 +100,7 @@ export default function About() {
               data-w-id="3a13a58c-8b59-09d0-895e-d85627d01dae"
               style={{ "opacity": "0" }}
               className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-              <a
+              <Link
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                 href="/contact"
                 className="rt-button-body w-inline-block"
@@ -107,7 +108,7 @@ export default function About() {
                 <div
                   className="rt-button-body-overlay"
                   style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
-                ></a>
+                ></Link>
             </div>
           </div>
         </div>

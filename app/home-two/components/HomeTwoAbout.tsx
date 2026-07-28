@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React from 'react';
 
@@ -102,7 +103,7 @@ export default function HomeTwoAbout() {
                   <div
                     data-w-id="70c45100-f145-3c18-c43c-49629dffa573"
                     className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                    <a
+                    <Link
                       data-wf--rt-border-button--variant="base"
                       data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                       href="/contact"
@@ -111,7 +112,7 @@ export default function HomeTwoAbout() {
                         &nbsp;Get started today
                       </div>
                       <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React from 'react';
 
@@ -89,14 +90,14 @@ export default function HomeTwoMarquee() {
                 <div
                   data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f9"
                   className="w-layout-hflex rt-hero-v7-button-wrap">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     data-wf--rt-border-button--variant="base"
                     data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                     href="/pricing"
@@ -105,7 +106,7 @@ export default function HomeTwoMarquee() {
                       View pricing
                     </div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
                 <div
                   data-w-id="e614267b-345c-6f68-39fe-7fe900653232"

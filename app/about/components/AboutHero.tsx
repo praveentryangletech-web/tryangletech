@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const A = '/about-assets';
 
@@ -44,10 +45,10 @@ export default function AboutHero() {
                 </p>
 
                 <div data-w-id="930d11b7-0033-4561-be37-a0d90e04a784" className="w-layout-hflex rt-hero-v7-button-wrap">
-                  <a data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/service-one" className="rt-button-body w-inline-block">
+                  <Link data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/service-one" className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                   <a data-wf--rt-border-button--variant="base" href="tel:4588812341" className="rt-button-body rt-nav-btn w-inline-block">
                     <div className="rt-button-text rt-btn-color-nav">Schedule a call</div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>

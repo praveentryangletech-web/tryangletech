@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function BlogContent() {
   return (
@@ -34,7 +35,7 @@ export default function BlogContent() {
             data-duration-out="100"
             className="tabs w-tabs">
             <div className="tabs-menu w-tab-menu" role="tablist">
-              <a
+              <Link
                 data-w-tab="Tab 1"
                 data-w-id="6ba64cb4-8cc9-d548-64cf-bb03b736f950"
                 className="rt-tab-link w-inline-block w-tab-link w--current"
@@ -47,8 +48,8 @@ export default function BlogContent() {
                 <div className="rt-tab-main-border-line">
                   <div className="rt-tab-inner-booder-line rt-1"></div>
                 </div>
-              </a>
-              <a
+              </Link>
+              <Link
                 data-w-tab="Tab 2"
                 data-w-id="6ba64cb4-8cc9-d548-64cf-bb03b736f953"
                 className="rt-tab-link w-inline-block w-tab-link"
@@ -62,8 +63,8 @@ export default function BlogContent() {
                 <div className="rt-tab-main-border-line">
                   <div className="rt-tab-inner-booder-line rt-2-bg"></div>
                 </div>
-              </a>
-              <a
+              </Link>
+              <Link
                 data-w-tab="Tab 3"
                 data-w-id="6ba64cb4-8cc9-d548-64cf-bb03b736f956"
                 className="rt-tab-link w-inline-block w-tab-link"
@@ -77,8 +78,8 @@ export default function BlogContent() {
                 <div className="rt-tab-main-border-line">
                   <div className="rt-tab-inner-booder-line rt-3"></div>
                 </div>
-              </a>
-              <a
+              </Link>
+              <Link
                 data-w-tab="Tab 4"
                 data-w-id="62cbce5a-3d08-ccfc-36a5-07d85aaff304"
                 className="rt-tab-link w-inline-block w-tab-link"
@@ -92,7 +93,7 @@ export default function BlogContent() {
                 <div className="rt-tab-main-border-line">
                   <div className="rt-tab-inner-booder-line rt-4"></div>
                 </div>
-              </a>
+              </Link>
             </div>
             <div className="rt-tads-content w-tab-content">
               <div
@@ -104,7 +105,7 @@ export default function BlogContent() {
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/empowering-teams-through-structured-project-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -146,10 +147,10 @@ export default function BlogContent() {
                             Empowering teams through structured project planning
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/building-clarity-through-smarter-work-systems"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -191,10 +192,10 @@ export default function BlogContent() {
                             Building clarity through smarter work systems
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/simplify-projects-through-intelligent-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -237,10 +238,10 @@ export default function BlogContent() {
                             management
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/empowering-teams-through-organized-workflows"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -282,10 +283,10 @@ export default function BlogContent() {
                             Empowering teams through organized workflows
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/efficiency-starts-with-effective-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -327,10 +328,10 @@ export default function BlogContent() {
                             Efficiency starts with effective task management
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/streamline-tasks-maximize-team-productivity"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -372,10 +373,10 @@ export default function BlogContent() {
                             Streamline tasks, maximize team productivity
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/streamlining-work-processes-for-busy-professionals"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -417,10 +418,10 @@ export default function BlogContent() {
                             Streamlining work processes for busy professionals
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/accelerate-project-delivery-with-organized-workflow-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -463,10 +464,10 @@ export default function BlogContent() {
                             planning
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
                         href="/blog-post/how-to-integrate-taskopia-with-your-favorite-productivity-tools"
                         className="rt-blog-v1-card-wrap w-inline-block">
@@ -509,7 +510,7 @@ export default function BlogContent() {
                             productivity tools
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -523,7 +524,7 @@ export default function BlogContent() {
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -558,10 +559,10 @@ export default function BlogContent() {
                             Empowering teams through structured project planning
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -596,10 +597,10 @@ export default function BlogContent() {
                             Streamline tasks, maximize team productivity
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -635,7 +636,7 @@ export default function BlogContent() {
                             planning
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -649,7 +650,7 @@ export default function BlogContent() {
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -684,10 +685,10 @@ export default function BlogContent() {
                             Building clarity through smarter work systems
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -722,10 +723,10 @@ export default function BlogContent() {
                             Empowering teams through organized workflows
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -761,7 +762,7 @@ export default function BlogContent() {
                             productivity tools
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -775,7 +776,7 @@ export default function BlogContent() {
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -811,10 +812,10 @@ export default function BlogContent() {
                             management
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -849,10 +850,10 @@ export default function BlogContent() {
                             Efficiency starts with effective task management
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div role="listitem" className="w-dyn-item">
-                      <a
+                      <Link
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
@@ -887,7 +888,7 @@ export default function BlogContent() {
                             Streamlining work processes for busy professionals
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

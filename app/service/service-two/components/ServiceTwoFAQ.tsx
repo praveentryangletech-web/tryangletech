@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -56,14 +57,14 @@ export default function ServiceTwoFAQ() {
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"
                 className="w-layout-hflex rt-hero-v7-button-wrap">
-                <a
+                <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                   href="/about"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text">Get started today</div>
                   <div className="rt-button-body-overlay"></div>
-                </a>
-                <a
+                </Link>
+                <Link
                   data-wf--rt-border-button--variant="base"
                   data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                   href="/pricing"
@@ -72,7 +73,7 @@ export default function ServiceTwoFAQ() {
                     View pricing
                   </div>
                   <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="rt-hero-v6-main">
@@ -475,13 +476,13 @@ taskopia-service-two-hero-9
                   </div>
                 </div>
                 <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -811,13 +812,13 @@ taskopia-service-two-hero-9
                 <div
                   data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b7e"
                   className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/about"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Explore benefits</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="rt-core-right rt-border-radius-medium">
@@ -1272,7 +1273,7 @@ taskopia-service-two-hero-9
                 <div
                   data-w-id="b9d08fca-feec-a53d-e33a-1ec9279fb1c6"
                   className="rt-button-para-gap">
-                  <a
+                  <Link
                     data-wf--rt-white-button--variant="color"
                     data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
                     href="/contact"
@@ -1281,7 +1282,7 @@ taskopia-service-two-hero-9
                       &nbsp;Get started today
                     </div>
                     <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div

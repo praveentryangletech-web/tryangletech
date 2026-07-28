@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 const SA = '/service3-assets';
 
 export default function ServiceOneHero() {
@@ -34,13 +35,13 @@ export default function ServiceOneHero() {
                 <div
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350326"
                   className="w-layout-hflex rt-hero-v5-button-wrap">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                   <div className="w-layout-hflex rt-hero-v2-client-wrap">
                     <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                       <div

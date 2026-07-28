@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const A = '/about-assets';
 
@@ -42,10 +43,10 @@ export default function OurGoal() {
                     </div>
 
                     <div data-w-id="10e068ac-9f62-8197-67e4-96584fae3d1c" className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                      <a href="/contact" className="rt-button-body w-inline-block">
+                      <Link href="/contact" className="rt-button-body w-inline-block">
                         <div className="rt-button-text">Start free trial</div>
                         <div className="rt-button-body-overlay"></div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
 

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -31,14 +32,14 @@ export default function ServiceTwoTestimonial() {
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"
                 className="w-layout-hflex rt-hero-v7-button-wrap">
-                <a
+                <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                   href="/about"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text">Get started today</div>
                   <div className="rt-button-body-overlay"></div>
-                </a>
-                <a
+                </Link>
+                <Link
                   data-wf--rt-border-button--variant="base"
                   data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                   href="/pricing"
@@ -47,7 +48,7 @@ export default function ServiceTwoTestimonial() {
                     View pricing
                   </div>
                   <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="rt-hero-v6-main">
@@ -449,13 +450,13 @@ taskopia-service-two-hero-9
                   </div>
                 </div>
                 <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Get started today</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -785,13 +786,13 @@ taskopia-service-two-hero-9
                 <div
                   data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b7e"
                   className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/about"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Explore benefits</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="rt-core-right rt-border-radius-medium">

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -17,7 +18,7 @@ export default function ServiceOnePricing() {
                 data-duration-out="100"
                 className="rt-service-tab w-tabs">
                 <div className="rt-method-menu w-tab-menu" role="tablist">
-                  <a
+                  <Link
                     data-w-tab="Tab 1"
                     data-w-id="ba8dfab3-890a-365d-c624-bffed8cf0c87"
                     className="rt-tab-menu-link rt-position-relative w-inline-block w-tab-link w--current"
@@ -37,8 +38,8 @@ export default function ServiceOnePricing() {
                         scheduling tools.
                       </p>
                     </div>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     data-w-tab="Tab 2"
                     data-w-id="ba8dfab3-890a-365d-c624-bffed8cf0c8b"
                     className="rt-tab-menu-link rt-position-relative w-inline-block w-tab-link"
@@ -59,8 +60,8 @@ export default function ServiceOnePricing() {
                         in one place.
                       </p>
                     </div>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     data-w-tab="Tab 3"
                     data-w-id="ba8dfab3-890a-365d-c624-bffed8cf0c8f"
                     className="rt-tab-menu-link rt-position-relative w-inline-block w-tab-link"
@@ -81,7 +82,7 @@ export default function ServiceOnePricing() {
                         clear, simple tools.
                       </p>
                     </div>
-                  </a>
+                  </Link>
                 </div>
                 <div className="rt-tab-main-content w-tab-content">
                   <div
@@ -117,7 +118,7 @@ export default function ServiceOnePricing() {
                         <div
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3e"
                           className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                          <a
+                          <Link
                             data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                             href="/contact"
                             className="rt-button-body w-inline-block">
@@ -125,7 +126,7 @@ export default function ServiceOnePricing() {
                               Contact us today
                             </div>
                             <div className="rt-button-body-overlay"></div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="rt-services-v3-right rt-overflow-hidden">
@@ -175,7 +176,7 @@ export default function ServiceOnePricing() {
                           reminders, and real-time progress tracking
                         </p>
                         <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                          <a
+                          <Link
                             data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                             href="/contact"
                             className="rt-button-body w-inline-block">
@@ -183,7 +184,7 @@ export default function ServiceOnePricing() {
                               Start free trial
                             </div>
                             <div className="rt-button-body-overlay"></div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="rt-services-v3-right">
@@ -229,7 +230,7 @@ export default function ServiceOnePricing() {
                           reminders, and real-time progress tracking
                         </p>
                         <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                          <a
+                          <Link
                             data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                             href="/contact"
                             className="rt-button-body w-inline-block">
@@ -237,7 +238,7 @@ export default function ServiceOnePricing() {
                               Start free trial
                             </div>
                             <div className="rt-button-body-overlay"></div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="rt-services-v3-right">

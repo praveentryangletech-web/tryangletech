@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from 'react';
 
 export default function Pricing() {
@@ -18,13 +19,13 @@ export default function Pricing() {
             <div className="rt-pricing-title">Starter</div>
             <div className="rt-pricing-amount">$19<span>/mo</span></div>
             <p className="rt-no-margin rt-color-pale-periwinkle">Perfect for small teams and startups getting started.</p>
-            <a href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Get Started</div></a>
+            <Link href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Get Started</div></Link>
           </div>
           <div className="rt-pricing-card rt-popular">
             <div className="rt-pricing-title">Pro Plan</div>
             <div className="rt-pricing-amount">$49<span>/mo</span></div>
             <p className="rt-no-margin rt-color-pale-periwinkle">Advanced tools and analytics for growing organizations.</p>
-            <a href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Start Free Trial</div></a>
+            <Link href="/contact" className="rt-button-body w-inline-block"><div className="rt-button-text">Start Free Trial</div></Link>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React from 'react';
 
@@ -78,13 +79,13 @@ export default function HomeTwoChoose() {
                 <div
                   data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf43"
                   className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/about"
                     className="rt-button-body w-inline-block">
                     <div className="rt-button-text">Explore benefits</div>
                     <div className="rt-button-body-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="rt-choose-v5-right rt-position-relative">

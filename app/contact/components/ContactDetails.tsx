@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React from 'react';
 
@@ -28,13 +29,13 @@ export default function ContactDetails() {
                 </h2>
               </div>
               <div className="rt-contact-v3-utton-wrap">
-                <a
+                <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                   href="/about"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text">Talk to a task expert</div>
                   <div className="rt-button-body-overlay"></div>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="w-layout-grid rt-contact-details-v3-card">

@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -117,7 +118,7 @@ specialiti-icon-3
                   <div
                     data-w-id="f811abe4-4f70-55fe-7128-7a1d75f47474"
                     className="rt-button-para-gap rt-overflow-hidden rt-button-left">
-                    <a
+                    <Link
                       data-wf--rt-white-button--variant="base"
                       data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
                       href="/about"
@@ -126,7 +127,7 @@ specialiti-icon-3
                         Organize my tasks
                       </div>
                       <div className="rt-button-body-overlay rt-color-blue rt-color-change"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

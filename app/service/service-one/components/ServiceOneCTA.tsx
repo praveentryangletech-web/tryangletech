@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 import React, { useState } from 'react';
 
@@ -168,7 +169,7 @@ export default function ServiceOneCTA() {
                   </div>
                 </div>
                 <div className="rt-pricing-v3-button-wrap">
-                  <a
+                  <Link
                     data-wf--rt-border-button--variant="base"
                     data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                     href="/pricing"
@@ -177,7 +178,7 @@ export default function ServiceOneCTA() {
                       Select pricing plan
                     </div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div
@@ -308,13 +309,13 @@ export default function ServiceOneCTA() {
                     </div>
                   </div>
                   <div className="rt-pricing-v3-button-wrap">
-                    <a
+                    <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/pricing"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Select pricing plan</div>
                       <div className="rt-button-body-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                   <div className="rt-pricing-v3-tag">
                     <div className="rt-tag-text">Most popular</div>
@@ -448,7 +449,7 @@ export default function ServiceOneCTA() {
                   </div>
                 </div>
                 <div className="rt-pricing-v3-button-wrap">
-                  <a
+                  <Link
                     data-wf--rt-border-button--variant="base"
                     data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                     href="/pricing"
@@ -457,7 +458,7 @@ export default function ServiceOneCTA() {
                       Select pricing plan
                     </div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -586,7 +587,7 @@ export default function ServiceOneCTA() {
                   </div>
                 </div>
                 <div className="rt-pricing-v3-button-wrap">
-                  <a
+                  <Link
                     data-wf--rt-border-button--variant="base"
                     data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                     href="/pricing"
@@ -595,7 +596,7 @@ export default function ServiceOneCTA() {
                       Select pricing plan
                     </div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="rt-pricing-card-v1-gradient rt-border-radius-medium">
@@ -724,13 +725,13 @@ export default function ServiceOneCTA() {
                     </div>
                   </div>
                   <div className="rt-pricing-v3-button-wrap">
-                    <a
+                    <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/pricing"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Select pricing plan</div>
                       <div className="rt-button-body-overlay"></div>
-                    </a>
+                    </Link>
                   </div>
                   <div className="rt-pricing-v3-tag">
                     <div className="rt-tag-text">Most popular</div>
@@ -862,7 +863,7 @@ export default function ServiceOneCTA() {
                   </div>
                 </div>
                 <div className="rt-pricing-v3-button-wrap">
-                  <a
+                  <Link
                     data-wf--rt-border-button--variant="base"
                     data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                     href="/pricing"
@@ -871,7 +872,7 @@ export default function ServiceOneCTA() {
                       Select pricing plan
                     </div>
                     <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

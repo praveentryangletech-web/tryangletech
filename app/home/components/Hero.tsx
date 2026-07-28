@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from 'react';
 
 export default function Hero() {
@@ -83,7 +84,7 @@ export default function Hero() {
                   data-w-id="573d8b58-e477-bda2-3b16-571fb8963934"
                   style={{ "opacity": "0" }}
                   className="rt-button-para-gap rt-overflow-hidden">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/home-one#"
                     className="rt-button-body w-inline-block"
@@ -91,7 +92,7 @@ export default function Hero() {
                     <div
                       className="rt-button-body-overlay"
                       style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
-                    ></a>
+                    ></Link>
                 </div>
                 <div
                   data-w-id="8797da1e-594a-f957-cceb-2c4c7590d8d0"
@@ -249,7 +250,7 @@ export default function Hero() {
                   data-w-id="33bf6bb3-0554-1366-8305-2e53564f5f56"
                   style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                   className="rt-button-para-gap rt-hero-between">
-                  <a
+                  <Link
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="/contact"
                     className="rt-button-body w-inline-block"
@@ -257,7 +258,7 @@ export default function Hero() {
                     <div
                       className="rt-button-body-overlay"
                       style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
-                    ></a>
+                    ></Link>
                   <div className="rt-hero-v1-call">
                     <div>
                       <img

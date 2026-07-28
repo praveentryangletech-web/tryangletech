@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const A = '/about-assets';
 
@@ -18,10 +19,10 @@ export default function FooterCTA() {
                 </div>
                 <p data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc17" className="rt-text-color-white rt-gap-off rt-footer-card-para">Simplify your workflow with a single platform that keeps tasks, deadlines, and teams perfectly aligned.</p>
                 <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc19" className="rt-button-para-gap">
-                  <a data-wf--rt-white-button--variant="color" data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf" href="/contact" className="rt-button-body rt-bg-color w-inline-block">
+                  <Link data-wf--rt-white-button--variant="color" data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf" href="/contact" className="rt-button-body rt-bg-color w-inline-block">
                     <div className="rt-button-text rt-btn-color" style={{ color: '#1a0b54' }}>&nbsp;Get started today</div>
                     <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
               {[1, 2, 3].map((lineNum) => (

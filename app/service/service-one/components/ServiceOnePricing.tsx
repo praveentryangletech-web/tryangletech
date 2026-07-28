@@ -42,7 +42,7 @@ export default function ServiceOnePricing() {
                     data-w-tab="Tab 2"
                     data-w-id="ba8dfab3-890a-365d-c624-bffed8cf0c8b"
                     className="rt-tab-menu-link rt-position-relative w-inline-block w-tab-link"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     id="w-tabs-0-data-w-tab-1"
                     href="/service-one#w-tabs-0-data-w-pane-1"
                     role="tab"
@@ -64,7 +64,7 @@ export default function ServiceOnePricing() {
                     data-w-tab="Tab 3"
                     data-w-id="ba8dfab3-890a-365d-c624-bffed8cf0c8f"
                     className="rt-tab-menu-link rt-position-relative w-inline-block w-tab-link"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     id="w-tabs-0-data-w-tab-2"
                     href="/service-one#w-tabs-0-data-w-pane-2"
                     role="tab"

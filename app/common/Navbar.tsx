@@ -2,9 +2,12 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { useRouter } from 'next/navigation';
+
 const NAV_ASSETS = '/Taskopia_files';
 
 export default function Navbar() {
+  const router = useRouter();
   return (
     <>
       <div
@@ -25,7 +28,7 @@ export default function Navbar() {
 
               {/* ── Logo ── */}
               <div className="rt-navbar-logo-wrap">
-                <a
+                <Link
                   href="/"
                   className="rt-navbar-logo rt-position-relative w-nav-brand"
                   aria-label="home">
@@ -37,7 +40,7 @@ export default function Navbar() {
                     loading="lazy"
                     className="rt-auto-fit rt-desktop-image-full-width" />
                   <div className="rt-link-discernible">link<br />&#x200D;</div>
-                </a>
+                </Link>
               </div>
 
               {/* ── Desktop Menu ── */}
@@ -73,16 +76,16 @@ export default function Navbar() {
                     id="w-dropdown-list-0"
                     aria-labelledby="w-dropdown-toggle-0"
                     style={{ width: "100%", height: "0px" }}>
-                    <a href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
-                    <a href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</a>
-                    <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
+                    <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
+                    <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
+                    <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
                   </nav>
                 </div>
 
                 {/* About */}
-                <a href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
                   <div className="rt-menu-text">About</div>
-                </a>
+                </Link>
 
                 {/* Service dropdown */}
                 <div
@@ -113,9 +116,9 @@ export default function Navbar() {
                     id="w-dropdown-list-1"
                     aria-labelledby="w-dropdown-toggle-1"
                     style={{ width: "100%", height: "0px" }}>
-                    <a href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
-                    <a href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
-                    <a href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
+                    <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
+                    <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
+                    <Link href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</Link>
                   </nav>
                 </div>
 
@@ -165,7 +168,7 @@ export default function Navbar() {
                           </div>
                         </div>
                         <div className="w-layout-hflex rt-pages-menu-left-button">
-                          <a
+                          <Link
                             data-wf--rt-border-button--variant="base"
                             data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                             href="/service/service-one"
@@ -173,14 +176,14 @@ export default function Navbar() {
                             tabIndex={0}>
                             <div className="rt-button-text rt-btn-color-nav">See integrations</div>
                             <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="w-layout-hflex rt-pages-menu-wrap">
                         {/* Left column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">
                           {/* Home page */}
-                          <a href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <Link href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -193,9 +196,9 @@ export default function Navbar() {
                             <div>
                               <img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
-                          </a>
+                          </Link>
                           {/* About page */}
-                          <a href="/about" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <Link href="/about" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="14" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -208,9 +211,9 @@ export default function Navbar() {
                             <div>
                               <img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
-                          </a>
+                          </Link>
                           {/* Service page */}
-                          <a href="/service/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <Link href="/service/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="14" height="12" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -223,7 +226,7 @@ export default function Navbar() {
                             <div>
                               <img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
-                          </a>
+                          </Link>
                           {/* Blog page */}
                           <a href="#" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
@@ -243,7 +246,7 @@ export default function Navbar() {
                         {/* Right column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">
                           {/* Contact page */}
-                          <a href="/contact" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <Link href="/contact" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
                                 <img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
@@ -256,7 +259,7 @@ export default function Navbar() {
                             <div>
                               <img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
-                          </a>
+                          </Link>
                           {/* Pricing page */}
                           <a href="#" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
@@ -307,7 +310,7 @@ export default function Navbar() {
                     aria-expanded="false"
                     role="button"
                     tabIndex={0}>
-                    <div className="rt-menu-text">Blog</div>
+                    <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/blog/blog-two'); }} style={{ cursor: 'pointer' }}>Blog</div>
                     <div className="rt-nav-menu-arrow-holder rt-position-relative">
                       <img
                         width="10"
@@ -322,17 +325,17 @@ export default function Navbar() {
                     id="w-dropdown-list-3"
                     aria-labelledby="w-dropdown-toggle-3"
                     style={{ width: "100%", height: "0px" }}>
-                    <a href="/blog" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Blog one</a>
-                    <a href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</a>
-                    <a href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</a>
-                    <a href="/blog" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
+                    <Link href="/blog" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Blog one</Link>
+                    <Link href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</Link>
+                    <Link href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</Link>
+                    <Link href="/blog" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Blog post</Link>
                   </nav>
                 </div>
 
                 {/* Contact */}
-                <a href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
                   <div className="rt-menu-text">Contact</div>
-                </a>
+                </Link>
 
               </div>
 
@@ -351,9 +354,9 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4">
-                          <a href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</a>
-                          <a href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</a>
-                          <a href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</a>
+                          <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
+                          <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
+                          <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
                         </nav>
                       </div>
 
@@ -366,16 +369,16 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5">
-                          <a href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</a>
-                          <a href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</a>
-                          <a href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</a>
+                          <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
+                          <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
+                          <Link href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</Link>
                         </nav>
                       </div>
 
                       {/* Mobile – About */}
-                      <a href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
+                      <Link href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
                         <div className="rt-menu-text">About</div>
-                      </a>
+                      </Link>
 
                       {/* Mobile – Pages */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
@@ -388,7 +391,7 @@ export default function Navbar() {
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-6" aria-labelledby="w-dropdown-toggle-6">
                           <div className="w-layout-hflex rt-pages-menu-wrap rt-padding">
                             <div className="w-layout-vflex rt-pages-menu-list-wrap">
-                              <a href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              <Link href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
@@ -397,8 +400,8 @@ export default function Navbar() {
                                   </div>
                                 </div>
                                 <div><img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </a>
-                              <a href="/about" data-w-id="b84e5def-8be0-c77c-84d1-4421928068c6" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              </Link>
+                              <Link href="/about" data-w-id="b84e5def-8be0-c77c-84d1-4421928068c6" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="14" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
@@ -407,8 +410,8 @@ export default function Navbar() {
                                   </div>
                                 </div>
                                 <div><img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </a>
-                              <a href="/service/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              </Link>
+                              <Link href="/service/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="14" height="12" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
@@ -417,7 +420,7 @@ export default function Navbar() {
                                   </div>
                                 </div>
                                 <div><img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </a>
+                              </Link>
                               <a href="#" data-w-id="b84e5def-8be0-c77c-84d1-4421928068dc" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="14" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
@@ -430,7 +433,7 @@ export default function Navbar() {
                               </a>
                             </div>
                             <div className="w-layout-vflex rt-pages-menu-list-wrap rt-padding">
-                              <a href="/contact" data-w-id="b84e5def-8be0-c77c-84d1-4421928068e8" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              <Link href="/contact" data-w-id="b84e5def-8be0-c77c-84d1-4421928068e8" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="13" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
@@ -439,7 +442,7 @@ export default function Navbar() {
                                   </div>
                                 </div>
                                 <div><img width="9" height="8" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </a>
+                              </Link>
                               <a href="#" data-w-id="b84e5def-8be0-c77c-84d1-4421928068f3" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><img width="14" height="14" alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
@@ -468,7 +471,7 @@ export default function Navbar() {
                       {/* Mobile – Blog */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
                         <div className="rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle" id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
-                          <div className="rt-menu-text">Blog</div>
+                          <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/blog'); }} style={{ cursor: 'pointer' }}>Blog</div>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <img width="10" height="6" alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
@@ -482,9 +485,9 @@ export default function Navbar() {
                       </div>
 
                       {/* Mobile – Contact */}
-                      <a href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
+                      <Link href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
                         <div className="rt-menu-text">Contact</div>
-                      </a>
+                      </Link>
 
                     </div>
 
@@ -553,14 +556,14 @@ export default function Navbar() {
                 <div className="rt-signin-wrap">
                   <a href="#" className="rt-menu-text rt-navbar-signin">Sign in</a>
                 </div>
-                <a
+                <Link
                   data-wf--rt-border-button--variant="padding"
                   data-w-id="9067a903-cf07-9614-de57-af0aba677203"
                   href="/contact"
                   className="rt-button-body rt-nav-btn w-variant-1b2d9ec2-3fdd-1f2f-c0ef-d11a45cf51a4 w-inline-block">
                   <div className="rt-button-text rt-btn-color-nav">Start free trial</div>
                   <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                </a>
+                </Link>
               </div>
 
             </div>

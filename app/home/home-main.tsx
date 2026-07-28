@@ -12,51 +12,32 @@ import Faq from './components/Faq';
 import Cta from './components/Cta';
 
 export default function HomeMain() {
- useEffect(() => {
-    const triggerWebflow = () => {
-      if (typeof window !== 'undefined') {
-        document.documentElement.classList.add('w-mod-ix');
-        
-        if ((window as any).Webflow) {
-          const w = (window as any).Webflow;
-          try {
-            w.ready();
-            window.dispatchEvent(new Event('resize'));
-            window.dispatchEvent(new Event('scroll'));
-          } catch (e) {
-            console.error("Webflow ready trigger error:", e);
-          }
+  useEffect(() => {
+    // Set the specific page ID for Webflow interactions on this page
+    document.documentElement.setAttribute('data-wf-page', '68eddb146961691d5aa6086f');
+    document.documentElement.classList.add('w-mod-ix');
+
+    let attempts = 0;
+    const initWebflow = () => {
+      if (typeof window !== 'undefined' && (window as any).Webflow && (window as any).Webflow.require) {
+        const Webflow = (window as any).Webflow;
+        Webflow.destroy();
+        Webflow.ready();
+        const ix2 = Webflow.require('ix2');
+        if (ix2) {
+          ix2.init();
         }
+        // Dispatch resize to fix some layout calculation issues with Webflow
+        window.dispatchEvent(new Event('resize'));
+      } else if (attempts < 50) {
+        attempts++;
+        setTimeout(initWebflow, 50);
       }
     };
 
-    const timer = setTimeout(triggerWebflow, 300);
-
-    const observerCallback: IntersectionObserverCallback = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLElement;
-          target.style.opacity = '1';
-          target.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)';
-          target.style.transition = 'opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1)';
-          observer.unobserve(target);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      root: null,
-      rootMargin: '0px 0px -50px 0px',
-      threshold: 0.1,
-    });
-
-    const animatedElements = document.querySelectorAll('[data-w-id]');
-    animatedElements.forEach((el) => observer.observe(el));
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
+    const timer = setTimeout(initWebflow, 50);
+    
+    return () => clearTimeout(timer);
   }, []);
 
 

@@ -5,7 +5,7 @@ export default function Hero() {
   return (
    <>  <div
           data-w-id="41edf69b-8081-d913-a5ae-b2e1fc472d6d"
-          className="rt-hero-v1-wrapper">
+          className="rt-hero-v1-wrapper relative z-10">
           <section className="rt-hero-v1">
             <div className="w-layout-blockcontainer rt-container-main w-container">
               <div className="rt-hero-v1-top rt-position-relative">

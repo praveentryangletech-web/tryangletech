@@ -6,7 +6,15 @@ import { useState } from 'react';
 const A = '/about-assets';
 
 export default function AboutFAQ() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaqs, setOpenFaqs] = useState<number[]>([0]);
+
+  const toggleFaq = (idx: number) => {
+    if (openFaqs.includes(idx)) {
+      setOpenFaqs(openFaqs.filter((i) => i !== idx));
+    } else {
+      setOpenFaqs([...openFaqs, idx]);
+    }
+  };
   return (
     <>
         {/* ── FAQ ── */}
@@ -38,13 +46,13 @@ export default function AboutFAQ() {
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab', q: 'Is this suitable for small teams and enterprises?', a: 'Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors.', paraClass: '' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9', q: 'Can I track project deadlines?', a: 'Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations.', paraClass: ' rt-faq-v2' },
                   ].map(({ wid, q, a, isTop, paraClass }, idx) => {
-                    const isOpen = openFaq === idx;
+                    const isOpen = openFaqs.includes(idx);
                     return (
                       <div
                         key={wid}
                         className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${isTop ? ' rt-top-gap-of' : ''}`}
                         style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
-                        onClick={() => setOpenFaq(isOpen ? null : idx)}
+                        onClick={() => toggleFaq(idx)}
                       >
                         <div className="w-layout-hflex rt-faq-top-part">
                           <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
@@ -52,7 +60,13 @@ export default function AboutFAQ() {
                           </div>
                           <div className="rt-faq-right-part">
                             <div className="rt-faq-minus"></div>
-                            <div className="rt-faq-plus" style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}></div>
+                            <div 
+                              className="rt-faq-plus" 
+                              style={{ 
+                                transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', 
+                                opacity: isOpen ? 0 : 1,
+                                transition: 'all 0.3s ease' 
+                              }}></div>
                           </div>
                         </div>
                         <div 

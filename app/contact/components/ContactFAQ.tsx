@@ -26,7 +26,15 @@ const faqs = [
 ];
 
 export default function ContactFAQ() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+
+  const toggleFaq = (idx: number) => {
+    if (openFaqs.includes(idx)) {
+      setOpenFaqs(openFaqs.filter((i) => i !== idx));
+    } else {
+      setOpenFaqs([...openFaqs, idx]);
+    }
+  };
   return (
     <>
         <section className="rt-faq">
@@ -54,46 +62,48 @@ export default function ContactFAQ() {
               <div
                 data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
                 className="rt-faq-main rt-margin-auto">
-                {faqs.map((faq, i) => (
-                  <div
-                    key={i}
-                    data-w-id={`faq-item-${i}`}
-                    className="w-layout-vflex rt-faq-dropdown-wrap"
-                    style={{
-                      backgroundColor:
-                        openFaq === i
-                          ? "rgba(0, 0, 0, 0.03)"
-                          : "rgba(0, 0, 0, 0)",
-                    }}>
+                {faqs.map((faq, i) => {
+                  const isOpen = openFaqs.includes(i);
+                  return (
                     <div
-                      className="w-layout-hflex rt-faq-top-part"
-                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                      style={{ cursor: "pointer" }}>
-                      <div className="w-layout-hflex r-faq-text-wrap">
-                        <div className="rt-text-style-h6">{faq.q}</div>
+                      key={i}
+                      className="w-layout-vflex rt-faq-dropdown-wrap"
+                      style={{
+                        backgroundColor: isOpen ? "rgba(0, 0, 0, 0.03)" : "rgba(0, 0, 0, 0)",
+                      }}>
+                      <div
+                        className="w-layout-hflex rt-faq-top-part"
+                        onClick={() => toggleFaq(i)}
+                        style={{ cursor: "pointer" }}>
+                        <div className="w-layout-hflex r-faq-text-wrap">
+                          <div className="rt-text-style-h6">{faq.q}</div>
+                        </div>
+                        <div className="rt-faq-right-part">
+                          <div className="rt-faq-minus"></div>
+                          <div
+                            className="rt-faq-plus"
+                            style={{
+                              transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+                              opacity: isOpen ? 0 : 1,
+                              transition: "all 0.3s ease",
+                            }}></div>
+                        </div>
                       </div>
-                      <div className="rt-faq-right-part">
-                        <div
-                          className="rt-faq-minus"
-                          style={{
-                            display: openFaq === i ? "block" : "none",
-                          }}></div>
-                        <div
-                          className="rt-faq-plus"
-                          style={{
-                            display: openFaq === i ? "none" : "block",
-                          }}></div>
+                      <div
+                        className="rt-faq-bottom-part rt-overflow-hidden"
+                        style={{ 
+                          height: isOpen ? "auto" : 0,
+                          opacity: isOpen ? 1 : 0,
+                          transition: "opacity 0.3s ease",
+                          paddingTop: isOpen ? "20px" : 0
+                        }}>
+                        <div className="rt-faq-para-wrap">
+                          <p className="rt-gap-off">{faq.a}</p>
+                        </div>
                       </div>
                     </div>
-                    <div
-                      className="rt-faq-bottom-part rt-overflow-hidden"
-                      style={{ height: openFaq === i ? "auto" : "0px" }}>
-                      <div className="rt-faq-para-wrap">
-                        <p className="rt-gap-off">{faq.a}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -15,10 +15,11 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
     // Use polling to wait for Webflow script to load
     let attempts = 0;
     const initWebflow = () => {
-      if (window.Webflow && window.Webflow.require) {
-        window.Webflow.destroy();
-        window.Webflow.ready();
-        const ix2 = window.Webflow.require('ix2');
+      const Webflow = (window as any).Webflow;
+      if (Webflow && Webflow.require) {
+        Webflow.destroy();
+        Webflow.ready();
+        const ix2 = Webflow.require('ix2');
         if (ix2) {
           try {
             ix2.init();

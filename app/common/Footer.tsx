@@ -158,10 +158,9 @@ export default function Footer() {
             href="/"
             className="rt-navbar-logo rt-position-relative w-nav-brand"
           ><img
-              width="191"
-              height="40"
+              style={{ height: '40px', width: 'auto' }}
               alt=""
-              src="/Taskopia_files/69269a3ea5e20bf6f3f40183_top logo.svg"
+              src="/logo.png"
               loading="lazy" />
             <div className="rt-link-discernible">link<br />&#x200D;</div></a
           >

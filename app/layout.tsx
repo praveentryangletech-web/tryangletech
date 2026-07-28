@@ -7,6 +7,9 @@ import type { Metadata, Viewport } from 'next';
 export const metadata: Metadata = {
   title: 'TryangleTech',
   description: 'Innovative Technology Solutions by TryangleTech.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export const viewport: Viewport = {

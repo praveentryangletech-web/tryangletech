@@ -21,10 +21,17 @@ export default function Navbar() {
 
   return (
     <>
+      <style>{`
+        .rt-top-nav {
+          background-color: ${scrolled ? '#ffffff !important' : 'transparent'};
+          box-shadow: ${scrolled ? '0 4px 12px rgba(0,0,0,0.05) !important' : 'none'};
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+      `}</style>
       <div
         data-wf--rt-nav--variant="base"
         data-w-id="b07e93b6-139e-136c-8189-3251b36d9225"
-        className={`rt-top-nav relative z-[999] transition-colors duration-300 ${scrolled ? 'bg-white shadow-sm' : 'rt-bg-color'}`}>
+        className="rt-top-nav relative z-[999]">
         <div
           data-w-id="b07e93b6-139e-136c-8189-3251b36d9226"
           data-animation="default"

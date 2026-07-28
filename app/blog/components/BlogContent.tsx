@@ -52,7 +52,7 @@ export default function BlogContent() {
                 data-w-tab="Tab 2"
                 data-w-id="6ba64cb4-8cc9-d548-64cf-bb03b736f953"
                 className="rt-tab-link w-inline-block w-tab-link"
-                tabIndex="-1"
+                tabIndex={-1}
                 id="w-tabs-0-data-w-tab-1"
                 href="/blog-two#w-tabs-0-data-w-pane-1"
                 role="tab"
@@ -67,7 +67,7 @@ export default function BlogContent() {
                 data-w-tab="Tab 3"
                 data-w-id="6ba64cb4-8cc9-d548-64cf-bb03b736f956"
                 className="rt-tab-link w-inline-block w-tab-link"
-                tabIndex="-1"
+                tabIndex={-1}
                 id="w-tabs-0-data-w-tab-2"
                 href="/blog-two#w-tabs-0-data-w-pane-2"
                 role="tab"
@@ -82,7 +82,7 @@ export default function BlogContent() {
                 data-w-tab="Tab 4"
                 data-w-id="62cbce5a-3d08-ccfc-36a5-07d85aaff304"
                 className="rt-tab-link w-inline-block w-tab-link"
-                tabIndex="-1"
+                tabIndex={-1}
                 id="w-tabs-0-data-w-tab-3"
                 href="/blog-two#w-tabs-0-data-w-pane-3"
                 role="tab"

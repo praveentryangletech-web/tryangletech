@@ -2,8 +2,16 @@ import React from 'react';
 import Script from 'next/script';
 import './globals.css';
 
-export const metadata = {
-  title: 'Taskopia Exact Clone',
+import type { Metadata, Viewport } from 'next';
+
+export const metadata: Metadata = {
+  title: 'TryangleTech',
+  description: 'Innovative Technology Solutions by TryangleTech.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -12,14 +20,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html 
-      lang="en" 
-      className="w-mod-js" 
+    <html
+      lang="en"
+      className="w-mod-js"
       data-wf-site="68c3feed3b3e541e7d5c098a"
       suppressHydrationWarning>
-      <head 
+      <head
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: `
+        dangerouslySetInnerHTML={{
+          __html: `
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
       .wf-force-outline-none[tabindex="-1"]:focus {
@@ -31,31 +40,6 @@ export default function RootLayout({
       href="https://cdn.prod.website-files.com/"
       rel="preconnect"
       crossorigin="anonymous" />
-    <title>Taskopia - Webflow HTML website template</title>
-    <meta
-      content="Boost productivity with Taskopiaâ€™s intuitive task manager, real-time tracking, and smooth workflow features for every team."
-      name="description" />
-    <meta
-      content="Taskopia - Webflow HTML website template"
-      property="og:title" />
-    <meta
-      content="Boost productivity with Taskopiaâ€™s intuitive task manager, real-time tracking, and smooth workflow features for every team."
-      property="og:description" />
-    <meta
-      content="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/692583a09dc0a34789c98f04_1200x630.webp"
-      property="og:image" />
-    <meta
-      content="Taskopia - Webflow HTML website template"
-      name="twitter:title" />
-    <meta
-      content="Boost productivity with Taskopiaâ€™s intuitive task manager, real-time tracking, and smooth workflow features for every team."
-      name="twitter:description" />
-    <meta
-      content="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/692583a09dc0a34789c98f04_1200x630.webp"
-      name="twitter:image" />
-    <meta property="og:type" content="website" />
-    <meta content="summary_large_image" name="twitter:card" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Webflow" name="generator" />
     <link
       href="/Taskopia_files/taskopia.webflow.shared.f0926b53b.css"
@@ -833,7 +817,7 @@ export default function RootLayout({
         color: #fff;
       }
     </style>
-   ` }} 
+   ` }}
       />
       <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
         {children}

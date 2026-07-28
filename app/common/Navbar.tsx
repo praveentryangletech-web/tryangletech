@@ -35,7 +35,7 @@ export default function Navbar() {
                   <img
                     width="191"
                     height="40"
-                    alt="Taskopia logo"
+                    alt="TryangleTech logo"
                     src={`${NAV_ASSETS}/69269a3ea5e20bf6f3f40183_top logo.svg`}
                     loading="lazy"
                     className="rt-auto-fit rt-desktop-image-full-width" />
@@ -158,7 +158,7 @@ export default function Navbar() {
                             <img
                               width="27"
                               height="39"
-                              alt=""
+                              alt="TryangleTech logo"
                               src={`${NAV_ASSETS}/68ff54083b9a1440134bda1b_Vector 1557.svg`}
                               loading="lazy"
                               className="rt-mega-menu-icon" />

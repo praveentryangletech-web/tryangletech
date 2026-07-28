@@ -34,18 +34,7 @@ export default function ServicePage() {
       <Footer />
       <div></div>
       <div className="rt-vlt-root">
-        <button
-          className="rt-vlt-trigger"
-          id="rtVltOpen"
-          aria-label="Open the vault">
-          <span className="rt-vlt-mark">190</span>
-          <span>
-            <b>Open the vault</b>
-            <br />
-            <span className="rt-vlt-sub">190 templates · 3 new this week</span>
-          </span>
-          <span className="rt-vlt-pulse"></span>
-        </button>
+        
         <div
           className="rt-vlt-overlay"
           id="rtVltOverlay"

@@ -42,7 +42,6 @@ export default function AboutFAQ() {
                     return (
                       <div
                         key={wid}
-                        data-w-id={wid}
                         className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${isTop ? ' rt-top-gap-of' : ''}`}
                         style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
                         onClick={() => setOpenFaq(isOpen ? null : idx)}
@@ -53,16 +52,22 @@ export default function AboutFAQ() {
                           </div>
                           <div className="rt-faq-right-part">
                             <div className="rt-faq-minus"></div>
-                            <div className="rt-faq-plus" style={isOpen ? { transform: 'rotate(45deg)' } : {}}></div>
+                            <div className="rt-faq-plus" style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}></div>
                           </div>
                         </div>
-                        {isOpen && (
-                          <div className="rt-faq-bottom-part rt-overflow-hidden" style={{ height: 'auto', display: 'block' }}>
-                            <div className={`rt-faq-para-wrap${paraClass}`}>
-                              <p className="rt-gap-off">{a}</p>
-                            </div>
+                        <div 
+                          className="rt-faq-bottom-part rt-overflow-hidden" 
+                          style={{ 
+                            height: isOpen ? 'auto' : 0, 
+                            opacity: isOpen ? 1 : 0, 
+                            transition: 'opacity 0.3s ease',
+                            paddingTop: isOpen ? '20px' : 0
+                          }}
+                        >
+                          <div className={`rt-faq-para-wrap${paraClass}`}>
+                            <p className="rt-gap-off">{a}</p>
                           </div>
-                        )}
+                        </div>
                       </div>
                     );
                   })}

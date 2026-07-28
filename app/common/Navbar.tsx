@@ -477,7 +477,7 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-7" aria-labelledby="w-dropdown-toggle-7">
-                          <a href="#" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Blog one</a>
+                          <a href="#" className="rt-nav-m-nu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Blog one</a>
                           <a href="#" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</a>
                           <a href="#" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</a>
                           <a href="#" className="rt-nav-menu-link shadow-varient-59 rt-last w-dropdown-link" tabIndex={0}>Blog post</a>

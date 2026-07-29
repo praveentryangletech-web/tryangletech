@@ -78,6 +78,15 @@ export default function PortfolioGrid() {
           background: #eee;
         }
         
+        @keyframes filterFadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .filter-btn-animate {
+          animation: filterFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          opacity: 0;
+        }
+
         /* Internal Card Hover Animations */
         .portfolio-card-hover .rt-blog-image {
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -116,8 +125,9 @@ export default function PortfolioGrid() {
           {categories.map((cat, idx) => (
             <button
               key={idx}
-              className={`filter-btn ${activeFilter === cat ? 'active' : ''}`}
+              className={`filter-btn filter-btn-animate ${activeFilter === cat ? 'active' : ''}`}
               onClick={() => setActiveFilter(cat)}
+              style={{ animationDelay: `${idx * 0.1}s` }}
             >
               {cat}
             </button>

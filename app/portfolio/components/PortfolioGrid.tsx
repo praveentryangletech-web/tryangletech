@@ -95,6 +95,8 @@ export default function PortfolioGrid() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
+          max-width: 1050px;
+          margin: 0 auto;
         }
         @media (max-width: 991px) {
           .portfolio-grid {
@@ -128,7 +130,7 @@ export default function PortfolioGrid() {
               <div key={`${activeFilter}-${project.title}`} role="listitem" className="w-dyn-item reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
                 <a href="#" className="rt-blog-v3-card rt-border-radius-medium w-inline-block portfolio-card-hover">
                   <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backgroundColor: '#f8f8f8' }}>
-                    <img className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={project.image} alt={project.title} style={{ objectFit: 'contain', width: '100%', height: '250px' }} loading="lazy" />
+                    <img className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={project.image} alt={project.title} style={{ objectFit: 'contain', width: '100%', height: '200px' }} loading="lazy" />
                   </div>
                   <div className="rt-blog-v3-card-bottom-part">
                     <div className="w-layout-hflex rt-blog-v3-publish-date">

@@ -104,6 +104,11 @@ export default function Navbar() {
                   <div className="rt-menu-text">About</div>
                 </Link>
 
+                {/* Portfolio */}
+                <Link href="/portfolio" className="rt-navbar-dropdown-toggle w-inline-block">
+                  <div className="rt-menu-text">Portfolio</div>
+                </Link>
+
                 {/* Service dropdown */}
                 <div
                   data-delay="300"
@@ -394,6 +399,11 @@ export default function Navbar() {
                       {/* Mobile – About */}
                       <Link href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
                         <div className="rt-menu-text">About</div>
+                      </Link>
+
+                      {/* Mobile – Portfolio */}
+                      <Link href="/portfolio" className="rt-navbar-dropdown-toggle w-inline-block">
+                        <div className="rt-menu-text">Portfolio</div>
                       </Link>
 
                       {/* Mobile – Pages */}

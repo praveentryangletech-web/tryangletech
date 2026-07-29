@@ -91,6 +91,21 @@ export default function PortfolioGrid() {
         .portfolio-card-hover:hover .arrow-icon {
           transform: translateX(5px);
         }
+        .portfolio-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+        @media (max-width: 991px) {
+          .portfolio-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 767px) {
+          .portfolio-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
       
       <div className="rt-blog-three-main w-layout-blockcontainer rt-container-main w-container">
@@ -108,7 +123,7 @@ export default function PortfolioGrid() {
         </div>
 
         <div className="rt-blog-three-all w-dyn-list" style={{ display: 'block' }}>
-          <div role="list" className="rt-blog-v3-card-main w-dyn-items" key={activeFilter}>
+          <div role="list" className="rt-blog-v3-card-main w-dyn-items portfolio-grid" key={activeFilter}>
             {filteredProjects.map((project, idx) => (
               <div key={`${activeFilter}-${project.title}`} role="listitem" className="w-dyn-item reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
                 <a href="#" className="rt-blog-v3-card rt-border-radius-medium w-inline-block portfolio-card-hover">

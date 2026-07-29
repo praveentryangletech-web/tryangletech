@@ -3,6 +3,7 @@ import React from "react";
 import HomeTwoHero from '../home-two/components/HomeTwoHero';
 import ServiceMarquee from './components/ServiceMarquee';
 import HomeTwoAIAgents from '../home-two/components/HomeTwoAIAgents';
+import WhyChooseUs from "../home-three/components/Features";
 import ServiceAbout from './components/ServiceAbout';
 import HomeTwoChoose from '../home-two/components/HomeTwoChoose';
 import HomeTwoBenefits from '../home-two/components/HomeTwoBenefits';
@@ -23,7 +24,7 @@ export default function ServicePage() {
         <ServiceMarquee />
         {/* <HomeTwoAIAgents /> */}
         <ServiceAbout />
-        <HomeTwoChoose />
+        <WhyChooseUs />
         <HomeTwoBenefits />
         <HomeThrToolsIcon />
         <HomeTwoFAQ />

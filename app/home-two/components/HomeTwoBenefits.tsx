@@ -5,7 +5,7 @@ import React from 'react';
 export default function HomeTwoBenefits() {
   return (
     <>
-      <section className="rt-benefits">
+      <section className="rt-benefits pt-16">
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-tools-iconheading rt-heading-bottom-gap">
               <div

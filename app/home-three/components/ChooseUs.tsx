@@ -8,7 +8,7 @@ export default function ChooseUs() {
           <div className="rt-choose-v4-left">
             <div
               data-w-id="efb93258-8b81-0384-03aa-317b4cacd67b"
-              style={{ opacity: "0" }}
+
               className="rt-sub-gap"
             >
               <div className="rt-sub-text rt-sub-gredient">recurring tasks</div>
@@ -16,7 +16,7 @@ export default function ChooseUs() {
             <div className="rt-heading-para-gap">
               <h2
                 data-w-id="718674f5-d056-a87d-b263-49485df31d9c"
-                style={{ opacity: "0" }}
+  
                 className="rt-gap-off"
               >
                 Never miss deadlines with recurring task automation
@@ -24,7 +24,7 @@ export default function ChooseUs() {
             </div>
             <p
               data-w-id="a1d96da0-181b-bb21-8799-d21f6f51be3e"
-              style={{ opacity: "0" }}
+
               className="rt-gap-off"
             >
               Never miss deadlines with recurring task automation that schedules
@@ -34,7 +34,7 @@ export default function ChooseUs() {
             <div className="rt-choose-v4-left-inner">
               <div
                 data-w-id="8da8b8da-dc9c-d89a-23db-e5858158f2eb"
-                style={{ opacity: "0" }}
+  
                 className="rt-choose-v4-left-inner-row"
               >
                 <div>
@@ -50,7 +50,7 @@ export default function ChooseUs() {
               </div>
               <div
                 data-w-id="6eae5b6e-e72c-07d6-efbe-4fb119e2be8b"
-                style={{ opacity: "0" }}
+  
                 className="rt-choose-v4-left-inner-row"
               >
                 <div>
@@ -67,7 +67,7 @@ export default function ChooseUs() {
             </div>
             <div
               data-w-id="66c95f67-3918-d3e7-b38a-2b6366dea897"
-              style={{ opacity: "0" }}
+
               className="rt-button-para-gap rt-overflow-hidden rt-button-left"
             >
               <a
@@ -90,7 +90,7 @@ export default function ChooseUs() {
           <div className="rt-choose-v4-right rt-position-relative">
             <div
               data-w-id="40e020f4-358f-684a-09cf-e2afb3b900de"
-              style={{ opacity: "0" }}
+
             >
               <img
                 src="/Home3_files/69253eb3631bda2ad958e90e_Taskopia-home-three-choose-3 (1).webp"
@@ -100,7 +100,7 @@ export default function ChooseUs() {
             </div>
             <div
               data-w-id="842f638b-e31c-1206-9472-5959f4589222"
-              style={{ opacity: "0" }}
+
               className="rt-choose-v4-right-image-one"
             >
               <img
@@ -111,7 +111,7 @@ export default function ChooseUs() {
             </div>
             <div
               data-w-id="49e6c173-5717-1979-8352-3d54908b2a1a"
-              style={{ opacity: "0" }}
+
               className="rt-choose-v4-right-image-two rt-up-down"
             >
               <img

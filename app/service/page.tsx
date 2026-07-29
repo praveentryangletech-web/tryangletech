@@ -7,6 +7,7 @@ import HomeTwoAbout from '../home-two/components/HomeTwoAbout';
 import HomeTwoChoose from '../home-two/components/HomeTwoChoose';
 import HomeTwoBenefits from '../home-two/components/HomeTwoBenefits';
 import HomeTwoToolsIcon from '../home-two/components/HomeTwoToolsIcon';
+import HomeThrToolsIcon from '../home-three/components/ToolsIntegration';
 import HomeTwoFAQ from '../home-two/components/HomeTwoFAQ';
 import HomeTwoTestimonial from '../home-two/components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
@@ -27,7 +28,7 @@ export default function ServicePage() {
         <HomeTwoAbout />
         <HomeTwoChoose />
         <HomeTwoBenefits />
-        <HomeTwoToolsIcon />
+        <HomeThrToolsIcon />
         <HomeTwoFAQ />
         <HomeTwoTestimonial />
       </main>

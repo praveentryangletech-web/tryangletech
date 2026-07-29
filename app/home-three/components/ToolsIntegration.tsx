@@ -1,15 +1,56 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
 
 export default function ToolsIntegration() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            // Optional: stop observing once it has animated
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="rt-tools-icon-v1">
+    <section className="rt-tools-icon-v1" ref={sectionRef}>
+      <style>{`
+        .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-on-scroll.animate-fade-in-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        /* Stagger the delays for the logos in each row to create a wave effect */
+        .rt-integration-top > div:nth-child(1) .reveal-on-scroll { transition-delay: 0.1s; }
+        .rt-integration-top > div:nth-child(2) .reveal-on-scroll { transition-delay: 0.2s; }
+        .rt-integration-top > div:nth-child(3) .reveal-on-scroll { transition-delay: 0.3s; }
+        .rt-integration-top > div:nth-child(4) .reveal-on-scroll { transition-delay: 0.4s; }
+        .rt-integration-top > div:nth-child(5) .reveal-on-scroll { transition-delay: 0.5s; }
+        .rt-integration-top > div:nth-child(6) .reveal-on-scroll { transition-delay: 0.6s; }
+        .rt-integration-top > div:nth-child(7) .reveal-on-scroll { transition-delay: 0.7s; }
+      `}</style>
       <div className="w-layout-blockcontainer rt-container-extra-large w-container">
         <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative">
           <div className="rt-tools-icon-container rt-change">
             <div
               data-w-id="94ab69a2-10a8-48fd-4bee-648edaa97316"
-              style={{ opacity: "0" }}
-              className="rt-tools-iconheading rt-heading-bottom-gap"
+              className="rt-tools-iconheading rt-heading-bottom-gap reveal-on-scroll"
             >
               <div className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">integration</div>
@@ -31,8 +72,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02a_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09c"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -43,8 +83,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02e_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09e"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -55,8 +94,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a0"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -67,8 +105,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac028_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a2"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -79,8 +116,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac030_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a4"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -91,8 +127,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02c_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a6"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -103,8 +138,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02f_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a8"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo rt-last"
+                    className="rt-itegration-logo rt-last reveal-on-scroll"
                   />
                 </div>
               </div>
@@ -117,8 +151,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac029_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ab"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -129,8 +162,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac027_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ad"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -141,8 +173,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02d_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
                 <div>
@@ -153,8 +184,7 @@ export default function ToolsIntegration() {
                     src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0b1"
-                    style={{ opacity: "0" }}
-                    className="rt-itegration-logo"
+                    className="rt-itegration-logo reveal-on-scroll"
                   />
                 </div>
               </div>

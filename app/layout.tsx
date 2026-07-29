@@ -198,13 +198,7 @@ export default function RootLayout({
             (n.className += t + "touch"));
       })(window, document);
     </script>
-    <link
-      href="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691186273675f3d38a7df760_favicon%202.svg"
-      rel="shortcut icon"
-      type="image/x-icon" />
-    <link
-      href="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691186272e63b8d4b1d8ed79_favicon%201.svg"
-      rel="apple-touch-icon" />
+
     <style id="rtVaultCss">
       .rt-vlt-root {
         --ink: #120a0e;

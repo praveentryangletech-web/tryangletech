@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 
 export default function PortfolioHero() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

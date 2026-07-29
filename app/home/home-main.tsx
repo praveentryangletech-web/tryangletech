@@ -12,6 +12,7 @@ import Testimonials from './components/Testimonials';
 import Faq from './components/Faq';
 import Cta from './components/Cta';
 import Collaboration from './components/Collaboration';
+import ProjectsSection from './components/ProjectsSection';
 import WebflowInit from '@/app/common/WebflowInit';
 
 export default function HomeMain() {
@@ -29,6 +30,7 @@ export default function HomeMain() {
         <WhyChooseUs />
         <Collaboration />
         {/* <Workflow /> */}
+        <ProjectsSection />
         <Integrations />
         <Testimonials />
         <Faq />

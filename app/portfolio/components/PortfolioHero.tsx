@@ -21,7 +21,7 @@ export default function PortfolioHero() {
   }, []);
 
   return (
-    <section className="rt-hero-12" ref={sectionRef}>
+    <div ref={sectionRef}>
       <style>{`
         .reveal-on-scroll {
           opacity: 0;
@@ -43,6 +43,6 @@ export default function PortfolioHero() {
           </h1>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

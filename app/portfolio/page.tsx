@@ -11,15 +11,15 @@ export default function PortfolioPage() {
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
-      <div style={{ backgroundColor: '#f9fbff', backgroundImage: 'linear-gradient(#1833fe1a 12%, #812efd1a 34%, #ef56450d 56%, #ffaf5e00 72%, #ffaf5e00 85%)', minHeight: '100vh' }}>
-        <Navbar />
-        <main>
+      <Navbar />
+      <main>
+        <section className="rt-hero-12">
           <PortfolioHero />
           <PortfolioGrid />
-          <HomeThreeFaq />
-          <HomeTwoTestimonial />
-        </main>
-      </div>
+        </section>
+        <HomeThreeFaq />
+        <HomeTwoTestimonial />
+      </main>
       <Footer />
     </>
   );

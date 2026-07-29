@@ -26,10 +26,10 @@ export default function NotFound() {
             Sorry, we couldn't find the page you're looking for. It might have been removed, renamed, or did not exist in the first place.
           </p>
 
-          <Link href="/" className="rt-button-body w-inline-block">
+          <a href="/" className="rt-button-body w-inline-block">
             <div className="rt-button-text">Go back home</div>
             <div className="rt-button-body-overlay"></div>
-          </Link>
+          </a>
 
         </div>
       </main>

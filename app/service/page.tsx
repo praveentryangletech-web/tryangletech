@@ -1,7 +1,7 @@
 import React from "react";
 
 import HomeTwoHero from '../home-two/components/HomeTwoHero';
-import HomeTwoMarquee from '../home-two/components/HomeTwoMarquee';
+import ServiceMarquee from './components/ServiceMarquee';
 import HomeTwoAIAgents from '../home-two/components/HomeTwoAIAgents';
 import HomeTwoAbout from '../home-two/components/HomeTwoAbout';
 import HomeTwoChoose from '../home-two/components/HomeTwoChoose';
@@ -23,7 +23,7 @@ export default function ServicePage() {
       <Navbar />
       <main>
         <HomeTwoHero />
-        <HomeTwoMarquee />
+        <ServiceMarquee />
         <HomeTwoAIAgents />
         <HomeTwoAbout />
         <HomeTwoChoose />

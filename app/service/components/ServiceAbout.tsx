@@ -1,18 +1,54 @@
 'use client';
+"use client";
 import Link from "next/link";
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function ServiceAbout() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      <section className="rt-about-v4 rt-overflow-hidden">
+      <section className="rt-about-v4 rt-overflow-hidden" ref={sectionRef}>
+        <style>{`
+          .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+          }
+          .reveal-on-scroll.animate-fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          .stagger-grid > div:nth-child(1) { transition-delay: 0.1s; }
+          .stagger-grid > div:nth-child(2) { transition-delay: 0.2s; }
+          .stagger-grid > div:nth-child(3) { transition-delay: 0.3s; }
+          .stagger-grid > div:nth-child(4) { transition-delay: 0.4s; }
+        `}</style>
           <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-            <div className="rt-about-v4-contanner rt-overflow-hidden">
-              <div className="rt-about-v4-main">
+            <div className="rt-about-v4-contanner rt-overflow-hidden" style={{ paddingLeft: '8%', paddingRight: '8%' }}>
+              <div className="rt-about-v4-main" style={{ display: 'flex', width: '100%', gap: '6%' }}>
                 <div
                   data-w-id="70c45100-f145-3c18-c43c-49629dffa554"
-                  className="rt-about-v4-left rt-position-relative">
+                  className="rt-about-v4-left rt-position-relative" style={{ flex: 1 }}>
                   <div className="rt-about-v4-box-samll rt-tab-display-none"></div>
                   <div
                     data-w-id="70c45100-f145-3c18-c43c-49629dffa555"
@@ -21,6 +57,7 @@ export default function ServiceAbout() {
                       src="/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp"
                       loading="lazy"
                       alt="taskopiya-home-two-project-over"
+                      style={{ width: '100%', height: 'auto' }}
                     />
                     <div className="rt-about-v4-left-line rt-tab-display-none">
                       <img
@@ -40,7 +77,7 @@ export default function ServiceAbout() {
                     />
                   </div>
                 </div>
-                <div className="rt-about-v4-right">
+                <div className="rt-about-v4-right" style={{ flex: 1 }}>
                   <div className="rt-sub-gap">
                     <div
                       data-w-id="70c45100-f145-3c18-c43c-49629dffa55a"
@@ -55,17 +92,17 @@ export default function ServiceAbout() {
                       Stay focused, minimize delays, maximize results
                     </h2>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', marginTop: '30px', marginBottom: '30px' }}>
+                  <div className="grid grid-cols-2 gap-10 my-8 stagger-grid">
                     {/* Collaboration Block */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                      <div style={{ marginBottom: '20px' }}>
+                    <div className="flex flex-col items-start reveal-on-scroll">
+                      <div className="mb-5">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="12" width="6" height="8" rx="1"></rect>
                           <rect x="9" y="8" width="6" height="12" rx="1"></rect>
                           <rect x="15" y="4" width="6" height="16" rx="1"></rect>
                         </svg>
                       </div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white" style={{ marginBottom: '15px' }}>
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white mb-4">
                         Collaboration
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
@@ -74,15 +111,15 @@ export default function ServiceAbout() {
                     </div>
 
                     {/* Innovation Block */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                      <div style={{ marginBottom: '20px' }}>
+                    <div className="flex flex-col items-start reveal-on-scroll">
+                      <div className="mb-5">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                           <polyline points="2 12 12 17 22 12"></polyline>
                           <polyline points="2 17 12 22 22 17"></polyline>
                         </svg>
                       </div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white" style={{ marginBottom: '15px' }}>
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white mb-4">
                         Innovation
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
@@ -91,14 +128,14 @@ export default function ServiceAbout() {
                     </div>
 
                     {/* Efficiency Block (Row 2) */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                      <div style={{ marginBottom: '20px' }}>
+                    <div className="flex flex-col items-start reveal-on-scroll">
+                      <div className="mb-5">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="12" cy="12" r="10"></circle>
                           <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                       </div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white" style={{ marginBottom: '15px' }}>
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white mb-4">
                         Efficiency
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
@@ -107,14 +144,14 @@ export default function ServiceAbout() {
                     </div>
 
                     {/* Security Block (Row 2) */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                      <div style={{ marginBottom: '20px' }}>
+                    <div className="flex flex-col items-start reveal-on-scroll">
+                      <div className="mb-5">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                           <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
                       </div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white" style={{ marginBottom: '15px' }}>
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white mb-4">
                         Security
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">

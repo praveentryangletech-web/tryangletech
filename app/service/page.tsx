@@ -21,7 +21,7 @@ export default function ServicePage() {
       <main>
         <HomeTwoHero />
         <ServiceMarquee />
-        <HomeTwoAIAgents />
+        {/* <HomeTwoAIAgents /> */}
         <ServiceAbout />
         <HomeTwoChoose />
         <HomeTwoBenefits />

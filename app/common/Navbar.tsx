@@ -90,9 +90,7 @@ export default function Navbar() {
                   </div>
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    id="w-dropdown-list-0"
-                    aria-labelledby="w-dropdown-toggle-0"
-                    style={{ width: "100%", height: "0px" }}>
+                    aria-labelledby="w-dropdown-toggle-0">
                     <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
                     <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
                     <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
@@ -135,9 +133,7 @@ export default function Navbar() {
                   </div>
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    id="w-dropdown-list-1"
-                    aria-labelledby="w-dropdown-toggle-1"
-                    style={{ width: "100%", height: "0px" }}>
+                    aria-labelledby="w-dropdown-toggle-1">
                     <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
                     <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
                     <Link href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</Link>
@@ -170,9 +166,7 @@ export default function Navbar() {
                   </div>
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden rt-pages-menu w-dropdown-list"
-                    id="w-dropdown-list-2"
-                    aria-labelledby="w-dropdown-toggle-2"
-                    style={{ width: "100%", height: "0px" }}>
+                    aria-labelledby="w-dropdown-toggle-2">
                     <div className="w-layout-hflex rt-mega-menu-wrap">
                       <div className="w-layout-vflex rt-pages-menu-left">
                         <div className="w-layout-vflex rt-pages-menu-left-top">
@@ -343,9 +337,7 @@ export default function Navbar() {
                   </div>
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    id="w-dropdown-list-3"
-                    aria-labelledby="w-dropdown-toggle-3"
-                    style={{ width: "100%", height: "0px" }}>
+                    aria-labelledby="w-dropdown-toggle-3">
                     <Link href="/blog" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Blog one</Link>
                     <Link href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog two</Link>
                     <Link href="/blog" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Blog three</Link>

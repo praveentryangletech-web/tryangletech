@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function WhyChooseUs() {
   return (
         <section className="rt-why-choose-v1">
@@ -33,13 +35,13 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-v1-left-item"
                       style={{ "opacity": "0" }}>
                       <div className="rt-why-choose-v1-icon">
-                        <img
+                        <Image
                           src="/Taskopia_files/6916ef876682eed2b2fd5911_Vector (34).svg"
                           loading="lazy"
-                          width="18.5"
-                          height="100"
+                          width={19}
+                          height={100}
                           alt=""
-                          className="rt-why-choose-icon" />
+                          className="rt-why-choose-icon"  />
                       </div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
                         Custom workflows
@@ -57,13 +59,13 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-v1-left-item"
                       style={{ "opacity": "0" }}>
                       <div className="rt-why-choose-v1-icon">
-                        <img
+                        <Image
                           src="/Taskopia_files/6916f00db3051e5aed09bd3f_Group 2085663576.svg"
                           loading="lazy"
-                          width="100"
-                          height="100"
+                          width={100}
+                          height={100}
                           alt=""
-                          className="rt-why-choose-icon" />
+                          className="rt-why-choose-icon"  />
                       </div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
                         On-time delivery
@@ -78,10 +80,10 @@ export default function WhyChooseUs() {
                     data-w-id="9ec697c3-d7e6-12f5-7ab9-a71d0a578b6a"
                     style={{ "opacity": "0" }}
                     className="rt-why-choose-v1-center">
-                    <img
+                    <Image
                       src="/Taskopia_files/691ecfdec4425f741cb80fc8_tasopiya-home-one-hande.webp"
                       loading="lazy"
-                      alt="" />
+                      alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-why-choose-v1-left">
                     <div
@@ -89,13 +91,13 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-v1-left-item"
                       style={{ "opacity": "0" }}>
                       <div className="rt-why-choose-v1-icon">
-                        <img
+                        <Image
                           src="/Taskopia_files/6916ec635353353be914aafc_Vector (32).svg"
                           loading="lazy"
-                          width="18.5"
-                          height="100"
+                          width={19}
+                          height={100}
                           alt=""
-                          className="rt-why-choose-icon" />
+                          className="rt-why-choose-icon"  />
                       </div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
                         All-in-one platform
@@ -114,13 +116,13 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-v1-left-item"
                       style={{ "opacity": "0" }}>
                       <div className="rt-why-choose-v1-icon">
-                        <img
+                        <Image
                           src="/Taskopia_files/6916ec6339f890a80905a69b_Vector (33).svg"
                           loading="lazy"
-                          width="100"
-                          height="100"
+                          width={100}
+                          height={100}
                           alt=""
-                          className="rt-why-choose-icon" />
+                          className="rt-why-choose-icon"  />
                       </div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
                         Smarter collaboration

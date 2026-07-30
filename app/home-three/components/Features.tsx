@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 
+import Image from "next/image";
+
 export default function Features() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -42,25 +44,25 @@ export default function Features() {
           <div className="rt-features-v2-left rt-1 rt-border-radius-l">
             <div className="rt-features-v2-left-image">
               <div className="rt-features-v2-image-one reveal-on-scroll">
-                <img
+                <Image
                   src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                   loading="lazy"
                   alt="Taskopia-features-home-v3-1"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll">
-                <img
+                <Image
                   src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                   loading="lazy"
                   alt="Taskopia-features-home-v3-2"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll">
-                <img
+                <Image
                   src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                   loading="lazy"
                   alt="Taskopia-features-home-v3-3"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
             <div className="rt-features-v2-left-text-box">
@@ -78,11 +80,11 @@ export default function Features() {
                   View more
                 </div>
                 <div>
-                  <img
+                  <Image
                     src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </a>
             </div>
@@ -91,36 +93,36 @@ export default function Features() {
             <div className="rt-features-v2-right-image">
               <div className="rt-position-relative rt-features-inner-image">
                 <div className="rt-features-v2-icon rt-tab-display-none reveal-on-scroll">
-                  <img
+                  <Image
                     src="/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp"
                     loading="lazy"
                     alt="Taskopia-features-home-v3-icon"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-features-v2-line">
-                  <img
+                  <Image
                     src="/Home3_files/690dad3509f6f587288a12d7_Taskopia-features-home-v3-7.webp"
                     loading="lazy"
                     alt="Taskopia-features-home-v3-7"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-features-v2-image-four rt-position-relative reveal-on-scroll">
-                  <img
+                  <Image
                     src="/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp"
                     loading="lazy"
                     alt="
 Taskopia-features-home-v3-right
 "
                     className="rt-shadow"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-features-v2-image-five rt-position-relative reveal-on-scroll">
-                  <img
+                  <Image
                     src="/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp"
                     loading="lazy"
                     alt="Taskopia-features-home-v3-5"
                     className="rt-shadow"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -141,11 +143,11 @@ Taskopia-features-home-v3-right
                   View more
                 </div>
                 <div>
-                  <img
+                  <Image
                     src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </a>
             </div>

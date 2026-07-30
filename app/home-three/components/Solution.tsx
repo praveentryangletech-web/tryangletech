@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 export default function Solution() {
   return (
     <section className="rt-solution-v1">
@@ -10,49 +12,49 @@ export default function Solution() {
         >
           <div className="rt-solution-left-part rt-position-relative">
             <div className="rt-solution-image-wrap">
-              <img
-                width="526"
-                height="585"
+              <Image
+                width={526}
+                height={585}
                 alt="taskopia-home-three-seamless-0ne"
                 src="/Home3_files/690d7d05f6aafef905b4e347_taskopia-home-three-seamless-0ne.webp"
                 loading="lazy"
                 srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d7d05f6aafef905b4e347_taskopia-home-three-seamless-0ne-p-500.webp 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d7d05f6aafef905b4e347_taskopia-home-three-seamless-0ne-p-800.png 800w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d7d05f6aafef905b4e347_taskopia-home-three-seamless-0ne.webp 1052w"
                 sizes="(max-width: 767px) 100vw, 526px"
                 className="rt-mobile-l-display-none"
-              />
-              <img
-                width="526"
-                height="585"
+               />
+              <Image
+                width={526}
+                height={585}
                 alt="taskopia-home-three-seamless-main"
                 src="/Home3_files/690d89a519fa0ba69a76c452_taskopia-home-three-seamless-main.webp"
                 loading="lazy"
                 srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d89a519fa0ba69a76c452_taskopia-home-three-seamless-main-p-500.webp 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d89a519fa0ba69a76c452_taskopia-home-three-seamless-main-p-800.webp 800w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d89a519fa0ba69a76c452_taskopia-home-three-seamless-main-p-1080.webp 1080w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/690d89a519fa0ba69a76c452_taskopia-home-three-seamless-main.webp 1190w"
                 sizes="(max-width: 767px) 100vw, 526px"
                 className="rt-solution-image-wrap-image-1"
-              />
+               />
             </div>
             <div
               data-w-id="c11f2ea4-3459-1ded-feb7-55c656b24220"
               style={{ opacity: "0" }}
               className="rt-solution-absolute-image-one rt-mobile-l-display-none"
             >
-              <img
-                width="296"
-                height="212"
+              <Image
+                width={296}
+                height={212}
                 alt="taskopiya-home-three-se amvess-image"
                 src="/Home3_files/6915600f2b490dae5ce6d2f1_taskopiya-home-three-se amvess-image.webp"
                 loading="lazy"
-              />
+               />
             </div>
             <div className="rt-solution-absolute-image-two">
-              <img
-                width="151"
-                height="122"
+              <Image
+                width={151}
+                height={122}
                 alt=""
                 src="/Home3_files/690d7cf2ee9d3a0bdde6c218_kloudera-service-one-solution-micro.svg"
                 loading="lazy"
                 className="rt-auto-fit rt-desktop-image-full-width"
-              />
+               />
             </div>
           </div>
           <div className="rt-solution-right-part">
@@ -89,11 +91,11 @@ export default function Solution() {
                 className="rt-about-v1-right-item"
               >
                 <div className="rt-about-v1-right-item-icon">
-                  <img
+                  <Image
                     src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -111,11 +113,11 @@ export default function Solution() {
                 className="rt-about-v1-right-item rt-top-bottom-of"
               >
                 <div className="rt-about-v1-right-item-icon">
-                  <img
+                  <Image
                     src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">

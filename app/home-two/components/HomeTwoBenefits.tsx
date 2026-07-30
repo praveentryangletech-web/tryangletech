@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoBenefits() {
   return (
     <>
@@ -32,17 +34,17 @@ export default function HomeTwoBenefits() {
                   <div
                     data-w-id="b11a6bba-0fb6-b2a9-72b2-ecde0332d0e1"
                     className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
-                    <img
+                    <Image
                       src="/Home2_files/6912f62c82b64389f32cf4f2_taskopia-benefits-home-two-1.webp"
                       loading="lazy"
                       alt="taskopia-benefits-home-two-1"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <div className="rt-benefits-small-image rt-1">
-                      <img
+                      <Image
                         src="/Home2_files/6912f62cac10df5f2a6eba6b_Group 2085663570.webp"
                         loading="lazy"
                         alt="taskopia-home-two-small-30%"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                   <div className="rt-benefits-item-text">
@@ -57,17 +59,17 @@ export default function HomeTwoBenefits() {
                   data-w-id="71d233e7-17e3-e29f-6260-499af23458fb"
                   className="rt-benefits-item">
                   <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
-                    <img
+                    <Image
                       src="/Home2_files/6912f62c1b2810c6c1ca5837_taskopia-benefits-home-two-2.webp"
                       loading="lazy"
                       alt="taskopia-benefits-home-two-2"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <div className="rt-benefits-small-image rt-2">
-                      <img
+                      <Image
                         src="/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp"
                         loading="lazy"
                         alt="taskopia-benefits-home-two-complete"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                   <div className="rt-benefits-item-text">
@@ -84,11 +86,11 @@ export default function HomeTwoBenefits() {
                   data-w-id="c5ff7e0a-813a-bab5-0c99-87ff995a45e8"
                   className="rt-benefits-item">
                   <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
-                    <img
+                    <Image
                       src="/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp"
                       loading="lazy"
                       alt="taskopia-benefits-home-two-3"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-benefits-item-text">
                     <div className="rt-text-style-h6">
@@ -106,17 +108,17 @@ export default function HomeTwoBenefits() {
                 className="w-layout-grid rt-benefits-content-two">
                 <div className="rt-benefits-item rt-bottom">
                   <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
-                    <img
+                    <Image
                       src="/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp"
                       loading="lazy"
                       alt="taskopia-benefits-home-two-4"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <div className="rt-benefits-small-image rt-3">
-                      <img
+                      <Image
                         src="/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp"
                         loading="lazy"
                         alt="taskopia-home-two-0.55"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                   <div className="rt-benefits-item-text">
@@ -131,11 +133,11 @@ export default function HomeTwoBenefits() {
                 </div>
                 <div className="rt-benefits-item rt-bottom">
                   <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
-                    <img
+                    <Image
                       src="/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp"
                       loading="lazy"
                       alt="taskopia-benefits-home-two-5"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-benefits-item-text">
                     <div className="rt-text-style-h6">

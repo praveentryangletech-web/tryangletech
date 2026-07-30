@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React, { useEffect, useRef } from 'react';
 
+import Image from "next/image";
+
 export default function ServiceAbout() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -45,28 +47,28 @@ export default function ServiceAbout() {
                   <div
                     data-w-id="70c45100-f145-3c18-c43c-49629dffa555"
                     className="rt-position-relative rt-4">
-                    <img
+                    <Image
                       src="/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp"
                       loading="lazy"
                       alt="taskopiya-home-two-project-over"
-                      style={{ width: '100%', height: 'auto' }}
-                    />
+                      style={{ width: "100%", height: "auto",  width: '100%', height: 'auto' }}
+                     width={800} height={800} />
                     <div className="rt-about-v4-left-line rt-tab-display-none">
-                      <img
+                      <Image
                         src="/Home2_files/6912cb4109692fed844d1f39_taskopia-home-two-who-3.webp"
                         loading="lazy"
                         alt="taskopia-home-two-who-3"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                   <div
                     data-w-id="b033537f-357f-c026-0852-3db8a224feb4"
                     className="rt-about-v4-left-small-image rt-border-radius-medium rt-overflow-hidden">
-                    <img
+                    <Image
                       src="/Home2_files/6912cb4228402e3879fa5f10_taskopia-home-two-who.webp"
                       loading="lazy"
                       alt="taskopia-home-two-who"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-about-v4-right" style={{ flex: 1 }}>

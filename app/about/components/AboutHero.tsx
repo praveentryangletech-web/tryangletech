@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from "next/link";
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function AboutHero() {
@@ -22,7 +24,7 @@ export default function AboutHero() {
                         { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159c', file: 'ecda3', w: 59.5, h: 79, extra: ' rt-margin-left' },
                       ].map(({ id, file, w, h, extra }) => (
                         <div key={id} data-w-id={id} className={`rt-hero-v2-client-image rt-overflow-hidden rt-sub-image${extra}`}>
-                          <img width={w} height={h} alt="client" src={`${A}/690499e17ce0c344a20${file}_kloudera-home-two-hero-image.webp`} loading="lazy" />
+                          <Image width={w} height={h} alt="client" src={`${A}/690499e17ce0c344a20${file}_kloudera-home-two-hero-image.webp`} loading="lazy"  />
                         </div>
                       ))}
                     </div>
@@ -59,10 +61,10 @@ export default function AboutHero() {
               {/* Right */}
               <div data-w-id="6da1e0e9-8679-bd2c-933d-50714d290b3b" className="rt-hero-v4-right rt-mobile-l-display-none">
                 <div>
-                  <img src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`} loading="lazy" alt="about hero" />
+                  <Image src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`} loading="lazy" alt="about hero"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v4-right-image-two">
-                  <img src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`} loading="lazy" alt="Mobile about" />
+                  <Image src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`} loading="lazy" alt="Mobile about"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -93,7 +95,7 @@ export default function AboutHero() {
                     <div key={wid} data-w-id={wid} style={{ opacity: 0 }} className="w-layout-vflex rt-benefits-v2-card rt-two">
                       <div className="rt-benefits-v2-card-image">
                         <div className="rt-benefits-icon rt-two">
-                          <img width={38} height={38} alt={title} src={icon} loading="lazy" />
+                          <Image width={38} height={38} alt={title} src={icon} loading="lazy"  />
                         </div>
                         <div className="rt-text-style-h6">{title}</div>
                       </div>
@@ -109,7 +111,7 @@ export default function AboutHero() {
 
           {/* Banner image */}
           <div className="rt-hero-v4-image">
-            <img src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`} loading="lazy" alt="taskopiya-about-banner" />
+            <Image src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`} loading="lazy" alt="taskopiya-about-banner"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
           <div className="rt-hero-v4-dot one"></div>
           <div className="rt-hero-v4-dot two"></div>

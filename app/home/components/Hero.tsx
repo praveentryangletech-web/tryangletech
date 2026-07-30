@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function Hero() {
   return (
    <>  <div
@@ -20,34 +22,34 @@ export default function Hero() {
                         data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a6"
                         style={{ "opacity": "0" }}
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                        <img
-                          width="62"
-                          height="47"
+                        <Image
+                          width={62}
+                          height={47}
                           alt="Kloudera-home-two-hero-image"
                           src="/Taskopia_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                          loading="lazy" />
+                          loading="lazy"  />
                       </div>
                       <div
                         data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a8"
                         style={{ "opacity": "0" }}
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                        <img
-                          width="59.5"
-                          height="79"
+                        <Image
+                          width={60}
+                          height={79}
                           alt="Kloudera-home-two-hero-image"
                           src="/Taskopia_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                          loading="lazy" />
+                          loading="lazy"  />
                       </div>
                       <div
                         data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3aa"
                         style={{ "opacity": "0" }}
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                        <img
-                          width="59.5"
-                          height="79"
+                        <Image
+                          width={60}
+                          height={79}
                           alt="Kloudera-home-two-hero-image"
                           src="/Taskopia_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                          loading="lazy" />
+                          loading="lazy"  />
                       </div>
                     </div>
                   </div>
@@ -103,10 +105,10 @@ export default function Hero() {
                     style={{ "transform": "translate3d(3.888px, 6.5008px, 0px)\n                      scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                      skew(0deg, 0deg)", "transformStyle": "preserve-3d", "willChange": "transform" }}>
                     <div className="rt-small-btn-text">Workflow</div>
                     <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                      <img
+                      <Image
                         src="/Taskopia_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"
                         loading="lazy"
-                        alt="small icon" />
+                        alt="small icon"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                 </div>
@@ -115,36 +117,36 @@ export default function Hero() {
                 style={{ "transform": "translate3d(0px, 0%, 0px) scale3d(1, 1, 1)\n                  rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                 className="rt-hero-v1-bottom">
                 <div className="rt-hero-v1-image rt-overflow-hidden">
-                  <img
+                  <Image
                     src="/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"
                     loading="lazy"
                     alt="taskopia-hero-one-dashbord"
-                    height="669" />
+                    height={669}  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v1-icon-1 rt-icon-on" style={{ "opacity": "1" }}>
-                  <img
+                  <Image
                     src="/Taskopia_files/68ee3ab6b5f54ab84d4db94a_Group 2085663558.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v1-line-1">
                   <div style={{ "width": "100%" }} className="rt-hero-v1-line-animation">
-                    <img
+                    <Image
                       src="/Taskopia_files/68ee2bfe9c7b10140a71bd60_Vector 1519.webp"
                       loading="lazy"
-                      width="427"
+                      width={427}
                       alt="taskopia-home-one-line-1"
-                      className="rt-image-none rt-line-opacity" />
+                      className="rt-image-none rt-line-opacity"  height={800} />
                   </div>
                 </div>
                 <div className="rt-hero-v1-line-2">
                   <div
                     className="rt-hero-v1-line-animation rt-two"
                     style={{ "width": "100%" }}>
-                    <img
+                    <Image
                       src="/Taskopia_files/68ee2bfe85f7babff365e15f_Vector 1518.png"
                       loading="lazy"
-                      width="427"
+                      width={427}
                       sizes="(max-width: 479px) 100vw, 427px"
                       alt="taskopia-home-one-line-2"
                       srcSet="
@@ -152,26 +154,26 @@ export default function Hero() {
                       https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68ee2bfe85f7babff365e15f_Vector%201518-p-800.png 800w,
                       https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68ee2bfe85f7babff365e15f_Vector%201518.png       944w
                     "
-                      className="rt-image-none rt-line-opacity" />
+                      className="rt-image-none rt-line-opacity"  height={800} />
                   </div>
                 </div>
                 <div className="rt-hero-v1-icon-2 rt-icon-on" style={{ "opacity": "1" }}>
-                  <img
+                  <Image
                     src="/Taskopia_files/68ee3ab6b92d21cdec042a92_Group 2085663559.svg"
                     loading="lazy"
-                    alt="icon home page 2" />
+                    alt="icon home page 2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v1-icon-3 rt-icon-on" style={{ "opacity": "1" }}>
-                  <img
+                  <Image
                     src="/Taskopia_files/68ee3ab607d07e6601123425_Group 2085663558 (1).svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v1-icon-4 rt-icon-on" style={{ "opacity": "1" }}>
-                  <img
+                  <Image
                     src="/Taskopia_files/68ee3ab6bb15da9c1d725533_Group 2085663559 (1).svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -192,34 +194,34 @@ export default function Hero() {
                       data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba4"
                       style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                      <img
-                        width="62"
-                        height="47"
+                      <Image
+                        width={62}
+                        height={47}
                         alt="Kloudera-home-two-hero-image"
                         src="/Taskopia_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                        loading="lazy" />
+                        loading="lazy"  />
                     </div>
                     <div
                       data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba6"
                       style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                      <img
-                        width="59.5"
-                        height="79"
+                      <Image
+                        width={60}
+                        height={79}
                         alt="Kloudera-home-two-hero-image"
                         src="/Taskopia_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                        loading="lazy" />
+                        loading="lazy"  />
                     </div>
                     <div
                       data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba8"
                       style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                      <img
-                        width="59.5"
-                        height="79"
+                      <Image
+                        width={60}
+                        height={79}
                         alt="Kloudera-home-two-hero-image"
                         src="/Taskopia_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                        loading="lazy" />
+                        loading="lazy"  />
                     </div>
                   </div>
                 </div>
@@ -261,10 +263,10 @@ export default function Hero() {
                     ></Link>
                   <div className="rt-hero-v1-call">
                     <div>
-                      <img
+                      <Image
                         src="/Taskopia_files/691aa59bf2f2a3f94a847b78_call (1).svg"
                         loading="lazy"
-                        alt="" />
+                        alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
                       <div>Call us directly</div>
@@ -282,10 +284,10 @@ export default function Hero() {
                   style={{ "transform": "translate3d(3.888px, 6.5008px, 0px)\n                    scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                    skew(0deg, 0deg)", "transformStyle": "preserve-3d", "willChange": "transform" }}>
                   <div className="rt-small-btn-text">Workflow</div>
                   <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                    <img
+                    <Image
                       src="/Taskopia_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"
                       loading="lazy"
-                      alt="small icon" />
+                      alt="small icon"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>
@@ -295,28 +297,28 @@ export default function Hero() {
             data-w-id="33bf6bb3-0554-1366-8305-2e53564f5f88"
             style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)\n              rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
             className="rt-hero-right-v1">
-            <img
-              width="1078"
-              height="604"
+            <Image
+              width={1078}
+              height={604}
               alt="taskopiya-home-two"
               src="/Taskopia_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"
-              loading="lazy" />
+              loading="lazy"  />
           </div>
           <div
             className="rt-hero-v1-box-1"
             style={{ "willChange": "transform", "transform": "translate3d(0px, 0px, 0px) scale3d(0.699, 0.699, 1)\n              rotateX(0deg) rotateY(0deg) rotateZ(31.893deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}>
-            <img
+            <Image
               src="/Taskopia_files/68ee3ab607d07e6601123425_Group 2085663558 (1).svg"
               loading="lazy"
-              alt="" />
+              alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
           <div
             className="rt-hero-v1-box-2"
             style={{ "willChange": "transform", "transform": "translate3d(0px, 0px, 0px) scale3d(0.699, 0.699, 1)\n              rotateX(0deg) rotateY(0deg) rotateZ(-23deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}>
-            <img
+            <Image
               src="/Taskopia_files/68ee3ab6b92d21cdec042a92_Group 2085663559.svg"
               loading="lazy"
-              alt="icon home page 2" />
+              alt="icon home page 2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
         </section>
         <section
@@ -326,119 +328,119 @@ export default function Hero() {
             <div className="rt-text-marquee-wrapper rt-overflow-hidden">
               <div className="rt-text-marquee-train" style={{}}>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27127d946b9cb9fdcbce_logo.svg"
                     loading="lazy"
-                    width="100"
-                    alt="" />
+                    width={100}
+                    alt=""  height={800} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
               <div className="rt-text-marquee-train" style={{}}>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27127d946b9cb9fdcbce_logo.svg"
                     loading="lazy"
-                    width="100"
-                    alt="" />
+                    width={100}
+                    alt=""  height={800} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
               <div className="rt-text-marquee-train" style={{}}>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27127d946b9cb9fdcbce_logo.svg"
                     loading="lazy"
-                    width="100"
-                    alt="" />
+                    width={100}
+                    alt=""  height={800} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-marquee-iteme">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>

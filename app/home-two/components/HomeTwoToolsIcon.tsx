@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoToolsIcon() {
   return (
     <>
@@ -30,11 +32,11 @@ export default function HomeTwoToolsIcon() {
                   className="w-layout-hflex rt-tools-icon-wrapper">
                   <div className="w-layout-vflex rt-tools-icon one">
                     <div className="rt-tools-icon-image">
-                      <img
+                      <Image
                         src="/Home2_files/690addfe1d0a8b4dac6fd942_Group 2147225566.svg"
                         loading="lazy"
                         alt="taskopia-home-two-icon-1"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="w-layout-vflex rt-tools-icon-text">
                       <div className="rt-small-name">Clarityworks</div>
@@ -45,13 +47,13 @@ export default function HomeTwoToolsIcon() {
                   </div>
                   <div className="w-layout-vflex rt-tools-icon two">
                     <div className="rt-tools-icon-image">
-                      <img
-                        width="135"
-                        height="135"
+                      <Image
+                        width={135}
+                        height={135}
                         alt=""
                         src="/Home2_files/690ae03efa396b38eb292fe4_Towers.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="rt-small-name">Flowbridge</div>
                     <div className="w-layout-vflex rt-tools-icon-text">
@@ -62,13 +64,13 @@ export default function HomeTwoToolsIcon() {
                   </div>
                   <div className="w-layout-vflex rt-tools-icon one">
                     <div className="rt-tools-icon-image">
-                      <img
-                        width="112"
-                        height="112"
+                      <Image
+                        width={112}
+                        height={112}
                         alt=""
                         src="/Home2_files/691d8bb1729b52a1f8ffd65a_icon-service-i.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-tools-icon-text">
                       <div className="rt-small-name">Plansync</div>
@@ -79,13 +81,13 @@ export default function HomeTwoToolsIcon() {
                   </div>
                   <div className="w-layout-vflex rt-tools-icon two">
                     <div className="rt-tools-icon-image">
-                      <img
-                        width="115"
-                        height="115"
+                      <Image
+                        width={115}
+                        height={115}
                         alt=""
                         src="/Home2_files/690adf8b2d64b64c03d7f792_Nira.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-tools-icon-text">
                       <div className="rt-small-name">Collabtrack</div>
@@ -96,13 +98,13 @@ export default function HomeTwoToolsIcon() {
                   </div>
                   <div className="w-layout-vflex rt-tools-icon one">
                     <div className="rt-tools-icon-image">
-                      <img
-                        width="126"
-                        height="126"
+                      <Image
+                        width={126}
+                        height={126}
                         alt=""
                         src="/Home2_files/691d8c2797ae7dee4fdd46cd_taskopia-integration-icon.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-tools-icon-text">
                       <div className="rt-small-name">Worksphere</div>
@@ -113,13 +115,13 @@ export default function HomeTwoToolsIcon() {
                   </div>
                   <div className="w-layout-vflex rt-tools-icon two">
                     <div className="rt-tools-icon-image">
-                      <img
-                        width="138"
-                        height="138"
+                      <Image
+                        width={138}
+                        height={138}
                         alt=""
                         src="/Home2_files/690adf8af33dd03d1823e581_Aven.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-tools-icon-text">
                       <div className="rt-small-name">Tasknest</div>
@@ -131,11 +133,11 @@ export default function HomeTwoToolsIcon() {
                 </div>
               </div>
               <div className="rt-tools-icon-overlay">
-                <img
+                <Image
                   src="/Home2_files/690adbc5bfed3c0fa7e49213_Vector 1530.webp"
                   loading="lazy"
                   alt="taskopia-home-two-overlay-integration"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>

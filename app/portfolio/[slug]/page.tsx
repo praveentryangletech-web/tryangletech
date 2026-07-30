@@ -6,6 +6,8 @@ import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
 
+import Image from "next/image";
+
 export default async function PortfolioDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const project = projects.find((p) => p.slug === resolvedParams.slug);
@@ -46,13 +48,13 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
               </h1>
             </div>
             <div className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-              <img
+              <Image
                 src={project.image}
                 loading="lazy"
                 alt={project.title}
                 className="rt-image-scale"
-                style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
-              />
+                style={{ width: "100%", height: "auto",  width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
+               width={800} height={800} />
             </div>
           </div>
         </section>

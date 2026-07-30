@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function OurProcess() {
@@ -39,7 +41,7 @@ export default function OurProcess() {
               <div className="rt-process-item-overlay rt-overflow-hidden">
                 <div data-w-id="fe26f0d6-37c8-3685-a177-c8bb05fdb9ca" className="rt-process-box rt-1">
                   <div className="rt-icon-no">
-                    <img src={`${A}/690c7b256a26b771ea0562fb_Vector (27).svg`} loading="lazy" alt="" />
+                    <Image src={`${A}/690c7b256a26b771ea0562fb_Vector (27).svg`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-process-text-gap">
                     <div className="rt-text-style-h6 rt-text-color-white">Task setup</div>
@@ -49,7 +51,7 @@ export default function OurProcess() {
 
                 <div data-w-id="9a59051b-7eac-c0f0-0d70-0d14e85112ac" className="rt-process-box rt-2">
                   <div className="rt-icon-no">
-                    <img src={`${A}/690c7b2508ab483ef4047387_Vector (28).svg`} loading="lazy" alt="" />
+                    <Image src={`${A}/690c7b2508ab483ef4047387_Vector (28).svg`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-process-text-gap">
                     <div className="rt-text-style-h6">Progress tracking</div>
@@ -59,7 +61,7 @@ export default function OurProcess() {
 
                 <div data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc918" className="rt-process-box rt-3">
                   <div className="rt-icon-no">
-                    <img src={`${A}/6914525ddeeb169b19ad1aa4_Vector (29).svg`} loading="lazy" alt="" />
+                    <Image src={`${A}/6914525ddeeb169b19ad1aa4_Vector (29).svg`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-process-text-gap">
                     <div className="rt-text-style-h6">Report &amp; share</div>

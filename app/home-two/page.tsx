@@ -12,6 +12,8 @@ import HomeTwoTestimonial from './components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
 
 
+import Image from "next/image";
+
 export default function HomeTwo() {
 
 
@@ -58,12 +60,12 @@ export default function HomeTwo() {
               <div className="rt-vlt-row rt-vlt-r1">
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp"
                       alt="Arodesk template"
                       loading="lazy"
                       data-c="#a06a7a"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Arodesk</strong>
@@ -72,12 +74,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png"
                       alt="Avelety template"
                       loading="lazy"
                       data-c="#6f8f7f"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Avelety</strong>
@@ -86,12 +88,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp"
                       alt="Soltio template"
                       loading="lazy"
                       data-c="#8a7256"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Soltio</strong>
@@ -100,12 +102,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp"
                       alt="Applyze template"
                       loading="lazy"
                       data-c="#8a8256"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Applyze</strong>
@@ -114,12 +116,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a54675bee7ff76236031d61_Arodesk-main-thumbnail.webp"
                       alt="Arodesk template"
                       loading="lazy"
                       data-c="#a06a7a"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Arodesk</strong>
@@ -128,12 +130,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a50eb44a6759b2b5304c955_Avelety-main-image 1.png"
                       alt="Avelety template"
                       loading="lazy"
                       data-c="#6f8f7f"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Avelety</strong>
@@ -142,12 +144,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a546792d08a08fc6f1a5e4a_Soltio-Main-Thumbnail.webp"
                       alt="Soltio template"
                       loading="lazy"
                       data-c="#8a7256"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Soltio</strong>
@@ -156,12 +158,12 @@ export default function HomeTwo() {
                 </div>
                 <div className="rt-vlt-card">
                   <div className="rt-vlt-shot rt-vlt-shot--img">
-                    <img
+                    <Image
                       src="/Home2_files/6a5467a6b7f79705585a6dbb_Applyze-main-thumbnail.webp"
                       alt="Applyze template"
                       loading="lazy"
                       data-c="#8a8256"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-vlt-cap">
                     <strong>Applyze</strong>

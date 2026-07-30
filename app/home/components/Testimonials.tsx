@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function Testimonials() {
   return (
         <section className="rt-testimonials-v1">
@@ -35,21 +37,21 @@ export default function Testimonials() {
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp"
                               loading="lazy"
                               alt="
 taskopia-testimonials-author-v1
-" />
+"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -85,19 +87,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v2" />
+                              alt="taskopia-testimonials-author-v2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -132,19 +134,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v3" />
+                              alt="taskopia-testimonials-author-v3"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -181,21 +183,21 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp"
                               loading="lazy"
                               alt="
 taskopia-testimonials-author-v1
-" />
+"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -231,19 +233,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v2" />
+                              alt="taskopia-testimonials-author-v2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -278,19 +280,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v3" />
+                              alt="taskopia-testimonials-author-v3"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -327,21 +329,21 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp"
                               loading="lazy"
                               alt="
 taskopia-testimonials-author-v1
-" />
+"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -377,19 +379,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v2" />
+                              alt="taskopia-testimonials-author-v2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>
@@ -424,19 +426,19 @@ taskopia-testimonials-author-v1
                         className="rt-testimonials-v1-item">
                         <div className="rt-testimonials-v1-item-top">
                           <div className="rt-testimonials-author">
-                            <img
+                            <Image
                               src="/Taskopia_files/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp"
                               loading="lazy"
-                              alt="taskopia-testimonials-author-v3" />
+                              alt="taskopia-testimonials-author-v3"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                           </div>
                           <div className="rt-testimonials-v1-item-top-right">
                             <div>
                               <div>
-                                <img
+                                <Image
                                   src="/Taskopia_files/68f1ff9d3485bfaf19e14f3e_star (2).svg"
                                   loading="lazy"
                                   alt="star (2)"
-                                  className="rt-star-test-v1" />
+                                  className="rt-star-test-v1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                             </div>
                             <div>

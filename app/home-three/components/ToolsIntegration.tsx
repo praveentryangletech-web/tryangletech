@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 
+import Image from "next/image";
+
 export default function ToolsIntegration() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -57,137 +59,137 @@ export default function ToolsIntegration() {
             <div className="w-layout-vflex rt-integration-main-v2 rt-margin-auto">
               <div className="rt-integration-top">
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02a_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09c"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="131"
+                  <Image
+                    width={129}
+                    height={131}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02e_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09e"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a0"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac028_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a2"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac030_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a4"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02c_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a6"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02f_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a8"
                     className="rt-itegration-logo rt-last reveal-on-scroll"
-                  />
+                   />
                 </div>
               </div>
               <div className="rt-integration-top rt-bottom">
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac029_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ab"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac027_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ad"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02d_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
                 <div>
-                  <img
-                    width="129"
-                    height="132"
+                  <Image
+                    width={129}
+                    height={132}
                     alt="Kloudera-service-one-integration-image"
                     src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
                     loading="lazy"
                     data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0b1"
                     className="rt-itegration-logo reveal-on-scroll"
-                  />
+                   />
                 </div>
               </div>
             </div>
           </div>
           <div className="rt-tools-icon-overlay">
-            <img
+            <Image
               src="/Home3_files/690adbc5bfed3c0fa7e49213_Vector 1530.webp"
               loading="lazy"
               alt="taskopia-home-two-overlay-integration"
-            />
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
         </div>
       </div>

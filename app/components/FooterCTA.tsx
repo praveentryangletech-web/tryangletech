@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from "next/link";
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function FooterCTA() {
@@ -29,7 +31,7 @@ export default function FooterCTA() {
                 <div key={lineNum} data-w-id={`7e10f033-b0ef-59d7-53ae-aed6bd65fc${lineNum + 26}`} className={`rt-collaborate-card-line-${lineNum} rt-tab-display-none`}>
                   {[1, 2, 3, 4].map((i) => (
                     <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                      <div><img src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt="" /></div>
+                      <div><Image src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
                     </div>
                   ))}
                 </div>

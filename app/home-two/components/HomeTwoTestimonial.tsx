@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoTestimonial() {
   return (
     <>
@@ -37,25 +39,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -78,25 +80,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -120,25 +122,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -164,25 +166,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -205,25 +207,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -247,25 +249,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -291,25 +293,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -332,25 +334,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/Home2_files/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -374,25 +376,25 @@ export default function HomeTwoTestimonial() {
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/Home2_files/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>

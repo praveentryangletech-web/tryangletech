@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React from 'react';
 
+import Image from "next/image";
+
 const CA = '/contact-assets';
 
 export default function ContactDetails() {
@@ -46,14 +48,14 @@ export default function ContactDetails() {
                 <div className="rt-contact-details-card">
                   <div className="w-layout-vflex rt-contact-details-cad-top-part">
                     <div>
-                      <img
+                      <Image
                         width={47}
                         height={34}
                         alt=""
                         src={`${CA}/68ff6f486c1e1aea191e71fa_location.svg`}
                         loading="lazy"
                         className="rt-contact-icon"
-                      />
+                       />
                     </div>
                     <div className="rt-text-style-h6">Office address</div>
                   </div>
@@ -78,13 +80,13 @@ export default function ContactDetails() {
                 <div className="rt-contact-details-card">
                   <div className="w-layout-vflex rt-contact-details-cad-top-part">
                     <div className="rt-contact-icon">
-                      <img
+                      <Image
                         width={43}
                         height={34}
                         alt=""
                         src={`${CA}/68ff6f534f70c35617e6462c_email.svg`}
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="rt-text-style-h6">Email address</div>
                   </div>
@@ -111,14 +113,14 @@ export default function ContactDetails() {
                 <div className="rt-contact-details-card">
                   <div className="w-layout-vflex rt-contact-details-cad-top-part">
                     <div>
-                      <img
+                      <Image
                         width={29}
                         height={34}
                         alt=""
                         src={`${CA}/68ff6f48a3b994823c7de81d_call.svg`}
                         loading="lazy"
                         className="rt-contact-icon"
-                      />
+                       />
                     </div>
                     <div className="rt-text-style-h6">Phone number</div>
                   </div>

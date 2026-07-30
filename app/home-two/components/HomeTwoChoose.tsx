@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoChoose() {
   return (
     <>
@@ -41,13 +43,13 @@ export default function HomeTwoChoose() {
                     data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf33"
                     className="w-layout-vflex rt-analytics-v2-box">
                     <div>
-                      <img
-                        width="45"
-                        height="45"
+                      <Image
+                        width={45}
+                        height={45}
                         alt=""
                         src="/Home2_files/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                       <div className="rt-text-style-h6">Collaboration</div>
@@ -60,13 +62,13 @@ export default function HomeTwoChoose() {
                     data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf3b"
                     className="w-layout-vflex rt-analytics-v2-box">
                     <div>
-                      <img
-                        width="45"
-                        height="45"
+                      <Image
+                        width={45}
+                        height={45}
                         alt=""
                         src="/Home2_files/6916ed30dcc91e4de385f200_specialiti-icon-3 (1).svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                       <div className="rt-text-style-h6">Innovation</div>
@@ -90,39 +92,39 @@ export default function HomeTwoChoose() {
               </div>
               <div className="rt-choose-v5-right rt-position-relative">
                 <div>
-                  <img
+                  <Image
                     src="/Home2_files/6912d92ac62cc1c666f241bd_Group 2085663563 (1).webp"
                     alt=""
                     data-w-id="55bcbfe2-a1d8-f900-f3f7-b61ba694bf47"
                     loading="lazy"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="ead067ea-e922-1d89-199c-e48c526ba8ad"
                   className="rt-choose-v5-image-1">
-                  <img
+                  <Image
                     src="/Home2_files/6912d929c3345daf963571e2_taskopia-total-hours.webp"
                     loading="lazy"
                     alt="taskopia-total-hours"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="6313cade-b2bd-e44b-493f-1b18d69a9459"
                   className="_2t-choose-v5-image-1">
-                  <img
+                  <Image
                     src="/Home2_files/6912d9292005865758903bcf_taskopia-total-hours-2.webp"
                     loading="lazy"
                     alt="taskopia-total-hours-2"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="56c9eafc-11c7-fc5e-d3d4-bc177bc4e039"
                   className="rt-choose-v5-image-3 rt-up-down">
-                  <img
+                  <Image
                     src="/Home2_files/69156be83cce6dbc951c4727_taskopiya-home-two-productivity.webp"
                     loading="lazy"
                     alt="taskopiya-home-two-productivity"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>

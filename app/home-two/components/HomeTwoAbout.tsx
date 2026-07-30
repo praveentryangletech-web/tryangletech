@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoAbout() {
   return (
     <>
@@ -17,27 +19,27 @@ export default function HomeTwoAbout() {
                   <div
                     data-w-id="70c45100-f145-3c18-c43c-49629dffa555"
                     className="rt-position-relative rt-4">
-                    <img
+                    <Image
                       src="/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp"
                       loading="lazy"
                       alt="taskopiya-home-two-project-over"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <div className="rt-about-v4-left-line rt-tab-display-none">
-                      <img
+                      <Image
                         src="/Home2_files/6912cb4109692fed844d1f39_taskopia-home-two-who-3.webp"
                         loading="lazy"
                         alt="taskopia-home-two-who-3"
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                   <div
                     data-w-id="b033537f-357f-c026-0852-3db8a224feb4"
                     className="rt-about-v4-left-small-image rt-border-radius-medium rt-overflow-hidden">
-                    <img
+                    <Image
                       src="/Home2_files/6912cb4228402e3879fa5f10_taskopia-home-two-who.webp"
                       loading="lazy"
                       alt="taskopia-home-two-who"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-about-v4-right">
@@ -59,11 +61,11 @@ export default function HomeTwoAbout() {
                     data-w-id="0887166c-6ff5-5063-35c2-ef02801acebd"
                     className="rt-about-v1-right-item rt-top-bottom-of">
                     <div className="rt-about-v1-right-item-icon">
-                      <img
+                      <Image
                         src="/Home2_files/68ef800270f70b566b665b2f_Vector (23).svg"
                         loading="lazy"
                         alt=""
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white">
@@ -83,11 +85,11 @@ export default function HomeTwoAbout() {
                     data-w-id="ba857511-b04a-d2aa-41cb-a56aa7cbb4fa"
                     className="rt-about-v1-right-item rt-bottom-padding-of">
                     <div className="rt-about-v1-right-item-icon">
-                      <img
+                      <Image
                         src="/Home2_files/68ef800270f70b566b665b2f_Vector (23).svg"
                         loading="lazy"
                         alt=""
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap rt-text-color-white">

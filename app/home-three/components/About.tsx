@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 export default function About() {
   return (
     <section className="rt-about-v3">
@@ -17,11 +19,11 @@ export default function About() {
                 }}
                 className="rt-position-relative rt-4"
               >
-                <img
+                <Image
                   src="/Home3_files/690dc69fa56b486d2211f9af_taskopia-highlights-1.webp"
                   loading="lazy"
                   alt="taskopia-highlights-1"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div
                 data-w-id="79ad1220-598b-55cd-ca82-f17a6b7bf086"
@@ -93,13 +95,13 @@ export default function About() {
               >
                 <div className="w-layout-vflex rt-analytics-v2-box">
                   <div>
-                    <img
-                      width="45"
-                      height="45"
+                    <Image
+                      width={45}
+                      height={45}
                       alt=""
                       src="/Home3_files/6916b33016cea6a92e3f8264_specialiti-icon-2.svg"
                       loading="lazy"
-                    />
+                     />
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
@@ -112,13 +114,13 @@ export default function About() {
                 </div>
                 <div className="w-layout-vflex rt-analytics-v2-box">
                   <div>
-                    <img
-                      width="45"
-                      height="45"
+                    <Image
+                      width={45}
+                      height={45}
                       alt="specialiti-icon-1"
                       src="/Home3_files/6916b330bfe76dda628cf5ac_specialiti-icon-1.svg"
                       loading="lazy"
-                    />
+                     />
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">

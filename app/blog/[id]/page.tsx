@@ -1,6 +1,8 @@
 
 import WebflowInit from "../../common/WebflowInit";
 
+import Image from "next/image";
+
 export default function BlogPostPage() {
   return (
     <>
@@ -26,13 +28,13 @@ export default function BlogPostPage() {
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
               className="rt-hero-13-main-image rt-overflow-hidden rt-shadow">
-              <img
+              <Image
                 src="/blog-post-assets/69033401de7772098a4febcf_blog-betails-H.webp"
                 loading="lazy"
                 data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
                 alt=""
                 className="rt-image-scale"
-              />
+               width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
           </div>
         </section>
@@ -77,14 +79,14 @@ export default function BlogPostPage() {
                 className="rt-blog-details-overlay">
                 <div className="w-layout-hflex rt-blog-details-overlay-inner rt-border-radius-l">
                   <div className="rt-blog-d-image">
-                    <img
-                      width="51"
-                      height="36"
+                    <Image
+                      width={51}
+                      height={36}
                       alt=""
                       src="/blog-post-assets/6901bd59af6fd86af618ab91_kloudera-contact-three-icon.svg"
                       loading="lazy"
                       className="rt-height-auto"
-                    />
+                     />
                   </div>
                   <div className="w-layout-vflex rt-blog-overlay-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
@@ -96,14 +98,14 @@ export default function BlogPostPage() {
                     </div>
                     <div className="w-layout-hflex rt-blog-author">
                       <div>
-                        <img
-                          width="36"
-                          height="1"
+                        <Image
+                          width={36}
+                          height={1}
                           alt=""
                           src="/blog-post-assets/6901bd59af6fd86af618ab92_Kloudera-blog-post-line.svg"
                           loading="lazy"
                           className="rt-auto-fit rt-desktop-image-full-width"
-                        />
+                         />
                       </div>
                       <div className="rt-text-color-white">Tanya Erin</div>
                     </div>
@@ -133,22 +135,22 @@ export default function BlogPostPage() {
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
                 className="rt-blog-details-content-image">
                 <div className="rt-blog-post-image-wrap rt-overflow-hidden">
-                  <img
-                    width="458"
-                    height="291"
+                  <Image
+                    width={458}
+                    height={291}
                     alt=""
                     src="/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png"
                     loading="lazy"
-                  />
+                   />
                 </div>
                 <div className="rt-blog-post-image-wrap rt-overflow-hidden">
-                  <img
-                    width="537"
-                    height="357"
+                  <Image
+                    width={537}
+                    height={357}
                     alt=""
                     src="/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp"
                     loading="lazy"
-                  />
+                   />
                 </div>
               </div>
               <div
@@ -179,14 +181,14 @@ export default function BlogPostPage() {
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca78"
                 className="w-layout-hflex rt-bottom-blog">
                 <div className="rt-author-bloge-dtails rt-overflow-hidden">
-                  <img
-                    width="110"
-                    height="110"
+                  <Image
+                    width={110}
+                    height={110}
                     alt=""
                     src="/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp"
                     loading="lazy"
                     className="rt-auto-fit rt-desktop-image-full-width"
-                  />
+                   />
                 </div>
                 <div className="w-layout-vflex rt-author-content-wrap rt-mobile-text-center">
                   <div className="w-layout-hflex rt-blog-post-author-wrap">

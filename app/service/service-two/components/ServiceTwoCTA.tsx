@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React, { useState } from 'react';
 
+import Image from "next/image";
+
 const SA = '/service3-assets';
 
 export default function ServiceTwoCTA() {
@@ -56,83 +58,83 @@ export default function ServiceTwoCTA() {
               <div
                 data-w-id="bd3b7318-15d0-e2b5-9880-c5981ed75446"
                 className="rt-hero-v6-item rt-shadow rt-border-radius-medium">
-                <img
+                <Image
                   src="/service-2-assets/6909cabf5d40fb1770899a00_taskopia-service-two-hero-2.webp"
                   loading="lazy"
                   alt="taskopia-service-two-hero-2"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-hero-v6-item rt-two">
                 <div
                   data-w-id="8a73aa12-aaae-22a9-3807-2177d3e35b77"
                   className="rt-hero-v6-iteminner-blue">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabfdfa42ae4bf355d10_taskopia-service-two-hero-1.webp"
                     loading="lazy"
                     data-w-id="502bd2f6-e7d7-3b1c-3d3c-6b704526a51e"
                     alt="taskopia-service-two-hero-1"
                     className="rt-shadow rt-border-radius-medium rt-roted"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="b420372a-e374-20ab-e360-50783cf6b4e2"
                   className="rt-shadow rt-border-radius-medium">
-                  <img
+                  <Image
                     src="/service-2-assets/69171b49d266be94698645a4_taskopioya-service-two-banner-bottom.png"
                     loading="lazy"
                     alt="taskopioya-service-two-banner-bottom"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
               <div className="rt-hero-v6-item rt-two">
                 <div
                   data-w-id="d180a0b5-6463-e458-42bb-33822b1d9d64"
                   className="rt-shadow rt-border-radius-medium">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabfda1a40ef2716a6a3_taskopia-service-two-hero-8.webp"
                     loading="lazy"
                     alt="taskopia-service-two-hero-8"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="13027e95-e993-2169-a200-5ecf19604de4"
                   className="rt-shadow rt-border-radius-medium">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabfdb82f84467851eea_taskopia-service-two-hero-7.webp"
                     loading="lazy"
                     alt="taskopia-service-two-hero-7"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
               <div className="rt-hero-v6-item rt-two rt-position-relative">
                 <div
                   data-w-id="90837caa-3eb0-4fd9-23ef-fb0932652d00"
                   className="rt-shadow rt-border-radius-medium">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabfa5a17d34fde1fe7d_taskopia-service-two-hero-6.png"
                     loading="lazy"
                     alt="taskopia-service-two-hero-6"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="328df24a-1ed6-afc3-bcce-1b0c86d62c01"
                   className="rt-shadow rt-border-radius-medium">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabf60d8c7cce58ba358_taskopia-service-two-hero-9.webp"
                     loading="lazy"
                     alt="
 taskopia-service-two-hero-9
 "
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="d4fa10a8-991b-7efd-da13-e37ad20b1b7f"
                   className="rt-hero-v6-item-inner">
-                  <img
+                  <Image
                     src="/service-2-assets/6909cabfeee3a35808ad7eb7_Group 2147225566.webp"
                     loading="lazy"
                     alt=" taskopia-service-two-round"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -144,137 +146,137 @@ taskopia-service-two-hero-9
               <div className="rt-text-marquee-wrapper rt-overflow-hidden">
                 <div className="rt-text-marquee-train">
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg"
                       loading="lazy"
-                      width="100"
+                      width={100}
                       alt=""
-                    />
+                     height={800} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-text-marquee-train">
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg"
                       loading="lazy"
-                      width="100"
+                      width={100}
                       alt=""
-                    />
+                     height={800} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-text-marquee-train">
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg"
                       loading="lazy"
-                      width="100"
+                      width={100}
                       alt=""
-                    />
+                     height={800} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-text-marquee-iteme">
-                    <img
+                    <Image
                       src="/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
                       loading="lazy"
                       alt=""
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>
@@ -282,11 +284,11 @@ taskopia-service-two-hero-9
             <div className="rt-marquee-bottom-line"></div>
           </div>
           <div className="rt-hero-v6-bg">
-            <img
+            <Image
               src="/service-2-assets/69142d3301921d8eace15477_home three hero.webp"
               loading="lazy"
               alt="home three hero"
-            />
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
         </section>
         <section className="rt-ai-agents-v1 rt-overflow-hidden">
@@ -379,11 +381,11 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="daa11c44-29ce-1d77-876f-1f472850669b"
                 className="rt-about-v2-left rt-overflow-hidden">
-                <img
+                <Image
                   src="/service-2-assets/6908aeda67bc5beddc6c96f6_taskopia-service-two-why-choos.png"
                   loading="lazy"
                   alt="taskopia-service-two-why-choos"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-about-v2-right">
                 <div
@@ -414,11 +416,11 @@ taskopia-service-two-hero-9
                     data-w-id="daa11c44-29ce-1d77-876f-1f47285066ac"
                     className="rt-about-v1-right-item">
                     <div className="rt-about-v1-right-item-icon">
-                      <img
+                      <Image
                         src="/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                         loading="lazy"
                         alt=""
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -434,11 +436,11 @@ taskopia-service-two-hero-9
                     data-w-id="0721302a-3445-421f-ff2b-72516e3f56a6"
                     className="rt-about-v1-right-item rt-top-bottom-of">
                     <div className="rt-about-v1-right-item-icon">
-                      <img
+                      <Image
                         src="/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                         loading="lazy"
                         alt=""
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -488,11 +490,11 @@ taskopia-service-two-hero-9
                 data-w-id="eb174494-37b0-c577-f775-a0aff8b2fae8"
                 className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
                 <div className="rt-feaures-v2-item-icon">
-                  <img
+                  <Image
                     src="/service-2-assets/6916ec6339f890a80905a69b_Vector (33).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">Customizable workflows</div>
                 <p className="rt-gap-off">
@@ -504,11 +506,11 @@ taskopia-service-two-hero-9
                 data-w-id="51a3f6a3-d1e9-e116-2ab6-7bbf62b0bfaf"
                 className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
                 <div className="rt-feaures-v2-item-icon">
-                  <img
+                  <Image
                     src="/service-2-assets/6916ec635353353be914aafc_Vector (32).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">Data-driven insights</div>
                 <p className="rt-gap-off">
@@ -520,11 +522,11 @@ taskopia-service-two-hero-9
                 data-w-id="0598657a-6564-d0cc-c595-dd3f3baae2ca"
                 className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
                 <div className="rt-feaures-v2-item-icon">
-                  <img
+                  <Image
                     src="/service-2-assets/690c7b2508ab483ef4047387_Vector (28).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">Cross-platform access</div>
                 <p className="rt-gap-off">
@@ -576,11 +578,11 @@ taskopia-service-two-hero-9
                       className="rt-services-v2-left-inner">
                       <div className="rt-services-v2-left-top">
                         <div className="rt-services-v2-left-inner-icon">
-                          <img
+                          <Image
                             src="/service-2-assets/69099fe756beabe4238c7528_clipboard (1) 1.svg"
                             loading="lazy"
                             alt=""
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v2-text">
                           <div>
@@ -604,11 +606,11 @@ taskopia-service-two-hero-9
                       className="rt-services-v2-left-inner">
                       <div className="rt-services-v2-left-top">
                         <div className="rt-services-v2-left-inner-icon">
-                          <img
+                          <Image
                             src="/service-2-assets/69099fe7ba9794ca9c0b34c5_database (1) 2.svg"
                             loading="lazy"
                             alt=""
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v2-text">
                           <div>
@@ -632,11 +634,11 @@ taskopia-service-two-hero-9
                       className="rt-services-v2-left-inner">
                       <div className="rt-services-v2-left-top">
                         <div className="rt-services-v2-left-inner-icon">
-                          <img
+                          <Image
                             src="/service-2-assets/69099fe7cf95879c6cb6f865_lock (2) 1.svg"
                             loading="lazy"
                             alt=""
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v2-text">
                           <div>
@@ -660,11 +662,11 @@ taskopia-service-two-hero-9
                       className="rt-services-v2-left-inner">
                       <div className="rt-services-v2-left-top">
                         <div className="rt-services-v2-left-inner-icon">
-                          <img
+                          <Image
                             src="/service-2-assets/69099fe7e885083e2015cd2c_activity 2.svg"
                             loading="lazy"
                             alt=""
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v2-text">
                           <div>
@@ -687,31 +689,31 @@ taskopia-service-two-hero-9
                   <div
                     data-w-id="efc1e74b-43a5-b6db-7cd1-10d908e9d225"
                     className="rt-services-v2-right">
-                    <img
+                    <Image
                       src="/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp"
                       loading="eager"
                       alt="service v3"
                       className="rt-services-v2-one"
-                    />
-                    <img
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    <Image
                       src="/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp"
                       loading="lazy"
-                      width="847"
+                      width={847}
                       alt="taskopiya-service-two-task"
                       className="rt-services-v2-two"
-                    />
-                    <img
+                     height={800} />
+                    <Image
                       src="/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp"
                       loading="eager"
                       alt="service v3"
                       className="rt-services-v2-three"
-                    />
-                    <img
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    <Image
                       src="/service-2-assets/69132a3f107f32facf60e873_service v4.webp"
                       loading="eager"
                       alt="service v4"
                       className="rt-services-v2-four"
-                    />
+                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>
@@ -750,13 +752,13 @@ taskopia-service-two-hero-9
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b6e"
                     className="w-layout-vflex rt-analytics-v2-box">
                     <div>
-                      <img
-                        width="45"
-                        height="45"
+                      <Image
+                        width={45}
+                        height={45}
                         alt=""
                         src="/service-2-assets/6916f00db3051e5aed09bd3f_Group 2085663576.svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                       <div className="rt-text-style-h6">Collaboration</div>
@@ -769,13 +771,13 @@ taskopia-service-two-hero-9
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b76"
                     className="w-layout-vflex rt-analytics-v2-box">
                     <div>
-                      <img
-                        width="45"
-                        height="45"
+                      <Image
+                        width={45}
+                        height={45}
                         alt=""
                         src="/service-2-assets/6916ef876682eed2b2fd5911_Vector (34).svg"
                         loading="lazy"
-                      />
+                       />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                       <div className="rt-text-style-h6">Innovation</div>
@@ -798,12 +800,12 @@ taskopia-service-two-hero-9
                 </div>
               </div>
               <div className="rt-core-right rt-border-radius-medium">
-                <img
+                <Image
                   src="/service-2-assets/69097f69015c484147186fc7_taskopia-service-two-core.webp"
                   loading="lazy"
                   data-w-id="e5d55f52-d279-25a4-74c1-f7183bd17df6"
                   alt="taskopia-service-two-core"
-                />
+                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>
@@ -840,25 +842,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -881,25 +883,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -923,25 +925,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -967,25 +969,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -1008,25 +1010,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -1050,25 +1052,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -1094,25 +1096,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-position-relative">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -1135,25 +1137,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonial-client-image"
                             src="/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="w-layout-vflex rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>
@@ -1177,25 +1179,25 @@ taskopia-service-two-hero-9
                     <div className="w-layout-vflex rt-testimonials-v2-item rt-overflow-hidden">
                       <div className="rt-testimonial-v2-author-main rt-agp-20 rt-padding-40">
                         <div className="rt-testimonial-v3-client-wrap">
-                          <img
-                            width="55"
-                            height="55"
+                          <Image
+                            width={55}
+                            height={55}
                             alt="Kloudera-home-one-testimonila-client-image"
                             src="/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp"
                             loading="lazy"
                             className="rt-auto-fit rt-desktop-image-full-width"
-                          />
+                           />
                         </div>
                         <div className="rt-testimonial-v3-client-details">
                           <div className="rt-testimonial-star">
-                            <img
-                              width="91"
-                              height="91"
+                            <Image
+                              width={91}
+                              height={91}
                               alt=""
                               src="/service-2-assets/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
-                            />
+                             />
                           </div>
                           <div className="rt-text-style-h6">
                             <div>

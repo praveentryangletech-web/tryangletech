@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Image from "next/image";
+
 export default function HomeTwoAIAgents() {
   return (
     <>
@@ -45,13 +47,13 @@ export default function HomeTwoAIAgents() {
                 data-w-id="3a0e692a-85f3-6585-a105-145552d14388"
                 className="w-layout-vflex rt-benefits-v2-card">
                 <div className="rt-benefits-icon">
-                  <img
-                    width="38"
-                    height="38"
+                  <Image
+                    width={38}
+                    height={38}
                     alt="databaseicon-1"
                     src="/Home2_files/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg"
                     loading="lazy"
-                  />
+                   />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">Simplify workflows</div>
@@ -65,14 +67,14 @@ export default function HomeTwoAIAgents() {
                 data-w-id="3a0e692a-85f3-6585-a105-145552d14390"
                 className="w-layout-vflex rt-benefits-v2-card">
                 <div>
-                  <img
-                    width="38"
-                    height="38"
+                  <Image
+                    width={38}
+                    height={38}
                     alt=""
                     src="/Home2_files/6916ec6339f890a80905a69b_Vector (33).svg"
                     loading="lazy"
                     className="rt-benefits-icon"
-                  />
+                   />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">
@@ -87,14 +89,14 @@ export default function HomeTwoAIAgents() {
                 data-w-id="3a0e692a-85f3-6585-a105-145552d14398"
                 className="w-layout-vflex rt-benefits-v2-card">
                 <div>
-                  <img
-                    width="42"
-                    height="38"
+                  <Image
+                    width={42}
+                    height={38}
                     alt=""
                     src="/Home2_files/6916ef876682eed2b2fd5911_Vector (34).svg"
                     loading="lazy"
                     className="rt-benefits-icon"
-                  />
+                   />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">Achieve goals faster</div>

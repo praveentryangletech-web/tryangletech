@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+import Image from "next/image";
+
 export default function BlogContent() {
   return (
     <main>
@@ -19,11 +21,11 @@ export default function BlogContent() {
               <div className="rt-small-btn-main rt-color-change">
                 <div className="rt-small-btn-text">Workflow</div>
                 <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                  <img
+                  <Image
                     src="/blog-assets/69203b6151156495054eacd7_Vector 503 (2).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -110,7 +112,7 @@ export default function BlogContent() {
                         href="/blog-post/empowering-teams-through-structured-project-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -118,7 +120,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -127,13 +129,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -155,7 +157,7 @@ export default function BlogContent() {
                         href="/blog-post/building-clarity-through-smarter-work-systems"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -163,7 +165,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -172,13 +174,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -200,7 +202,7 @@ export default function BlogContent() {
                         href="/blog-post/simplify-projects-through-intelligent-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -208,7 +210,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -217,13 +219,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -246,7 +248,7 @@ export default function BlogContent() {
                         href="/blog-post/empowering-teams-through-organized-workflows"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -254,7 +256,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -263,13 +265,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -291,7 +293,7 @@ export default function BlogContent() {
                         href="/blog-post/efficiency-starts-with-effective-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -299,7 +301,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -308,13 +310,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -336,7 +338,7 @@ export default function BlogContent() {
                         href="/blog-post/streamline-tasks-maximize-team-productivity"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -344,7 +346,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -353,13 +355,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -381,7 +383,7 @@ export default function BlogContent() {
                         href="/blog-post/streamlining-work-processes-for-busy-professionals"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -389,7 +391,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -398,13 +400,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -426,7 +428,7 @@ export default function BlogContent() {
                         href="/blog-post/accelerate-project-delivery-with-organized-workflow-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -434,7 +436,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -443,13 +445,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -472,7 +474,7 @@ export default function BlogContent() {
                         href="/blog-post/how-to-integrate-taskopia-with-your-favorite-productivity-tools"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658964"
                             loading="lazy"
                             alt=""
@@ -480,7 +482,7 @@ export default function BlogContent() {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A.png 820w"
                             className="rt-image-scale"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -489,13 +491,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt=""
                                   src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -528,13 +530,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/69033374f7bdbaecce80e7c9_blog-two-I.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -543,13 +545,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -566,13 +568,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/690335125e318fe0479213b7_blog-two-D.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335125e318fe0479213b7_blog-two-D.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -581,13 +583,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -604,13 +606,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/690335bdf5bb94e8937089e8_blog-two-B.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690335bdf5bb94e8937089e8_blog-two-B.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -619,13 +621,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -654,13 +656,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/690333f5e01881a7f1a4f838_blog-two-H.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690333f5e01881a7f1a4f838_blog-two-H.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -669,13 +671,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -692,13 +694,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/6903348b628bea456749d51f_blog-two-F.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903348b628bea456749d51f_blog-two-F.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -707,13 +709,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -730,13 +732,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/6903360856c5072575d9fe32_blog-two-A.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903360856c5072575d9fe32_blog-two-A.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -745,13 +747,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -780,13 +782,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/690334335e613d605998a49f_blog-two-G.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334335e613d605998a49f_blog-two-G.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -795,13 +797,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -819,13 +821,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/690334ce350586b1ee9594e3_blog-two-E.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/690334ce350586b1ee9594e3_blog-two-E.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -834,13 +836,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>
@@ -857,13 +859,13 @@ export default function BlogContent() {
                         href="/blog-two#"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                          <img
+                          <Image
                             loading="lazy"
                             src="/blog-assets/6903355a56854d99c23063f0_blog-two-C.png"
                             alt=""
                             sizes="100vw"
                             srcSet="https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C-p-500.png 500w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C-p-800.png 800w, https://cdn.prod.website-files.com/68edde427431f6c08f3cfad4/6903355a56854d99c23063f0_blog-two-C.png 820w"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="w-layout-vflex rt-blog-card-v1-top-part">
                           <div className="w-layout-hflex rt-blog-v1-text-wrap">
@@ -872,13 +874,13 @@ export default function BlogContent() {
                             </div>
                             <div className="w-layout-hflex rt-blog-v1-publish-wrap">
                               <div className="rt-blog-card-icon">
-                                <img
-                                  width="14"
-                                  height="15"
+                                <Image
+                                  width={14}
+                                  height={15}
                                   alt="kloudera-blog-one-icon"
                                   src="/blog-assets/690062a695ff7289f21abbbc_kloudera-blog-one-icon.svg"
                                   loading="lazy"
-                                />
+                                 />
                               </div>
                               <div>29 Oct 2025</div>
                             </div>

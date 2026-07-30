@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from "next/link";
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function OurGoal() {
@@ -32,7 +34,7 @@ export default function OurGoal() {
                       ].map(({ wid, icon, title, desc }) => (
                         <div key={wid} data-w-id={wid} className="w-layout-vflex rt-our-goal-left-inner">
                           <div className="rt-icon-no rt-small">
-                            <img width={45} height={45} alt="" src={icon} loading="lazy" />
+                            <Image width={45} height={45} alt="" src={icon} loading="lazy"  />
                           </div>
                           <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                             <div className="rt-text-style-h6">{title}</div>
@@ -52,20 +54,20 @@ export default function OurGoal() {
 
                   <div className="rt-our-goal-right rt-position-relative">
                     <div className="rt-our-goal-right-image-wrap">
-                      <img width={424} height={519} alt="goal-1" src={`${A}/690c6ad1d102d19b352ee0d0_Taskopia-about-goal-1.webp`} loading="lazy" />
+                      <Image width={424} height={519} alt="goal-1" src={`${A}/690c6ad1d102d19b352ee0d0_Taskopia-about-goal-1.webp`} loading="lazy"  />
                     </div>
                     <div data-w-id="9c1d7b40-2e15-4a4c-54e5-f1fd08a7e199" className="rt-our-goal-overlay"></div>
                     <div data-w-id="9c1d7b40-2e15-4a4c-54e5-f1fd08a7e19a" className="rt-our-goal-absolute-image rt-mobile-l-display-none">
-                      <img alt="goal-2" src={`${A}/690c6ad1caeaf4cf1d1053ae_Taskopia-about-goal-2.webp`} loading="lazy" />
+                      <Image alt="goal-2" src={`${A}/690c6ad1caeaf4cf1d1053ae_Taskopia-about-goal-2.webp`} loading="lazy"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div data-w-id="9c1d7b40-2e15-4a4c-54e5-f1fd08a7e19c" className="rt-our-goal-absolute-line rt-mobile-l-display-none">
-                      <img width={68} height={198} alt="" src={`${A}/690c6739a599070d1f107184_kloudera-service-three-faq-line.svg`} loading="lazy" />
+                      <Image width={68} height={198} alt="" src={`${A}/690c6739a599070d1f107184_kloudera-service-three-faq-line.svg`} loading="lazy"  />
                     </div>
                   </div>
                 </div>
               </div>
               <div className="rt-tools-icon-overlay rt-two">
-                <img src={`${A}/690c617ce241b4a9015d2d58_Vector 1533.webp`} loading="lazy" alt="" />
+                <Image src={`${A}/690c617ce241b4a9015d2d58_Vector 1533.webp`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>

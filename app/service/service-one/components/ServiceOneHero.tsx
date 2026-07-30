@@ -1,5 +1,7 @@
 'use client';
 import Link from "next/link";
+import Image from "next/image";
+
 const SA = '/service3-assets';
 
 export default function ServiceOneHero() {
@@ -47,35 +49,35 @@ export default function ServiceOneHero() {
                       <div
                         data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032a"
                         className="rt-hero-v2-client-image rt-overflow-hidden">
-                        <img
-                          width="62"
-                          height="47"
+                        <Image
+                          width={62}
+                          height={47}
                           alt="Kloudera-home-two-hero-image"
                           src="/service-1-assets/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div
                         data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032c"
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                        <img
-                          width="59.5"
-                          height="79"
+                        <Image
+                          width={60}
+                          height={79}
                           alt="Kloudera-home-two-hero-image"
                           src="/service-1-assets/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div
                         data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032e"
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                        <img
-                          width="59.5"
-                          height="79"
+                        <Image
+                          width={60}
+                          height={79}
                           alt="Kloudera-home-two-hero-image"
                           src="/service-1-assets/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
                           loading="lazy"
-                        />
+                         />
                       </div>
                     </div>
                     <div className="rt-color-dark-indigo">
@@ -89,11 +91,11 @@ export default function ServiceOneHero() {
                   <div className="rt-small-btn-main rt-color-change">
                     <div className="rt-small-btn-text">Workflow</div>
                     <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                      <img
+                      <Image
                         src="/service-1-assets/69203b6151156495054eacd7_Vector 503 (2).svg"
                         loading="lazy"
                         alt=""
-                      />
+                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                 </div>
@@ -102,40 +104,40 @@ export default function ServiceOneHero() {
                 <div
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35035e"
                   className="rt-hero-v5-right-one">
-                  <img
+                  <Image
                     src="/service-1-assets/690acfecf91d77770201a6cb_taskopia-service-one-hero-1.webp"
                     loading="lazy"
                     alt="taskopia-service-one-hero-1"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350360"
                   className="rt-hero-v5-right-two">
-                  <img
+                  <Image
                     src="/service-1-assets/6916b40c8e7ba2243876a27f_taskopiya-service-one-hero.avif"
                     loading="lazy"
                     alt="taskopiya-service-one-hero"
                     className="rt-shadow rt-border-radius-medium"
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>
           </div>
           <div className="rt-hero-v5-image">
-            <img
+            <Image
               src="/service-1-assets/6915cd620829878f7ea58178_taskopiya-about-banner.webp"
               loading="lazy"
               alt="taskopiya-about-banner"
-            />
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
           <div
             data-w-id="e3adfb91-848f-aad7-a9a7-c71e5016acc3"
             className="rt-hero-v5-image-dot">
-            <img
+            <Image
               src="/service-1-assets/690ad30ba7100eb0c23fba01_taskopia-service-2-dot.webp"
               loading="lazy"
               alt="taskopia-service-2-dot"
-            />
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
         </section>
     </>

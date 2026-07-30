@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function Benefits() {
   return (
     <section className="rt-our-benefits">
@@ -71,11 +73,11 @@ export default function Benefits() {
                     <div
                       className="rt-benefite-line rt-overflow-hidden"
                       style={{ "width": "0%" }}>
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef3247af262fa1f91a61c0_Vector 1522.png"
                         loading="lazy"
-                        width="280"
-                        alt="line section" />
+                        width={280}
+                        alt="line section"  height={800} />
                     </div>
                     <div
                       data-w-id="c4d71f34-66b2-085e-99cc-0943fd0ea377"
@@ -87,13 +89,13 @@ export default function Benefits() {
                       <div
                         className="rt-benefit-line-two-main rt-overflow-hidden"
                         style={{ "height": "0%" }}>
-                        <img
+                        <Image
                           src="/Taskopia_files/68ef33fcf7932467a4b60157_Group 2085663558.png"
                           loading="lazy"
-                          width="193"
-                          height="111"
+                          width={193}
+                          height={111}
                           alt="line animation 1"
-                          className="rt-image-none rt--benefit-v1" />
+                          className="rt-image-none rt--benefit-v1"  />
                       </div>
                     </div>
                   </div>
@@ -130,18 +132,18 @@ export default function Benefits() {
                       data-w-id="b975fa27-f23e-e4dd-d931-87645a58fe34"
                       style={{ "opacity": "0" }}
                       className="rt-our-benefits-two-inner">
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef3bbf83aee6efac6613df_Group 1597884841.webp"
                         loading="lazy"
                         alt="taskopiya-home-one-project-task"
-                        className="rt-width-height-full" />
+                        className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-our-benefits-two-inner-two rt-overflow-hidden">
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef377edc986166df11074b_Group 2085663258.webp"
                         loading="lazy"
                         alt="taskopiya-home-one-task-list"
-                        className="rt-width-height-full" />
+                        className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                 </div>
@@ -160,17 +162,17 @@ export default function Benefits() {
                       className="rt-inimation-benefits-one-bottom">
                       <div className="rt-bg-benefits-one-bottom">
                         <div>
-                          <img
+                          <Image
                             src="/Taskopia_files/68ef47dea5804b0aa8577340_Rectangle 17425.png"
                             loading="lazy"
-                            alt="Rectangle 17425" />
+                            alt="Rectangle 17425"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                       </div>
                       <div className="rt-inner-benefits-one-bottom" style={{}}>
-                        <img
+                        <Image
                           src="/Taskopia_files/68ef4883307654f50142573b_Group 1597884847 (1).png"
                           loading="lazy"
-                          alt="taskopia-home-one-project-rate" />
+                          alt="taskopia-home-one-project-rate"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                       </div>
                     </div>
                   </div>
@@ -186,13 +188,13 @@ export default function Benefits() {
                     <div className="rt-text-style-h6">Data-driven insights</div>
                   </div>
                   <div className="rt-2-bg">
-                    <img
+                    <Image
                       src="/Taskopia_files/68ef4ad94cb3129a087eda8d_Mask group.webp"
                       loading="lazy"
                       alt="
 Mask group
 "
-                      className="rt-width-height-full" />
+                      className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
                     Gain complete visibility your teamâ€™s performance with
@@ -203,55 +205,55 @@ Mask group
                       data-w-id="2187d097-913e-2499-2082-25f0715b0e13"
                       className="rt-our-benefits-icon-1 rt-one"
                       style={{ "opacity": "0" }}>
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef4b9ab808dc747717c5d6_Group 2085663558 (2).svg"
                         loading="lazy"
-                        alt="" />
+                        alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div
                       data-w-id="84b6d843-6f9b-68bd-8035-505fad5d588e"
                       className="rt-our-benefits-icon-1 rt-two"
                       style={{ "opacity": "0" }}>
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef4b9b16930aefa632d7c9_Group 2085663559 (2).svg"
                         loading="lazy"
-                        alt="" />
+                        alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div
                       data-w-id="61b710c7-6458-88a3-fed5-92078587dacc"
                       className="rt-our-benefits-icon-wrap-2"
                       style={{ "opacity": "0" }}>
                       <div className="rt-shadow rt-radius-full">
-                        <img
+                        <Image
                           src="/Taskopia_files/68ef4b9b221f1b7f58d6d9fb_Group 2085663560.svg"
                           loading="lazy"
                           alt=""
-                          className="rt-width-height-full" />
+                          className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                       </div>
                       <div className="rt-shadow rt-radius-full">
-                        <img
+                        <Image
                           src="/Taskopia_files/68ef4b9b6238a6ea761cb446_Group 2085663561.svg"
                           loading="lazy"
                           alt=""
-                          className="rt-width-height-full" />
+                          className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                       </div>
                       <div className="rt-shadow rt-radius-full">
-                        <img
+                        <Image
                           src="/Taskopia_files/68ef4bc6e4f0293dcb39fe86_Group 2085663561 (1).svg"
                           loading="lazy"
                           alt=""
-                          className="rt-width-height-full" />
+                          className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                       </div>
                     </div>
                     <div
                       className="rt-our-benefits-two-bottom-line rt-overflow-hidden"
                       style={{ "width": "0%" }}>
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef4b9a87704a2661be1351_Group 2085663562.svg"
                         loading="lazy"
-                        width="200"
+                        width={200}
                         alt=""
-                        className="rt-image-none r--benefit-v4-img" />
+                        className="rt-image-none r--benefit-v4-img"  height={800} />
                     </div>
                   </div>
                 </div>
@@ -265,11 +267,11 @@ Mask group
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>
-                      <img
+                      <Image
                         src="/Taskopia_files/68ef5a7f624607e5d90b671e_Subtract.webp"
                         loading="lazy"
-                        width="362"
-                        alt="Subtract" />
+                        width={362}
+                        alt="Subtract"  height={800} />
                     </div>
                     <div
                       data-w-id="7c8a7acf-2849-d94b-d213-0bc0279e96cb"
@@ -277,10 +279,10 @@ Mask group
                       <div className="rt-small-btn-main" style={{}}>
                         <div className="rt-small-btn-text">Tracking</div>
                         <div className="rt-btn-arrow-v2">
-                          <img
+                          <Image
                             src="/Taskopia_files/68ef5d8e21f7535e98837c04_Vector 503.svg"
                             loading="lazy"
-                            alt="" />
+                            alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                       </div>
                     </div>

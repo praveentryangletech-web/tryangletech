@@ -1,6 +1,8 @@
 "use client";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function Collaboration() {
   return (
         <section className="rt-collaboration-v1 rt-overflow-hidden">
@@ -37,10 +39,10 @@ export default function Collaboration() {
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-left-item">
                     <div className="rt-collaboration-left-icon">
-                      <img
+                      <Image
                         src="/Taskopia_files/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg"
                         loading="lazy"
-                        alt="" />
+                        alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -61,10 +63,10 @@ export default function Collaboration() {
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-left-item">
                     <div className="rt-collaboration-left-icon">
-                      <img
+                      <Image
                         src="/Taskopia_files/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"
                         loading="lazy"
-                        alt="" />
+                        alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -95,36 +97,36 @@ export default function Collaboration() {
                     data-w-id="ae8cc4e1-ef96-bdcf-a4f1-2f55a386306b"
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-v1-right-one">
-                    <img
+                    <Image
                       src="/Taskopia_files/68f21b4dc6a06a6abe39c79b_taskopia-Collaboration-one.webp"
                       loading="lazy"
-                      alt="taskopia-Collaboration-one" />
+                      alt="taskopia-Collaboration-one"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div
                     data-w-id="6e37c1de-f32a-f8b2-a948-1302911adaed"
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-v1-right-two">
-                    <img
+                    <Image
                       src="/Taskopia_files/68f21b3af8e5e0af23ce678d_taskopia-Collaboration-two.webp"
                       loading="lazy"
-                      alt="taskopia-Collaboration-two" />
+                      alt="taskopia-Collaboration-two"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div
                   data-w-id="5f4e3a0f-8628-ed34-e438-68eb6dc94db3"
                   style={{ "opacity": "0" }}
                   className="rt-collaboration-v1-right-bottom">
-                  <img
+                  <Image
                     src="/Taskopia_files/68f21b3a3b734d2430609672_taskopia-Collaboration-three.webp"
                     loading="lazy"
-                    width="466"
+                    width={466}
                     sizes="(max-width: 479px) 100vw, 466px"
                     alt="taskopia-Collaboration-three"
                     srcSet="
                     https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three-p-500.webp 500w,
                     https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three-p-800.webp 800w,
                     https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three.webp       932w
-                  " />
+                  "  height={800} />
                 </div>
                 <div className="rt-collaboration-v1-right-bg"></div>
               </div>

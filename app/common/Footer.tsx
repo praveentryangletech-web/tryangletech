@@ -2,6 +2,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <section
@@ -157,11 +159,11 @@ export default function Footer() {
           <a
             href="/"
             className="rt-navbar-logo rt-position-relative w-nav-brand"
-          ><img
-              style={{ height: '40px', width: 'auto' }}
+          ><Image
+              style={{ width: "100%", height: "auto",  height: '40px', width: 'auto' }}
               alt=""
               src="/logo.png"
-              loading="lazy" />
+              loading="lazy"  width={800} height={800} />
             <div className="rt-link-discernible">link<br />&#x200D;</div></a
           >
           <p
@@ -187,33 +189,33 @@ export default function Footer() {
               href="https://dribbble.com/"
               className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
             ><div className="rt-social-media-link">
-                <img
+                <Image
                   src="/Taskopia_files/6914525ddeeb169b19ad1aa4_Vector (29).svg"
                   loading="lazy"
                   alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
+                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-link-discernible">link<br />&#x200D;</div></a
             ><a
               href="https://www.instagram.com/"
               className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
             ><div className="rt-social-media-link">
-                <img
+                <Image
                   src="/Taskopia_files/6914525d5095fa32d625e19c_Vector (30).svg"
                   loading="lazy"
                   alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
+                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-link-discernible">link<br />&#x200D;</div></a
             ><a
               href="https://www.pinterest.com/"
               className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
             ><div className="rt-social-media-link">
-                <img
+                <Image
                   src="/Taskopia_files/6914525d8e53e345a9c4d809_Vector (31).svg"
                   loading="lazy"
                   alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0" />
+                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-link-discernible">link<br /> </div></a
             >

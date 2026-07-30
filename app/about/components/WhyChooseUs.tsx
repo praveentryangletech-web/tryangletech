@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function WhyChooseUs() {
@@ -26,7 +28,7 @@ export default function WhyChooseUs() {
               ].map(({ icon, title, desc }) => (
                 <div key={title} className="rt-choose-v3-item">
                   <div className="rt-choose-v3-item-icon">
-                    <img src={icon} loading="lazy" alt={title} />
+                    <Image src={icon} loading="lazy" alt={title}  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-choose-v3-item-line"></div>
                   <div className="rt-choose-v3-item-text-wrap">

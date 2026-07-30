@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React, { useState } from 'react';
 
+import Image from "next/image";
+
 const SA = '/service3-assets';
 
 export default function ServiceOneCTA() {
@@ -52,13 +54,13 @@ export default function ServiceOneCTA() {
                   <div className="w-layout-vflex rt-pricing-v1-card-heading">
                     <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                       <div>
-                        <img
-                          width="21"
-                          height="21"
+                        <Image
+                          width={21}
+                          height={21}
                           alt="Vector (36)"
                           src="/service-1-assets/6916f56a114dfcf4637d80a2_Vector (36).svg"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div className="rt-text-style-h6">Standard plan</div>
                     </div>
@@ -80,91 +82,91 @@ export default function ServiceOneCTA() {
                 </div>
                 <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>1 AI agent (chat-based)</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Email support</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 500 conversations per month</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Basic automation</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Standard response speed</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>One-time payment opstion</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ee_kloudera-home-two-pricing-three.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Access to knowledge base</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 5 integrations</div>
                   </div>
                 </div>
@@ -189,13 +191,13 @@ export default function ServiceOneCTA() {
                     <div className="w-layout-vflex rt-pricing-v1-card-heading">
                       <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                         <div>
-                          <img
-                            width="21"
-                            height="21"
+                          <Image
+                            width={21}
+                            height={21}
                             alt=""
                             src="/service-1-assets/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg"
                             loading="lazy"
-                          />
+                           />
                         </div>
                         <div className="rt-text-style-h6">
                           Professional plan
@@ -220,91 +222,91 @@ export default function ServiceOneCTA() {
                   </div>
                   <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>3 AI agent (chat-based)</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Email support</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Up to 1500 conversations per month</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Basic automation</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Standard response speed</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>One-time payment opstion</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Access to knowledge base</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Up to 10 integrations</div>
                     </div>
                   </div>
@@ -329,13 +331,13 @@ export default function ServiceOneCTA() {
                   <div className="w-layout-vflex rt-pricing-v1-card-heading">
                     <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                       <div>
-                        <img
-                          width="21"
-                          height="21"
+                        <Image
+                          width={21}
+                          height={21}
                           alt=""
                           src="/service-1-assets/6916f56ad8ac594c1debbb97_Vector (37).svg"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div className="rt-text-style-h6">
                         Enterprise plan
@@ -360,91 +362,91 @@ export default function ServiceOneCTA() {
                 </div>
                 <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>10 AI agent (chat-based)</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Email support</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 2500 conversations per month</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Basic automation</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Standard response speed</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>One-time payment opstion</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Access to knowledge base</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 15 integrations</div>
                   </div>
                 </div>
@@ -470,13 +472,13 @@ export default function ServiceOneCTA() {
                   <div className="w-layout-vflex rt-pricing-v1-card-heading">
                     <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                       <div>
-                        <img
-                          width="21"
-                          height="21"
+                        <Image
+                          width={21}
+                          height={21}
                           alt="Vector (36)"
                           src="/service-1-assets/6916f56a114dfcf4637d80a2_Vector (36).svg"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div className="rt-text-style-h6">Standard plan</div>
                     </div>
@@ -498,91 +500,91 @@ export default function ServiceOneCTA() {
                 </div>
                 <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>1 AI agent (chat-based)</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Email support</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 500 conversations per month</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Basic automation</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Standard response speed</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>One-time payment opstion</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ee_kloudera-home-two-pricing-three.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Access to knowledge base</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 5 integrations</div>
                   </div>
                 </div>
@@ -605,13 +607,13 @@ export default function ServiceOneCTA() {
                     <div className="w-layout-vflex rt-pricing-v1-card-heading">
                       <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                         <div>
-                          <img
-                            width="21"
-                            height="21"
+                          <Image
+                            width={21}
+                            height={21}
                             alt=""
                             src="/service-1-assets/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg"
                             loading="lazy"
-                          />
+                           />
                         </div>
                         <div className="rt-text-style-h6">
                           Professional plan
@@ -636,91 +638,91 @@ export default function ServiceOneCTA() {
                   </div>
                   <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>3 AI agent (chat-based)</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Email support</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Up to 1500 conversations per month</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Basic automation</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Standard response speed</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>One-time payment opstion</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Access to knowledge base</div>
                     </div>
                     <div className="rt-basic-plan-list-v1-flex">
-                      <img
-                        width="15"
-                        height="16"
+                      <Image
+                        width={15}
+                        height={16}
                         alt=""
                         src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                         loading="lazy"
                         className="rt-pricing-icon-v1"
-                      />
+                       />
                       <div>Up to 10 integrations</div>
                     </div>
                   </div>
@@ -743,13 +745,13 @@ export default function ServiceOneCTA() {
                   <div className="w-layout-vflex rt-pricing-v1-card-heading">
                     <div className="w-layout-hflex rt-pricing-v1-text-wrap">
                       <div>
-                        <img
-                          width="21"
-                          height="21"
+                        <Image
+                          width={21}
+                          height={21}
                           alt=""
                           src="/service-1-assets/6916f56ad8ac594c1debbb97_Vector (37).svg"
                           loading="lazy"
-                        />
+                         />
                       </div>
                       <div className="rt-text-style-h6">
                         Enterprise plan
@@ -774,91 +776,91 @@ export default function ServiceOneCTA() {
                 </div>
                 <div className="w-layout-vflex rt-pricing-v1-list-wrap">
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>10 AI agent (chat-based)</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Email support</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 2500 conversations per month</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Basic automation</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Standard response speed</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>One-time payment opstion</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/6900893085847554469bc5a2_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Access to knowledge base</div>
                   </div>
                   <div className="rt-basic-plan-list-v1-flex">
-                    <img
-                      width="15"
-                      height="16"
+                    <Image
+                      width={15}
+                      height={16}
                       alt=""
                       src="/service-1-assets/690091602dd7aa7a0c1228ef_kloudera-pricing-one-icon.svg"
                       loading="lazy"
                       className="rt-pricing-icon-v1"
-                    />
+                     />
                     <div>Up to 15 integrations</div>
                   </div>
                 </div>

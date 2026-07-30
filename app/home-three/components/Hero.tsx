@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="rt-hero-v3 rt-position-relative">
@@ -27,13 +29,13 @@ export default function Hero() {
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image"
                 >
-                  <img
-                    width="62"
-                    height="47"
+                  <Image
+                    width={62}
+                    height={47}
                     alt="Kloudera-home-two-hero-image"
                     src="/Home3_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
                     loading="lazy"
-                  />
+                   />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5d"
@@ -45,13 +47,13 @@ export default function Hero() {
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <img
-                    width="59.5"
-                    height="79"
+                  <Image
+                    width={60}
+                    height={79}
                     alt="Kloudera-home-two-hero-image"
                     src="/Home3_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
                     loading="lazy"
-                  />
+                   />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5f"
@@ -63,13 +65,13 @@ export default function Hero() {
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <img
-                    width="59.5"
-                    height="79"
+                  <Image
+                    width={60}
+                    height={79}
                     alt="Kloudera-home-two-hero-image"
                     src="/Home3_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
                     loading="lazy"
-                  />
+                   />
                 </div>
               </div>
             </div>
@@ -174,12 +176,12 @@ export default function Hero() {
               transformStyle: "preserve-3d",
             }}
           >
-            <img
+            <Image
               src="/Home3_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"
               loading="lazy"
-              width="970"
+              width={970}
               alt="taskopiya-home-two"
-            />
+             height={800} />
           </div>
           <div
             data-w-id="9c7243c2-f09d-09f4-a76d-1bb89e12d14f"
@@ -191,24 +193,24 @@ export default function Hero() {
             }}
             className="rt-hero-v3-phone-wrapper"
           >
-            <img
+            <Image
               src="/Home3_files/691446321ac91daae7cf1d82_Mobile (1).png"
               loading="lazy"
               sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 760px"
               srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691446321ac91daae7cf1d82_Mobile%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691446321ac91daae7cf1d82_Mobile%20(1).png 760w"
               alt="Mobile (1)"
-            />
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
         </div>
       </div>
       <div className="rt-hero-v3-image">
-        <img
+        <Image
           src="/Home3_files/69142d3301921d8eace15477_home three hero.webp"
           loading="lazy"
           sizes="(max-width: 3840px) 100vw, 3840px"
           srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero-p-500.png 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero-p-800.png 800w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero.webp 3840w"
           alt="home three hero"
-        />
+         width={800} height={800} style={{ width: "100%", height: "auto" }} />
       </div>
     </section>
   );

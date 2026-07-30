@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Image from "next/image";
+
 const CA = '/contact-assets';
 
 export default function ContactHero() {
@@ -42,11 +44,11 @@ export default function ContactHero() {
                     <div className="rt-small-btn-main rt-color-change">
                       <div className="rt-small-btn-text">Workflow</div>
                       <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                        <img
+                        <Image
                           src={`${CA}/69203b6151156495054eacd7_Vector 503 (2).svg`}
                           loading="lazy"
                           alt=""
-                        />
+                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                       </div>
                     </div>
                   </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Image from "next/image";
+
 const A = '/about-assets';
 
 export default function AboutBlog() {
@@ -26,19 +28,19 @@ export default function AboutBlog() {
                   <div key={idx} role="listitem" className="w-dyn-item">
                     <a data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc916" href={post.href} className="rt-blog-v3-card rt-border-radius-medium w-inline-block">
                       <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
-                        <img className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={`${A}/${post.img}`} width="410" height="348" alt="" loading="lazy" />
+                        <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={`${A}/${post.img}`} width={410} height={348} alt="" loading="lazy"  />
                       </div>
                       <div className="rt-blog-v3-card-bottom-part">
                         <div className="w-layout-hflex rt-blog-v3-publish-date">
                           <div className="w-layout-vflex">
-                            <img width="15" height="16" alt="" src={`${A}/6903524c7f841af5015b3844_kloudera-blog-two-icon.svg`} loading="lazy" />
+                            <Image width={15} height={16} alt="" src={`${A}/6903524c7f841af5015b3844_kloudera-blog-two-icon.svg`} loading="lazy"  />
                           </div>
                           <div>{post.date}</div>
                         </div>
                         <div className="rt-text-style-h6">{post.title}</div>
                         <div className="w-layout-hflex rt-blog-v2-author-details">
                           <div className="rt-blog-v2-author-image rt-overflow-hidden">
-                            <img width="38" height="38" alt="" src={`${A}/${post.authorImg}`} loading="lazy" className="rt-auto-fit rt-desktop-image-full-width" />
+                            <Image width={38} height={38} alt="" src={`${A}/${post.authorImg}`} loading="lazy" className="rt-auto-fit rt-desktop-image-full-width"  />
                           </div>
                           <div>{post.author}</div>
                         </div>

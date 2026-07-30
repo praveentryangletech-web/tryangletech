@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React from 'react';
 
+import Image from "next/image";
+
 export default function About() {
   return (
     <section className="rt-about-v1">
@@ -14,20 +16,20 @@ export default function About() {
             <div
               data-w-id="ff0a139f-98ea-ffdb-dd98-ba887e27c7b1"
               style={{ "opacity": "0" }}>
-              <img
+              <Image
                 src="/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"
                 loading="lazy"
                 alt=""
-                className="rt-width-height-full" />
+                className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
             <div
               data-w-id="dde1b63a-3928-b16b-6972-084ad79fec04"
               style={{ "opacity": "0" }}>
-              <img
+              <Image
                 src="/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"
                 loading="lazy"
                 alt="taskopia-hero-one-dashbord-daily"
-                className="rt-width-height-full" />
+                className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
           </div>
           <div className="rt-about-v1-right">
@@ -60,10 +62,10 @@ export default function About() {
                 style={{ "opacity": "0" }}
                 className="rt-about-v1-right-item">
                 <div className="rt-about-v1-right-item-icon">
-                  <img
+                  <Image
                     src="/Taskopia_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <p className="rt-gap-off">
                   <span className="rt-color-dark-indigo"
@@ -82,10 +84,10 @@ export default function About() {
                 style={{ "opacity": "0" }}
                 className="rt-about-v1-right-item rt-bottom-padding-of">
                 <div className="rt-about-v1-right-item-icon">
-                  <img
+                  <Image
                     src="/Taskopia_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
-                    alt="" />
+                    alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <p className="rt-gap-off">
                   <span className="rt-color-dark-indigo"

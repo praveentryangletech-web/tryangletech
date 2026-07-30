@@ -1,5 +1,7 @@
 import React from "react";
 
+import Image from "next/image";
+
 export default function ChooseUs() {
   return (
     <section className="rt-choose-v4 rt-overflow-hidden">
@@ -38,11 +40,11 @@ export default function ChooseUs() {
                 className="rt-choose-v4-left-inner-row"
               >
                 <div>
-                  <img
+                  <Image
                     src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
                   <div className="rt-text-style-h6">Automated scheduling</div>
@@ -54,11 +56,11 @@ export default function ChooseUs() {
                 className="rt-choose-v4-left-inner-row"
               >
                 <div>
-                  <img
+                  <Image
                     src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                     loading="lazy"
                     alt=""
-                  />
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
                   <div className="rt-text-style-h6">Consistent workflow</div>
@@ -92,33 +94,33 @@ export default function ChooseUs() {
               data-w-id="40e020f4-358f-684a-09cf-e2afb3b900de"
 
             >
-              <img
+              <Image
                 src="/Home3_files/69253eb3631bda2ad958e90e_Taskopia-home-three-choose-3 (1).webp"
                 loading="lazy"
                 alt="Taskopia-home-three-choose-3 (1)"
-              />
+               width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
             <div
               data-w-id="842f638b-e31c-1206-9472-5959f4589222"
 
               className="rt-choose-v4-right-image-one"
             >
-              <img
+              <Image
                 src="/Home3_files/6915609b657b80ae89e07f7c_taskopia-three-october.webp"
                 loading="lazy"
                 alt="taskopia-three-october"
-              />
+               width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
             <div
               data-w-id="49e6c173-5717-1979-8352-3d54908b2a1a"
 
               className="rt-choose-v4-right-image-two rt-up-down"
             >
-              <img
+              <Image
                 src="/Home3_files/69156a9c6eacd4f1bab9c4f9_taskopiya-home-three-choose-1.webp"
                 loading="lazy"
                 alt="taskopiya-home-three-choose-1"
-              />
+               width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
           </div>
         </div>

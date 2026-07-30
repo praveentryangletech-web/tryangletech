@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import React, { useState } from 'react';
 
+import Image from "next/image";
+
 const SA = '/service3-assets';
 
 export default function ServiceOnePricing() {
@@ -133,20 +135,20 @@ export default function ServiceOnePricing() {
                         <div
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b42"
                           className="rt-services-v3-right-one rt-shadow">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smarter"
                             src="/service-1-assets/6909f9d928bb4346dc5c9aea_taskopia-service-two-smarter.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b44"
                           className="rt-services-v3-right-two">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smarter-2"
                             src="/service-1-assets/6909f9d9332080fa830347e9_taskopia-service-two-smarter-2.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                       </div>
                     </div>
@@ -189,18 +191,18 @@ export default function ServiceOnePricing() {
                       </div>
                       <div className="rt-services-v3-right">
                         <div className="rt-services-v3-right-one rt-shadow">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smart-1"
                             src="/service-1-assets/69147a46b87412da5367dbc0_taskopia-service-two-smart-1.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v3-right-two">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smarter-2"
                             src="/service-1-assets/6909f9d9332080fa830347e9_taskopia-service-two-smarter-2.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                       </div>
                     </div>
@@ -243,18 +245,18 @@ export default function ServiceOnePricing() {
                       </div>
                       <div className="rt-services-v3-right">
                         <div className="rt-services-v3-right-one rt-shadow">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smart-2"
                             src="/service-1-assets/69147a46eac3a081312c6df0_taskopia-service-two-smart-2.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                         <div className="rt-services-v3-right-two">
-                          <img
+                          <Image
                             alt="taskopia-service-two-smarter-2"
                             src="/service-1-assets/6909f9d9332080fa830347e9_taskopia-service-two-smarter-2.webp"
                             loading="lazy"
-                          />
+                           width={800} height={800} style={{ width: "100%", height: "auto" }} />
                         </div>
                       </div>
                     </div>

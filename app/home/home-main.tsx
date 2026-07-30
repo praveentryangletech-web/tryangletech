@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from 'react';
-import Navbar from '@/app/common/Navbar';
-import Footer from '@/app/common/Footer';
+
 import Hero from './components/Hero';
 import About from './components/about';
 import Benefits from './components/Benefits';
@@ -19,7 +18,7 @@ export default function HomeMain() {
   return (
     <>
       <WebflowInit pageId="68eddb146961691d5aa6086f" />
-      <Navbar />
+
 
       <main>
         <Hero />
@@ -36,7 +35,7 @@ export default function HomeMain() {
         <Faq />
         {/* <Cta /> */}
       </main>
-      <Footer />
+
     </>
   );
 }

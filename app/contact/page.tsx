@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../common/Navbar";
-import Footer from "../common/Footer";
+
 
 
 import ContactHero from './components/ContactHero';
@@ -45,7 +44,7 @@ export default function ContactPage() {
   return (
     <>
       <WebflowInit pageId="68eddcfa0d76f97cdbb8c1e5" />
-      <Navbar />
+
 
       <main>
         <div>
@@ -63,7 +62,7 @@ export default function ContactPage() {
           <ContactFAQ />
       </main>
 
-      <Footer />
+
     </>
   );
 }

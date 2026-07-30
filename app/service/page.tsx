@@ -11,14 +11,13 @@ import HomeThrToolsIcon from '../home-three/components/ToolsIntegration';
 import HomeTwoFAQ from '../home-two/components/HomeTwoFAQ';
 import HomeTwoTestimonial from '../home-two/components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
-import Navbar from "../common/Navbar";
-import Footer from "../common/Footer";
+
 
 export default function ServicePage() {
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
-      <Navbar />
+
       <main>
         <HomeTwoHero />
         <ServiceMarquee />
@@ -30,7 +29,7 @@ export default function ServicePage() {
         <HomeTwoFAQ />
         <HomeTwoTestimonial />
       </main>
-      <Footer />
+
     </>
   );
 }

@@ -10,8 +10,7 @@ import HomeTwoToolsIcon from './components/HomeTwoToolsIcon';
 import HomeTwoFAQ from './components/HomeTwoFAQ';
 import HomeTwoTestimonial from './components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
-import Navbar from "../common/Navbar";
-import Footer from "../common/Footer";
+
 
 export default function HomeTwo() {
 
@@ -19,7 +18,7 @@ export default function HomeTwo() {
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
-      <Navbar />
+
       <main>
         <HomeTwoHero />
         <HomeTwoMarquee />
@@ -31,7 +30,7 @@ export default function HomeTwo() {
         <HomeTwoFAQ />
         <HomeTwoTestimonial />
       </main>
-      <Footer />
+
       <div></div>
       <div className="rt-vlt-root">
        

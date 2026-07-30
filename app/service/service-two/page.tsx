@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../../common/Navbar";
-import Footer from "../../common/Footer";
+
 
 const SA = "/service3-assets";
 
@@ -98,7 +97,7 @@ export default function ServiceTwoPage() {
   return (
     <>
       <WebflowInit pageId="68eddb96ee2e53b120952722" />
-      <Navbar />
+
 
       <main>
         <ServiceTwoHero />
@@ -112,7 +111,7 @@ export default function ServiceTwoPage() {
         <ServiceTwoFAQ />
       </main>
 
-      <Footer />
+
     </>
   );
 }

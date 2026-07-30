@@ -1,12 +1,11 @@
-import Navbar from "../../common/Navbar";
-import Footer from "../../common/Footer";
+
 import WebflowInit from "../../common/WebflowInit";
 
 export default function BlogPostPage() {
   return (
     <>
       <WebflowInit pageId="68edde422825b6d5b8990f59" />
-      <Navbar />
+
       <main>
         <section className="rt-hero-13">
           <div className="w-layout-blockcontainer rt-container w-container">
@@ -212,7 +211,7 @@ export default function BlogPostPage() {
           </div>
         </section>
       </main>
-      <Footer />
+
     </>
   );
 }

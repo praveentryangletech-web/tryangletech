@@ -1,15 +1,14 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import Navbar from '@/app/common/Navbar';
-import Footer from '@/app/common/Footer';
+
 import WebflowInit from '@/app/common/WebflowInit';
 
 export default function NotFound() {
   return (
     <>
       <WebflowInit pageId="68eddb146961691d5aa6086f" />
-      <Navbar />
+
       <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", backgroundColor: "#f8f9ff" }}>
         {/* We use flex-grow to push the footer to the bottom organically */}
         <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "120px 20px" }}>
@@ -33,7 +32,7 @@ export default function NotFound() {
 
         </div>
       </main>
-      <Footer />
+
     </>
   );
 }

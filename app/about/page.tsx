@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Navbar from '../common/Navbar';
-import Footer from '../common/Footer';
+
 
 
 import AboutHero from './components/AboutHero';
@@ -24,7 +23,7 @@ export default function AboutPage() {
   return (
     <>
       <WebflowInit pageId="68eddb57e406830358a1f29d" />
-      <Navbar />
+
 
       {/* ══════════════════ MAIN ══════════════════ */}
       <main>
@@ -47,7 +46,7 @@ export default function AboutPage() {
 
       </main>
 
-      <Footer />
+
     </>
   );
 }

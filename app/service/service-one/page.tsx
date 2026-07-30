@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../../common/Navbar";
-import Footer from "../../common/Footer";
+
 
 const SA = "/service3-assets";
 
@@ -99,7 +98,7 @@ export default function ServiceOnePage() {
   return (
     <>
       <WebflowInit pageId="68eddb6fb6de895fcd6c3914" />
-      <Navbar />
+
 
       <main>
         <ServiceOneHero />
@@ -114,7 +113,7 @@ export default function ServiceOnePage() {
         <ServiceOneCTA />
       </main>
 
-      <Footer />
+
     </>
   );
 }

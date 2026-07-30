@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import WebflowInit from "../common/WebflowInit";
-import Navbar from "@/app/common/Navbar";
-import Footer from "@/app/common/Footer";
+
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Agent from "./components/Agent";
@@ -18,7 +17,7 @@ export default function HomeThree() {
   return (
     <>
       <WebflowInit pageId="68eddb2fff5c773ab7afbc89" />
-      <Navbar />
+
       <main>
         <Hero />
         <Marquee />
@@ -31,7 +30,7 @@ export default function HomeThree() {
         <Pricing />
         <Faq />
       </main>
-      <Footer />
+
     </>
   );
 }

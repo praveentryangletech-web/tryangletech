@@ -50,15 +50,7 @@ export default function PortfolioGrid() {
   return (
     <section className="rt-blog-v3-main-wrapper" ref={sectionRef} style={{ paddingBottom: '120px' }}>
       <style>{`
-        .reveal-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-on-scroll.animate-fade-in-up {
-          opacity: 1;
-          transform: translateY(0);
-        }
+
         .filter-btn {
           padding: 8px 20px;
           border-radius: 100px;

@@ -11,24 +11,11 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
   // elements before ix2.init() takes over, preventing a flash of visible content.
   const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
   useIsomorphicLayoutEffect(() => {
-    // Add a strict hiding class to prevent any 1-frame micro-flashes during route changes.
-    // This perfectly bridges the gap between React rendering and Webflow applying its inline start states.
-    document.documentElement.classList.add('wf-initializing');
+    // Remove w-mod-ix to let Webflow's native CSS hide animated elements before ix2.init()
     document.documentElement.classList.remove('w-mod-ix');
   }, [pathname]);
 
   useEffect(() => {
-    // Inject the anti-flash CSS rules if they don't exist yet
-    if (!document.getElementById('wf-anti-flash')) {
-      const style = document.createElement('style');
-      style.id = 'wf-anti-flash';
-      style.innerHTML = `
-        html.wf-initializing [data-w-id] {
-          opacity: 0 !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
 
     // If a specific page ID is provided, set it on the HTML element
     if (pageId) {
@@ -58,10 +45,9 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
         }
         document.dispatchEvent(new Event('readystatechange'));
         // Give Webflow 50ms to fully calculate and apply all initial inline styles.
-        // Then remove the strict hiding class and dispatch a scroll event so Webflow 
+        // Then dispatch a scroll event so Webflow 
         // immediately triggers animations for elements already in the viewport.
         setTimeout(() => {
-          document.documentElement.classList.remove('wf-initializing');
           window.dispatchEvent(new Event('resize'));
           window.dispatchEvent(new Event('scroll'));
         }, 100);

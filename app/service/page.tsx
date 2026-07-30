@@ -23,8 +23,8 @@ export default function ServicePage() {
         <ServiceMarquee />
         {/* <HomeTwoAIAgents /> */}
         <ServiceAbout />
-        <WhyChooseUs />
-        <HomeTwoBenefits />
+        {/* <WhyChooseUs /> */}
+        {/* <HomeTwoBenefits /> */}
         <HomeThrToolsIcon />
         <HomeTwoFAQ />
         <HomeTwoTestimonial />

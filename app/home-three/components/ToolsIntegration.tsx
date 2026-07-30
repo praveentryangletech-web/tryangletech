@@ -27,15 +27,7 @@ export default function ToolsIntegration() {
   return (
     <section className="rt-tools-icon-v1" ref={sectionRef}>
       <style>{`
-        .reveal-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal-on-scroll.animate-fade-in-up {
-          opacity: 1;
-          transform: translateY(0);
-        }
+
         /* Stagger the delays for the logos in each row to create a wave effect */
         .rt-integration-top > div:nth-child(1) .reveal-on-scroll { transition-delay: 0.1s; }
         .rt-integration-top > div:nth-child(2) .reveal-on-scroll { transition-delay: 0.2s; }

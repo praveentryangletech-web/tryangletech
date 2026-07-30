@@ -29,15 +29,7 @@ export default function ServiceAbout() {
     <>
       <section className="rt-about-v4 rt-overflow-hidden" ref={sectionRef}>
         <style>{`
-          .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-          }
-          .reveal-on-scroll.animate-fade-in-up {
-            opacity: 1;
-            transform: translateY(0);
-          }
+
           .stagger-grid > div:nth-child(1) { transition-delay: 0.1s; }
           .stagger-grid > div:nth-child(2) { transition-delay: 0.2s; }
           .stagger-grid > div:nth-child(3) { transition-delay: 0.3s; }

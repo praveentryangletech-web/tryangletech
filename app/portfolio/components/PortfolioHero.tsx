@@ -23,15 +23,7 @@ export default function PortfolioHero() {
   return (
     <div ref={sectionRef}>
       <style>{`
-        .reveal-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal-on-scroll.animate-fade-in-up {
-          opacity: 1;
-          transform: translateY(0);
-        }
+
       `}</style>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         <div className="rt-hero-11-heading rt-desktop-text-center rt-heading-bottom-gap">

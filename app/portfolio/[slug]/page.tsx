@@ -53,7 +53,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 loading="lazy"
                 alt={project.title}
                 className="rt-image-scale"
-                style={{ width: "100%", height: "auto",  width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
+                style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
                width={800} height={800} />
             </div>
           </div>

@@ -124,7 +124,7 @@ export default function Hero() {
                     src="/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"
                     loading="lazy"
                     alt="taskopia-hero-one-dashbord"
-                    height={669}  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    height={669}  width={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-hero-v1-icon-1 rt-icon-on" style={{ "opacity": "1" }}>
                   <Image

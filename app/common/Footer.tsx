@@ -160,7 +160,7 @@ export default function Footer() {
             href="/"
             className="rt-navbar-logo rt-position-relative w-nav-brand"
           ><Image
-              style={{ width: "100%", height: "auto",  height: '40px', width: 'auto' }}
+              style={{ height: '40px', width: 'auto' }}
               alt=""
               src="/logo.png"
               loading="lazy"  width={800} height={800} />

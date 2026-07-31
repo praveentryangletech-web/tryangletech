@@ -53,7 +53,7 @@ export default function Navbar() {
                   className="rt-navbar-logo rt-position-relative w-nav-brand"
                   aria-label="home">
                   <Image
-                    style={{ width: "100%", height: "auto",  height: '40px', width: 'auto' }}
+                    style={{ height: '40px', width: 'auto' }}
                     alt="TryangleTech logo"
                     src={`/logo.png`}
                     loading="lazy"
@@ -174,7 +174,7 @@ export default function Navbar() {
                         <div className="w-layout-vflex rt-pages-menu-left-top">
                           <div>
                             <Image
-                              style={{ width: "100%", height: "auto",  height: '40px', width: 'auto' }}
+                              style={{ height: '40px', width: 'auto' }}
                               alt="TryangleTech logo"
                               src={`/logo.png`}
                               loading="lazy"

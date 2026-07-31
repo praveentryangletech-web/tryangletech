@@ -23,7 +23,7 @@ export default function ServiceMarquee() {
                       src="/Home2_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"
                       loading="lazy"
                       alt="small icon"
-                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>
@@ -41,7 +41,7 @@ export default function ServiceMarquee() {
                         alt="Kloudera-home-two-hero-image"
                         src="/Home2_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
                         loading="lazy"
-                       />
+                      />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ed"
@@ -52,7 +52,7 @@ export default function ServiceMarquee() {
                         alt="Kloudera-home-two-hero-image"
                         src="/Home2_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
                         loading="lazy"
-                       />
+                      />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ef"
@@ -63,7 +63,7 @@ export default function ServiceMarquee() {
                         alt="Kloudera-home-two-hero-image"
                         src="/Home2_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
                         loading="lazy"
-                       />
+                      />
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function ServiceMarquee() {
                       src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                       loading="lazy"
                       alt=""
-                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
                     Streamlined workflows
@@ -130,7 +130,7 @@ export default function ServiceMarquee() {
                       src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                       loading="lazy"
                       alt=""
-                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
                     Enhance collaboration
@@ -142,7 +142,7 @@ export default function ServiceMarquee() {
                       src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
                       loading="lazy"
                       alt=""
-                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
                     Achieve goals faster
@@ -241,7 +241,7 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   alt="taskopia-home-two-hero-left"
                   className="rt-shadow rt-border-radius-medium rt-border-line"
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div
                 data-w-id="dcecf02b-225d-a6bb-a12c-4ac9b21d3821"
@@ -251,7 +251,7 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   alt="taskopia-hero-v2-2"
                   className="rt-shadow rt-border-radius-medium rt-border-line"
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div
                 data-w-id="8c510f67-e449-acf5-7671-3a4a269a89b7"
@@ -261,7 +261,7 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   alt="taskopia-home-two-hero-right-2"
                   className="rt-shadow rt-border-radius-medium rt-border-line"
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function ServiceMarquee() {
               alt=""
               src="/Home2_files/6911b9467f26f096826792ff_Kloudera-landing-hero-icon.svg"
               loading="lazy"
-             />
+            />
           </div>
         </section>
       </div>
@@ -288,42 +288,42 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                 height={800} />
+                  height={800} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -333,42 +333,42 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                 height={800} />
+                  height={800} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -378,42 +378,42 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                 height={800} />
+                  height={800} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>

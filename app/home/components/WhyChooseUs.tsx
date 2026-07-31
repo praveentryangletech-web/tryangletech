@@ -8,7 +8,7 @@ export default function WhyChooseUs() {
         <section className="rt-why-choose-v1">
           <div
             className="w-layout-blockcontainer rt-container-extra-large w-container">
-            <div className="rt-why-choose-v1-wrapper">
+            <div className="rt-why-choose-v1-wrapper" style={{ boxShadow: "none", border: "none" }}>
               <div className="rt-why-choose-v1-content">
                 <div className="rt-testimonials-v1-top rt-heading-bottom-gap">
                   <div

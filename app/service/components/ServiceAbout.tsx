@@ -51,7 +51,7 @@ export default function ServiceAbout() {
                       src="/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp"
                       loading="lazy"
                       alt="taskopiya-home-two-project-over"
-                      style={{ width: "100%", height: "auto",  width: '100%', height: 'auto' }}
+                      style={{ width: '100%', height: 'auto' }}
                      width={800} height={800} />
                     <div className="rt-about-v4-left-line rt-tab-display-none">
                       <Image

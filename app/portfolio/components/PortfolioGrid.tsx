@@ -171,7 +171,7 @@ export default function PortfolioGrid() {
               <div key={`${activeFilter}-${project.title}`} role="listitem" className="w-dyn-item reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
                 <Link href={`/portfolio/${project.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block portfolio-card-hover">
                   <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', height: '260px' }}>
-                    <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={project.image} alt={project.title} style={{ width: "100%", height: "auto",  objectFit: 'contain', width: '100%', height: '100%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))' }} loading="lazy"  width={800} height={800} />
+                    <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={project.image} alt={project.title} style={{ objectFit: 'contain', width: '100%', height: '100%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))' }} loading="lazy"  width={800} height={800} />
                   </div>
                   <div className="rt-blog-v3-card-bottom-part">
                     <div className="w-layout-hflex rt-blog-v3-publish-date" style={{ marginBottom: '12px' }}>
@@ -182,7 +182,7 @@ export default function PortfolioGrid() {
                       <div className="rt-features-v2-small-link w-inline-block" style={{ padding: '8px 0' }}>
                         <div className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 500 }}>View Case Study</div>
                         <div style={{ width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: '8px' }}>
-                          <Image className="arrow-icon" src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg" loading="lazy" alt="" style={{ width: "100%", height: "auto",  width: '100%', height: '100%', objectFit: 'contain' }}  width={800} height={800} />
+                          <Image className="arrow-icon" src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg" loading="lazy" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }}  width={800} height={800} />
                         </div>
                       </div>
                     </div>

@@ -90,7 +90,7 @@ export default function ServiceAbout() {
                     {/* Collaboration Block */}
                     <div className="flex flex-col items-start reveal-on-scroll">
                       <div className="">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eb3612ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="12" width="6" height="8" rx="1"></rect>
                           <rect x="9" y="8" width="6" height="12" rx="1"></rect>
                           <rect x="15" y="4" width="6" height="16" rx="1"></rect>
@@ -107,7 +107,7 @@ export default function ServiceAbout() {
                     {/* Innovation Block */}
                     <div className="flex flex-col items-start reveal-on-scroll">
                       <div className="">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eb3612ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                           <polyline points="2 12 12 17 22 12"></polyline>
                           <polyline points="2 17 12 22 22 17"></polyline>
@@ -124,7 +124,7 @@ export default function ServiceAbout() {
                     {/* Efficiency Block (Row 2) */}
                     <div className="flex flex-col items-start reveal-on-scroll">
                       <div className="">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eb3612ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="12" cy="12" r="10"></circle>
                           <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
@@ -140,7 +140,7 @@ export default function ServiceAbout() {
                     {/* Security Block (Row 2) */}
                     <div className="flex flex-col items-start reveal-on-scroll">
                       <div className="">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eb3612ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                           <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>

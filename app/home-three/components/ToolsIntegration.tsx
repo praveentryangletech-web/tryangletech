@@ -39,7 +39,7 @@ export default function ToolsIntegration() {
         .rt-integration-top > div:nth-child(6) .reveal-on-scroll { transition-delay: 0.6s; }
         .rt-integration-top > div:nth-child(7) .reveal-on-scroll { transition-delay: 0.7s; }
       `}</style>
-      <div className="w-layout-blockcontainer rt-container-extra-large w-container">
+      <div className="w-layout-blockcontainer rt-container-extra-large w-container mt-[5rem]">
         <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative">
           <div className="rt-tools-icon-container rt-change">
             <div

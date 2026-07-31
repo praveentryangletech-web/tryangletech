@@ -113,7 +113,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/empowering-teams-through-structured-project-planning"
+                        href="/blog/empowering-teams-through-structured-project-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -158,7 +158,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/building-clarity-through-smarter-work-systems"
+                        href="/blog/building-clarity-through-smarter-work-systems"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -203,7 +203,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/simplify-projects-through-intelligent-task-management"
+                        href="/blog/simplify-projects-through-intelligent-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -249,7 +249,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/empowering-teams-through-organized-workflows"
+                        href="/blog/empowering-teams-through-organized-workflows"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -294,7 +294,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/efficiency-starts-with-effective-task-management"
+                        href="/blog/efficiency-starts-with-effective-task-management"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -339,7 +339,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/streamline-tasks-maximize-team-productivity"
+                        href="/blog/streamline-tasks-maximize-team-productivity"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -384,7 +384,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/streamlining-work-processes-for-busy-professionals"
+                        href="/blog/streamlining-work-processes-for-busy-professionals"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -429,7 +429,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/accelerate-project-delivery-with-organized-workflow-planning"
+                        href="/blog/accelerate-project-delivery-with-organized-workflow-planning"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image
@@ -475,7 +475,7 @@ export default function BlogContent() {
                     <div role="listitem" className="w-dyn-item">
                       <Link
                         data-w-id="6a0c5f90-d20e-a01a-7fa9-5c4d9b658962"
-                        href="/blog-post/how-to-integrate-taskopia-with-your-favorite-productivity-tools"
+                        href="/blog/how-to-integrate-taskopia-with-your-favorite-productivity-tools"
                         className="rt-blog-v1-card-wrap w-inline-block">
                         <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                           <Image

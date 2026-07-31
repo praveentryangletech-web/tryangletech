@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import React from 'react';
+import NextImage, { ImageProps } from "next/image";
 
-import Image from "next/image";
+const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
+  return <NextImage {...props} />;
+};
 
 export default function Hero() {
   return (

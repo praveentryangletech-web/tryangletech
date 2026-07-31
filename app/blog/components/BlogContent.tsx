@@ -1,7 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-import Image from "next/image";
+import NextImage, { ImageProps } from "next/image";
+
+const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
+  return <NextImage {...props} />;
+};
 
 export default function BlogContent() {
   return (

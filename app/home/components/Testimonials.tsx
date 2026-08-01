@@ -5,6 +5,9 @@ import Image from "next/image";
 
 export default function Testimonials() {
   return (
+    <>
+      <div className="rt-position-relative">
+        <div className="rt-testimonial-v1-bg"></div>
         <section className="rt-testimonials-v1">
           <div
             className="w-layout-blockcontainer rt-container-extra-large w-container">
@@ -67,15 +70,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œGood sales growthâ€ 
+                            “Good sales growth”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œThis tool transformed how our team works! Tasks are
+                            “This tool transformed how our team works! Tasks are
                             organized, deadlines are clear, and collaboration is
                             smoother than ever. Productivity has never been this
-                            high.â€ 
+                            high.”
                           </p>
                         </div>
                       </div>
@@ -115,14 +118,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œFaster supportâ€ 
+                            “Faster support”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œAn absolute game-changer for project management. We
+                            “An absolute game-changer for project management. We
                             can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.â€ 
+                            deliver projects on schedule with less stress.”
                           </p>
                         </div>
                       </div>
@@ -162,14 +165,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œSmooth workflowâ€ 
+                            “Smooth workflow”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œSimple, intuitive, and powerfulâ€”our team now
+                            “Simple, intuitive, and powerful—our team now
                             manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.â€ 
+                            aligned and helps us achieve more in less time.”
                           </p>
                         </div>
                       </div>
@@ -213,15 +216,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œGood sales growthâ€ 
+                            “Good sales growth”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œThis tool transformed how our team works! Tasks are
+                            “This tool transformed how our team works! Tasks are
                             organized, deadlines are clear, and collaboration is
                             smoother than ever. Productivity has never been this
-                            high.â€ 
+                            high.”
                           </p>
                         </div>
                       </div>
@@ -261,14 +264,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œFaster supportâ€ 
+                            “Faster support”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œAn absolute game-changer for project management. We
+                            “An absolute game-changer for project management. We
                             can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.â€ 
+                            deliver projects on schedule with less stress.”
                           </p>
                         </div>
                       </div>
@@ -308,14 +311,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œSmooth workflowâ€ 
+                            “Smooth workflow”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œSimple, intuitive, and powerfulâ€”our team now
+                            “Simple, intuitive, and powerful—our team now
                             manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.â€ 
+                            aligned and helps us achieve more in less time.”
                           </p>
                         </div>
                       </div>
@@ -359,15 +362,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œGood sales growthâ€ 
+                            “Good sales growth”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œThis tool transformed how our team works! Tasks are
+                            “This tool transformed how our team works! Tasks are
                             organized, deadlines are clear, and collaboration is
                             smoother than ever. Productivity has never been this
-                            high.â€ 
+                            high.”
                           </p>
                         </div>
                       </div>
@@ -407,14 +410,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œFaster supportâ€ 
+                            “Faster support”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œAn absolute game-changer for project management. We
+                            “An absolute game-changer for project management. We
                             can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.â€ 
+                            deliver projects on schedule with less stress.”
                           </p>
                         </div>
                       </div>
@@ -454,14 +457,14 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            â€œSmooth workflowâ€ 
+                            “Smooth workflow”
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            â€œSimple, intuitive, and powerfulâ€”our team now
+                            “Simple, intuitive, and powerful—our team now
                             manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.â€ 
+                            aligned and helps us achieve more in less time.”
                           </p>
                         </div>
                       </div>
@@ -474,5 +477,7 @@ taskopia-testimonials-author-v1
             </div>
           </div>
         </section>
+      </div>
+    </>
   );
 }

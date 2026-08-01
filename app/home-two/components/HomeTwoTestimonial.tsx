@@ -8,6 +8,7 @@ export default function HomeTwoTestimonial() {
   return (
     <>
       <div className="rt-position-relative">
+          <div className="rt-testimonial-v2-bg"></div>
           <section
             data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e67"
             className="rt-testimonial-v2">
@@ -17,7 +18,7 @@ export default function HomeTwoTestimonial() {
                   <div className="rt-testimonial-v2-heading-wrap rt-desktop-text-center rt-heading-bottom-gap">
                     <div className="rt-sub-gap">
                       <div
-                        data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e6d"
+
                         className="rt-sub-text rt-sub-gredient">
                         our testimonials
                       </div>

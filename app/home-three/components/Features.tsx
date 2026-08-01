@@ -152,6 +152,69 @@ Taskopia-features-home-v3-right
               </a>
             </div>
           </div>
+          <div className="rt-features-v2-left rt-2 rt-border-radius-l">
+            <div className="rt-features-v2-right-image">
+              <div className="rt-position-relative rt-features-inner-image">
+                <div className="rt-features-v2-icon rt-tab-display-none reveal-on-scroll">
+                  <Image
+                    src="/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp"
+                    loading="lazy"
+                    alt="Taskopia-features-home-v3-icon"
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                </div>
+                <div className="rt-features-v2-line">
+                  <Image
+                    src="/Home3_files/690dad3509f6f587288a12d7_Taskopia-features-home-v3-7.webp"
+                    loading="lazy"
+                    alt="Taskopia-features-home-v3-7"
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                </div>
+                <div className="rt-features-v2-image-four rt-position-relative reveal-on-scroll">
+                  <Image
+                    src="/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp"
+                    loading="lazy"
+                    alt="
+Taskopia-features-home-v3-right
+"
+                    className="rt-shadow"
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                </div>
+                <div className="rt-features-v2-image-five rt-position-relative reveal-on-scroll">
+                  <Image
+                    src="/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp"
+                    loading="lazy"
+                    alt="Taskopia-features-home-v3-5"
+                    className="rt-shadow"
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                </div>
+              </div>
+            </div>
+            <div className="rt-features-v2-left-text-box">
+              <div className="rt-text-style-h5">
+                Smart workflows and automation
+              </div>
+              <p className="rt-gap-off">
+                Automate key workflows to reduce manual effort, cut errors, and
+                keep your team aligned, helping every project move faster and
+                more smoothly.
+              </p>
+              <a
+                href="https://taskopia.webflow.io/about"
+                className="rt-features-v2-small-link w-inline-block"
+              >
+                <div className="rt-button-text rt-color-vivid-blue">
+                  View more
+                </div>
+                <div>
+                  <Image
+                    src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
+                    loading="lazy"
+                    alt=""
+                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

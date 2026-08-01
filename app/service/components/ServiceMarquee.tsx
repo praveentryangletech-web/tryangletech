@@ -150,7 +150,7 @@ export default function ServiceMarquee() {
                 </div>
               </div>
             </div>
-            <div className="rt-hero-v2-content">
+            <div className="rt-hero-v2-content" style={{ alignItems: 'flex-end' }}>
               <div
                 data-w-id="11d58063-9804-40c1-9e7d-d67bfd38af74"
                 className="rt-hero-v2-card-v1">
@@ -189,79 +189,6 @@ export default function ServiceMarquee() {
                   style={{ width: '100%', height: 'auto' }}
                   className="rt-shadow rt-border-radius-medium rt-border-line"
                 />
-              </div>
-            </div>
-            <div className="rt-hero-v2-content mt-[20rem]">
-              <div
-                data-w-id="11d58063-9804-40c1-9e7d-d67bfd38af74"
-                className="rt-hero-v2-card-v1">
-                <Image
-                  src="/Home2_files/691432fc2dbfd7373d92627c_taskopia-home-two-hero-left.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-left"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div>
-              {/* <div
-                data-w-id="dcecf02b-225d-a6bb-a12c-4ac9b21d3821"
-                className="rt-hero-v2-card-2">
-                <Image
-                  src="/Home2_files/6912c4bdaae7aed5d10b828e_taskopia-hero-v2-2.webp"
-                  loading="lazy"
-                  alt="taskopia-hero-v2-2"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div> */}
-              <div
-                data-w-id="8c510f67-e449-acf5-7671-3a4a269a89b7"
-                className="rt-hero-v2-card-v3">
-                <Image
-                  src="/Home2_files/69144db3d5bfa45112b0ac9f_taskopia-home-two-hero-right-2.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-right-2"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div>
-            </div>
-            <div className="rt-hero-v2-content mt-[20rem]">
-              <div
-                data-w-id="11d58063-9804-40c1-9e7d-d67bfd38af74"
-                className="rt-hero-v2-card-v1">
-                <Image
-                  src="/Home2_files/691432fc2dbfd7373d92627c_taskopia-home-two-hero-left.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-left"
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div
-                data-w-id="dcecf02b-225d-a6bb-a12c-4ac9b21d3821"
-                className="rt-hero-v2-card-2">
-                <Image
-                  src="/Home2_files/6912c4bdaae7aed5d10b828e_taskopia-hero-v2-2.webp"
-                  loading="lazy"
-                  alt="taskopia-hero-v2-2"
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div
-                data-w-id="8c510f67-e449-acf5-7671-3a4a269a89b7"
-                className="rt-hero-v2-card-v3">
-                <Image
-                  src="/Home2_files/69144db3d5bfa45112b0ac9f_taskopia-home-two-hero-right-2.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-right-2"
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>

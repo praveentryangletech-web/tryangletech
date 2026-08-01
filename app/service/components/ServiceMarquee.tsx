@@ -212,7 +212,7 @@ export default function ServiceMarquee() {
                 />
               </div>
             </div> */}
-            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end' }}>
+            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap' }}>
               <div className="rt-hero-v2-card-1 rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
@@ -383,6 +383,133 @@ export default function ServiceMarquee() {
                         loading="lazy"
                         alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '380px', flex: '0 0 100%', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="rt-features-v2-left-image" style={{ flex: '1' }}>
+                  <div className="rt-features-v2-image-one reveal-on-scroll">
+                    <Image
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
+                      loading="lazy"
+                      alt="Taskopia-features-home-v3-1"
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
+                      loading="lazy"
+                      alt="Taskopia-features-home-v3-2"
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
+                      loading="lazy"
+                      alt="Taskopia-features-home-v3-3"
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                </div>
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms', flex: '1', paddingLeft: '4rem' }}>
+                  <div className="rt-text-style-h5">Smart task assignment</div>
+                  <p className="rt-gap-off">
+                    Easily assign tasks to the right people with clear priorities
+                    and timelines, improving accountability and ensuring a smoother
+                    project flow.
+                  </p>
+                  <a
+                    href="https://taskopia.webflow.io/about"
+                    className="rt-features-v2-small-link w-inline-block"
+                  >
+                    <div className="rt-button-text rt-color-vivid-blue">
+                      View more
+                    </div>
+                    <div>
+                      <Image
+                        src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
+                        loading="lazy"
+                        alt=""
+                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div style={{ flexBasis: '100%', height: 0 }}></div>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%', marginTop: '1.875rem' }}>
+                <div className="rt-features-v2-left-image">
+                  <div className="rt-features-v2-image-one reveal-on-scroll">
+                    <Image
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                </div>
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
+                  <div className="rt-text-style-h5">Customizable reporting</div>
+                  <p className="rt-gap-off">
+                    Generate detailed reports tailored to your team's specific KPIs.
+                  </p>
+                  <a
+                    href="https://taskopia.webflow.io/about"
+                    className="rt-features-v2-small-link w-inline-block"
+                  >
+                    <div className="rt-button-text rt-color-vivid-blue">
+                      View more
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%', marginTop: '1.875rem' }}>
+                <div className="rt-features-v2-left-image">
+                  <div className="rt-features-v2-image-one reveal-on-scroll">
+                    <Image
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
+                    <Image
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                </div>
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
+                  <div className="rt-text-style-h5">Seamless integration</div>
+                  <p className="rt-gap-off">
+                    Connect smoothly with all the tools your team already relies on.
+                  </p>
+                  <a
+                    href="https://taskopia.webflow.io/about"
+                    className="rt-features-v2-small-link w-inline-block"
+                  >
+                    <div className="rt-button-text rt-color-vivid-blue">
+                      View more
                     </div>
                   </a>
                 </div>

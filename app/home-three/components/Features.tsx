@@ -152,7 +152,7 @@ Taskopia-features-home-v3-right
               </a>
             </div>
           </div>
-          <div className="rt-features-v2-left rt-2 rt-border-radius-l">
+          {/* <div className="rt-features-v2-left rt-2 rt-border-radius-l">
             <div className="rt-features-v2-right-image">
               <div className="rt-position-relative rt-features-inner-image">
                 <div className="rt-features-v2-icon rt-tab-display-none reveal-on-scroll">
@@ -214,7 +214,7 @@ Taskopia-features-home-v3-right
                 </div>
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

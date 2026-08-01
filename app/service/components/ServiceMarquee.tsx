@@ -435,8 +435,7 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
-              <div style={{ flexBasis: '100%', height: 0 }}></div>
-              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%', marginTop: '1.875rem' }}>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
@@ -475,7 +474,7 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
-              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%', marginTop: '1.875rem' }}>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image

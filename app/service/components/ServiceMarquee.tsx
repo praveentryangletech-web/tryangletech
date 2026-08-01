@@ -2,12 +2,33 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function ServiceMarquee() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      <div className="rt-hero-v2-wrapper">
+      <div className="rt-hero-v2-wrapper" ref={sectionRef}>
         <section
           data-w-id="d3f5d731-f45f-6040-b304-e8f46b7cbf87"
           className="rt-hero-v2 rt-position-relative">
@@ -192,23 +213,23 @@ export default function ServiceMarquee() {
               </div>
             </div> */}
             <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end' }}>
-              <div className="rt-hero-v2-card-1 rt-features-v2-left rt-1 rt-border-radius-l" style={{ minHeight: '500px' }}>
+              <div className="rt-hero-v2-card-1 rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-left-image">
-                  <div className="rt-features-v2-image-one">
+                  <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
                       src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
                       alt="Taskopia-features-home-v3-1"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
-                  <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow">
+                  <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
                       src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
                       alt="Taskopia-features-home-v3-2"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
-                  <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow">
+                  <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
                       src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
@@ -216,7 +237,7 @@ export default function ServiceMarquee() {
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
-                <div className="rt-features-v2-left-text-box">
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">Smart task assignment</div>
                   <p className="rt-gap-off">
                     Easily assign tasks to the right people with clear priorities
@@ -240,10 +261,10 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
-              <div className="rt-hero-v2-card-2 rt-features-v2-left rt-2 rt-border-radius-l" style={{ minHeight: '680px' }}>
+              <div className="rt-hero-v2-card-2 rt-features-v2-left rt-2 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '680px' }}>
                 <div className="rt-features-v2-right-image">
                   <div className="rt-position-relative rt-features-inner-image">
-                    <div className="rt-features-v2-icon rt-tab-display-none">
+                    <div className="rt-features-v2-icon rt-tab-display-none reveal-on-scroll">
                       <Image
                         src="/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp"
                         loading="lazy"
@@ -257,7 +278,7 @@ export default function ServiceMarquee() {
                         alt="Taskopia-features-home-v3-7"
                         width={800} height={900} style={{ width: "100%", height: "auto" }} />
                     </div>
-                    <div className="rt-features-v2-image-four rt-position-relative">
+                    <div className="rt-features-v2-image-four rt-position-relative reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                       <Image
                         src="/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp"
                         loading="lazy"
@@ -267,7 +288,7 @@ export default function ServiceMarquee() {
                         className="rt-shadow"
                         width={800} height={900} style={{ width: "100%", height: "auto" }} />
                     </div>
-                    <div className="rt-features-v2-image-five rt-position-relative">
+                    <div className="rt-features-v2-image-five rt-position-relative reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                       <Image
                         src="/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp"
                         loading="lazy"
@@ -277,7 +298,7 @@ export default function ServiceMarquee() {
                     </div>
                   </div>
                 </div>
-                <div className="rt-features-v2-left-text-box">
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">
                     Smart workflows and automation
                   </div>
@@ -303,10 +324,10 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
-              <div className=" rt-hero-v2-card-3 rt-features-v2-left rt-2 rt-border-radius-l" style={{ minHeight: '500px' }}>
+              <div className="rt-hero-v2-card-3 rt-features-v2-left rt-2 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-right-image">
                   <div className="rt-position-relative rt-features-inner-image">
-                    <div className="rt-features-v2-icon rt-tab-display-none">
+                    <div className="rt-features-v2-icon rt-tab-display-none reveal-on-scroll">
                       <Image
                         src="/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp"
                         loading="lazy"
@@ -320,7 +341,7 @@ export default function ServiceMarquee() {
                         alt="Taskopia-features-home-v3-7"
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                    <div className="rt-features-v2-image-four rt-position-relative">
+                    <div className="rt-features-v2-image-four rt-position-relative reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                       <Image
                         src="/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp"
                         loading="lazy"
@@ -330,7 +351,7 @@ export default function ServiceMarquee() {
                         className="rt-shadow"
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                    <div className="rt-features-v2-image-five rt-position-relative">
+                    <div className="rt-features-v2-image-five rt-position-relative reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                       <Image
                         src="/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp"
                         loading="lazy"
@@ -340,7 +361,7 @@ export default function ServiceMarquee() {
                     </div>
                   </div>
                 </div>
-                <div className="rt-features-v2-left-text-box">
+                <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">
                     Smart workflows and automation
                   </div>

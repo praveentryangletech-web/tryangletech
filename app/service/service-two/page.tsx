@@ -107,7 +107,7 @@ export default function ServiceTwoPage() {
         <ServiceTwoServices />
         <ServiceTwoCore />
         <ServiceTwoTestimonial />
-        <ServiceTwoCTA />
+        {/* <ServiceTwoCTA /> */}
         <ServiceTwoFAQ />
       </main>
 

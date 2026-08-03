@@ -112,10 +112,12 @@ export default function PortfolioGrid() {
         .rt-blog-v3-card .rt-blog-v3-card-bottom-part {
           text-align: left !important;
           align-items: flex-start !important;
+          width: 100% !important;
         }
         .rt-blog-v3-card .rt-blog-v2-author-details {
           justify-content: flex-start !important;
           align-items: center !important;
+          width: 100% !important;
         }
         .rt-blog-v3-card:hover .pf-arrow-icon {
           transform: translateX(4px);

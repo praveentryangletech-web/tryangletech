@@ -108,7 +108,18 @@ export default function PortfolioGrid() {
           box-shadow: 0 28px 50px rgba(24, 72, 212, 0.14) !important;
         }
 
-        /* ── Grid responsive layout ── */
+        /* ── Force left align on card bottom — override Webflow centering ── */
+        .rt-blog-v3-card .rt-blog-v3-card-bottom-part {
+          text-align: left !important;
+          align-items: flex-start !important;
+        }
+        .rt-blog-v3-card .rt-blog-v2-author-details {
+          justify-content: flex-start !important;
+          align-items: center !important;
+        }
+        .rt-blog-v3-card:hover .pf-arrow-icon {
+          transform: translateX(4px);
+        }
         .pf-grid {
           grid-template-columns: 1fr 1fr !important;
         }
@@ -191,19 +202,20 @@ export default function PortfolioGrid() {
                     {/* Title */}
                     <div className="rt-text-style-h6">{project.title}</div>
 
-                    {/* Author row — client name */}
-                    <div className="w-layout-hflex rt-blog-v2-author-details">
-                      <div className="rt-blog-v2-author-image rt-overflow-hidden">
-                        <Image
-                          width={38}
-                          height={38}
-                          alt={project.client}
-                          src={authorAvatars[project.slug] || "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"}
-                          loading="lazy"
-                          className="rt-auto-fit rt-desktop-image-full-width"
-                        />
-                      </div>
-                      <div>{project.client}</div>
+                    {/* View Case Study link */}
+                    <div className="w-layout-hflex rt-blog-v2-author-details" style={{ alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
+                      <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px' }}>
+                        View Case Study
+                      </span>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'start',
+                        color: 'var(--vivid-blue, #1833fe)',
+                        fontSize: '16px',
+                        fontWeight: 600,
+                        lineHeight: 1,
+                        transition: 'transform 0.3s ease',
+                      }} className="pf-arrow-icon">›</span>
                     </div>
                   </div>
                 </Link>

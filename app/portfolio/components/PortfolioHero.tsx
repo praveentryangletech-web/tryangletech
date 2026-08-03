@@ -15,9 +15,22 @@ export default function PortfolioHero() {
     }, { threshold: 0.1 });
 
     const elements = sectionRef.current?.querySelectorAll('.reveal-on-scroll');
-    elements?.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
+    const timer = setTimeout(() => {
+      elements?.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('animate-fade-in-up');
+        } else {
+          observer.observe(el);
+        }
+      });
+    }, 50);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (

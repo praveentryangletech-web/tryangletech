@@ -43,12 +43,26 @@ export default function PortfolioGrid() {
     );
 
     const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
-    elements?.forEach((el) => {
-      el.classList.remove("animate-fade-in-up");
-      observer.observe(el);
-    });
 
-    return () => observer.disconnect();
+    // Delay slightly so Next.js finishes layout before we measure positions
+    const timer = setTimeout(() => {
+      elements?.forEach((el) => {
+        el.classList.remove("animate-fade-in-up");
+        // If element is already in viewport (e.g. after client-side navigation),
+        // reveal it immediately — don't wait for IntersectionObserver
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add("animate-fade-in-up");
+        } else {
+          observer.observe(el);
+        }
+      });
+    }, 50);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, [activeFilter]);
 
   return (

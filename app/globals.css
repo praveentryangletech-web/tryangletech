@@ -3,11 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171717;
+    --foreground: #ffffff;
+    --card-bg: #2a2a2a;
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: rgba(0, 0, 0, 0.2);
+  }
 }
 
 body {
-  background: #ffffff;
-  color: #171717;
   font-family: Inter, Poppins, sans-serif;
 }
 
@@ -80,3 +91,19 @@ body {
   z-index: -1;
   pointer-events: none;
 }
+
+.rt-why-choose-v1-left-item,
+.rt-choose-v3-item {
+  border: 1px solid var(--card-border) !important;
+  box-shadow: 0px 10px 40px var(--card-shadow) !important;
+  background-color: var(--card-bg) !important;
+  border-radius: 12px !important;
+  padding: 32px !important;
+  margin-bottom: 24px !important;
+}
+
+.rt-why-choose-v1-line,
+.rt-choose-v3-item-line {
+  display: none !important;
+}
+

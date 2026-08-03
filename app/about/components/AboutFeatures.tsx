@@ -28,10 +28,10 @@ export default function AboutFeatures() {
                   <p className="rt-color-pale-periwinkle rt-gap-off">Real-Time Progress Tracking gives teams complete visibility into every task, milestone, and deadline.</p>
                 </div>
                 <div data-w-id="62508c73-e31b-0068-13cd-79c365633cb0" className="rt-features-v1-inner-image">
-                  <Image src={`${A}/690c408d17e948acfd9dd61a_taskopia- about-features-1.webp`} loading="lazy" alt="about-features-1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  <Image src={`${A}/690c408d17e948acfd9dd61a_taskopia-%20about-features-1.webp`} loading="lazy" alt="about-features-1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   <div className="rt-features-v1-inner-image-over">
                     <div data-w-id="bcfd77a1-c414-9dba-e50b-0935c10eca41" className="rt-features-v1-inner-image-inner">
-                      <Image src={`${A}/690c411f1386eb9e04e8adb7_Mask group (9).webp`} loading="lazy" alt="line-animation" className="rt-image-min-width"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      <Image src={`${A}/690c411f1386eb9e04e8adb7_Mask%20group%20(9).webp`} loading="lazy" alt="line-animation" className="rt-image-min-width"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
                 </div>
@@ -46,10 +46,10 @@ export default function AboutFeatures() {
                 </div>
                 <div className="rt-features-v1-inner-image-2">
                   <div data-w-id="7a0ae718-492b-9c68-43b4-75a267c14680" className="rt-features-v1-right-image-one">
-                    <Image src={`${A}/690c465f3c3aa6146c8e184d_Group 2147225572.png`} loading="lazy" alt="collaboration"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    <Image src={`${A}/690c465f3c3aa6146c8e184d_Group%202147225572.png`} loading="lazy" alt="collaboration"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div data-w-id="cf38d222-3eb1-22c6-4716-782e02464715" className="rt-features-v1-right-image">
-                    <Image src={`${A}/690c408c3798540bf3f8932b_taskopia- about-features-3.webp`} loading="lazy" alt="about-features-3"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    <Image src={`${A}/690c408c3798540bf3f8932b_taskopia-%20about-features-3.webp`} loading="lazy" alt="about-features-3"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>

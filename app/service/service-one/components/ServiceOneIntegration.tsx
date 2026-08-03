@@ -9,7 +9,7 @@ const SA = '/service3-assets';
 export default function ServiceOneIntegration() {
   return (
     <>
-      <section className="rt-feaures-v3">
+      <section className="rt-feaures-v3" style={{paddingBottom : 0 }}>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-tools-iconheading rt-heading-bottom-gap">
               <div className="rt-sub-gap">

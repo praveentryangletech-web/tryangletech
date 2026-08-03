@@ -1,13 +1,21 @@
 "use client";
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-
 import Link from 'next/link';
+import Image from "next/image";
 import { projects } from '../../data/portfolioData';
 
-import Image from "next/image";
+// Map each project to a fixed author avatar using existing public assets
+const authorAvatars: Record<string, string> = {
+  "fintech-dashboard":  "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp",
+  "ecommerce-mobile":   "/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp",
+  "healthtech-portal":  "/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp",
+  "ai-marketing-tool":  "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp",
+  "smart-crm":          "/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp",
+  "logistics-tracker":  "/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp",
+};
 
 export default function PortfolioGrid() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
 
   const categories = useMemo(() => {
@@ -20,6 +28,7 @@ export default function PortfolioGrid() {
     return projects.filter(p => p.category === activeFilter);
   }, [activeFilter]);
 
+  // Scroll-reveal: re-observe every time filter changes
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,13 +39,10 @@ export default function PortfolioGrid() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
 
-
-
     const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
-    // Reset classes for animation re-trigger
     elements?.forEach((el) => {
       el.classList.remove("animate-fade-in-up");
       observer.observe(el);
@@ -46,145 +52,158 @@ export default function PortfolioGrid() {
   }, [activeFilter]);
 
   return (
-    <section className="rt-blog-v3-main-wrapper" ref={sectionRef} style={{ paddingBottom: '120px' }}>
+    <div ref={sectionRef}>
       <style>{`
-
-        .filter-btn {
-          padding: 10px 24px;
+        /* ── Filter Buttons ── */
+        .pf-filter-wrap {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          padding-bottom: 3rem;
+        }
+        .pf-filter-btn {
+          padding: 9px 22px;
           border-radius: 100px;
-          font-weight: 500;
           font-size: 14px;
+          font-weight: 500;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          background: #f4f5f7;
-          color: #666;
-          border: 1px solid transparent;
-          backdrop-filter: blur(10px);
+          border: 1px solid #e1e6f4;
+          background: #fff;
+          color: #6b7280;
+          transition: all 0.25s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .filter-btn.active {
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        .pf-filter-btn.active {
+          background: var(--dark-indigo, #1a0b54);
           color: #fff;
-          box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+          border-color: transparent;
+          box-shadow: 0 4px 14px rgba(26,11,84,0.25);
         }
-        .filter-btn:hover:not(.active) {
-          background: #e2e8f0;
-          color: #0f172a;
+        .pf-filter-btn:hover:not(.active) {
+          background: #f1f5f9;
+          color: var(--dark-indigo, #1a0b54);
+          border-color: #d3d3f4;
           transform: translateY(-2px);
         }
-        
-        @keyframes filterFadeIn {
-          from { opacity: 0; transform: translateY(15px); }
-          to { opacity: 1; transform: translateY(0); }
+
+        /* ── Image zoom on hover (matches BLOG3 Webflow animation) ── */
+        .rt-blog-v3-card .rt-blog-image {
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          display: block;
+          width: 100%;
+          object-fit: cover;
         }
-        .filter-btn-animate {
-          animation: filterFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          opacity: 0;
+        .rt-blog-v3-card:hover .rt-blog-image {
+          transform: scale(1.08);
         }
 
-        /* Internal Card Hover Animations */
-        .portfolio-card-hover {
-          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-          background: #ffffff;
-          border: 1px solid rgba(226, 232, 240, 0.8);
-          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-          display: flex;
-          flex-direction: column;
-          height: 100%;
+        /* ── Card lift on hover ── */
+        .rt-blog-v3-card {
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .portfolio-card-hover:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-          border-color: rgba(0, 0, 0, 0.1);
+        .rt-blog-v3-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 28px 50px rgba(24, 72, 212, 0.14) !important;
         }
-        .portfolio-card-hover .rt-blog-v3-card-top-part {
-          background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%) !important;
-          border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-          position: relative;
+
+        /* ── Grid responsive layout ── */
+        .pf-grid {
+          grid-template-columns: 1fr 1fr !important;
         }
-        .portfolio-card-hover .rt-blog-v3-card-top-part::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.02), transparent);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-        .portfolio-card-hover:hover .rt-blog-v3-card-top-part::after {
-          opacity: 1;
-        }
-        .portfolio-card-hover .rt-blog-image {
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .portfolio-card-hover:hover .rt-blog-image {
-          transform: scale(1.08) rotate(1deg);
-        }
-        .portfolio-card-hover .arrow-icon {
-          transition: transform 0.3s ease;
-        }
-        .portfolio-card-hover:hover .arrow-icon {
-          transform: translateX(6px);
-        }
-        .portfolio-card-hover .rt-blog-v3-card-bottom-part {
-          padding: 24px;
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-        }
-        .portfolio-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 40px;
-          max-width: 1140px;
-          margin: 0 auto;
-        }
-        @media (max-width: 991px) {
-          .portfolio-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+        @media (min-width: 992px) {
+          .pf-grid {
+            grid-template-columns: 1fr 1fr 1fr !important;
           }
         }
         @media (max-width: 767px) {
-          .portfolio-grid {
-            grid-template-columns: 1fr;
+          .pf-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
-      
-      <div className="rt-blog-three-main w-layout-blockcontainer rt-container-main w-container">
-        {/* Quick Filter Section */}
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '50px' }}>
+
+      <div className="w-layout-blockcontainer rt-container-main w-container">
+
+        {/* Filter pills */}
+        <div className="pf-filter-wrap">
           {categories.map((cat, idx) => (
             <button
               key={idx}
-              className={`filter-btn filter-btn-animate ${activeFilter === cat ? 'active' : ''}`}
+              className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
               onClick={() => setActiveFilter(cat)}
-              style={{ animationDelay: `${idx * 0.1}s` }}
             >
               {cat}
             </button>
           ))}
         </div>
 
-        <div className="rt-blog-three-all w-dyn-list" style={{ display: 'block' }}>
-          <div role="list" className="rt-blog-v3-card-main w-dyn-items portfolio-grid" key={activeFilter}>
+        {/* Card grid — identical HTML structure to BLOG3.html */}
+        <div style={{ display: 'block' }} className="rt-blog-three-all w-dyn-list">
+          <div
+            role="list"
+            className="rt-blog-v3-card-main w-dyn-items pf-grid"
+            key={activeFilter}
+          >
             {filteredProjects.map((project, idx) => (
-              <div key={`${activeFilter}-${project.title}`} role="listitem" className="w-dyn-item reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
-                <Link href={`/portfolio/${project.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block portfolio-card-hover">
-                  <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', height: '260px' }}>
-                    <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image" src={project.image} alt={project.title} style={{ objectFit: 'contain', width: '100%', height: '100%', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))' }} loading="lazy"  width={800} height={800} />
+              <div
+                key={`${activeFilter}-${project.slug}`}
+                role="listitem"
+                className="w-dyn-item reveal-on-scroll"
+                style={{ transitionDelay: `${idx * 0.08}s` }}
+              >
+                {/* Same anchor + card as BLOG3 */}
+                <Link
+                  href={`/portfolio/${project.slug}`}
+                  className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
+                >
+                  {/* Top image — same class as template */}
+                  <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
+                    <Image
+                      className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
+                      src={project.image}
+                      alt={project.title}
+                      width={410}
+                      height={290}
+                      loading="lazy"
+                      style={{ height: '220px' }}
+                    />
                   </div>
+
+                  {/* Bottom content — same classes as BLOG3 */}
                   <div className="rt-blog-v3-card-bottom-part">
-                    <div className="w-layout-hflex rt-blog-v3-publish-date" style={{ marginBottom: '12px' }}>
-                      <div className="rt-sub-text rt-sub-gredient" style={{ fontSize: '12px', letterSpacing: '1px', fontWeight: 600 }}>{project.category.toUpperCase()}</div>
-                    </div>
-                    <div className="rt-text-style-h5" style={{ marginBottom: '16px', fontWeight: 600, color: '#0f172a' }}>{project.title}</div>
-                    <div style={{ marginTop: 'auto' }}>
-                      <div className="rt-features-v2-small-link w-inline-block" style={{ padding: '8px 0' }}>
-                        <div className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 500 }}>View Case Study</div>
-                        <div style={{ width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: '8px' }}>
-                          <Image className="arrow-icon" src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg" loading="lazy" alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }}  width={800} height={800} />
-                        </div>
+
+                    {/* Publish date row — shows category instead */}
+                    <div className="w-layout-hflex rt-blog-v3-publish-date">
+                      <div className="w-layout-vflex">
+                        <Image
+                          width={15}
+                          height={16}
+                          alt=""
+                          src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
+                          loading="lazy"
+                        />
                       </div>
+                      <div>{project.category}</div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="rt-text-style-h6">{project.title}</div>
+
+                    {/* Author row — client name */}
+                    <div className="w-layout-hflex rt-blog-v2-author-details">
+                      <div className="rt-blog-v2-author-image rt-overflow-hidden">
+                        <Image
+                          width={38}
+                          height={38}
+                          alt={project.client}
+                          src={authorAvatars[project.slug] || "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp"}
+                          loading="lazy"
+                          className="rt-auto-fit rt-desktop-image-full-width"
+                        />
+                      </div>
+                      <div>{project.client}</div>
                     </div>
                   </div>
                 </Link>
@@ -192,7 +211,8 @@ export default function PortfolioGrid() {
             ))}
           </div>
         </div>
+
       </div>
-    </section>
+    </div>
   );
 }

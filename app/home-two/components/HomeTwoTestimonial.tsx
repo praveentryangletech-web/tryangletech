@@ -8,7 +8,6 @@ export default function HomeTwoTestimonial() {
   return (
     <>
       <div className="rt-position-relative">
-          <div className="rt-testimonial-v2-bg"></div>
           <section
             data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e67"
             className="rt-testimonial-v2">

@@ -7,7 +7,6 @@ export default function Testimonials() {
   return (
     <>
       <div className="rt-position-relative">
-        <div className="rt-testimonial-v1-bg"></div>
         <section className="rt-testimonials-v1">
           <div
             className="w-layout-blockcontainer rt-container-extra-large w-container">

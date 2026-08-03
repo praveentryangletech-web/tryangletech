@@ -7,7 +7,7 @@ const A = '/about-assets';
 export default function OurProcess() {
   return (
     <>
-        <section className="rt-process" style={{ paddingBottom: '14rem', position: 'relative' }}>
+        <section className="rt-process" style={{ position: 'relative' }}>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-tools-iconheading rt-features-v1-top rt-heading-bottom-gap">
               <div data-w-id="693eb16e-3bc6-8021-f4ba-24ac39d3bdeb" className="rt-sub-gap">

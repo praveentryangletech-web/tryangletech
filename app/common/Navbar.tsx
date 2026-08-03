@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import Image from "next/image";
 
@@ -10,6 +10,7 @@ const NAV_ASSETS = '/Taskopia_files';
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -20,6 +21,21 @@ export default function Navbar() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reset Webflow IX2 stuck hover interactions on route change
+  useEffect(() => {
+    const navElements = document.querySelectorAll('.w-dropdown-toggle, .rt-navbar-dropdown-toggle, .w-dropdown, .rt-menu-text, .w-dropdown-list');
+    navElements.forEach(el => {
+      el.classList.remove('w--open');
+      if (el instanceof HTMLElement) {
+        // Clear any inline styles left behind by Webflow interactions
+        el.style.borderBottom = '';
+        el.style.borderBottomColor = '';
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+      }
+    });
+  }, [pathname]);
 
   return (
     <>

@@ -121,3 +121,43 @@ body {
   }
 }
 
+/* ── Marquee / Logo Ticker Animation ── */
+@keyframes rtMarqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+.rt-text-marquee-wrapper {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.rt-text-marquee-train {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 3rem;
+  animation: rtMarqueeScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.rt-text-marquee-train:hover {
+  animation-play-state: paused;
+}
+
+.rt-text-marquee-iteme {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rt-text-marquee-train {
+    animation: none;
+  }
+}
+

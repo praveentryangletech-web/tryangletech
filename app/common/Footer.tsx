@@ -246,6 +246,7 @@ export default function Footer() {
                     src="/Taskopia_files/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg"
                     loading="lazy"
                     alt="LinkedIn"
+                    style={{ filter: 'invert(1) brightness(2)' }}
                   />
                 </div>
                 <div className="rt-link-discernible">
@@ -262,6 +263,7 @@ export default function Footer() {
                     src="/Taskopia_files/68ff46366a330717f35394cc_Kloudera-team-icon.svg"
                     loading="lazy"
                     alt="Instagram"
+                    style={{ filter: 'invert(1) brightness(2)' }}
                   />
                 </div>
                 <div className="rt-link-discernible">
@@ -278,6 +280,7 @@ export default function Footer() {
                     src="/Taskopia_files/68ff46366a330717f35394d0_Kloudera-team-icon.svg"
                     loading="lazy"
                     alt="Facebook"
+                    style={{ filter: 'invert(1) brightness(2)' }}
                   />
                 </div>
                 <div className="rt-link-discernible">

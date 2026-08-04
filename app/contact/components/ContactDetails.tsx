@@ -67,7 +67,7 @@ export default function ContactDetails() {
                   </div>
                   <div className="rt-contact-v3-details-text-wrap">
                     <div className="rt-text-style-h6">
-                      410 Sandtown, California 94001, USA
+                      1st Floor-29/Vithal Plaza, New Naroda, Ahmedabad
                     </div>
                   </div>
                 </div>
@@ -98,9 +98,9 @@ export default function ContactDetails() {
                   </div>
                   <div className="rt-contact-v3-details-text-wrap">
                     <a
-                      href="mailto:info@example.com"
+                      href="mailto:info.tryangletech@gmail.com"
                       className="rt-text-style-h6">
-                      info@example.com
+                      info.tryangletech@gmail.com
                     </a>
                   </div>
                 </div>
@@ -131,8 +131,8 @@ export default function ContactDetails() {
                     </p>
                   </div>
                   <div className="rt-contact-v3-details-text-wrap">
-                    <a href="tel:8881234567" className="rt-text-style-h6">
-                      (888) 123 4567
+                    <a href="tel:+919033878806" className="rt-text-style-h6">
+                      +91 90338 78806
                     </a>
                   </div>
                 </div>

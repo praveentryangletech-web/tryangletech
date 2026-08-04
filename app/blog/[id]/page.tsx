@@ -34,7 +34,7 @@ export default function BlogPostPage() {
                 data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
                 alt=""
                 className="rt-image-scale"
-               width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
           </div>
         </section>
@@ -86,7 +86,7 @@ export default function BlogPostPage() {
                       src="/blog-post-assets/6901bd59af6fd86af618ab91_kloudera-contact-three-icon.svg"
                       loading="lazy"
                       className="rt-height-auto"
-                     />
+                    />
                   </div>
                   <div className="w-layout-vflex rt-blog-overlay-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
@@ -105,7 +105,7 @@ export default function BlogPostPage() {
                           src="/blog-post-assets/6901bd59af6fd86af618ab92_Kloudera-blog-post-line.svg"
                           loading="lazy"
                           className="rt-auto-fit rt-desktop-image-full-width"
-                         />
+                        />
                       </div>
                       <div className="rt-text-color-white">Tanya Erin</div>
                     </div>
@@ -116,20 +116,36 @@ export default function BlogPostPage() {
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
                 className="w-richtext">
                 <h3>Steps to integrate AI with creative workflows</h3>
-                <p>
-                  Successful integration requires identifying areas where AI can
-                  assist, selecting the right tools, and fostering a culture of
-                  experimentation. Encourage teams to explore AI-generated
-                  suggestions, iterate quickly, and combine them with human
-                  intuition.
-                </p>
-                <p>
-                  Develop a step-by-step plan, including testing, monitoring,
-                  and continuous optimization. Train teams to adapt to
-                  AI-augmented workflows while maintaining governance, security,
-                  and compliance. Regularly evaluate outcomes and refine
-                  processes for maximum creative impact.
-                </p>
+                <div className="flex flex-col md:flex-row gap-6 my-8">
+                  <div className="w-full md:w-1/2 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex items-start gap-4">
+                    <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <p className="m-0 leading-relaxed text-gray-600">
+                      Successful integration requires identifying areas where AI can
+                      assist, selecting the right tools, and fostering a culture of
+                      experimentation. Encourage teams to explore AI-generated
+                      suggestions, iterate quickly, and combine them with human
+                      intuition.
+                    </p>
+                  </div>
+                  <div className="w-full md:w-1/2 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex items-start gap-4">
+                    <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                      </svg>
+                    </div>
+                    <p className="m-0 leading-relaxed text-gray-600">
+                      Develop a step-by-step plan, including testing, monitoring,
+                      and continuous optimization. Train teams to adapt to
+                      AI-augmented workflows while maintaining governance, security,
+                      and compliance. Regularly evaluate outcomes and refine
+                      processes for maximum creative impact.
+                    </p>
+                  </div>
+                </div>
               </div>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
@@ -141,7 +157,7 @@ export default function BlogPostPage() {
                     alt=""
                     src="/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png"
                     loading="lazy"
-                   />
+                  />
                 </div>
                 <div className="rt-blog-post-image-wrap rt-overflow-hidden">
                   <Image
@@ -150,7 +166,7 @@ export default function BlogPostPage() {
                     alt=""
                     src="/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp"
                     loading="lazy"
-                   />
+                  />
                 </div>
               </div>
               <div
@@ -188,7 +204,7 @@ export default function BlogPostPage() {
                     src="/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp"
                     loading="lazy"
                     className="rt-auto-fit rt-desktop-image-full-width"
-                   />
+                  />
                 </div>
                 <div className="w-layout-vflex rt-author-content-wrap rt-mobile-text-center">
                   <div className="w-layout-hflex rt-blog-post-author-wrap">

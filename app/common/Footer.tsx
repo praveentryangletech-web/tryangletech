@@ -1,229 +1,290 @@
 "use client";
-import React from 'react';
-import Link from 'next/link';
-
+import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
   return (
-    <section
-      data-wf--rt-footer-v1--variant="white-version"
-      className="rt-footer rt-color-change w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative">
-      <div className="w-layout-blockcontainer rt-container-main w-container">
-        <div
-          data-w-id="e6ec5761-f4fc-4af6-536f-a4c3f63a640a"
-          className="rt-footer-wrap rt-position-relative">
-          <div
-            className="w-layout-grid rt-footer-link-grid w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-            <div
-              id="w-node-e6ec5761-f4fc-4af6-536f-a4c3f63a640c-fe735dda"
-              className="w-layout-vflex rt-footer-link-wrap">
-              <div
-                className="rt-small-name rt-text-color-white w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                Need help?
+    <>
+      <section className="rt-footer-carde">
+        <div className="w-layout-blockcontainer rt-container-main w-container">
+          <div className="rt-footer-card-main rt-overflow-hidden">
+            <div className="rt-footer-card-content rt-cta-two">
+              <div className="rt-sub-gap"></div>
+              <div className="rt-heading-para-gap">
+                <h2 className="rt-text-color-white rt-gap-off">
+                  Have questions? We’re ready to support you
+                </h2>
               </div>
-              <div className="w-layout-vflex rt-footer-link-box rt-change">
-                <div
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                  <div
-                    className="rt-text-color-white rt-color-change w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                    Call us directly
-                  </div>
-                  <a
-                    href="tel:8884567890"
-                    className="rt-text-color-white rt-bark w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-footer-link"
-                  >(888) 456 7890</a
-                  >
-                </div>
-                <div>
-                  <div
-                    className="rt-text-color-white rt-color-change w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                    Email us directly
-                  </div>
-                  <a
-                    href="mailto:info@example.com"
-                    className="rt-text-color-white rt-emil rt-color-blue w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-footer-link"
-                  >info@example.com</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div className="w-layout-vflex rt-footer-link-wrap">
-              <div
-                className="rt-small-name rt-text-color-white w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                Quick links
-              </div>
-              <div className="w-layout-vflex rt-footer-link-box">
+              <p className="rt-text-color-white rt-gap-off rt-footer-card-para">
+                Have questions or need more details? Our team is always happy to
+                guide and support you anytime.
+              </p>
+              <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
                 <a
-                  href="/"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Home</a
-                ><a
-                  href="/about"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >About </a
-                ><a
-                  href="#"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Blog</a
-                ><a
-                  href="/service/service-one"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Service</a
-                ><a
-                  href="#"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Pricing</a
-                >
+                  href="/contact"
+                  className="rt-button-body rt-bg-color w-inline-block">
+                  <div className="rt-button-text rt-btn-color">
+                    &nbsp;Get started today
+                  </div>
+                  <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
+                </a>
               </div>
-            </div>
-            <div className="w-layout-vflex rt-footer-link-wrap rt-border-none">
-              <div
-                className="rt-small-name rt-text-color-white w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                Utilities
-              </div>
-              <div className="w-layout-vflex rt-footer-link-box">
-                <a
-                  href="#"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >License</a
-                ><a
-                  href="#"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Style guide</a
-                ><a
-                  href="#"
-                  target="_blank"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Password protected</a
-                ><a
-                  href="#"
-                  target="_blank"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >404</a
-                ><a
-                  href="#"
-                  className="rt-footer-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                >Changelog</a
-                >
+              <div className="rt-cta-small-text-wrapper">
+                <div className="rt-pricing-samll-text-copy">
+                  <div>
+                    <img
+                      src="/Home2_files/691f0869e7b3ddb1373ab145_Vector (42).svg"
+                      loading="lazy"
+                      alt=""
+                    />
+                  </div>
+                  <div className="rt-text-color-white">
+                    Get 14 days free trial
+                  </div>
+                </div>
+                <div className="rt-pricing-samll-text-copy">
+                  <div>
+                    <img
+                      src="/Home2_files/691f086a07c1090bebcd23b4_Vector (43).svg"
+                      loading="lazy"
+                      alt=""
+                    />
+                  </div>
+                  <div className="rt-text-color-white">
+                    24/7 customer service
+                  </div>
+                </div>
               </div>
             </div>
             <div
-              id="w-node-e6ec5761-f4fc-4af6-536f-a4c3f63a6430-fe735dda"
-              className="w-layout-vflex rt-footer-link-main">
-              <div className="w-layout-vflex rt-footer-text-wrap">
-                <div
-                  className="rt-small-name rt-text-color-white w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                  Get in touch
+              id="w-node-_1f66be3f-ed37-32ed-3724-e3947469d0c1-6b53c1d1"
+              className="rt-cta-right rt-position-relative rt-mobile-display-none">
+              <div className="rt-position-relative rt-4">
+                <img
+                  src="/Home2_files/691edca0e8b035362336016b_mobile.webp"
+                  loading="lazy"
+                  alt=""
+                />
+              </div>
+              <div className="rt-smal-cta rt-up-down">
+                <img
+                  src="/Home2_files/691edca01e4ec6ffb3d85cbc_Frame 1597884145.webp"
+                  loading="lazy"
+                  alt=""
+                />
+              </div>
+              <div className="rt-smal-cta-overlay">
+                <img
+                  src="/Home2_files/691ee5b6b223aeba002d25e2_Group 2085663586.webp"
+                  loading="lazy"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="rt-footer rt-position-relative rt-footer-card-padding">
+        <div className="w-layout-blockcontainer rt-container-main w-container">
+          <div className="rt-footer-wrap rt-position-relative">
+            <div className="w-layout-grid rt-footer-link-grid">
+              <div
+                id="w-node-_50e1d07b-f342-3384-42a9-57fa6b53c1e4-6b53c1d1"
+                className="w-layout-vflex rt-footer-link-wrap">
+                <div className="rt-small-name rt-text-color-white">
+                  Need help?
                 </div>
-                <p
-                  className="rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-gap-off rt-gap">
-                  <span
-                    className="rt-text-color-white rt-bark w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-                  >Let’s discuss your next project</span
-                  >—connect with our team today for tailored solutions.
-                </p>
+                <div className="w-layout-vflex rt-footer-link-box rt-change">
+                  <div>
+                    <div className="rt-text-color-white">Call us directly</div>
+                    <a
+                      href="tel:8884567890"
+                      className="rt-text-color-white rt-footer-link">
+                      (888) 456 7890
+                    </a>
+                  </div>
+                  <div>
+                    <div className="rt-text-color-white">Email us directly</div>
+                    <a
+                      href="mailto:info@example.com"
+                      className="rt-text-color-white rt-emil rt-footer-link">
+                      info@example.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="w-layout-vflex rt-footer-link-wrap">
+                <div className="rt-small-name rt-text-color-white">
+                  Quick links
+                </div>
+                <div className="w-layout-vflex rt-footer-link-box">
+                  <a
+                    href="/home-one"
+                    className="rt-footer-link">
+                    Home
+                  </a>
+                  <a
+                    href="/about"
+                    className="rt-footer-link">
+                    About us
+                  </a>
+                  <a
+                    href="/blog-one"
+                    className="rt-footer-link">
+                    Blog
+                  </a>
+                  <a
+                    href="/service-one"
+                    className="rt-footer-link">
+                    Service
+                  </a>
+                  <a
+                    href="/pricing"
+                    className="rt-footer-link">
+                    Pricing
+                  </a>
+                </div>
+              </div>
+              <div className="w-layout-vflex rt-footer-link-wrap rt-border-none">
+                <div className="rt-small-name rt-text-color-white">
+                  Utilities
+                </div>
+                <div className="w-layout-vflex rt-footer-link-box">
+                  <a
+                    href="/style-guide"
+                    className="rt-footer-link">
+                    License
+                  </a>
+                  <a
+                    href="/style-guide"
+                    className="rt-footer-link">
+                    Style guide
+                  </a>
+                  <a
+                    href="/401"
+                    target="_blank"
+                    className="rt-footer-link">
+                    Password protected
+                  </a>
+                  <a
+                    href="/404"
+                    className="rt-footer-link">
+                    404
+                  </a>
+                  <a
+                    href="/changelog"
+                    className="rt-footer-link">
+                    Changelog
+                  </a>
+                </div>
               </div>
               <div
-                className="rt-black-footer w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
+                id="w-node-_50e1d07b-f342-3384-42a9-57fa6b53c208-6b53c1d1"
+                className="w-layout-vflex rt-footer-link-main">
+                <div className="w-layout-vflex rt-footer-text-wrap">
+                  <div className="rt-small-name rt-text-color-white">
+                    Connect with us today
+                  </div>
+                  <p className="rt-color-pale-periwinkle">
+                    <span className="rt-text-color-white">
+                      Let’s discuss your next project
+                    </span>
+                    —connect with our team today for tailored solutions.
+                  </p>
+                </div>
                 <a
-                  data-w-id="c8a9123b-e737-6c41-a0a9-96ac3b2f975c"
                   href="tel:8884567890"
-                  className="rt-button-body w-inline-block"
-                ><div
-                  className="rt-button-text rt-blue-white"
-                  style={{ "color": "rgb(255, 255, 255)" }}>
+                  className="rt-button-body w-inline-block">
+                  <div className="rt-button-text rt-blue-white">
                     Schedule a call
                   </div>
-                  <div
-                    className="rt-button-body-overlay rt-blue-white"
-                    style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
-                  ></a>
-              </div>
-              <div
-                className="rt-white-footer w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-                <a
-                  data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href="tel:8884567890"
-                  className="rt-button-body w-inline-block"
-                ><div className="rt-button-text">Schedule a call</div>
-                  <div
-                    className="rt-button-body-overlay"
-                    style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
-                  ></a>
+                  <div className="rt-button-body-overlay rt-blue-white"></div>
+                </a>
               </div>
             </div>
           </div>
-        </div>
-        <div className="w-layout-hflex rt-footer-bottom-part">
-          <a
-            href="/"
-            className="rt-navbar-logo rt-position-relative w-nav-brand"
-          ><Image
-              style={{ height: '40px', width: 'auto' }}
-              alt=""
-              src="/logo.png"
-              loading="lazy"  width={800} height={800} />
-            <div className="rt-link-discernible">link<br />&#x200D;</div></a
-          >
-          <p
-            className="rt-no-margin rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-mobile-text-center">
-            Designed by{" "}
+          <div className="w-layout-hflex rt-footer-bottom-part">
             <a
-              href="https://www.radianttemplates.com/"
-              className="rt-bottom-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-            >Radiant Templates</a
-            >, Powered by{" "}
-            <a
-              href="https://webflow.com/"
-              className="rt-bottom-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"
-            >Webflow</a
-            >
-          </p>
-          <div className="rt-social-media">
-            <div
-              className="rt-color-pale-periwinkle w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0">
-              Social media :
+              href="/"
+              className="rt-navbar-logo rt-position-relative w-nav-brand">
+              <img
+                width="191"
+                height="40"
+                alt=""
+                src="/Home2_files/69269a3e001e0a8ee2fc6cc6_Bottom logo.svg"
+                loading="lazy"
+                className="rt-auto-fit rt-desktop-image-full-width"
+              />
+              <div className="rt-link-discernible">
+                link
+                <br />‍
+              </div>
+            </a>
+            <p className="rt-no-margin rt-color-pale-periwinkle rt-mobile-text-center">
+              Designed by&nbsp;
+              <a
+                href="https://www.radianttemplates.com/"
+                className="rt-bottom-link">
+                Radiant Templates
+              </a>
+              , Powered by&nbsp;
+              <a href="https://webflow.com/" className="rt-bottom-link">
+                Webflow
+              </a>
+            </p>
+            <div className="rt-social-media">
+              <div className="rt-color-pale-periwinkle">Social media :</div>
+              <a
+                href="https://dribbble.com/"
+                className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
+                <div className="rt-social-media-link">
+                  <img
+                    src="/Home2_files/6914525ddeeb169b19ad1aa4_Vector (29).svg"
+                    loading="lazy"
+                    alt=""
+                  />
+                </div>
+                <div className="rt-link-discernible">
+                  link
+                  <br />‍
+                </div>
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
+                <div className="rt-social-media-link">
+                  <img
+                    src="/Home2_files/6914525d5095fa32d625e19c_Vector (30).svg"
+                    loading="lazy"
+                    alt=""
+                  />
+                </div>
+                <div className="rt-link-discernible">
+                  link
+                  <br />‍
+                </div>
+              </a>
+              <a
+                href="https://www.pinterest.com/"
+                className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
+                <div className="rt-social-media-link">
+                  <img
+                    src="/Home2_files/6914525d8e53e345a9c4d809_Vector (31).svg"
+                    loading="lazy"
+                    alt=""
+                  />
+                </div>
+                <div className="rt-link-discernible">
+                  link
+                  <br />‍
+                </div>
+              </a>
             </div>
-            <a
-              href="https://dribbble.com/"
-              className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
-            ><div className="rt-social-media-link">
-                <Image
-                  src="/Taskopia_files/6914525ddeeb169b19ad1aa4_Vector (29).svg"
-                  loading="lazy"
-                  alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-link-discernible">link<br />&#x200D;</div></a
-            ><a
-              href="https://www.instagram.com/"
-              className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
-            ><div className="rt-social-media-link">
-                <Image
-                  src="/Taskopia_files/6914525d5095fa32d625e19c_Vector (30).svg"
-                  loading="lazy"
-                  alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-link-discernible">link<br />&#x200D;</div></a
-            ><a
-              href="https://www.pinterest.com/"
-              className="rt-sicial-link w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0 rt-position-relative rt-overflow-hidden w-inline-block"
-            ><div className="rt-social-media-link">
-                <Image
-                  src="/Taskopia_files/6914525d8e53e345a9c4d809_Vector (31).svg"
-                  loading="lazy"
-                  alt=""
-                  className="rt-nivert w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-link-discernible">link<br /> </div></a
-            >
           </div>
+          <div className="rt-footer-bottom-line"></div>
         </div>
-      </div>
-      <div
-        className="rt-footer-bottom-line w-variant-4e53b383-59ff-12b8-0d77-36138c3c95c0"></div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -12,16 +12,17 @@ export default function Footer() {
             <div className="rt-footer-card-content rt-cta-two">
               <div className="rt-sub-gap"></div>
               <div className="rt-heading-para-gap">
-                <h2 className="rt-text-color-white rt-gap-off">
+                <h2 data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1da" className="rt-text-color-white rt-gap-off">
                   Have questions? We’re ready to support you
                 </h2>
               </div>
-              <p className="rt-text-color-white rt-gap-off rt-footer-card-para">
+              <p data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1dc" className="rt-text-color-white rt-gap-off rt-footer-card-para">
                 Have questions or need more details? Our team is always happy to
                 guide and support you anytime.
               </p>
-              <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
+              <div data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1de" className="rt-button-para-gap rt-overflow-hidden rt-button-left">
                 <a
+                  data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
                   href="/contact"
                   className="rt-button-body rt-bg-color w-inline-block">
                   <div className="rt-button-text rt-btn-color">
@@ -30,7 +31,7 @@ export default function Footer() {
                   <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
                 </a>
               </div>
-              <div className="rt-cta-small-text-wrapper">
+              <div data-w-id="242c4689-7f59-0a17-a87d-3a8866872649" className="rt-cta-small-text-wrapper">
                 <div className="rt-pricing-samll-text-copy">
                   <div>
                     <img
@@ -60,14 +61,14 @@ export default function Footer() {
             <div
               id="w-node-_1f66be3f-ed37-32ed-3724-e3947469d0c1-6b53c1d1"
               className="rt-cta-right rt-position-relative rt-mobile-display-none">
-              <div className="rt-position-relative rt-4">
+              <div data-w-id="b0c8cabf-7792-befb-1b5b-89fced141e73" className="rt-position-relative rt-4">
                 <img
                   src="/Home2_files/691edca0e8b035362336016b_mobile.webp"
                   loading="lazy"
                   alt=""
                 />
               </div>
-              <div className="rt-smal-cta rt-up-down">
+              <div data-w-id="c94a7726-8e42-7a34-542e-a621ddfb8e56" className="rt-smal-cta rt-up-down">
                 <img
                   src="/Home2_files/691edca01e4ec6ffb3d85cbc_Frame 1597884145.webp"
                   loading="lazy"
@@ -87,7 +88,7 @@ export default function Footer() {
       </section>
       <section className="rt-footer rt-position-relative rt-footer-card-padding">
         <div className="w-layout-blockcontainer rt-container-main w-container">
-          <div className="rt-footer-wrap rt-position-relative">
+          <div data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1e2" className="rt-footer-wrap rt-position-relative">
             <div className="w-layout-grid rt-footer-link-grid">
               <div
                 id="w-node-_50e1d07b-f342-3384-42a9-57fa6b53c1e4-6b53c1d1"
@@ -194,6 +195,7 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
+                  data-w-id="c8a9123b-e737-6c41-a0a9-96ac3b2f975c"
                   href="tel:+919033878806"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text rt-blue-white">

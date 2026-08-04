@@ -11,7 +11,8 @@ export default function ServiceMarquee() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          // If intersecting or already scrolled past (above viewport)
+          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
             entry.target.classList.add("animate-fade-in-up");
             observer.unobserve(entry.target);
           }
@@ -438,6 +439,13 @@ export default function ServiceMarquee() {
                     <div className="rt-button-text rt-color-vivid-blue">
                       View more
                     </div>
+                    <div>
+                      <Image
+                        src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
+                        loading="lazy"
+                        alt=""
+                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    </div>
                   </a>
                 </div>
               </div>
@@ -477,6 +485,13 @@ export default function ServiceMarquee() {
                     <div className="rt-button-text rt-color-vivid-blue">
                       View more
                     </div>
+                    <div>
+                      <Image
+                        src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
+                        loading="lazy"
+                        alt=""
+                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    </div>
                   </a>
                 </div>
               </div>
@@ -484,9 +499,7 @@ export default function ServiceMarquee() {
           </div>
         </section>
       </div>
-      <div
-        data-w-id="bb2028c0-8868-4d90-ae7b-80ecef8e422a"
-        className="rt-marquee-v2 rt-hero-v5-marquee">
+      <div className="rt-marquee-v2 rt-hero-v5-marquee">
         <div className="w-layout-blockcontainer rt-container-main w-container">
           <div className="rt-text-marquee-wrapper rt-overflow-hidden">
             <div className="rt-text-marquee-train">
@@ -496,42 +509,43 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                  height={800} />
+                  height={40}
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -541,42 +555,43 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                  height={800} />
+                  height={40}
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -586,42 +601,43 @@ export default function ServiceMarquee() {
                   loading="lazy"
                   width={100}
                   alt=""
-                  height={800} />
+                  height={40}
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
           </div>

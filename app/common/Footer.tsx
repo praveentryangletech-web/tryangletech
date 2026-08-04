@@ -99,17 +99,17 @@ export default function Footer() {
                   <div>
                     <div className="rt-text-color-white">Call us directly</div>
                     <a
-                      href="tel:8884567890"
+                      href="tel:+911234567890"
                       className="rt-text-color-white rt-footer-link">
-                      (888) 456 7890
+                      +91 123 456 7890
                     </a>
                   </div>
                   <div>
                     <div className="rt-text-color-white">Email us directly</div>
                     <a
-                      href="mailto:info@example.com"
+                      href="mailto:info@tryangletech.com"
                       className="rt-text-color-white rt-emil rt-footer-link">
-                      info@example.com
+                      info@tryangletech.com
                     </a>
                   </div>
                 </div>
@@ -130,12 +130,12 @@ export default function Footer() {
                     About us
                   </a>
                   <a
-                    href="/blog-one"
+                    href="/blog"
                     className="rt-footer-link">
                     Blog
                   </a>
                   <a
-                    href="/service-one"
+                    href="/service"
                     className="rt-footer-link">
                     Service
                   </a>
@@ -152,28 +152,28 @@ export default function Footer() {
                 </div>
                 <div className="w-layout-vflex rt-footer-link-box">
                   <a
-                    href="/style-guide"
+                    href="#"
                     className="rt-footer-link">
                     License
                   </a>
                   <a
-                    href="/style-guide"
+                    href="#"
                     className="rt-footer-link">
                     Style guide
                   </a>
                   <a
-                    href="/401"
+                    href="#"
                     target="_blank"
                     className="rt-footer-link">
                     Password protected
                   </a>
                   <a
-                    href="/404"
+                    href="#"
                     className="rt-footer-link">
                     404
                   </a>
                   <a
-                    href="/changelog"
+                    href="#"
                     className="rt-footer-link">
                     Changelog
                   </a>
@@ -194,7 +194,7 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
-                  href="tel:8884567890"
+                  href="tel:+911234567890"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text rt-blue-white">
                     Schedule a call
@@ -208,11 +208,11 @@ export default function Footer() {
             <a
               href="/"
               className="rt-navbar-logo rt-position-relative w-nav-brand">
-              <img
-                width="191"
-                height="40"
-                alt=""
-                src="/Home2_files/69269a3e001e0a8ee2fc6cc6_Bottom logo.svg"
+              <Image
+                width={191}
+                height={40}
+                alt="TryangleTech"
+                src="/logo.png"
                 loading="lazy"
                 className="rt-auto-fit rt-desktop-image-full-width"
               />
@@ -224,13 +224,13 @@ export default function Footer() {
             <p className="rt-no-margin rt-color-pale-periwinkle rt-mobile-text-center">
               Designed by&nbsp;
               <a
-                href="https://www.radianttemplates.com/"
+                href="/"
                 className="rt-bottom-link">
-                Radiant Templates
+                TryangleTech
               </a>
               , Powered by&nbsp;
-              <a href="https://webflow.com/" className="rt-bottom-link">
-                Webflow
+              <a href="/" className="rt-bottom-link">
+                TryangleTech
               </a>
             </p>
             <div className="rt-social-media">

@@ -99,17 +99,17 @@ export default function Footer() {
                   <div>
                     <div className="rt-text-color-white">Call us directly</div>
                     <a
-                      href="tel:+911234567890"
+                      href="tel:+919033878806"
                       className="rt-text-color-white rt-footer-link">
-                      +91 123 456 7890
+                      +91 90338 78806
                     </a>
                   </div>
                   <div>
                     <div className="rt-text-color-white">Email us directly</div>
                     <a
-                      href="mailto:info@tryangletech.com"
+                      href="mailto:info.tryangletech@gmail.com"
                       className="rt-text-color-white rt-emil rt-footer-link">
-                      info@tryangletech.com
+                      info.tryangletech@gmail.com
                     </a>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
-                  href="tel:+911234567890"
+                  href="tel:+919033878806"
                   className="rt-button-body w-inline-block">
                   <div className="rt-button-text rt-blue-white">
                     Schedule a call
@@ -236,13 +236,14 @@ export default function Footer() {
             <div className="rt-social-media">
               <div className="rt-color-pale-periwinkle">Social media :</div>
               <a
-                href="https://dribbble.com/"
+                href="https://www.linkedin.com/in/tryangle-tech-564223256/"
+                target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
                   <img
-                    src="/Home2_files/6914525ddeeb169b19ad1aa4_Vector (29).svg"
+                    src="/Taskopia_files/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg"
                     loading="lazy"
-                    alt=""
+                    alt="LinkedIn"
                   />
                 </div>
                 <div className="rt-link-discernible">
@@ -251,13 +252,14 @@ export default function Footer() {
                 </div>
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/tryangle24_7/?hl=en"
+                target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
                   <img
-                    src="/Home2_files/6914525d5095fa32d625e19c_Vector (30).svg"
+                    src="/Taskopia_files/68ff46366a330717f35394cc_Kloudera-team-icon.svg"
                     loading="lazy"
-                    alt=""
+                    alt="Instagram"
                   />
                 </div>
                 <div className="rt-link-discernible">
@@ -266,13 +268,14 @@ export default function Footer() {
                 </div>
               </a>
               <a
-                href="https://www.pinterest.com/"
+                href="https://www.facebook.com/tryangletech/"
+                target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
                   <img
-                    src="/Home2_files/6914525d8e53e345a9c4d809_Vector (31).svg"
+                    src="/Taskopia_files/68ff46366a330717f35394d0_Kloudera-team-icon.svg"
                     loading="lazy"
-                    alt=""
+                    alt="Facebook"
                   />
                 </div>
                 <div className="rt-link-discernible">

@@ -63,7 +63,7 @@ export default function Navbar() {
             <div className="rt-navbar-wrapper rt-position-relative">
 
               {/* ── Logo ── */}
-              <div className="rt-navbar-logo-wrap">
+              <div className="rt-navbar-logo-wrap" style={{ flex: 1 }}>
                 <Link
                   href="/"
                   className="rt-navbar-logo rt-position-relative w-nav-brand"
@@ -527,21 +527,6 @@ export default function Navbar() {
 
                     </div>
 
-                    {/* Mobile CTA buttons */}
-                    <div className="rt-mobile-menu-button-wrap">
-                      <a href="#" className="rt-button-v1-main rt-position-relative w-inline-block">
-                        <div className="rt-button-v1">
-                          <div className="rt-button-text">Sign in</div>
-                        </div>
-                        <div className="rt-button-overlay"></div>
-                      </a>
-                      <a href="#" className="rt-button-v1-main rt-position-relative background-white-5 w-inline-block">
-                        <div className="rt-button-v1 background-white-6">
-                          <div className="rt-button-text rt-btn-color">Sign up</div>
-                        </div>
-                        <div className="rt-button-overlay background-white-8"></div>
-                      </a>
-                    </div>
                   </div>
 
                   {/* Mobile bottom – social + contact */}
@@ -587,20 +572,8 @@ export default function Navbar() {
                 <div className="rt-menu-line rt-bottom-line"></div>
               </div>
 
-              {/* ── Desktop CTA ── */}
-              <div className="w-layout-hflex rt-navbar-button-wrap rt-tab-display-none">
-                <div className="rt-signin-wrap">
-                  <a href="#" className="rt-menu-text rt-navbar-signin">Sign in</a>
-                </div>
-                <Link
-                  data-wf--rt-border-button--variant="padding"
-                  data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-                  href="/contact"
-                  className="rt-button-body rt-nav-btn w-variant-1b2d9ec2-3fdd-1f2f-c0ef-d11a45cf51a4 w-inline-block">
-                  <div className="rt-button-text rt-btn-color-nav">Start free trial</div>
-                  <div className="rt-button-body-overlay rt-nav-overlay"></div>
-                </Link>
-              </div>
+              {/* ── Right Spacer to balance flex layout and center menu ── */}
+              <div className="rt-tab-display-none" style={{ flex: 1 }}></div>
 
             </div>
           </div>

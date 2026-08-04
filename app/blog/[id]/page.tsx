@@ -147,6 +147,40 @@ export default function BlogPostPage() {
                   </div>
                 </div>
               </div>
+
+<h5>--These both are sample</h5>
+
+                <div
+                data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
+                className="w-richtext">
+                <h3>Steps to integrate AI with creative workflows</h3>
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="w-full md:w-1/2 flex items-start gap-3">
+                    <svg className="w-5 h-5 mt-1 flex-shrink-0 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <p className="m-0">
+                      Successful integration requires identifying areas where AI can
+                      assist, selecting the right tools, and fostering a culture of
+                      experimentation. Encourage teams to explore AI-generated
+                      suggestions, iterate quickly, and combine them with human
+                      intuition.
+                    </p>
+                  </div>
+                  <div className="w-full md:w-1/2 flex items-start gap-3">
+                    <svg className="w-5 h-5 mt-1 flex-shrink-0 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <p className="m-0">
+                      Develop a step-by-step plan, including testing, monitoring,
+                      and continuous optimization. Train teams to adapt to
+                      AI-augmented workflows while maintaining governance, security,
+                      and compliance. Regularly evaluate outcomes and refine
+                      processes for maximum creative impact.
+                    </p>
+                  </div>
+                </div>
+              </div> 
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
                 className="rt-blog-details-content-image">

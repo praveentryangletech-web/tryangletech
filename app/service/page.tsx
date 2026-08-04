@@ -7,7 +7,7 @@ import WhyChooseUs from "../home-three/components/Features";
 import ServiceAbout from './components/ServiceAbout';
 import HomeTwoChoose from '../home-two/components/HomeTwoChoose';
 import HomeTwoBenefits from '../home-two/components/HomeTwoBenefits';
-import HomeThrToolsIcon from '../home-three/components/ToolsIntegration';
+import ServiceToolsIntegration from './components/ServiceToolsIntegration';
 import HomeTwoFAQ from '../home-two/components/HomeTwoFAQ';
 import HomeTwoTestimonial from '../home-two/components/HomeTwoTestimonial';
 import WebflowInit from "../common/WebflowInit";
@@ -25,7 +25,7 @@ export default function ServicePage() {
         <ServiceAbout />
         {/* <WhyChooseUs /> */}
         {/* <HomeTwoBenefits /> */}
-        <HomeThrToolsIcon />
+        <ServiceToolsIntegration />
         <HomeTwoFAQ />
         <HomeTwoTestimonial />
       </main>

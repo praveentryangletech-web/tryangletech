@@ -219,8 +219,8 @@ export default function PortfolioGrid() {
                     <div className="rt-text-style-h6">{project.title}</div>
 
                     {/* View Case Study link */}
-                    <div className="w-layout-hflex rt-blog-v2-author-details" style={{ alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
-                      <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
+                      <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px', margin: 0 }}>
                         View Case Study
                       </span>
                       <span style={{

@@ -27,8 +27,8 @@ export default function ServiceMarquee() {
   }, []);
 
   return (
-    <>
-      <div className="rt-hero-v2-wrapper" ref={sectionRef}>
+    <div ref={sectionRef}>
+      <div className="rt-hero-v2-wrapper">
         <section
           data-w-id="d3f5d731-f45f-6040-b304-e8f46b7cbf87"
           className="rt-hero-v2 rt-position-relative">
@@ -171,47 +171,6 @@ export default function ServiceMarquee() {
                 </div>
               </div>
             </div>
-            {/* <div className="rt-hero-v2-content" style={{ alignItems: 'flex-end' }}>
-              <div
-                data-w-id="11d58063-9804-40c1-9e7d-d67bfd38af74"
-                className="rt-hero-v2-card-v1">
-                <Image
-                  src="/Home2_files/691432fc2dbfd7373d92627c_taskopia-home-two-hero-left.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-left"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div>
-              <div
-                data-w-id="dcecf02b-225d-a6bb-a12c-4ac9b21d3821"
-                className="rt-hero-v2-card-2">
-                <Image
-                  src="/Home2_files/6912c4bdaae7aed5d10b828e_taskopia-hero-v2-2.webp"
-                  loading="lazy"
-                  alt="taskopia-hero-v2-2"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div>
-              <div
-                data-w-id="8c510f67-e449-acf5-7671-3a4a269a89b7"
-                className="rt-hero-v2-card-v3">
-                <Image
-                  src="/Home2_files/69144db3d5bfa45112b0ac9f_taskopia-home-two-hero-right-2.webp"
-                  loading="lazy"
-                  alt="taskopia-home-two-hero-right-2"
-                  width={800}
-                  height={600}
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rt-shadow rt-border-radius-medium rt-border-line"
-                />
-              </div>
-            </div> */}
             <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap' }}>
               <div className="rt-hero-v2-card-1 rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-left-image">
@@ -372,6 +331,29 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="rt-landing-absolute-imgae-two rt-tab-display-none">
+            <Image
+              width={101}
+              height={118}
+              alt=""
+              src="/Home2_files/6911b9467f26f096826792ff_Kloudera-landing-hero-icon.svg"
+              loading="lazy"
+            />
+          </div>
+        </section>
+      </div>
+      <style>{`
+        .no-bg-pseudo::before, .no-bg-pseudo::after {
+          display: none !important;
+          background: none !important;
+        }
+      `}</style>
+      <div className="rt-hero-v2-wrapper no-bg-pseudo" style={{ backgroundColor: '#ffffff' }}>
+        <section className="rt-hero-v2 rt-position-relative no-bg-pseudo" style={{ paddingTop: '30px', paddingBottom: '50px', backgroundColor: '#ffffff', backgroundImage: 'none' }}>
+          <div className="w-layout-blockcontainer rt-container-extra-large w-container">
+            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap' }}>
               <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '380px', flex: '0 0 100%', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div className="rt-features-v2-left-image" style={{ flex: '1' }}>
                   <div className="rt-features-v2-image-one reveal-on-scroll">
@@ -459,7 +441,7 @@ export default function ServiceMarquee() {
                   </a>
                 </div>
               </div>
-              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%' }}>
+              <div className="rt-features-v2-left rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%', backgroundColor: '#ffffff' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
@@ -499,15 +481,6 @@ export default function ServiceMarquee() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="rt-landing-absolute-imgae-two rt-tab-display-none">
-            <Image
-              width={101}
-              height={118}
-              alt=""
-              src="/Home2_files/6911b9467f26f096826792ff_Kloudera-landing-hero-icon.svg"
-              loading="lazy"
-            />
           </div>
         </section>
       </div>
@@ -656,6 +629,6 @@ export default function ServiceMarquee() {
         <div className="rt-marquee-bottom-line"></div>
       </div>
 
-    </>
+    </div>
   );
 }

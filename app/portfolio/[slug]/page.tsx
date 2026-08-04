@@ -1,10 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects } from '../../data/portfolioData';
 import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
+import PortfolioButtons from '../components/PortfolioButtons';
 
 import Image from "next/image";
 
@@ -54,7 +56,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 alt={project.title}
                 className="rt-image-scale"
                 style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
-               width={800} height={800} />
+                width={800} height={800} />
             </div>
           </div>
         </section>
@@ -68,10 +70,10 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             gap: 20px;
             margin-bottom: 50px;
             padding: 30px;
-            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            // background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
             border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            // border: 1px solid rgba(226, 232, 240, 0.8);
+            // box-shadow: 0 4px 20px rgba(0,0,0,0.02);
           }
           .meta-card {
             display: flex;
@@ -163,6 +165,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   <span className="meta-value">{project.role}</span>
                 </div>
               </div>
+              <PortfolioButtons />
 
               <div className="enhanced-richtext">
                 <h2>Project Overview</h2>
@@ -176,11 +179,6 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 </p>
               </div>
 
-              <div style={{ marginTop: '80px', display: 'flex', justifyContent: 'center' }}>
-                <a href="/contact" className="start-project-btn">
-                  Start a similar project
-                </a>
-              </div>
             </div>
           </div>
         </section>

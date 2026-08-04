@@ -28,10 +28,10 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
       const Webflow = (window as any).Webflow;
       if (Webflow && Webflow.require) {
         // Prevent React 18 Strict Mode from double-firing the initialization and causing a jump
-        if ((window as any).__wf_loaded_page === pageId) {
+        if ((window as any).__wf_loaded_pathname === pathname) {
           return;
         }
-        (window as any).__wf_loaded_page = pageId;
+        (window as any).__wf_loaded_pathname = pathname;
 
         Webflow.destroy();
         Webflow.ready();

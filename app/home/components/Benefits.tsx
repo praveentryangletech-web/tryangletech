@@ -11,7 +11,6 @@ export default function Benefits() {
               className="rt-our-benefits-heading rt-overflow-hidden rt-heading-bottom-gap">
               <div
                 data-w-id="94cc7c6d-9925-8a1a-3c65-1eff2c96a244"
-                style={{ "opacity": "0" }}
                 className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">our benefits</div>
               </div>
@@ -38,7 +37,7 @@ export default function Benefits() {
                       </div>
                     </div>
                     <div className="rt-overflow-hidden">
-                      <div className="rt-text-style-h6">
+                      <div className="rt-text-style-h5">
                         One platform for every task and project
                       </div>
                     </div>
@@ -122,7 +121,7 @@ export default function Benefits() {
                       <div
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
-                        className="rt-text-style-h6">
+                        className="rt-text-style-h5">
                         A workflow designed to fit your style
                       </div>
                     </div>

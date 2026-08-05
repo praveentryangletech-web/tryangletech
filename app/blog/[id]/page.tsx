@@ -2,6 +2,7 @@
 import WebflowInit from "../../common/WebflowInit";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BlogPostPage() {
   return (
@@ -43,6 +44,58 @@ export default function BlogPostPage() {
           className="rt-blog-post">
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-blog-post--main">
+              <style>{`
+                .project-meta-grid {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  gap: 20px;
+                  margin-bottom: 50px;
+                  padding: 30px;
+                  border-radius: 16px;
+                }
+                .meta-card {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 8px;
+                  padding: 15px;
+                  background: #ffffff;
+                  border-radius: 12px;
+                  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+                  transition: transform 0.3s ease;
+                }
+                .meta-card:hover {
+                  transform: translateY(-3px);
+                  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+                }
+                .meta-label {
+                  font-size: 13px;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  color: #64748b;
+                  font-weight: 600;
+                }
+                .meta-value {
+                  font-size: 18px;
+                  color: #0f172a;
+                  font-weight: 600;
+                }
+                .back-btn-animated {
+                  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                }
+                .back-btn-animated:hover {
+                  transform: translateY(-4px);
+                  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.25);
+                }
+                .back-btn-animated:active {
+                  transform: translateY(-1px);
+                }
+                .back-btn-animated svg {
+                  transition: transform 0.3s ease;
+                }
+                .back-btn-animated:hover svg {
+                  transform: translateX(-4px);
+                }
+              `}</style>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9ca"
                 className="w-layout-hflex rt-blog-post-date-wrap">
@@ -55,6 +108,26 @@ export default function BlogPostPage() {
                     Our tasks
                   </div>
                 </div>
+              </div>
+              <div className="project-meta-grid">
+                <div className="meta-card">
+                  <span className="meta-label">Category</span>
+                  <span className="meta-value">Our Tasks</span>
+                </div>
+                <div className="meta-card">
+                  <span className="meta-label">Author</span>
+                  <span className="meta-value">Glenn Parker</span>
+                </div>
+              </div>
+              <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
+                <Link href="/blog" className="rt-button-body w-inline-block back-btn-animated" style={{ borderRadius: '100px' }}>
+                  <div className="rt-button-text" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Blog
+                  </div>
+                </Link>
               </div>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9d1"

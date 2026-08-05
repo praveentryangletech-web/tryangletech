@@ -112,7 +112,7 @@ export default function Benefits() {
                           data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0046"
                           style={{ "opacity": "0" }}
                           className="rt-sub-text rt-sub-gredient rt-text-size">
-                          END-TO-END DELIVERY
+                          DIGITAL MARKETING & SEO
                         </div>
                       </div>
                     </div>
@@ -121,7 +121,7 @@ export default function Benefits() {
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
                         className="rt-text-style-h5">
-                        Solutions built around your business goals
+                        Get found, get traffic, get results
                       </div>
                     </div>
                   </div>

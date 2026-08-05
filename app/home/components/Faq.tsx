@@ -39,7 +39,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        What is AI automation, and how does it work ?
+                        What industries do you work with?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -54,10 +54,10 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        AI automation uses artificial intelligence to perform
-                        repetitive tasks, analyze data, and optimize processes,
-                        enabling businesses to save time, reduce errors, and make
-                        smarter, faster decisions efficiently.
+                        We work with businesses across healthcare, finance,
+                        e-commerce, education, and many other industries —
+                        delivering tailored web, app, and software solutions
+                        for each.
                       </p>
                     </div>
                   </div>
@@ -69,7 +69,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        What types of tasks can be automated with AI ?
+                        Do you provide ongoing support after the project is delivered?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -84,10 +84,10 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-no-margin">
-                        AI can automate repetitive tasks like data entry, customer
-                        support, report generation, inventory management, and
-                        workflow optimization, allowing teams to focus on
-                        strategic, high-value activities and business growth.
+                        Yes, we offer ongoing support and maintenance after
+                        launch to make sure your website or app keeps running
+                        smoothly, stays updated, and continues to perform as
+                        your business grows.
                       </p>
                     </div>
                   </div>
@@ -99,7 +99,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        Is AI automation suitable for small businesses ?
+                        What does your IT consulting process look like?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -114,10 +114,10 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Yes, AI automation is ideal for small businesses. It
-                        streamlines operations, reduces manual work, improves
-                        efficiency, and provides actionable insights, helping
-                        smaller teams compete and grow effectively.
+                        We start by understanding your business goals, then
+                        plan, design, develop, test, and launch your project —
+                        keeping you updated at every stage so there are no
+                        surprises along the way.
                       </p>
                     </div>
                   </div>
@@ -129,7 +129,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        What industries benefit the most from AI automation?
+                        What's a typical project timeline?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -144,11 +144,10 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Industries like finance, healthcare, retail,
-                        manufacturing, and logistics benefit greatly from AI
-                        automation. It streamlines operations, reduces errors,
-                        enhances customer service, and drives efficiency across
-                        diverse business sectors.
+                        Timelines vary by project scope, but most websites
+                        take 2–4 weeks and custom software or app projects
+                        typically take 4–8 weeks. We'll give you a clear
+                        estimate after understanding your requirements.
                       </p>
                     </div>
                   </div>
@@ -160,7 +159,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        Can AI automation integrate with my existing tools?
+                        What technologies do you build with?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -175,11 +174,10 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Absolutely. AI automation seamlessly integrates with your
-                        existing tools and platforms, allowing workflows to
-                        connect effortlessly, enhancing productivity, reducing
-                        manual effort, and ensuring a smooth transition without
-                        disrupting current operations.
+                        We build using HTML, CSS, WordPress, and PHP, along
+                        with modern frameworks like React, Next.js, and Laravel
+                        — choosing the right stack based on what your project
+                        actually needs.
                       </p>
                     </div>
                   </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import NextImage, { ImageProps } from "next/image";
 
 const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
@@ -7,20 +7,47 @@ const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
 };
 
 export default function Integration() {
-  const [isVisible, setIsVisible] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-      }
-    }, { threshold: 0.2 });
+    let rafId: number;
 
-    if (svgRef.current) {
-      observer.observe(svgRef.current);
-    }
-    return () => observer.disconnect();
+    const syncToWebflow = () => {
+      // Watch the Webflow-animated PNG line to get progress (0% -> 100%)
+      const lineEl = document.querySelector('.rt-integration-v1-line-1') as HTMLElement;
+      const svg = svgRef.current;
+      const clipRect = svg?.getElementById('reveal-rect') as SVGRectElement | null;
+      if (!lineEl || !svg || !clipRect) {
+        rafId = requestAnimationFrame(syncToWebflow);
+        return;
+      }
+
+      const widthStr = lineEl.style.width || '0%';
+      // progress: 0 = hidden, 1 = fully drawn
+      let progress = 0;
+      if (widthStr.endsWith('%')) {
+        progress = parseFloat(widthStr) / 100;
+      } else if (widthStr.endsWith('px')) {
+        progress = parseFloat(widthStr) / 455;
+      }
+      progress = Math.min(Math.max(progress, 0), 1);
+
+      // Animate clipPath rect: starts as 0-width rect at center (500),
+      // expands symmetrically outward to cover the full viewBox (-200 to 1200)
+      const halfWidth = progress * 700; // 700 = half of total span 1400
+      clipRect.setAttribute('x', String(500 - halfWidth));
+      clipRect.setAttribute('width', String(halfWidth * 2));
+
+      // Fade in the 4 new icons
+      document.querySelectorAll('.new-icon-anim').forEach(el => {
+        (el as HTMLElement).style.opacity = String(progress);
+      });
+
+      rafId = requestAnimationFrame(syncToWebflow);
+    };
+
+    rafId = requestAnimationFrame(syncToWebflow);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   return (
@@ -130,69 +157,68 @@ export default function Integration() {
             </div>
           </div>
 
-          {/* SVG Lines for the 4 New Icons (Vertical and Horizontal Cross) */}
+          {/* SVG Lines for 4 new icons — dashed lines, drawn from center outward, synced with Webflow */}
           <svg
             ref={svgRef}
-            viewBox="0 0 1000 1000"
+            viewBox="-200 -200 1400 1400"
             preserveAspectRatio="none"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              zIndex: 1,
-              pointerEvents: "none",
-              clipPath: isVisible ? 'inset(-20% -20% -20% -20%)' : 'inset(50% 50% 50% 50%)',
-              WebkitClipPath: isVisible ? 'inset(-20% -20% -20% -20%)' : 'inset(50% 50% 50% 50%)',
-              transition: 'clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, -webkit-clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s'
-            }}
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none", overflow: "visible" }}
           >
-            <style>
-              {`
-                .flow-line {
-                  stroke: #A7B0CB;
-                  stroke-width: 1.5px;
-                  stroke-dasharray: 5 5;
-                  fill: none;
-                  vector-effect: non-scaling-stroke;
-                }
-              `}
-            </style>
-            {/* Center to Top */}
-            <path d="M 500 500 L 500 -200" className="flow-line" />
-            {/* Center to Bottom */}
-            <path d="M 500 500 L 500 1200" className="flow-line" />
-            {/* Center to Far Left */}
-            <path d="M 500 500 L -200 500" className="flow-line" />
-            {/* Center to Far Right */}
-            <path d="M 500 500 L 1200 500" className="flow-line" />
+            <defs>
+              {/* clipPath rect starts at center width=0, animated via JS to expand outward */}
+              <clipPath id="center-reveal">
+                <rect id="reveal-rect" x="500" y="-200" width="0" height="1400" />
+              </clipPath>
+            </defs>
+            {/* All 4 lines share the same clipPath — reveals symmetrically from center */}
+            <g clipPath="url(#center-reveal)">
+              {/* Top: straight up from center */}
+              <line x1="500" y1="530" x2="500" y2="-100"
+                stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
+                style={{ vectorEffect: 'non-scaling-stroke' }} />
+              {/* Bottom: straight down from center */}
+              <line x1="500" y1="530" x2="500" y2="1100"
+                stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
+                style={{ vectorEffect: 'non-scaling-stroke' }} />
+              {/* Left: straight left from center */}
+              <line x1="500" y1="530" x2="-100" y2="530"
+                stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
+                style={{ vectorEffect: 'non-scaling-stroke' }} />
+              {/* Right: straight right from center */}
+              <line x1="500" y1="530" x2="1100" y2="530"
+                stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
+                style={{ vectorEffect: 'non-scaling-stroke' }} />
+            </g>
           </svg>
 
-          {/* 4 New Icons positioned perfectly on the vertical and horizontal axes */}
-          {/* Top Center Icon (Swift) */}
-          <div style={{ opacity: isVisible ? "1" : "0", inset: "-15% 0% auto 0%", margin: "0 auto", transition: "opacity 0.8s ease-out 0.6s" }} className="rt-integration-icon-wrap">
-            <div>
-              <Image src="/tech-icons/swift.svg" loading="lazy" width={19} height={800} alt="Swift logo" />
-            </div>
+          {/* 4 New Icons — fade in synced with Webflow animation via .new-icon-anim */}
+          {/* Top Center: Swift — centered horizontally, above section */}
+          <div
+            className="rt-integration-icon-wrap new-icon-anim"
+            style={{ opacity: 0, position: "absolute", top: "-14%", left: "50%", transform: "translateX(-50%)" }}
+          >
+            <div><Image src="/tech-icons/swift.svg" loading="lazy" width={19} height={800} alt="Swift logo" /></div>
           </div>
-          {/* Bottom Center Icon (Figma) */}
-          <div style={{ opacity: isVisible ? "1" : "0", inset: "auto 0% -15% 0%", margin: "0 auto", transition: "opacity 0.8s ease-out 0.6s" }} className="rt-integration-icon-wrap">
-            <div>
-              <Image src="/tech-icons/figma.svg" loading="lazy" width={19} height={800} alt="Figma logo" />
-            </div>
+          {/* Bottom Center: Figma — centered horizontally, below section */}
+          <div
+            className="rt-integration-icon-wrap new-icon-anim"
+            style={{ opacity: 0, position: "absolute", bottom: "-14%", left: "50%", transform: "translateX(-50%)" }}
+          >
+            <div><Image src="/tech-icons/figma.svg" loading="lazy" width={19} height={800} alt="Figma logo" /></div>
           </div>
-          {/* Far Left Center Icon (Flutter) */}
-          <div style={{ opacity: isVisible ? "1" : "0", inset: "0% auto 0% -15%", margin: "auto 0", transition: "opacity 0.8s ease-out 0.6s" }} className="rt-integration-icon-wrap">
-            <div>
-              <Image src="/tech-icons/flutter.svg" loading="lazy" width={19} height={800} alt="Flutter logo" />
-            </div>
+          {/* Far Left: Flutter — aligned to horizontal line at ~53% top */}
+          <div
+            className="rt-integration-icon-wrap new-icon-anim"
+            style={{ opacity: 0, position: "absolute", top: "53%", left: "-14%", transform: "translateY(-50%)" }}
+          >
+            <div><Image src="/tech-icons/flutter.svg" loading="lazy" width={19} height={800} alt="Flutter logo" /></div>
           </div>
-          {/* Far Right Center Icon (Kotlin) */}
-          <div style={{ opacity: isVisible ? "1" : "0", inset: "0% -15% 0% auto", margin: "auto 0", transition: "opacity 0.8s ease-out 0.6s" }} className="rt-integration-icon-wrap">
-            <div>
-              <Image src="/tech-icons/kotlin.svg" loading="lazy" width={19} height={800} alt="Kotlin logo" />
-            </div>
+          {/* Far Right: Kotlin — aligned to horizontal line at ~53% top */}
+          <div
+            className="rt-integration-icon-wrap new-icon-anim"
+            style={{ opacity: 0, position: "absolute", top: "53%", right: "-14%", transform: "translateY(-50%)" }}
+          >
+            <div><Image src="/tech-icons/kotlin.svg" loading="lazy" width={19} height={800} alt="Kotlin logo" /></div>
           </div>
           <div
             className="rt-integration-v1-line-1 rt-overflow-hidden"

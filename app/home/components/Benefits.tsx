@@ -18,7 +18,7 @@ export default function Benefits() {
                 data-w-id="f0268362-b169-cd10-f941-4e79335712bd"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off rt-desktop-text-center">
-                Seamless teamwork, smarter tasks,
+                Seamless collaboration, smarter solutions,
                 <span className="rt-color-periwinkle-gray">better outcomes</span>
               </h2>
             </div>
@@ -33,12 +33,12 @@ export default function Benefits() {
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
                       <div className="rt-sub-text rt-sub-gredient rt-text-size">
-                        Centralized Workspace
+                        FULL-STACK EXPERTISE
                       </div>
                     </div>
                     <div className="rt-overflow-hidden">
                       <div className="rt-text-style-h5">
-                        One platform for every task and project
+                        One team for every stage of your project
                       </div>
                     </div>
                   </div>
@@ -47,27 +47,27 @@ export default function Benefits() {
                       data-w-id="94e17314-daf6-c72f-7b0e-213605327473"
                       className="rt-our-benefits-btn-one rt-btn-1"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Project tracking</div>
+                      <div className="rt-small-size">Web Design & Development</div>
                     </div>
                     <div
                       data-w-id="9bea13b0-69c4-8d2c-7e84-8c2e19fd3196"
                       className="rt-our-benefits-btn-one rt-button-2"
                       style={{ "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", "opacity": "0" }}>
                       <div className="rt-small-size rt-text-color-white">
-                        Seamless team
+                        Digital Marketing
                       </div>
                     </div>
                     <div
                       data-w-id="d4e837ca-4c7c-4a4f-6f99-e781ed4c0aab"
                       className="rt-our-benefits-btn-one rt-button-3"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Custom Workflows</div>
+                      <div className="rt-small-size">SEO</div>
                     </div>
                     <div
                       data-w-id="a04517a8-fc82-b735-ef19-7d7ca9b1e21d"
                       className="rt-our-benefits-btn-one rt-button-4"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Integrated tools</div>
+                      <div className="rt-small-size">Mobile App Development</div>
                     </div>
                     <div
                       className="rt-benefite-line rt-overflow-hidden"
@@ -82,7 +82,7 @@ export default function Benefits() {
                       data-w-id="c4d71f34-66b2-085e-99cc-0943fd0ea377"
                       className="rt-our-benefits-btn-one rt-button-5"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Centralized task</div>
+                      <div className="rt-small-size">Graphics Designing</div>
                     </div>
                     <div className="rt-benefit-line-two">
                       <div
@@ -100,8 +100,7 @@ export default function Benefits() {
                   </div>
                   <div className="rt-overflow-hidden">
                     <p className="rt-our-benefits-para-top rt-gap-off">
-                      Keep all your projects, tasks, files, and conversations in
-                      one organized hub. With a centralized workspace.
+                      From web design to digital marketing, SEO to app development — we deliver every service your business needs, backed by our expertise in custom development too.
                     </p>
                   </div>
                 </div>
@@ -113,7 +112,7 @@ export default function Benefits() {
                           data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0046"
                           style={{ "opacity": "0" }}
                           className="rt-sub-text rt-sub-gredient rt-text-size">
-                          Seamless Collaboration
+                          END-TO-END DELIVERY
                         </div>
                       </div>
                     </div>
@@ -122,7 +121,7 @@ export default function Benefits() {
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
                         className="rt-text-style-h5">
-                        A workflow designed to fit your style
+                        Solutions built around your business goals
                       </div>
                     </div>
                   </div>
@@ -154,7 +153,7 @@ export default function Benefits() {
                 <div className="rt-our-benefits-one-bottom rt-overflow-hidden">
                   <div className="rt-our-benefits-one-wrap">
                     <div className="rt-our-benefits-gap-3">
-                      <div className="rt-text-style-h6">Boosted productivity</div>
+                      <div className="rt-text-style-h6">Faster time to launch</div>
                     </div>
                     <div
                       data-w-id="d919edb7-1114-6397-f57a-a2c6d2775464"
@@ -176,15 +175,14 @@ export default function Benefits() {
                     </div>
                   </div>
                   <p className="rt-gap-off">
-                    Boost productivity by organizing tasks, setting clear
-                    priorities, automating routine work.
+                    Speed up your project by streamlining design, development, and testing into one workflow.
                   </p>
                 </div>
                 <div
                   data-w-id="1c6222f6-a97f-fefb-0d46-bedad32c97e7"
                   className="rt-our-benefits-one-bottom rt-padding rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">Data-driven insights</div>
+                    <div className="rt-text-style-h6">SEO & analytics built-in</div>
                   </div>
                   <div className="rt-2-bg">
                     <Image
@@ -196,8 +194,7 @@ Mask group
                       className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
-                    Gain complete visibility your teamâ€™s performance with
-                    real-time analytics and reports .
+                    Gain complete visibility into your website's performance with real-time SEO and traffic reports.
                   </p>
                   <div className="rt-our-benefits-two-bottom-content">
                     <div
@@ -259,10 +256,10 @@ Mask group
                 <div
                   className="rt-our-benefits-one-bottom rt-padding rt-2 rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">Deadline tracking</div>
+                    <div className="rt-text-style-h6">On-time delivery</div>
                   </div>
                   <p className="rt-gap-off">
-                    Stay on top of every milestone with smart deadline tracking.
+                    Stay updated on every milestone with clear timelines and progress tracking.
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>
@@ -276,7 +273,7 @@ Mask group
                       data-w-id="7c8a7acf-2849-d94b-d213-0bc0279e96cb"
                       className="rt-small-btn-wrap">
                       <div className="rt-small-btn-main" style={{}}>
-                        <div className="rt-small-btn-text">Tracking</div>
+                        <div className="rt-small-btn-text">On Track</div>
                         <div className="rt-btn-arrow-v2">
                           <Image
                             src="/Taskopia_files/68ef5d8e21f7535e98837c04_Vector 503.svg"

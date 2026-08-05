@@ -44,17 +44,17 @@ export default function About() {
                 data-w-id="e56a7671-e1ec-e100-8312-33edf2c12738"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off">
-                Reduce errors streamline work,
-                <span className="rt-color-periwinkle-gray">stay productive</span>
+                Reduce delays, streamline delivery,
+                <span className="rt-color-periwinkle-gray">stay ahead</span>
               </h2>
             </div>
             <p
               data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
               style={{ "opacity": "0" }}
               className="rt-gap-off">
-              Experience simplified task management with intuitive tools
-              designed to remove friction. Keep work organized, accelerate
-              progress.
+              Experience seamless project management with expert tools
+              designed to eliminate delays. Keep your business organized, accelerate
+              growth.
             </p>
             <div className="rt-about-v1-right-inner">
               <div
@@ -69,10 +69,10 @@ export default function About() {
                 </div>
                 <p className="rt-gap-off">
                   <span className="rt-color-dark-indigo"
-                  >Consistent performance:</span
+                  >Consistent quality:</span
                   >
-                  {" "}Ensures smooth, reliable output for every task,
-                  helping teams maintain accuracy and stability.
+                  {" "}Ensures smooth, reliable delivery for every project,
+                  helping your business maintain quality and stability.
                 </p>
               </div>
               <div
@@ -93,8 +93,8 @@ export default function About() {
                   <span className="rt-color-dark-indigo"
                   >Data-driven decisions:</span
                   >
-                  {" "}Offers clear insights that support smarter choices and
-                  improve overall decision quality.
+                  {" "}Offers clear insights that support smarter strategies and
+                  improve overall business decisions.
                 </p>
               </div>
             </div>

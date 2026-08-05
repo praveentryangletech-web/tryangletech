@@ -195,7 +195,7 @@ export default function Hero() {
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                     <div
                       data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba4"
-                      style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
+                      style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(-15deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
                       <Image
                         width={62}
@@ -217,7 +217,7 @@ export default function Hero() {
                     </div>
                     <div
                       data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba8"
-                      style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
+                      style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(30deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
                       <Image
                         width={60}

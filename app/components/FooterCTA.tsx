@@ -31,7 +31,7 @@ export default function FooterCTA() {
                 <div key={lineNum} data-w-id={`7e10f033-b0ef-59d7-53ae-aed6bd65fc${lineNum + 26}`} className={`rt-collaborate-card-line-${lineNum} rt-tab-display-none`}>
                   {[1, 2, 3, 4].map((i) => (
                     <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                      <div><Image src={`${A}/690c965e97785a12d9fab6b0_Nira (1).svg`} loading="lazy" alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
+                      <div><Image src="/favicon.png" loading="lazy" alt="Tryangle Tech Logo" width={100} height={100} style={{ width: "100%", height: "auto" }} /></div>
                     </div>
                   ))}
                 </div>

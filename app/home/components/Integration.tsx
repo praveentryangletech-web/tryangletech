@@ -172,19 +172,19 @@ export default function Integration() {
             </defs>
             <g clipPath="url(#center-reveal)">
               {/* Top: up to Swift icon at ~top -6% ≈ y=50 in viewBox */}
-              <line x1="500" y1="530" x2="500" y2="50"
+              <line x1="500" y1="730" x2="500" y2="50"
                 stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
                 style={{ vectorEffect: 'non-scaling-stroke' }} />
               {/* Bottom: down to Figma icon at ~bottom -6% ≈ y=950 in viewBox */}
-              <line x1="500" y1="530" x2="500" y2="950"
+              <line x1="500" y1="730" x2="500" y2="950"
                 stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
                 style={{ vectorEffect: 'non-scaling-stroke' }} />
               {/* Left: to Flutter at left -8% ≈ x=-80 in viewBox */}
-              <line x1="500" y1="530" x2="-80" y2="530"
+              <line x1="250" y1="530" x2="-220" y2="530"
                 stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
                 style={{ vectorEffect: 'non-scaling-stroke' }} />
               {/* Right: to Kotlin at right -8% ≈ x=1080 in viewBox */}
-              <line x1="500" y1="530" x2="1080" y2="530"
+              <line x1="770" y1="530" x2="1880" y2="530"
                 stroke="#A7B0CB" strokeWidth="1.5" strokeDasharray="6 6" fill="none"
                 style={{ vectorEffect: 'non-scaling-stroke' }} />
             </g>
@@ -194,28 +194,28 @@ export default function Integration() {
           {/* Top Center: Swift — pulled closer to logo */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
-            style={{ opacity: 0, position: "absolute", top: "-6%", left: "50%", transform: "translateX(-50%)" }}
+            style={{ opacity: 0, position: "absolute", top: "2%", left: "50%", transform: "translateX(-50%)" }}
           >
             <div><Image src="/tech-icons/swift.svg" loading="lazy" width={19} height={800} alt="Swift logo" /></div>
           </div>
           {/* Bottom Center: Figma — pulled closer to logo */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
-            style={{ opacity: 0, position: "absolute", bottom: "-6%", left: "50%", transform: "translateX(-50%)" }}
+            style={{ opacity: 0, position: "absolute", bottom: "2%", left: "50%", transform: "translateX(-50%)" }}
           >
             <div><Image src="/tech-icons/figma.svg" loading="lazy" width={19} height={800} alt="Figma logo" /></div>
           </div>
           {/* Far Left: Flutter — closer to center horizontally */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
-            style={{ opacity: 0, position: "absolute", top: "53%", left: "-8%", transform: "translateY(-50%)" }}
+            style={{ opacity: 0, position: "absolute", top: "53%", left: "-6%", transform: "translateY(-50%)" }}
           >
             <div><Image src="/tech-icons/flutter.svg" loading="lazy" width={19} height={800} alt="Flutter logo" /></div>
           </div>
           {/* Far Right: Kotlin — closer to center horizontally */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
-            style={{ opacity: 0, position: "absolute", top: "53%", right: "-8%", transform: "translateY(-50%)" }}
+            style={{ opacity: 0, position: "absolute", top: "53%", right: "-6%", transform: "translateY(-50%)" }}
           >
             <div><Image src="/tech-icons/kotlin.svg" loading="lazy" width={19} height={800} alt="Kotlin logo" /></div>
           </div>

@@ -15,7 +15,7 @@ export default function AboutFeatures() {
                 <div className="rt-sub-text rt-sub-gredient">our features</div>
               </div>
               <h2 className="rt-gap-off rt-desktop-text-center">
-                Boost team productivity through <span className="rt-color-periwinkle-gray">streamlined workflows</span>
+                Delivering digital excellence through <span className="rt-color-periwinkle-gray">expert IT solutions</span>
               </h2>
             </div>
 
@@ -23,9 +23,9 @@ export default function AboutFeatures() {
               {/* Feature 1 — Progress tracking */}
               <div data-w-id="7332a125-a796-723b-e9c9-e16e2936f971" className="rt-features-v1-left rt-border-radius-l">
                 <div className="rt-features-v1-inner-heading">
-                  <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">Task Summary</div></div>
-                  <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Real-time progress tracking</div>
-                  <p className="rt-color-pale-periwinkle rt-gap-off">Real-Time Progress Tracking gives teams complete visibility into every task, milestone, and deadline.</p>
+                  <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">WEB DEVELOPMENT</div></div>
+                  <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Custom websites that perform</div>
+                  <p className="rt-color-pale-periwinkle rt-gap-off">From custom builds to WordPress and e-commerce, we craft fast, responsive websites that engage your audience and deliver real business results.</p>
                 </div>
                 <div data-w-id="62508c73-e31b-0068-13cd-79c365633cb0" className="rt-features-v1-inner-image">
                   <Image src={`${A}/690c408d17e948acfd9dd61a_taskopia-%20about-features-1.webp`} loading="lazy" alt="about-features-1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
@@ -40,9 +40,9 @@ export default function AboutFeatures() {
               {/* Feature 2 — Collaboration */}
               <div data-w-id="56f1b25a-061c-3e82-d0b8-df0f60b657fd" className="rt-features-v1-left rt-border-radius-l rt-right">
                 <div className="rt-features-v1-inner-heading">
-                  <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">collaboration</div></div>
-                  <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Team collaboration hub</div>
-                  <p className="rt-color-pale-periwinkle rt-gap-off">A centralized space for discussions, file sharing, and feedback to keep teams connected and productive.</p>
+                  <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">MOBILE & SOFTWARE</div></div>
+                  <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Apps and software built to scale</div>
+                  <p className="rt-color-pale-periwinkle rt-gap-off">iOS and Android apps, custom software, and scalable digital solutions — built around your business goals and delivered on time.</p>
                 </div>
                 <div className="rt-features-v1-inner-image-2">
                   <div data-w-id="7a0ae718-492b-9c68-43b4-75a267c14680" className="rt-features-v1-right-image-one">

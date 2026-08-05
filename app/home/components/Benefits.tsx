@@ -33,12 +33,12 @@ export default function Benefits() {
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
                       <div className="rt-sub-text rt-sub-gredient rt-text-size">
-                        FULL-STACK EXPERTISE
+                        WEB DEVELOPMENT
                       </div>
                     </div>
                     <div className="rt-overflow-hidden">
                       <div className="rt-text-style-h5">
-                        One team for every stage of your project
+                        Websites built to perform, not just look good
                       </div>
                     </div>
                   </div>
@@ -47,27 +47,27 @@ export default function Benefits() {
                       data-w-id="94e17314-daf6-c72f-7b0e-213605327473"
                       className="rt-our-benefits-btn-one rt-btn-1"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Web Design & Development</div>
+                      <div className="rt-small-size">Custom Development</div>
                     </div>
                     <div
                       data-w-id="9bea13b0-69c4-8d2c-7e84-8c2e19fd3196"
                       className="rt-our-benefits-btn-one rt-button-2"
                       style={{ "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", "opacity": "0" }}>
                       <div className="rt-small-size rt-text-color-white">
-                        Digital Marketing
+                        WordPress
                       </div>
                     </div>
                     <div
                       data-w-id="d4e837ca-4c7c-4a4f-6f99-e781ed4c0aab"
                       className="rt-our-benefits-btn-one rt-button-3"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">SEO</div>
+                      <div className="rt-small-size">E-Commerce</div>
                     </div>
                     <div
                       data-w-id="a04517a8-fc82-b735-ef19-7d7ca9b1e21d"
                       className="rt-our-benefits-btn-one rt-button-4"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Mobile App Development</div>
+                      <div className="rt-small-size">Responsive Design</div>
                     </div>
                     <div
                       className="rt-benefite-line rt-overflow-hidden"
@@ -82,7 +82,7 @@ export default function Benefits() {
                       data-w-id="c4d71f34-66b2-085e-99cc-0943fd0ea377"
                       className="rt-our-benefits-btn-one rt-button-5"
                       style={{ "opacity": "0" }}>
-                      <div className="rt-small-size">Graphics Designing</div>
+                      <div className="rt-small-size">Business Websites</div>
                     </div>
                     <div className="rt-benefit-line-two">
                       <div
@@ -100,7 +100,7 @@ export default function Benefits() {
                   </div>
                   <div className="rt-overflow-hidden">
                     <p className="rt-our-benefits-para-top rt-gap-off">
-                      From web design to digital marketing, SEO to app development — we deliver every service your business needs, backed by our expertise in custom development too.
+                      Custom-built, WordPress, e-commerce, or business websites — fast, responsive, and designed to engage your audience across every device.
                     </p>
                   </div>
                 </div>

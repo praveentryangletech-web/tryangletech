@@ -23,7 +23,7 @@ export default function WhyChooseUs() {
                 <h2 className="rt-gap-off">
                   Stay productive with smarter
                   <span className="rt-color-periwinkle-gray"
-                  >task management</span
+                  >project delivery</span
                   >
                 </h2>
               </div>
@@ -44,10 +44,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Custom workflows
+                    Tailored solutions
                   </div>
                   <p className="rt-gap-off">
-                    Adapt the platform to match the way your team works.
+                    Adapt our process and tools to match the way your business works.
                   </p>
                 </div>
                 <div
@@ -71,8 +71,7 @@ export default function WhyChooseUs() {
                     On-time delivery
                   </div>
                   <p className="rt-gap-off">
-                    Never miss a deadline again with smart reminders, progress
-                    tracking, and visual dashboards.
+                    Stay on schedule with clear timelines, progress updates, and milestone tracking.
                   </p>
                 </div>
               </div>
@@ -100,11 +99,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    All-in-one platform
+                    One dedicated team
                   </div>
                   <p className="rt-gap-off">
-                    Manage projects, tasks, files, and communication in one
-                    centralized hub.
+                    Get design, development, testing, and support — all under one dedicated team.
                   </p>
                 </div>
                 <div
@@ -128,8 +126,7 @@ export default function WhyChooseUs() {
                     Smarter collaboration
                   </div>
                   <p className="rt-gap-off">
-                    Assign tasks, share updates, and stay connected in real
-                    time. With seamless communication.
+                    Get real-time updates, share feedback, and stay connected throughout your project.
                   </p>
                 </div>
               </div>

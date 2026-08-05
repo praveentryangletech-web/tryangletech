@@ -17,7 +17,7 @@ export default function Collaboration() {
                     data-w-id="f68a08f7-0700-c3c7-7ea2-119bf4408740"
                     style={{ "opacity": "0" }}
                     className="rt-sub-text rt-sub-gredient">
-                    Collaboration Section
+                    How We Work
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
@@ -25,7 +25,7 @@ export default function Collaboration() {
                     data-w-id="fa389f03-d668-fc21-92b7-625895f0f1cd"
                     style={{ "opacity": "0" }}
                     className="rt-gap-off">
-                    One platform to connect, collaborate
+                    One team to connect, collaborate
                     <span className="rt-color-periwinkle-gray">and deliver</span>
                   </h2>
                 </div>
@@ -33,8 +33,7 @@ export default function Collaboration() {
                   data-w-id="01cd9f60-c08f-a44e-7306-8a24c776e67e"
                   style={{ "opacity": "0" }}
                   className="rt-gap-off">
-                  Bring your team, tasks, and tools together in one spaceâ€”making
-                  collaboration seamless and project delivery faster than ever.
+                  From the first call to final launch, we work as an extension of your team — clear communication, real progress updates, and no surprises.
                 </p>
                 <div className="rt-collaboration-left-inner">
                   <div
@@ -52,8 +51,7 @@ export default function Collaboration() {
                         Seamless teamwork
                       </div>
                       <p className="rt-gap-off">
-                        Unify communication, tasks, and files in one space to keep
-                        your team aligned and projects moving forward
+                        Stay aligned with clear communication and a dedicated point of contact throughout your project — no chasing updates, no guesswork.
                       </p>
                     </div>
                   </div>
@@ -76,8 +74,7 @@ export default function Collaboration() {
                         Faster project delivery
                       </div>
                       <p>
-                        Track progress, set clear deadlines, and streamline
-                        workflows to ensure every project is delivered on time.
+                        Track progress, hit clear deadlines, and launch on time, every time — backed by 7+ years delivering 350+ websites.
                       </p>
                     </div>
                   </div>

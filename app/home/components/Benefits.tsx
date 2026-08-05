@@ -153,7 +153,7 @@ export default function Benefits() {
                 <div className="rt-our-benefits-one-bottom rt-overflow-hidden">
                   <div className="rt-our-benefits-one-wrap">
                     <div className="rt-our-benefits-gap-3">
-                      <div className="rt-text-style-h6">Faster time to launch</div>
+                      <div className="rt-text-style-h6">Mobile App Development</div>
                     </div>
                     <div
                       data-w-id="d919edb7-1114-6397-f57a-a2c6d2775464"
@@ -175,7 +175,7 @@ export default function Benefits() {
                     </div>
                   </div>
                   <p className="rt-gap-off">
-                    Speed up your project by streamlining design, development, and testing into one workflow.
+                    iOS & Android apps designed with performance and user experience at the core, built for brands across the globe.
                   </p>
                 </div>
                 <div

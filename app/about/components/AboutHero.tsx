@@ -23,7 +23,7 @@ export default function AboutHero() {
                       { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159a', extra: ' rt-margin-left' },
                       { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159c', extra: ' rt-margin-left' },
                     ].map(({ id, extra }) => (
-                      <div key={id} data-w-id={id} className={`rt-overflow-hidden rt-sub-image${extra}`}>
+                      <div key={id} data-w-id={id} className={`rt-hero-v2-client-image rt-overflow-hidden rt-sub-image${extra}`} style={{ border: 'none' }}>
                         <Image width={30} height={30} alt="Tryangle Tech Logo" src="/favicon.png" loading="lazy" />
                       </div>
                     ))}

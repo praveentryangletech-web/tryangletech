@@ -27,11 +27,24 @@ export default function FooterCTA() {
                   </Link>
                 </div>
               </div>
+              <style dangerouslySetInnerHTML={{ __html: `
+                @keyframes spinForward { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                @keyframes spinBackward { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+                
+                .animate-ring-1 { animation: spinForward 40s linear infinite; }
+                .animate-icon-1 { animation: spinBackward 40s linear infinite; }
+                
+                .animate-ring-2 { animation: spinBackward 50s linear infinite; }
+                .animate-icon-2 { animation: spinForward 50s linear infinite; }
+                
+                .animate-ring-3 { animation: spinForward 60s linear infinite; }
+                .animate-icon-3 { animation: spinBackward 60s linear infinite; }
+              `}} />
               {[1, 2, 3].map((lineNum) => (
-                <div key={lineNum} data-w-id={`7e10f033-b0ef-59d7-53ae-aed6bd65fc${lineNum + 26}`} className={`rt-collaborate-card-line-${lineNum} rt-tab-display-none`}>
+                <div key={lineNum} className={`rt-collaborate-card-line-${lineNum} animate-ring-${lineNum} rt-tab-display-none`}>
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i}`}>
-                      <div><Image src="/favicon.png" loading="lazy" alt="Tryangle Tech Logo" width={100} height={100} style={{ width: "100%", height: "auto" }} /></div>
+                    <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i} animate-icon-${lineNum}`}>
+                      <div><Image src="/favicon.png" loading="lazy" alt="Tryangle Tech Logo" width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
                     </div>
                   ))}
                 </div>

@@ -94,18 +94,18 @@ export default function AboutHero() {
                   <div className="rt-sub-gap">
                     <div className="rt-sub-text rt-sub-gredient">our speciality</div>
                   </div>
-                  <h2 className="rt-gap-off rt-heading-para-gap">Building a future of organized, stress-free teamwork</h2>
+                  <h2 className="rt-gap-off rt-heading-para-gap">Building digital solutions that drive real business growth</h2>
                 </div>
                 <div className="rt-hero-v4-speciality-top-para">
-                  <p className="rt-gap-off">Building a future of organized, stress-free teamwork starts with simplifying how projects are managed</p>
+                  <p className="rt-gap-off">We are a community of designers, developers, and marketers dedicated to delivering quality solutions and ensuring customer satisfaction.</p>
                 </div>
               </div>
 
               <div className="w-layout-grid rt-benefits-v2-card-wrap">
                 {[
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: '24/7 Virtual support', desc: 'Enables teams to communicate, share files, and track progress in real time, ensuring everyone stays aligned.' },
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, title: 'Smart task tracking', desc: 'Provides clear visibility of deadlines, priorities, and responsibilities, helping teams stay organized and avoid delays.' },
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Integration & automation', desc: 'Connects with popular tools and automates repetitive tasks, saving time and boosting overall productivity.' },
+                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Web Design & Development', desc: 'Precision-crafted websites — custom builds, WordPress, and e-commerce — designed to engage your audience across every device.' },
+                  { wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, title: 'Mobile App Development', desc: 'iOS and Android apps built with cutting-edge technology and user-centric design, for brands across the globe.' },
+                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Digital Marketing & SEO', desc: 'Complete digital marketing and SEO strategies that improve visibility, drive quality traffic, and grow your online revenue.' },
                 ].map(({ wid, icon, title, desc }) => (
                   <div key={wid} data-w-id={wid} style={{ opacity: 0 }} className="w-layout-vflex rt-benefits-v2-card rt-two">
                     <div className="rt-benefits-v2-card-image">

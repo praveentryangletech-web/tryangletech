@@ -15,16 +15,16 @@ export default function WhyChooseUs() {
                 <div className="rt-sub-text rt-sub-gredient">Why choose us</div>
               </div>
               <h2 className="rt-gap-off rt-desktop-text-center">
-                Boost productivity through organized <span className="rt-color-periwinkle-gray">task management</span>
+                Your trusted partner for digital <span className="rt-color-periwinkle-gray">growth and innovation</span>
               </h2>
             </div>
 
             <div data-w-id="7755f54e-a063-7fd1-4011-b0bcae52ff74" className="rt-choose-v3-wrap">
               {[
-                { icon: `${A}/6916f56a114dfcf4637d80a2_Vector (36).svg`, title: 'Centralized workspace', desc: 'Manage all projects, tasks, and files in one platform for complete visibility and control.' },
-                { icon: `${A}/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg`, title: 'Seamless collaboration', desc: 'Enable teams to communicate, share updates, and work together in real time.' },
-                { icon: `${A}/6916f56ad8ac594c1debbb97_Vector (37).svg`, title: 'Automation & integrations', desc: 'Automate repetitive tasks and connect with tools your team already uses.' },
-                { icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Data-driven insights', desc: 'Get smart reports and analytics to track performance and improve efficiency.' },
+                { icon: `${A}/6916f56a114dfcf4637d80a2_Vector (36).svg`, title: '7+ Years of Experience', desc: 'Over 7 years of delivering high-quality web, app, and software solutions to businesses across 5+ countries.' },
+                { icon: `${A}/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg`, title: '750+ Happy Clients', desc: 'Trusted by 750+ happy clients worldwide — from startups to established businesses across multiple industries.' },
+                { icon: `${A}/6916f56ad8ac594c1debbb97_Vector (37).svg`, title: '350+ Websites Delivered', desc: 'From business websites to e-commerce stores and custom web apps — 350+ successful projects and counting.' },
+                { icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Full-Service IT Company', desc: 'Web development, mobile apps, digital marketing, SEO, graphics, and custom software — everything your business needs under one roof.' },
               ].map(({ icon, title, desc }) => (
                 <div key={title} className="rt-choose-v3-item">
                   <div className="rt-choose-v3-item-icon">

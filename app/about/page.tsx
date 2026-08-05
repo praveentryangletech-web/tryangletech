@@ -38,11 +38,11 @@ export default function AboutPage() {
 
         <OurProcess />
 
-        <AboutFAQ />
 
         <FooterCTA />
+        <AboutFAQ />
 
-        <AboutBlog />
+        {/* <AboutBlog /> */}
 
       </main>
 

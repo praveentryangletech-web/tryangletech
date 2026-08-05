@@ -182,7 +182,7 @@ export default function Benefits() {
                   data-w-id="1c6222f6-a97f-fefb-0d46-bedad32c97e7"
                   className="rt-our-benefits-one-bottom rt-padding rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">SEO & analytics built-in</div>
+                    <div className="rt-text-style-h6">Graphics Designing</div>
                   </div>
                   <div className="rt-2-bg">
                     <Image
@@ -194,7 +194,7 @@ Mask group
                       className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
-                    Gain complete visibility into your website's performance with real-time SEO and traffic reports.
+                    Eye-catching logos, branding, and visuals crafted by expert designers to leave a lasting impression.
                   </p>
                   <div className="rt-our-benefits-two-bottom-content">
                     <div
@@ -256,10 +256,10 @@ Mask group
                 <div
                   className="rt-our-benefits-one-bottom rt-padding rt-2 rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">On-time delivery</div>
+                      <div className="rt-text-style-h6">Custom Software Development</div>
                   </div>
                   <p className="rt-gap-off">
-                    Stay updated on every milestone with clear timelines and progress tracking.
+                    Invent, integrate, build, and upgrade your ideas into high-quality, scalable software solutions.
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>
@@ -273,7 +273,7 @@ Mask group
                       data-w-id="7c8a7acf-2849-d94b-d213-0bc0279e96cb"
                       className="rt-small-btn-wrap">
                       <div className="rt-small-btn-main" style={{}}>
-                        <div className="rt-small-btn-text">On Track</div>
+                        <div className="rt-small-btn-text">In Progress</div>
                         <div className="rt-btn-arrow-v2">
                           <Image
                             src="/Taskopia_files/68ef5d8e21f7535e98837c04_Vector 503.svg"

@@ -151,10 +151,16 @@ export default function Navbar() {
                   </div>
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    aria-labelledby="w-dropdown-toggle-1">
+                    aria-labelledby="w-dropdown-toggle-1" style={{ width: "max-content", minWidth: "200px" }}>
                     <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
                     <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
-                    <Link href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</Link>
+                    <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
+                    <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software</Link>
+                    <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>WEB DEVELOPMENT</Link>
+                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
+                    <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
+                    <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
+                    <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
                   </nav>
                 </div>
 
@@ -399,10 +405,16 @@ export default function Navbar() {
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy"  />
                           </div>
                         </div>
-                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5">
+                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "200px" }}>
                           <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
                           <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
-                          <Link href="/service/service-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Service three</Link>
+                          <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
+                          <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software</Link>
+                          <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>WEB DEVELOPMENT</Link>
+                          <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
+                          <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
+                          <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
+                          <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
                         </nav>
                       </div>
 

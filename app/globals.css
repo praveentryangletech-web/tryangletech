@@ -145,7 +145,7 @@ body {
   will-change: transform;
 }
 
-.rt-text-marquee-train:hover {
+.rt-text-marquee-wrapper:hover .rt-text-marquee-train {
   animation-play-state: paused;
 }
 

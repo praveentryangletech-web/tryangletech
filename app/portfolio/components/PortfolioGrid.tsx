@@ -246,6 +246,7 @@ export default function PortfolioGrid() {
                       width={410}
                       height={290}
                       loading="lazy"
+                      unoptimized={project.image.endsWith('.gif')}
                       style={{ height: '220px' }}
                     />
                   </div>

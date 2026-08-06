@@ -34,10 +34,11 @@ export default function Footer() {
               <div data-w-id="242c4689-7f59-0a17-a87d-3a8866872649" className="rt-cta-small-text-wrapper">
                 <div className="rt-pricing-samll-text-copy">
                   <div>
-                    <img
+                    <Image
                       src="/Home2_files/691f0869e7b3ddb1373ab145_Vector (42).svg"
-                      loading="lazy"
-                      alt=""
+                      width={24}
+                      height={24}
+                      alt="Icon"
                     />
                   </div>
                   <div className="rt-text-color-white">
@@ -46,10 +47,11 @@ export default function Footer() {
                 </div>
                 <div className="rt-pricing-samll-text-copy">
                   <div>
-                    <img
+                    <Image
                       src="/Home2_files/691f086a07c1090bebcd23b4_Vector (43).svg"
-                      loading="lazy"
-                      alt=""
+                      width={24}
+                      height={24}
+                      alt="Icon"
                     />
                   </div>
                   <div className="rt-text-color-white">
@@ -62,24 +64,30 @@ export default function Footer() {
               id="w-node-_1f66be3f-ed37-32ed-3724-e3947469d0c1-6b53c1d1"
               className="rt-cta-right rt-position-relative rt-mobile-display-none">
               <div data-w-id="b0c8cabf-7792-befb-1b5b-89fced141e73" className="rt-position-relative rt-4">
-                <img
+                <Image
                   src="/Home2_files/691edca0e8b035362336016b_mobile.webp"
-                  loading="lazy"
-                  alt=""
+                  width={400}
+                  height={400}
+                  style={{ width: '100%', height: 'auto' }}
+                  alt="Mobile Mockup"
                 />
               </div>
               <div data-w-id="c94a7726-8e42-7a34-542e-a621ddfb8e56" className="rt-smal-cta rt-up-down">
-                <img
+                <Image
                   src="/Home2_files/691edca01e4ec6ffb3d85cbc_Frame 1597884145.webp"
-                  loading="lazy"
-                  alt=""
+                  width={200}
+                  height={200}
+                  style={{ width: '100%', height: 'auto' }}
+                  alt="Floating Element"
                 />
               </div>
               <div className="rt-smal-cta-overlay">
-                <img
+                <Image
                   src="/Home2_files/691ee5b6b223aeba002d25e2_Group 2085663586.webp"
-                  loading="lazy"
-                  alt=""
+                  width={200}
+                  height={200}
+                  style={{ width: '100%', height: 'auto' }}
+                  alt="Floating Element"
                 />
               </div>
             </div>
@@ -242,9 +250,10 @@ export default function Footer() {
                 target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg"
-                    loading="lazy"
+                    width={24}
+                    height={24}
                     alt="LinkedIn"
                     style={{ filter: 'invert(1) brightness(2)' }}
                   />
@@ -259,9 +268,10 @@ export default function Footer() {
                 target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ff46366a330717f35394cc_Kloudera-team-icon.svg"
-                    loading="lazy"
+                    width={24}
+                    height={24}
                     alt="Instagram"
                     style={{ filter: 'invert(1) brightness(2)' }}
                   />
@@ -276,9 +286,10 @@ export default function Footer() {
                 target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">
-                  <img
+                  <Image
                     src="/Taskopia_files/68ff46366a330717f35394d0_Kloudera-team-icon.svg"
-                    loading="lazy"
+                    width={24}
+                    height={24}
                     alt="Facebook"
                     style={{ filter: 'invert(1) brightness(2)' }}
                   />

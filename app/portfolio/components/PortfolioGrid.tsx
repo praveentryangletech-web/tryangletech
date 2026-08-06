@@ -14,21 +14,36 @@ const authorAvatars: Record<string, string> = {
   "logistics-tracker":  "/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp",
 };
 
+const categories = [
+  "All",
+  "Business Website", 
+  "E-Commerce Website",
+  "Landing Website",
+  "App Development",
+  "Software Development",
+  "Graphic Design"
+];
+
 export default function PortfolioGrid() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
-
-  const categories = useMemo(() => {
-    const cats = new Set(projects.map(p => p.category));
-    return ["All", ...Array.from(cats)];
-  }, []);
+  
+  // Infinite scroll state
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return projects;
     return projects.filter(p => p.category === activeFilter);
   }, [activeFilter]);
 
-  // Scroll-reveal: re-observe every time filter changes
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(9);
+  }, [activeFilter]);
+
+  // Scroll-reveal: re-observe every time filter or visibleCount changes
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -42,12 +57,11 @@ export default function PortfolioGrid() {
       { threshold: 0.08 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
+    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll:not(.animate-fade-in-up)");
 
     // Delay slightly so Next.js finishes layout before we measure positions
     const timer = setTimeout(() => {
       elements?.forEach((el) => {
-        el.classList.remove("animate-fade-in-up");
         // If element is already in viewport (e.g. after client-side navigation),
         // reveal it immediately — don't wait for IntersectionObserver
         const rect = el.getBoundingClientRect();
@@ -63,7 +77,31 @@ export default function PortfolioGrid() {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, [activeFilter]);
+  }, [activeFilter, visibleCount]);
+
+  // Infinite scroll observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoadingMore && visibleCount < filteredProjects.length) {
+          setIsLoadingMore(true);
+          setTimeout(() => {
+            setVisibleCount(prev => prev + 6);
+            setIsLoadingMore(false);
+          }, 500);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isLoadingMore, visibleCount, filteredProjects.length]);
 
   return (
     <div ref={sectionRef}>
@@ -149,6 +187,20 @@ export default function PortfolioGrid() {
             grid-template-columns: 1fr !important;
           }
         }
+
+        /* ── Loading Spinner ── */
+        @keyframes spin { 
+          to { transform: rotate(360deg); } 
+        }
+        .pf-spinner {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 3px solid #e5e7eb;
+          border-top-color: var(--vivid-blue, #1833fe);
+          animation: spin 0.7s linear infinite;
+          margin: 0 auto;
+        }
       `}</style>
 
       <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -173,7 +225,7 @@ export default function PortfolioGrid() {
             className="rt-blog-v3-card-main w-dyn-items pf-grid"
             key={activeFilter}
           >
-            {filteredProjects.map((project, idx) => (
+            {filteredProjects.slice(0, visibleCount).map((project, idx) => (
               <div
                 key={`${activeFilter}-${project.slug}`}
                 role="listitem"
@@ -239,6 +291,17 @@ export default function PortfolioGrid() {
             ))}
           </div>
         </div>
+
+        {/* Infinite Scroll Sentinel & Loading indicator */}
+        {visibleCount < filteredProjects.length ? (
+          <div ref={sentinelRef} style={{ height: '20px', display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+            {isLoadingMore && <div className="pf-spinner"></div>}
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center', fontSize: '13px', color: '#9ca3af', padding: '1.5rem 0' }}>
+            ✓ All projects loaded
+          </div>
+        )}
 
       </div>
     </div>

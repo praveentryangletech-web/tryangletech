@@ -9,6 +9,7 @@ export interface Project {
   role?: string;
   liveUrl?: string;
   content?: string;
+  hasLiveUrl?: boolean;
 }
 
 export const projects: Project[] = [
@@ -46,17 +47,7 @@ export const projects: Project[] = [
     role: "Web Design & Development",
     liveUrl: "https://7ddesignstudios.in",
   },
-  {
-    slug: "ansh-exports",
-    title: "Ansh Exports",
-    category: "Business Website",
-    image: "/portfolio/ansh-exports.jpg",
-    description: "An export company website with product listings and international inquiry support.",
-    client: "Ansh Exports",
-    duration: "2 Weeks",
-    role: "Web Design & Development",
-    liveUrl: "https://anshexports.in",
-  },
+
   {
     slug: "stonils",
     title: "Stonils",
@@ -279,15 +270,134 @@ export const projects: Project[] = [
     role: "Landing Page Design & Development",
     liveUrl: "https://secureedgelife.in",
   },
+
+  // App Development (6 projects shown on old site)
   {
-    slug: "devrshree",
-    title: "Devrshree",
+    slug: "app-dev-seller",
+    title: "Seller App",
+    category: "App Development",
+    image: "/portfolio/app-dev-1.jpg",
+    description: "A seller-side mobile application with inventory management, order tracking, and real-time dashboard.",
+    client: "Tryangletech Client",
+    duration: "6 Weeks",
+    role: "Mobile App Development",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "app-dev-user",
+    title: "User App",
+    category: "App Development",
+    image: "/portfolio/app-dev-2.jpg",
+    description: "A user-facing mobile application with seamless UI, product browsing, and order management.",
+    client: "Tryangletech Client",
+    duration: "6 Weeks",
+    role: "Mobile App Development",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "app-dev-3",
+    title: "Mobile App Project",
+    category: "App Development",
+    image: "/portfolio/app-dev-3.jpg",
+    description: "A cross-platform mobile application built for seamless performance on iOS and Android.",
+    client: "Tryangletech Client",
+    duration: "8 Weeks",
+    role: "Mobile App Development",
+    hasLiveUrl: false,
+  },
+
+  // Software Development (3 projects shown on old site)
+  {
+    slug: "software-sevabridge",
+    title: "Seva Bridge",
+    category: "Software Development",
+    image: "/portfolio/software-sevabridge.jpg",
+    description: "A service bridge platform connecting service providers with customers through a streamlined digital workflow.",
+    client: "Tryangletech Client",
+    duration: "8 Weeks",
+    role: "Custom Software Development",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "software-edms",
+    title: "My eDMS",
+    category: "Software Development",
+    image: "/portfolio/software-edms.jpg",
+    description: "A Document Management System built for efficient document storage, retrieval, and workflow automation.",
+    client: "Tryangletech Client",
+    duration: "10 Weeks",
+    role: "Custom Software Development",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "software-eoffice",
+    title: "My eOffice",
+    category: "Software Development",
+    image: "/portfolio/software-eoffice.jpg",
+    description: "A digital office management platform for streamlining internal operations and document workflows.",
+    client: "Tryangletech Client",
+    duration: "10 Weeks",
+    role: "Custom Software Development",
+    hasLiveUrl: false,
+  },
+
+  // Graphic Design (6 projects shown on old site)
+  {
+    slug: "graphic-shrahav",
+    title: "Shrahav Mobile App Design",
+    category: "Graphic Design",
+    image: "/portfolio/graphic-shrahav.jpg",
+    description: "Complete UI/UX and graphic design for a mobile application including screens, icons, and brand identity.",
+    client: "Tryangletech Client",
+    duration: "3 Weeks",
+    role: "Graphic Design & UI/UX",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "graphic-sasa",
+    title: "SASA Brand Design",
+    category: "Graphic Design",
+    image: "/portfolio/graphic-sasa.jpg",
+    description: "Brand identity and graphic design including logo, social media posts, and marketing collateral.",
+    client: "Tryangletech Client",
+    duration: "2 Weeks",
+    role: "Graphic Design & Branding",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "graphic-greenpackwell",
+    title: "Greenpackwell Campaign",
+    category: "Graphic Design",
+    image: "/portfolio/graphic-greenpackwell.jpg",
+    description: "Social media campaign design and marketing post creation for a packaging brand.",
+    client: "Tryangletech Client",
+    duration: "2 Weeks",
+    role: "Graphic Design",
+    hasLiveUrl: false,
+  },
+  {
+    slug: "graphic-uttarayan",
+    title: "My eOffice Uttarayan",
+    category: "Graphic Design",
+    image: "/portfolio/graphic-uttarayan.jpg",
+    description: "Festival-themed graphic design and video production for a corporate brand campaign.",
+    client: "Tryangletech Client",
+    duration: "1 Week",
+    role: "Graphic Design & Video",
+    hasLiveUrl: false,
+  },
+
+  // Landing Website — add this one missing from old site
+  {
+    slug: "varnet-landing",
+    title: "Varnet Enterprise Landing",
     category: "Landing Website",
-    image: "/portfolio/devrshree.jpg",
-    description: "A landing page built for brand awareness and lead capture for a lifestyle brand.",
-    client: "Devrshree",
+    image: "/portfolio/varnet-enterprise.jpg",
+    description: "A high-converting landing page for Varnet Enterprise to drive product enquiries and online sales.",
+    client: "Varnet Enterprise",
     duration: "1 Week",
     role: "Landing Page Design & Development",
-    liveUrl: "https://devrshree.com",
+    liveUrl: "https://varnetenterprise.com",
+    hasLiveUrl: true,
   },
 ];

@@ -1,87 +1,94 @@
-export interface PortfolioProject {
-  id: string;
+export interface Project {
   slug: string;
   title: string;
   category: string;
   image: string;
   description: string;
-  client: string;
-  duration: string;
-  role: string;
-  content: string;
 }
 
-export const projects: PortfolioProject[] = [
-  { 
-    id: "1",
-    slug: "fintech-dashboard",
-    title: "Fintech Dashboard", 
-    category: "Web App", 
-    image: "/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp",
-    description: "A comprehensive financial dashboard that empowers users to track their expenses, investments, and overall financial health in real-time.",
-    client: "FinServe Inc.",
-    duration: "4 Months",
-    role: "Full Stack Development & UI/UX",
-    content: "Our team developed a robust fintech dashboard designed to simplify complex financial data. The platform integrates securely with multiple banking APIs to provide real-time updates. We focused heavily on data visualization, ensuring that users can easily understand their spending habits and investment growth at a glance. The backend was built for high scalability and top-tier security compliance."
+export const projects: Project[] = [
+  {
+    slug: "vh-accounting",
+    title: "VH Accounting",
+    category: "Business Website",
+    image: "/portfolio/vh-accounting.jpg",
+    description: "A professional business website for an accounting firm, built for credibility and lead generation.",
   },
-  { 
-    id: "2",
-    slug: "ecommerce-mobile",
-    title: "E-Commerce Mobile", 
-    category: "Mobile App", 
-    image: "/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp",
-    description: "A seamless and intuitive mobile shopping experience with advanced filtering, personalized recommendations, and instant checkout.",
-    client: "RetailHub",
-    duration: "6 Months",
-    role: "Mobile App Development",
-    content: "We partnered with RetailHub to revamp their mobile e-commerce presence. The new app features a lightning-fast native experience, augmented reality (AR) product previews, and a machine-learning-driven recommendation engine. By optimizing the checkout flow, we helped increase their conversion rate by over 25% within the first month of launch."
+  {
+    slug: "varnet-enterprise",
+    title: "Varnet Enterprise",
+    category: "E-Commerce Website",
+    image: "/portfolio/varnet-enterprise.jpg",
+    description: "A full-featured e-commerce platform built for product listing, ordering, and online sales.",
   },
-  { 
-    id: "3",
-    slug: "healthtech-portal",
-    title: "HealthTech Portal", 
-    category: "Web Platform", 
-    image: "/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp",
-    description: "A secure patient-doctor portal facilitating remote consultations, medical record management, and prescription tracking.",
-    client: "MediCare Solutions",
-    duration: "8 Months",
-    role: "Platform Engineering",
-    content: "The HealthTech Portal bridges the gap between healthcare providers and patients. It features end-to-end encrypted video consultations, secure messaging, and a highly accessible medical records dashboard. Strict adherence to HIPAA compliance was maintained throughout the development lifecycle, ensuring patient data privacy."
+  {
+    slug: "tattvam-arts",
+    title: "Tattvam Arts",
+    category: "E-Commerce Website",
+    image: "/portfolio/tattvam-arts.jpg",
+    description: "An e-commerce store for artisanal products with a clean, visually rich shopping experience.",
   },
-  { 
-    id: "4",
-    slug: "ai-marketing-tool",
-    title: "AI Marketing Tool", 
-    category: "SaaS", 
-    image: "/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp",
-    description: "An AI-powered SaaS platform that automates digital marketing campaigns, generates copy, and optimizes ad spend.",
-    client: "MarketGenius",
-    duration: "5 Months",
-    role: "Product Design & Development",
-    content: "MarketGenius approached us to build a SaaS tool that leverages generative AI for marketing agencies. The platform automates A/B testing, generates high-converting ad copy, and automatically adjusts ad budgets based on performance metrics. The intuitive interface allows marketers to manage complex campaigns with minimal effort."
+  {
+    slug: "secure-edge-life",
+    title: "Secure Edge Life",
+    category: "Landing Website",
+    image: "/portfolio/secure-edge-life.jpg",
+    description: "A high-converting landing page designed to drive leads and build trust for a security brand.",
   },
-  { 
-    id: "5",
-    slug: "smart-crm",
-    title: "Smart CRM", 
-    category: "Enterprise App", 
-    image: "/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp",
-    description: "A customized Customer Relationship Management tool designed for large sales teams to track leads and close deals efficiently.",
-    client: "Global Sales Corp",
-    duration: "7 Months",
-    role: "Enterprise Solutions",
-    content: "This Smart CRM was built from the ground up to handle massive datasets for enterprise sales teams. It includes automated lead scoring, deep email integration, and customizable sales pipelines. The system also generates comprehensive sales forecasts and reports, giving management clear visibility into team performance."
+  {
+    slug: "evon-ceramics",
+    title: "Evon Ceramics",
+    category: "Business Website",
+    image: "/portfolio/evon-ceramics.jpg",
+    description: "A product showcase website for a ceramics manufacturer, focused on B2B enquiry generation.",
   },
-  { 
-    id: "6",
-    slug: "logistics-tracker",
-    title: "Logistics Tracker", 
-    category: "Mobile App", 
-    image: "/Home2_files/69254371136c64c2548fd85e_taskopiya-home-two-project-over.webp",
-    description: "A real-time fleet management and delivery tracking application for enterprise logistics companies.",
-    client: "Swift Logistics",
-    duration: "4 Months",
-    role: "Mobile App Development",
-    content: "The Logistics Tracker app provides drivers with optimized routing and real-time traffic updates while giving dispatchers a bird's-eye view of the entire fleet. Features include proof of delivery via signature and photo, barcode scanning, and offline mode capabilities for drivers in remote areas."
+  {
+    slug: "stonils",
+    title: "Stonils",
+    category: "Business Website",
+    image: "/portfolio/stonils.jpg",
+    description: "A modern business website for a stone and marble supplier, with product catalogue and contact integration.",
+  },
+  {
+    slug: "sahjanand-test-lab",
+    title: "Sahjanand Test Lab",
+    category: "Business Website",
+    image: "/portfolio/sahjanand-test-lab.jpg",
+    description: "A professional website for a diagnostic lab, designed for trust-building and appointment enquiries.",
+  },
+  {
+    slug: "nira-energy",
+    title: "Nira Energy",
+    category: "Business Website",
+    image: "/portfolio/nira-energy.jpg",
+    description: "A clean corporate website for an energy solutions company with service listings and contact forms.",
+  },
+  {
+    slug: "7d-design-studios",
+    title: "7D Design Studios",
+    category: "Business Website",
+    image: "/portfolio/7d-design-studios.jpg",
+    description: "A portfolio and service website for an interior design studio, showcasing their work and expertise.",
+  },
+  {
+    slug: "pious-events",
+    title: "Pious Events",
+    category: "Business Website",
+    image: "/portfolio/pious-events.jpg",
+    description: "An event management company website with gallery, services, and inquiry form.",
+  },
+  {
+    slug: "devrshree",
+    title: "Devrshree",
+    category: "Landing Website",
+    image: "/portfolio/devrshree.jpg",
+    description: "A landing page built for brand awareness and lead capture for a lifestyle brand.",
+  },
+  {
+    slug: "ansh-exports",
+    title: "Ansh Exports",
+    category: "Business Website",
+    image: "/portfolio/ansh-exports.jpg",
+    description: "An export company website with product listings and international inquiry support.",
   },
 ];

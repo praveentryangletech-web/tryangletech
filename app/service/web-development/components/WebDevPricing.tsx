@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const SA = '/service3-assets';
 
-export default function ServiceOnePricing() {
+export default function WebDevPricing() {
   return (
     <>
       <section className="rt-services-v3 rt-position-relative">
@@ -32,12 +32,11 @@ export default function ServiceOnePricing() {
                     <div className="rt-tab-bottom-line rt-1"></div>
                     <div className="rt-color-vivid-blue">01</div>
                     <div className="rt-text-style-h6">
-                      Project planning &amp; scheduling
+                      Custom Web Solutions
                     </div>
                     <div className="rt-service-v3-samll-para rt-overflow-hidden rt-1">
                       <p className="rt-gap-off">
-                        Plan tasks easily and keep everyone aligned with simple
-                        scheduling tools.
+                        We build tailored web applications and websites that perfectly align with your business goals.
                       </p>
                     </div>
                   </Link>
@@ -54,12 +53,11 @@ export default function ServiceOnePricing() {
                     <div className="rt-tab-bottom-line rt-2"></div>
                     <div className="rt-color-vivid-blue">02</div>
                     <div className="rt-text-style-h6">
-                      Collaboration &amp; communication
+                      Responsive &amp; Scalable
                     </div>
                     <div className="rt-service-v3-samll-para rt-overflow-hidden rt-2">
                       <p className="rt-gap-off">
-                        Share updates smoothly and help your team stay connected
-                        in one place.
+                        Ensure your platform looks great on any device and scales effortlessly as your traffic grows.
                       </p>
                     </div>
                   </Link>
@@ -76,12 +74,11 @@ export default function ServiceOnePricing() {
                     <div className="rt-tab-bottom-line rt-3"></div>
                     <div className="rt-color-vivid-blue">03</div>
                     <div className="rt-text-style-h6">
-                      Automation &amp; progress tracking
+                      High Performance &amp; Security
                     </div>
                     <div className="rt-service-v3-samll-para rt-overflow-hidden rt-3">
                       <p className="rt-gap-off">
-                        Automate routine work and track team progress with
-                        clear, simple tools.
+                        Our web solutions are optimized for lightning-fast speeds and secured with robust protocols.
                       </p>
                     </div>
                   </Link>
@@ -106,16 +103,13 @@ export default function ServiceOnePricing() {
                           <h2
                             data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3a"
                             className="rt-gap-off">
-                            Simple, transparent pricing for smarter automation
+                            Modern web development for your digital growth
                           </h2>
                         </div>
                         <p
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3c"
                           className="rt-gap-off rt-services-v3-para">
-                          Our task management service helps you organize
-                          projects, streamline workflows, and collaborate
-                          effortlessly. Stay productive with automation,
-                          reminders, and real-time progress tracking
+                          Our web development services help you establish a strong online presence, engage your audience, and drive conversions effortlessly. Stay ahead with modern tech stacks, custom integrations, and seamless user experiences.
                         </p>
                         <div
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3e"
@@ -168,14 +162,11 @@ export default function ServiceOnePricing() {
                         </div>
                         <div className="rt-heading-para-gap">
                           <h2 className="rt-gap-off">
-                            Simple, transparent pricing for smarter automation
+                            Modern web development for your digital growth
                           </h2>
                         </div>
                         <p className="rt-gap-off rt-services-v3-para">
-                          Our task management service helps you organize
-                          projects, streamline workflows, and collaborate
-                          effortlessly. Stay productive with automation,
-                          reminders, and real-time progress tracking
+                          Our web development services help you establish a strong online presence, engage your audience, and drive conversions effortlessly. Stay ahead with modern tech stacks, custom integrations, and seamless user experiences.
                         </p>
                         <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
                           <Link
@@ -222,14 +213,11 @@ export default function ServiceOnePricing() {
                         </div>
                         <div className="rt-heading-para-gap">
                           <h2 className="rt-gap-off">
-                            Simple, transparent pricing for smarter automation
+                            Modern web development for your digital growth
                           </h2>
                         </div>
                         <p className="rt-gap-off rt-services-v3-para">
-                          Our task management service helps you organize
-                          projects, streamline workflows, and collaborate
-                          effortlessly. Stay productive with automation,
-                          reminders, and real-time progress tracking
+                          Our web development services help you establish a strong online presence, engage your audience, and drive conversions effortlessly. Stay ahead with modern tech stacks, custom integrations, and seamless user experiences.
                         </p>
                         <div className="rt-button-para-gap rt-overflow-hidden rt-button-left">
                           <Link

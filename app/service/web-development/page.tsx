@@ -56,9 +56,9 @@ const faqs = [
 ];
 
 import WebDevHero from './components/WebDevHero';
-import WebDevMarquee from './components/WebDevMarquee';
+
 import WebDevSpeciality from './components/WebDevSpeciality';
-import WebDevWhyChoose from './components/WebDevWhyChoose';
+
 import WebDevFeatures from './components/WebDevFeatures';
 import WebDevServices from './components/WebDevServices';
 import WebDevIntegration from './components/WebDevIntegration';
@@ -66,6 +66,8 @@ import WebDevPricing from './components/WebDevPricing';
 import WebDevFAQ from './components/WebDevFAQ';
 import WebDevCTA from './components/WebDevCTA';
 import WebflowInit from "../../common/WebflowInit";
+
+import HomeTwoFAQ from '../../home-two/components/HomeTwoFAQ';
 
 export default function WebDevelopmentPage() {
 
@@ -76,13 +78,14 @@ export default function WebDevelopmentPage() {
 
       <main>
         <WebDevHero />
-        <WebDevMarquee />
+
         <WebDevSpeciality />
-        <WebDevWhyChoose />
+
         <WebDevFeatures />
         <WebDevServices />
         <WebDevIntegration />
         <WebDevFAQ />
+        <HomeTwoFAQ/>
         {/* <WebDevCTA /> */}
       </main>
 

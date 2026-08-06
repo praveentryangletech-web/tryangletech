@@ -69,32 +69,6 @@ import WebflowInit from "../../common/WebflowInit";
 
 export default function WebDevelopmentPage() {
 
-
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-wf-page",
-      "68eddb6fb6de895fcd6c3914",
-    );
-    document.documentElement.setAttribute(
-      "data-wf-site",
-      "68c3feed3b3e541e7d5c098a",
-    );
-    const initWebflow = setInterval(() => {
-      const Webflow = (window as any).Webflow;
-      if (typeof window !== "undefined" && Webflow && Webflow.require) {
-        const ix2 = Webflow.require("ix2");
-        if (ix2) {
-          clearInterval(initWebflow);
-          Webflow.destroy();
-          Webflow.ready();
-          ix2.init();
-          document.dispatchEvent(new Event("readystatechange"));
-        }
-      }
-    }, 100);
-    return () => clearInterval(initWebflow);
-  }, []);
-
   return (
     <>
       <WebflowInit pageId="68eddb6fb6de895fcd6c3914" />

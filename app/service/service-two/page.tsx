@@ -67,7 +67,7 @@ import ServiceTwoFAQ from './components/ServiceTwoFAQ';
 import WebflowInit from "../../common/WebflowInit";
 
 export default function ServiceTwoPage() {
-  
+
 
   useEffect(() => {
     document.documentElement.setAttribute(

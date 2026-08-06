@@ -84,6 +84,7 @@ export default function WebDevelopmentPage() {
         <WebDevFeatures />
         <WebDevServices />
         <WebDevIntegration />
+        <WebDevPricing />
         <WebDevFAQ />
         <HomeTwoFAQ/>
         {/* <WebDevCTA /> */}

@@ -16,7 +16,7 @@ export async function GET() {
     { url: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg", filename: "figma.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg", filename: "google-ads.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg", filename: "stripe.svg" },
-    { url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg", filename: "meta.svg" }
+    { url: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg", filename: "meta.svg" }
   ];
 
   try {

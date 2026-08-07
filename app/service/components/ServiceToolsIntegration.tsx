@@ -162,7 +162,7 @@ export default function ServiceToolsIntegration() {
                 <div>
                   <img
                     alt="Meta"
-                    src="/tech-icons/meta.png"
+                    src="/tech-icons/meta.svg"
                     loading="lazy"
                     className="rt-itegration-logo reveal-on-scroll"
                     style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}

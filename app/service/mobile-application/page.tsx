@@ -1,35 +1,109 @@
 "use client";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
+
+
+const SA = "/service3-assets";
+
+const faqs = [
+  {
+    q: "Does it integrate with other tools?",
+    a: "AI automation uses artificial intelligence to perform repetitive tasks, analyze data, and optimize processes, enabling businesses to save time, reduce errors, and make smarter, faster decisions efficiently.",
+  },
+  {
+    q: "How can task management software improve productivity?",
+    a: "AI can automate repetitive tasks like data entry, customer support, report generation, inventory management, and workflow optimization, allowing teams to focus on strategic, high-value activities and business growth.",
+  },
+  {
+    q: "Can I collaborate with my team using this platform?",
+    a: "Yes, AI automation is ideal for small businesses. It streamlines operations, reduces manual work, improves efficiency, and provides actionable insights, helping smaller teams compete and grow effectively.",
+  },
+  {
+    q: "Is this suitable for small teams and enterprises?",
+    a: "Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors.",
+  },
+  {
+    q: "Can I track project deadlines?",
+    a: "Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations.",
+  },
+];
+
+const testimonials = [
+  {
+    img: `${SA}/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp`,
+    name: "Jonathan Keller",
+    title: '"Good sales growth"',
+    text: '"This tool transformed how our team works! Tasks are organized, deadlines are clear, and collaboration is smoother than ever. Productivity has never been this high."',
+  },
+  {
+    img: `${SA}/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp`,
+    name: "Rebecca Lin",
+    title: '"Faster support"',
+    text: '"An absolute game-changer for project management. We can track progress in real-time, avoid delays, and deliver projects on schedule with less stress."',
+  },
+  {
+    img: `${SA}/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp`,
+    name: "Mark Wilson",
+    title: '"Smooth workflow"',
+    text: '"Simple, intuitive, and powerful—our team now manages tasks without confusion. It keeps everyone aligned and helps us achieve more in less time."',
+  },
+];
+
+import MobileApplicationHero from './components/MobileApplicationHero';
+import MobileApplicationSimplified from './components/MobileApplicationSimplified';
+import MobileApplicationOurServices from './components/MobileApplicationOurServices';
+import MobileApplicationCases from './components/MobileApplicationCases';
+import MobileApplicationFeatures from './components/MobileApplicationFeatures';
+import MobileApplicationCollaboration from './components/MobileApplicationCollaboration';
+import MobileApplicationTestimonial from './components/MobileApplicationTestimonial';
+import MobileApplicationFAQ from './components/MobileApplicationFAQ';
 import WebflowInit from "../../common/WebflowInit";
 
-import MobileAppHero from "./components/MobileAppHero";
-import MobileAppMarquee from "./components/MobileAppMarquee";
-import MobileAppAgent from "./components/MobileAppAgent";
-import MobileAppAbout from "./components/MobileAppAbout";
-import MobileAppFeatures from "./components/MobileAppFeatures";
-import MobileAppChooseUs from "./components/MobileAppChooseUs";
-import MobileAppSolution from "./components/MobileAppSolution";
-import MobileAppToolsIntegration from "./components/MobileAppToolsIntegration";
-import MobileAppPricing from "./components/MobileAppPricing";
-import MobileAppFaq from "./components/MobileAppFaq";
-
 export default function MobileApplicationPage() {
+
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-wf-page",
+      "68eddba421ea11fa0687f4f0",
+    );
+    document.documentElement.setAttribute(
+      "data-wf-site",
+      "68c3feed3b3e541e7d5c098a",
+    );
+
+    const initWebflow = setInterval(() => {
+      const Webflow = (window as any).Webflow;
+      if (typeof window !== "undefined" && Webflow && Webflow.require) {
+        const ix2 = Webflow.require("ix2");
+        if (ix2) {
+          clearInterval(initWebflow);
+          Webflow.destroy();
+          Webflow.ready();
+          ix2.init();
+          document.dispatchEvent(new Event("readystatechange"));
+        }
+      }
+    }, 100);
+    return () => clearInterval(initWebflow);
+  }, []);
+
   return (
     <>
-      <WebflowInit pageId="68eddb2fff5c773ab7afbc89" />
+      <WebflowInit pageId="68eddba421ea11fa0687f4f0" />
+
 
       <main>
-        <MobileAppHero />
-        <MobileAppMarquee />
-        <MobileAppAgent />
-        <MobileAppAbout />
-        <MobileAppFeatures />
-        <MobileAppChooseUs />
-        <MobileAppSolution />
-        <MobileAppToolsIntegration />
-        <MobileAppPricing />
-        <MobileAppFaq />
+        <MobileApplicationHero />
+        <MobileApplicationSimplified />
+        <MobileApplicationOurServices />
+        <MobileApplicationCases />
+        <MobileApplicationFeatures />
+        <MobileApplicationCollaboration />
+        <MobileApplicationTestimonial />
+        <MobileApplicationFAQ />
       </main>
+
 
     </>
   );

@@ -157,7 +157,7 @@ export default function Navbar() {
                     <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
                     <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software</Link>
                     <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>WEB DEVELOPMENT</Link>
-                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING & SEO</Link>
+                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
                     <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
                     <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
                   </nav>

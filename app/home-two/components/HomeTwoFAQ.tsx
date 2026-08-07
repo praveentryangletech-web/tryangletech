@@ -41,15 +41,17 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
             {question}
           </div>
         </div>
-        <div className="rt-faq-right-part" style={{ position: 'relative' }}>
-          <div className="rt-faq-minus"></div>
-          <div className="rt-faq-plus" style={{ 
-            opacity: isOpen ? 0 : 1, 
-            transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
-            transition: 'all 0.3s ease',
-            position: 'absolute',
-            top: 0, left: 0, width: '100%', height: '100%'
-          }}></div>
+        <div className="rt-faq-right-part" style={{ position: 'relative', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {isOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0C2451' }}>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0C2451' }}>
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          )}
         </div>
       </div>
       <div

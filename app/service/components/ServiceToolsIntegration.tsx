@@ -68,126 +68,104 @@ export default function ServiceToolsIntegration() {
             <div className="w-layout-vflex rt-integration-main-v2 rt-margin-auto">
               <div className="rt-integration-top">
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02a_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="React"
+                    src="/tech-icons/react.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09c"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={131}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02e_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Next.js"
+                    src="/tech-icons/nextjs.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09e"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="PHP"
+                    src="/tech-icons/php.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a0"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac028_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="AWS"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a2"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac030_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Docker"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a4"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02c_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Laravel"
+                    src="/tech-icons/laravel.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a6"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02f_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Tailwind CSS"
+                    src="/tech-icons/tailwind.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a8"
                     className="rt-itegration-logo rt-last reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
               </div>
               <div className="rt-integration-top rt-bottom">
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac029_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Figma"
+                    src="/tech-icons/figma.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ab"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac027_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Google Ads"
+                    src="/tech-icons/google-ads.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ad"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02d_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Stripe"
+                    src="/tech-icons/stripe.svg"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
                 <div>
-                  <Image
-                    width={129}
-                    height={132}
-                    alt="Kloudera-service-one-integration-image"
-                    src="/Home3_files/690d778d9a0ef2e561eac02b_kloudera-service-one-integration-image.svg"
+                  <img
+                    alt="Meta"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/512px-Meta_Platforms_Inc._logo.svg.png"
                     loading="lazy"
-                    data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0b1"
                     className="rt-itegration-logo reveal-on-scroll"
+                    style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
                   />
                 </div>
               </div>

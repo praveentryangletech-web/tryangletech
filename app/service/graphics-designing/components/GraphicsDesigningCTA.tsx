@@ -16,7 +16,7 @@ export default function GraphicsDesigningCTA() {
               <div
                 data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed1"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">Smart Tasking</div>
+                <div className="rt-sub-text rt-sub-gredient">Creative Design</div>
               </div>
               <div className="rt-hero-heading-gap">
                 <h1

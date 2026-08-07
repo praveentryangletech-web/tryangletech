@@ -15,32 +15,32 @@ export default function GraphicsDesigningFAQ() {
   const faqs = [
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
-      q: 'What services does Tryangletech offer?',
-      a: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development — all under one roof.',
+      q: 'What types of graphic design services do you offer?',
+      a: 'We offer a full spectrum of graphic design services, including logo design, brand identity packages, marketing materials (flyers, brochures, banners), social media graphics, UI/UX design, and custom illustrations.',
       isTop: true,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
-      q: 'Which industries do you serve?',
-      a: 'We serve businesses across healthcare, finance, e-commerce, education, retail, and more — both in India and internationally.',
+      q: 'How long does a typical design project take?',
+      a: 'Timelines vary depending on the complexity of the project. A standard logo design may take 1-2 weeks, while a comprehensive brand identity package could take 3-4 weeks. We always provide a clear timeline before starting.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
-      q: 'Do you provide support after project completion?',
-      a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.',
+      q: 'Do I get the source files for my designs?',
+      a: 'Absolutely! Upon project completion and final payment, we provide all high-resolution files and the original source files (like .AI, .PSD, or .Figma) so you have full ownership of your assets.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
-      q: "What's a typical project timeline?",
-      a: 'Timelines vary by scope, but most websites take 2–4 weeks and custom software or app projects typically take 4–8 weeks. We\'ll give you a clear estimate after understanding your requirements.',
+      q: "What is your revision process?",
+      a: 'We believe in a collaborative approach. Most of our design packages include a set number of revision rounds. We present our concepts, gather your feedback, and make refinements until the design aligns perfectly with your vision.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
-      q: 'What technologies do you build with?',
-      a: 'We build using HTML, CSS, WordPress, and PHP, along with modern frameworks like React, Next.js, and Laravel — choosing the right stack based on what your project actually needs.',
+      q: 'Do you offer printing services as well?',
+      a: 'While we specialize in the digital creation of print-ready designs, we partner with trusted local and online printers. We can either manage the printing process for you or provide you with the exact files you need to take to a printer of your choice.',
       isTop: false,
     },
   ];

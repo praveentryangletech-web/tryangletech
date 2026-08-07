@@ -15,21 +15,19 @@ export default function GraphicsDesigningTestimonial() {
               <div
                 data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed1"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">Smart Tasking</div>
+                <div className="rt-sub-text rt-sub-gredient">Creative Design</div>
               </div>
               <div className="rt-hero-heading-gap">
                 <h1
                   data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed4"
                   className="rt-gap-off">
-                  Empowering teams through effortless task services
+                  Crafting visually stunning graphics that elevate your brand
                 </h1>
               </div>
               <p
                 data-w-id="e2966c08-e2ab-594a-a52e-ff609081dee0"
                 className="rt-padding-hero-v6 rt-gap-off">
-                Organized workflows that drive business success by streamlining
-                tasks, reducing delays, and ensuring teams stay focused,
-                efficient, and aligned on every project goal.
+                From eye-catching logos to complete brand identities, our expert designers create compelling visuals that capture attention, communicate your message, and leave a lasting impression.
               </p>
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"
@@ -295,14 +293,13 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="d34d7029-6b0e-655f-892b-4c57bb0aa55d"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">who we are</div>
+                <div className="rt-sub-text rt-sub-gredient">our impact</div>
               </div>
               <div
                 data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2cd"
                 className="rt-position-relative rt-overflow-hidden">
                 <h2 className="rt-gap-off">
-                  Simplify workflows, collaborate seamlessly, and manage tasks
-                  effectively for better business growth
+                  Delivering creative excellence and visual storytelling that resonates with your target audience
                 </h2>
                 <div
                   data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2d0"
@@ -341,7 +338,7 @@ taskopia-service-two-hero-9
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-two">
                 <div className="rt-text-style-h1 rt-color-vivid-blue">10k+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Tasks organized</div>
+                  <div className="rt-text-style-h6">Designs created</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa749"
@@ -352,7 +349,7 @@ taskopia-service-two-hero-9
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-three">
                 <div className="rt-text-style-h1 rt-color-vivid-blue">5k+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Teams collaborating</div>
+                  <div className="rt-text-style-h6">Brands elevated</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa751"
@@ -365,7 +362,7 @@ taskopia-service-two-hero-9
                   99.9%
                 </div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Secure platform</div>
+                  <div className="rt-text-style-h6">Client satisfaction</div>
                 </div>
                 <div className="rt-vision-card-box-line rt-line"></div>
               </div>
@@ -390,24 +387,23 @@ taskopia-service-two-hero-9
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a1"
                   className="rt-sub-gap">
                   <div className="rt-sub-text rt-sub-gredient">
-                    Why choose us
+                    Why choose Tryangletech
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
                   <h2
                     data-w-id="daa11c44-29ce-1d77-876f-1f47285066a5"
                     className="rt-gap-off">
-                    Simplifying work, boosting team{" "}
+                    Transforming ideas into visually striking{" "}
                     <span className="rt-color-periwinkle-gray">
-                      productivity fast
+                      realities
                     </span>
                   </h2>
                 </div>
                 <p
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a9"
                   className="rt-gap-off">
-                  Streamline your tasks effortlessly with our platform, helping
-                  teams stay organized, work smarter, and achieve more daily
+                  We blend creativity with strategic thinking to design graphics that not only look beautiful but also align with your business goals and engage your audience.
                 </p>
                 <div className="rt-about-v1-right-inner">
                   <div
@@ -422,11 +418,10 @@ taskopia-service-two-hero-9
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Secure &amp; reliable platform
+                        Original &amp; Creative Concepts
                       </div>
                       <p className="rt-gap-off">
-                        Protect your projects with enterprise-grade security and
-                        a stable system designed to keep your data safe .
+                        Every design we create is unique, tailored specifically to your brand's personality and designed to stand out in a crowded market.
                       </p>
                     </div>
                   </div>
@@ -442,11 +437,10 @@ taskopia-service-two-hero-9
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        On-time project delivery
+                        Timely Delivery &amp; Revisions
                       </div>
                       <p className="rt-gap-off">
-                        Protect your projects with enterprise-grade security and
-                        a stable system designed to keep your data safe .
+                        Every design we create is unique, tailored specifically to your brand's personality and designed to stand out in a crowded market.
                       </p>
                     </div>
                   </div>
@@ -471,15 +465,15 @@ taskopia-service-two-hero-9
                 data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa63"
                 className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">
-                  our unique feaures
+                  our design process
                 </div>
               </div>
               <h2
                 data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa66"
                 className="rt-gap-off">
-                Boost productivity through intelligent{" "}
+                A strategic approach to brilliant{" "}
                 <span className="rt-color-periwinkle-gray">
-                  task management
+                  graphic design
                 </span>
               </h2>
             </div>
@@ -494,10 +488,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Customizable workflows</div>
+                <div className="rt-text-style-h6">Brand Identity &amp; Logos</div>
                 <p className="rt-gap-off">
-                  Task creation to project completion, adapt every step for
-                  maximum efficiency and control.
+                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
                 </p>
               </div>
               <div
@@ -510,10 +503,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Data-driven insights</div>
+                <div className="rt-text-style-h6">Marketing Materials</div>
                 <p className="rt-gap-off">
-                  Task creation to project completion, adapt every step for
-                  maximum efficiency and control.
+                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
                 </p>
               </div>
               <div
@@ -526,10 +518,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Cross-platform access</div>
+                <div className="rt-text-style-h6">UI/UX &amp; Web Graphics</div>
                 <p className="rt-gap-off">
-                  Task creation to project completion, adapt every step for
-                  maximum efficiency and control.
+                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
                 </p>
               </div>
             </div>
@@ -552,20 +543,18 @@ taskopia-service-two-hero-9
                       <div
                         data-w-id="f74def95-767b-a89b-08a5-953ba5c723f5"
                         className="rt-sub-gap">
-                        <div className="rt-sub-text">our service</div>
+                        <div className="rt-sub-text">our services</div>
                       </div>
                       <h2
                         data-w-id="f74def95-767b-a89b-08a5-953ba5c723f8"
                         className="rt-gap-off rt-text-color-white">
-                        Your reliable partner for efficient task management
+                        Your reliable partner for efficient graphic design
                       </h2>
                     </div>
                     <p
                       data-w-id="03f01ed3-f9d4-a771-a9d5-5fac199e2fda"
                       className="rt-service-v2-para rt-color-pale-periwinkle">
-                      Empower your business with smarter task services that
-                      streamline workflows, boost efficiency, and drive lasting
-                      success
+                      Whether you need a complete rebrand or engaging social media graphics, our creative team delivers high-quality designs that speak to your audience.
                     </p>
                   </div>
                   <div
@@ -585,7 +574,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Task creation &amp; assignment
+                              Logo &amp; Brand Design
                             </div>
                           </div>
                         </div>
@@ -593,8 +582,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-one">
                         <div className="rt-services-v2-left-bottom-inner rt-one">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            Protect your sensitive information with robust,
-                            encrypted storage and advanced security measures.
+                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
                           </p>
                         </div>
                       </div>
@@ -613,7 +601,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Cross-platform access
+                              Print Design &amp; Packaging
                             </div>
                           </div>
                         </div>
@@ -621,8 +609,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-active">
                         <div className="rt-services-v2-left-bottom-inner rt-active">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            Protect your sensitive information with robust,
-                            encrypted storage and advanced security measures.
+                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
                           </p>
                         </div>
                       </div>
@@ -641,7 +628,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Secure data management
+                              Social Media Graphics
                             </div>
                           </div>
                         </div>
@@ -649,8 +636,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-two">
                         <div className="rt-services-v2-left-bottom-inner rt-two">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            Protect your sensitive information with robust,
-                            encrypted storage and advanced security measures.
+                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
                           </p>
                         </div>
                       </div>
@@ -669,7 +655,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Progress tracking &amp; reporting
+                              Illustrations &amp; Infographics
                             </div>
                           </div>
                         </div>
@@ -677,8 +663,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-three">
                         <div className="rt-services-v2-left-bottom-inner rt-three">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            Protect your sensitive information with robust,
-                            encrypted storage and advanced security measures.
+                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
                           </p>
                         </div>
                       </div>
@@ -697,7 +682,7 @@ taskopia-service-two-hero-9
                       src="/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp"
                       loading="lazy"
                       width={847}
-                      alt="taskopiya-graphics-designing-task"
+                      alt="taskopiya-service-two-task"
                       className="rt-services-v2-two"
                      height={800} />
                     <Image
@@ -726,23 +711,21 @@ taskopia-service-two-hero-9
                   <div
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b64"
                     className="rt-sub-text rt-sub-gredient">
-                    intelligent analytics
+                    creative excellence
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
                   <h2
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b66"
                     className="rt-gap-off">
-                    Organized workflows driving business growth forward
+                    Designs that drive engagement and business growth
                   </h2>
                 </div>
                 <div
                   data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b6a"
                   className="rt-analytics-v2-para-wrap rt-gap-large">
                   <p className="rt-gap-off">
-                    We transform automation into real-time business outcomes,
-                    streamlining processes, boosting efficiency, and delivering
-                    measurable results for your company.
+                    We don't just make things look pretty. We design with purpose, using visual communication to build trust, convey your value proposition, and ultimately drive sales and growth.
                   </p>
                 </div>
                 <div className="w-layout-grid rt-analytics-v2-box-wrap">
@@ -759,9 +742,9 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Collaboration</div>
+                      <div className="rt-text-style-h6">Strategic Design</div>
                       <p className="rt-no-margin">
-                        Enhance team productivity with seamless collaboration
+                        Visuals tailored to your specific marketing and business objectives.
                       </p>
                     </div>
                   </div>
@@ -778,9 +761,9 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Innovation</div>
+                      <div className="rt-text-style-h6">Creative Innovation</div>
                       <p className="rt-no-margin">
-                        Drive progress with innovative task management solutions
+                        Drive progress with innovative graphic design solutions
                       </p>
                     </div>
                   </div>

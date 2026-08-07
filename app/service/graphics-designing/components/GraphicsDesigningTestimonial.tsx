@@ -15,19 +15,19 @@ export default function GraphicsDesigningTestimonial() {
               <div
                 data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed1"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">Creative Design</div>
+                <div className="rt-sub-text rt-sub-gredient">Graphic Design Services</div>
               </div>
               <div className="rt-hero-heading-gap">
                 <h1
                   data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed4"
                   className="rt-gap-off">
-                  Crafting visually stunning graphics that elevate your brand
+                  Visual designs that make your brand impossible to ignore
                 </h1>
               </div>
               <p
                 data-w-id="e2966c08-e2ab-594a-a52e-ff609081dee0"
                 className="rt-padding-hero-v6 rt-gap-off">
-                From eye-catching logos to complete brand identities, our expert designers create compelling visuals that capture attention, communicate your message, and leave a lasting impression.
+                Tryangletech's design team crafts stunning logos, brand identities, marketing materials, and digital visuals — helping Ahmedabad businesses stand out, build trust, and convert more customers.
               </p>
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"
@@ -293,13 +293,13 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="d34d7029-6b0e-655f-892b-4c57bb0aa55d"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">our impact</div>
+                <div className="rt-sub-text rt-sub-gredient">our numbers</div>
               </div>
               <div
                 data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2cd"
                 className="rt-position-relative rt-overflow-hidden">
                 <h2 className="rt-gap-off">
-                  Delivering creative excellence and visual storytelling that resonates with your target audience
+                  Trusted by businesses across Ahmedabad for creative design that delivers real results
                 </h2>
                 <div
                   data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2d0"
@@ -325,9 +325,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa73a"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-one">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">10k+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">500+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Projects completed</div>
+                  <div className="rt-text-style-h6">Design projects delivered</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa741"
@@ -336,9 +336,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa742"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-two">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">10k+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">200+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Designs created</div>
+                  <div className="rt-text-style-h6">Brands elevated</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa749"
@@ -347,9 +347,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa74a"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-three">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">5k+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">7+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Brands elevated</div>
+                  <div className="rt-text-style-h6">Years of experience</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa751"
@@ -387,23 +387,23 @@ taskopia-service-two-hero-9
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a1"
                   className="rt-sub-gap">
                   <div className="rt-sub-text rt-sub-gredient">
-                    Why choose Tryangletech
+                    Why choose us for design
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
                   <h2
                     data-w-id="daa11c44-29ce-1d77-876f-1f47285066a5"
                     className="rt-gap-off">
-                    Transforming ideas into visually striking{" "}
+                    Design that speaks before your business{" "}
                     <span className="rt-color-periwinkle-gray">
-                      realities
+                      says a word
                     </span>
                   </h2>
                 </div>
                 <p
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a9"
                   className="rt-gap-off">
-                  We blend creativity with strategic thinking to design graphics that not only look beautiful but also align with your business goals and engage your audience.
+                  At Tryangletech, we pair sharp creative thinking with a deep understanding of your brand. Every pixel we place is intentional — designed to communicate your value and win your audience's trust at first glance.
                 </p>
                 <div className="rt-about-v1-right-inner">
                   <div
@@ -418,10 +418,10 @@ taskopia-service-two-hero-9
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Original &amp; Creative Concepts
+                        100% Custom &amp; Original Designs
                       </div>
                       <p className="rt-gap-off">
-                        Every design we create is unique, tailored specifically to your brand's personality and designed to stand out in a crowded market.
+                        We never use templates. Every logo, banner, and brand kit is built from scratch, tailored exclusively to your business identity.
                       </p>
                     </div>
                   </div>
@@ -488,9 +488,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Brand Identity &amp; Logos</div>
+                <div className="rt-text-style-h6">Logo &amp; Brand Identity</div>
                 <p className="rt-gap-off">
-                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
+                  A great logo is the foundation of your brand. We create distinctive, versatile logos and full brand kits that leave a lasting mark.
                 </p>
               </div>
               <div
@@ -503,9 +503,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Marketing Materials</div>
+                <div className="rt-text-style-h6">Marketing &amp; Print Design</div>
                 <p className="rt-gap-off">
-                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
+                  From brochures and flyers to banners and presentations — we create print-ready marketing materials that command attention.
                 </p>
               </div>
               <div
@@ -518,9 +518,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">UI/UX &amp; Web Graphics</div>
+                <div className="rt-text-style-h6">Social Media &amp; Digital Design</div>
                 <p className="rt-gap-off">
-                  Crafting memorable logos and cohesive brand guidelines that perfectly represent your business.
+                  Scroll-stopping social media posts, ad creatives, and digital banners crafted to boost engagement and drive clicks.
                 </p>
               </div>
             </div>
@@ -548,7 +548,7 @@ taskopia-service-two-hero-9
                       <h2
                         data-w-id="f74def95-767b-a89b-08a5-953ba5c723f8"
                         className="rt-gap-off rt-text-color-white">
-                        Your reliable partner for efficient graphic design
+                        Everything you need to build a powerful visual brand
                       </h2>
                     </div>
                     <p
@@ -582,7 +582,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-one">
                         <div className="rt-services-v2-left-bottom-inner rt-one">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
+                            We build distinctive logo systems and brand guidelines that articulate your brand's unique mission and values, ensuring consistency across every touchpoint.
                           </p>
                         </div>
                       </div>
@@ -609,7 +609,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-active">
                         <div className="rt-services-v2-left-bottom-inner rt-active">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
+                            We create impactful print collateral, from business cards and brochures to product packaging, that captures your brand's essence in a tangible, premium way.
                           </p>
                         </div>
                       </div>
@@ -636,7 +636,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-two">
                         <div className="rt-services-v2-left-bottom-inner rt-two">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
+                            We design high-converting, eye-catching social assets — including post templates, stories, and ad creatives — to help your brand thrive and engage your audience daily.
                           </p>
                         </div>
                       </div>
@@ -663,7 +663,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-three">
                         <div className="rt-services-v2-left-bottom-inner rt-three">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We build strong, recognizable brand identities starting with a unique logo that captures your company's essence.
+                            We transform complex data and abstract concepts into visually compelling custom illustrations and infographics, simplifying your message and making it memorable.
                           </p>
                         </div>
                       </div>
@@ -718,14 +718,14 @@ taskopia-service-two-hero-9
                   <h2
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b66"
                     className="rt-gap-off">
-                    Designs that drive engagement and business growth
+                    Great design is the silent ambassador of your brand
                   </h2>
                 </div>
                 <div
                   data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b6a"
                   className="rt-analytics-v2-para-wrap rt-gap-large">
                   <p className="rt-gap-off">
-                    We don't just make things look pretty. We design with purpose, using visual communication to build trust, convey your value proposition, and ultimately drive sales and growth.
+                    Your visuals are often the first impression a customer has of your business. At Tryangletech, we make sure that first impression counts — every design we produce is crafted to communicate trust, quality, and professionalism.
                   </p>
                 </div>
                 <div className="w-layout-grid rt-analytics-v2-box-wrap">
@@ -742,9 +742,9 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Strategic Design</div>
+                      <div className="rt-text-style-h6">Purpose-Driven Design</div>
                       <p className="rt-no-margin">
-                        Visuals tailored to your specific marketing and business objectives.
+                        Every design choice — color, font, layout — is intentional and aligned with your brand strategy.
                       </p>
                     </div>
                   </div>
@@ -761,9 +761,9 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Creative Innovation</div>
+                      <div className="rt-text-style-h6">Pixel-Perfect Execution</div>
                       <p className="rt-no-margin">
-                        Drive progress with innovative graphic design solutions
+                        We sweat the small stuff. Clean lines, balanced compositions, and flawless finishes every time.
                       </p>
                     </div>
                   </div>

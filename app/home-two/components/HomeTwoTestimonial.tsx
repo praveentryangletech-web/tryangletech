@@ -68,7 +68,7 @@ export default function HomeTwoTestimonial() {
                         </div>
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
-                        <div className="rt-text-style-h6">“Faster support”</div>
+                        <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
                           “This tool transformed how our team works! Tasks are
                           organized, deadlines are clear, and collaboration is
@@ -110,7 +110,7 @@ export default function HomeTwoTestimonial() {
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Good sales growth”
+                          “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
                           “An absolute game-changer for project management. We
@@ -152,7 +152,7 @@ export default function HomeTwoTestimonial() {
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Smooth workflow”
+                          “Incredible App Design”
                         </div>
                         <p className="rt-gap-off">
                           “Simple, intuitive, and powerful—our team now manages
@@ -195,7 +195,7 @@ export default function HomeTwoTestimonial() {
                         </div>
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
-                        <div className="rt-text-style-h6">“Faster support”</div>
+                        <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
                           “This tool transformed how our team works! Tasks are
                           organized, deadlines are clear, and collaboration is
@@ -237,7 +237,7 @@ export default function HomeTwoTestimonial() {
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Good sales growth”
+                          “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
                           “An absolute game-changer for project management. We
@@ -279,7 +279,7 @@ export default function HomeTwoTestimonial() {
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Smooth workflow”
+                          “Incredible App Design”
                         </div>
                         <p className="rt-gap-off">
                           “Simple, intuitive, and powerful—our team now manages
@@ -322,7 +322,7 @@ export default function HomeTwoTestimonial() {
                         </div>
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
-                        <div className="rt-text-style-h6">“Faster support”</div>
+                        <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
                           “This tool transformed how our team works! Tasks are
                           organized, deadlines are clear, and collaboration is
@@ -364,7 +364,7 @@ export default function HomeTwoTestimonial() {
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Good sales growth”
+                          “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
                           “An absolute game-changer for project management. We

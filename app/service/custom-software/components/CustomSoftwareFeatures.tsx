@@ -51,7 +51,7 @@ export default function CustomSoftwareFeatures() {
                   Scalable Architecture
                 </div>
                 <p className="rt-gap-off">
-                  We architect every system to grow with your business — from a handful of users to hundreds of thousands, without rebuilding from scratch.
+                  Tryangletech architects every system to grow with your business — from a handful of users to hundreds of thousands, without rebuilding from scratch.
                 </p>
               </div>
               <div className="rt-speciality-item-bottom rt-1">
@@ -137,7 +137,7 @@ export default function CustomSoftwareFeatures() {
                   Agile Development Process
                 </div>
                 <p className="rt-gap-off">
-                  We follow agile sprints, delivering working software early and iterating based on your feedback — so you always stay in control of the product direction.
+                  Our team follows agile sprints, delivering working software early and iterating based on your feedback — so you always stay in control of the product direction.
                 </p>
               </div>
               <div

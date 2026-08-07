@@ -62,7 +62,7 @@ export default function CustomSoftwareServices() {
                   data-w-id="f811abe4-4f70-55fe-7128-7a1d75f47460"
                   className="rt-goal-para-wrap">
                   <p className="rt-gap-off rt-color-pale-periwinkle">
-                    We don't build generic products. Every line of code we write is intentional — shaped by your industry, your processes, and your growth goals to deliver maximum ROI.
+                    At Tryangletech, we don't build generic products. Every line of code we write is intentional — shaped by your industry, your processes, and your growth goals to deliver maximum ROI.
                   </p>
                 </div>
                 <div className="w-layout-vflex rt-goal-box-main rt-gap-medium">
@@ -108,7 +108,7 @@ export default function CustomSoftwareServices() {
                         Post-Launch Support & Maintenance
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
-                        We don't disappear after go-live. Our team provides ongoing bug fixes, performance monitoring, feature upgrades, and scaling support.
+                        Tryangletech doesn't disappear after go-live. Our team provides ongoing bug fixes, performance monitoring, feature upgrades, and scaling support.
                       </p>
                     </div>
                   </div>

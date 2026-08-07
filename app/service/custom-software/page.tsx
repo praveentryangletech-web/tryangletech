@@ -5,12 +5,11 @@ import WebflowInit from "../../common/WebflowInit";
 
 // Reused directly
 import WebDevSpeciality from '../web-development/components/WebDevSpeciality';
-import GraphicsDesigningTestimonial from '../graphics-designing/components/GraphicsDesigningTestimonial';
-
 // Custom for this page
 import CustomSoftwareHero from './components/CustomSoftwareHero';
 import CustomSoftwareFeatures from './components/CustomSoftwareFeatures';
 import CustomSoftwareServices from './components/CustomSoftwareServices';
+import CustomSoftwareTestimonial from './components/CustomSoftwareTestimonial';
 import CustomSoftwareFAQ from './components/CustomSoftwareFAQ';
 
 export default function CustomSoftwarePage() {
@@ -32,8 +31,8 @@ export default function CustomSoftwarePage() {
         {/* Custom Services Accordion */}
         <CustomSoftwareServices />
 
-        {/* Reused Testimonials */}
-        <GraphicsDesigningTestimonial />
+        {/* Custom Testimonials */}
+        <CustomSoftwareTestimonial />
 
         {/* Custom FAQ */}
         <CustomSoftwareFAQ />

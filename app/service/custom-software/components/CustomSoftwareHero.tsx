@@ -20,14 +20,14 @@ export default function CustomSoftwareHero() {
                 <h1
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350321"
                   className="rt-gap-off">
-                  Tailor-made software built for the way your business works
+                  Tailor-made software built for your business in Ahmedabad
                 </h1>
               </div>
               <div
                 data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350323"
                 className="rt-hero-v7-para-wrap">
                 <p className="rt-gap-off">
-                  Off-the-shelf software doesn't fit every business. We design, develop, and deploy custom software solutions that automate your workflows, eliminate inefficiencies, and scale with your growth.
+                  Off-the-shelf software doesn't fit every business. Tryangletech designs, develops, and deploys custom software solutions that automate your workflows, eliminate inefficiencies, and scale with your growth.
                 </p>
               </div>
               <div

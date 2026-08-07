@@ -70,10 +70,10 @@ export default function HomeTwoTestimonial() {
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
                         <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
-                          “This tool transformed how our team works! Tasks are
-                          organized, deadlines are clear, and collaboration is
-                          smoother than ever. Productivity has never been this
-                          high.”
+                          “Tryangletech transformed our online presence. Their custom software
+                          solutions were delivered flawlessly, and their team was
+                          incredibly responsive throughout the entire process.
+                          We highly recommend them!”
                         </p>
                       </div>
                     </div>
@@ -113,9 +113,9 @@ export default function HomeTwoTestimonial() {
                           “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
-                          “An absolute game-changer for project management. We
-                          can track progress in real-time, avoid delays, and
-                          deliver projects on schedule with less stress.”
+                          “An absolute game-changer for our business. The digital
+                          marketing and SEO strategies they implemented drove our organic
+                          traffic through the roof and directly increased our sales.”
                         </p>
                       </div>
                     </div>
@@ -155,9 +155,9 @@ export default function HomeTwoTestimonial() {
                           “Incredible App Design”
                         </div>
                         <p className="rt-gap-off">
-                          “Simple, intuitive, and powerful—our team now manages
-                          tasks without confusion. It keeps everyone aligned and
-                          helps us achieve more in less time.”
+                          “The mobile app they built for us is simple, intuitive,
+                          and powerful. It has completely modernized how our customers
+                          interact with our brand. We couldn't be happier!”
                         </p>
                       </div>
                     </div>
@@ -197,10 +197,10 @@ export default function HomeTwoTestimonial() {
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
                         <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
-                          “This tool transformed how our team works! Tasks are
-                          organized, deadlines are clear, and collaboration is
-                          smoother than ever. Productivity has never been this
-                          high.”
+                          “Tryangletech transformed our online presence. Their custom software
+                          solutions were delivered flawlessly, and their team was
+                          incredibly responsive throughout the entire process.
+                          We highly recommend them!”
                         </p>
                       </div>
                     </div>
@@ -240,9 +240,9 @@ export default function HomeTwoTestimonial() {
                           “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
-                          “An absolute game-changer for project management. We
-                          can track progress in real-time, avoid delays, and
-                          deliver projects on schedule with less stress.”
+                          “An absolute game-changer for our business. The digital
+                          marketing and SEO strategies they implemented drove our organic
+                          traffic through the roof and directly increased our sales.”
                         </p>
                       </div>
                     </div>
@@ -282,9 +282,9 @@ export default function HomeTwoTestimonial() {
                           “Incredible App Design”
                         </div>
                         <p className="rt-gap-off">
-                          “Simple, intuitive, and powerful—our team now manages
-                          tasks without confusion. It keeps everyone aligned and
-                          helps us achieve more in less time.”
+                          “The mobile app they built for us is simple, intuitive,
+                          and powerful. It has completely modernized how our customers
+                          interact with our brand. We couldn't be happier!”
                         </p>
                       </div>
                     </div>
@@ -324,10 +324,10 @@ export default function HomeTwoTestimonial() {
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
                         <div className="rt-text-style-h6">“Exceptional Quality”</div>
                         <p className="rt-gap-off">
-                          “This tool transformed how our team works! Tasks are
-                          organized, deadlines are clear, and collaboration is
-                          smoother than ever. Productivity has never been this
-                          high.”
+                          “Tryangletech transformed our online presence. Their custom software
+                          solutions were delivered flawlessly, and their team was
+                          incredibly responsive throughout the entire process.
+                          We highly recommend them!”
                         </p>
                       </div>
                     </div>
@@ -367,9 +367,9 @@ export default function HomeTwoTestimonial() {
                           “Massive Traffic Growth”
                         </div>
                         <p className="rt-gap-off">
-                          “An absolute game-changer for project management. We
-                          can track progress in real-time, avoid delays, and
-                          deliver projects on schedule with less stress.”
+                          “An absolute game-changer for our business. The digital
+                          marketing and SEO strategies they implemented drove our organic
+                          traffic through the roof and directly increased our sales.”
                         </p>
                       </div>
                     </div>

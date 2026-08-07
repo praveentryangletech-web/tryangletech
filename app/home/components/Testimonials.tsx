@@ -24,7 +24,7 @@ export default function Testimonials() {
                       data-w-id="a23714eb-edfa-8381-582b-b2a0c38b7434"
                       style={{ "opacity": "0" }}
                       className="rt-gap-off rt-text-color-white">
-                      Customer experiences that speak for themselves
+                      What our clients say about working with us
                     </h2>
                   </div>
                 </div>
@@ -69,15 +69,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Good sales growth”
+                            "Great experience working together"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “This tool transformed how our team works! Tasks are
-                            organized, deadlines are clear, and collaboration is
-                            smoother than ever. Productivity has never been this
-                            high.”
+                            “We hired Tryangletech to rebuild our company website and the
+                            result was amazing. The team understood exactly what we
+                            needed and delivered a site that our customers love.
+                            Highly recommended.”
                           </p>
                         </div>
                       </div>
@@ -117,14 +117,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Faster support”
+                            "Professional and reliable"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for project management. We
-                            can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.”
+                            “Their digital marketing work helped us grow our online
+                            traffic significantly. They are easy to communicate with
+                            and always deliver on their promises. A solid team
+                            you can count on.”
                           </p>
                         </div>
                       </div>
@@ -164,14 +165,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Smooth workflow”
+                            "Excellent app development"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “Simple, intuitive, and powerful—our team now
-                            manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.”
+                            “They built a mobile app for our business that works
+                            beautifully on both Android and iOS. The whole process
+                            was smooth and the team was always available when we
+                            had questions.”
                           </p>
                         </div>
                       </div>
@@ -215,15 +217,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Good sales growth”
+                            "Great experience working together"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “This tool transformed how our team works! Tasks are
-                            organized, deadlines are clear, and collaboration is
-                            smoother than ever. Productivity has never been this
-                            high.”
+                            “We hired Tryangletech to rebuild our company website and the
+                            result was amazing. The team understood exactly what we
+                            needed and delivered a site that our customers love.
+                            Highly recommended.”
                           </p>
                         </div>
                       </div>
@@ -263,14 +265,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Faster support”
+                            "Professional and reliable"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for project management. We
-                            can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.”
+                            “Their digital marketing work helped us grow our online
+                            traffic significantly. They are easy to communicate with
+                            and always deliver on their promises. A solid team
+                            you can count on.”
                           </p>
                         </div>
                       </div>
@@ -310,14 +313,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Smooth workflow”
+                            "Excellent app development"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “Simple, intuitive, and powerful—our team now
-                            manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.”
+                            “They built a mobile app for our business that works
+                            beautifully on both Android and iOS. The whole process
+                            was smooth and the team was always available when we
+                            had questions.”
                           </p>
                         </div>
                       </div>
@@ -361,15 +365,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Good sales growth”
+                            "Great experience working together"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “This tool transformed how our team works! Tasks are
-                            organized, deadlines are clear, and collaboration is
-                            smoother than ever. Productivity has never been this
-                            high.”
+                            “We hired Tryangletech to rebuild our company website and the
+                            result was amazing. The team understood exactly what we
+                            needed and delivered a site that our customers love.
+                            Highly recommended.”
                           </p>
                         </div>
                       </div>
@@ -409,14 +413,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Faster support”
+                            "Professional and reliable"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for project management. We
-                            can track progress in real-time, avoid delays, and
-                            deliver projects on schedule with less stress.”
+                            “Their digital marketing work helped us grow our online
+                            traffic significantly. They are easy to communicate with
+                            and always deliver on their promises. A solid team
+                            you can count on.”
                           </p>
                         </div>
                       </div>
@@ -456,14 +461,15 @@ taskopia-testimonials-author-v1
                           <div
                             className="rt-small-name rt-text-color-white rt-small-heading-para-gap"
                             style={{ "color": "rgb(255, 255, 255)" }}>
-                            “Smooth workflow”
+                            "Excellent app development"
                           </div>
                           <p
                             style={{ "color": "rgb(178, 181, 187)" }}
                             className="rt-color-pale-periwinkle">
-                            “Simple, intuitive, and powerful—our team now
-                            manages tasks without confusion. It keeps everyone
-                            aligned and helps us achieve more in less time.”
+                            “They built a mobile app for our business that works
+                            beautifully on both Android and iOS. The whole process
+                            was smooth and the team was always available when we
+                            had questions.”
                           </p>
                         </div>
                       </div>

@@ -58,14 +58,14 @@ export default function Integration() {
             data-w-id="938155cb-3e23-0427-eb61-f0e0e334e534"
             style={{ "opacity": "0" }}
             className="rt-sub-gap">
-            <div className="rt-sub-text rt-sub-gredient">integration</div>
+            <div className="rt-sub-text rt-sub-gredient">technologies we use</div>
           </div>
           <h2
             data-w-id="938155cb-3e23-0427-eb61-f0e0e334e537"
             style={{ "opacity": "0" }}
             className="rt-gap-off rt-desktop-text-center">
-            Seamless teamwork, smarter tasks,
-            <span className="rt-color-periwinkle-gray">better outcomes</span>
+            Tools and frameworks we build
+            <span className="rt-color-periwinkle-gray">your projects with</span>
           </h2>
         </div>
         <div
@@ -89,8 +89,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/react.svg"
                 loading="lazy"
-                width={19}
-                alt="React logo" height={800} />
+                width={48}
+                height={48}
+                alt="React logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-2">
@@ -98,8 +99,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/nextdotjs.svg"
                 loading="lazy"
-                width={19}
-                alt="Next.js logo" height={800} />
+                width={48}
+                height={48}
+                alt="Next.js logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-3">
@@ -107,8 +109,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/wordpress.svg"
                 loading="lazy"
-                width={19}
-                alt="WordPress logo" height={800} />
+                width={48}
+                height={48}
+                alt="WordPress logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-4">
@@ -116,8 +119,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/laravel.svg"
                 loading="lazy"
-                width={19}
-                alt="Laravel logo" height={800} />
+                width={48}
+                height={48}
+                alt="Laravel logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-5">
@@ -125,8 +129,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/php.svg"
                 loading="lazy"
-                width={19}
-                alt="PHP logo" height={800} />
+                width={48}
+                height={48}
+                alt="PHP logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-6">
@@ -134,8 +139,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/postgresql.svg"
                 loading="lazy"
-                width={19}
-                alt="PostgreSQL logo" height={800} />
+                width={48}
+                height={48}
+                alt="PostgreSQL logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-7">
@@ -143,8 +149,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/mysql.svg"
                 loading="lazy"
-                width={19}
-                alt="MySQL logo" height={800} />
+                width={48}
+                height={48}
+                alt="MySQL logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-8">
@@ -152,8 +159,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/docker.svg"
                 loading="lazy"
-                width={19}
-                alt="Docker logo" height={800} />
+                width={48}
+                height={48}
+                alt="Docker logo" style={{ width: "48px", height: "48px" }} />
             </div>
           </div>
 
@@ -196,28 +204,28 @@ export default function Integration() {
             className="rt-integration-icon-wrap new-icon-anim"
             style={{ opacity: 0, position: "absolute", top: "2%", left: "50%", transform: "translateX(-50%)" }}
           >
-            <div><Image src="/tech-icons/swift.svg" loading="lazy" width={19} height={800} alt="Swift logo" /></div>
+            <div><Image src="/tech-icons/swift.svg" loading="lazy" width={48} height={48} alt="Swift logo" style={{ width: "48px", height: "48px" }} /></div>
           </div>
           {/* Bottom Center: Figma — pulled closer to logo */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
             style={{ opacity: 0, position: "absolute", bottom: "2%", left: "50%", transform: "translateX(-50%)" }}
           >
-            <div><Image src="/tech-icons/figma.svg" loading="lazy" width={19} height={800} alt="Figma logo" /></div>
+            <div><Image src="/tech-icons/figma.svg" loading="lazy" width={48} height={48} alt="Figma logo" style={{ width: "48px", height: "48px" }} /></div>
           </div>
           {/* Far Left: Flutter — closer to center horizontally */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
             style={{ opacity: 0, position: "absolute", top: "53%", left: "-6%", transform: "translateY(-50%)" }}
           >
-            <div><Image src="/tech-icons/flutter.svg" loading="lazy" width={19} height={800} alt="Flutter logo" /></div>
+            <div><Image src="/tech-icons/flutter.svg" loading="lazy" width={48} height={48} alt="Flutter logo" style={{ width: "48px", height: "48px" }} /></div>
           </div>
           {/* Far Right: Kotlin — closer to center horizontally */}
           <div
             className="rt-integration-icon-wrap new-icon-anim"
             style={{ opacity: 0, position: "absolute", top: "53%", right: "-6%", transform: "translateY(-50%)" }}
           >
-            <div><Image src="/tech-icons/kotlin.svg" loading="lazy" width={19} height={800} alt="Kotlin logo" /></div>
+            <div><Image src="/tech-icons/kotlin.svg" loading="lazy" width={48} height={48} alt="Kotlin logo" style={{ width: "48px", height: "48px" }} /></div>
           </div>
           <div
             className="rt-integration-v1-line-1 rt-overflow-hidden"

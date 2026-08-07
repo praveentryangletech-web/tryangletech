@@ -1,0 +1,125 @@
+'use client';
+import Link from "next/link";
+import React, { useState } from 'react';
+import Image from "next/image";
+
+const SA = '/service3-assets';
+
+export default function GraphicsDesigningFAQ() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaq(openFaq === idx ? null : idx);
+  };
+
+  const faqs = [
+    {
+      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
+      q: 'What services does Tryangletech offer?',
+      a: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development — all under one roof.',
+      isTop: true,
+    },
+    {
+      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
+      q: 'Which industries do you serve?',
+      a: 'We serve businesses across healthcare, finance, e-commerce, education, retail, and more — both in India and internationally.',
+      isTop: false,
+    },
+    {
+      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
+      q: 'Do you provide support after project completion?',
+      a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.',
+      isTop: false,
+    },
+    {
+      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
+      q: "What's a typical project timeline?",
+      a: 'Timelines vary by scope, but most websites take 2–4 weeks and custom software or app projects typically take 4–8 weeks. We\'ll give you a clear estimate after understanding your requirements.',
+      isTop: false,
+    },
+    {
+      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
+      q: 'What technologies do you build with?',
+      a: 'We build using HTML, CSS, WordPress, and PHP, along with modern frameworks like React, Next.js, and Laravel — choosing the right stack based on what your project actually needs.',
+      isTop: false,
+    },
+  ];
+
+  return (
+    <>
+      <section className="rt-faq">
+        <div className="w-layout-blockcontainer rt-faq-container w-container">
+          <div className="rt-faq-content-main">
+            <div className="w-layout-hflex rt-faq-heading-main">
+              <div className="w-layout-vflex rt-faq-heading-wrap rt-desktop-text-center">
+                <div className="rt-sub-gap">
+                  <div
+                    data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2d"
+                    className="rt-sub-text rt-sub-gredient">
+                    Frequently asked questions
+                  </div>
+                </div>
+                <h2
+                  data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2f"
+                  className="rt-no-margin">
+                  Everything you want to know{" "}
+                  <span className="rt-color-periwinkle-gray">
+                    explained clearly
+                  </span>
+                </h2>
+              </div>
+            </div>
+            <div
+              data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
+              className="rt-faq-main rt-margin-auto">
+              {faqs.map(({ wid, q, a, isTop }, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={wid}
+                    data-w-id={wid}
+                    className={`w-layout-vflex rt-faq-dropdown-wrap${isTop ? ' rt-faq-pag rt-top-gap-of' : ''}`}
+                    style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
+                    onClick={() => toggleFaq(idx)}
+                  >
+                    <div className="w-layout-hflex rt-faq-top-part">
+                      <div className="w-layout-hflex r-faq-text-wrap">
+                        <div className="rt-text-style-h6">{q}</div>
+                      </div>
+                      <div className="rt-faq-right-part">
+                        <div className="rt-faq-minus"></div>
+                        <div
+                          className="rt-faq-plus"
+                          style={{
+                            transform: isOpen
+                              ? 'rotate(90deg)'
+                              : 'rotate(0deg)',
+                            opacity: isOpen ? 0 : 1,
+                            transition: 'all 0.3s ease',
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div
+                      className="rt-faq-bottom-part rt-overflow-hidden"
+                      style={{
+                        height: isOpen ? 'auto' : 0,
+                        opacity: isOpen ? 1 : 0,
+                        transition: 'opacity 0.3s ease',
+                        paddingTop: isOpen ? '20px' : 0,
+                      }}
+                    >
+                      <div className="rt-faq-para-wrap">
+                        <p className="rt-gap-off">{a}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

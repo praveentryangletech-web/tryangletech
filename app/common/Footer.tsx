@@ -42,7 +42,7 @@ export default function Footer() {
                     />
                   </div>
                   <div className="rt-text-color-white">
-                    Get 14 days free trial
+                    Free Consultation
                   </div>
                 </div>
                 <div className="rt-pricing-samll-text-copy">
@@ -55,7 +55,7 @@ export default function Footer() {
                     />
                   </div>
                   <div className="rt-text-color-white">
-                    24/7 customer service
+                    Dedicated IT Support
                   </div>
                 </div>
               </div>
@@ -136,55 +136,54 @@ export default function Footer() {
                   <a
                     href="/about"
                     className="rt-footer-link">
-                    About us
+                    About Us
+                  </a>
+                  <a
+                    href="/portfolio"
+                    className="rt-footer-link">
+                    Portfolio
+                  </a>
+                  <a
+                    href="/contact"
+                    className="rt-footer-link">
+                    Contact Us
                   </a>
                   <a
                     href="/blog"
                     className="rt-footer-link">
                     Blog
                   </a>
-                  <a
-                    href="/service"
-                    className="rt-footer-link">
-                    Service
-                  </a>
-                  <a
-                    href="/pricing"
-                    className="rt-footer-link">
-                    Pricing
-                  </a>
                 </div>
               </div>
               <div className="w-layout-vflex rt-footer-link-wrap rt-border-none">
                 <div className="rt-small-name rt-text-color-white">
-                  Utilities
+                  Services
                 </div>
                 <div className="w-layout-vflex rt-footer-link-box">
                   <a
-                    href="#"
+                    href="/service/web-development"
                     className="rt-footer-link">
-                    License
+                    Web Development
                   </a>
                   <a
-                    href="#"
+                    href="/service/custom-software"
                     className="rt-footer-link">
-                    Style guide
+                    Custom Software
                   </a>
                   <a
-                    href="#"
-                    target="_blank"
+                    href="/service/mobile-application"
                     className="rt-footer-link">
-                    Password protected
+                    Mobile Application
                   </a>
                   <a
-                    href="#"
+                    href="/service/digital-marketing"
                     className="rt-footer-link">
-                    404
+                    Digital Marketing
                   </a>
                   <a
-                    href="#"
+                    href="/service/graphics-designing"
                     className="rt-footer-link">
-                    Changelog
+                    Graphics Designing
                   </a>
                 </div>
               </div>

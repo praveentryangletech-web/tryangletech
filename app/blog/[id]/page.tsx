@@ -3,11 +3,12 @@ import WebflowInit from "../../common/WebflowInit";
 
 import Image from "next/image";
 import Link from "next/link";
-import { BLOG_POSTS } from "../components/BlogContent";
+import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = BLOG_POSTS.find(p => p.slug === params.id);
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const post = BLOG_POSTS.find(p => p.slug === resolvedParams.id);
   
   if (!post) {
     return notFound();

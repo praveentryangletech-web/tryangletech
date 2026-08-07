@@ -40,46 +40,7 @@ export default function CustomSoftwareHero() {
                   <div className="rt-button-text">Get a free consultation</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
-                <div className="w-layout-hflex rt-hero-v2-client-wrap">
-                  <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032a"
-                      className="rt-hero-v2-client-image rt-overflow-hidden">
-                      <Image
-                        width={62}
-                        height={47}
-                        alt="client-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032c"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="client-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032e"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="client-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                  <div className="rt-color-dark-indigo">
-                    Trusted by 200+ businesses
-                  </div>
-                </div>
+               
               </div>
               <div
                 data-w-id="2a922485-2ae2-43f1-d550-fc7c8735205f"

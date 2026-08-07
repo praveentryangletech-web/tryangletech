@@ -9,7 +9,7 @@ const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
 
 const CATEGORIES = ["All", "Web Development", "Custom Software", "Digital Marketing"];
 
-export const BLOG_POSTS = [
+export export const BLOG_POSTS = [
   {
     id: "post-1",
     slug: "future-of-web-development-2026",

@@ -2,6 +2,7 @@
 import WebflowInit from "../common/WebflowInit";
 
 import BlogContent from './components/BlogContent';
+import BlogFAQ from './components/BlogFAQ';
 
 export default function BlogPage() {
   return (
@@ -10,6 +11,7 @@ export default function BlogPage() {
 
       <main>
         <BlogContent />
+        <BlogFAQ />
       </main>
 
     </>

@@ -348,7 +348,7 @@ export default function ServiceMarquee() {
       <div className="rt-hero-v2-wrapper no-bg-pseudo" style={{  paddingBottom: '0' }}>
         <section className="rt-hero-v2 rt-position-relative no-bg-pseudo bg-gradient-to-b from-[#f4f7fe] to-white" style={{ paddingTop: '30px', paddingBottom: '50px',backgroundImage: 'none' }}>
           <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap', marginBottom: '0' }}>
+            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'stretch', flexWrap: 'wrap', marginBottom: '0' }}>
               <div className="rt-features-v2-left rt-2 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '380px', flex: '0 0 100%', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div className="rt-features-v2-left-image" style={{ flex: '1' }}>
                   <div className="rt-features-v2-image-one reveal-on-scroll">

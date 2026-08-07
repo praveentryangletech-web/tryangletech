@@ -33,7 +33,7 @@ export default function Benefits() {
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
                       <div className="rt-sub-text rt-sub-gredient rt-text-size">
-                        WEB DEVELOPMENT
+                        Website Development
                       </div>
                     </div>
                     <div className="rt-overflow-hidden">
@@ -108,12 +108,12 @@ export default function Benefits() {
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
                       <div className="rt-overflow-hidden">
-                        <div
-                          data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0046"
-                          style={{ "opacity": "0" }}
-                          className="rt-sub-text rt-sub-gredient rt-text-size">
-                          DIGITAL MARKETING & SEO
-                        </div>
+                          <div
+                            data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0046"
+                            style={{ "opacity": "0" }}
+                            className="rt-sub-text rt-sub-gredient rt-text-size">
+                            Custom Software Development
+                          </div>
                       </div>
                     </div>
                     <div className="rt-overflow-hidden">
@@ -121,7 +121,7 @@ export default function Benefits() {
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
                         className="rt-text-style-h5">
-                        Get found, get traffic, get results
+                        Tailored software solutions designed for your unique business challenges
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,7 @@ export default function Benefits() {
                 <div className="rt-our-benefits-one-bottom rt-overflow-hidden">
                   <div className="rt-our-benefits-one-wrap">
                     <div className="rt-our-benefits-gap-3">
-                      <div className="rt-text-style-h6">Mobile App Development</div>
+                      <div className="rt-text-style-h6">Mobile Development</div>
                     </div>
                     <div
                       data-w-id="d919edb7-1114-6397-f57a-a2c6d2775464"
@@ -182,7 +182,7 @@ export default function Benefits() {
                   data-w-id="1c6222f6-a97f-fefb-0d46-bedad32c97e7"
                   className="rt-our-benefits-one-bottom rt-padding rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">Graphics Designing</div>
+                    <div className="rt-text-style-h6">Digital Marketing</div>
                   </div>
                   <div className="rt-2-bg">
                     <Image
@@ -194,7 +194,7 @@ Mask group
                       className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
-                    Eye-catching logos, branding, and visuals crafted by expert designers to leave a lasting impression.
+                    Data-driven strategies including SEO, social media, and paid campaigns to boost your visibility.
                   </p>
                   <div className="rt-our-benefits-two-bottom-content">
                     <div
@@ -256,10 +256,10 @@ Mask group
                 <div
                   className="rt-our-benefits-one-bottom rt-padding rt-2 rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                      <div className="rt-text-style-h6">Custom Software Development</div>
+                      <div className="rt-text-style-h6">Graphic Design</div>
                   </div>
                   <p className="rt-gap-off">
-                    Invent, integrate, build, and upgrade your ideas into high-quality, scalable software solutions.
+                    Eye-catching logos, branding, and visual content crafted by expert designers.
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>

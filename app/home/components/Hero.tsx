@@ -71,7 +71,7 @@ export default function Hero() {
                   data-w-id="06744b7e-7ec6-335a-be04-940831b89e5e"
                   style={{ "opacity": "0" }}
                   className="rt-gap-off">
-                  Simplify workflows, boost team productivity daily
+                  We build websites, apps and software that actually work for your business
                 </h1>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function Hero() {
                 data-w-id="1497d66d-9c00-ed45-6339-d76f8f3ac76c"
                 style={{ "opacity": "0" }}
                 className="rt-hero-v1-top-padding rt-gap-off">
-                Our IT experts transform bold ideas into powerful digital products, helping your business build stunning websites, launch smarter apps, and grow online revenue.
+                Whether you need a new website, a mobile app, or a complete software solution, our team in Ahmedabad has been helping businesses like yours grow online for over 7 years.
               </p>
             </div>
             <div
@@ -91,7 +91,7 @@ export default function Hero() {
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                 href="/home-one#"
                 className="rt-button-body w-inline-block"
-              ><div className="rt-button-text">Get started today</div>
+              ><div className="rt-button-text">Talk to us today</div>
                 <div
                   className="rt-button-body-overlay"
                   style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
@@ -104,7 +104,7 @@ export default function Hero() {
               <div
                 className="rt-small-btn-main"
                 style={{ "transform": "translate3d(3.888px, 6.5008px, 0px)\n                      scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                      skew(0deg, 0deg)", "transformStyle": "preserve-3d", "willChange": "transform" }}>
-                <div className="rt-small-btn-text">Workflow</div>
+                <div className="rt-small-btn-text">Let's Build</div>
                 <div className="rt-btn-arrow-v2 rt-hero-v1-small">
                   <Image
                     src="/Taskopia_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"

@@ -21,9 +21,9 @@ export default function WhyChooseUs() {
                 data-w-id="07416d34-f69b-c50c-b2bc-d9952d15faca"
                 style={{ "opacity": "0" }}>
                 <h2 className="rt-gap-off">
-                  Stay productive with smarter
+                  Why businesses choose to work
                   <span className="rt-color-periwinkle-gray"
-                  >project delivery</span
+                  >with us</span
                   >
                 </h2>
               </div>
@@ -44,10 +44,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Tailored solutions
+                    Built for your business
                   </div>
                   <p className="rt-gap-off">
-                    Adapt our process and tools to match the way your business works.
+                    We do not use one size fits all templates. Every project is planned and built specifically for what your business needs.
                   </p>
                 </div>
                 <div
@@ -68,10 +68,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    On-time delivery
+                    We deliver on time
                   </div>
                   <p className="rt-gap-off">
-                    Stay on schedule with clear timelines, progress updates, and milestone tracking.
+                    When we say a deadline, we mean it. You will get regular updates so you always know how things are going.
                   </p>
                 </div>
               </div>
@@ -99,10 +99,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    One dedicated team
+                    Everything under one roof
                   </div>
                   <p className="rt-gap-off">
-                    Get design, development, testing, and support — all under one dedicated team.
+                    Design, development, testing, marketing, and support. You get one team that handles everything, so you do not have to manage multiple vendors.
                   </p>
                 </div>
                 <div
@@ -123,10 +123,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Smarter collaboration
+                    Easy to work with
                   </div>
                   <p className="rt-gap-off">
-                    Get real-time updates, share feedback, and stay connected throughout your project.
+                    We keep things simple. You share your feedback, we make the changes, and you can track progress anytime. No complicated tools or processes.
                   </p>
                 </div>
               </div>

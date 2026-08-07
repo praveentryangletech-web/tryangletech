@@ -54,10 +54,7 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        We work with businesses across healthcare, finance,
-                        e-commerce, education, and many other industries —
-                        delivering tailored web, app, and software solutions
-                        for each.
+                        We have worked with businesses in healthcare, education, real estate, ecommerce, finance, and many other industries. Whatever your field, we know how to build technology that fits.
                       </p>
                     </div>
                   </div>
@@ -84,10 +81,7 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-no-margin">
-                        Yes, we offer ongoing support and maintenance after
-                        launch to make sure your website or app keeps running
-                        smoothly, stays updated, and continues to perform as
-                        your business grows.
+                        Yes, we do. After your website or app goes live, we are still here to help with updates, bug fixes, and any changes you need. We do not just build and disappear.
                       </p>
                     </div>
                   </div>
@@ -99,7 +93,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        What does your IT consulting process look like?
+                        How does the process work from start to finish?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -114,10 +108,7 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        We start by understanding your business goals, then
-                        plan, design, develop, test, and launch your project —
-                        keeping you updated at every stage so there are no
-                        surprises along the way.
+                        It is pretty simple. First we sit down and understand what you need. Then we create a plan, design the look and feel, build it out, test everything, and launch. You are involved at every stage so nothing catches you off guard.
                       </p>
                     </div>
                   </div>
@@ -129,7 +120,7 @@ export default function FAQ() {
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap">
                       <div className="rt-text-style-h6">
-                        What's a typical project timeline?
+                        How long does a project usually take?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -144,10 +135,7 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Timelines vary by project scope, but most websites
-                        take 2–4 weeks and custom software or app projects
-                        typically take 4–8 weeks. We'll give you a clear
-                        estimate after understanding your requirements.
+                        It depends on the project. A website usually takes about 2 to 4 weeks. Custom software or a mobile app can take 4 to 8 weeks. We will give you a proper timeline once we understand exactly what you are looking for.
                       </p>
                     </div>
                   </div>
@@ -174,10 +162,7 @@ export default function FAQ() {
                     style={{ "height": "0px" }}>
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        We build using HTML, CSS, WordPress, and PHP, along
-                        with modern frameworks like React, Next.js, and Laravel
-                        — choosing the right stack based on what your project
-                        actually needs.
+                        We work with PHP, Laravel, WordPress, React, Next.js, and many other modern tools. We pick the right technology based on what makes sense for your project, not just what is trendy.
                       </p>
                     </div>
                   </div>

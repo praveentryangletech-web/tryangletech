@@ -44,17 +44,15 @@ export default function About() {
                 data-w-id="e56a7671-e1ec-e100-8312-33edf2c12738"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off">
-                Reduce delays, streamline delivery,
-                <span className="rt-color-periwinkle-gray">stay ahead</span>
+                We take your idea and turn it into
+                <span className="rt-color-periwinkle-gray">something real</span>
               </h2>
             </div>
             <p
               data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
               style={{ "opacity": "0" }}
               className="rt-gap-off">
-              Experience seamless project management with expert tools
-              designed to eliminate delays. Keep your business organized, accelerate
-              growth.
+              You tell us what you need. We plan it out, build it, test it, and hand it over. No confusing process, no endless meetings. Just a team that gets things done on time.
             </p>
             <div className="rt-about-v1-right-inner">
               <div
@@ -71,8 +69,7 @@ export default function About() {
                   <span className="rt-color-dark-indigo"
                   >Consistent quality:</span
                   >
-                  {" "}Ensures smooth, reliable delivery for every project,
-                  helping your business maintain quality and stability.
+                  {" "}Every project goes through proper testing and review before we deliver it to you.
                 </p>
               </div>
               <div
@@ -91,10 +88,9 @@ export default function About() {
                 </div>
                 <p className="rt-gap-off">
                   <span className="rt-color-dark-indigo"
-                  >Data-driven decisions:</span
+                  >Clear communication:</span
                   >
-                  {" "}Offers clear insights that support smarter strategies and
-                  improve overall business decisions.
+                  {" "}You will always know where your project stands. We keep you updated at every step.
                 </p>
               </div>
             </div>
@@ -106,7 +102,7 @@ export default function About() {
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                 href="/contact"
                 className="rt-button-body w-inline-block"
-              ><div className="rt-button-text">Get started today</div>
+              ><div className="rt-button-text">Talk to us today</div>
                 <div
                   className="rt-button-body-overlay"
                   style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div

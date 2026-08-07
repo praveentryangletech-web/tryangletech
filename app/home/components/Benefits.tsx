@@ -18,8 +18,8 @@ export default function Benefits() {
                 data-w-id="f0268362-b169-cd10-f941-4e79335712bd"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off rt-desktop-text-center">
-                Seamless collaboration, smarter solutions,
-                <span className="rt-color-periwinkle-gray">better outcomes</span>
+                What we can do for
+                <span className="rt-color-periwinkle-gray">your business</span>
               </h2>
             </div>
             <div className="rt-our-benefits-content">
@@ -38,7 +38,7 @@ export default function Benefits() {
                     </div>
                     <div className="rt-overflow-hidden">
                       <div className="rt-text-style-h5">
-                        Websites built to perform, not just look good
+                        Websites that look great and bring in customers
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@ export default function Benefits() {
                   </div>
                   <div className="rt-overflow-hidden">
                     <p className="rt-our-benefits-para-top rt-gap-off">
-                      Custom-built, WordPress, e-commerce, or business websites — fast, responsive, and designed to engage your audience across every device.
+                      We build custom websites, WordPress sites, online stores, and business websites. Every site we create is fast, mobile friendly, and designed to help you get more customers.
                     </p>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default function Benefits() {
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
                         className="rt-text-style-h5">
-                        Tailored software solutions designed for your unique business challenges
+                        Software built around the way you work
                       </div>
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export default function Benefits() {
                     </div>
                   </div>
                   <p className="rt-gap-off">
-                    iOS & Android apps designed with performance and user experience at the core, built for brands across the globe.
+                    We design and develop iOS and Android apps that your customers will actually enjoy using. Simple, fast, and built to grow with your business.
                   </p>
                 </div>
                 <div
@@ -194,7 +194,7 @@ Mask group
                       className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
-                    Data-driven strategies including SEO, social media, and paid campaigns to boost your visibility.
+                    From SEO to social media to paid ads, we help more people find your business online and turn visitors into paying customers.
                   </p>
                   <div className="rt-our-benefits-two-bottom-content">
                     <div
@@ -259,7 +259,7 @@ Mask group
                       <div className="rt-text-style-h6">Graphic Design</div>
                   </div>
                   <p className="rt-gap-off">
-                    Eye-catching logos, branding, and visual content crafted by expert designers.
+                    Logos, brand identity, social media graphics, and marketing materials that make your business look professional and trustworthy.
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>

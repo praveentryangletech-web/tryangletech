@@ -25,15 +25,15 @@ export default function Collaboration() {
                     data-w-id="fa389f03-d668-fc21-92b7-625895f0f1cd"
                     style={{ "opacity": "0" }}
                     className="rt-gap-off">
-                    One team to connect, collaborate
-                    <span className="rt-color-periwinkle-gray">and deliver</span>
+                    How we work with you from start
+                    <span className="rt-color-periwinkle-gray">to finish</span>
                   </h2>
                 </div>
                 <p
                   data-w-id="01cd9f60-c08f-a44e-7306-8a24c776e67e"
                   style={{ "opacity": "0" }}
                   className="rt-gap-off">
-                  From the first call to final launch, we work as an extension of your team — clear communication, real progress updates, and no surprises.
+                  We start by listening to what you need. Then we plan, design, build, and launch your project. You are part of the process at every step, so there are never any surprises.
                 </p>
                 <div className="rt-collaboration-left-inner">
                   <div
@@ -48,10 +48,10 @@ export default function Collaboration() {
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Seamless teamwork
+                        Clear communication
                       </div>
                       <p className="rt-gap-off">
-                        Stay aligned with clear communication and a dedicated point of contact throughout your project — no chasing updates, no guesswork.
+                        You will have a dedicated point of contact who keeps you updated. No chasing for answers or wondering what is happening with your project.
                       </p>
                     </div>
                   </div>
@@ -71,10 +71,10 @@ export default function Collaboration() {
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Faster project delivery
+                        Proven track record
                       </div>
                       <p>
-                        Track progress, hit clear deadlines, and launch on time, every time — backed by 7+ years delivering 350+ websites.
+                        We have delivered over 350 websites and projects in the last 7 plus years. We know how to plan properly and launch on time.
                       </p>
                     </div>
                   </div>
@@ -84,7 +84,7 @@ export default function Collaboration() {
                     data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                     href="contact"
                     className="rt-button-body w-inline-block"
-                  ><div className="rt-button-text">Get started today</div>
+                  ><div className="rt-button-text">Talk to us today</div>
                     <div
                       className="rt-button-body-overlay"
                       style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div

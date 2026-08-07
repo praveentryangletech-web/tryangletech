@@ -93,7 +93,7 @@ export default function ServiceMarquee() {
                   <div
                     data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f2"
                     className="rt-sub-text rt-sub-gredient">
-                    Task management
+                    Our Services
                   </div>
                 </div>
               </div>
@@ -101,14 +101,13 @@ export default function ServiceMarquee() {
                 <h1
                   data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f5"
                   className="rt-gap-off">
-                  Boost productivity with smarter task tools for teams
+                  Comprehensive Digital Solutions for Your Business Growth
                 </h1>
               </div>
               <p
                 data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f7"
                 className="rt-padding-hero-v2 rt-gap-off">
-                Achieve more with intelligent task tools that streamline
-                workflows and maximize team productivity every day.
+                From custom software to data-driven marketing, we provide end-to-end services designed to scale your business and drive innovation.
               </p>
               <div
                 data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f9"
@@ -123,10 +122,10 @@ export default function ServiceMarquee() {
                 <Link
                   data-wf--rt-border-button--variant="base"
                   data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-                  href="/pricing"
+                  href="/portfolio"
                   className="rt-button-body rt-nav-btn w-inline-block">
                   <div className="rt-button-text rt-btn-color-nav">
-                    View pricing
+                    View portfolio
                   </div>
                   <div className="rt-button-body-overlay rt-nav-overlay"></div>
                 </Link>
@@ -143,7 +142,7 @@ export default function ServiceMarquee() {
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
-                    Streamlined workflows
+                    Innovative Solutions
                   </div>
                 </div>
                 <div className="rt-pricing-samll-text">
@@ -155,7 +154,7 @@ export default function ServiceMarquee() {
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
-                    Enhance collaboration
+                    Expert Engineering
                   </div>
                 </div>
                 <div className="rt-pricing-samll-text">
@@ -167,7 +166,7 @@ export default function ServiceMarquee() {
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-color-dark-indigo">
-                    Achieve goals faster
+                    Client-Centric
                   </div>
                 </div>
               </div>

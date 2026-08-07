@@ -83,7 +83,7 @@ export default function ServiceAbout() {
                     <h2
                       data-w-id="70c45100-f145-3c18-c43c-49629dffa55d"
                       className="rt-gap-off rt-text-color-white">
-                      Stay focused, minimize delays, maximize results
+                      Deliver excellence, drive innovation, achieve scale
                     </h2>
                   </div>
                   <div className="grid grid-cols-2 gap-10 my-8 stagger-grid">
@@ -100,7 +100,7 @@ export default function ServiceAbout() {
                         Collaboration
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
-                        Enhance team productivity with seamless collaboration
+                        Partner with our dedicated experts to turn your vision into scalable solutions.
                       </p>
                     </div>
 
@@ -117,7 +117,7 @@ export default function ServiceAbout() {
                         Innovation
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
-                        Drive progress with innovative task management solutions
+                        Leverage cutting-edge technologies and creative strategies to stay ahead of the curve.
                       </p>
                     </div>
 
@@ -133,7 +133,7 @@ export default function ServiceAbout() {
                         Efficiency
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
-                        Streamline your workflow and get more done in less time.
+                        Optimize your digital presence with high-performance applications and platforms.
                       </p>
                     </div>
 
@@ -149,7 +149,7 @@ export default function ServiceAbout() {
                         Security
                       </div>
                       <p className="rt-gap-off rt-color-pale-periwinkle">
-                        Keep your data protected with enterprise-grade security.
+                        Ensure your applications are protected with robust, enterprise-grade security measures.
                       </p>
                     </div>
                   </div>

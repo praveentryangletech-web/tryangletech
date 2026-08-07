@@ -4,24 +4,24 @@ import React, { useState, useRef } from 'react';
 
 const faqData = [
   {
-    question: "Does it integrate with other tools?",
-    answer: "AI automation uses artificial intelligence to perform repetitive tasks, analyze data, and optimize processes, enabling businesses to save time, reduce errors, and make smarter, faster decisions efficiently."
+    question: "What types of services do you offer?",
+    answer: "We offer a comprehensive suite of digital services including Custom Software Development, Web and Mobile App Development, UI/UX Graphics Designing, and full-scale Digital Marketing strategies to help businesses grow."
   },
   {
-    question: "How can task management software improve productivity?",
-    answer: "AI can automate repetitive tasks like data entry, customer support, report generation, inventory management, and workflow optimization, allowing teams to focus on strategic, high-value activities and business growth."
+    question: "Do you provide custom software solutions?",
+    answer: "Yes, we specialize in building custom software tailored exactly to your unique business needs, ensuring scalability, performance, and seamless integration with your existing workflows."
   },
   {
-    question: "Can I collaborate with my team using this platform?",
-    answer: "Yes, AI automation is ideal for small businesses. It streamlines operations, reduces manual work, improves efficiency, and provides actionable insights, helping smaller teams compete and grow effectively."
+    question: "How long does a typical project take?",
+    answer: "Project timelines vary depending on the scope and complexity. A simple website might take a few weeks, while a complex mobile application or custom software platform can take several months. We provide detailed timelines during the discovery phase."
   },
   {
-    question: "Is this suitable for small teams and enterprises?",
-    answer: "Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors."
+    question: "Do you offer post-launch support?",
+    answer: "Absolutely. We provide ongoing maintenance and support for all our projects to ensure your software remains up-to-date, secure, and performs optimally as your business grows."
   },
   {
-    question: "Can I track project deadlines?",
-    answer: "Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations."
+    question: "Can you help with digital marketing and SEO?",
+    answer: "Yes! Our digital marketing team provides data-driven strategies including SEO, social media management, and paid advertising to boost your online visibility and drive measurable conversions."
   }
 ];
 

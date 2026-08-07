@@ -540,7 +540,7 @@ export default function ServiceMarquee() {
                   width={200} height={80} style={{ height: "30px", width: "auto" }} />
               </div>
             </div>
-            {/* <div className="rt-text-marquee-train">
+            <div className="rt-text-marquee-train">
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27127d946b9cb9fdcbce_logo.svg"
@@ -631,7 +631,7 @@ export default function ServiceMarquee() {
                   alt=""
                   width={200} height={80} style={{ height: "30px", width: "auto" }} />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
         <div className="rt-marquee-bottom-line"></div>

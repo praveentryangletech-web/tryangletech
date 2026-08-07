@@ -2,13 +2,15 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const icons = [
     { url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg", filename: "react.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg", filename: "nextjs.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg", filename: "php.svg" },
-    { url: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg", filename: "aws.svg" },
-    { url: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg", filename: "docker.svg" },
+    { url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", filename: "aws.svg" },
+    { url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", filename: "docker.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg", filename: "laravel.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg", filename: "tailwind.svg" },
     { url: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg", filename: "figma.svg" },
@@ -25,16 +27,21 @@ export async function GET() {
 
     for (const icon of icons) {
       const filePath = path.join(dirPath, icon.filename);
-      // Skip if already exists
-      if (!fs.existsSync(filePath)) {
-        const response = await fetch(icon.url);
-        const buffer = await response.arrayBuffer();
-        fs.writeFileSync(filePath, Buffer.from(buffer));
+      // Always download and overwrite to ensure we have the latest version
+      const response = await fetch(icon.url, {
+        headers: {
+          'User-Agent': 'Tryangletech-App/1.0 (contact@tryangletech.com)'
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch ${icon.url}: ${response.statusText}`);
       }
+      const buffer = await response.arrayBuffer();
+      fs.writeFileSync(filePath, Buffer.from(buffer));
     }
 
     return NextResponse.json({ success: true, message: "Icons downloaded successfully to public/tech-icons" });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ success: false, error: error.message }, { status: 200 });
   }
 }

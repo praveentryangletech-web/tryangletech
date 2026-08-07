@@ -97,7 +97,7 @@ export default function ServiceToolsIntegration() {
                 <div>
                   <img
                     alt="AWS"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+                    src="/tech-icons/aws.svg"
                     loading="lazy"
                     className="rt-itegration-logo reveal-on-scroll"
                     style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
@@ -106,7 +106,7 @@ export default function ServiceToolsIntegration() {
                 <div>
                   <img
                     alt="Docker"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                    src="/tech-icons/docker.svg"
                     loading="lazy"
                     className="rt-itegration-logo reveal-on-scroll"
                     style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
@@ -162,7 +162,7 @@ export default function ServiceToolsIntegration() {
                 <div>
                   <img
                     alt="Meta"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/512px-Meta_Platforms_Inc._logo.svg.png"
+                    src="/tech-icons/meta.png"
                     loading="lazy"
                     className="rt-itegration-logo reveal-on-scroll"
                     style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}

@@ -33,11 +33,11 @@ export default function DigitalMarketingFeatures() {
       <div className="w-layout-blockcontainer rt-container-main w-container">
         <div className="rt-tools-iconheading rt-choose-v4-heading rt-heading-bottom-gap">
           <div className="rt-sub-gap">
-            <div className="rt-sub-text rt-sub-gredient">why choose us</div>
+            <div className="rt-sub-text rt-sub-gredient">our services</div>
           </div>
           <h2 className="rt-gap-off rt-desktop-text-center">
-            Comprehensive strategies for{" "}
-            <span className="rt-color-periwinkle-gray">market dominance</span>
+            Powerful services that fuel{" "}
+            <span className="rt-color-periwinkle-gray">real business growth</span>
           </h2>
         </div>
         <div className="rt-features-v2-main">
@@ -68,7 +68,7 @@ export default function DigitalMarketingFeatures() {
             <div className="rt-features-v2-left-text-box">
               <div className="rt-text-style-h5">Search Engine Optimization</div>
               <p className="rt-gap-off">
-                Climb to the top of search results and capture high-intent traffic with comprehensive on-page, off-page, and technical SEO strategies.
+                Rank on page 1 and stay there. Our technical SEO, content optimization, and link-building expertise delivers sustainable, long-term organic traffic that compounds over time.
               </p>
               <a
                 href="https://taskopia.webflow.io/about"
@@ -126,10 +126,10 @@ Taskopia-features-home-v3-right
             </div>
             <div className="rt-features-v2-left-text-box">
               <div className="rt-text-style-h5">
-                High-Converting PPC Campaigns
+                Performance-Driven PPC & Paid Ads
               </div>
               <p className="rt-gap-off">
-                Maximize your ad spend with laser-targeted campaigns across Google and Meta, designed to deliver high-quality leads and instant ROI.
+                Stop burning ad budget. Our certified Google & Meta Ads specialists build and continuously optimize campaigns that bring in high-intent leads at the lowest possible cost-per-acquisition.
               </p>
               <a
                 href="https://taskopia.webflow.io/about"

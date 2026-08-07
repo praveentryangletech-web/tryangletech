@@ -13,7 +13,7 @@ export default function DigitalMarketingChooseUs() {
 
               className="rt-sub-gap"
             >
-              <div className="rt-sub-text rt-sub-gredient">measurable growth</div>
+              <div className="rt-sub-text rt-sub-gredient">why tryangletech</div>
             </div>
             <div className="rt-heading-para-gap">
               <h2
@@ -21,7 +21,7 @@ export default function DigitalMarketingChooseUs() {
   
                 className="rt-gap-off"
               >
-                Never guess about your marketing performance again
+                Your marketing should make money, not just make noise
               </h2>
             </div>
             <p
@@ -29,7 +29,7 @@ export default function DigitalMarketingChooseUs() {
 
               className="rt-gap-off"
             >
-              Get full transparency into your campaigns with advanced analytics, custom reporting, and a dedicated team focused entirely on scaling your revenue.
+              Real-time dashboards, monthly reports, and a dedicated account manager — so you always know exactly where your budget is going and what results it's delivering.
             </p>
             <div className="rt-choose-v4-left-inner">
               <div
@@ -45,7 +45,7 @@ export default function DigitalMarketingChooseUs() {
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
-                  <div className="rt-text-style-h6">Data-Driven Insights</div>
+                  <div className="rt-text-style-h6">Transparent Reporting</div>
                 </div>
               </div>
               <div
@@ -61,7 +61,7 @@ export default function DigitalMarketingChooseUs() {
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
-                  <div className="rt-text-style-h6">Continuous Optimization</div>
+                  <div className="rt-text-style-h6">Dedicated Growth Team</div>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function DigitalMarketingChooseUs() {
                 href="https://taskopia.webflow.io/contact"
                 className="rt-button-body w-inline-block"
               >
-                <div className="rt-button-text">Start growing your brand</div>
+                <div className="rt-button-text">Let's grow together</div>
                 <div
                   className="rt-button-body-overlay"
                   style={{

@@ -68,7 +68,7 @@ export default function DigitalMarketingSolution() {
               className="rt-sub-gap"
             >
               <div className="rt-sub-text rt-sub-gredient">
-                End-to-End Solutions
+                Full-Service Marketing
               </div>
             </div>
             <div className="rt-heading-para-gap">
@@ -77,7 +77,7 @@ export default function DigitalMarketingSolution() {
                 style={{ opacity: "0" }}
                 className="rt-gap-off"
               >
-                Transforming your digital footprint into revenue
+                One agency. Every channel. Zero guesswork.
               </h2>
             </div>
             <p
@@ -85,7 +85,7 @@ export default function DigitalMarketingSolution() {
               style={{ opacity: "0" }}
               className="rt-gap-off"
             >
-              We manage your entire marketing stack, from content creation to paid media, ensuring a cohesive and high-performing strategy.
+              Tryangletech handles your SEO, paid ads, social media, content, and email — all under one roof. One strategy, one team, and one clear goal: growing your business.
             </p>
             <div className="rt-about-v1-right-inner">
               <div
@@ -102,10 +102,10 @@ export default function DigitalMarketingSolution() {
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Omnichannel Marketing
+                    Integrated Multi-Channel Strategy
                   </div>
                   <p className="rt-gap-off">
-                    Reach your audience wherever they are, seamlessly integrating across search, social, and email platforms.
+                    SEO, PPC, social, and email working together — not in silos — to maximize your reach and revenue.
                   </p>
                 </div>
               </div>
@@ -123,10 +123,10 @@ export default function DigitalMarketingSolution() {
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Scalable Campaigns
+                    Agile, Scalable Execution
                   </div>
                   <p className="rt-gap-off">
-                    Campaigns built to grow with you. As your business scales, our strategies adapt to maximize market share.
+                    Whether you're a startup or an enterprise, our strategies scale with you as your business grows.
                   </p>
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function DigitalMarketingSolution() {
                   href="https://taskopia.webflow.io/contact"
                   className="rt-button-body w-inline-block"
                 >
-                  <div className="rt-button-text">Explore solutions</div>
+                  <div className="rt-button-text">See all services</div>
                   <div
                     className="rt-button-body-overlay"
                     style={{

@@ -11,32 +11,32 @@ export default function DigitalMarketingFaq() {
   const faqs = [
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
-      q: 'What digital marketing services do you specialize in?',
-      a: 'We specialize in Search Engine Optimization (SEO), Pay-Per-Click (PPC) advertising, social media marketing, content creation, and conversion rate optimization (CRO) to maximize your online revenue.',
+      q: 'What digital marketing services does Tryangletech offer?',
+      a: 'We offer a complete suite of digital marketing services including SEO, Google & Meta Ads (PPC), social media marketing, content marketing, email campaigns, and conversion rate optimization — all managed by certified specialists.',
       isTop: true,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
-      q: 'How long does it take to see results from SEO?',
-      a: 'While PPC can deliver immediate traffic, SEO is a long-term strategy. You can typically expect to see noticeable improvements in rankings and organic traffic within 3 to 6 months.',
+      q: 'How soon will I see results from SEO?',
+      a: 'SEO is a long-term investment. Most of our clients begin to see meaningful improvements in rankings and organic traffic within 3–6 months. However, we set up quick wins early on to show progress while the long-term strategy builds momentum.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
-      q: 'How do you measure the success of a campaign?',
-      a: "We track key performance indicators (KPIs) tailored to your goals, such as cost per acquisition (CPA), return on ad spend (ROAS), conversion rates, and overall organic traffic growth. You'll receive comprehensive monthly reports.",
+      q: 'What is your minimum budget for paid ads (PPC)?',
+      a: 'We work with businesses of all sizes. Our PPC management typically starts with a minimum ad spend of ₹50,000/month. This ensures enough data for optimization and meaningful results. We’ll recommend the right budget based on your goals.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
-      q: 'Do you handle both B2B and B2C digital marketing?',
-      a: 'Absolutely. Our strategies are customized for your specific audience, whether that involves lead generation for B2B clients or direct e-commerce sales for B2C brands.',
+      q: 'How do you measure and report on campaign performance?',
+      a: 'You get a dedicated dashboard with real-time campaign data plus a detailed monthly report. We track KPIs like cost-per-lead, ROAS, conversion rates, and revenue attribution — so you always know exactly what’s working.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
-      q: 'What makes your digital marketing approach different?',
-      a: "We don't just chase traffic; we focus on revenue. Our data-driven approach ensures every dollar you spend is optimized for the highest possible return on investment.",
+      q: 'Do you work with businesses outside India?',
+      a: 'Yes! We serve clients across India, the US, UK, UAE, and Australia. Our team is experienced in running multi-market campaigns and we adapt our strategies to the cultural and competitive nuances of each market.',
       isTop: false,
     },
   ];

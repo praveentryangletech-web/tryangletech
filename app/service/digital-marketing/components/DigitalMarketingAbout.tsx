@@ -49,7 +49,7 @@ export default function DigitalMarketingAbout() {
                   }}
                   className="rt-sub-text"
                 >
-                  Key Highlights
+                  Our Approach
                 </div>
               </div>
               <div className="rt-heading-para-gap">
@@ -63,7 +63,7 @@ export default function DigitalMarketingAbout() {
                   }}
                   className="rt-gap-off rt-text-color-white"
                 >
-                  Collaborate seamlessly, track progress in real-time
+                  Strategy that delivers, not just data that looks good
                 </h2>
               </div>
               <div
@@ -77,9 +77,7 @@ export default function DigitalMarketingAbout() {
                 }}
               >
                 <p className="rt-gap-off rt-color-pale-periwinkle">
-                  Empower teams with instant updates, shared boards, and
-                  transparent progress tracking, ensuring every project
-                  milestone is reached without delays or confusion.
+                  We start with understanding your business goals deeply, then build a tailored marketing strategy — not a template — that attracts the right audience and converts them into loyal customers.
                 </p>
               </div>
               <div
@@ -105,10 +103,10 @@ export default function DigitalMarketingAbout() {
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
-                      Task organization
+                      ROI-Focused Campaigns
                     </div>
                     <p className="rt-gap-off rt-color-pale-periwinkle">
-                      Enhance team productivity with seamless collaboration
+                      Every rupee spent is tracked, optimized, and accountable
                     </p>
                   </div>
                 </div>
@@ -124,10 +122,10 @@ export default function DigitalMarketingAbout() {
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
-                      Team collaboration
+                      Full-Funnel Execution
                     </div>
                     <p className="rt-gap-off rt-color-pale-periwinkle">
-                      Drive progress with innovative task management solutions
+                      From awareness to conversion — we own every stage
                     </p>
                   </div>
                 </div>
@@ -153,7 +151,7 @@ export default function DigitalMarketingAbout() {
                     className="rt-button-text rt-btn-color"
                     style={{ color: "rgb(26, 11, 84)" }}
                   >
-                    &nbsp;Get started today
+                    &nbsp;Book a Free Consultation
                   </div>
                   <div
                     className="rt-button-body-overlay rt-color-blue rt-color-change"

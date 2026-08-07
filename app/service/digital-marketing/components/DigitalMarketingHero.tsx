@@ -89,7 +89,7 @@ export default function DigitalMarketingHero() {
                 }}
                 className="rt-sub-text rt-sub-gredient"
               >
-                Scale Your Business
+                Digital Marketing
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function DigitalMarketingHero() {
               }}
               className="rt-gap-off"
             >
-              Accelerate your online growth with data-driven Digital Marketing
+              Turn Clicks Into Customers With Results-Driven Digital Marketing
             </h1>
           </div>
           <p
@@ -117,7 +117,7 @@ export default function DigitalMarketingHero() {
             }}
             className="rt-padding-hero-v3 rt-gap-off"
           >
-            Dominate your market with targeted SEO, high-converting PPC campaigns, and data-driven strategies designed to scale your online presence and maximize ROI.
+            At Tryangletech, we don't just drive traffic — we drive revenue. From SEO to paid media, our full-funnel marketing strategies are built to grow your brand, fill your pipeline, and deliver measurable ROI.
           </p>
           <div
             data-w-id="42f17482-8aaf-c560-055d-05b0a411c54a"
@@ -134,7 +134,7 @@ export default function DigitalMarketingHero() {
               href="https://taskopia.webflow.io/about"
               className="rt-button-body w-inline-block"
             >
-              <div className="rt-button-text">Get a Free Audit</div>
+              <div className="rt-button-text">Get a Free Strategy Call</div>
               <div
                 className="rt-button-body-overlay"
                 style={{
@@ -154,7 +154,7 @@ export default function DigitalMarketingHero() {
                 className="rt-button-text rt-btn-color-nav"
                 style={{ color: "rgb(24, 51, 254)" }}
               >
-                Our services
+                View our work
               </div>
               <div
                 className="rt-button-body-overlay rt-nav-overlay"

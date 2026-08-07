@@ -47,12 +47,12 @@ export default function DigitalMarketingToolsIntegration() {
               className="rt-tools-iconheading rt-heading-bottom-gap reveal-on-scroll"
             >
               <div className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">integration</div>
+                <div className="rt-sub-text rt-sub-gredient">marketing stack</div>
               </div>
               <h2 className="rt-gap-off rt-desktop-text-center">
-                Connect your favorite tools to{" "}
+                We work with the tools{" "}
                 <span className="rt-color-periwinkle-gray">
-                  scale your marketing
+                  your business already uses
                 </span>
               </h2>
             </div>

@@ -65,7 +65,7 @@ export default function Integration() {
             style={{ "opacity": "0" }}
             className="rt-gap-off rt-desktop-text-center">
             Tools and frameworks we build
-            <span className="rt-color-periwinkle-gray">your projects with</span>
+            <span className="rt-color-periwinkle-gray"> your projects with</span>
           </h2>
         </div>
         <div

@@ -198,14 +198,12 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">Smart task assignment</div>
+                  <div className="rt-text-style-h5">Custom Software Development</div>
                   <p className="rt-gap-off">
-                    Easily assign tasks to the right people with clear priorities
-                    and timelines, improving accountability and ensuring a smoother
-                    project flow.
+                    We build tailored software solutions designed specifically to meet your unique business challenges, streamlining your operations and driving growth.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/custom-software"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -260,15 +258,13 @@ export default function ServiceMarquee() {
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">
-                    Smart workflows and automation
+                    Web Development
                   </div>
                   <p className="rt-gap-off">
-                    Automate key workflows to reduce manual effort, cut errors, and
-                    keep your team aligned, helping every project move faster and
-                    more smoothly.
+                    Create a powerful online presence with our responsive, high-performance web development services. We craft engaging websites that captivate your audience.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/web-development"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -309,14 +305,12 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">Smart task assignment</div>
+                  <div className="rt-text-style-h5">Mobile Application</div>
                   <p className="rt-gap-off">
-                    Easily assign tasks to the right people with clear priorities
-                    and timelines, improving accountability and ensuring a smoother
-                    project flow.
+                    Reach your customers on the go with intuitive, user-friendly mobile applications for iOS and Android. We turn your app ideas into reality.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/mobile-application"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -380,14 +374,12 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms', flex: '1', paddingLeft: '4rem' }}>
-                  <div className="rt-text-style-h5">Smart task assignment</div>
+                  <div className="rt-text-style-h5">Graphics Designing</div>
                   <p className="rt-gap-off">
-                    Easily assign tasks to the right people with clear priorities
-                    and timelines, improving accountability and ensuring a smoother
-                    project flow.
+                    Elevate your brand with stunning visual designs. Our creative team delivers eye-catching graphics, logos, and UI/UX designs that leave a lasting impression.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/graphics-designing"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -428,12 +420,12 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">Customizable reporting</div>
+                  <div className="rt-text-style-h5">Digital Marketing</div>
                   <p className="rt-gap-off">
-                    Generate detailed reports tailored to your team's specific KPIs.
+                    Boost your online visibility and drive conversions. We offer comprehensive digital marketing strategies tailored to your business goals.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/digital-marketing"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -474,12 +466,12 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">Seamless integration</div>
+                  <div className="rt-text-style-h5">Search Engine Optimization</div>
                   <p className="rt-gap-off">
-                    Connect smoothly with all the tools your team already relies on.
+                    Rank higher, drive organic traffic, and outpace your competition. We implement data-driven SEO strategies that deliver measurable, long-term results.
                   </p>
                   <a
-                    href="https://taskopia.webflow.io/about"
+                    href="/service/seo"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">

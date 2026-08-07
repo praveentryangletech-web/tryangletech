@@ -89,9 +89,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/react.svg"
                 loading="lazy"
-                width={48}
-                height={48}
-                alt="React logo" style={{ width: "48px", height: "48px" }} />
+                width={60}
+                height={60}
+                alt="React logo" style={{ width: "60px", height: "auto" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-2">
@@ -129,9 +129,9 @@ export default function Integration() {
               <Image
                 src="/tech-icons/php.svg"
                 loading="lazy"
-                width={48}
-                height={48}
-                alt="PHP logo" style={{ width: "48px", height: "48px" }} />
+                width={70}
+                height={70}
+                alt="PHP logo" style={{ width: "70px", height: "auto" }} />
             </div>
           </div>
           <div style={{ "opacity": "0" }} className="rt-integration-icon-wrap rt-6">

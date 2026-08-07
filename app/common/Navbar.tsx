@@ -155,10 +155,10 @@ export default function Navbar() {
                     <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
                     <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
                     <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
-                    <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software Development</Link>
                     <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Website Development</Link>
-                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
+                    <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software </Link>
                     <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
+                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
                     <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
                   </nav>
                 </div>
@@ -368,7 +368,7 @@ export default function Navbar() {
                   </nav>
                 </div>
                 */}
- {/* Blog */}
+                {/* Blog */}
                 <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
                   <div className="rt-menu-text">Blog</div>
                 </Link>
@@ -412,7 +412,7 @@ export default function Navbar() {
                           <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
                           <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
                           <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
-                          <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software Development</Link>
+                          <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software</Link>
                           <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Website Development</Link>
                           <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
                           <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
@@ -535,10 +535,10 @@ export default function Navbar() {
                         </nav>
                       </div>
                       */}
- {/* Blog */}
-                <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
-                  <div className="rt-menu-text">Blog</div>
-                </Link>
+                      {/* Blog */}
+                      <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                        <div className="rt-menu-text">Blog</div>
+                      </Link>
                       {/* Mobile – Contact */}
                       <Link href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
                         <div className="rt-menu-text">Contact</div>

@@ -73,7 +73,7 @@ export default function Navbar() {
                     alt="TryangleTech logo"
                     src={`/logo.png`}
                     loading="lazy"
-                    className="rt-auto-fit rt-desktop-image-full-width"  width={800} height={800} />
+                    className="rt-auto-fit rt-desktop-image-full-width" width={800} height={800} />
                   <div className="rt-link-discernible">link<br />&#x200D;</div>
                 </Link>
               </div>
@@ -103,7 +103,7 @@ export default function Navbar() {
                         height={6}
                         alt="dropdown arrow"
                         src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy"  />
+                        loading="lazy" />
                     </div>
                   </div>
                   <nav
@@ -146,7 +146,7 @@ export default function Navbar() {
                         height={6}
                         alt="dropdown arrow"
                         src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy"  />
+                        loading="lazy" />
                     </div>
                   </div>
                   <nav
@@ -157,8 +157,7 @@ export default function Navbar() {
                     <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
                     <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software</Link>
                     <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>WEB DEVELOPMENT</Link>
-                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING</Link>
-                    <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
+                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>DIGITAL MARKETING & SEO</Link>
                     <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
                     <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
                   </nav>
@@ -185,7 +184,7 @@ export default function Navbar() {
                         height={6}
                         alt="dropdown arrow"
                         src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy"  />
+                        loading="lazy" />
                     </div>
                   </div>
                   <nav
@@ -200,7 +199,7 @@ export default function Navbar() {
                               alt="TryangleTech logo"
                               src={`/logo.png`}
                               loading="lazy"
-                              className="rt-mega-menu-icon"  width={800} height={800} />
+                              className="rt-mega-menu-icon" width={800} height={800} />
                           </div>
                           <div className="rt-text-style-h6 rt-text-color-white">
                             Connect your favorite tools and apps seamlessly with our AI agent
@@ -225,7 +224,7 @@ export default function Navbar() {
                           <Link href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Home page</div>
@@ -233,14 +232,14 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* About page */}
                           <Link href="/about" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">About page</div>
@@ -248,14 +247,14 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* Service page */}
                           <Link href="/service/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Service page</div>
@@ -263,14 +262,14 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* Blog page */}
                           <a href="#" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
@@ -278,7 +277,7 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </a>
                         </div>
@@ -288,7 +287,7 @@ export default function Navbar() {
                           <Link href="/contact" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Contact page</div>
@@ -296,14 +295,14 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* Pricing page */}
                           <a href="#" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Pricing page</div>
@@ -311,14 +310,14 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </a>
                           {/* FAQ */}
                           <a href="#" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  />
+                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">FAQ</div>
@@ -326,7 +325,7 @@ export default function Navbar() {
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  />
+                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </a>
                         </div>
@@ -356,7 +355,7 @@ export default function Navbar() {
                         height={6}
                         alt="dropdown arrow"
                         src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy"  />
+                        loading="lazy" />
                     </div>
                   </div>
                   <nav
@@ -387,7 +386,7 @@ export default function Navbar() {
                         <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy"  />
+                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4">
@@ -402,7 +401,7 @@ export default function Navbar() {
                         <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-5" aria-controls="w-dropdown-list-5" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <Link href="/service" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Service</Link>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy"  />
+                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "200px" }}>
@@ -433,7 +432,7 @@ export default function Navbar() {
                         <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-6" aria-controls="w-dropdown-list-6" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <div className="rt-menu-text">Pages</div>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy"  />
+                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-6" aria-labelledby="w-dropdown-toggle-6">
@@ -441,75 +440,75 @@ export default function Navbar() {
                             <div className="w-layout-vflex rt-pages-menu-list-wrap">
                               <Link href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Home page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Connect, collaborate and stay</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
                               <Link href="/about" data-w-id="b84e5def-8be0-c77c-84d1-4421928068c6" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">About page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Learn about our story, mission</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
                               <Link href="/service/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Service page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Explore our services effortlessly</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
                               <a href="#" data-w-id="b84e5def-8be0-c77c-84d1-4421928068dc" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Update the latest articles</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </a>
                             </div>
                             <div className="w-layout-vflex rt-pages-menu-list-wrap rt-padding">
                               <Link href="/contact" data-w-id="b84e5def-8be0-c77c-84d1-4421928068e8" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Contact page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">We&#x2019;re here to help you 24/7</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
                               <a href="#" data-w-id="b84e5def-8be0-c77c-84d1-4421928068f3" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Pricing page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Choose the option made for you</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </a>
                               <a href="#" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon"  /></div>
+                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">FAQ</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Collaboration, trust, and shared goals</div>
                                   </div>
                                 </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow"  /></div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </a>
                             </div>
                           </div>
@@ -521,7 +520,7 @@ export default function Navbar() {
                         <div className="rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle" id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/blog'); }} style={{ cursor: 'pointer' }}>Blog</div>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy"  />
+                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-7" aria-labelledby="w-dropdown-toggle-7">
@@ -547,16 +546,16 @@ export default function Navbar() {
                       <div className="rt-text-style-h5">Follow us</div>
                       <div className="w-layout-hflex rt-social-link-wrap">
                         <a href="https://www.instagram.com/" className="rt-mega-menu-icon w-inline-block">
-                          <Image width={10} height={18} alt="Instagram" src={`${NAV_ASSETS}/68ff46366a330717f35394cc_Kloudera-team-icon.svg`} loading="lazy"  />
+                          <Image width={10} height={18} alt="Instagram" src={`${NAV_ASSETS}/68ff46366a330717f35394cc_Kloudera-team-icon.svg`} loading="lazy" />
                         </a>
                         <a href="https://x.com/" className="rt-mega-menu-icon w-inline-block">
-                          <Image width={14} height={14} alt="X" src={`${NAV_ASSETS}/68ff46366a330717f35394d6_kloudera-mega-menu-icon.svg`} loading="lazy"  />
+                          <Image width={14} height={14} alt="X" src={`${NAV_ASSETS}/68ff46366a330717f35394d6_kloudera-mega-menu-icon.svg`} loading="lazy" />
                         </a>
                         <a href="https://www.linkedin.com/" className="rt-mega-menu-icon w-inline-block">
-                          <Image width={14} height={15} alt="LinkedIn" src={`${NAV_ASSETS}/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg`} loading="lazy"  />
+                          <Image width={14} height={15} alt="LinkedIn" src={`${NAV_ASSETS}/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg`} loading="lazy" />
                         </a>
                         <a href="https://www.facebook.com/" className="rt-mega-menu-icon w-inline-block">
-                          <Image width={10} height={18} alt="Facebook" src={`${NAV_ASSETS}/68ff46366a330717f35394d0_Kloudera-team-icon.svg`} loading="lazy"  />
+                          <Image width={10} height={18} alt="Facebook" src={`${NAV_ASSETS}/68ff46366a330717f35394d0_Kloudera-team-icon.svg`} loading="lazy" />
                         </a>
                       </div>
                     </div>

@@ -152,8 +152,8 @@ export default function ServiceToolsIntegration() {
                 </div>
                 <div>
                   <img
-                    alt="Stripe"
-                    src="/tech-icons/stripe.svg"
+                    alt="Razorpay"
+                    src="/tech-icons/razorpay.svg"
                     loading="lazy"
                     className="rt-itegration-logo reveal-on-scroll"
                     style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}

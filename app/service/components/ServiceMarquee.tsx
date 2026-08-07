@@ -198,7 +198,7 @@ export default function ServiceMarquee() {
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">Custom Software Development</div>
+                  <div className="rt-text-style-h5">Custom Software</div>
                   <p className="rt-gap-off">
                     We build tailored software solutions designed specifically to meet your unique business challenges, streamlining your operations and driving growth.
                   </p>

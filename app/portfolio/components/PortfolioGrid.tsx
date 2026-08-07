@@ -24,13 +24,17 @@ const categories = [
   "Graphic Design"
 ];
 
-export default function PortfolioGrid() {
+interface PortfolioGridProps {
+  limit?: number;
+}
+
+export default function PortfolioGrid({ limit }: PortfolioGridProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
   
   // Infinite scroll state
-  const [visibleCount, setVisibleCount] = useState(9);
+  const [visibleCount, setVisibleCount] = useState(limit || 9);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const filteredProjects = useMemo(() => {
@@ -40,8 +44,8 @@ export default function PortfolioGrid() {
 
   // Reset visible count when filter changes
   useEffect(() => {
-    setVisibleCount(9);
-  }, [activeFilter]);
+    setVisibleCount(limit || 9);
+  }, [activeFilter, limit]);
 
   // Scroll-reveal: re-observe every time filter or visibleCount changes
   useEffect(() => {
@@ -294,14 +298,16 @@ export default function PortfolioGrid() {
         </div>
 
         {/* Infinite Scroll Sentinel & Loading indicator */}
-        {visibleCount < filteredProjects.length ? (
-          <div ref={sentinelRef} style={{ height: '20px', display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-            {isLoadingMore && <div className="pf-spinner"></div>}
-          </div>
-        ) : (
-          <div style={{ textAlign: 'center', fontSize: '13px', color: '#9ca3af', padding: '1.5rem 0' }}>
-            ✓ All projects loaded
-          </div>
+        {!limit && (
+          visibleCount < filteredProjects.length ? (
+            <div ref={sentinelRef} style={{ height: '20px', display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+              {isLoadingMore && <div className="pf-spinner"></div>}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center', fontSize: '13px', color: '#9ca3af', padding: '1.5rem 0' }}>
+              ✓ All projects loaded
+            </div>
+          )
         )}
 
       </div>

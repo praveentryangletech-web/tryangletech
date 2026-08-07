@@ -7,7 +7,7 @@ export default function ProjectsSection() {
   return (
     <section className="rt-hero-12">
       <PortfolioHero />
-      <PortfolioGrid />
+      <PortfolioGrid limit={6} />
     </section>
   );
 }

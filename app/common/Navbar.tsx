@@ -334,7 +334,7 @@ export default function Navbar() {
                   </nav>
                 </div>
 
-                {/* Blog dropdown */}
+                {/* Blog dropdown
                 <div
                   data-delay="300"
                   data-hover="true"
@@ -367,7 +367,11 @@ export default function Navbar() {
                     <Link href="/blog" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Blog post</Link>
                   </nav>
                 </div>
-
+                */}
+ {/* Blog */}
+                <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                  <div className="rt-menu-text">Blog</div>
+                </Link>
                 {/* Contact */}
                 <Link href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
                   <div className="rt-menu-text">Contact</div>
@@ -515,7 +519,7 @@ export default function Navbar() {
                         </nav>
                       </div>
 
-                      {/* Mobile – Blog */}
+                      {/* Mobile – Blog
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
                         <div className="rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle" id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/blog'); }} style={{ cursor: 'pointer' }}>Blog</div>
@@ -530,7 +534,11 @@ export default function Navbar() {
                           <a href="#" className="rt-nav-menu-link shadow-varient-59 rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
                         </nav>
                       </div>
-
+                      */}
+ {/* Blog */}
+                <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                  <div className="rt-menu-text">Blog</div>
+                </Link>
                       {/* Mobile – Contact */}
                       <Link href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
                         <div className="rt-menu-text">Contact</div>

@@ -3,8 +3,16 @@ import WebflowInit from "../../common/WebflowInit";
 
 import Image from "next/image";
 import Link from "next/link";
+import { BLOG_POSTS } from "../components/BlogContent";
+import { notFound } from "next/navigation";
 
-export default function BlogPostPage() {
+export default function BlogPostPage({ params }: { params: { id: string } }) {
+  const post = BLOG_POSTS.find(p => p.slug === params.id);
+  
+  if (!post) {
+    return notFound();
+  }
+
   return (
     <>
       <WebflowInit pageId="68edde422825b6d5b8990f59" />
@@ -17,25 +25,25 @@ export default function BlogPostPage() {
                 <div
                   data-w-id="83bcf42d-4766-4fc8-0747-58448baf3155"
                   className="rt-sub-text rt-sub-gredient">
-                  Our tasks
+                  {post.category}
                 </div>
               </div>
               <h1
                 data-w-id="83bcf42d-4766-4fc8-0747-58448baf3157"
                 className="rt-gap-off">
-                Building clarity through smarter work systems
+                {post.title}
               </h1>
             </div>
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
               className="rt-hero-13-main-image rt-overflow-hidden rt-shadow">
               <Image
-                src="/blog-post-assets/69033401de7772098a4febcf_blog-betails-H.webp"
+                src={post.image}
                 loading="lazy"
                 data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
-                alt=""
+                alt={post.title}
                 className="rt-image-scale"
-                width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                width={800} height={800} style={{ width: "100%", height: "auto", objectFit: "cover", maxHeight: "60vh" }} />
             </div>
           </div>
         </section>
@@ -100,23 +108,23 @@ export default function BlogPostPage() {
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9ca"
                 className="w-layout-hflex rt-blog-post-date-wrap">
                 <p className="rt-gap-off rt-color-vivid-blue">
-                  October 29, 2025
+                  {post.date}
                 </p>
                 <div className="rt-author-name-wrap">
                   <div className="rt-dot-small"></div>
                   <div className="rt-sub-text rt-color-blue-yonder">
-                    Our tasks
+                    {post.category}
                   </div>
                 </div>
               </div>
               <div className="project-meta-grid">
                 <div className="meta-card">
                   <span className="meta-label">Category</span>
-                  <span className="meta-value">Our Tasks</span>
+                  <span className="meta-value">{post.category}</span>
                 </div>
                 <div className="meta-card">
                   <span className="meta-label">Author</span>
-                  <span className="meta-value">Glenn Parker</span>
+                  <span className="meta-value">TryangleTech Team</span>
                 </div>
               </div>
               <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
@@ -315,10 +323,10 @@ export default function BlogPostPage() {
                 </div>
                 <div className="w-layout-vflex rt-author-content-wrap rt-mobile-text-center">
                   <div className="w-layout-hflex rt-blog-post-author-wrap">
-                    <div className="rt-text-style-h6">Glenn Parker</div>
+                    <div className="rt-text-style-h6">TryangleTech Team</div>
                     <div className="rt-author-degignation-wrap">
                       <div className="rt-blog-degignation-text rt-text-color-white-2">
-                        Prompt engineer
+                        Content Creators
                       </div>
                     </div>
                   </div>

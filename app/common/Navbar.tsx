@@ -568,8 +568,8 @@ export default function Navbar() {
                       </div>
                     </div>
                     <div className="w-layout-vflex rt-mobile-menu-link-text-mian">
-                      <a href="tel:8884567890" className="rt-text-style-h5">(888) 456 7890</a>
-                      <a href="mailto:info@example.com" className="rt-text-style-h5">info@example.com</a>
+                      <a href="tel:8884567890" className="rt-text-style-h5">+91 90338 78806</a>
+                      <a href="mailto:info.tryangletech@gmail.com" className="rt-text-style-h5">info.tryangletech@gmail.com</a>
                     </div>
                   </div>
                 </div>

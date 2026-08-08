@@ -45,7 +45,7 @@ export default function About() {
                 style={{ "opacity": "0" }}
                 className="rt-gap-off">
                 We take your idea and turn it into
-                <span className="rt-color-periwinkle-gray">something real</span>
+                <span className="rt-color-periwinkle-gray"> something real</span>
               </h2>
             </div>
             <p

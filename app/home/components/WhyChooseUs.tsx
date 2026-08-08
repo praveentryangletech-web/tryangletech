@@ -23,7 +23,7 @@ export default function WhyChooseUs() {
                 <h2 className="rt-gap-off">
                   Why businesses choose to work
                   <span className="rt-color-periwinkle-gray"
-                  >with us</span
+                  > with us</span
                   >
                 </h2>
               </div>

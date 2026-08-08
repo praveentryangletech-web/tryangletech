@@ -26,7 +26,7 @@ export default function Collaboration() {
                     style={{ "opacity": "0" }}
                     className="rt-gap-off">
                     How we work with you from start
-                    <span className="rt-color-periwinkle-gray">to finish</span>
+                    <span className="rt-color-periwinkle-gray"> to finish</span>
                   </h2>
                 </div>
                 <p

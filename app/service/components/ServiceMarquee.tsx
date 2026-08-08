@@ -57,35 +57,17 @@ export default function ServiceMarquee() {
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403eb"
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                      <Image
-                        width={62}
-                        height={47}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/Home2_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
+                      <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ed"
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/Home2_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
+                      <div style={{ width: '60px', height: '60px', backgroundColor: '#3b82f6', borderRadius: '50%' }} />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ef"
                       className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/Home2_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
+                      <div style={{ width: '60px', height: '60px', backgroundColor: '#a855f7', borderRadius: '50%' }} />
                     </div>
                   </div>
                 </div>

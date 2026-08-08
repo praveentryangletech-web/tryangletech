@@ -25,34 +25,34 @@ export default function Hero() {
                     data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a6"
                     style={{ "opacity": "0" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                    <Image
-                      width={62}
-                      height={47}
-                      alt="Kloudera-home-two-hero-image"
-                      src="/Taskopia_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#38bdf8',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                   <div
                     data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a8"
                     style={{ "opacity": "0" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <Image
-                      width={60}
-                      height={79}
-                      alt="Kloudera-home-two-hero-image"
-                      src="/Taskopia_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#3b82f6',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                   <div
                     data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3aa"
                     style={{ "opacity": "0" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <Image
-                      width={60}
-                      height={79}
-                      alt="Kloudera-home-two-hero-image"
-                      src="/Taskopia_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#a855f7',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                 </div>
               </div>
@@ -195,34 +195,34 @@ export default function Hero() {
                     data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba4"
                     style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(-15deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                    <Image
-                      width={62}
-                      height={47}
-                      alt="Company Icon"
-                      src="/favicon.png"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#38bdf8',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                   <div
                     data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba6"
                     style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <Image
-                      width={60}
-                      height={79}
-                      alt="Company Icon"
-                      src="/favicon.png"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#3b82f6',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                   <div
                     data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba8"
                     style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(30deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
                     className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <Image
-                      width={60}
-                      height={79}
-                      alt="Company Icon"
-                      src="/favicon.png"
-                      loading="lazy" />
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      backgroundColor: '#a855f7',
+                      borderRadius: '50%'
+                    }} />
                   </div>
                 </div>
               </div>

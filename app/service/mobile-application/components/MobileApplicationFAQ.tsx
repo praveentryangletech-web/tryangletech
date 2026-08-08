@@ -74,35 +74,17 @@ export default function MobileApplicationFAQ() {
                       <div
                         data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80c7"
                         className="rt-hero-v2-client-image rt-overflow-hidden">
-                        <Image
-                          width={62}
-                          height={47}
-                          alt="Kloudera-home-two-hero-image"
-                          src="/service-3-assets/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                          loading="lazy"
-                         />
+                        <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
                       </div>
                       <div
                         data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80c9"
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                        <Image
-                          width={60}
-                          height={79}
-                          alt="Kloudera-home-two-hero-image"
-                          src="/service-3-assets/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                          loading="lazy"
-                         />
+                        <div style={{ width: '60px', height: '60px', backgroundColor: '#3b82f6', borderRadius: '50%' }} />
                       </div>
                       <div
                         data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80cb"
                         className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                        <Image
-                          width={60}
-                          height={79}
-                          alt="Kloudera-home-two-hero-image"
-                          src="/service-3-assets/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                          loading="lazy"
-                         />
+                        <div style={{ width: '60px', height: '60px', backgroundColor: '#a855f7', borderRadius: '50%' }} />
                       </div>
                     </div>
                     <div className="rt-color-dark-indigo">

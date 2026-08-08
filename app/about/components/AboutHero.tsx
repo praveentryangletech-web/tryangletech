@@ -19,12 +19,12 @@ export default function AboutHero() {
                 <div className="rt-overflow-hidden">
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                     {[
-                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c1598', extra: '' },
-                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159a', extra: ' rt-margin-left' },
-                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159c', extra: ' rt-margin-left' },
-                    ].map(({ id, extra }) => (
+                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c1598', extra: '', color: '#38bdf8' },
+                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159a', extra: ' rt-margin-left', color: '#3b82f6' },
+                      { id: '7abbce1b-da37-af5e-d2f0-7cd49e9c159c', extra: ' rt-margin-left', color: '#a855f7' },
+                    ].map(({ id, extra, color }) => (
                       <div key={id} data-w-id={id} className={`rt-hero-v2-client-image rt-overflow-hidden rt-sub-image${extra}`} style={{ border: 'none' }}>
-                        <Image width={30} height={30} alt="Tryangle Tech Logo" src="/favicon.png" loading="lazy" />
+                        <div style={{ width: '60px', height: '60px', backgroundColor: color, borderRadius: '50%' }} />
                       </div>
                     ))}
                   </div>

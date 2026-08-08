@@ -21,7 +21,7 @@ export default function FAQ() {
                     data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2f"
                     className="rt-no-margin"
                     style={{ "opacity": "0" }}>
-                    Everything you want to know
+                    Frequently Asked Questions
                     <span className="rt-color-periwinkle-gray"
                     >explained clearly</span
                     >

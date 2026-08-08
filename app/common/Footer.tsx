@@ -13,12 +13,11 @@ export default function Footer() {
               <div className="rt-sub-gap"></div>
               <div className="rt-heading-para-gap">
                 <h2 data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1da" className="rt-text-color-white rt-gap-off">
-                  Have questions? We’re ready to support you
+                  Ready to turn your ideas into reality?
                 </h2>
               </div>
               <p data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1dc" className="rt-text-color-white rt-gap-off rt-footer-card-para">
-                Have questions or need more details? Our team is always happy to
-                guide and support you anytime.
+                Whether you need a new website, a mobile app, or a complete digital strategy, we're here to help you succeed.
               </p>
               <div data-w-id="50e1d07b-f342-3384-42a9-57fa6b53c1de" className="rt-button-para-gap rt-overflow-hidden rt-button-left">
                 <a
@@ -196,9 +195,9 @@ export default function Footer() {
                   </div>
                   <p className="rt-color-pale-periwinkle">
                     <span className="rt-text-color-white">
-                      Let’s discuss your next project
+                      We'd love to hear from you.
                     </span>
-                    —connect with our team today for tailored solutions.
+                    <br />Reach out today to discover how we can help your business grow.
                   </p>
                 </div>
                 <a

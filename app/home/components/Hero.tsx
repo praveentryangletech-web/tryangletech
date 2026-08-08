@@ -268,7 +268,7 @@ export default function Hero() {
                   </div>
                   <div>
                     <div>Call us directly</div>
-                    <a href="tel:8884567890">+91 90338 78806</a>
+                    <a href="tel:+919033878806">+91 90338 78806</a>
                   </div>
                 </div>
               </div>

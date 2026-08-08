@@ -19,7 +19,7 @@ export default function Benefits() {
                 style={{ "opacity": "0" }}
                 className="rt-gap-off rt-desktop-text-center">
                 What we can do for
-                <span className="rt-color-periwinkle-gray">your business</span>
+                <span className="rt-color-periwinkle-gray"> your business</span>
               </h2>
             </div>
             <div className="rt-our-benefits-content">

@@ -76,10 +76,10 @@ export default function AboutHero() {
             {/* Right */}
             <div data-w-id="6da1e0e9-8679-bd2c-933d-50714d290b3b" className="rt-hero-v4-right rt-mobile-l-display-none">
               <div>
-                <Image src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`} loading="lazy" alt="about hero" width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                <Image src={`${A}/690c2237c3412540538c8db2_taskopiya-about-hero-Hand.webp`} loading="lazy" alt="TryangleTech About Hero" width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-hero-v4-right-image-two">
-                <Image src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`} loading="lazy" alt="Mobile about" width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                <Image src={`${A}/6915cf130e64f93cbd9e83bc_Mobile about.webp`} loading="lazy" alt="TryangleTech Mobile App Preview" width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function AboutHero() {
                   <h2 className="rt-gap-off rt-heading-para-gap">Building digital solutions that drive real business growth</h2>
                 </div>
                 <div className="rt-hero-v4-speciality-top-para">
-                  <p className="rt-gap-off">We are a community of designers, developers, and marketers dedicated to delivering quality solutions and ensuring customer satisfaction.</p>
+                  <p className="rt-gap-off">Our dedicated team works closely with you at every stage, turning complex challenges into streamlined, high-performing digital products that scale with your business.</p>
                 </div>
               </div>
 
@@ -126,7 +126,7 @@ export default function AboutHero() {
 
         {/* Banner image */}
         <div className="rt-hero-v4-image">
-          <Image src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`} loading="lazy" alt="taskopiya-about-banner" width={800} height={800} style={{ width: "100%", height: "auto" }} />
+          <Image src={`${A}/6915cd620829878f7ea58178_taskopiya-about-banner.webp`} loading="lazy" alt="TryangleTech Team Banner" width={800} height={800} style={{ width: "100%", height: "auto" }} />
         </div>
         <div className="rt-hero-v4-dot one"></div>
         <div className="rt-hero-v4-dot two"></div>

@@ -42,11 +42,24 @@ export default function FooterCTA() {
               `}} />
               {[1, 2, 3].map((lineNum) => (
                 <div key={lineNum} className={`rt-collaborate-card-line-${lineNum} animate-ring-${lineNum} rt-tab-display-none`}>
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i} animate-icon-${lineNum}`}>
-                      <div><Image src="/favicon.png" loading="lazy" alt="Tryangle Tech Logo" width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
-                    </div>
-                  ))}
+                  {[1, 2, 3, 4].map((i) => {
+                    const iconIndex = ((lineNum - 1) * 4 + i) % 7 + 1;
+                    const icons = {
+                      1: '/Taskopia_files/68f23486208c840a16db162e_taskopia-integration-icon-1.svg',
+                      2: '/Taskopia_files/68f2348699aef274cbcbee3e_taskopia-integration-icon-2.svg',
+                      3: '/Taskopia_files/68f23486c96e19be1a0fd550_taskopia-integration-icon-3.svg',
+                      4: '/Taskopia_files/68f23486b959a4ffa7a97ffd_taskopia-integration-icon-4.svg',
+                      5: '/Taskopia_files/68f234862949c40075dc6633_taskopia-integration-icon-5.svg',
+                      6: '/Taskopia_files/68f234867a335089a7a018ec_taskopia-integration-icon-6.svg',
+                      7: '/Taskopia_files/68f2348662af5d1784a5246b_taskopia-integration-icon-7.svg'
+                    };
+                    const src = icons[iconIndex as keyof typeof icons];
+                    return (
+                      <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i} animate-icon-${lineNum}`}>
+                        <div><Image src={src} loading="lazy" alt={`Integration Icon`} width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>

@@ -28,7 +28,8 @@ export default function AboutFAQ() {
                       <div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb877" className="rt-sub-text rt-sub-gredient">Frequently asked questions</div>
                     </div>
                     <h2 data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb879" className="rt-no-margin">
-                      Everything you want to know <span className="rt-color-periwinkle-gray">explained clearly</span>
+                    Your common questions 
+                    <span className="rt-color-periwinkle-gray">answered</span>
                     </h2>
                     <div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb87d" className="rt-button-para-gap">
                       <Link data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8" href="/contact" className="rt-button-body w-inline-block">

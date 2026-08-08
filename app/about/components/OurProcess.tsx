@@ -23,10 +23,8 @@ export default function OurProcess() {
               <div className="rt-process-wrapper">
                 {[
                   { wid1: 'baf8e5e7-49ac-4f7f-ad09-58deaac1a659', wid2: '55254470-bac2-0dd8-dd5a-5cfe717a3c25', label: 'Discover', cls: 'one' },
-                  { wid1: 'e48fada5-0185-92fe-c33e-d6a7c98377b3', wid2: 'e48fada5-0185-92fe-c33e-d6a7c98377b6', label: 'Design', cls: 'two' },
-                  { wid1: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1f7', wid2: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1fa', label: 'Develop', cls: 'three' },
-                  { wid1: 'b4ca4a0e-d949-d77f-5378-a8300d077e81', wid2: 'b4ca4a0e-d949-d77f-5378-a8300d077e84', label: 'Test & Launch', cls: 'four' },
-                  { wid1: 'e54f59c9-a53c-e843-6644-89e2987b9f51', wid2: 'e54f59c9-a53c-e843-6644-89e2987b9f54', label: 'Support', cls: 'five' },
+                  { wid1: 'e48fada5-0185-92fe-c33e-d6a7c98377b3', wid2: 'e48fada5-0185-92fe-c33e-d6a7c98377b6', label: 'Design & Develop', cls: 'two' },
+                  { wid1: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1f7', wid2: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1fa', label: 'Launch & Support', cls: 'three' },
                 ].map(({ wid1, wid2, label, cls }) => (
                   <div key={cls} className="rt-process-item">
                     <div data-w-id={wid1} className="rt-process-text"><div>{label}</div></div>

@@ -19,7 +19,7 @@ export default function FooterCTA() {
                 <div className="rt-heading-para-gap">
                   <h2 data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc15" className="rt-text-color-white rt-gap-off">Build smarter, launch faster, grow your business online</h2>
                 </div>
-                <p data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc17" className="rt-text-color-white rt-gap-off rt-footer-card-para">Partner with Tryangletech for expert web development, digital marketing, and custom software solutions — all under one roof.</p>
+                <p data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc17" className="rt-text-color-white rt-gap-off rt-footer-card-para">Partner with Tryangletech for expert website development, digital marketing, and custom software solutions, all under one roof.</p>
                 <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc19" className="rt-button-para-gap">
                   <Link data-wf--rt-white-button--variant="color" data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf" href="/contact" className="rt-button-body rt-bg-color w-inline-block">
                     <div className="rt-button-text rt-btn-color" style={{ color: '#1a0b54' }}>&nbsp;Get started today</div>
@@ -45,13 +45,13 @@ export default function FooterCTA() {
                   {[1, 2, 3, 4].map((i) => {
                     const iconIndex = ((lineNum - 1) * 4 + i) % 7 + 1;
                     const icons = {
-                      1: '/Taskopia_files/68f23486208c840a16db162e_taskopia-integration-icon-1.svg',
-                      2: '/Taskopia_files/68f2348699aef274cbcbee3e_taskopia-integration-icon-2.svg',
-                      3: '/Taskopia_files/68f23486c96e19be1a0fd550_taskopia-integration-icon-3.svg',
-                      4: '/Taskopia_files/68f23486b959a4ffa7a97ffd_taskopia-integration-icon-4.svg',
-                      5: '/Taskopia_files/68f234862949c40075dc6633_taskopia-integration-icon-5.svg',
-                      6: '/Taskopia_files/68f234867a335089a7a018ec_taskopia-integration-icon-6.svg',
-                      7: '/Taskopia_files/68f2348662af5d1784a5246b_taskopia-integration-icon-7.svg'
+                      1: '/favicon.png',
+                      2: '/favicon.png',
+                      3: '/favicon.png',
+                      4: '/favicon.png',
+                      5: '/favicon.png',
+                      6: '/favicon.png',
+                      7: '/favicon.png'
                     };
                     const src = icons[iconIndex as keyof typeof icons];
                     return (

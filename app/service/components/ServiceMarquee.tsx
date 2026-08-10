@@ -56,17 +56,17 @@ export default function ServiceMarquee() {
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403eb"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image" style={{ border: 'none', outline: 'none' }}>
                       <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ed"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image" style={{ border: 'none', outline: 'none' }}>
                       <div style={{ width: '60px', height: '60px', backgroundColor: '#3b82f6', borderRadius: '50%' }} />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ef"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image" style={{ border: 'none', outline: 'none' }}>
                       <div style={{ width: '60px', height: '60px', backgroundColor: '#a855f7', borderRadius: '50%' }} />
                     </div>
                   </div>

@@ -254,27 +254,63 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 </div>
 
                 {project.technologies && project.technologies.length > 0 && (
-                  <div style={{ marginTop: '2rem' }}>
-                    <h3 style={{ marginBottom: '1.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold' }}>Technologies Used</h3>
-                    <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: 0 }}>
-                      <div className="rt-integration-top" style={{ flexWrap: 'wrap', justifyContent: 'flex-start', gap: '20px' }}>
-                        {project.technologies.map((tech, i) => (
-                          <div key={i}>
-                            <div className="rt-itegration-logo" style={{ 
-                              display: 'flex', 
-                              alignItems: 'center', 
-                              justifyContent: 'center', 
-                              width: '129px', 
-                              height: '129px', 
-                              background: '#ffffff', 
-                              borderRadius: '16px',
-                              border: '1px solid #e2e8f0',
-                              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)'
-                            }}>
-                              <span className="rt-text-style-h6" style={{ fontSize: '1.1rem', margin: 0, textAlign: 'center', color: '#1a0b54' }}>{tech}</span>
+                  <div style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
+                    <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Technologies Used</h3>
+                    <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
+                      <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
+                        {project.technologies.map((tech, i) => {
+                          const techIconMap: Record<string, string> = {
+                            "React": "/tech-icons/react.svg",
+                            "React Native": "/tech-icons/react.svg",
+                            "Next.js": "/tech-icons/nextjs.svg",
+                            "PHP": "/tech-icons/php.svg",
+                            "AWS": "/tech-icons/aws.svg",
+                            "AWS S3": "/tech-icons/aws.svg",
+                            "Docker": "/tech-icons/docker.svg",
+                            "Laravel": "/tech-icons/laravel.svg",
+                            "Tailwind CSS": "/tech-icons/tailwind.svg",
+                            "Figma": "/tech-icons/figma.svg",
+                            "Google Ads": "/tech-icons/google-ads.svg",
+                            "Razorpay": "/tech-icons/razorpay.svg",
+                            "Meta": "/tech-icons/meta.svg",
+                            "MongoDB": "/tech-icons/mongodb.svg",
+                            "MySQL": "/tech-icons/mysql.svg",
+                            "PostgreSQL": "/tech-icons/postgresql.svg",
+                            "SQLite": "/tech-icons/sqlite.svg",
+                            "Stripe": "/tech-icons/stripe.svg",
+                            "Swift": "/tech-icons/swift.svg",
+                            "WordPress": "/tech-icons/wordpress.svg",
+                            "Flutter": "/tech-icons/flutter.svg",
+                            "Git": "/tech-icons/git.svg",
+                            "Kotlin": "/tech-icons/kotlin.svg",
+                          };
+                          const iconSrc = techIconMap[tech];
+                          return (
+                            <div key={i}>
+                              {iconSrc ? (
+                                <img
+                                  alt={tech}
+                                  src={iconSrc}
+                                  loading="lazy"
+                                  className="rt-itegration-logo"
+                                  style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
+                                />
+                              ) : (
+                                <div className="rt-itegration-logo" style={{ 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  justifyContent: 'center', 
+                                  width: '129px', 
+                                  height: '132px', 
+                                  background: '#ffffff', 
+                                  padding: '15px'
+                                }}>
+                                  <span className="rt-text-style-h6" style={{ fontSize: '1rem', margin: 0, textAlign: 'center', color: '#1a0b54' }}>{tech}</span>
+                                </div>
+                              )}
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

@@ -193,14 +193,14 @@ export default function Navbar() {
                     <div className="w-layout-hflex rt-mega-menu-wrap">
                       <div className="w-layout-vflex rt-pages-menu-left">
                         <div className="w-layout-vflex rt-pages-menu-left-top">
-                          <Image width={140} height={40} alt="Logo" src={`/logo.png`} loading="lazy" style={{ filter: 'brightness(0) invert(1)', width: 'auto', height: '30px' }} />
-                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4 }}>
-                            Connect your favorite tools and apps seamlessly with our AI agent
+                          <Image width={140} height={40} alt="TryangleTech Logo" src={`/logo.png`} loading="lazy" style={{ filter: 'brightness(0) invert(1)', width: 'auto', height: '35px' }} />
+                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4, marginTop: '1rem' }}>
+                            Transform your bold ideas into powerful digital products with our IT experts.
                           </div>
                         </div>
                         <div className="rt-pages-menu-left-button">
-                          <Link href="/service" className="w-button" style={{ backgroundColor: '#fff', color: '#1833fe', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, display: 'inline-block', border: 'none', cursor: 'pointer' }}>
-                            See integrations
+                          <Link href="/contact" className="w-button" style={{ backgroundColor: '#fff', color: '#1833fe', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, display: 'inline-block', border: 'none', cursor: 'pointer' }}>
+                            Get started today
                           </Link>
                         </div>
                       </div>
@@ -211,60 +211,60 @@ export default function Navbar() {
                           <Link href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={13} height={14} alt="Home" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Home page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Connect, collaborate and stay</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Welcome to TryangleTech</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* About page */}
                           <Link href="/about" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={14} height={14} alt="About" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">About page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Learn about our story, mission</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Discover our mission and vision</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* Service page */}
-                          <Link href="/service/service-one" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          <Link href="/service" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={14} height={12} alt="Service" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Service page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Explore our services effortlessly</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Explore our IT solutions</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* Blog page */}
                           <Link href="/blog" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={14} height={14} alt="Blog" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Update the latest articles</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Read our latest tech insights</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                         </div>
@@ -274,45 +274,45 @@ export default function Navbar() {
                           <Link href="/contact" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={13} height={14} alt="Contact" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Contact page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">We&#x2019;re here to help you 24/7</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Get in touch with our experts</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* Pricing page */}
-                          <Link href="/pricing" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Portfolio page */}
+                          <Link href="/portfolio" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={14} height={14} alt="Portfolio" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Pricing page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Choose the option made for you</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Portfolio page</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">View our successful projects</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                           {/* FAQ */}
                           <Link href="/faq" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <Image width={14} height={14} alt="FAQ" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">FAQ</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Collaboration, trust, and shared goals</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Find answers to common questions</div>
                               </div>
                             </div>
                             <div>
-                              <Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
                         </div>

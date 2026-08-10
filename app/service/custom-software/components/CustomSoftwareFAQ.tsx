@@ -1,5 +1,9 @@
 'use client';
+import Link from "next/link";
 import React, { useState } from 'react';
+import Image from "next/image";
+
+const SA = '/service3-assets';
 
 export default function CustomSoftwareFAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -11,32 +15,32 @@ export default function CustomSoftwareFAQ() {
   const faqs = [
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
-      q: 'Do you build both web and mobile custom applications?',
-      a: 'Yes, we are a full-stack development agency. We build responsive web applications, native mobile apps (iOS and Android), and cross-platform solutions tailored to your business needs.',
+      q: 'How long does it take to build custom software?',
+      a: 'It really depends on the complexity of what you need. A focused web application might take 6 to 10 weeks, while a larger enterprise system could take several months. We always give you a detailed timeline upfront before any work begins so you know exactly what to expect.',
       isTop: true,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
-      q: 'Will I own the source code?',
-      a: 'Absolutely. Once the project is completed and fully paid for, all intellectual property rights and the complete source code are transferred to you.',
+      q: 'Do I need a technical background to work with your team?',
+      a: 'Not at all. We are experienced at translating business goals into technical requirements. You just share your vision and challenges with us and we handle everything from architecture to deployment. We keep the conversation simple and always in plain language.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
-      q: 'How do you ensure the software is secure?',
-      a: 'Security is baked into our development lifecycle from day one. We follow OWASP best practices, perform regular vulnerability scanning, encrypt data at rest and in transit, and implement role-based access controls.',
+      q: 'Will I own the software and source code after the project?',
+      a: 'Absolutely. Once the project is complete and the final payment is made, full ownership of the code and all related assets transfers to you. There are no licensing fees or ongoing ties to us unless you choose to keep us on for support.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
-      q: "Can you rescue an existing software project that is failing?",
-      a: 'Yes. We frequently conduct code audits and rescue missions for legacy systems or stalled projects. We will assess your current codebase, identify the bottlenecks, and provide a clear roadmap to stabilize and complete the software.',
+      q: 'What happens after the software is launched?',
+      a: 'We do not just hand things over and disappear. We offer ongoing maintenance and support packages to keep your software running smoothly, handle any bugs that come up, and help you add new features as your business grows.',
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
-      q: 'How do we communicate during the project?',
-      a: 'We use agile methodologies and maintain transparent communication. You will have a dedicated project manager, access to our project tracking tools (like Jira or Asana), and scheduled weekly sprint reviews to see working software.',
+      q: 'Can you work with our existing systems and tools?',
+      a: 'Yes, and this is something we do all the time. Whether you need new software to connect with your CRM, ERP, or any third party platform, we make sure everything integrates cleanly so your team can keep working the way they already do.',
       isTop: false,
     },
   ];

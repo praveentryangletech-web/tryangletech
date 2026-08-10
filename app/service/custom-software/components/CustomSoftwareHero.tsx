@@ -1,102 +1,40 @@
 'use client';
-import Link from "next/link";
-import Image from "next/image";
+
+import React, { useState } from 'react';
+
+const SA = '/service3-assets';
+
+const steps = [
+  {
+    num: "01",
+    title: "Define your goals",
+    desc: "Start by mapping out your project objectives and key deliverables in a unified workspace.",
+    wId: "bf832279-7882-71e9-77f0-dfcaa36b2a14",
+  },
+  {
+    num: "02",
+    title: "Assign and organize",
+    desc: "Break work down into manageable tasks and assign them to the right team members.",
+    wId: "bf832279-7882-71e9-77f0-dfcaa36b2a1a",
+  },
+  {
+    num: "03",
+    title: "Track progress",
+    desc: "Monitor real-time updates and spot potential roadblocks before they impact your timeline.",
+    wId: "bf832279-7882-71e9-77f0-dfcaa36b2a20",
+  },
+  {
+    num: "04",
+    title: "Deliver and review",
+    desc: "Complete projects successfully and use our analytics tools to optimize your next workflow.",
+    wId: "bf832279-7882-71e9-77f0-dfcaa36b2a26",
+  },
+];
 
 export default function CustomSoftwareHero() {
   return (
     <>
-      <section className="rt-hero-v5">
-        <div className="w-layout-blockcontainer rt-container-main w-container">
-          <div className="rt-hero-v5-wrapper">
-            <div className="w-layout-vflex rt-hero-v5-heading-wrap rt-position-relative">
-              <div className="rt-sub-gap">
-                <div
-                  data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35031e"
-                  className="rt-sub-text rt-sub-gredient">
-                  Custom Software Development
-                </div>
-              </div>
-              <div className="rt-hero-heading-gap">
-                <h1
-                  data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350321"
-                  className="rt-gap-off">
-                  Tailor-made software built for your business in Ahmedabad
-                </h1>
-              </div>
-              <div
-                data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350323"
-                className="rt-hero-v7-para-wrap">
-                <p className="rt-gap-off">
-                  Off-the-shelf software doesn't fit every business. Tryangletech designs, develops, and deploys custom software solutions that automate your workflows, eliminate inefficiencies, and scale with your growth.
-                </p>
-              </div>
-              <div
-                data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350326"
-                className="w-layout-hflex rt-hero-v5-button-wrap">
-                <Link
-                  data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href="/contact"
-                  className="rt-button-body w-inline-block">
-                  <div className="rt-button-text">Get a free consultation</div>
-                  <div className="rt-button-body-overlay"></div>
-                </Link>
-               
-              </div>
-              <div
-                data-w-id="2a922485-2ae2-43f1-d550-fc7c8735205f"
-                className="rt-small-btn-wrap rt-hero-v1-small rt-service-one">
-                <div className="rt-small-btn-main rt-color-change">
-                  <div className="rt-small-btn-text">End-to-End Solutions</div>
-                  <div className="rt-btn-arrow-v2 rt-hero-v1-small">
-                    <Image
-                      src="/service-1-assets/69203b6151156495054eacd7_Vector 503 (2).svg"
-                      loading="lazy"
-                      alt=""
-                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="rt-hero-v5-right rt-mobile-l-display-none">
-              <div
-                data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35035e"
-                className="rt-hero-v5-right-one">
-                <Image
-                  src="/service-1-assets/690acfecf91d77770201a6cb_taskopia-service-one-hero-1.webp"
-                  loading="lazy"
-                  alt="custom-software-hero"
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div
-                data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350360"
-                className="rt-hero-v5-right-two">
-                <Image
-                  src="/service-1-assets/6916b40c8e7ba2243876a27f_taskopiya-service-one-hero.avif"
-                  loading="lazy"
-                  alt="custom-software-hero-2"
-                  className="rt-shadow rt-border-radius-medium"
-                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="rt-hero-v5-image">
-          <Image
-            src="/service-1-assets/6915cd620829878f7ea58178_taskopiya-about-banner.webp"
-            loading="lazy"
-            alt="background"
-            width={800} height={800} style={{ width: "100%", height: "auto" }} />
-        </div>
-        <div
-          data-w-id="e3adfb91-848f-aad7-a9a7-c71e5016acc3"
-          className="rt-hero-v5-image-dot">
-          <Image
-            src="/service-1-assets/690ad30ba7100eb0c23fba01_taskopia-service-2-dot.webp"
-            loading="lazy"
-            alt=""
-            width={800} height={800} style={{ width: "100%", height: "auto" }} />
-        </div>
-      </section>
+      
     </>
   );
 }

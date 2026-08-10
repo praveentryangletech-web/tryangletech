@@ -7,10 +7,11 @@ import Image from "next/image";
 
 const SA = '/service3-assets';
 
-export default function CustomSoftwareTestimonial() {
+export default function CustomSoftwareCTA() {
   return (
     <>
-      <div className="w-layout-blockcontainer rt-container-extra-large rt-position-relative w-container">
+      <section className="rt-hero-v6 rt-position-relative">
+          <div className="w-layout-blockcontainer rt-container-extra-large rt-position-relative w-container">
             <div className="rt-hero-v6-top rt-desktop-text-center">
               <div
                 data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed1"
@@ -21,13 +22,13 @@ export default function CustomSoftwareTestimonial() {
                 <h1
                   data-w-id="5f8f0865-2834-ece3-646d-4bbca5ea2ed4"
                   className="rt-gap-off">
-                  We build software that fits your business exactly the way it is
+                  Software built around your business not the other way around
                 </h1>
               </div>
               <p
                 data-w-id="e2966c08-e2ab-594a-a52e-ff609081dee0"
                 className="rt-padding-hero-v6 rt-gap-off">
-                We write custom software that matches exactly how your business runs. Whether you want to save time on repetitive work, build something new from the ground up, or fix a problem that has been slowing you down, we are here to help.
+                We design and develop custom software that fits exactly how your team works. Whether you need to automate a process, launch a new platform, or fix a long-standing problem, we turn your ideas into software that actually makes your business work better.
               </p>
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"
@@ -287,19 +288,20 @@ taskopia-service-two-hero-9
               alt="home three hero"
              width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
+        </section>
         <section className="rt-ai-agents-v1 rt-overflow-hidden">
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-simplified-top rt-desktop-text-center">
               <div
                 data-w-id="d34d7029-6b0e-655f-892b-4c57bb0aa55d"
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">our numbers</div>
+                <div className="rt-sub-text rt-sub-gredient">who we are</div>
               </div>
               <div
                 data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2cd"
                 className="rt-position-relative rt-overflow-hidden">
                 <h2 className="rt-gap-off">
-                  Businesses across India trust us to build software that actually works
+                  A trusted technology partner for businesses ready to grow smarter and move faster
                 </h2>
                 <div
                   data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2d0"
@@ -325,9 +327,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa73a"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-one">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">500+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">10k+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Software projects delivered</div>
+                  <div className="rt-text-style-h6">Projects completed</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa741"
@@ -336,9 +338,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa742"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-two">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">200+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">10k+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Happy clients served</div>
+                  <div className="rt-text-style-h6">Tasks organized</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa749"
@@ -347,9 +349,9 @@ taskopia-service-two-hero-9
               <div
                 data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa74a"
                 className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-three">
-                <div className="rt-text-style-h1 rt-color-vivid-blue">7+</div>
+                <div className="rt-text-style-h1 rt-color-vivid-blue">5k+</div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Years of experience</div>
+                  <div className="rt-text-style-h6">Teams collaborating</div>
                 </div>
                 <div
                   data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa751"
@@ -362,7 +364,7 @@ taskopia-service-two-hero-9
                   99.9%
                 </div>
                 <div className="w-layout-hflex rt-ai-agents-text-wrap">
-                  <div className="rt-text-style-h6">Client satisfaction</div>
+                  <div className="rt-text-style-h6">Secure platform</div>
                 </div>
                 <div className="rt-vision-card-box-line rt-line"></div>
               </div>
@@ -387,7 +389,7 @@ taskopia-service-two-hero-9
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a1"
                   className="rt-sub-gap">
                   <div className="rt-sub-text rt-sub-gredient">
-                    Why choose us for software
+                    Why choose us
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
@@ -396,14 +398,14 @@ taskopia-service-two-hero-9
                     className="rt-gap-off">
                     Software that solves real problems and{" "}
                     <span className="rt-color-periwinkle-gray">
-                      keeps growing with you
+                      grows with you
                     </span>
                   </h2>
                 </div>
                 <p
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a9"
                   className="rt-gap-off">
-                  We take the time to understand your business properly before we start building anything. Our goal is always to make software that your team enjoys using and that helps your business run smoothly.
+                  We spend time getting to know your business before we write a single line of code. Our team builds software that feels natural to use and is strong enough to handle whatever your business needs.
                 </p>
                 <div className="rt-about-v1-right-inner">
                   <div
@@ -418,10 +420,10 @@ taskopia-service-two-hero-9
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Fully custom and built for you
+                        Fully custom and scalable
                       </div>
                       <p className="rt-gap-off">
-                        We build everything from scratch based on how your team works. There are no ready made shortcuts. You get something made specifically for your business.
+                        We never take a one-size-fits-all approach. Every solution is built from scratch based on how you work, who your users are, and what your business actually needs.
                       </p>
                     </div>
                   </div>
@@ -437,10 +439,10 @@ taskopia-service-two-hero-9
                     </div>
                     <div>
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        On-time delivery and full transparency
+                        On-time project delivery
                       </div>
                       <p className="rt-gap-off">
-                        We stick to deadlines and keep you in the loop at every stage. You will always know what is being worked on and when things will be ready.
+                        We respect your deadlines and keep you informed throughout the project so there are no surprises and you always know what comes next.
                       </p>
                     </div>
                   </div>
@@ -465,15 +467,15 @@ taskopia-service-two-hero-9
                 data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa63"
                 className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">
-                  our development process
+                  what we deliver
                 </div>
               </div>
               <h2
                 data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa66"
                 className="rt-gap-off">
-                A structured approach to building{" "}
+                Powerful software features built for{" "}
                 <span className="rt-color-periwinkle-gray">
-                  great software
+                  real business needs
                 </span>
               </h2>
             </div>
@@ -488,9 +490,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Discovery and Planning</div>
+                <div className="rt-text-style-h6">Tailored to your process</div>
                 <p className="rt-gap-off">
-                  First we sit down with you to understand what your business needs. Then we put together a clear plan so the whole team knows exactly what is being built and why.
+                  We learn how your team actually works and build software that matches your process instead of asking you to change the way you do things.
                 </p>
               </div>
               <div
@@ -503,9 +505,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Design and Development</div>
+                <div className="rt-text-style-h6">Smart integrations</div>
                 <p className="rt-gap-off">
-                  Our designers and developers work as one team to bring your idea to life. The software we build looks good and works even better.
+                  We connect your new software with the tools your team already uses so everything works together without any extra effort.
                 </p>
               </div>
               <div
@@ -518,9 +520,9 @@ taskopia-service-two-hero-9
                     alt=""
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Testing and Launch Support</div>
+                <div className="rt-text-style-h6">Secure and reliable</div>
                 <p className="rt-gap-off">
-                  We check everything carefully before the software goes live. And once it does, we stay close and sort out any issues quickly so you are never left stuck.
+                  Your data and your users are in safe hands. We follow strong security standards and build systems that work reliably around the clock.
                 </p>
               </div>
             </div>
@@ -543,7 +545,7 @@ taskopia-service-two-hero-9
                       <div
                         data-w-id="f74def95-767b-a89b-08a5-953ba5c723f5"
                         className="rt-sub-gap">
-                        <div className="rt-sub-text">our services</div>
+                        <div className="rt-sub-text">our service</div>
                       </div>
                       <h2
                         data-w-id="f74def95-767b-a89b-08a5-953ba5c723f8"
@@ -554,7 +556,7 @@ taskopia-service-two-hero-9
                     <p
                       data-w-id="03f01ed3-f9d4-a771-a9d5-5fac199e2fda"
                       className="rt-service-v2-para rt-color-pale-periwinkle">
-                      We take care of every part of your project from start to finish so you can focus on running your business.
+                      From the first discovery call to post-launch support, we handle every part of your software project with care and expertise so you can focus on your business.
                     </p>
                   </div>
                   <div
@@ -574,7 +576,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Discovery and Planning
+                              Discovery and planning
                             </div>
                           </div>
                         </div>
@@ -582,7 +584,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-one">
                         <div className="rt-services-v2-left-bottom-inner rt-one">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We start by getting to know your goals and your team. Then we put together a simple plan before any building begins.
+                            We map out your goals and technical requirements to build a clear roadmap for successful implementation.
                           </p>
                         </div>
                       </div>
@@ -601,7 +603,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Design and Development
+                              Design and development
                             </div>
                           </div>
                         </div>
@@ -609,7 +611,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-active">
                         <div className="rt-services-v2-left-bottom-inner rt-active">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            Our team builds your software together using clean code and thoughtful design so it is easy to use and easy to maintain.
+                            Our engineers bring your vision to life using clean code and modern design principles.
                           </p>
                         </div>
                       </div>
@@ -628,7 +630,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Testing and Quality Assurance
+                              Testing and quality assurance
                             </div>
                           </div>
                         </div>
@@ -636,7 +638,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-two">
                         <div className="rt-services-v2-left-bottom-inner rt-two">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We test every part of your software carefully. When it goes live it works the way it should and your users have a good experience from day one.
+                            Every feature is rigorously tested to ensure performance, reliability, and security before launch.
                           </p>
                         </div>
                       </div>
@@ -655,7 +657,7 @@ taskopia-service-two-hero-9
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Launch and Ongoing Support
+                              Launch and ongoing support
                             </div>
                           </div>
                         </div>
@@ -663,7 +665,7 @@ taskopia-service-two-hero-9
                       <div className="rt-services-v2-left-bottom rt-three">
                         <div className="rt-services-v2-left-bottom-inner rt-three">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We do not walk away after launch. If something needs fixing or you want to add something new, just let us know and we will take care of it.
+                            We stand by your side after deployment with continuous maintenance and feature updates.
                           </p>
                         </div>
                       </div>
@@ -682,7 +684,7 @@ taskopia-service-two-hero-9
                       src="/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp"
                       loading="lazy"
                       width={847}
-                      alt="taskopiya-service-two-task"
+                      alt="taskopiya-custom-software-task"
                       className="rt-services-v2-two"
                      height={800} />
                     <Image
@@ -718,14 +720,14 @@ taskopia-service-two-hero-9
                   <h2
                     data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b66"
                     className="rt-gap-off">
-                    We build software the right way by listening first
+                    From your first idea to a finished product your team loves
                   </h2>
                 </div>
                 <div
                   data-w-id="0e5e56d6-5628-85cf-39de-3ef5d5049b6a"
                   className="rt-analytics-v2-para-wrap rt-gap-large">
                   <p className="rt-gap-off">
-                    We believe great software comes from really understanding your business. We listen carefully, plan together, build with care, and stay around long after things go live.
+                    We maintain total transparency throughout the build process. We believe in clear communication and predictable outcomes, ensuring your project stays on track and on budget.
                   </p>
                 </div>
                 <div className="w-layout-grid rt-analytics-v2-box-wrap">
@@ -742,10 +744,10 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Agile and transparent process</div>
-                       <p className="rt-no-margin">
-                         We work in short rounds and check in with you regularly. You always know what we are working on and where things stand.
-                       </p>
+                      <div className="rt-text-style-h6">Agile development</div>
+                      <p className="rt-no-margin">
+                        We work in short cycles so you see real progress every week and can give feedback at every step.
+                      </p>
                     </div>
                   </div>
                   <div
@@ -761,10 +763,10 @@ taskopia-service-two-hero-9
                        />
                     </div>
                     <div className="w-layout-vflex rt-analytics-v2-text-wrap">
-                      <div className="rt-text-style-h6">Built to scale with you</div>
-                       <p className="rt-no-margin">
-                         What we build for you today can grow as your business grows. You will never need to start over when things get bigger.
-                       </p>
+                      <div className="rt-text-style-h6">Clear communication</div>
+                      <p className="rt-no-margin">
+                        You get regular updates and always have a direct line to your project team throughout the entire build.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -852,9 +854,12 @@ taskopia-service-two-hero-9
                         </div>
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center rt-position-relative">
-                        <div className="rt-text-style-h6">"Delivered exactly what we needed"</div>
+                        <div className="rt-text-style-h6">“Faster support”</div>
                         <p className="rt-gap-off">
-                          “Working with Tryangletech changed how we run our operations. They understood us quickly and built exactly what we needed. We could not be happier.”
+                          “This tool transformed how our team works! Tasks are
+                          organized, deadlines are clear, and collaboration is
+                          smoother than ever. Productivity has never been this
+                          high.”
                         </p>
                       </div>
                     </div>
@@ -891,10 +896,12 @@ taskopia-service-two-hero-9
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Great experience”
+                          “Good sales growth”
                         </div>
                         <p className="rt-gap-off">
-                          “They were easy to work with at every step. The team communicated clearly, hit every deadline, and gave us software our whole team actually enjoys using.”
+                          “An absolute game-changer for project management. We
+                          can track progress in real-time, avoid delays, and
+                          deliver projects on schedule with less stress.”
                         </p>
                       </div>
                     </div>
@@ -931,10 +938,12 @@ taskopia-service-two-hero-9
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Really happy with the result”
+                          “Smooth workflow”
                         </div>
                         <p className="rt-gap-off">
-                          “Simple to deal with and very professional. They listened to what we wanted, kept us updated throughout, and delivered a great product on time.”
+                          “Simple, intuitive, and powerful—our team now manages
+                          tasks without confusion. It keeps everyone aligned and
+                          helps us achieve more in less time.”
                         </p>
                       </div>
                     </div>
@@ -1056,10 +1065,12 @@ taskopia-service-two-hero-9
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Really happy with the result”
+                          “Smooth workflow”
                         </div>
                         <p className="rt-gap-off">
-                          “Simple to deal with and very professional. They listened to what we wanted, kept us updated throughout, and delivered a great product on time.”
+                          “Simple, intuitive, and powerful—our team now manages
+                          tasks without confusion. It keeps everyone aligned and
+                          helps us achieve more in less time.”
                         </p>
                       </div>
                     </div>
@@ -1181,10 +1192,12 @@ taskopia-service-two-hero-9
                       </div>
                       <div className="w-layout-vflex rt-testimonial-v2-content-wrap rt-mobile-text-center">
                         <div className="rt-text-style-h6">
-                          “Really happy with the result”
+                          “Smooth workflow”
                         </div>
                         <p className="rt-gap-off">
-                          “Simple to deal with and very professional. They listened to what we wanted, kept us updated throughout, and delivered a great product on time.”
+                          “Simple, intuitive, and powerful—our team now manages
+                          tasks without confusion. It keeps everyone aligned and
+                          helps us achieve more in less time.”
                         </p>
                       </div>
                     </div>

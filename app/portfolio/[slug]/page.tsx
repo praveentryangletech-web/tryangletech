@@ -147,6 +147,42 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3);
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
           }
+          .tech-stack-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+          }
+          .tech-pill {
+            background: rgba(121, 107, 240, 0.08);
+            color: #5b4dbf;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(121, 107, 240, 0.2);
+            transition: all 0.3s ease;
+          }
+          .tech-pill:hover {
+            background: rgba(121, 107, 240, 0.15);
+            transform: translateY(-2px);
+          }
+          .list-item-custom {
+            margin-bottom: 16px;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #334155;
+            font-size: 1.1rem;
+            line-height: 1.6;
+          }
+          .list-item-custom::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
         `}</style>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-blog-post--main">
@@ -168,15 +204,81 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
               <PortfolioButtons />
 
               <div className="enhanced-richtext">
-                <h2>Project Overview</h2>
-                <p>
-                  {project.description}
-                </p>
+                {project.description && (
+                  <>
+                    <h2>Project Overview</h2>
+                    <p>{project.description}</p>
+                  </>
+                )}
 
-                <h3>Case Study</h3>
-                <p>
-                  {project.content}
-                </p>
+                {project.content && (
+                  <>
+                    <h3>Case Study</h3>
+                    <p>{project.content}</p>
+                  </>
+                )}
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '2.5rem', marginBottom: '3rem' }}>
+                  {project.challenges && project.challenges.length > 0 && (
+                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {project.challenges.map((item, i) => (
+                          <li key={i} className="list-item-custom">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {project.solutions && project.solutions.length > 0 && (
+                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {project.solutions.map((item, i) => (
+                          <li key={i} className="list-item-custom">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {project.results && project.results.length > 0 && (
+                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {project.results.map((item, i) => (
+                          <li key={i} className="list-item-custom">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {project.technologies && project.technologies.length > 0 && (
+                  <div style={{ marginTop: '2rem' }}>
+                    <h3 style={{ marginBottom: '1.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold' }}>Technologies Used</h3>
+                    <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: 0 }}>
+                      <div className="rt-integration-top" style={{ flexWrap: 'wrap', justifyContent: 'flex-start', gap: '20px' }}>
+                        {project.technologies.map((tech, i) => (
+                          <div key={i}>
+                            <div className="rt-itegration-logo" style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center', 
+                              width: '129px', 
+                              height: '129px', 
+                              background: '#ffffff', 
+                              borderRadius: '16px',
+                              border: '1px solid #e2e8f0',
+                              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)'
+                            }}>
+                              <span className="rt-text-style-h6" style={{ fontSize: '1.1rem', margin: 0, textAlign: 'center', color: '#1a0b54' }}>{tech}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
             </div>
@@ -187,7 +289,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
         <div className="animate-section anim-delay-4">
           <HomeTwoTestimonial />
-          <Cta />
+          {/* <Cta /> */}
         </div>
         <div className="animate-section anim-delay-3">
           <HomeThreeFaq />

@@ -14,7 +14,7 @@ export default function AboutHero() {
           <div className="rt-hero-v4-wrapper">
 
             {/* Left */}
-            <div className="rt-hero-v4-left" style={{ paddingTop: '5px' }}>
+            <div className="rt-hero-v4-left" style={{ marginTop: '-4rem', flex: '1.2', maxWidth: '60%', paddingRight: '20px' }}>
               <div data-w-id="56597df3-c221-7996-6257-e67d35ef3b26" className="rt-hero-v1-top-sub">
                 <div className="rt-overflow-hidden">
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
@@ -42,11 +42,16 @@ export default function AboutHero() {
                 </h1>
               </div>
 
-              <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" className="rt-padding-hero-v6 rt-gap-off">
-                Tryangletech is a full-service IT company in Ahmedabad, helping businesses design, build, and grow with expert web development, mobile apps, digital marketing, and custom software solutions — all under one roof.
+              <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" className="rt-padding-hero-v6 rt-gap-off" style={{ marginBottom: '1rem' }}>
+                Tryangletech is a full-service IT company in Ahmedabad, helping businesses design, build, and grow with expert web development, mobile apps, digital marketing, and custom software solutions, all under one roof.
               </p>
+              
+              <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" style={{ color: '#4b5563', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '95%' }}>
+                We don't just write code, we partner with you to solve real business challenges. No confusing jargon or hidden costs, just a dedicated local team that actually cares about your success.
+              </p>
+
               {/* Stats row */}
-              <div style={{ display: 'flex', gap: '24px', marginTop: '24px', flexWrap: 'wrap' }}>
+              <div data-w-id="930d11b7-0033-4561-be37-a0d90e04a784" style={{ display: 'flex', gap: '24px', marginTop: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
                 {[
                   { value: '7+', label: 'Years of Experience' },
                   { value: '350+', label: 'Websites Developed' },
@@ -55,7 +60,7 @@ export default function AboutHero() {
                 ].map(({ value, label }) => (
                   <div key={label} style={{ display: 'flex', flexDirection: 'column', minWidth: '80px' }}>
                     <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#2d3a8c', lineHeight: 1.1 }}>{value}</span>
-                    <span style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '2px' }}>{label}</span>
+                    <span style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '4px', fontWeight: 500 }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -103,7 +108,7 @@ export default function AboutHero() {
 
               <div className="w-layout-grid rt-benefits-v2-card-wrap">
                 {[
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Web Design & Development', desc: 'Precision-crafted websites — custom builds, WordPress, and e-commerce — designed to engage your audience across every device.' },
+                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Web Design & Development', desc: 'Precision-crafted websites  custom builds, WordPress, and e-commerce  designed to engage your audience across every device.' },
                   { wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, title: 'Mobile App Development', desc: 'iOS and Android apps built with cutting-edge technology and user-centric design, for brands across the globe.' },
                   { wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Digital Marketing & SEO', desc: 'Complete digital marketing and SEO strategies that improve visibility, drive quality traffic, and grow your online revenue.' },
                 ].map(({ wid, icon, title, desc }) => (

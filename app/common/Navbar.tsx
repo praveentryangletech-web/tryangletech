@@ -191,6 +191,19 @@ export default function Navbar() {
                     className="rt-navbar-menu-dropdown rt-overflow-hidden rt-pages-menu w-dropdown-list"
                     aria-labelledby="w-dropdown-toggle-2">
                     <div className="w-layout-hflex rt-mega-menu-wrap">
+                      <div className="w-layout-vflex rt-pages-menu-left">
+                        <div className="w-layout-vflex rt-pages-menu-left-top">
+                          <Image width={140} height={40} alt="Logo" src={`/logo.png`} loading="lazy" style={{ filter: 'brightness(0) invert(1)', width: 'auto', height: '30px' }} />
+                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4 }}>
+                            Connect your favorite tools and apps seamlessly with our AI agent
+                          </div>
+                        </div>
+                        <div className="rt-pages-menu-left-button">
+                          <Link href="/service" className="w-button" style={{ backgroundColor: '#fff', color: '#1833fe', padding: '12px 24px', borderRadius: '4px', textDecoration: 'none', fontWeight: 600, display: 'inline-block', border: 'none', cursor: 'pointer' }}>
+                            See integrations
+                          </Link>
+                        </div>
+                      </div>
                       <div className="w-layout-hflex rt-pages-menu-wrap">
                         {/* Left column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">

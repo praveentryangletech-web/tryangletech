@@ -342,39 +342,10 @@ export default function Navbar() {
                   </nav>
                 </div>
                 */}
-                {/* Home dropdown */}
-                <div
-                  data-delay="300"
-                  data-hover="true"
-                  data-w-id="b07e93b6-139e-136c-8189-3251b36d922d"
-                  className="rt-navbar-dropdown w-dropdown">
-                  <div
-                    className="rt-navbar-dropdown-toggle w-dropdown-toggle"
-                    id="w-dropdown-toggle-0"
-                    aria-controls="w-dropdown-list-0"
-                    aria-haspopup="menu"
-                    aria-expanded="false"
-                    role="button"
-                    tabIndex={0}>
-                    <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
-                    <div
-                      className="rt-nav-menu-arrow-holder rt-position-relative">
-                      <Image
-                        width={10}
-                        height={6}
-                        alt="dropdown arrow"
-                        src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy" />
-                    </div>
-                  </div>
-                  <nav
-                    className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    aria-labelledby="w-dropdown-toggle-0">
-                    <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
-                    <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
-                    <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
-                  </nav>
-                </div>
+                {/* Blog */}
+                <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                  <div className="rt-menu-text">Blog</div>
+                </Link>
                 {/* Contact */}
                 <Link href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
                   <div className="rt-menu-text">Contact</div>

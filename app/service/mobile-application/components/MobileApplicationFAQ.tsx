@@ -9,24 +9,24 @@ const SA = '/service3-assets';
 
 const faqs = [
   {
-    q: "Do you develop for both iOS and Android?",
-    a: "Yes, we build native apps using Swift and Kotlin, as well as cross-platform apps using React Native and Flutter to reach all your users.",
+    q: "Do you build apps for both iPhone and Android?",
+    a: "Yes, we can build apps that work on every type of phone so you can reach all your customers.",
   },
   {
-    q: "How long does it take to build a custom mobile app?",
-    a: "The timeline depends on the complexity of your features, but most apps typically take between 3 to 6 months from design to launch.",
+    q: "How long does it take to build an app?",
+    a: "It depends on what you need, but most apps take about three to six months to finish from start to launch.",
   },
   {
-    q: "Do you provide post-launch support and maintenance?",
-    a: "Absolutely. We offer ongoing maintenance packages to ensure your app stays updated with the latest OS versions and security patches.",
+    q: "Do you keep working on the app after it launches?",
+    a: "Yes we do. We offer support packages to make sure your app stays updated and secure as phone software changes.",
   },
   {
-    q: "Can you integrate the app with my existing backend?",
-    a: "Yes, our mobile apps can seamlessly connect to your existing REST or GraphQL APIs, databases, and third-party services.",
+    q: "Can the app connect to my current systems?",
+    a: "Yes, we can easily connect your new app to the databases and software your business already uses.",
   },
   {
-    q: "Will you help me publish the app on the App Store and Google Play?",
-    a: "Yes, we handle the entire submission process, ensuring your app meets all guidelines for a smooth approval and launch.",
+    q: "Do you help put the app on the app stores?",
+    a: "Yes, we take care of the whole process of getting your app approved and published so people can download it.",
   },
 ];
 
@@ -49,14 +49,14 @@ export default function MobileApplicationFAQ() {
                   <h1
                     data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80b8"
                     className="rt-gap-off">
-                    Building high-performance mobile experiences for your business
+                    We build mobile apps that work great and help your business grow
                   </h1>
                 </div>
                 <div
                   data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80bc"
                   className="rt-hero-v7-para-wrap">
                   <p className="rt-gap-off">
-                    Transform your ideas into powerful, intuitive iOS and Android applications that engage users and drive lasting business growth using technologies like React Native and Flutter.
+                    We turn your ideas into mobile apps for both iPhone and Android. Our apps are easy to use and built to keep your customers coming back.
                   </p>
                 </div>
                 <div
@@ -283,9 +283,9 @@ export default function MobileApplicationFAQ() {
               <h2
                 data-w-id="d0c75e4f-f3ca-a991-c514-10c2a1c509e3"
                 className="rt-gap-off">
-                Our mobile app development process ensures smooth{" "}
+                How we build your mobile app from{" "}
                 <span className="rt-color-periwinkle-gray">
-                  delivery and a stunning final product
+                  start to finish
                 </span>
               </h2>
             </div>
@@ -306,10 +306,10 @@ export default function MobileApplicationFAQ() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part">
                   <div className="rt-text-style-h6">
-                    Seamless UI/UX Design
+                    Clean and Simple Design
                   </div>
                   <p className="rt-gap-off">
-                    Engaging and intuitive interfaces designed to maximize user retention.
+                    We create apps that look good and are easy for your customers to use.
                   </p>
                 </div>
               </div>
@@ -340,10 +340,10 @@ export default function MobileApplicationFAQ() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part rt-3">
                   <div className="rt-text-style-h6">
-                    Agile Development
+                    Clear Communication
                   </div>
                   <p className="rt-gap-off">
-                    Iterative builds and transparent communication to keep your app on schedule.
+                    We keep you updated every step of the way so your app is finished on time.
                   </p>
                 </div>
               </div>
@@ -361,10 +361,10 @@ export default function MobileApplicationFAQ() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part rt-2">
                   <div className="rt-text-style-h6">
-                    Robust Architecture
+                    Strong Foundation
                   </div>
                   <p className="rt-gap-off">
-                    Scalable and secure backends to power your mobile experience.
+                    We make sure the technology behind your app is secure and works perfectly.
                   </p>
                 </div>
               </div>
@@ -431,13 +431,13 @@ export default function MobileApplicationFAQ() {
                       <h2
                         data-w-id="0874d457-f036-2926-f3c8-80010962016e"
                         className="rt-gap-off rt-text-color-white">
-                        Scalable mobile apps for growing startups and enterprises
+                        Apps built for businesses of all sizes
                       </h2>
                     </div>
                     <p
                       data-w-id="b0ab4ba8-5be6-3c27-98c6-724a3e3820db"
                       className="rt-gap-off rt-color-pale-periwinkle">
-                      We build custom mobile solutions tailored to your unique business needs, ensuring high performance and a flawless user experience.
+                      We build mobile apps designed specifically for your business so they work well and give your users a great experience.
                     </p>
                   </div>
                   <div
@@ -455,12 +455,12 @@ export default function MobileApplicationFAQ() {
                       <div
                         data-w-id="51e73edd-cd94-a54d-7eed-7768bb6cc864"
                         className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">
-                        Native &amp; Cross-Platform Development
+                        iPhone and Android Apps
                       </div>
                       <p
                         data-w-id="15cfac48-955b-b56a-6e2a-fa56be3f619c"
                         className="rt-gap-off rt-color-pale-periwinkle">
-                        We build apps natively or use cross-platform frameworks like Flutter to reach iOS and Android users.
+                        We can build your app so it works perfectly on every type of phone your customers use.
                       </p>
                     </div>
                     <div
@@ -499,9 +499,9 @@ export default function MobileApplicationFAQ() {
                     <h2
                       data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401e3"
                       className="rt-gap-off">
-                      High-performance apps, stress-
+                      Fast apps delivered with{" "}
                       <span className="rt-color-periwinkle-gray">
-                        free delivery
+                        zero stress
                       </span>
                     </h2>
                   </div>
@@ -509,8 +509,7 @@ export default function MobileApplicationFAQ() {
                     data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401e7"
                     className="rt-cases-para-wrap rt-gap-large">
                     <p className="rt-gap-off">
-                      Our mobile development team is dedicated to saving you time
-                      and delivering an exceptional app without the technical headaches.
+                      Our team works hard to save you time and build a great app without any technical problems getting in the way.
                     </p>
                   </div>
                   <div
@@ -541,10 +540,10 @@ export default function MobileApplicationFAQ() {
                     </div>
                     <div className="w-layout-vflex rt-cases-box-text-wrap">
                       <div className="rt-text-style-h6">
-                        Optimized performance
+                        Fast and smooth
                       </div>
                       <p className="rt-gap-off">
-                        Smooth animations, fast load times, and rock-solid stability for a premium user experience.
+                        Your app will load quickly and run without crashing so your users stay happy.
                       </p>
                     </div>
                   </div>
@@ -560,10 +559,10 @@ export default function MobileApplicationFAQ() {
                     </div>
                     <div className="w-layout-vflex rt-cases-box-text-wrap rt-full-width">
                       <div className="rt-text-style-h6">
-                        Seamless integration
+                        Works with your tools
                       </div>
                       <p className="rt-gap-off">
-                        Easy connection with your existing APIs, databases, and third-party services.
+                        We easily connect your new app to the systems and databases you already use.
                       </p>
                     </div>
                   </div>
@@ -618,15 +617,15 @@ export default function MobileApplicationFAQ() {
                 data-w-id="90bc93a4-7453-cf99-b117-5b196d3d4337"
                 className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">
-                  our unique feaures
+                  what you get
                 </div>
               </div>
               <h2
                 data-w-id="90bc93a4-7453-cf99-b117-5b196d3d433a"
                 className="rt-gap-off">
-                Simplify workflows, boost overall{" "}
+                Make work easier and help your{" "}
                 <span className="rt-color-periwinkle-gray">
-                  business efficiency
+                  business run better
                 </span>
               </h2>
             </div>
@@ -653,9 +652,9 @@ export default function MobileApplicationFAQ() {
                    />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                  <div className="rt-text-style-h6">Intuitive Interfaces</div>
+                  <div className="rt-text-style-h6">Simple to Use</div>
                   <p className="rt-gap-off">
-                    User-centric designs that feel natural and boost engagement.
+                    We design apps that make sense to your users right from the start.
                   </p>
                 </div>
               </div>
@@ -673,9 +672,9 @@ export default function MobileApplicationFAQ() {
                    />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                  <div className="rt-text-style-h6">Secure Data Handling</div>
+                  <div className="rt-text-style-h6">Safe and Secure</div>
                   <p className="rt-gap-off">
-                    Industry-standard encryption to keep user data safe and secure.
+                    We protect your information so you and your users have peace of mind.
                   </p>
                 </div>
               </div>
@@ -693,9 +692,9 @@ export default function MobileApplicationFAQ() {
                    />
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                  <div className="rt-text-style-h6">Cross-platform access</div>
+                  <div className="rt-text-style-h6">Works on Any Phone</div>
                   <p className="rt-gap-off">
-                    Reach users on both iOS and Android effortlessly.
+                    Your app will work perfectly on all mobile devices.
                   </p>
                 </div>
               </div>
@@ -816,16 +815,16 @@ Taskopia-service-happy-two
                   data-w-id="ae5c502b-6188-46fa-bc36-1f7b3f7289e1"
                   className="rt-heading-para-gap">
                   <h2 className="rt-gap-off">
-                    One team to design, build{" "}
+                    One team to build and{" "}
                     <span className="rt-color-periwinkle-gray">
-                      and launch
+                      launch your app
                     </span>
                   </h2>
                 </div>
                 <p
                   data-w-id="ae5c502b-6188-46fa-bc36-1f7b3f7289e6"
                   className="rt-gap-off">
-                  Bring your vision to life with a dedicated team that makes the development process seamless and faster than ever.
+                  Bring your idea to life with a team that makes building an app simple and fast.
                 </p>
                 <div className="rt-collaboration-left-inner">
                   <div
@@ -841,10 +840,10 @@ Taskopia-service-happy-two
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Transparent communication
+                        Clear Updates
                       </div>
                       <p className="rt-gap-off">
-                        Stay informed at every step of the development lifecycle with regular updates and clear communication.
+                        We keep you in the loop the whole time so you always know what is happening.
                       </p>
                     </div>
                   </div>
@@ -863,10 +862,10 @@ Taskopia-service-happy-two
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Faster time-to-market
+                        Ready to Launch Fast
                       </div>
                       <p className="rt-gap-off">
-                        Our agile development approach and efficient workflows ensure your mobile app launches on time.
+                        We work quickly to make sure your app is ready exactly when you need it.
                       </p>
                     </div>
                   </div>
@@ -899,12 +898,12 @@ Taskopia-service-happy-two
                   <div
                     data-w-id="584d018b-8d6e-8292-34fe-7f2c572f8489"
                     className="rt-sub-gap">
-                    <div className="rt-sub-text">our testimonials</div>
+                    <div className="rt-sub-text">what people say</div>
                   </div>
                   <h2
                     data-w-id="584d018b-8d6e-8292-34fe-7f2c572f848c"
                     className="rt-gap-off rt-text-color-white">
-                    Customer experiences that speak for themselves
+                    See what our clients think about us
                   </h2>
                 </div>
                 <div
@@ -946,10 +945,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Flawless app launch”
+                            “Great experience”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “The team built an incredible app for us! From design to deployment, the process was seamless and our users love the new mobile experience. Highly recommended.”
+                            “The team built an incredible app for us. The whole process was smooth from start to finish, and our users love the new mobile experience. We highly recommend them.”
                           </p>
                         </div>
                       </div>
@@ -987,10 +986,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Stunning UI/UX”
+                            “Beautiful design”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for our business. The native performance and intuitive interface resulted in a massive increase in our mobile conversion rates.”
+                            “This app completely changed our business. The smooth performance and clean look led to a huge increase in our sales.”
                           </p>
                         </div>
                       </div>
@@ -1028,10 +1027,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Cross-platform success”
+                            “Works on both phones”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “They delivered a flawless Flutter app that works perfectly on both iOS and Android. It saved us months of development time and looks incredible.”
+                            “They built a great app that works perfectly on both iPhone and Android. It saved us a lot of time and looks incredible.”
                           </p>
                         </div>
                       </div>
@@ -1073,10 +1072,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Flawless app launch”
+                            “Great experience”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “The team built an incredible app for us! From design to deployment, the process was seamless and our users love the new mobile experience. Highly recommended.”
+                            “The team built an incredible app for us. The whole process was smooth from start to finish, and our users love the new mobile experience. We highly recommend them.”
                           </p>
                         </div>
                       </div>
@@ -1114,10 +1113,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Stunning UI/UX”
+                            “Beautiful design”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for our business. The native performance and intuitive interface resulted in a massive increase in our mobile conversion rates.”
+                            “This app completely changed our business. The smooth performance and clean look led to a huge increase in our sales.”
                           </p>
                         </div>
                       </div>
@@ -1200,10 +1199,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Flawless app launch”
+                            “Great experience”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “The team built an incredible app for us! From design to deployment, the process was seamless and our users love the new mobile experience. Highly recommended.”
+                            “The team built an incredible app for us. The whole process was smooth from start to finish, and our users love the new mobile experience. We highly recommend them.”
                           </p>
                         </div>
                       </div>
@@ -1241,10 +1240,10 @@ taskopia-testimonials-author-v1
                         </div>
                         <div className="rt-testimonials-v1-item-inner">
                           <div className="rt-small-name rt-text-color-white rt-small-heading-para-gap">
-                            “Stunning UI/UX”
+                            “Beautiful design”
                           </div>
                           <p className="rt-color-pale-periwinkle">
-                            “An absolute game-changer for our business. The native performance and intuitive interface resulted in a massive increase in our mobile conversion rates.”
+                            “This app completely changed our business. The smooth performance and clean look led to a huge increase in our sales.”
                           </p>
                         </div>
                       </div>
@@ -1307,15 +1306,15 @@ taskopia-testimonials-author-v1
                     <div
                       data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb877"
                       className="rt-sub-text rt-sub-gredient">
-                      Frequently asked questions
+                      questions and answers
                     </div>
                   </div>
                   <h2
                     data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb879"
                     className="rt-no-margin">
-                    Everything you want to know{" "}
+                    All your questions answered{" "}
                     <span className="rt-color-periwinkle-gray">
-                      explained clearly
+                      clearly
                     </span>
                   </h2>
                   <div
@@ -1340,7 +1339,7 @@ taskopia-testimonials-author-v1
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
                       <div className="rt-text-style-h6">
-                        Do you develop for both iOS and Android?
+                        Do you build apps for both iPhone and Android?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -1351,7 +1350,7 @@ taskopia-testimonials-author-v1
                   <div className="rt-faq-bottom-part rt-overflow-hidden">
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Yes, we build native apps using Swift and Kotlin, as well as cross-platform apps using React Native and Flutter to reach all your users.
+                        Yes, we can build apps that work on every type of phone so you can reach all your customers.
                       </p>
                     </div>
                   </div>
@@ -1362,7 +1361,7 @@ taskopia-testimonials-author-v1
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
                       <div className="rt-text-style-h6">
-                        How long does it take to build a custom mobile app?
+                        How long does it take to build an app?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -1373,7 +1372,7 @@ taskopia-testimonials-author-v1
                   <div className="rt-faq-bottom-part rt-overflow-hidden">
                     <div className="rt-faq-para-wrap rt-faq-v2">
                       <p className="rt-gap-off">
-                        The timeline depends on the complexity of your features, but most apps typically take between 3 to 6 months from design to launch.
+                        It depends on what you need, but most apps take about three to six months to finish from start to launch.
                       </p>
                     </div>
                   </div>
@@ -1384,7 +1383,7 @@ taskopia-testimonials-author-v1
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
                       <div className="rt-text-style-h6">
-                        Do you provide post-launch support and maintenance?
+                        Do you keep working on the app after it launches?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -1395,7 +1394,7 @@ taskopia-testimonials-author-v1
                   <div className="rt-faq-bottom-part rt-overflow-hidden">
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Absolutely. We offer ongoing maintenance packages to ensure your app stays updated with the latest OS versions and security patches.
+                        Yes we do. We offer support packages to make sure your app stays updated and secure as phone software changes.
                       </p>
                     </div>
                   </div>
@@ -1406,7 +1405,7 @@ taskopia-testimonials-author-v1
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
                       <div className="rt-text-style-h6">
-                        Can you integrate the app with my existing backend?
+                        Can the app connect to my current systems?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -1417,7 +1416,7 @@ taskopia-testimonials-author-v1
                   <div className="rt-faq-bottom-part rt-overflow-hidden">
                     <div className="rt-faq-para-wrap">
                       <p className="rt-gap-off">
-                        Yes, our mobile apps can seamlessly connect to your existing REST or GraphQL APIs, databases, and third-party services.
+                        Yes, we can easily connect your new app to the databases and software your business already uses.
                       </p>
                     </div>
                   </div>
@@ -1428,7 +1427,7 @@ taskopia-testimonials-author-v1
                   <div className="w-layout-hflex rt-faq-top-part">
                     <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
                       <div className="rt-text-style-h6">
-                        Will you help me publish the app on the App Store and Google Play?
+                        Do you help put the app on the app stores?
                       </div>
                     </div>
                     <div className="rt-faq-right-part">
@@ -1439,7 +1438,7 @@ taskopia-testimonials-author-v1
                   <div className="rt-faq-bottom-part rt-overflow-hidden">
                     <div className="rt-faq-para-wrap rt-faq-v2">
                       <p className="rt-gap-off">
-                        Yes, we handle the entire submission process, ensuring your app meets all guidelines for a smooth approval and launch.
+                        Yes, we take care of the whole process of getting your app approved and published so people can download it.
                       </p>
                     </div>
                   </div>

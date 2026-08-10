@@ -193,8 +193,10 @@ export default function Navbar() {
                     <div className="w-layout-hflex rt-mega-menu-wrap">
                       <div className="w-layout-vflex rt-pages-menu-left">
                         <div className="w-layout-vflex rt-pages-menu-left-top">
-                          <Image width={140} height={40} alt="TryangleTech Logo" src={`/logo.png`} loading="lazy" style={{ filter: 'brightness(0) invert(1)', width: 'auto', height: '35px' }} />
-                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4, marginTop: '1rem' }}>
+                          <div style={{ backgroundColor: '#fff', padding: '10px 16px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', width: 'fit-content' }}>
+                            <Image width={140} height={40} alt="TryangleTech Logo" src={`/logo.png`} loading="lazy" style={{ width: 'auto', height: '24px' }} />
+                          </div>
+                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4, marginTop: '1.5rem' }}>
                             Transform your bold ideas into powerful digital products with our IT experts.
                           </div>
                         </div>

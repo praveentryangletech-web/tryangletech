@@ -256,7 +256,9 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {project.technologies && project.technologies.length > 0 && (
                   <div style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
-                    <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Technologies Used</h3>
+                    <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                      <h3 style={{ display: 'inline-block', margin: 0, fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold' }}>Technologies</h3>
+                    </div>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
                       <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
                         {project.technologies.map((tech, i) => {

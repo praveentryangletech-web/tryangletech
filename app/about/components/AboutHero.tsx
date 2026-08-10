@@ -38,7 +38,7 @@ export default function AboutHero() {
 
               <div className="rt-hero-heading-gap rt-left pt-0">
                 <h1 data-w-id="930d11b7-0033-4561-be37-a0d90e04a780" className="rt-gap-off">
-                  Empowering businesses with smarter digital solutions
+                  Your Trusted IT & Digital Partner
                 </h1>
               </div>
 

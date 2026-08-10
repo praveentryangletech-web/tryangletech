@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
+import CascadeSlider from "../components/CascadeSlider";
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
@@ -37,14 +38,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             </div>
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
-              className="rt-hero-13-main-image rt-overflow-hidden rt-shadow">
-              <Image
-                src={post.image}
-                loading="lazy"
-                data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
-                alt={post.title}
-                className="rt-image-scale"
-                width={800} height={800} style={{ width: "100%", height: "auto", objectFit: "cover", maxHeight: "60vh" }} />
+              className="rt-hero-13-main-image rt-overflow-hidden" style={{ position: 'relative' }}>
+              {post.images && post.images.length > 1 ? (
+                <CascadeSlider images={post.images} title={post.title} />
+              ) : (
+                <Image
+                  src={post.image}
+                  loading="lazy"
+                  data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
+                  alt={post.title}
+                  className="rt-image-scale"
+                  width={800} height={800} style={{ width: "100%", height: "auto", objectFit: "cover", maxHeight: "60vh" }} />
+              )}
             </div>
           </div>
         </section>

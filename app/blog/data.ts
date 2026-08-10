@@ -7,7 +7,12 @@ export const BLOG_POSTS = [
     title: "The Future of Web Development: Trends to Watch in 2026",
     category: "Web Development",
     date: "29 Oct 2025",
-    image: "/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
+    image: "/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png",
+    images: [
+      "/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png",
+      "/blog-assets/690333f5e01881a7f1a4f838_blog-two-H.png",
+      "/blog-assets/690334335e613d605998a49f_blog-two-G.png"
+    ]
   },
   {
     id: "post-2",

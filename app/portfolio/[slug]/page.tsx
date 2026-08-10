@@ -301,12 +301,14 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   display: 'flex', 
                                   alignItems: 'center', 
                                   justifyContent: 'center', 
-                                  width: '85px', 
+                                  minWidth: '85px', 
+                                  width: 'auto',
                                   height: '85px', 
                                   background: '#ffffff', 
-                                  padding: '8px'
+                                  padding: '0 16px',
+                                  boxSizing: 'border-box'
                                 }}>
-                                  <span className="rt-text-style-h6" style={{ fontSize: '0.9rem', margin: 0, textAlign: 'center', color: '#1a0b54', wordBreak: 'break-word', lineHeight: '1.2' }}>{tech}</span>
+                                  <span className="rt-text-style-h6" style={{ fontSize: '0.9rem', margin: 0, textAlign: 'center', color: '#1a0b54', whiteSpace: 'nowrap', fontWeight: '600' }}>{tech}</span>
                                 </div>
                               )}
                             </div>
@@ -317,36 +319,50 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   </div>
                 )}
 
-                {/* Relevant Blogs Section */}
+                {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Relevant Insights</h3>
+                  <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Relevant Projects</h3>
                   <div className="w-dyn-list">
                     <div role="list" className="rt-blog-v4-card-main w-dyn-items animate-section anim-delay-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
                       {(() => {
-                        const relevantBlogs = BLOG_POSTS.filter(post => post.category === project.category).slice(0, 3);
-                        if (relevantBlogs.length < 3) {
-                          const moreBlogs = BLOG_POSTS.filter(post => post.category !== project.category).slice(0, 3 - relevantBlogs.length);
-                          relevantBlogs.push(...moreBlogs);
+                        let relevant = projects.filter(p => p.category === project.category && p.slug !== project.slug).slice(0, 3);
+                        if (relevant.length < 3) {
+                          const more = projects.filter(p => p.category !== project.category && p.slug !== project.slug).slice(0, 3 - relevant.length);
+                          relevant.push(...more);
                         }
-                        return relevantBlogs.map((post, idx) => (
-                          <div key={idx} role="listitem" className="w-dyn-item">
-                            <Link href={`/blog/${post.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block transition-all duration-300 hover:-translate-y-2" style={{ display: 'block', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', backgroundColor: '#fff', border: '1px solid #e2e8f0' }}>
+                        return relevant.map((p, idx) => (
+                          <div key={idx} role="listitem" className="w-dyn-item" style={{ height: '100%' }}>
+                            <Link href={`/portfolio/${p.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block transition-all duration-300 hover:-translate-y-2" style={{ display: 'flex', flexDirection: 'column', height: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', backgroundColor: '#fff', border: '1px solid #e2e8f0' }}>
                               <div className="rt-blog-v3-card-top-part rt-overflow-hidden" style={{ minHeight: '220px', background: '#f0f4f8' }}>
-                                <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image hover:scale-105 transition-transform duration-500" src={post.image} width={410} height={348} alt={post.title} loading="lazy" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                                <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image hover:scale-105 transition-transform duration-500" src={p.image} width={410} height={348} alt={p.title} loading="lazy" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                               </div>
-                              <div className="rt-blog-v3-card-bottom-part" style={{ padding: '1.5rem' }}>
+                              <div className="rt-blog-v3-card-bottom-part" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                                 <div className="w-layout-hflex rt-blog-v3-publish-date" style={{ marginBottom: '1rem', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                  <div>{post.date}</div>
+                                  <div>{p.duration || 'Completed'}</div>
                                   <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#cbd5e1' }}></div>
-                                  <div style={{ color: '#3b82f6', fontWeight: 'bold' }}>{post.category}</div>
+                                  <div style={{ color: '#3b82f6', fontWeight: 'bold' }}>{p.category}</div>
                                 </div>
-                                <div className="rt-text-style-h6" style={{ color: '#1a0b54', lineHeight: '1.4', fontSize: '1.1rem', margin: 0 }}>{post.title}</div>
+                                <div className="rt-text-style-h6" style={{ color: '#1a0b54', lineHeight: '1.4', fontSize: '1.1rem', margin: 0 }}>{p.title}</div>
+                                <div style={{ marginTop: 'auto', paddingTop: '1.5rem', display: 'flex', alignItems: 'center', color: '#3b82f6', fontWeight: '600', fontSize: '0.95rem' }}>
+                                  View project
+                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px' }}>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                  </svg>
+                                </div>
                               </div>
                             </Link>
                           </div>
                         ));
                       })()}
                     </div>
+                  </div>
+                  
+                  <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+                    <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block">
+                      <div className="rt-button-text rt-btn-color-nav">View all projects</div>
+                      <div className="rt-button-body-overlay rt-nav-overlay"></div>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects } from '../../data/portfolioData';
+import { BLOG_POSTS } from '../../blog/data';
 import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
@@ -315,6 +316,39 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                     </div>
                   </div>
                 )}
+
+                {/* Relevant Blogs Section */}
+                <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
+                  <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Relevant Insights</h3>
+                  <div className="w-dyn-list">
+                    <div role="list" className="rt-blog-v4-card-main w-dyn-items animate-section anim-delay-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+                      {(() => {
+                        const relevantBlogs = BLOG_POSTS.filter(post => post.category === project.category).slice(0, 3);
+                        if (relevantBlogs.length < 3) {
+                          const moreBlogs = BLOG_POSTS.filter(post => post.category !== project.category).slice(0, 3 - relevantBlogs.length);
+                          relevantBlogs.push(...moreBlogs);
+                        }
+                        return relevantBlogs.map((post, idx) => (
+                          <div key={idx} role="listitem" className="w-dyn-item">
+                            <Link href={`/blog/${post.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block transition-all duration-300 hover:-translate-y-2" style={{ display: 'block', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', backgroundColor: '#fff', border: '1px solid #e2e8f0' }}>
+                              <div className="rt-blog-v3-card-top-part rt-overflow-hidden" style={{ minHeight: '220px', background: '#f0f4f8' }}>
+                                <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image hover:scale-105 transition-transform duration-500" src={post.image} width={410} height={348} alt={post.title} loading="lazy" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                              </div>
+                              <div className="rt-blog-v3-card-bottom-part" style={{ padding: '1.5rem' }}>
+                                <div className="w-layout-hflex rt-blog-v3-publish-date" style={{ marginBottom: '1rem', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <div>{post.date}</div>
+                                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#cbd5e1' }}></div>
+                                  <div style={{ color: '#3b82f6', fontWeight: 'bold' }}>{post.category}</div>
+                                </div>
+                                <div className="rt-text-style-h6" style={{ color: '#1a0b54', lineHeight: '1.4', fontSize: '1.1rem', margin: 0 }}>{post.title}</div>
+                              </div>
+                            </Link>
+                          </div>
+                        ));
+                      })()}
+                    </div>
+                  </div>
+                </div>
               </div>
 
             </div>

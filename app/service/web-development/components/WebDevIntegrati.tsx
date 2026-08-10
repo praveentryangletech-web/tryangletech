@@ -30,7 +30,6 @@ const faqs = [
 ];
 
 export default function ServiceOneFAQ() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <>
       <section className="rt-tools-icon-v1">

@@ -15,7 +15,7 @@ import WebDevFeatures from './components/WebDevFeatures';
 import WebDevServices from './components/WebDevServices';
 import WebDevIntegration from './components/WebDevIntegration';
 import WebDevPricing from './components/WebDevPricing';
-import WebDevFAQ from './components/WebDevFAQ';
+import WebDevFAQ from './components/TechStack';
 import WebDevCTA from './components/WebDevCTA';
 import WebflowInit from "../../common/WebflowInit";
 

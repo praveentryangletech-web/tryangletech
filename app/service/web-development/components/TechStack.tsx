@@ -9,7 +9,7 @@ export default function WebDevFAQ() {
     <>
       <section className="rt-tools-icon-v1">
         <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-          <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative">
+          <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
             <div className="rt-tools-icon-container">
               <div className="rt-tools-iconheading rt-heading-bottom-gap">
                 <div
@@ -28,7 +28,7 @@ export default function WebDevFAQ() {
               <div
                 data-w-id="129f78ad-f271-7836-05de-3984f045f443"
                 className="w-layout-hflex rt-tools-icon-wrapper">
-                <div className="w-layout-vflex rt-tools-icon one">
+                <div className="w-layout-vflex rt-tools-icon one" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
@@ -44,7 +44,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon two">
+                <div className="w-layout-vflex rt-tools-icon two" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="Next.js"
@@ -60,7 +60,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon one">
+                <div className="w-layout-vflex rt-tools-icon one" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="PHP"
@@ -76,7 +76,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon two">
+                <div className="w-layout-vflex rt-tools-icon two" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="Tailwind CSS"
@@ -92,7 +92,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon one">
+                <div className="w-layout-vflex rt-tools-icon one" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="PostgreSQL"
@@ -108,7 +108,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon two">
+                <div className="w-layout-vflex rt-tools-icon two" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="AWS"
@@ -125,7 +125,7 @@ export default function WebDevFAQ() {
                     </div>
                   </div>
                 </div>
-                <div className="w-layout-vflex rt-tools-icon one">
+                <div className="w-layout-vflex rt-tools-icon one" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
                   <div className="rt-tools-icon-image">
                     <img
                       alt="Docker"
@@ -143,13 +143,7 @@ export default function WebDevFAQ() {
                 </div>
               </div>
             </div>
-            <div className="rt-tools-icon-overlay">
-              <Image
-                src="/service-1-assets/690adbc5bfed3c0fa7e49213_Vector 1530.webp"
-                loading="lazy"
-                alt="taskopia-home-two-overlay-integration"
-                width={800} height={800} style={{ width: "100%", height: "auto" }} />
-            </div>
+
           </div>
         </div>
       </section>

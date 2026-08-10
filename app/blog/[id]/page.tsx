@@ -156,6 +156,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   <span className="meta-value">TryangleTech Team</span>
                 </div>
               </div>
+               <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
+                <Link href="/blog" className="rt-button-body w-inline-block back-btn-animated" style={{ borderRadius: '100px' }}>
+                  <div className="rt-button-text" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Blog
+                  </div>
+                </Link>
+              </div>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca03"
                 className="rt-blog-details-overlay">

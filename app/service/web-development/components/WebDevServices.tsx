@@ -55,14 +55,14 @@ export default function WebDevServices() {
                     <h2
                       data-w-id="f811abe4-4f70-55fe-7128-7a1d75f4745c"
                       className="rt-gap-off rt-text-color-white">
-                      Transform your digital presence with custom web solutions
+                      We build websites that help your business grow online and make a real impression on your visitors
                     </h2>
                   </div>
                   <div
                     data-w-id="f811abe4-4f70-55fe-7128-7a1d75f47460"
                     className="rt-goal-para-wrap">
                     <p className="rt-gap-off rt-color-pale-periwinkle">
-                      Enhance your online visibility, drive more conversions, and deliver exceptional user experiences with our tailored web development services.
+                      Good web development is not just about looks. It is about making sure your website works well, loads fast, and actually helps people find you and contact you.
                     </p>
                   </div>
                   <div className="w-layout-vflex rt-goal-box-main rt-gap-medium">
@@ -86,7 +86,7 @@ specialiti-icon-3
                           Custom Development
                         </div>
                         <p className="rt-gap-off rt-color-pale-periwinkle">
-                          We build everything from simple landing pages to complex, full-stack web applications.
+                           We handle everything from small business sites to large web platforms. Every project is built specifically for how you work.
                         </p>
                       </div>
                     </div>
@@ -108,7 +108,7 @@ specialiti-icon-3
                           Ongoing Support
                         </div>
                         <p className="rt-gap-off rt-color-pale-periwinkle">
-                          We provide continuous maintenance, updates, and security monitoring for your peace of mind.
+                           We do not disappear after launch. We keep your site updated, secure, and running well so you can focus on your business.
                         </p>
                       </div>
                     </div>

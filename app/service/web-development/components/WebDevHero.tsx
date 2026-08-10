@@ -22,14 +22,14 @@ export default function WebDevHero() {
                 <h1
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350321"
                   className="rt-gap-off">
-                  Build high-performing, scalable websites and apps
+                  Websites that look great and work even better
                 </h1>
               </div>
               <div
                 data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350323"
                 className="rt-hero-v7-para-wrap">
                 <p className="rt-gap-off">
-                  From custom web applications to beautiful landing pages, we engineer fast, secure, and responsive digital experiences tailored to your business goals.
+                   We create websites and web apps that your visitors enjoy using. Whether it is a landing page, a full web platform, or an online store, we build things that load fast, look clean, and help your business grow.
                 </p>
               </div>
               <div
@@ -79,7 +79,7 @@ export default function WebDevHero() {
                     </div>
                   </div>
                   <div className="rt-color-dark-indigo">
-                    Trusted by 200+ leaders
+                    Trusted by 200+ businesses
                   </div>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default function WebDevHero() {
                 data-w-id="2a922485-2ae2-43f1-d550-fc7c8735205f"
                 className="rt-small-btn-wrap rt-hero-v1-small rt-service-one">
                 <div className="rt-small-btn-main rt-color-change">
-                  <div className="rt-small-btn-text">Custom Solutions</div>
+                  <div className="rt-small-btn-text">Built for you</div>
                   <div className="rt-btn-arrow-v2 rt-hero-v1-small">
                     <Image
                       src="/service-1-assets/69203b6151156495054eacd7_Vector 503 (2).svg"

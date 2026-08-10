@@ -19,7 +19,7 @@ export default function WebDevFeatures() {
               data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
               className="rt-position-relative">
               <h2 className="rt-gap-off rt-desktop-text-center">
-                Build powerful, responsive, and secure websites that drive business growth
+                Websites that work well on every device and bring real results to your business
               </h2>
               <div className="rt-position-absolute rt-text-overlay">
                 <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
@@ -53,7 +53,7 @@ export default function WebDevFeatures() {
                   Responsive Design
                 </div>
                 <p className="rt-gap-off">
-                  We ensure your website looks stunning and works perfectly across all devices and screen sizes.
+                  Your website will look good and work properly on any phone, tablet, or computer your visitors use.
                 </p>
               </div>
               <div className="rt-speciality-item-bottom rt-1">
@@ -92,7 +92,7 @@ export default function WebDevFeatures() {
                   SEO Optimized
                 </div>
                 <p className="rt-gap-off">
-                  Built with modern SEO best practices to help your site rank higher and attract more visitors.
+                  We write your pages so search engines can find them easily, which means more people discover your business.
                 </p>
               </div>
               <div className="rt-speciality-item-bottom rt-2">
@@ -135,7 +135,7 @@ export default function WebDevFeatures() {
                   High Performance
                 </div>
                 <p className="rt-gap-off">
-                  Fast load times and secure architecture to maximize conversions and protect your data.
+                  Pages that load quickly keep visitors happy and help turn more of them into paying customers.
                 </p>
               </div>
               <div

@@ -16,7 +16,7 @@ export default function WebDevIntegration() {
                 <div className="rt-sub-text rt-sub-gredient">capabilities</div>
               </div>
               <h2 className="rt-gap-off rt-desktop-text-center">
-                Modern technologies for high-performance websites
+                The tools and technologies we use to build your website
               </h2>
             </div>
             <div
@@ -37,7 +37,7 @@ export default function WebDevIntegration() {
                     Frontend Development
                   </div>
                   <p className="rt-gap-off">
-                    Build engaging user interfaces with React, Next.js, and modern CSS.
+                     We build the part of your website that people see and interact with, making it smooth and easy to use.
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@ export default function WebDevIntegration() {
                     Backend Architecture
                   </div>
                   <p className="rt-gap-off">
-                    Robust server-side architecture using Node.js, Python, or PHP.
+                     We build the server side of your website so data is stored, processed, and delivered the right way.
                   </p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function WebDevIntegration() {
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">Database Design</div>
                   <p className="rt-gap-off">
-                    Secure and scalable database solutions using SQL and NoSQL.
+                    We organize your website data so it stays secure and is always easy to find.
                   </p>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function WebDevIntegration() {
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">E-commerce Solutions</div>
                   <p className="rt-gap-off">
-                    Custom online stores built with WooCommerce or Shopify.
+                    We create simple online shops that help you sell products and manage orders with ease.
                   </p>
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function WebDevIntegration() {
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">API Integrations</div>
                   <p className="rt-gap-off">
-                    Seamlessly connect your app with third-party services and APIs.
+                    We link your website to other apps and tools to help your business run more smoothly.
                   </p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export default function WebDevIntegration() {
                     Performance Tuning
                   </div>
                   <p className="rt-gap-off">
-                    Speed optimization and Core Web Vitals improvements.
+                     We make sure your website loads quickly so your visitors do not have to wait.
                   </p>
                 </div>
               </div>

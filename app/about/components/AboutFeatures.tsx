@@ -28,8 +28,13 @@ export default function AboutFeatures() {
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>Our mission is to bridge the gap between complex business challenges and intuitive digital solutions. We strive to provide Ahmedabad and the world with top-tier IT services.</p>
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>We focus on delivering high-quality, scalable web and mobile applications that drive real growth, prioritizing clean code, user-centric design, and measurable results.</p>
                   <p className="rt-color-pale-periwinkle rt-gap-off">By partnering closely with our clients, we ensure every project isn't just delivered on time, but actually transforms the way they do business.</p>
+                  <ul className="rt-color-pale-periwinkle" style={{ listStyleType: 'disc', paddingLeft: '20px', marginTop: '1rem', lineHeight: '1.6', color: '#a3a8cc' }}>
+                    <li>Delivering user-centric software solutions</li>
+                    <li>Maintaining 100% transparency in our processes</li>
+                    <li>Driving measurable, long-term business growth</li>
+                  </ul>
                 </div>
-                <div style={{ transform: 'scale(0.65)', transformOrigin: 'bottom center', marginTop: '-3rem' }}>
+                <div style={{ transform: 'scale(0.65)', transformOrigin: 'bottom center', marginTop: '-8rem' }}>
                   <div data-w-id="62508c73-e31b-0068-13cd-79c365633cb0" className="rt-features-v1-inner-image">
                     <Image src={`${A}/690c408d17e948acfd9dd61a_taskopia-%20about-features-1.webp`} loading="lazy" alt="about-features-1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <div className="rt-features-v1-inner-image-over">
@@ -49,8 +54,13 @@ export default function AboutFeatures() {
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>We envision a future where businesses of all sizes have access to enterprise-grade technology without the overwhelming complexity or hidden costs.</p>
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>Tryangletech aims to be the leading IT partner recognized for innovation, transparency, and an unwavering commitment to our clients' long-term success.</p>
                   <p className="rt-color-pale-periwinkle rt-gap-off">We don't just want to build software; we want to build lasting digital ecosystems that empower our partners to thrive in an ever-evolving digital landscape.</p>
+                  <ul className="rt-color-pale-periwinkle" style={{ listStyleType: 'disc', paddingLeft: '20px', marginTop: '1rem', lineHeight: '1.6', color: '#a3a8cc' }}>
+                    <li>Pioneering innovative digital ecosystems</li>
+                    <li>Democratizing enterprise-grade technologies</li>
+                    <li>Fostering lasting partnerships built on trust</li>
+                  </ul>
                 </div>
-                <div style={{ transform: 'scale(0.65)', transformOrigin: 'bottom center', marginTop: '-2rem' }}>
+                <div style={{ transform: 'scale(0.65)', transformOrigin: 'bottom center', marginTop: '-10rem' }}>
                   <div className="rt-features-v1-inner-image-2">
                   <div data-w-id="7a0ae718-492b-9c68-43b4-75a267c14680" className="rt-features-v1-right-image-one">
                     <Image src={`${A}/690c465f3c3aa6146c8e184d_Group%202147225572.png`} loading="lazy" alt="collaboration"  width={800} height={800} style={{ width: "100%", height: "auto" }} />

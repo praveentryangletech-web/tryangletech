@@ -108,7 +108,7 @@ export default function AboutHero() {
 
               <div className="w-layout-grid rt-benefits-v2-card-wrap">
                 {[
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Web Design & Development', desc: 'Precision-crafted websites  custom builds, WordPress, and e-commerce  designed to engage your audience across every device.' },
+                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Website Design & Development', desc: 'Precision-crafted websites  custom builds, WordPress, and e-commerce  designed to engage your audience across every device.' },
                   { wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, title: 'Mobile App Development', desc: 'iOS and Android apps built with cutting-edge technology and user-centric design, for brands across the globe.' },
                   { wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Digital Marketing & SEO', desc: 'Complete digital marketing and SEO strategies that improve visibility, drive quality traffic, and grow your online revenue.' },
                 ].map(({ wid, icon, title, desc }) => (

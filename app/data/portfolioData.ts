@@ -22,8 +22,9 @@ export const projects: Project[] = [
     description: "A professional business website for an accounting firm, built for credibility and lead generation.",
     client: "VH Accounting",
     duration: "3 Weeks",
-    role: "Web Design & Development",
+    role: "Website Design & Development",
     liveUrl: "https://vh-accounting.com",
+    content: "VH Accounting required a modern digital presence to reflect their expertise and attract high-value corporate clients. We developed a clean, professional platform focused on user experience and lead generation. By implementing clear service breakdowns, trust-building testimonials, and a streamlined contact flow, the new website successfully increased their monthly client inquiries and improved their overall brand authority.",
   },
   {
     slug: "evon-ceramics",
@@ -33,8 +34,9 @@ export const projects: Project[] = [
     description: "A product showcase website for a ceramics manufacturer, focused on B2B enquiry generation.",
     client: "Evon Ceramics",
     duration: "3 Weeks",
-    role: "Web Design & Development",
+    role: "Website Design & Development",
     liveUrl: "https://evonceramics.com",
+    content: "Evon Ceramics needed a robust platform to showcase their extensive product catalog to B2B distributors worldwide. We designed an interactive, highly visual website that allows users to easily filter and explore ceramic collections. The seamless user journey and optimized product pages led to a significant boost in wholesale inquiries and expanded their global digital footprint.",
   },
   {
     slug: "7d-design-studios",
@@ -44,8 +46,9 @@ export const projects: Project[] = [
     description: "A portfolio and service website for an interior design studio, showcasing their work and expertise.",
     client: "7D Design Studios",
     duration: "3 Weeks",
-    role: "Web Design & Development",
+    role: "Website Design & Development",
     liveUrl: "https://7ddesignstudios.in",
+    content: "For 7D Design Studios, the website itself had to be a masterpiece of design. We created a visually stunning, minimalist portfolio platform that puts their architectural and interior design projects center stage. High-resolution galleries, smooth animations, and an intuitive layout perfectly communicate their aesthetic sensibilities to prospective high-end clients.",
   },
   {
     slug: "ansh-exports",
@@ -55,8 +58,9 @@ export const projects: Project[] = [
     description: "A comprehensive business website built for an export company with product showcases.",
     client: "Ansh Exports",
     duration: "3 Weeks",
-    role: "Web Design & Development",
+    role: "Website Design & Development",
     liveUrl: "https://anshexports.in",
+    content: "Ansh Exports approached us to build a comprehensive corporate website to facilitate international trade. We structured the site to highlight their diverse product range, quality certifications, and global logistics capabilities. The result is a highly professional, fast-loading platform that instills trust in international buyers and streamlines the quotation request process.",
   },
 
   {

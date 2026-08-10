@@ -14,7 +14,7 @@ export default function AboutHero() {
           <div className="rt-hero-v4-wrapper">
 
             {/* Left */}
-            <div className="rt-hero-v4-left" style={{ marginTop: '-4rem', flex: '1.2', maxWidth: '60%', paddingRight: '20px' }}>
+            <div className="rt-hero-v4-left" style={{ marginTop: '-4rem' }}>
               <div data-w-id="56597df3-c221-7996-6257-e67d35ef3b26" className="rt-hero-v1-top-sub">
                 <div className="rt-overflow-hidden">
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">

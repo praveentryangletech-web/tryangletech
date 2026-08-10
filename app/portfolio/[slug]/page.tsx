@@ -257,7 +257,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   <div style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
                     <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Technologies Used</h3>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
-                      <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px' }}>
+                      <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
                         {project.technologies.map((tech, i) => {
                           const techIconMap: Record<string, string> = {
                             "React": "/tech-icons/react.svg",
@@ -286,26 +286,26 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                           };
                           const iconSrc = techIconMap[tech];
                           return (
-                            <div key={i}>
+                            <div key={i} className="animate-section" style={{ animationDelay: `${i * 0.15}s` }}>
                               {iconSrc ? (
                                 <img
                                   alt={tech}
                                   src={iconSrc}
                                   loading="lazy"
-                                  className="rt-itegration-logo"
-                                  style={{ width: '129px', height: '132px', objectFit: 'contain', padding: '25px', boxSizing: 'border-box' }}
+                                  className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300"
+                                  style={{ width: '85px', height: '85px', objectFit: 'contain', padding: '18px', boxSizing: 'border-box' }}
                                 />
                               ) : (
-                                <div className="rt-itegration-logo" style={{ 
+                                <div className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300" style={{ 
                                   display: 'flex', 
                                   alignItems: 'center', 
                                   justifyContent: 'center', 
-                                  width: '129px', 
-                                  height: '132px', 
+                                  width: '85px', 
+                                  height: '85px', 
                                   background: '#ffffff', 
-                                  padding: '15px'
+                                  padding: '8px'
                                 }}>
-                                  <span className="rt-text-style-h6" style={{ fontSize: '1rem', margin: 0, textAlign: 'center', color: '#1a0b54' }}>{tech}</span>
+                                  <span className="rt-text-style-h6" style={{ fontSize: '0.9rem', margin: 0, textAlign: 'center', color: '#1a0b54', wordBreak: 'break-word', lineHeight: '1.2' }}>{tech}</span>
                                 </div>
                               )}
                             </div>

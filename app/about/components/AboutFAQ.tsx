@@ -41,7 +41,7 @@ export default function AboutFAQ() {
                 </div>
                 <div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880" className="rt-faq-main rt-margin-auto rt-faq-2-main">
                   {[
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb881', q: 'What services does Tryangletech offer?', a: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development — all under one roof.', isTop: true, paraClass: '' },
+                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb881', q: 'What services does Tryangletech offer?', a: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development, all under one roof.', isTop: true, paraClass: '' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f', q: 'Which industries do you serve?', a: 'We serve a wide range of industries including healthcare, finance, e-commerce, education, retail, and more, both in India and internationally.', paraClass: ' rt-faq-v2' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d', q: 'Do you provide support after project completion?', a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.', paraClass: '' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab', q: 'How long does it take to complete a project?', a: 'Project timelines vary based on complexity and requirements. A standard website typically takes 2–4 weeks, while larger projects may take longer. We\'ll give you a clear timeline before we start.', paraClass: '' },

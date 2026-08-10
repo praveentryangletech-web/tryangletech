@@ -181,7 +181,7 @@ export default function ServiceMarquee() {
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">Custom Software Development</div>
                   <p className="rt-gap-off">
-                    We build tailored software solutions designed specifically to meet your unique business challenges, streamlining your operations and driving growth.
+                    We create custom software that fits exactly what your business needs. Our solutions help your team work faster and make growing your company a whole lot easier.
                   </p>
                   <a
                     href="/service/custom-software"
@@ -242,7 +242,7 @@ export default function ServiceMarquee() {
                     Website Development
                   </div>
                   <p className="rt-gap-off">
-                    Create a powerful online presence with our responsive, high-performance web development services. We craft engaging websites that captivate your audience.
+                    Get a beautiful website that works perfectly on any device. We design and build online experiences that grab attention and turn your visitors into loyal customers.
                   </p>
                   <a
                     href="/service/web-development"
@@ -288,7 +288,7 @@ export default function ServiceMarquee() {
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">Mobile Application</div>
                   <p className="rt-gap-off">
-                    Reach your customers on the go with intuitive, user-friendly mobile applications for iOS and Android. We turn your app ideas into reality.
+                    Connect with your customers wherever they are through a custom mobile app. We take your app idea and build an amazing experience for both Apple and Android phones.
                   </p>
                   <a
                     href="/service/mobile-application"
@@ -357,7 +357,7 @@ export default function ServiceMarquee() {
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms', flex: '1', paddingLeft: '4rem' }}>
                   <div className="rt-text-style-h5">Graphics Designing</div>
                   <p className="rt-gap-off">
-                    Elevate your brand with stunning visual designs. Our creative team delivers eye-catching graphics, logos, and UI/UX designs that leave a lasting impression.
+                    Make your brand stand out with stunning visuals that capture your unique identity. From beautiful logos and marketing materials to amazing user interfaces, our creative team designs everything you need to leave a lasting impression. We focus on blending beautiful aesthetics with smart functionality, ensuring that every graphic we create not only looks fantastic but also communicates your message clearly and drives real engagement with your target audience.
                   </p>
                   <a
                     href="/service/graphics-designing"
@@ -403,7 +403,7 @@ export default function ServiceMarquee() {
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">Digital Marketing</div>
                   <p className="rt-gap-off">
-                    Boost your online visibility and drive conversions. We offer comprehensive digital marketing strategies tailored to your business goals.
+                    Grow your audience and increase your sales online. We put together complete marketing strategies that help your business get noticed by the right people at the right time.
                   </p>
                   <a
                     href="/service/digital-marketing"
@@ -449,7 +449,7 @@ export default function ServiceMarquee() {
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">Search Engine Optimization</div>
                   <p className="rt-gap-off">
-                    Rank higher, drive organic traffic, and outpace your competition. We implement data-driven SEO strategies that deliver measurable, long-term results.
+                    Help more people find you on Google and stay ahead of the competition. We use proven strategies to get your website ranking higher so you can see real growth over time.
                   </p>
                   <a
                     href="/service/seo"

@@ -361,8 +361,8 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   </div>
                   
                   <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-                    <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block">
-                      <div className="rt-button-text rt-btn-color-nav">View all projects</div>
+                    <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block" style={{ display: 'inline-flex', width: 'auto', minWidth: '200px', padding: '14px 32px', justifyContent: 'center' }}>
+                      <div className="rt-button-text rt-btn-color-nav" style={{ width: 'auto', display: 'inline-block', margin: 0 }}>View all projects</div>
                       <div className="rt-button-body-overlay rt-nav-overlay"></div>
                     </Link>
                   </div>

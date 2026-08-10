@@ -43,7 +43,7 @@ export default function AboutHero() {
               </div>
 
               <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" className="rt-padding-hero-v6 rt-gap-off" style={{ marginBottom: '1rem' }}>
-                Tryangletech is a full-service IT company in Ahmedabad, helping businesses design, build, and grow with expert web development, mobile apps, digital marketing, and custom software solutions, all under one roof.
+                Tryangletech is a full-service IT company in Ahmedabad, helping businesses design, build, and grow with expert website development, mobile apps, digital marketing, and custom software solutions, all under one roof.
               </p>
               
               <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" style={{ color: '#4b5563', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '95%' }}>

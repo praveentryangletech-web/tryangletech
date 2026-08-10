@@ -45,7 +45,7 @@ export default function AboutFAQ() {
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f', q: 'Which industries do you serve?', a: 'We serve a wide range of industries including healthcare, finance, e-commerce, education, retail, and more, both in India and internationally.', paraClass: ' rt-faq-v2' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d', q: 'Do you provide support after project completion?', a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.', paraClass: '' },
                     { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab', q: 'How long does it take to complete a project?', a: 'Project timelines vary based on complexity and requirements. A standard website typically takes 2–4 weeks, while larger projects may take longer. We\'ll give you a clear timeline before we start.', paraClass: '' },
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9', q: 'Do you offer free hosting?', a: 'Yes, we offer 1 year of free hosting with our web development packages. Domain registration is handled separately by the client.', paraClass: ' rt-faq-v2' },
+                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9', q: 'Do you offer free hosting?', a: 'Yes, we offer 1 year of free hosting with our website development packages. Domain registration is handled separately by the client.', paraClass: ' rt-faq-v2' },
                   ].map(({ wid, q, a, isTop, paraClass }, idx) => {
                     const isOpen = openFaqs.includes(idx);
                     return (

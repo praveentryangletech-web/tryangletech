@@ -1,53 +1,6 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
-
-
-const SA = "/service3-assets";
-
-const faqs = [
-  {
-    q: "Does it integrate with other tools?",
-    a: "AI automation uses artificial intelligence to perform repetitive tasks, analyze data, and optimize processes, enabling businesses to save time, reduce errors, and make smarter, faster decisions efficiently.",
-  },
-  {
-    q: "How can task management software improve productivity?",
-    a: "AI can automate repetitive tasks like data entry, customer support, report generation, inventory management, and workflow optimization, allowing teams to focus on strategic, high-value activities and business growth.",
-  },
-  {
-    q: "Can I collaborate with my team using this platform?",
-    a: "Yes, AI automation is ideal for small businesses. It streamlines operations, reduces manual work, improves efficiency, and provides actionable insights, helping smaller teams compete and grow effectively.",
-  },
-  {
-    q: "Is this suitable for small teams and enterprises?",
-    a: "Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors.",
-  },
-  {
-    q: "Can I track project deadlines?",
-    a: "Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations.",
-  },
-];
-
-const testimonials = [
-  {
-    img: `${SA}/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp`,
-    name: "Jonathan Keller",
-    title: '"Good sales growth"',
-    text: '"This tool transformed how our team works! Tasks are organized, deadlines are clear, and collaboration is smoother than ever. Productivity has never been this high."',
-  },
-  {
-    img: `${SA}/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp`,
-    name: "Rebecca Lin",
-    title: '"Faster support"',
-    text: '"An absolute game-changer for project management. We can track progress in real-time, avoid delays, and deliver projects on schedule with less stress."',
-  },
-  {
-    img: `${SA}/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp`,
-    name: "Mark Wilson",
-    title: '"Smooth workflow"',
-    text: '"Simple, intuitive, and powerful—our team now manages tasks without confusion. It keeps everyone aligned and helps us achieve more in less time."',
-  },
-];
 
 import MobileApplicationHero from './components/MobileApplicationHero';
 import MobileApplicationSimplified from './components/MobileApplicationSimplified';

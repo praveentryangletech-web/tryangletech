@@ -10,7 +10,7 @@ import CascadeSlider from "../components/CascadeSlider";
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const post = BLOG_POSTS.find(p => p.slug === resolvedParams.id);
-  
+
   if (!post) {
     return notFound();
   }
@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             </div>
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
-              className="rt-hero-13-main-image rt-overflow-hidden" style={{ position: 'relative' }}>
+              className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ position: 'relative' }}>
               {post.images && post.images.length > 1 ? (
                 <CascadeSlider images={post.images} title={post.title} />
               ) : (
@@ -123,27 +123,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   </div>
                 </div>
               </div>
-              <div className="project-meta-grid">
-                <div className="meta-card">
-                  <span className="meta-label">Category</span>
-                  <span className="meta-value">{post.category}</span>
-                </div>
-                <div className="meta-card">
-                  <span className="meta-label">Author</span>
-                  <span className="meta-value">TryangleTech Team</span>
-                </div>
-              </div>
-              <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
-                <Link href="/blog" className="rt-button-body w-inline-block back-btn-animated" style={{ borderRadius: '100px' }}>
-                  <div className="rt-button-text" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                    Back to Blog
-                  </div>
-                </Link>
-              </div>
-              <div
+
+                           <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9d1"
                 className="w-richtext">
                 <h2>Blending human creativity with hachine Intelligence</h2>
@@ -160,6 +141,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   ensures that human imagination and computational precision
                   work together to produce remarkable outcomes.
                 </p>
+              </div>
+               <div className="project-meta-grid">
+                <div className="meta-card">
+                  <span className="meta-label">Category</span>
+                  <span className="meta-value">{post.category}</span>
+                </div>
+                <div className="meta-card">
+                  <span className="meta-label">Author</span>
+                  <span className="meta-value">TryangleTech Team</span>
+                </div>
+                <div className="meta-card">
+                  <span className="meta-label">Author</span>
+                  <span className="meta-value">TryangleTech Team</span>
+                </div>
               </div>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca03"
@@ -199,6 +194,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   </div>
                 </div>
               </div>
+              
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
                 className="w-richtext">
@@ -235,9 +231,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 </div>
               </div>
 
-<h5>--These both are sample</h5>
+              <h5>--These both are sample</h5>
 
-                <div
+              <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
                 className="w-richtext">
                 <h3>Steps to integrate AI with creative workflows</h3>
@@ -267,7 +263,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                     </p>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
                 className="rt-blog-details-content-image">

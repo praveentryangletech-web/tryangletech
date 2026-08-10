@@ -32,9 +32,39 @@ export default function WebDevHero() {
                    We create websites and web apps that your visitors enjoy using. Whether it is a landing page, a full web platform, or an online store, we build things that load fast, look clean, and help your business grow.
                 </p>
               </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '24px', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(99,102,241,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Fast and reliable</div>
+                    <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Your website loads quickly on any device so visitors do not get frustrated and leave.</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(99,102,241,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Built to rank on Google</div>
+                    <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Every page is structured so search engines understand your content and show it to the right people.</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(99,102,241,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Works on every screen</div>
+                    <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Phones, tablets, laptops, your website looks and feels right on all of them.</div>
+                  </div>
+                </div>
+              </div>
               <div
                 data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350326"
                 className="w-layout-hflex rt-hero-v5-button-wrap">
+
                 <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                   href="/contact"
@@ -42,46 +72,7 @@ export default function WebDevHero() {
                   <div className="rt-button-text">Get started today</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
-                <div className="w-layout-hflex rt-hero-v2-client-wrap">
-                  <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032a"
-                      className="rt-hero-v2-client-image rt-overflow-hidden">
-                      <Image
-                        width={62}
-                        height={47}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032c"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div
-                      data-w-id="136ee2be-3a36-f0e2-c08f-8813ef35032e"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left">
-                      <Image
-                        width={60}
-                        height={79}
-                        alt="Kloudera-home-two-hero-image"
-                        src="/service-1-assets/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                  <div className="rt-color-dark-indigo">
-                    Trusted by 200+ businesses
-                  </div>
-                </div>
+                
               </div>
               <div
                 data-w-id="2a922485-2ae2-43f1-d550-fc7c8735205f"

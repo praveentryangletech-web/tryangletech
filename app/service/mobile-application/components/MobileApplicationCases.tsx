@@ -43,7 +43,7 @@ export default function MobileApplicationCases() {
                     className="rt-button-para-gap">
                       <Link
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                      href="/service-one"
+                      href="/contact"
                       className="rt-button-body w-inline-block">
                       <div className="rt-button-text">Explore benefits</div>
                       <div className="rt-button-body-overlay"></div>

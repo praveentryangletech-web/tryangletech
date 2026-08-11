@@ -66,77 +66,8 @@ export default function DigitalMarketingAgent() {
             </div>
           </div>
         </div>
-        <div className="w-layout-hflex rt-agent-v3-box-wrap rt-overflow-hidden">
-          <div
-            data-w-id="c45858de-def6-510f-805b-5dbb3f6a15a8"
-            className="w-layout-vflex rt-data-analyzed-content"
-          >
-            <div className="rt-text-style-h2 rt-color-vivid-blue">3x</div>
-            <div className="w-layout-vflex rt-agents-text-wrap">
-              <div className="rt-data-analyzed-border">
-                <div
-                  style={{ width: "0%" }}
-                  className="rt-agents-v3-box-overlay"
-                ></div>
-              </div>
-              <div className="w-layout-hflex rt-agents-icon-wrap">
-                <div className="rt-text-style-h6">Average ROI</div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="c45858de-def6-510f-805b-5dbb3f6a15b3"
-            className="w-layout-vflex rt-data-analyzed-content two"
-          >
-            <div className="rt-text-style-h2 rt-color-vivid-blue">70%</div>
-            <div className="w-layout-vflex rt-agents-text-wrap">
-              <div className="rt-data-analyzed-border">
-                <div
-                  style={{ width: "0%" }}
-                  className="rt-agents-v3-box-overlay"
-                ></div>
-              </div>
-              <div className="w-layout-hflex rt-agents-icon-wrap">
-                <div className="rt-text-style-h6">More Qualified Leads</div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="c45858de-def6-510f-805b-5dbb3f6a15be"
-            className="w-layout-vflex rt-data-analyzed-content three"
-          >
-            <div className="rt-text-style-h2 rt-color-vivid-blue">500+</div>
-            <div className="w-layout-vflex rt-agents-text-wrap">
-              <div className="rt-data-analyzed-border">
-                <div
-                  style={{ width: "0%" }}
-                  className="rt-agents-v3-box-overlay"
-                ></div>
-              </div>
-              <div className="w-layout-hflex rt-agents-icon-wrap">
-                <div className="rt-text-style-h6">Campaigns Launched</div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="c45858de-def6-510f-805b-5dbb3f6a15c9"
-            className="w-layout-vflex rt-data-analyzed-content three"
-          >
-            <div className="rt-text-style-h2 rt-color-vivid-blue">98%</div>
-            <div className="w-layout-vflex rt-agents-text-wrap">
-              <div className="rt-data-analyzed-border">
-                <div
-                  style={{ width: "0%" }}
-                  className="rt-agents-v3-box-overlay"
-                ></div>
-              </div>
-              <div className="w-layout-hflex rt-agents-icon-wrap">
-                <div className="rt-text-style-h6">Client Retention</div>
-              </div>
-            </div>
-          </div>
-      </div>
-      </div>
+        </div>
+      {/* </div> */}
     </section>
   );
 }

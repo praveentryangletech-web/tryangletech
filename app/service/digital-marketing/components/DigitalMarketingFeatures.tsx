@@ -195,7 +195,8 @@ Taskopia-features-home-v3-right
                 more smoothly.
               </p>
               <a
-                href="https://taskopia.webflow.io/about"
+                data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
+                href="/about"
                 className="rt-features-v2-small-link w-inline-block"
               >
                 <div className="rt-button-text rt-color-vivid-blue">

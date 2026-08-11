@@ -22,14 +22,14 @@ export default function WebDevHero() {
                 <h1
                   data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350321"
                   className="rt-gap-off">
-                  Websites that look great and work even better
+                  Websites that bring in customers, not just look nice
                 </h1>
               </div>
               <div
                 data-w-id="136ee2be-3a36-f0e2-c08f-8813ef350323"
                 className="rt-hero-v7-para-wrap">
                 <p className="rt-gap-off">
-                   We create websites and web apps that your visitors enjoy using. Whether it is a landing page, a full web platform, or an online store, we build things that load fast, look clean, and help your business grow.
+                   We build custom websites, WordPress sites, e-commerce stores, and business websites for companies across Ahmedabad and beyond. Every site is planned around what you sell, built to load fast, and backed by real support after launch - not just handed over and forgotten.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '24px', marginBottom: '8px' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
@@ -38,7 +38,7 @@ export default function WebDevHero() {
                     </div>
                     <div>
                       <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Fast and reliable</div>
-                      <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Your website loads quickly on any device so visitors do not get frustrated and leave.</div>
+                       <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Your website loads quickly on any device, so visitors don't get frustrated and leave.</div>
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
@@ -47,7 +47,7 @@ export default function WebDevHero() {
                     </div>
                     <div>
                       <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Built to rank on Google</div>
-                      <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Every page is structured so search engines understand your content and show it to the right people.</div>
+                       <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Every page is structured so search engines understand your content and show it to the right people.</div>
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
@@ -56,7 +56,7 @@ export default function WebDevHero() {
                     </div>
                     <div>
                       <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '2px' }}>Works on every screen</div>
-                      <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Phones, tablets, laptops, your website looks and feels right on all of them.</div>
+                       <div style={{ fontSize: '14px', opacity: 0.7, lineHeight: '1.5' }}>Phones, tablets, laptops - your website looks and works right on all of them.</div>
                     </div>
                   </div>
                 </div>

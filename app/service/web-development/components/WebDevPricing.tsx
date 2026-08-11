@@ -10,6 +10,14 @@ const SA = '/service3-assets';
 export default function WebDevPricing() {
   return (
     <>
+      <style>{`
+        .rt-service-v3-samll-para {
+          height: auto !important;
+          max-height: none !important;
+          overflow: visible !important;
+          opacity: 1 !important;
+        }
+      `}</style>
       <section className="rt-services-v3 rt-position-relative">
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-method-main">
@@ -34,10 +42,10 @@ export default function WebDevPricing() {
                     <div className="rt-text-style-h6">
                       Custom Web Solutions
                     </div>
-                    <div className="rt-service-v3-samll-para rt-overflow-hidden rt-1">
-                      <p className="rt-gap-off">
-                        We build tailored web applications and websites that perfectly align with your business goals.
-                      </p>
+                    <div className="rt-service-v3-samll-para rt-overflow-hidden rt-1" style={{ maxHeight: 'none', overflow: 'visible' }}>
+                       <p className="rt-gap-off">
+                         We build tailored web applications and websites that align with your business goals — from simple landing pages to full platforms built to convert.
+                       </p>
                     </div>
                   </Link>
                   <Link
@@ -55,11 +63,11 @@ export default function WebDevPricing() {
                     <div className="rt-text-style-h6">
                       Responsive &amp; Scalable
                     </div>
-                    <div className="rt-service-v3-samll-para rt-overflow-hidden rt-2">
-                      <p className="rt-gap-off">
-                        Ensure your platform looks great on any device and scales effortlessly as your traffic grows.
-                      </p>
-                    </div>
+                     <div className="rt-service-v3-samll-para rt-overflow-hidden rt-2" style={{ maxHeight: 'none', overflow: 'visible' }}>
+                       <p className="rt-gap-off">
+                         Every site works smoothly across phones, tablets, and desktops, and is built to grow as your business adds more products, pages, or traffic.
+                       </p>
+                     </div>
                   </Link>
                   <Link
                     data-w-tab="Tab 3"
@@ -76,11 +84,11 @@ export default function WebDevPricing() {
                     <div className="rt-text-style-h6">
                       High Performance &amp; Security
                     </div>
-                    <div className="rt-service-v3-samll-para rt-overflow-hidden rt-3">
-                      <p className="rt-gap-off">
-                        Our web solutions are optimized for lightning-fast speeds and secured with robust protocols.
-                      </p>
-                    </div>
+                     <div className="rt-service-v3-samll-para rt-overflow-hidden rt-3" style={{ maxHeight: 'none', overflow: 'visible' }}>
+                       <p className="rt-gap-off">
+                         We optimize every site for fast load times and keep it protected with regular updates and monitoring, so it stays secure and reliable long after launch.
+                       </p>
+                     </div>
                   </Link>
                 </div>
                 <div className="rt-tab-main-content w-tab-content">

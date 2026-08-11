@@ -44,12 +44,12 @@ export default function MobileApplicationHero() {
                   <div className="rt-button-text">Start your app project</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
-                <div className="w-layout-hflex rt-hero-v2-client-wrap">
+                {/* <div className="w-layout-hflex rt-hero-v2-client-wrap">
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                     <div
                       data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80c7"
                       className="rt-hero-v2-client-image rt-overflow-hidden">
-                      <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
+                      <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%',border:'none'}} />
                     </div>
                     <div
                       data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80c9"
@@ -65,13 +65,13 @@ export default function MobileApplicationHero() {
                   <div className="rt-color-dark-indigo">
                     Trusted by 200+ leaders
                   </div>
-                </div>
+                </div> */}
               </div>
               <div
                 data-w-id="71a4d9bb-ed12-fffa-7ded-0324d6f48125"
                 className="rt-hero-v7-left-bottom rt-overflow-hidden rt-tab-display-none">
                 <div className="rt-text-style-h6 rt-hero-v7-left-text">
-                  Trusted by 50,000+ businesses
+                  Trusted by 350+ businesses
                 </div>
                 <div className="rt-text-marquee-wrapper rt-overflow-hidden">
                   <div className="rt-text-marquee-train">

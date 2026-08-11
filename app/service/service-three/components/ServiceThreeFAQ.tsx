@@ -1386,140 +1386,70 @@ taskopia-testimonials-author-v1
                       <div className="rt-button-text">Contact us today</div>
                       <div className="rt-button-body-overlay"></div>
                     </Link>
-                  </div>
-                </div>
-              </div>
-              <div
+                         <div
                 data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880"
                 className="rt-faq-main rt-margin-auto rt-faq-2-main">
-                <div
-                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb881"
-                  className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag rt-top-gap-of">
-                  <div className="w-layout-hflex rt-faq-top-part">
-                    <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                      <div className="rt-text-style-h6">
-                        Does it integrate with other tools?
+                {faqs.map(({ q, a }, idx) => {
+                  const isOpen = openFaq === idx;
+                  return (
+                    <div
+                      key={idx}
+                      className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${idx === 0 ? ' rt-top-gap-of' : ''}`}
+                      style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    >
+                      <div className="w-layout-hflex rt-faq-top-part">
+                        <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
+                          <h3 className="rt-text-style-h6" style={{ marginTop: 0, marginBottom: 0 }}>{q}</h3>
+                        </div>
+                        <div className="rt-faq-right-part">
+                          <div className="rt-faq-minus"></div>
+                          <div 
+                            className="rt-faq-plus" 
+                            style={{ 
+                              transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', 
+                              opacity: isOpen ? 0 : 1,
+                              transition: 'all 0.3s ease' 
+                            }}></div>
+                        </div>
+                      </div>
+                      <div 
+                        className="rt-faq-bottom-part rt-overflow-hidden" 
+                        style={{ 
+                          height: isOpen ? 'auto' : 0, 
+                          opacity: isOpen ? 1 : 0, 
+                          transition: 'opacity 0.3s ease',
+                          paddingTop: isOpen ? '20px' : 0
+                        }}
+                      >
+                        <div className="rt-faq-para-wrap">
+                          <p className="rt-gap-off">{a}</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="rt-faq-right-part">
-                      <div className="rt-faq-minus"></div>
-                      <div className="rt-faq-plus"></div>
-                    </div>
-                  </div>
-                  <div className="rt-faq-bottom-part rt-overflow-hidden">
-                    <div className="rt-faq-para-wrap">
-                      <p className="rt-gap-off">
-                        AI automation uses artificial intelligence to perform
-                        repetitive tasks, analyze data, and optimize processes,
-                        enabling businesses to save time, reduce errors, and
-                        make smarter, faster decisions efficiently.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f"
-                  className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag">
-                  <div className="w-layout-hflex rt-faq-top-part">
-                    <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                      <div className="rt-text-style-h6">
-                        How can task management software improve productivity?
-                      </div>
-                    </div>
-                    <div className="rt-faq-right-part">
-                      <div className="rt-faq-minus"></div>
-                      <div className="rt-faq-plus"></div>
-                    </div>
-                  </div>
-                  <div className="rt-faq-bottom-part rt-overflow-hidden">
-                    <div className="rt-faq-para-wrap rt-faq-v2">
-                      <p className="rt-gap-off">
-                        AI can automate repetitive tasks like data entry,
-                        customer support, report generation, inventory
-                        management, and workflow optimization, allowing teams to
-                        focus on strategic, high-value activities and business
-                        growth.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d"
-                  className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag">
-                  <div className="w-layout-hflex rt-faq-top-part">
-                    <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                      <div className="rt-text-style-h6">
-                        Can I collaborate with my team using this platform?
-                      </div>
-                    </div>
-                    <div className="rt-faq-right-part">
-                      <div className="rt-faq-minus"></div>
-                      <div className="rt-faq-plus"></div>
-                    </div>
-                  </div>
-                  <div className="rt-faq-bottom-part rt-overflow-hidden">
-                    <div className="rt-faq-para-wrap">
-                      <p className="rt-gap-off">
-                        Yes, AI automation is ideal for small businesses. It
-                        streamlines operations, reduces manual work, improves
-                        efficiency, and provides actionable insights, helping
-                        smaller teams compete and grow effectively.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab"
-                  className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag">
-                  <div className="w-layout-hflex rt-faq-top-part">
-                    <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                      <div className="rt-text-style-h6">
-                        Is this suitable for small teams and enterprises?
-                      </div>
-                    </div>
-                    <div className="rt-faq-right-part">
-                      <div className="rt-faq-minus"></div>
-                      <div className="rt-faq-plus"></div>
-                    </div>
-                  </div>
-                  <div className="rt-faq-bottom-part rt-overflow-hidden">
-                    <div className="rt-faq-para-wrap">
-                      <p className="rt-gap-off">
-                        Industries like finance, healthcare, retail,
-                        manufacturing, and logistics benefit greatly from AI
-                        automation. It streamlines operations, reduces errors,
-                        enhances customer service, and drives efficiency across
-                        diverse business sectors.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9"
-                  className="w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag">
-                  <div className="w-layout-hflex rt-faq-top-part">
-                    <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                      <div className="rt-text-style-h6">
-                        Can I track project deadlines?
-                      </div>
-                    </div>
-                    <div className="rt-faq-right-part">
-                      <div className="rt-faq-minus"></div>
-                      <div className="rt-faq-plus"></div>
-                    </div>
-                  </div>
-                  <div className="rt-faq-bottom-part rt-overflow-hidden">
-                    <div className="rt-faq-para-wrap rt-faq-v2">
-                      <p className="rt-gap-off">
-                        Absolutely. AI automation seamlessly integrates with
-                        your existing tools and platforms, allowing workflows to
-                        connect effortlessly, enhancing productivity, reducing
-                        manual effort, and ensuring a smooth transition without
-                        disrupting current operations.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.a
+                }
+              }))
+            })
+          }}
+        />
               </div>
             </div>
           </div>

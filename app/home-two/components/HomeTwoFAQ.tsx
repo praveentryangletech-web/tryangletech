@@ -37,9 +37,9 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
     >
       <div className="w-layout-hflex rt-faq-top-part" style={{ alignItems: 'center' }}>
         <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-          <div className="rt-text-style-h6">
+          <h3 className="rt-text-style-h6" style={{ marginTop: 0, marginBottom: 0 }}>
             {question}
-          </div>
+          </h3>
         </div>
         <div className="rt-faq-right-part" style={{ position: 'relative', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {isOpen ? (

@@ -1,14 +1,11 @@
 'use client';
+import React from 'react';
 
-import React, { useState } from 'react';
-
-const SA = '/service3-assets';
-
+// This section is currently unused (commented out in the original monolith).
+// Kept here for future use.
 export default function CustomSoftwareCore() {
   return (
     <>
-      <section className="rt-hero-v6 rt-position-relative"/>
-          
     </>
   );
 }

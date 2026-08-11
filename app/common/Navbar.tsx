@@ -97,7 +97,7 @@ export default function Navbar() {
               {/* ── Desktop Menu ── */}
               <div className="w-layout-hflex rt-navbar-v1-menu-desktop">
 
-                {/* Home dropdown */}
+                {/* Home dropdown (commented out)
                 <div
                   data-delay="300"
                   data-hover="true"
@@ -126,10 +126,13 @@ export default function Navbar() {
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
                     aria-labelledby="w-dropdown-toggle-0">
                     <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
-                    <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
-                    <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
                   </nav>
                 </div>
+                */}
+                {/* Home */}
+                <Link href="/" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/']) ? 'rt-active-link' : ''}`}>
+                  <div className="rt-menu-text">Home</div>
+                </Link>
 
                 {/* About */}
                 <Link href="/about" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/about']) ? 'rt-active-link' : ''}`}>
@@ -390,7 +393,7 @@ export default function Navbar() {
                   <div className="w-layout-vflex rt-mobile-menu-content-main">
                     <div className="rt-mobile-navbar">
 
-                      {/* Mobile – Home */}
+                      {/* Mobile – Home dropdown (commented out)
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
                         <div className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
@@ -400,10 +403,13 @@ export default function Navbar() {
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-4" aria-labelledby="w-dropdown-toggle-4">
                           <Link href="/" className="rt-nav-menu-link shadow-varient-59 rt-first w-dropdown-link" tabIndex={0}>Home one</Link>
-                          <Link href="/home-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Home two</Link>
-                          <Link href="/home-three" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Home three</Link>
                         </nav>
                       </div>
+                      */}
+                      {/* Mobile – Home */}
+                      <Link href="/" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/']) ? 'rt-active-link' : ''}`}>
+                        <div className="rt-menu-text">Home</div>
+                      </Link>
 
                       {/* Mobile – Service */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>

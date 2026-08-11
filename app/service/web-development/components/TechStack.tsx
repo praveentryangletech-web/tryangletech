@@ -88,7 +88,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">Tailwind CSS</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">Styling Framework</div>
+                      <div className="rt-tag" style={{ whiteSpace: 'nowrap' }}>Styling Framework</div>
                     </div>
                   </div>
                 </div>

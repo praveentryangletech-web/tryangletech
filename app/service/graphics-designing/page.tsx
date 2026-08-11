@@ -62,7 +62,6 @@ import GraphicsDesigningFeatures from './components/GraphicsDesigningFeatures';
 import GraphicsDesigningServices from './components/GraphicsDesigningServices';
 import GraphicsDesigningCore from './components/GraphicsDesigningCore';
 import GraphicsDesigningTestimonial from './components/GraphicsDesigningTestimonial';
-import GraphicsDesigningCTA from './components/GraphicsDesigningCTA';
 import GraphicsDesigningFAQ from './components/GraphicsDesigningFAQ';
 import WebflowInit from "../../common/WebflowInit";
 

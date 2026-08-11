@@ -7,10 +7,14 @@ import './globals.css';
 import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tryangletech.com'),
   title: 'TryangleTech',
   description: 'Innovative Technology Solutions by TryangleTech.',
   icons: {
     icon: '/favicon.png',
+  },
+  alternates: {
+    canonical: './',
   },
 };
 

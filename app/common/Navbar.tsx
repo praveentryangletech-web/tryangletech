@@ -419,7 +419,7 @@ export default function Navbar() {
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "200px" }}>
                           <Link href="/service/web-development" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Web Development</Link>
-                                               <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
+                          <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
                           <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
                           <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Digital Marketing</Link>
                           <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>

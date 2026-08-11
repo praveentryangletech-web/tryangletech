@@ -79,9 +79,9 @@ export default function GraphicsDesigningHero() {
               data-w-id="bd3b7318-15d0-e2b5-9880-c5981ed75446"
               className="rt-hero-v6-item rt-shadow rt-border-radius-medium">
               <Image
-                src="/portfolio/pious-events.webp"
+                src="/portfolio/tattvam-arts.webp"
                 loading="lazy"
-                alt="Graphic Design - Event Branding"
+                alt="Graphic Design - Tattvam Arts"
                 width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
 

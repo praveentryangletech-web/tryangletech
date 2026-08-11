@@ -117,7 +117,7 @@ export default function WebDevPricing() {
                         <p
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3c"
                           className="rt-gap-off rt-services-v3-para">
-                          Our web development services help you establish a strong online presence, engage your audience, and drive conversions effortlessly. Stay ahead with modern tech stacks, custom integrations, and seamless user experiences.
+                          Our web development services help you establish a strong online presence, engage your audience, and drive conversions effortlessly. Whether it's a custom-built platform, a WordPress site, or an online store, we combine modern tech stacks, custom integrations, and clean design to build something that actually works for your business - not just something that looks good in a demo. We've delivered 350+ web projects for businesses across Ahmedabad and beyond, and every one comes with support after launch, not just a handover.
                         </p>
                         <div
                           data-w-id="3662b99c-c917-15b5-2038-aa05d7432b3e"
@@ -131,6 +131,18 @@ export default function WebDevPricing() {
                             </div>
                             <div className="rt-button-body-overlay"></div>
                           </Link>
+                        </div>
+                        <div style={{ display: 'flex', gap: '28px', marginTop: '24px', flexWrap: 'wrap' }}>
+                          {[
+                            { value: '350+', label: 'Projects delivered' },
+                            { value: '7+', label: 'Years experience' },
+                            { value: '100%', label: 'Support after launch' },
+                          ].map((stat) => (
+                            <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                              <span style={{ fontSize: '22px', fontWeight: 700, color: '#1833fe', lineHeight: 1.1 }}>{stat.value}</span>
+                              <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 500 }}>{stat.label}</span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div className="rt-services-v3-right rt-overflow-hidden">

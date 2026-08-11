@@ -703,7 +703,7 @@ taskopia-service-two-hero-9
             </div>
           </div>
         </section>
-        <section className="rt-core">
+        {/* <section className="rt-core">
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-core-wrapper">
               <div className="rt-core-left">
@@ -790,7 +790,7 @@ taskopia-service-two-hero-9
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <div className="rt-position-relative">
           <section
             data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e67"

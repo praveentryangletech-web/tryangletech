@@ -158,6 +158,8 @@ export default function PortfolioGrid({ limit }: PortfolioGridProps) {
         .rt-blog-v3-card {
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                       box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          padding: 0 !important;
+          overflow: hidden;
         }
         .rt-blog-v3-card:hover {
           transform: translateY(-8px);
@@ -169,6 +171,7 @@ export default function PortfolioGrid({ limit }: PortfolioGridProps) {
           text-align: left !important;
           align-items: flex-start !important;
           width: 100% !important;
+          padding: 1.5625rem !important;
         }
         .rt-blog-v3-card .rt-blog-v2-author-details {
           justify-content: flex-start !important;

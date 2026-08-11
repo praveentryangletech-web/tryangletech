@@ -141,6 +141,50 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             box-shadow: 0 15px 35px rgba(26, 11, 84, 0.25);
             background: #1a0b54;
           }
+          
+          /* Portfolio Card CSS matching PortfolioGrid */
+          .rt-blog-v3-card .rt-blog-image {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+            width: 100%;
+            object-fit: cover;
+          }
+          .rt-blog-v3-card:hover .rt-blog-image {
+            transform: scale(1.08);
+          }
+          .rt-blog-v3-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 0 !important;
+            overflow: hidden;
+          }
+          .rt-blog-v3-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 50px rgba(24, 72, 212, 0.14) !important;
+          }
+          .rt-blog-v3-card .rt-blog-v3-card-bottom-part {
+            text-align: left !important;
+            align-items: flex-start !important;
+            width: 100% !important;
+            padding: 1.5625rem !important;
+          }
+          .rt-blog-v3-card:hover .pf-arrow-icon {
+            transform: translateX(4px);
+          }
+          .pf-grid {
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr 1fr !important;
+          }
+          @media (min-width: 992px) {
+            .pf-grid {
+              grid-template-columns: 1fr 1fr 1fr !important;
+            }
+          }
+          @media (max-width: 767px) {
+            .pf-grid {
+              grid-template-columns: 1fr !important;
+            }
+          }
           .tech-stack-container {
             display: flex;
             flex-wrap: wrap;
@@ -317,8 +361,8 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
                   <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Relevant Projects</h3>
-                  <div className="w-dyn-list">
-                    <div role="list" className="rt-blog-v4-card-main w-dyn-items animate-section anim-delay-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+                  <div className="rt-blog-three-all w-dyn-list">
+                    <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {
                         let relevant = projects.filter(p => p.category === project.category && p.slug !== project.slug).slice(0, 3);
                         if (relevant.length < 3) {
@@ -327,23 +371,49 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                         }
                         return relevant.map((p, idx) => (
                           <div key={idx} role="listitem" className="w-dyn-item" style={{ height: '100%' }}>
-                            <Link href={`/portfolio/${p.slug}`} className="rt-blog-v3-card rt-border-radius-medium w-inline-block transition-all duration-300 hover:-translate-y-2" style={{ display: 'flex', flexDirection: 'column', height: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', backgroundColor: '#fff', border: '1px solid #e2e8f0' }}>
-                              <div className="rt-blog-v3-card-top-part rt-overflow-hidden" style={{ minHeight: '220px', background: '#f0f4f8' }}>
-                                <Image className="rt-auto-fit rt-desktop-image-full-width rt-blog-image hover:scale-105 transition-transform duration-500" src={p.image} width={410} height={348} alt={p.title} loading="lazy" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                            <Link
+                              href={`/portfolio/${p.slug}`}
+                              className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
+                            >
+                              <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
+                                <Image
+                                  className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
+                                  src={p.image}
+                                  alt={p.title}
+                                  width={410}
+                                  height={290}
+                                  loading="lazy"
+                                  unoptimized={p.image.endsWith('.gif')}
+                                  style={{ height: '220px' }}
+                                />
                               </div>
-                              <div className="rt-blog-v3-card-bottom-part" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                                <div className="w-layout-hflex rt-blog-v3-publish-date" style={{ marginBottom: '1rem', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                  <div>{p.duration || 'Completed'}</div>
-                                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#cbd5e1' }}></div>
-                                  <div style={{ color: '#3b82f6', fontWeight: 'bold' }}>{p.category}</div>
+                              <div className="rt-blog-v3-card-bottom-part">
+                                <div className="w-layout-hflex rt-blog-v3-publish-date">
+                                  <div className="w-layout-vflex">
+                                    <Image
+                                      width={15}
+                                      height={16}
+                                      alt=""
+                                      src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                  <div>{p.category}</div>
                                 </div>
-                                <div className="rt-text-style-h6" style={{ color: '#1a0b54', lineHeight: '1.4', fontSize: '1.1rem', margin: 0 }}>{p.title}</div>
-                                <div style={{ marginTop: 'auto', paddingTop: '1.5rem', display: 'flex', alignItems: 'center', color: '#3b82f6', fontWeight: '600', fontSize: '0.95rem' }}>
-                                  View project
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px' }}>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                  </svg>
+                                <div className="rt-text-style-h6">{p.title}</div>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
+                                  <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px', margin: 0 }}>
+                                    View Case Study
+                                  </span>
+                                  <span style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'start',
+                                    color: 'var(--vivid-blue, #1833fe)',
+                                    fontSize: '16px',
+                                    fontWeight: 600,
+                                    lineHeight: 1,
+                                    transition: 'transform 0.3s ease',
+                                  }} className="pf-arrow-icon">›</span>
                                 </div>
                               </div>
                             </Link>

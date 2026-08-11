@@ -74,15 +74,24 @@ export default function GraphicsDesigningHero() {
 
           {/* Animated image grid — uses original Webflow rt-hero-v6-main structure */}
           <div className="rt-hero-v6-main">
-            {/* Col 1 — large single card */}
-            <div
-              data-w-id="bd3b7318-15d0-e2b5-9880-c5981ed75446"
-              className="rt-hero-v6-item rt-shadow rt-border-radius-medium">
-              <Image
-                src="/portfolio/tattvam-arts.webp"
-                loading="lazy"
-                alt="Graphic Design - Tattvam Arts"
-                width={800} height={800} style={{ width: "100%", height: "auto" }} />
+            {/* Col 1 — two stacked */}
+            <div className="rt-hero-v6-item rt-two">
+              <div
+                data-w-id="bd3b7318-15d0-e2b5-9880-c5981ed75446"
+                className="rt-shadow rt-border-radius-medium">
+                <Image
+                  src="/portfolio/tattvam-arts.webp"
+                  loading="lazy"
+                  alt="Graphic Design - Tattvam Arts"
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+              </div>
+              <div className="rt-shadow rt-border-radius-medium">
+                <Image
+                  src="/portfolio/graphic-eoffice.webp"
+                  loading="lazy"
+                  alt="Graphic Design - eOffice"
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+              </div>
             </div>
 
             {/* Col 2 — two stacked */}
@@ -91,10 +100,10 @@ export default function GraphicsDesigningHero() {
                 data-w-id="8a73aa12-aaae-22a9-3807-2177d3e35b77"
                 className="rt-hero-v6-iteminner-blue">
                 <Image
-                  src="/portfolio/graphic-eoffice.webp"
+                  src="/portfolio/graphic-sasa.webp"
                   loading="lazy"
                   data-w-id="502bd2f6-e7d7-3b1c-3d3c-6b704526a51e"
-                  alt="Graphic Design - eOffice Branding"
+                  alt="Graphic Design - SASA Brand"
                   className="rt-shadow rt-border-radius-medium rt-roted"
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
@@ -102,9 +111,9 @@ export default function GraphicsDesigningHero() {
                 data-w-id="b420372a-e374-20ab-e360-50783cf6b4e2"
                 className="rt-shadow rt-border-radius-medium">
                 <Image
-                  src="/portfolio/graphic-sasa.webp"
+                  src="/portfolio/makewell-elevators.webp"
                   loading="lazy"
-                  alt="Graphic Design - SASA Brand"
+                  alt="Graphic Design - Makewell Elevators"
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
@@ -159,6 +168,24 @@ export default function GraphicsDesigningHero() {
                   loading="lazy"
                   alt="Design badge"
                   width={200} height={200} style={{ width: "100%", height: "auto" }} />
+              </div>
+            </div>
+
+            {/* Col 5 — two new cards */}
+            <div className="rt-hero-v6-item rt-two">
+              <div className="rt-shadow rt-border-radius-medium">
+                <Image
+                  src="/portfolio/graphic-shrahav.webp"
+                  loading="lazy"
+                  alt="Graphic Design - Shrahav Brand"
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+              </div>
+              <div className="rt-shadow rt-border-radius-medium">
+                <Image
+                  src="/portfolio/varnet-enterprise.webp"
+                  loading="lazy"
+                  alt="Graphic Design - Varnet Enterprise"
+                  width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
           </div>

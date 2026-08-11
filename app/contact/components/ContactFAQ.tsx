@@ -76,7 +76,7 @@ export default function ContactFAQ() {
                         onClick={() => toggleFaq(i)}
                         style={{ cursor: "pointer" }}>
                         <div className="w-layout-hflex r-faq-text-wrap">
-                          <div className="rt-text-style-h6">{faq.q}</div>
+                          <h3 className="rt-text-style-h6" style={{ marginTop: 0, marginBottom: 0 }}>{faq.q}</h3>
                         </div>
                         <div className="rt-faq-right-part">
                           <div className="rt-faq-minus"></div>
@@ -108,6 +108,23 @@ export default function ContactFAQ() {
             </div>
           </div>
         </section>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.a
+                }
+              }))
+            })
+          }}
+        />
     </>
   );
 }

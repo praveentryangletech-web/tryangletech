@@ -15,6 +15,14 @@ export default function AboutFAQ() {
       setOpenFaqs([...openFaqs, idx]);
     }
   };
+  const faqs = [
+    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb881', q: 'What services does Tryangletech offer?', a: 'We offer website design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development, all under one roof.', isTop: true, paraClass: '' },
+    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f', q: 'Which industries do you serve?', a: 'We serve a wide range of industries including healthcare, finance, e-commerce, education, retail, and more, both in India and internationally.', paraClass: ' rt-faq-v2' },
+    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d', q: 'Do you provide support after project completion?', a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.', paraClass: '' },
+    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab', q: 'How long does it take to complete a project?', a: 'Project timelines vary based on complexity and requirements. A standard website typically takes 2–4 weeks, while larger projects may take longer. We\'ll give you a clear timeline before we start.', paraClass: '' },
+    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9', q: 'Do you offer free hosting?', a: 'Yes, we offer 1 year of free hosting with our website development packages. Domain registration is handled separately by the client.', paraClass: ' rt-faq-v2' },
+  ];
+
   return (
     <>
         {/* ── FAQ ── */}
@@ -40,13 +48,7 @@ export default function AboutFAQ() {
                   </div>
                 </div>
                 <div data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880" className="rt-faq-main rt-margin-auto rt-faq-2-main">
-                  {[
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb881', q: 'What services does Tryangletech offer?', a: 'We offer website design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development, all under one roof.', isTop: true, paraClass: '' },
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb88f', q: 'Which industries do you serve?', a: 'We serve a wide range of industries including healthcare, finance, e-commerce, education, retail, and more, both in India and internationally.', paraClass: ' rt-faq-v2' },
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb89d', q: 'Do you provide support after project completion?', a: 'Yes, we provide ongoing maintenance and support after every project to ensure your website or app continues to perform at its best.', paraClass: '' },
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8ab', q: 'How long does it take to complete a project?', a: 'Project timelines vary based on complexity and requirements. A standard website typically takes 2–4 weeks, while larger projects may take longer. We\'ll give you a clear timeline before we start.', paraClass: '' },
-                    { wid: 'b2a480e3-6f74-2e20-f3b4-35e4eb0fb8b9', q: 'Do you offer free hosting?', a: 'Yes, we offer 1 year of free hosting with our website development packages. Domain registration is handled separately by the client.', paraClass: ' rt-faq-v2' },
-                  ].map(({ wid, q, a, isTop, paraClass }, idx) => {
+                  {faqs.map(({ wid, q, a, isTop, paraClass }, idx) => {
                     const isOpen = openFaqs.includes(idx);
                     return (
                       <div
@@ -57,7 +59,7 @@ export default function AboutFAQ() {
                       >
                         <div className="w-layout-hflex rt-faq-top-part">
                           <div className="w-layout-hflex r-faq-text-wrap rt-faq-v2">
-                            <div className="rt-text-style-h6">{q}</div>
+                            <h3 className="rt-text-style-h6" style={{ marginTop: 0, marginBottom: 0 }}>{q}</h3>
                           </div>
                           <div className="rt-faq-right-part">
                             <div className="rt-faq-minus"></div>
@@ -94,6 +96,23 @@ export default function AboutFAQ() {
             <div className="rt-section-overlay"></div>
           </div>
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.a
+                }
+              }))
+            })
+          }}
+        />
     </>
   );
 }

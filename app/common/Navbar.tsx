@@ -37,6 +37,16 @@ export default function Navbar() {
     });
   }, [pathname]);
 
+  // Helper to determine if a path is active
+  const isActive = (paths: string[]) => {
+    return paths.some(path => {
+      if (path === '/') {
+        return pathname === '/' || pathname === '/home-two' || pathname === '/home-three';
+      }
+      return pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+    });
+  };
+
   return (
     <>
       <style>{`
@@ -44,6 +54,12 @@ export default function Navbar() {
           background-color: ${scrolled ? '#ffffff !important' : 'transparent'};
           box-shadow: ${scrolled ? '0 4px 12px rgba(0,0,0,0.05) !important' : 'none'};
           transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .rt-active-link {
+          color: #1833fe !important;
+        }
+        .rt-active-link .rt-menu-text {
+          color: #1833fe !important;
         }
       `}</style>
       <div
@@ -88,7 +104,7 @@ export default function Navbar() {
                   data-w-id="b07e93b6-139e-136c-8189-3251b36d922d"
                   className="rt-navbar-dropdown w-dropdown">
                   <div
-                    className="rt-navbar-dropdown-toggle w-dropdown-toggle"
+                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/']) ? 'rt-active-link' : ''}`}
                     id="w-dropdown-toggle-0"
                     aria-controls="w-dropdown-list-0"
                     aria-haspopup="menu"
@@ -116,12 +132,12 @@ export default function Navbar() {
                 </div>
 
                 {/* About */}
-                <Link href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/about" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/about']) ? 'rt-active-link' : ''}`}>
                   <div className="rt-menu-text">About</div>
                 </Link>
 
                 {/* Portfolio */}
-                <Link href="/portfolio" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/portfolio" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/portfolio']) ? 'rt-active-link' : ''}`}>
                   <div className="rt-menu-text">Portfolio</div>
                 </Link>
 
@@ -132,7 +148,7 @@ export default function Navbar() {
                   data-w-id="b07e93b6-139e-136c-8189-3251b36d92ab"
                   className="rt-navbar-dropdown w-dropdown">
                   <div
-                    className="rt-navbar-dropdown-toggle w-dropdown-toggle"
+                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/service']) ? 'rt-active-link' : ''}`}
                     id="w-dropdown-toggle-1"
                     aria-controls="w-dropdown-list-1"
                     aria-haspopup="menu"
@@ -170,7 +186,7 @@ export default function Navbar() {
                   data-w-id="b07e93b6-139e-136c-8189-3251b36d9247"
                   className="rt-navber-dropdown rt-pages-dropdown w-dropdown">
                   <div
-                    className="rt-navbar-dropdown-toggle w-dropdown-toggle"
+                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/team', '/pricing', '/faq', '/404']) ? 'rt-active-link' : ''}`}
                     id="w-dropdown-toggle-2"
                     aria-controls="w-dropdown-list-2"
                     aria-haspopup="menu"
@@ -330,7 +346,7 @@ export default function Navbar() {
                   data-w-id="b07e93b6-139e-136c-8189-3251b36d92b8"
                   className="rt-navbar-dropdown w-dropdown">
                   <div
-                    className="rt-navbar-dropdown-toggle w-dropdown-toggle"
+                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/blog']) ? 'rt-active-link' : ''}`}
                     id="w-dropdown-toggle-3"
                     aria-controls="w-dropdown-list-3"
                     aria-haspopup="menu"
@@ -358,11 +374,11 @@ export default function Navbar() {
                 </div>
                 */}
                 {/* Blog */}
-                <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/blog" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/blog']) ? 'rt-active-link' : ''}`}>
                   <div className="rt-menu-text">Blog</div>
                 </Link>
                 {/* Contact */}
-                <Link href="/contact" className="rt-navbar-dropdown-toggle w-inline-block">
+                <Link href="/contact" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/contact']) ? 'rt-active-link' : ''}`}>
                   <div className="rt-menu-text">Contact</div>
                 </Link>
 
@@ -376,7 +392,7 @@ export default function Navbar() {
 
                       {/* Mobile – Home */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
-                        <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
+                        <div className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-4" aria-controls="w-dropdown-list-4" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <Link href="/" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Home</Link>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
@@ -391,7 +407,7 @@ export default function Navbar() {
 
                       {/* Mobile – Service */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
-                        <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-5" aria-controls="w-dropdown-list-5" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
+                        <div className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/service']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-5" aria-controls="w-dropdown-list-5" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <Link href="/service" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Service</Link>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
@@ -413,19 +429,19 @@ export default function Navbar() {
                         </nav>
                       </div>
 
-                      {/* Mobile – About */}
-                      <Link href="/about" className="rt-navbar-dropdown-toggle w-inline-block">
+                      {/* About Mobile */}
+                      <Link href="/about" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/about']) ? 'rt-active-link' : ''}`}>
                         <div className="rt-menu-text">About</div>
                       </Link>
 
-                      {/* Mobile – Portfolio */}
-                      <Link href="/portfolio" className="rt-navbar-dropdown-toggle w-inline-block">
+                      {/* Portfolio Mobile */}
+                      <Link href="/portfolio" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/portfolio']) ? 'rt-active-link' : ''}`}>
                         <div className="rt-menu-text">Portfolio</div>
                       </Link>
 
-                      {/* Mobile – Pages */}
+                      {/* Pages dropdown Mobile */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
-                        <div className="rt-navbar-dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-6" aria-controls="w-dropdown-list-6" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
+                        <div className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/team', '/pricing', '/faq', '/404']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-6" aria-controls="w-dropdown-list-6" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <div className="rt-menu-text">Pages</div>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
@@ -511,10 +527,10 @@ export default function Navbar() {
                         </nav>
                       </div>
 
-                      {/* Mobile – Blog
+                      {/* Blog dropdown Mobile */}
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
-                        <div className="rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle" id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
-                          <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/blog'); }} style={{ cursor: 'pointer' }}>Blog</div>
+                        <div className={`rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle ${isActive(['/blog']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
+                          <div className="rt-menu-text">Blog</div>
                           <div className="rt-nav-menu-arrow-holder rt-position-relative">
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
@@ -526,13 +542,13 @@ export default function Navbar() {
                           <a href="#" className="rt-nav-menu-link shadow-varient-59 rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
                         </nav>
                       </div>
-                      */}
-                      {/* Blog */}
-                      <Link href="/blog" className="rt-navbar-dropdown-toggle w-inline-block">
+                      {/* Blog Mobile Link */}
+                      <Link href="/blog" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/blog']) ? 'rt-active-link' : ''}`}>
                         <div className="rt-menu-text">Blog</div>
                       </Link>
-                      {/* Mobile – Contact */}
-                      <Link href="/contact" className="rt-navbar-dropdown-toggle rt-bottom w-inline-block">
+
+                      {/* Contact Mobile */}
+                      <Link href="/contact" className={`rt-navbar-dropdown-toggle rt-bottom w-inline-block ${isActive(['/contact']) ? 'rt-active-link' : ''}`}>
                         <div className="rt-menu-text">Contact</div>
                       </Link>
 

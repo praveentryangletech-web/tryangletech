@@ -255,7 +255,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '2.5rem', marginBottom: '3rem' }}>
                   {project.challenges && project.challenges.length > 0 && (
-                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.challenges.map((item, i) => (
@@ -266,7 +266,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   )}
 
                   {project.solutions && project.solutions.length > 0 && (
-                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.solutions.map((item, i) => (
@@ -277,7 +277,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   )}
 
                   {project.results && project.results.length > 0 && (
-                    <div style={{ background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.results.map((item, i) => (

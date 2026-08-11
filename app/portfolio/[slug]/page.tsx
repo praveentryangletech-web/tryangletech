@@ -333,14 +333,14 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   style={{ width: '85px', height: '85px', objectFit: 'contain', padding: '18px', boxSizing: 'border-box' }}
                                 />
                               ) : (
-                                <div className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300" style={{ 
-                                  display: 'flex', 
-                                  alignItems: 'center', 
-                                  justifyContent: 'center', 
-                                  minWidth: '85px', 
+                                <div className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300" style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  minWidth: '85px',
                                   width: 'auto',
-                                  height: '85px', 
-                                  background: '#ffffff', 
+                                  height: '85px',
+                                  background: '#ffffff',
                                   padding: '0 16px',
                                   boxSizing: 'border-box'
                                 }}>
@@ -419,7 +419,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                       })()}
                     </div>
                   </div>
-                  
+
                   <div style={{ marginTop: '3rem', textAlign: 'center' }}>
                     <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block" style={{ display: 'inline-flex', width: 'auto', minWidth: '200px', padding: '14px 32px', justifyContent: 'center' }}>
                       <div className="rt-button-text rt-btn-color-nav" style={{ width: 'auto', display: 'inline-block', margin: 0 }}>View all projects</div>

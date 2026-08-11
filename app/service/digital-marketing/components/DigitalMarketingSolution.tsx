@@ -68,7 +68,7 @@ export default function DigitalMarketingSolution() {
               className="rt-sub-gap"
             >
               <div className="rt-sub-text rt-sub-gredient">
-                Full-Service Marketing
+                Our Approach
               </div>
             </div>
             <div className="rt-heading-para-gap">
@@ -77,7 +77,7 @@ export default function DigitalMarketingSolution() {
                 style={{ opacity: "0" }}
                 className="rt-gap-off"
               >
-                One agency. Every channel. Zero guesswork.
+                Marketing built around your business, not a template
               </h2>
             </div>
             <p
@@ -85,7 +85,7 @@ export default function DigitalMarketingSolution() {
               style={{ opacity: "0" }}
               className="rt-gap-off"
             >
-              Tryangletech handles your SEO, paid ads, social media, content, and email — all under one roof. One strategy, one team, and one clear goal: growing your business.
+              We start by understanding what you actually sell and who buys it. Then we build a plan around SEO, social media, and paid ads that fits your budget - not a one-size-fits-all package.
             </p>
             <div className="rt-about-v1-right-inner">
               <div
@@ -102,10 +102,10 @@ export default function DigitalMarketingSolution() {
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Integrated Multi-Channel Strategy
+                    SEO
                   </div>
                   <p className="rt-gap-off">
-                    SEO, PPC, social, and email working together — not in silos — to maximize your reach and revenue.
+                    We optimize your site's content and structure so it ranks on Google for the searches that actually bring you customers.
                   </p>
                 </div>
               </div>
@@ -123,10 +123,10 @@ export default function DigitalMarketingSolution() {
                 </div>
                 <div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Agile, Scalable Execution
+                    Social Media & Ads
                   </div>
                   <p className="rt-gap-off">
-                    Whether you're a startup or an enterprise, our strategies scale with you as your business grows.
+                    We run and manage your social presence and paid campaigns, so you get in front of people who are actually looking for what you offer.
                   </p>
                 </div>
               </div>

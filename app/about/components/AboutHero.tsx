@@ -45,7 +45,7 @@ export default function AboutHero() {
               <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" className="rt-padding-hero-v6 rt-gap-off" style={{ marginBottom: '1rem' }}>
                 Tryangletech is a full-service IT company in Ahmedabad, helping businesses design, build, and grow with expert website development, mobile apps, digital marketing, and custom software solutions, all under one roof.
               </p>
-              
+
               <p data-w-id="930d11b7-0033-4561-be37-a0d90e04a782" style={{ color: '#4b5563', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem', maxWidth: '95%' }}>
                 We don't just write code, we partner with you to solve real business challenges. No confusing jargon or hidden costs, just a dedicated local team that actually cares about your success.
               </p>
@@ -108,9 +108,30 @@ export default function AboutHero() {
 
               <div className="w-layout-grid rt-benefits-v2-card-wrap">
                 {[
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, title: 'Website Design & Development', desc: 'Precision-crafted websites  custom builds, WordPress, and e-commerce  designed to engage your audience across every device.' },
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, title: 'Mobile App Development', desc: 'iOS and Android apps built with cutting-edge technology and user-centric design, for brands across the globe.' },
-                  { wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, title: 'Digital Marketing & SEO', desc: 'Complete digital marketing and SEO strategies that improve visibility, drive quality traffic, and grow your online revenue.' },
+                  { 
+                    wid: '8625cd89-80d1-684b-6b8f-39c1a7682227', 
+                    icon: `${A}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`, 
+                    title: 'Time Savings', 
+                    desc: 'In our It Company with efficient and streamlined processes, you\'ll have more time to focus on what\'s important, whether that\'s growing your business or enjoying your personal pursuits.' 
+                  },
+                  { 
+                    wid: '8625cd89-80d1-684b-6b8f-39c1a768222f', 
+                    icon: `${A}/6916ec6339f890a80905a69b_Vector (33).svg`, 
+                    title: 'Enhanced Productivity', 
+                    desc: 'Experience a boost in productivity as our It company solutions eliminate inefficiencies, enabling you and your team to accomplish more in less time.' 
+                  },
+                  { 
+                    wid: '8625cd89-80d1-684b-6b8f-39c1a7682237', 
+                    icon: `${A}/6916ef876682eed2b2fd5911_Vector (34).svg`, 
+                    title: 'User-Friendly Solutions', 
+                    desc: 'Our user-centric approach means our It company solutions are designed with simplicity in mind, allowing you to benefit from technology without the learning curve.' 
+                  },
+                  { 
+                    wid: '8625cd89-80d1-684b-6b8f-39c1a768223f', 
+                    icon: `/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg`, 
+                    title: '24/7 Support', 
+                    desc: 'Enjoy peace of mind knowing our It company dedicated support team is available around the clock to address any concerns or issues that may arise.' 
+                  },
                 ].map(({ wid, icon, title, desc }) => (
                   <div key={wid} data-w-id={wid} style={{ opacity: 0 }} className="w-layout-vflex rt-benefits-v2-card rt-two">
                     <div className="rt-benefits-v2-card-image">

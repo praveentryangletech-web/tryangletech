@@ -31,7 +31,7 @@ export default function MobileApplicationHero() {
                   data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80bc"
                   className="rt-hero-v7-para-wrap">
                   <p className="rt-gap-off">
-                    We turn your ideas into mobile apps for both iPhone and Android. Our apps are easy to use and built to keep your customers coming back.
+                    We turn your ideas into mobile apps for both iPhone and Android. Based in Ahmedabad, we build apps that are easy to use and designed to keep your customers coming back.
                   </p>
                 </div>
                 <div

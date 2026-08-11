@@ -818,35 +818,36 @@ export default function RootLayout({
     </style>
    ` }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Tryangle Tech",
-            "image": "https://tryangletech.com/logo.png",
-            "url": "https://tryangletech.com",
-            "telephone": "+91-90338-78806",
-            "email": "info.tryangletech@gmail.com",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "1st Floor-29/Vitthal Plaza, Opp. GEB, Nava Naroda",
-              "addressLocality": "Ahmedabad",
-              "addressRegion": "Gujarat",
-              "postalCode": "382330",
-              "addressCountry": "IN"
-            },
-            "sameAs": [
-              "https://www.instagram.com/tryangle24_7/",
-              "https://www.linkedin.com/in/tryangle-tech-564223256/",
-              "https://www.facebook.com/tryangletech/"
-            ],
-            "priceRange": "$$"
-          })
-        }}
-      />
       <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Tryangle Tech",
+              "image": "https://tryangletech.com/logo.png",
+              "url": "https://tryangletech.com",
+              "telephone": "+91-90338-78806",
+              "email": "info.tryangletech@gmail.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1st Floor-29/Vitthal Plaza, Opp. GEB, Nava Naroda",
+                "addressLocality": "Ahmedabad",
+                "addressRegion": "Gujarat",
+                "postalCode": "382330",
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                "https://www.instagram.com/tryangle24_7/",
+                "https://www.linkedin.com/in/tryangle-tech-564223256/",
+                "https://www.facebook.com/tryangletech/"
+              ],
+              "priceRange": "$$"
+            })
+          }}
+        />
         <Navbar />
         {children}
         <Footer />

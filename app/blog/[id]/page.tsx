@@ -204,7 +204,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   </div>
                 </div>
               </div>
-              
+{/*               
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
                 className="w-richtext">
@@ -241,7 +241,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 </div>
               </div>
 
-              <h5>--These both are sample</h5>
+              <h5>--These both are sample</h5> */}
 
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"

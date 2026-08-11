@@ -381,7 +381,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   height={290}
                                   loading="lazy"
                                   unoptimized={p.image.endsWith('.gif')}
-                                  style={{ height: '220px' }}
+                                  style={{ height: '175px' }}
                                 />
                               </div>
                               <div className="rt-blog-v3-card-bottom-part">

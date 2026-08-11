@@ -10,6 +10,7 @@ export interface Project {
   liveUrl?: string;
   content?: string;
   hasLiveUrl?: boolean;
+  images?: string[];
   challenges?: string[];
   solutions?: string[];
   results?: string[];
@@ -28,6 +29,7 @@ export const projects: Project[] = [
     duration: "3 Weeks",
     role: "Website Design & Development",
     liveUrl: "https://vh-accounting.com",
+    images: ["/portfolio/vh-accounting.webp", "/portfolio/software-eoffice.webp", "/portfolio/devrshree.webp"],
     content: "VH Accounting required a modern digital presence to reflect their expertise and attract high-value corporate clients. We developed a clean, professional platform focused on user experience and lead generation. By implementing clear service breakdowns, trust-building testimonials, and a streamlined contact flow, the new website successfully increased their monthly client inquiries and improved their overall brand authority.",
     challenges: [
       "Outdated digital presence that didn't reflect their professional standing",

@@ -8,6 +8,7 @@ import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
 import PortfolioButtons from '../components/PortfolioButtons';
+import PortfolioImageSlider from '../components/PortfolioImageSlider';
 
 import Image from "next/image";
 
@@ -51,13 +52,17 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
               </h1>
             </div>
             <div className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-              <Image
-                src={project.image}
-                loading="lazy"
-                alt={project.title}
-                className="rt-image-scale"
-                style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
-                width={800} height={800} />
+              {project.images && project.images.length > 1 ? (
+                <PortfolioImageSlider images={project.images} title={project.title} />
+              ) : (
+                <Image
+                  src={project.image}
+                  loading="lazy"
+                  alt={project.title}
+                  className="rt-image-scale"
+                  style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
+                  width={800} height={800} />
+              )}
             </div>
           </div>
         </section>
@@ -236,7 +241,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   <span className="meta-value">{project.role}</span>
                 </div>
               </div>
-              <PortfolioButtons />
+              <PortfolioButtons liveUrl={project.liveUrl} />
 
               <div className="enhanced-richtext">
                 {project.description && (

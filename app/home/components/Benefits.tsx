@@ -100,7 +100,7 @@ export default function Benefits() {
                   </div>
                   <div className="rt-overflow-hidden">
                     <p className="rt-our-benefits-para-top rt-gap-off">
-                      We build custom websites, WordPress sites, online stores, and business websites. Every site we create is fast, mobile friendly, and designed to help you get more customers.
+                      We build custom websites, WordPress sites, online stores, and business websites. <span className="rt-color-periwinkle-gray">Every site is fast, mobile-friendly, and built to convert.</span>
                     </p>
                   </div>
                 </div>
@@ -144,6 +144,9 @@ export default function Benefits() {
                         className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                   </div>
+                  <p className="rt-gap-off">
+                    Off-the-shelf tools rarely fit the way you actually work. We build software around your process - task tracking, dashboards, client portals, whatever keeps your team moving. <span className="rt-color-periwinkle-gray">Built around how you work, not a template.</span>
+                  </p>
                 </div>
               </div>
               <div
@@ -175,7 +178,7 @@ export default function Benefits() {
                     </div>
                   </div>
                   <p className="rt-gap-off">
-                    We design and develop iOS and Android apps that your customers will actually enjoy using. Simple, fast, and built to grow with your business.
+                    We design and develop iOS and Android apps that your customers will actually enjoy using. <span className="rt-color-periwinkle-gray">Simple, fast, and built to grow with your business.</span>
                   </p>
                 </div>
                 <div
@@ -194,7 +197,7 @@ Mask group
                       className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <p className="rt-gap-off">
-                    From SEO to social media to paid ads, we help more people find your business online and turn visitors into paying customers.
+                    From SEO to social media to paid ads, we help more people find your business online. <span className="rt-color-periwinkle-gray">We turn visitors into paying customers - not just traffic.</span>
                   </p>
                   <div className="rt-our-benefits-two-bottom-content">
                     <div
@@ -259,7 +262,7 @@ Mask group
                       <div className="rt-text-style-h6">Graphic Design</div>
                   </div>
                   <p className="rt-gap-off">
-                    Logos, brand identity, social media graphics, and marketing materials that make your business look professional and trustworthy.
+                    Logos, brand identity, social media graphics, and marketing materials for your business. <span className="rt-color-periwinkle-gray">Design that looks professional and builds trust.</span>
                   </p>
                   <div className="rt-our-benefits-three-bottom">
                     <div>

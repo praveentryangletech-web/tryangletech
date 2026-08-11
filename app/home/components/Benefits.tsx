@@ -7,21 +7,7 @@ export default function Benefits() {
   return (
     <section className="rt-our-benefits">
           <div className="w-layout-blockcontainer rt-container-main w-container">
-            <div
-              className="rt-our-benefits-heading rt-overflow-hidden rt-heading-bottom-gap">
-              <div
-                data-w-id="94cc7c6d-9925-8a1a-3c65-1eff2c96a244"
-                className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">our benefits</div>
-              </div>
-              <h2
-                data-w-id="f0268362-b169-cd10-f941-4e79335712bd"
-                style={{ "opacity": "0" }}
-                className="rt-gap-off rt-desktop-text-center">
-                What we can do for
-                <span className="rt-color-periwinkle-gray"> your business</span>
-              </h2>
-            </div>
+
             <div className="rt-our-benefits-content">
               <div
                 data-w-id="1bc7296a-24a6-bd97-87ee-3d85a7896859"
@@ -32,13 +18,8 @@ export default function Benefits() {
                   className="rt-our-benefits-one-top">
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
-                      <div className="rt-sub-text rt-sub-gredient rt-text-size">
-                        Website Development
-                      </div>
-                    </div>
-                    <div className="rt-overflow-hidden">
                       <div className="rt-text-style-h5">
-                        Websites that look great and bring in customers
+                        Website Development
                       </div>
                     </div>
                   </div>
@@ -107,21 +88,11 @@ export default function Benefits() {
                 <div className="rt-our-benefits-two-top rt-overflow-hidden">
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
-                      <div className="rt-overflow-hidden">
-                          <div
-                            data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0046"
-                            style={{ "opacity": "0" }}
-                            className="rt-sub-text rt-sub-gredient rt-text-size">
-                            Custom Software Development
-                          </div>
-                      </div>
-                    </div>
-                    <div className="rt-overflow-hidden">
                       <div
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
                         className="rt-text-style-h5">
-                        Software built around the way you work
+                        Custom Software Development
                       </div>
                     </div>
                   </div>

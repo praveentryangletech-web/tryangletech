@@ -91,9 +91,9 @@ export default function WebDevIntegration() {
                 </div>
                 <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
                   <div className="rt-text-style-h6">E-commerce Solutions</div>
-                  <p className="rt-gap-off">
-                    We create simple online shops that help you sell products and manage orders with ease.
-                  </p>
+                   <p className="rt-gap-off">
+                     We build WooCommerce and custom online stores that make it easy to sell products, manage orders, and grow without extra hassle.
+                   </p>
                 </div>
               </div>
               <div className="w-layout-vflex rt-benefits-v3-card five">

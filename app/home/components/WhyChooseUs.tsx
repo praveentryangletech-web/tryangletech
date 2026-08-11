@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
                     Built for your business
                   </div>
                   <p className="rt-gap-off">
-                    We do not use one size fits all templates. Every project is planned and built specifically for what your business needs.
+                    No templates, no copy-paste designs. Every site or app we build is planned around what your business sells and who your customers are.
                   </p>
                 </div>
                 <div
@@ -71,7 +71,7 @@ export default function WhyChooseUs() {
                     We deliver on time
                   </div>
                   <p className="rt-gap-off">
-                    When we say a deadline, we mean it. You will get regular updates so you always know how things are going.
+                    When we quote a timeline, we stick to it - 2 to 4 weeks for a website, 4 to 8 for custom software. You'll get regular updates along the way.
                   </p>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function WhyChooseUs() {
                     Everything under one roof
                   </div>
                   <p className="rt-gap-off">
-                    Design, development, testing, marketing, and support. You get one team that handles everything, so you do not have to manage multiple vendors.
+                    Web development, mobile apps, custom software, marketing, and design - all from one team in Ahmedabad. No juggling five vendors for one project.
                   </p>
                 </div>
                 <div
@@ -126,7 +126,7 @@ export default function WhyChooseUs() {
                     Easy to work with
                   </div>
                   <p className="rt-gap-off">
-                    We keep things simple. You share your feedback, we make the changes, and you can track progress anytime. No complicated tools or processes.
+                    You share feedback, we make the changes - simple as that. No complicated tools, no waiting days for a reply. Just one point of contact.
                   </p>
                 </div>
               </div>

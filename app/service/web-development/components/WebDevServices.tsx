@@ -55,7 +55,7 @@ export default function WebDevServices() {
                     <h2
                       data-w-id="f811abe4-4f70-55fe-7128-7a1d75f4745c"
                       className="rt-gap-off rt-text-color-white">
-                      We build websites that help your business grow online and make a real impression on your visitors
+                      We build websites that grow your business and impress your visitors
                     </h2>
                   </div>
                   <div

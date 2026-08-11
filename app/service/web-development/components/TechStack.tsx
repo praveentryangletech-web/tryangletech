@@ -7,6 +7,7 @@ export default function WebDevFAQ() {
 
   return (
     <>
+      <style>{`.rt-tag { white-space: nowrap; }`}</style>
       <section className="rt-tools-icon-v1">
         <div className="w-layout-blockcontainer rt-container-extra-large w-container">
           <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
@@ -40,7 +41,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">React.js</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">Frontend Library</div>
+                      <div className="rt-tag">Frontend</div>
                     </div>
                   </div>
                 </div>
@@ -56,7 +57,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">Next.js</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">React Framework</div>
+                      <div className="rt-tag">React</div>
                     </div>
                   </div>
                 </div>
@@ -72,7 +73,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">PHP</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">Backend Language</div>
+                      <div className="rt-tag">Backend</div>
                     </div>
                   </div>
                 </div>
@@ -88,8 +89,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">Tailwind CSS</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag" style={{ whiteSpace: 'nowrap' }}>Styling Framework</div>
-                    </div>
+                      <div className="rt-tag">Styling Framework</div>                    </div>
                   </div>
                 </div>
                 <div className="w-layout-vflex rt-tools-icon one" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
@@ -104,7 +104,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">PostgreSQL</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">Relational Database</div>
+                      <div className="rt-tag">Database</div>
                     </div>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default function WebDevFAQ() {
                   <div className="w-layout-vflex rt-tools-icon-text">
                     <div className="rt-small-name">AWS</div>
                     <div className="rt-tools-icon-text-box">
-                      <div className="rt-tag">Cloud Infrastructure</div>
+                      <div className="rt-tag">Cloud</div>
                     </div>
                   </div>
                 </div>

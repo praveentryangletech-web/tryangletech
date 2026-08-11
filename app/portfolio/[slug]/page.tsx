@@ -335,7 +335,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   src={iconSrc}
                                   loading="lazy"
                                   className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300"
-                                  style={{ width: '85px', height: '85px', objectFit: 'contain', padding: '18px', boxSizing: 'border-box' }}
+                                  style={{ width: '85px', height: '85px', objectFit: 'contain', padding: '18px', boxSizing: 'border-box', backgroundColor: '#ffffff', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)' }}
                                 />
                               ) : (
                                 <div className="rt-itegration-logo hover:-translate-y-2 transition-all duration-300" style={{
@@ -347,7 +347,8 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   height: '85px',
                                   background: '#ffffff',
                                   padding: '0 16px',
-                                  boxSizing: 'border-box'
+                                  boxSizing: 'border-box',
+                                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)'
                                 }}>
                                   <span className="rt-text-style-h6" style={{ fontSize: '0.9rem', margin: 0, textAlign: 'center', color: '#1a0b54', whiteSpace: 'nowrap', fontWeight: '600' }}>{tech}</span>
                                 </div>

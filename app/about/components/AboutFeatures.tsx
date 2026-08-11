@@ -27,7 +27,8 @@ export default function AboutFeatures() {
                   <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Empowering your digital transformation</div>
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>Our mission is to bridge the gap between complex business challenges and intuitive digital solutions. We strive to provide Ahmedabad and the world with top-tier IT services.</p>
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>We focus on delivering high-quality, scalable web and mobile applications that drive real growth, prioritizing clean code, user-centric design, and measurable results.</p>
-                  <p className="rt-color-pale-periwinkle rt-gap-off">By partnering closely with our clients, we ensure every project isn't just delivered on time, but actually transforms the way they do business.</p>
+                 {/*  <p className="rt-color-pale-periwinkle rt-gap-off">By partnering closely with our clients, we ensure every project isn't just delivered on time, but actually transforms the way they do business.</p>
+                  */}
                   <ul style={{ listStyleType: 'disc', paddingLeft: '20px', marginTop: '1rem', lineHeight: '1.6' }}>
                     <li className="rt-color-pale-periwinkle">Delivering user-centric software solutions</li>
                     <li className="rt-color-pale-periwinkle">Maintaining 100% transparency in our processes</li>
@@ -52,8 +53,10 @@ export default function AboutFeatures() {
                   <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">OUR VISION</div></div>
                   <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Shaping the future of technology</div>
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>We envision a future where businesses of all sizes have access to enterprise-grade technology without the overwhelming complexity or hidden costs.</p>
+               
                   <p className="rt-color-pale-periwinkle rt-gap-off" style={{ marginBottom: '1rem' }}>Tryangletech aims to be the leading IT partner recognized for innovation, transparency, and an unwavering commitment to our clients' long-term success.</p>
-                  <p className="rt-color-pale-periwinkle rt-gap-off">We don't just want to build software; we want to build lasting digital ecosystems that empower our partners to thrive in an ever-evolving digital landscape.</p>
+                  {/*   <p className="rt-color-pale-periwinkle rt-gap-off">We don't just want to build software; we want to build lasting digital ecosystems that empower our partners to thrive in an ever-evolving digital landscape.</p>
+                  */}
                   <ul style={{ listStyleType: 'disc', paddingLeft: '20px', marginTop: '1rem', lineHeight: '1.6' }}>
                     <li className="rt-color-pale-periwinkle">Pioneering innovative digital ecosystems</li>
                     <li className="rt-color-pale-periwinkle">Democratizing enterprise-grade technologies</li>

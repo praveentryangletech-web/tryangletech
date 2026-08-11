@@ -10,7 +10,7 @@ export default function WebDevFAQ() {
       <style>{`.rt-tag { white-space: nowrap; }`}</style>
       <section className="rt-tools-icon-v1">
         <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-          <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
+          <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative" >
             <div className="rt-tools-icon-container">
               <div className="rt-tools-iconheading rt-heading-bottom-gap">
                 <div
@@ -143,7 +143,13 @@ export default function WebDevFAQ() {
                 </div>
               </div>
             </div>
-
+ <div className="rt-tools-icon-overlay">
+            <Image
+              src="/Home3_files/690adbc5bfed3c0fa7e49213_Vector 1530.webp"
+              loading="lazy"
+              alt="taskopia-home-two-overlay-integration"
+             width={800} height={800} style={{ width: "100%", height: "auto" }} />
+          </div>
           </div>
         </div>
       </section>

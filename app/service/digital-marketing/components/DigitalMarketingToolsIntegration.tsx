@@ -65,64 +65,58 @@ export default function DigitalMarketingToolsIntegration() {
                     <svg viewBox="0 0 48 48" width="60" height="60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 36.5L18 18l4.5 7.8L16.5 36.5H7.5z" fill="#FBBC04"/><path d="M29.5 36.5H40.5L29.5 18 24 27.8 29.5 36.5z" fill="#4285F4"/><path d="M18 18l11.5 0L24 8.5 18 18z" fill="#34A853"/></svg>
                   </div>
                 </div>
-                {/* Meta Ads */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09e" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="meta-g1" x1="6" y1="24" x2="20" y2="24" gradientUnits="userSpaceOnUse"><stop stopColor="#0064E1"/><stop offset="1" stopColor="#0064E1" stopOpacity="0"/></linearGradient><linearGradient id="meta-g2" x1="6" y1="30" x2="20" y2="30" gradientUnits="userSpaceOnUse"><stop stopColor="#0064E1"/><stop offset="1" stopColor="#0080FF"/></linearGradient></defs><path d="M6 23c0-4 2.2-8.5 5.5-8.5 2 0 3.5 1.2 5.5 4.5l5 8.5c2.8 4.8 5.5 7.5 9 7.5 2 0 3.8-.8 5.3-2.3" stroke="#0081FB" strokeWidth="3" fill="none" strokeLinecap="round"/><path d="M6 23c0 5 2.5 12 8 12 3 0 5.5-2 8-6" stroke="url(#meta-g2)" strokeWidth="3" fill="none" strokeLinecap="round"/><path d="M36.3 32.2C39.5 28.5 42 22.5 42 18c0-3-1.2-3.5-2.5-3.5-1.8 0-3.8 1.5-5.5 4.5l-5 8.5" stroke="#0081FB" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
-                  </div>
-                </div>
                 {/* Google Analytics */}
                 <div>
                   <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a0" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
                     <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="10" width="8" height="28" rx="4" fill="#F9AB00"/><rect x="20" y="22" width="8" height="16" rx="4" fill="#E37400" opacity="0.8"/><circle cx="13" cy="35" r="4" fill="#E37400"/></svg>
                   </div>
                 </div>
-                {/* Mailchimp */}
+                {/* Meta Ads */}
                 <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a2" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="24" cy="22" rx="14" ry="12" fill="#FFE01B"/><path d="M16 22c0-2 1.5-4 4-5l8 0c2.5 1 4 3 4 5 0 4-3.6 8-8 8s-8-4-8-8z" fill="#241C15"/><circle cx="20" cy="21" r="1.5" fill="#fff"/><circle cx="28" cy="21" r="1.5" fill="#fff"/><path d="M21 26c1 1.5 5 1.5 6 0" stroke="#fff" strokeWidth="1.2" fill="none" strokeLinecap="round"/><path d="M35 16c1-2 4-4 4-4s-1 3-2 5" stroke="#241C15" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
+                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d09e" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
+                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="meta-g1" x1="6" y1="24" x2="20" y2="24" gradientUnits="userSpaceOnUse"><stop stopColor="#0064E1"/><stop offset="1" stopColor="#0064E1" stopOpacity="0"/></linearGradient><linearGradient id="meta-g2" x1="6" y1="30" x2="20" y2="30" gradientUnits="userSpaceOnUse"><stop stopColor="#0064E1"/><stop offset="1" stopColor="#0080FF"/></linearGradient></defs><path d="M6 23c0-4 2.2-8.5 5.5-8.5 2 0 3.5 1.2 5.5 4.5l5 8.5c2.8 4.8 5.5 7.5 9 7.5 2 0 3.8-.8 5.3-2.3" stroke="#0081FB" strokeWidth="3" fill="none" strokeLinecap="round"/><path d="M6 23c0 5 2.5 12 8 12 3 0 5.5-2 8-6" stroke="url(#meta-g2)" strokeWidth="3" fill="none" strokeLinecap="round"/><path d="M36.3 32.2C39.5 28.5 42 22.5 42 18c0-3-1.2-3.5-2.5-3.5-1.8 0-3.8 1.5-5.5 4.5l-5 8.5" stroke="#0081FB" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
                   </div>
                 </div>
-                {/* HubSpot */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a4" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="33" cy="14" r="5" fill="#FF7A59"/><path d="M33 19v6" stroke="#FF7A59" strokeWidth="3" strokeLinecap="round"/><path d="M20 30a9 9 0 1 0 18 0 9 9 0 0 0-18 0z" fill="#FF7A59"/><path d="M20 30h-8" stroke="#FF7A59" strokeWidth="3" strokeLinecap="round"/><path d="M12 24l-4-4" stroke="#FF7A59" strokeWidth="3" strokeLinecap="round"/><path d="M12 36l-4 4" stroke="#FF7A59" strokeWidth="3" strokeLinecap="round"/></svg>
-                  </div>
-                </div>
-                {/* SEMrush */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a6" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M24 8C15.2 8 8 15.2 8 24s7.2 16 16 16 16-7.2 16-16S32.8 8 24 8z" fill="#FF642D"/><path d="M16 24h16M24 16v16" stroke="#fff" strokeWidth="3" strokeLinecap="round"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg>
-                  </div>
-                </div>
-                {/* Canva */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a8" className="rt-itegration-logo rt-last reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="16" fill="#7D2AE7"/><path d="M18 30c0-5 2.5-10 6-10s6 5 6 10" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round"/><circle cx="18" cy="30" r="2.5" fill="#fff"/><circle cx="30" cy="30" r="2.5" fill="#fff"/></svg>
-                  </div>
-                </div>
-              </div>
-              {/* Row 2 — 4 tools */}
-              <div className="rt-integration-top rt-bottom">
-                {/* LinkedIn Ads */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ab" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="36" height="36" rx="6" fill="#0A66C2"/><rect x="13" y="20" width="5" height="15" rx="1" fill="#fff"/><circle cx="15.5" cy="15.5" r="2.5" fill="#fff"/><path d="M23 20h5v3s1-3 5-3 5 3 5 6v9h-5v-8c0-1.5-1-2.5-2.5-2.5S28 27.5 28 29v6h-5V20z" fill="#fff"/></svg>
-                  </div>
-                </div>
-                {/* Google Search Console */}
+                {/* SEO (Search Console) */}
                 <div>
                   <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ad" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
                     <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="12" stroke="#4285F4" strokeWidth="3" fill="none"/><path d="M31 31l8 8" stroke="#34A853" strokeWidth="3" strokeLinecap="round"/><path d="M16 22h12" stroke="#EA4335" strokeWidth="2.5" strokeLinecap="round"/><path d="M22 16v12" stroke="#FBBC04" strokeWidth="2.5" strokeLinecap="round"/></svg>
                   </div>
                 </div>
-                {/* WordPress */}
+              </div>
+              {/* Row 2 — 3 tools */}
+              <div className="rt-integration-top rt-bottom">
+                {/* LinkedIn */}
                 <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="17" fill="#21759B"/><path d="M9 24c0 7.2 4.2 13.5 10.2 16.5L10.5 18A14.9 14.9 0 0 0 9 24zm25.5-1.5c0-2.2-.8-3.7-1.5-4.9-1-1.5-1.8-2.8-1.8-4.3 0-1.7 1.3-3.3 3.1-3.3l.2.01A14.97 14.97 0 0 0 24 9C19.2 9 15 11.4 12.5 15.1l1 .02c1.7 0 4.3-.2 4.3-.2.9-.05 1 1.2.1 1.3 0 0-.9.1-1.8.15l5.8 17.2 3.5-10.4-2.5-6.8c-.9-.05-1.7-.15-1.7-.15-.9-.05-.8-1.35.1-1.3 0 0 2.7.2 4.3.2 1.7 0 4.3-.2 4.3-.2.9-.05 1 1.2.1 1.3l-1.7.15 5.7 17 1.6-5.2c.7-2.2 1.2-3.8 1.2-5.2zM24.4 25.5l-4.7 13.7a15 15 0 0 0 9.2-.2l-.1-.2-4.4-13.3zm12.9-8.5a15 15 0 0 1 .2 2.3c0 2.3-.4 4.8-1.7 8L31 39c4.4-2.6 7-7.3 7-12.5a15 15 0 0 0-.7-4.5z" fill="#fff"/></svg>
+                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0ab" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
+                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="36" height="36" rx="6" fill="#0A66C2"/><rect x="13" y="20" width="5" height="15" rx="1" fill="#fff"/><circle cx="15.5" cy="15.5" r="2.5" fill="#fff"/><path d="M23 20h5v3s1-3 5-3 5 3 5 6v9h-5v-8c0-1.5-1-2.5-2.5-2.5S28 27.5 28 29v6h-5V20z" fill="#fff"/></svg>
                   </div>
                 </div>
-
+                {/* Facebook */}
+                <div>
+                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
+                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M24 2C11.85 2 2 11.85 2 24c0 10.96 8.04 20.03 18.56 21.71V29.98h-4.63v-5.98h4.63v-3.79c0-4.63 2.76-7.18 6.96-7.18 2.02 0 4.14.36 4.14.36v4.55h-2.33c-2.3 0-3.02 1.43-3.02 2.9v3.16h5.18l-.83 5.98h-4.35v15.73C33.96 44.03 42 34.96 42 24 42 11.85 32.15 2 24 2z" fill="#1877F2"/>
+                    </svg>
+                  </div>
+                </div>
+                {/* Instagram */}
+                <div>
+                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0a8" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
+                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="ig-grad" x1="10" y1="38" x2="38" y2="10" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#f09433"/>
+                          <stop offset="0.25" stopColor="#e6683c"/>
+                          <stop offset="0.5" stopColor="#dc2743"/>
+                          <stop offset="0.75" stopColor="#cc2366"/>
+                          <stop offset="1" stopColor="#bc1888"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M24 10.3c4.4 0 4.9.02 6.6.1 4.5.2 6.5 2.3 6.7 6.7.08 1.7.1 2.2.1 6.6s-.02 4.9-.1 6.6c-.2 4.4-2.3 6.5-6.7 6.7-1.7.08-2.2.1-6.6.1s-4.9-.02-6.6-.1c-4.4-.2-6.5-2.3-6.7-6.7-.08-1.7-.1-2.2-.1-6.6s.02-4.9.1-6.6c.2-4.4 2.3-6.5 6.7-6.7 1.7-.08 2.2-.1 6.6-.1m0-3.3c-4.5 0-5.1.02-6.9.1-6 .2-9.3 3.5-9.6 9.6-.08 1.8-.1 2.4-.1 6.9s.02 5.1.1 6.9c.2 6 3.5 9.3 9.6 9.6 1.8.08 2.4.1 6.9.1s5.1-.02 6.9-.1c6-.2 9.3-3.5 9.6-9.6.08-1.8.1-2.4.1-6.9s-.02-5.1-.1-6.9c-.2-6-3.5-9.3-9.6-9.6-1.8-.08-2.4-.1-6.9-.1zm0 8.7c-4.6 0-8.4 3.8-8.4 8.4s3.8 8.4 8.4 8.4 8.4-3.8 8.4-8.4-3.8-8.4-8.4-8.4zm0 13.8c-3 0-5.4-2.4-5.4-5.4s2.4-5.4 5.4-5.4 5.4 2.4 5.4 5.4-2.4 5.4-5.4 5.4zm8.8-16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="url(#ig-grad)"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

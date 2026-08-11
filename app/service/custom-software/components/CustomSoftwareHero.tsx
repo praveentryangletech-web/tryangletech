@@ -23,7 +23,7 @@ export default function CustomSoftwareHero() {
               <p
                 data-w-id="e2966c08-e2ab-594a-a52e-ff609081dee0"
                 className="rt-padding-hero-v6 rt-gap-off">
-                We write custom software that matches exactly how your business runs. Whether you want to save time on repetitive work, build something new from the ground up, or fix a problem that has been slowing you down, we are here to help.
+                We write custom software that matches exactly how your business runs. Based in Ahmedabad, we help you save time on repetitive work, build something new from the ground up, or fix problems that have been slowing you down.
               </p>
               <div
                 data-w-id="ff501147-2773-073a-9913-6a1e6a9362a7"

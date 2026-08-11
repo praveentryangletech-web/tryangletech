@@ -1,7 +1,10 @@
-"use client";
+import React from "react";
+import { Metadata } from 'next';
 
-import React, { useState, useEffect } from "react";
-
+export const metadata: Metadata = {
+  title: "Website Development Company in Ahmedabad | Tryangle Tech",
+  description: "Custom websites, WordPress, and e-commerce development in Ahmedabad. Fast, mobile-friendly sites built to bring in customers, not just look good.",
+};
 
 const SA = "/service3-assets";
 

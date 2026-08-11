@@ -171,9 +171,7 @@ export default function Navbar() {
                   <nav
                     className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
                     aria-labelledby="w-dropdown-toggle-1" style={{ width: "max-content", minWidth: "200px" }}>
-                    <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
-                    <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
-                    <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
+
                     <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Website Development</Link>
                     <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software </Link>
                     <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
@@ -420,14 +418,7 @@ export default function Navbar() {
                           </div>
                         </div>
                         <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "200px" }}>
-                          <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
-                          <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
-                          <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
-                          <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Web Development</Link>
-                          <Link href="/service/service-one" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Service one</Link>
-                          <Link href="/service/service-two" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service two</Link>
-                          <Link href="/service/service-three" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Service three</Link>
-                          <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Website Development</Link>
+                          <Link href="/service/web-development" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Web Development</Link>
                                                <Link href="/service/seo" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>SEO</Link>
                           <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
                           <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Digital Marketing</Link>
@@ -476,7 +467,7 @@ export default function Navbar() {
                                 </div>
                                 <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
-                              <Link href="/service/service-one" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                              <Link href="/service" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                                 <div className="w-layout-hflex rt-pages-menu-content">
                                   <div><Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
                                   <div className="w-layout-vflex rt-pages-menu-link">
@@ -533,7 +524,7 @@ export default function Navbar() {
                         </nav>
                       </div>
 
-                      {/* Blog dropdown Mobile */}
+                      {/* Blog dropdown Mobile (commented out) 
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
                         <div className={`rt-navbar-dropdown-toggle shadow-varient-41 rt-bottom w-dropdown-toggle ${isActive(['/blog']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-7" aria-controls="w-dropdown-list-7" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
                           <div className="rt-menu-text">Blog</div>
@@ -548,6 +539,7 @@ export default function Navbar() {
                           <a href="#" className="rt-nav-menu-link shadow-varient-59 rt-last w-dropdown-link" tabIndex={0}>Blog post</a>
                         </nav>
                       </div>
+                      */}
                       {/* Blog Mobile Link */}
                       <Link href="/blog" className={`rt-navbar-dropdown-toggle w-inline-block ${isActive(['/blog']) ? 'rt-active-link' : ''}`}>
                         <div className="rt-menu-text">Blog</div>
@@ -567,16 +559,13 @@ export default function Navbar() {
                     <div className="w-layout-vflex rt-mobile-menu-llink-main">
                       <div className="rt-text-style-h5">Follow us</div>
                       <div className="w-layout-hflex rt-social-link-wrap">
-                        <a href="https://www.instagram.com/" className="rt-mega-menu-icon w-inline-block">
+                        <a href="https://www.instagram.com/tryangle24_7/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
                           <Image width={10} height={18} alt="Instagram" src={`${NAV_ASSETS}/68ff46366a330717f35394cc_Kloudera-team-icon.svg`} loading="lazy" />
                         </a>
-                        <a href="https://x.com/" className="rt-mega-menu-icon w-inline-block">
-                          <Image width={14} height={14} alt="X" src={`${NAV_ASSETS}/68ff46366a330717f35394d6_kloudera-mega-menu-icon.svg`} loading="lazy" />
-                        </a>
-                        <a href="https://www.linkedin.com/" className="rt-mega-menu-icon w-inline-block">
+                        <a href="https://www.linkedin.com/in/tryangle-tech-564223256/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
                           <Image width={14} height={15} alt="LinkedIn" src={`${NAV_ASSETS}/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg`} loading="lazy" />
                         </a>
-                        <a href="https://www.facebook.com/" className="rt-mega-menu-icon w-inline-block">
+                        <a href="https://www.facebook.com/tryangletech/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
                           <Image width={10} height={18} alt="Facebook" src={`${NAV_ASSETS}/68ff46366a330717f35394d0_Kloudera-team-icon.svg`} loading="lazy" />
                         </a>
                       </div>

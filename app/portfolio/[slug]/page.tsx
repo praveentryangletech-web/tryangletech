@@ -99,14 +99,14 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
           }
           .meta-value {
             font-size: 18px;
-            color: #0f172a;
+            color: #1a0b54;
             font-weight: 600;
           }
           .enhanced-richtext {
             font-family: 'Inter', sans-serif;
           }
           .enhanced-richtext h2, .enhanced-richtext h3 {
-            color: #0f172a;
+            color: #1a0b54;
             font-weight: 700;
             margin-top: 40px;
             margin-bottom: 20px;
@@ -114,14 +114,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             display: inline-block;
           }
           .enhanced-richtext h2::after, .enhanced-richtext h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            border-radius: 2px;
+            display: none;
           }
           .enhanced-richtext p {
             font-size: 19px;
@@ -130,7 +123,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             margin-bottom: 24px;
           }
           .start-project-btn {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: #1833fe;
             color: white;
             padding: 18px 40px;
             border-radius: 100px;
@@ -141,12 +134,12 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             align-items: center;
             justify-content: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+            box-shadow: 0 10px 25px rgba(24, 51, 254, 0.25);
           }
           .start-project-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3);
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            box-shadow: 0 15px 35px rgba(26, 11, 84, 0.25);
+            background: #1a0b54;
           }
           .tech-stack-container {
             display: flex;
@@ -156,17 +149,17 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             margin-bottom: 30px;
           }
           .tech-pill {
-            background: rgba(121, 107, 240, 0.08);
-            color: #5b4dbf;
+            background: rgba(24, 51, 254, 0.08);
+            color: #1833fe;
             padding: 8px 20px;
             border-radius: 100px;
             font-size: 14px;
             font-weight: 600;
-            border: 1px solid rgba(121, 107, 240, 0.2);
+            border: 1px solid rgba(24, 51, 254, 0.2);
             transition: all 0.3s ease;
           }
           .tech-pill:hover {
-            background: rgba(121, 107, 240, 0.15);
+            background: rgba(24, 51, 254, 0.15);
             transform: translateY(-2px);
           }
           .list-item-custom {

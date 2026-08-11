@@ -29,16 +29,16 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
+                    border: "none"
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image"
                 >
-                  <Image
-                    width={62}
-                    height={47}
-                    alt="Kloudera-home-two-hero-image"
-                    src="/Home3_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
-                    loading="lazy"
-                   />
+                  <div style={{
+                    width: '60px',
+                    height: '60px',
+                    backgroundColor: '#38bdf8',
+                    borderRadius: '50%'
+                  }} />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5d"
@@ -47,16 +47,16 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
+                    border: "none"
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <Image
-                    width={60}
-                    height={79}
-                    alt="Kloudera-home-two-hero-image"
-                    src="/Home3_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
-                    loading="lazy"
-                   />
+                  <div style={{
+                    width: '60px',
+                    height: '60px',
+                    backgroundColor: '#3b82f6',
+                    borderRadius: '50%'
+                  }} />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5f"
@@ -65,16 +65,16 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
+                    border: "none"
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <Image
-                    width={60}
-                    height={79}
-                    alt="Kloudera-home-two-hero-image"
-                    src="/Home3_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
-                    loading="lazy"
-                   />
+                  <div style={{
+                    width: '60px',
+                    height: '60px',
+                    backgroundColor: '#a855f7',
+                    borderRadius: '50%'
+                  }} />
                 </div>
               </div>
             </div>

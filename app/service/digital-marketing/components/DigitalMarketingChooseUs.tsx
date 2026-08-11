@@ -19,18 +19,11 @@ export default function DigitalMarketingChooseUs() {
               <h2
                 data-w-id="718674f5-d056-a87d-b263-49485df31d9c"
   
-                className="rt-gap-off"
-              >
-                Your marketing should make money, not just make noise
-              </h2>
-            </div>
-            <p
-              data-w-id="a1d96da0-181b-bb21-8799-d21f6f51be3e"
-
               className="rt-gap-off"
             >
-              Real-time dashboards, monthly reports, and a dedicated account manager — so you always know exactly where your budget is going and what results it's delivering.
-            </p>
+              You'll always know what's happening with your budget
+            </h2>
+          </div>
             <div className="rt-choose-v4-left-inner">
               <div
                 data-w-id="8da8b8da-dc9c-d89a-23db-e5858158f2eb"
@@ -45,7 +38,10 @@ export default function DigitalMarketingChooseUs() {
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
-                  <div className="rt-text-style-h6">Transparent Reporting</div>
+                  <div className="rt-text-style-h6">Clear reporting</div>
+                  <p className="rt-gap-off" style={{ marginTop: '10px' }}>
+                    You get regular updates on what we're doing and how it's performing - no vague monthly summaries.
+                  </p>
                 </div>
               </div>
               <div
@@ -61,7 +57,10 @@ export default function DigitalMarketingChooseUs() {
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div>
-                  <div className="rt-text-style-h6">Dedicated Growth Team</div>
+                  <div className="rt-text-style-h6">One team, no guesswork</div>
+                  <p className="rt-gap-off" style={{ marginTop: '10px' }}>
+                    SEO, social, and ads all handled by the same team that knows your business, not handed off between departments.
+                  </p>
                 </div>
               </div>
             </div>
@@ -72,7 +71,7 @@ export default function DigitalMarketingChooseUs() {
             >
               <a
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                href="https://taskopia.webflow.io/contact"
+                href="/contact"
                 className="rt-button-body w-inline-block"
               >
                 <div className="rt-button-text">Let's grow together</div>

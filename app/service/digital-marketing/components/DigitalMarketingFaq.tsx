@@ -11,32 +11,26 @@ export default function DigitalMarketingFaq() {
   const faqs = [
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
-      q: 'What digital marketing services does Tryangletech offer?',
-      a: 'We offer a complete suite of digital marketing services including SEO, Google & Meta Ads (PPC), social media marketing, content marketing, email campaigns, and conversion rate optimization — all managed by certified specialists.',
+      q: 'What digital marketing services do you offer?',
+      a: 'SEO, social media management, and paid ad campaigns (Google & Meta) - built around what makes sense for your business and budget.',
       isTop: true,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
       q: 'How soon will I see results from SEO?',
-      a: 'SEO is a long-term investment. Most of our clients begin to see meaningful improvements in rankings and organic traffic within 3–6 months. However, we set up quick wins early on to show progress while the long-term strategy builds momentum.',
+      a: "SEO takes time. Most businesses start seeing real movement in rankings and traffic within 3 to 6 months, though we'll flag early wins as they come.",
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
-      q: 'What is your minimum budget for paid ads (PPC)?',
-      a: 'We work with businesses of all sizes. Our PPC management typically starts with a minimum ad spend of ₹50,000/month. This ensures enough data for optimization and meaningful results. We’ll recommend the right budget based on your goals.',
+      q: 'How do you report on performance?',
+      a: "You get regular updates on what's working - rankings, traffic, leads - so you always know where things stand.",
       isTop: false,
     },
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
-      q: 'How do you measure and report on campaign performance?',
-      a: 'You get a dedicated dashboard with real-time campaign data plus a detailed monthly report. We track KPIs like cost-per-lead, ROAS, conversion rates, and revenue attribution — so you always know exactly what’s working.',
-      isTop: false,
-    },
-    {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
-      q: 'Do you work with businesses outside India?',
-      a: 'Yes! We serve clients across India, the US, UK, UAE, and Australia. Our team is experienced in running multi-market campaigns and we adapt our strategies to the cultural and competitive nuances of each market.',
+      q: 'Do you work with businesses outside Ahmedabad?',
+      a: "We're based in Ahmedabad and primarily serve local and India-wide clients. If you're outside India, reach out and we'll let you know if it's a fit.",
       isTop: false,
     },
   ];

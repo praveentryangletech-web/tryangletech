@@ -122,12 +122,7 @@ export default function DigitalMarketingToolsIntegration() {
                     <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="17" fill="#21759B"/><path d="M9 24c0 7.2 4.2 13.5 10.2 16.5L10.5 18A14.9 14.9 0 0 0 9 24zm25.5-1.5c0-2.2-.8-3.7-1.5-4.9-1-1.5-1.8-2.8-1.8-4.3 0-1.7 1.3-3.3 3.1-3.3l.2.01A14.97 14.97 0 0 0 24 9C19.2 9 15 11.4 12.5 15.1l1 .02c1.7 0 4.3-.2 4.3-.2.9-.05 1 1.2.1 1.3 0 0-.9.1-1.8.15l5.8 17.2 3.5-10.4-2.5-6.8c-.9-.05-1.7-.15-1.7-.15-.9-.05-.8-1.35.1-1.3 0 0 2.7.2 4.3.2 1.7 0 4.3-.2 4.3-.2.9-.05 1 1.2.1 1.3l-1.7.15 5.7 17 1.6-5.2c.7-2.2 1.2-3.8 1.2-5.2zM24.4 25.5l-4.7 13.7a15 15 0 0 0 9.2-.2l-.1-.2-4.4-13.3zm12.9-8.5a15 15 0 0 1 .2 2.3c0 2.3-.4 4.8-1.7 8L31 39c4.4-2.6 7-7.3 7-12.5a15 15 0 0 0-.7-4.5z" fill="#fff"/></svg>
                   </div>
                 </div>
-                {/* Ahrefs */}
-                <div>
-                  <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0b1" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
-                    <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="17" fill="#FF7043"/><text x="24" y="30" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#fff" fontFamily="Arial,sans-serif">Ahrefs</text></svg>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

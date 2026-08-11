@@ -63,7 +63,7 @@ export default function DigitalMarketingAbout() {
                   }}
                   className="rt-gap-off rt-text-color-white"
                 >
-                  Strategy that delivers, not just data that looks good
+                  Marketing built around your business, not a template
                 </h2>
               </div>
               <div
@@ -77,7 +77,7 @@ export default function DigitalMarketingAbout() {
                 }}
               >
                 <p className="rt-gap-off rt-color-pale-periwinkle">
-                  We start with understanding your business goals deeply, then build a tailored marketing strategy — not a template — that attracts the right audience and converts them into loyal customers.
+                  We start by understanding what you actually sell and who buys it. Then we build a plan around SEO, social media, and paid ads that fits your budget - not a one-size-fits-all package.
                 </p>
               </div>
               <div
@@ -103,10 +103,10 @@ export default function DigitalMarketingAbout() {
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
-                      ROI-Focused Campaigns
+                      SEO
                     </div>
                     <p className="rt-gap-off rt-color-pale-periwinkle">
-                      Every rupee spent is tracked, optimized, and accountable
+                      We optimize your site's content and structure so it ranks on Google for the searches that actually bring you customers.
                     </p>
                   </div>
                 </div>
@@ -122,10 +122,10 @@ export default function DigitalMarketingAbout() {
                   </div>
                   <div className="w-layout-vflex rt-analytics-v2-text-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
-                      Full-Funnel Execution
+                      Social Media & Ads
                     </div>
                     <p className="rt-gap-off rt-color-pale-periwinkle">
-                      From awareness to conversion — we own every stage
+                      We run and manage your social presence and paid campaigns, so you get in front of people who are actually looking for what you offer.
                     </p>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export default function DigitalMarketingAbout() {
                 <a
                   data-wf--rt-white-button--variant="base"
                   data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
-                  href="https://taskopia.webflow.io/contact"
+                  href="/contact"
                   className="rt-button-body rt-bg-color w-inline-block"
                 >
                   <div

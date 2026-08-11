@@ -104,7 +104,7 @@ export default function DigitalMarketingHero() {
               }}
               className="rt-gap-off"
             >
-              Turn Clicks Into Customers With Results-Driven Digital Marketing
+              Get found online and turn visitors into customers
             </h1>
           </div>
           <p
@@ -117,7 +117,7 @@ export default function DigitalMarketingHero() {
             }}
             className="rt-padding-hero-v3 rt-gap-off"
           >
-            At Tryangletech, we don't just drive traffic — we drive revenue. From SEO to paid media, our full-funnel marketing strategies are built to grow your brand, fill your pipeline, and deliver measurable ROI.
+            We help Ahmedabad businesses show up on Google, get noticed on social media, and turn that attention into actual sales - not just traffic numbers that look nice in a report.
           </p>
           <div
             data-w-id="42f17482-8aaf-c560-055d-05b0a411c54a"
@@ -131,7 +131,7 @@ export default function DigitalMarketingHero() {
           >
             <a
               data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-              href="https://taskopia.webflow.io/about"
+              href="/contact"
               className="rt-button-body w-inline-block"
             >
               <div className="rt-button-text">Get a Free Strategy Call</div>
@@ -147,7 +147,7 @@ export default function DigitalMarketingHero() {
             <a
               data-wf--rt-border-button--variant="base"
               data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-              href="https://taskopia.webflow.io/pricing"
+              href="/contact"
               className="rt-button-body rt-nav-btn w-inline-block"
             >
               <div

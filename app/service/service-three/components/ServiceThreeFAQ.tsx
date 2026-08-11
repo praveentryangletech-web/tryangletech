@@ -1386,9 +1386,11 @@ taskopia-testimonials-author-v1
                       <div className="rt-button-text">Contact us today</div>
                       <div className="rt-button-body-overlay"></div>
                     </Link>
-                         <div
-                data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880"
-                className="rt-faq-main rt-margin-auto rt-faq-2-main">
+                  </div>
+                </div>
+                <div
+                  data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb880"
+                  className="rt-faq-main rt-margin-auto rt-faq-2-main">
                 {faqs.map(({ q, a }, idx) => {
                   const isOpen = openFaq === idx;
                   return (
@@ -1432,6 +1434,7 @@ taskopia-testimonials-author-v1
               </div>
             </div>
           </div>
+          </div>
         </section>
         <script
           type="application/ld+json"
@@ -1450,11 +1453,6 @@ taskopia-testimonials-author-v1
             })
           }}
         />
-              </div>
-            </div>
-          </div>
-        </section>
-      
     </>
   );
 }

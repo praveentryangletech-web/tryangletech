@@ -135,7 +135,7 @@ export default function DigitalMarketingAgent() {
               </div>
             </div>
           </div>
-        </div>
+      </div>
       </div>
     </section>
   );

@@ -71,7 +71,7 @@ export default function DigitalMarketingFeatures() {
                 Rank on page 1 and stay there. Our technical SEO, content optimization, and link-building expertise delivers sustainable, long-term organic traffic that compounds over time.
               </p>
               <a
-                href="https://taskopia.webflow.io/about"
+                href="/contact"
                 className="rt-features-v2-small-link w-inline-block"
               >
                 <div className="rt-button-text rt-color-vivid-blue">
@@ -129,10 +129,10 @@ Taskopia-features-home-v3-right
                 Performance-Driven PPC & Paid Ads
               </div>
               <p className="rt-gap-off">
-                Stop burning ad budget. Our certified Google & Meta Ads specialists build and continuously optimize campaigns that bring in high-intent leads at the lowest possible cost-per-acquisition.
+                Stop burning ad budget. Our team builds and continuously optimizes campaigns that bring in high-intent leads at the lowest possible cost-per-acquisition.
               </p>
               <a
-                href="https://taskopia.webflow.io/about"
+                href="/contact"
                 className="rt-features-v2-small-link w-inline-block"
               >
                 <div className="rt-button-text rt-color-vivid-blue">

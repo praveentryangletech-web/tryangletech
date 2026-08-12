@@ -319,21 +319,7 @@ export default function Navbar() {
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* FAQ */}
-                          <Link href="/faq" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                            <div className="w-layout-hflex rt-pages-menu-content">
-                              <div>
-                                <Image width={14} height={14} alt="FAQ" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
-                              </div>
-                              <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">FAQ</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Find answers to common questions</div>
-                              </div>
-                            </div>
-                            <div>
-                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
-                            </div>
-                          </Link>
+
                         </div>
                       </div>
                     </div>
@@ -508,16 +494,7 @@ export default function Navbar() {
                                 </div>
                                 <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
-                              <Link href="/faq" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">FAQ</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Collaboration, trust, and shared goals</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
+
                             </div>
                           </div>
                         </nav>

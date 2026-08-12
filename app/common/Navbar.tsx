@@ -271,21 +271,7 @@ export default function Navbar() {
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* Blog page */}
-                          <Link href="/blog" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                            <div className="w-layout-hflex rt-pages-menu-content">
-                              <div>
-                                <Image width={14} height={14} alt="Blog" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
-                              </div>
-                              <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Read our latest tech insights</div>
-                              </div>
-                            </div>
-                            <div>
-                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
-                            </div>
-                          </Link>
+
                         </div>
                         {/* Right column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">
@@ -313,6 +299,21 @@ export default function Navbar() {
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Portfolio page</div>
                                 <div className="rt-pages-menu-small-text rt-text-medium">View our successful projects</div>
+                              </div>
+                            </div>
+                            <div>
+                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                            </div>
+                          </Link>
+                          {/* Blog page */}
+                          <Link href="/blog" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <div className="w-layout-hflex rt-pages-menu-content">
+                              <div>
+                                <Image width={14} height={14} alt="Blog" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                              </div>
+                              <div className="w-layout-vflex rt-pages-menu-link">
+                                <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Read our latest tech insights</div>
                               </div>
                             </div>
                             <div>
@@ -462,16 +463,7 @@ export default function Navbar() {
                                 </div>
                                 <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
                               </Link>
-                              <Link href="/blog" data-w-id="b84e5def-8be0-c77c-84d1-4421928068dc" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Update the latest articles</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
+
                             </div>
                             <div className="w-layout-vflex rt-pages-menu-list-wrap rt-padding">
                               <Link href="/contact" data-w-id="b84e5def-8be0-c77c-84d1-4421928068e8" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
@@ -490,6 +482,16 @@ export default function Navbar() {
                                   <div className="w-layout-vflex rt-pages-menu-link">
                                     <div className="rt-nav-menu-link rt-padding-off">Pricing page</div>
                                     <div className="rt-pages-menu-small-text rt-text-medium">Choose the option made for you</div>
+                                  </div>
+                                </div>
+                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
+                              </Link>
+                              <Link href="/blog" data-w-id="b84e5def-8be0-c77c-84d1-4421928068dc" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                                <div className="w-layout-hflex rt-pages-menu-content">
+                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
+                                  <div className="w-layout-vflex rt-pages-menu-link">
+                                    <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
+                                    <div className="rt-pages-menu-small-text rt-text-medium">Update the latest articles</div>
                                   </div>
                                 </div>
                                 <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>

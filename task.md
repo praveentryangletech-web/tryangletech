@@ -11,3 +11,4 @@
 - Replaced Contact page FAQs with new IT-specific questions.
 - Fixed layout and styling bugs in the Contact FAQ accordion.
 - Removed "FAQ" link from the Pages dropdown menu in the Navbar.
+- Moved "Blog page" link to the right column in the Pages dropdown to balance the menu layout.

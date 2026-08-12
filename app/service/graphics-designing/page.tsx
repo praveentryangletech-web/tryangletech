@@ -64,6 +64,7 @@ import GraphicsDesigningCore from './components/GraphicsDesigningCore';
 import GraphicsDesigningTestimonial from './components/GraphicsDesigningTestimonial';
 import GraphicsDesigningFAQ from './components/GraphicsDesigningFAQ';
 import WebflowInit from "../../common/WebflowInit";
+import ProjectsSection from "../../home/components/ProjectsSection";
 
 export default function GraphicsDesigningPage() {
 
@@ -105,6 +106,7 @@ export default function GraphicsDesigningPage() {
         <GraphicsDesigningFeatures />
         <GraphicsDesigningServices />
         <GraphicsDesigningCore />
+        <ProjectsSection hideFilter={true} categoryFilter={["Graphic Design"]} />
         <GraphicsDesigningTestimonial />
         {/* <GraphicsDesigningCTA /> */}
         <GraphicsDesigningFAQ />

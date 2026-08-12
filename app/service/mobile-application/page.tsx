@@ -11,6 +11,7 @@ import MobileApplicationCollaboration from './components/MobileApplicationCollab
 import MobileApplicationTestimonial from './components/MobileApplicationTestimonial';
 import MobileApplicationFAQ from './components/MobileApplicationFAQ';
 import WebflowInit from "../../common/WebflowInit";
+import ProjectsSection from "../../home/components/ProjectsSection";
 
 export default function MobileApplicationPage() {
 
@@ -53,6 +54,7 @@ export default function MobileApplicationPage() {
         <MobileApplicationCases />
         <MobileApplicationFeatures />
         <MobileApplicationCollaboration />
+        <ProjectsSection hideFilter={true} categoryFilter={["App Development"]} />
         <MobileApplicationTestimonial />
         <MobileApplicationFAQ />
       </main>

@@ -21,6 +21,7 @@ import WebDevPricing from './components/WebDevPricing';
 import WebDevTechStack from './components/TechStack';
 import WebDevCTA from './components/WebDevCTA';
 import WebflowInit from "../../common/WebflowInit";
+import ProjectsSection from "../../home/components/ProjectsSection";
 
 import WebDevBottomFAQ from './components/WebDevBottomFAQ';
 
@@ -39,6 +40,7 @@ export default function WebDevelopmentPage() {
         <WebDevFeatures />
         <WebDevServices />
         <WebDevIntegration />
+        <ProjectsSection hideFilter={true} categoryFilter={["Business Website", "E-Commerce Website", "Landing Website"]} />
         <WebDevPricing />
         <WebDevTechStack />
         <WebDevBottomFAQ/>

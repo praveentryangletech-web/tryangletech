@@ -12,3 +12,7 @@
 - Fixed layout and styling bugs in the Contact FAQ accordion.
 - Removed "FAQ" link from the Pages dropdown menu in the Navbar.
 - Moved "Blog page" link to the right column in the Pages dropdown to balance the menu layout.
+- Added the Portfolio grid (`ProjectsSection`) to the Web Development service page just after the capabilities section.
+- Modified Portfolio grid to support hiding the search filter and auto-filtering by category, applying this specifically for Web Development projects on the web development service page.
+- Replicated the auto-filtered Portfolio grid across all other service pages (Custom Software, Mobile Application, Graphics Designing, Digital Marketing) with their respective category filters.
+- Fixed a bug across all service page FAQs (Digital Marketing, Custom Software, Graphics Designing) where Webflow's interactions (`data-w-id`) were conflicting with React state, causing FAQ answers to be invisible when expanded and breaking the layout spacing.

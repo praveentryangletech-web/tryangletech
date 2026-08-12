@@ -11,6 +11,7 @@ import DigitalMarketingChooseUs from "./components/DigitalMarketingChooseUs";
 import DigitalMarketingSolution from "./components/DigitalMarketingSolution";
 import DigitalMarketingToolsIntegration from "./components/DigitalMarketingToolsIntegration";
 import DigitalMarketingFaq from "./components/DigitalMarketingFaq";
+import ProjectsSection from "../../home/components/ProjectsSection";
 
 export default function DigitalMarketing() {
   return (
@@ -26,6 +27,7 @@ export default function DigitalMarketing() {
         <DigitalMarketingChooseUs />
         <DigitalMarketingSolution />
         <DigitalMarketingToolsIntegration />
+        <ProjectsSection hideFilter={true} categoryFilter={["Business Website", "Landing Website"]} />
         <DigitalMarketingFaq />
       </main>
 

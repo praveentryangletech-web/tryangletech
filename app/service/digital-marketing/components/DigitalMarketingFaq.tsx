@@ -10,28 +10,20 @@ export default function DigitalMarketingFaq() {
 
   const faqs = [
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
       q: 'What digital marketing services do you offer?',
       a: 'SEO, social media management, and paid ad campaigns (Google & Meta) - built around what makes sense for your business and budget.',
-      isTop: true,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
       q: 'How soon will I see results from SEO?',
       a: "SEO takes time. Most businesses start seeing real movement in rankings and traffic within 3 to 6 months, though we'll flag early wins as they come.",
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
       q: 'How do you report on performance?',
       a: "You get regular updates on what's working - rankings, traffic, leads - so you always know where things stand.",
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
       q: 'Do you work with businesses outside Ahmedabad?',
       a: "We're based in Ahmedabad and primarily serve local and India-wide clients. If you're outside India, reach out and we'll let you know if it's a fit.",
-      isTop: false,
     },
   ];
 
@@ -65,13 +57,12 @@ export default function DigitalMarketingFaq() {
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
               className="rt-faq-main rt-margin-auto"
               style={{ opacity: '0' }}>
-              {faqs.map(({ wid, q, a, isTop }, idx) => {
+              {faqs.map(({ q, a }, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
-                    key={wid}
-                    data-w-id={wid}
-                    className={`w-layout-vflex rt-faq-dropdown-wrap${isTop ? ' rt-faq-pag rt-top-gap-of' : ''}`}
+                    key={idx}
+                    className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${idx === 0 ? ' rt-top-gap-of' : ''}`}
                     style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
                     onClick={() => toggleFaq(idx)}
                   >

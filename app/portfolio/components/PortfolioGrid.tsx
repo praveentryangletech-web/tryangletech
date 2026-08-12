@@ -26,9 +26,11 @@ const categories = [
 
 interface PortfolioGridProps {
   limit?: number;
+  hideFilter?: boolean;
+  categoryFilter?: string[];
 }
 
-export default function PortfolioGrid({ limit }: PortfolioGridProps) {
+export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: PortfolioGridProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -38,9 +40,13 @@ export default function PortfolioGrid({ limit }: PortfolioGridProps) {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === "All") return projects;
-    return projects.filter(p => p.category === activeFilter);
-  }, [activeFilter]);
+    let filtered = projects;
+    if (categoryFilter && categoryFilter.length > 0) {
+      filtered = filtered.filter(p => categoryFilter.includes(p.category));
+    }
+    if (activeFilter === "All") return filtered;
+    return filtered.filter(p => p.category === activeFilter);
+  }, [activeFilter, categoryFilter]);
 
   // Reset visible count when filter changes
   useEffect(() => {
@@ -210,17 +216,19 @@ export default function PortfolioGrid({ limit }: PortfolioGridProps) {
       <div className="w-layout-blockcontainer rt-container-main w-container">
 
         {/* Filter pills */}
-        <div className="pf-filter-wrap">
-          {categories.map((cat, idx) => (
-            <button
-              key={idx}
-              className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
-              onClick={() => setActiveFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {!hideFilter && (
+          <div className="pf-filter-wrap">
+            {categories.map((cat, idx) => (
+              <button
+                key={idx}
+                className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
+                onClick={() => setActiveFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Card grid — identical HTML structure to BLOG3.html */}
         <div style={{ display: 'block' }} className="rt-blog-three-all w-dyn-list">

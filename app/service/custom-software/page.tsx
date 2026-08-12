@@ -65,10 +65,9 @@ import CustomSoftwareTestimonial from './components/CustomSoftwareTestimonial';
 import CustomSoftwareCTA from './components/CustomSoftwareCTA';
 import CustomSoftwareFAQ from './components/CustomSoftwareFAQ';
 import WebflowInit from "../../common/WebflowInit";
+import ProjectsSection from "../../home/components/ProjectsSection";
 
 export default function CustomSoftwarePage() {
-
-
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-wf-page",
@@ -93,7 +92,6 @@ export default function CustomSoftwarePage() {
     }, 100);
     return () => clearInterval(initWebflow);
   }, []);
-
   return (
     <>
       <WebflowInit pageId="68eddb96ee2e53b120952722" />
@@ -106,6 +104,7 @@ export default function CustomSoftwarePage() {
         <CustomSoftwareFeatures />
         <CustomSoftwareServices />
         <CustomSoftwareCore />
+        <ProjectsSection hideFilter={true} categoryFilter={["Software Development"]} />
         <CustomSoftwareTestimonial />
         {/* <CustomSoftwareCTA /> */}
         <CustomSoftwareFAQ />

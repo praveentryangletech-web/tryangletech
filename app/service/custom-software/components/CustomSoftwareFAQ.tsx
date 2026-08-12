@@ -14,34 +14,24 @@ export default function CustomSoftwareFAQ() {
 
   const faqs = [
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
       q: 'How long does it take to build custom software?',
       a: 'It really depends on the complexity of what you need. A focused web application might take 6 to 10 weeks, while a larger enterprise system could take several months. We always give you a detailed timeline upfront before any work begins so you know exactly what to expect.',
-      isTop: true,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
       q: 'Do I need a technical background to work with your team?',
       a: 'Not at all. We are experienced at translating business goals into technical requirements. You just share your vision and challenges with us and we handle everything from architecture to deployment. We keep the conversation simple and always in plain language.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
       q: 'Will I own the software and source code after the project?',
       a: 'Absolutely. Once the project is complete and the final payment is made, full ownership of the code and all related assets transfers to you. There are no licensing fees or ongoing ties to us unless you choose to keep us on for support.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
       q: 'What happens after the software is launched?',
       a: 'We do not just hand things over and disappear. We offer ongoing maintenance and support packages to keep your software running smoothly, handle any bugs that come up, and help you add new features as your business grows.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
       q: 'Can you work with our existing systems and tools?',
       a: 'Yes, and this is something we do all the time. Whether you need new software to connect with your CRM, ERP, or any third party platform, we make sure everything integrates cleanly so your team can keep working the way they already do.',
-      isTop: false,
     },
   ];
 
@@ -72,13 +62,12 @@ export default function CustomSoftwareFAQ() {
             <div
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
               className="rt-faq-main rt-margin-auto">
-              {faqs.map(({ wid, q, a, isTop }, idx) => {
+              {faqs.map(({ q, a }, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
-                    key={wid}
-                    data-w-id={wid}
-                    className={`w-layout-vflex rt-faq-dropdown-wrap${isTop ? ' rt-faq-pag rt-top-gap-of' : ''}`}
+                    key={idx}
+                    className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${idx === 0 ? ' rt-top-gap-of' : ''}`}
                     style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
                     onClick={() => toggleFaq(idx)}
                   >

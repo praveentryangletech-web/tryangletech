@@ -14,34 +14,24 @@ export default function GraphicsDesigningFAQ() {
 
   const faqs = [
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
       q: 'What types of graphic design services do you offer?',
       a: 'We offer a full spectrum of graphic design services, including logo design, brand identity packages, marketing materials (flyers, brochures, banners), social media graphics, UI/UX design, and custom illustrations.',
-      isTop: true,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde42',
       q: 'How long does a typical design project take?',
       a: 'Timelines vary depending on the complexity of the project. A standard logo design may take 1-2 weeks, while a comprehensive brand identity package could take 3-4 weeks. We always provide a clear timeline before starting.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde50',
       q: 'Do I get the source files for my designs?',
       a: 'Absolutely! Upon project completion and final payment, we provide all high-resolution files and the original source files (like .AI, .PSD, or .Figma) so you have full ownership of your assets.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde5e',
       q: "What is your revision process?",
       a: 'We believe in a collaborative approach. Most of our design packages include a set number of revision rounds. We present our concepts, gather your feedback, and make refinements until the design aligns perfectly with your vision.',
-      isTop: false,
     },
     {
-      wid: '4dd3e22b-253f-3566-2cec-7767aa6cde6c',
       q: 'Do you offer printing services as well?',
       a: 'While we specialize in the digital creation of print-ready designs, we partner with trusted local and online printers. We can either manage the printing process for you or provide you with the exact files you need to take to a printer of your choice.',
-      isTop: false,
     },
   ];
 
@@ -72,13 +62,12 @@ export default function GraphicsDesigningFAQ() {
             <div
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
               className="rt-faq-main rt-margin-auto">
-              {faqs.map(({ wid, q, a, isTop }, idx) => {
+              {faqs.map(({ q, a }, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
-                    key={wid}
-                    data-w-id={wid}
-                    className={`w-layout-vflex rt-faq-dropdown-wrap${isTop ? ' rt-faq-pag rt-top-gap-of' : ''}`}
+                    key={idx}
+                    className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${idx === 0 ? ' rt-top-gap-of' : ''}`}
                     style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
                     onClick={() => toggleFaq(idx)}
                   >

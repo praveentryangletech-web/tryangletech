@@ -244,7 +244,7 @@ export default function Footer() {
             <div className="rt-social-media">
               <div className="rt-color-pale-periwinkle">Social media :</div>
               <a
-                href="https://www.linkedin.com/in/tryangle-tech-564223256/"
+                href="https://www.linkedin.com/company/tryangle-tech"
                 target="_blank"
                 className="rt-sicial-link rt-position-relative rt-overflow-hidden w-inline-block">
                 <div className="rt-social-media-link">

@@ -8,8 +8,8 @@ import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tryangletech.com'),
-  title: 'TryangleTech',
-  description: 'Innovative Technology Solutions by TryangleTech.',
+  title: 'TryangleTech | Web, App & Custom Software Development in Ahmedabad',
+  description: "We're an Ahmedabad-based IT company building websites, mobile apps, and custom software for businesses. 350+ projects delivered with zero technical jargon.",
   icons: {
     icon: '/favicon.png',
   },
@@ -845,7 +845,7 @@ export default function RootLayout({
               },
               "sameAs": [
                 "https://www.instagram.com/tryangle24_7/",
-                "https://www.linkedin.com/in/tryangle-tech-564223256/",
+                "https://www.linkedin.com/company/tryangle-tech",
                 "https://www.facebook.com/tryangletech/"
               ],
               "priceRange": "$$"

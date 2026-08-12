@@ -562,7 +562,7 @@ export default function Navbar() {
                         <a href="https://www.instagram.com/tryangle24_7/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
                           <Image width={10} height={18} alt="Instagram" src={`${NAV_ASSETS}/68ff46366a330717f35394cc_Kloudera-team-icon.svg`} loading="lazy" />
                         </a>
-                        <a href="https://www.linkedin.com/in/tryangle-tech-564223256/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/company/tryangle-tech" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">
                           <Image width={14} height={15} alt="LinkedIn" src={`${NAV_ASSETS}/68ff46366a330717f35394d7_kloudera-mega-menu-icon.svg`} loading="lazy" />
                         </a>
                         <a href="https://www.facebook.com/tryangletech/" className="rt-mega-menu-icon w-inline-block" target="_blank" rel="noopener noreferrer">

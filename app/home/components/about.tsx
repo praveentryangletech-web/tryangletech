@@ -44,15 +44,15 @@ export default function About() {
                 data-w-id="e56a7671-e1ec-e100-8312-33edf2c12738"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off">
-                We turn your idea into a real,
-                <span className="rt-color-periwinkle-gray"> working product</span>
+                We build websites and apps that actually work for
+                <span className="rt-color-periwinkle-gray"> your business</span>
               </h2>
             </div>
             <p
               data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
               style={{ "opacity": "0" }}
               className="rt-gap-off">
-              We're an IT team based in Naroda, Ahmedabad — building websites, apps, and software for businesses across India. We've delivered 350+ projects so far - business websites, online stores, mobile apps, custom software, and branding - for clients across manufacturing, exports, testing labs, and real estate. You tell us what you need - we plan it, build it, test it, and hand it over. No confusing back-and-forth, no vanishing after launch.
+              We're a tech team based in Naroda, Ahmedabad. For over 7 years, we've helped Indian businesses launch websites, build mobile apps, and develop custom software that gets real results. You tell us what you need – we design it, build it, and launch it. No technical jargon, no disappearing acts.
             </p>
             <div className="rt-about-v1-right-inner">
               <div

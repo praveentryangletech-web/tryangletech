@@ -21,9 +21,9 @@ export default function WhyChooseUs() {
                 data-w-id="07416d34-f69b-c50c-b2bc-d9952d15faca"
                 style={{ "opacity": "0" }}>
                 <h2 className="rt-gap-off">
-                  Why businesses choose to work
+                  Why 350+ businesses
                   <span className="rt-color-periwinkle-gray"
-                  > with us</span
+                  > chose us</span
                   >
                 </h2>
               </div>

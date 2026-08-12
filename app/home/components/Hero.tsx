@@ -89,7 +89,7 @@ export default function Hero() {
               className="rt-button-para-gap rt-overflow-hidden">
               <Link
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                href="/home-one#"
+                href="/contact"
                 className="rt-button-body w-inline-block"
               ><div className="rt-button-text">Talk to us today</div>
                 <div

@@ -3,8 +3,8 @@ import React from 'react';
 import HomeMain from './home/home-main';
 
 export const metadata: Metadata = {
-  title: "Tryangletech Is Best It Company in Ahmedabad",
-  description: "Welcome to Tryangletech, your one-stop solution for IT services. From attractive website design and development to powerful marketing strategies, flawless app and software development, to profitable business solutions.",
+  title: "TryangleTech | Web, App & Custom Software Development in Ahmedabad",
+  description: "We're an Ahmedabad-based IT company building websites, mobile apps, and custom software for businesses. 350+ projects delivered with zero technical jargon.",
 };
 
 export default function ExactClonePage() {

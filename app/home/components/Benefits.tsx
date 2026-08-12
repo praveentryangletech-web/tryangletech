@@ -18,7 +18,7 @@ export default function Benefits() {
                   className="rt-our-benefits-one-top">
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
-                      <div className="rt-text-style-h5">
+                      <div className="rt-text-style-h4">
                         Website Development
                       </div>
                     </div>
@@ -91,7 +91,7 @@ export default function Benefits() {
                       <div
                         data-w-id="2c6a32ff-96b2-42b1-ba01-35d7cc1f0048"
                         style={{ "opacity": "0" }}
-                        className="rt-text-style-h5">
+                        className="rt-text-style-h4">
                         Custom Software Development
                       </div>
                     </div>
@@ -127,7 +127,7 @@ export default function Benefits() {
                 <div className="rt-our-benefits-one-bottom rt-overflow-hidden">
                   <div className="rt-our-benefits-one-wrap">
                     <div className="rt-our-benefits-gap-3">
-                      <div className="rt-text-style-h6">Mobile Development</div>
+                      <div className="rt-text-style-h4">Mobile Development</div>
                     </div>
                     <div
                       data-w-id="d919edb7-1114-6397-f57a-a2c6d2775464"
@@ -156,7 +156,7 @@ export default function Benefits() {
                   data-w-id="1c6222f6-a97f-fefb-0d46-bedad32c97e7"
                   className="rt-our-benefits-one-bottom rt-padding rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                    <div className="rt-text-style-h6">Digital Marketing</div>
+                    <div className="rt-text-style-h4">Digital Marketing</div>
                   </div>
                   <div className="rt-2-bg">
                     <Image
@@ -230,7 +230,7 @@ Mask group
                 <div
                   className="rt-our-benefits-one-bottom rt-padding rt-2 rt-overflow-hidden">
                   <div className="rt-small-heading-para-gap">
-                      <div className="rt-text-style-h6">Graphic Design</div>
+                      <div className="rt-text-style-h4">Graphic Design</div>
                   </div>
                   <p className="rt-gap-off">
                     Logos, brand identity, social media graphics, and marketing materials for your business. <span className="rt-color-periwinkle-gray">Design that looks professional and builds trust.</span>

@@ -68,7 +68,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
         </section>
 
         {/* Main Content & Details */}
-        <section className="rt-blog-post animate-section anim-delay-2">
+        <section className="rt-blog-post animate-section anim-delay-2" style={{ paddingBottom: '0px' }}>
           <style>{`
           .project-meta-grid {
             display: grid;

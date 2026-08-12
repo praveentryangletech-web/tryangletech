@@ -16,3 +16,4 @@
 - Modified Portfolio grid to support hiding the search filter and auto-filtering by category, applying this specifically for Web Development projects on the web development service page.
 - Replicated the auto-filtered Portfolio grid across all other service pages (Custom Software, Mobile Application, Graphics Designing, Digital Marketing) with their respective category filters.
 - Fixed a bug across all service page FAQs (Digital Marketing, Custom Software, Graphics Designing) where Webflow's interactions (`data-w-id`) were conflicting with React state, causing FAQ answers to be invisible when expanded and breaking the layout spacing.
+- Updated the heading text in the "Capabilities" section of the Web Development service page to better align with the underlying card content.

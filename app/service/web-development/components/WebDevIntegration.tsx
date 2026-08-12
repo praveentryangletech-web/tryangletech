@@ -16,7 +16,7 @@ export default function WebDevIntegration() {
                 <div className="rt-sub-text rt-sub-gredient">capabilities</div>
               </div>
               <h2 className="rt-gap-off rt-desktop-text-center">
-                The tools and technologies we use to build your website
+                Everything we handle when we build your website
               </h2>
             </div>
             <div

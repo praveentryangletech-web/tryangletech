@@ -26,14 +26,10 @@ const faqs = [
 ];
 
 export default function ContactFAQ() {
-  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (idx: number) => {
-    if (openFaqs.includes(idx)) {
-      setOpenFaqs(openFaqs.filter((i) => i !== idx));
-    } else {
-      setOpenFaqs([...openFaqs, idx]);
-    }
+    setOpenFaq(openFaq === idx ? null : idx);
   };
   return (
     <>
@@ -63,18 +59,15 @@ export default function ContactFAQ() {
                 data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
                 className="rt-faq-main rt-margin-auto">
                 {faqs.map((faq, i) => {
-                  const isOpen = openFaqs.includes(i);
+                  const isOpen = openFaq === i;
                   return (
                     <div
                       key={i}
-                      className="w-layout-vflex rt-faq-dropdown-wrap"
-                      style={{
-                        backgroundColor: isOpen ? "rgba(0, 0, 0, 0.03)" : "rgba(0, 0, 0, 0)",
-                      }}>
-                      <div
-                        className="w-layout-hflex rt-faq-top-part"
-                        onClick={() => toggleFaq(i)}
-                        style={{ cursor: "pointer" }}>
+                      className={`w-layout-vflex rt-faq-dropdown-wrap rt-faq-pag${i === 0 ? ' rt-top-gap-of' : ''}`}
+                      style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
+                      onClick={() => toggleFaq(i)}
+                    >
+                      <div className="w-layout-hflex rt-faq-top-part">
                         <div className="w-layout-hflex r-faq-text-wrap">
                           <h3 className="rt-text-style-h6" style={{ marginTop: 0, marginBottom: 0 }}>{faq.q}</h3>
                         </div>

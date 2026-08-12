@@ -48,7 +48,7 @@ export default function AboutFeatures() {
               </div>
 
               {/* Feature 2 — Collaboration */}
-              <div data-w-id="56f1b25a-061c-3e82-d0b8-df0f60b657fd" className="rt-features-v1-left rt-border-radius-l rt-right">
+              <div data-w-id="56f1b25a-061c-3e82-d0b8-df0f60b657fd" className="rt-features-v1-left rt-border-radius-l rt-right" style={{paddingBottom:'4rem'}}>
                 <div className="rt-features-v1-inner-heading">
                   <div className="rt-small-sub-gap"><div className="rt-sub-text rt-sub-small">OUR VISION</div></div>
                   <div className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">Shaping the future of technology</div>

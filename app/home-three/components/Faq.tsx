@@ -43,7 +43,7 @@ export default function Faq() {
 
   return (
     <>
-      <section className="rt-faq">
+      <section className="rt-faq"style={{marginTop:'-6rem'}}>
         <div className="w-layout-blockcontainer rt-faq-container w-container">
           <div className="rt-faq-content-main">
             <div className="w-layout-hflex rt-faq-heading-main">

@@ -4,24 +4,24 @@ import React, { useState } from 'react';
 
 const faqs = [
   {
-    q: "What is AI automation, and how does it work?",
-    a: "AI automation uses artificial intelligence to perform repetitive tasks, analyze data, and optimize processes, enabling businesses to save time, reduce errors, and make smarter, faster decisions efficiently.",
+    q: "How quickly will you respond to my inquiry?",
+    a: "We typically respond within 24 hours. For urgent requests, you can call us directly at +91 90338 78806.",
   },
   {
-    q: "What types of tasks can be automated with AI?",
-    a: "AI can automate repetitive tasks like data entry, customer support, report generation, inventory management, and workflow optimization, allowing teams to focus on strategic, high-value activities and business growth.",
+    q: "What information should I include when I reach out?",
+    a: "A brief description of what you need - a website, app, or software - and any timeline or budget you have in mind. We'll ask follow-up questions if we need more detail.",
   },
   {
-    q: "Is AI automation suitable for small businesses?",
-    a: "Yes, AI automation is ideal for small businesses. It streamlines operations, reduces manual work, improves efficiency, and provides actionable insights, helping smaller teams compete and grow effectively.",
+    q: "Do you offer a free consultation?",
+    a: "Yes, we offer a free initial consultation to understand your project and give you an honest assessment of scope and timeline before any commitment.",
   },
   {
-    q: "What industries benefit the most from AI automation?",
-    a: "Industries like finance, healthcare, retail, manufacturing, and logistics benefit greatly from AI automation. It streamlines operations, reduces errors, enhances customer service, and drives efficiency across diverse business sectors.",
+    q: "Can I visit your office in person?",
+    a: "Absolutely. Our office is in Naroda, Ahmedabad. Reach out beforehand so we can make sure the right person is available to meet with you.",
   },
   {
-    q: "Can AI automation integrate with my existing tools?",
-    a: "Absolutely. AI automation seamlessly integrates with your existing tools and platforms, allowing workflows to connect effortlessly, enhancing productivity, reducing manual effort, and ensuring a smooth transition without disrupting current operations.",
+    q: "What happens after I submit the contact form?",
+    a: "One of our team members will review your message and reach out to schedule a call or discuss next steps, usually within 24 hours.",
   },
 ];
 

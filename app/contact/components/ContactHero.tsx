@@ -26,16 +26,14 @@ export default function ContactHero() {
                     <h1
                       data-w-id="bfaf7311-da51-950a-1d57-7a0beac913b4"
                       className="rt-gap-off">
-                      Stay connected with seamless task management support
+                      Let's talk about your project
                     </h1>
                   </div>
                   <div
                     data-w-id="bfaf7311-da51-950a-1d57-7a0beac913b8"
                     className="rt-hero-v9-para-wrap">
                     <p className="rt-gap-off">
-                      Stay connected with seamless task management support
-                      ensures your team never feels stuck. With real-time
-                      communication, quick response assistance.
+                      Tell us what you're building and we'll get back to you within 24 hours. No sales pitch, no jargon - just a straight answer on how we can help.
                     </p>
                   </div>
                   <div

@@ -24,18 +24,18 @@ export default function ContactDetails() {
                   </div>
                 </div>
                 <h2 className="rt-no-margin">
-                  Stay connected with reliable task{" "}
+                  Get in touch with{" "}
                   <span className="rt-color-periwinkle-gray">
-                    management assistance
+                    our team
                   </span>
                 </h2>
               </div>
               <div className="rt-contact-v3-utton-wrap">
                 <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href="/about"
+                  href="/contact"
                   className="rt-button-body w-inline-block">
-                  <div className="rt-button-text">Talk to a task expert</div>
+                  <div className="rt-button-text">Get started today</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
               </div>

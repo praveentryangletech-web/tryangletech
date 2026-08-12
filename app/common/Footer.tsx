@@ -128,7 +128,7 @@ export default function Footer() {
                 </div>
                 <div className="w-layout-vflex rt-footer-link-box">
                   <a
-                    href="/home-one"
+                    href="/"
                     className="rt-footer-link">
                     Home
                   </a>

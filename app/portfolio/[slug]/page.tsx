@@ -340,7 +340,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'center' }}>Relevant Projects</h3>
+                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'left' }}>Relevant Projects</h3>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {

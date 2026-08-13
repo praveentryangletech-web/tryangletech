@@ -104,9 +104,9 @@ export default function GraphicsDesigningFeatures() {
                 className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
                   <Image
-                    src="/service-2-assets/690c7b2508ab483ef4047387_Vector (28).svg"
+                    src="/service-2-assets/social_media_icon.svg"
                     loading="lazy"
-                    alt=""
+                    alt="Social Media"
                    width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">Social Media &amp; Digital Design</div>

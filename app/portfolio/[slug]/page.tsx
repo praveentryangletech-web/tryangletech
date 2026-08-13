@@ -188,18 +188,25 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             background: rgba(24, 51, 254, 0.15);
             transform: translateY(-2px);
           }
-          .list-item-custom {
-            margin-bottom: 16px;
-            padding-left: 1.5rem;
-            position: relative;
+          .portfolio-list {
+            list-style-type: none;
+            padding-left: 1rem;
+            margin: 0;
           }
-          .list-item-custom::before {
+          .portfolio-list li {
+            position: relative;
+            margin-bottom: 16px;
+          }
+          .portfolio-list li::before {
             content: '';
             position: absolute;
-            left: 0;
+            left: -0.85rem;
             top: 10px;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
+            background-color: #1833fe;
+            border-radius: 50%;
+          }
         `}</style>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-blog-post--main">
@@ -237,33 +244,33 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '2.5rem', marginBottom: '3rem' }}>
                   {project.challenges && project.challenges.length > 0 && (
-                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
-                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                      <ul className="portfolio-list">
                         {project.challenges.map((item, i) => (
-                          <li key={i} className="list-item-custom">{item}</li>
+                          <li key={i}>{item}</li>
                         ))}
                       </ul>
                     </div>
                   )}
 
                   {project.solutions && project.solutions.length > 0 && (
-                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
-                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                      <ul className="portfolio-list">
                         {project.solutions.map((item, i) => (
-                          <li key={i} className="list-item-custom">{item}</li>
+                          <li key={i}>{item}</li>
                         ))}
                       </ul>
                     </div>
                   )}
 
                   {project.results && project.results.length > 0 && (
-                    <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
+                    <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
-                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                      <ul className="portfolio-list">
                         {project.results.map((item, i) => (
-                          <li key={i} className="list-item-custom">{item}</li>
+                          <li key={i}>{item}</li>
                         ))}
                       </ul>
                     </div>

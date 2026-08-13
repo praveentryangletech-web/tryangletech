@@ -25,9 +25,17 @@ body {
   opacity: 1 !important;
   height: auto !important;
   visibility: visible !important;
-  pointer-events: auto !important;
   transform: translate3d(0, 0, 0) !important;
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Prevent full-width transparent mega menu wrapper from keeping dropdown open */
+.w-dropdown:hover .rt-pages-menu,
+.w-dropdown.w--open .rt-pages-menu {
+  pointer-events: none !important;
+}
+.rt-pages-menu > * {
+  pointer-events: auto !important;
 }
 
 .w-dropdown:hover .rt-nav-menu-arrow-holder {

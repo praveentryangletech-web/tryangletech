@@ -319,9 +319,12 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 </div>
 
                 {project.technologies && project.technologies.length > 0 && (
-                  <div style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
-                    <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                      <h3 style={{ display: 'inline-block', margin: 0 }}>Technologies</h3>
+                  <div style={{ marginTop: '4rem', marginBottom: '3rem' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                      <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
+                        <div className="rt-sub-text rt-sub-gredient">TECH STACK</div>
+                      </div>
+                      <h2 className="rt-gap-off" style={{ margin: 0 }}>Technologies</h2>
                     </div>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
                       <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
@@ -388,7 +391,12 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'center' }}>Relevant Projects</h3>
+                  <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                    <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
+                      <div className="rt-sub-text rt-sub-gredient">MORE WORK</div>
+                    </div>
+                    <h2 className="rt-gap-off" style={{ margin: 0 }}>Relevant Projects</h2>
+                  </div>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {

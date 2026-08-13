@@ -85,7 +85,7 @@ export default function Navbar() {
                   className="rt-navbar-logo rt-position-relative w-nav-brand"
                   aria-label="home">
                   <Image
-                    style={{ height: '40px', width: 'auto' }}
+                    style={{ height: '50px', width: 'auto' }}
                     alt="TryangleTech logo"
                     src={`/logo.png`}
                     loading="lazy"

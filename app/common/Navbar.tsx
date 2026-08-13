@@ -144,57 +144,21 @@ export default function Navbar() {
                   <div className="rt-menu-text">Portfolio</div>
                 </Link>
 
-                {/* Service dropdown */}
-                <div
-                  data-delay="300"
-                  data-hover="true"
-                  data-w-id="b07e93b6-139e-136c-8189-3251b36d92ab"
-                  className="rt-navbar-dropdown w-dropdown">
-                  <div
-                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/service']) ? 'rt-active-link' : ''}`}
-                    id="w-dropdown-toggle-1"
-                    aria-controls="w-dropdown-list-1"
-                    aria-haspopup="menu"
-                    aria-expanded="false"
-                    role="button"
-                    tabIndex={0}>
-                    <Link href="/service" className="rt-menu-text" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>Service</Link>
-                    <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                      <Image
-                        width={10}
-                        height={6}
-                        alt="dropdown arrow"
-                        src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`}
-                        loading="lazy" />
-                    </div>
-                  </div>
-                  <nav
-                    className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list"
-                    aria-labelledby="w-dropdown-toggle-1" style={{ width: "max-content", minWidth: "200px" }}>
-
-                    <Link href="/service/web-development" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Website Development</Link>
-                    <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Custom Software </Link>
-                    <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
-                    <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Digital Marketing</Link>
-                    <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
-                  </nav>
-                </div>
-
-                {/* Pages Mega Menu dropdown */}
+                {/* Service Mega Menu dropdown */}
                 <div
                   data-delay="300"
                   data-hover="true"
                   data-w-id="b07e93b6-139e-136c-8189-3251b36d9247"
                   className="rt-navber-dropdown rt-pages-dropdown w-dropdown">
                   <div
-                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/team', '/pricing', '/faq', '/404']) ? 'rt-active-link' : ''}`}
+                    className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/service']) ? 'rt-active-link' : ''}`}
                     id="w-dropdown-toggle-2"
                     aria-controls="w-dropdown-list-2"
                     aria-haspopup="menu"
                     aria-expanded="false"
                     role="button"
                     tabIndex={0}>
-                    <div className="rt-menu-text">Pages</div>
+                    <div className="rt-menu-text" onClick={(e) => { e.stopPropagation(); router.push('/service'); }} style={{ cursor: 'pointer' }}>Service</div>
                     <div className="rt-nav-menu-arrow-holder rt-position-relative">
                       <Image
                         width={10}
@@ -210,10 +174,7 @@ export default function Navbar() {
                     <div className="w-layout-hflex rt-mega-menu-wrap">
                       <div className="w-layout-vflex rt-pages-menu-left">
                         <div className="w-layout-vflex rt-pages-menu-left-top">
-                          <div style={{ backgroundColor: '#fff', padding: '10px 16px', borderRadius: '8px', display: 'inline-flex', alignItems: 'center', width: 'fit-content' }}>
-                            <Image width={140} height={40} alt="TryangleTech Logo" src={`/logo.png`} loading="lazy" style={{ width: 'auto', height: '24px' }} />
-                          </div>
-                          <div style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.4, marginTop: '1.5rem' }}>
+                          <div style={{ color: '#fff', fontSize: '1.75rem', fontWeight: 700, lineHeight: 1.3, marginTop: '0' }}>
                             Transform your bold ideas into powerful digital products with our IT experts.
                           </div>
                         </div>
@@ -223,105 +184,93 @@ export default function Navbar() {
                           </Link>
                         </div>
                       </div>
-                      <div className="w-layout-hflex rt-pages-menu-wrap">
-                        {/* Left column */}
+                      <div className="w-layout-vflex" style={{ flex: 1, paddingTop: '12px' }}>
+                        <div style={{ padding: '0 32px 12px 32px', fontSize: '1.125rem', fontWeight: 700, color: '#111827' }}>
+                          Explore Our IT Solutions
+                        </div>
+                        <div className="w-layout-hflex rt-pages-menu-wrap" style={{ paddingTop: 0 }}>
+                          {/* Left column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">
-                          {/* Home page */}
-                          <Link href="/" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Web Development */}
+                          <Link href="/service/web-development" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="Home" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Home page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Welcome to TryangleTech</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Website Development</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Scalable and responsive websites</div>
                               </div>
                             </div>
                             <div>
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* About page */}
-                          <Link href="/about" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Custom Software */}
+                          <Link href="/service/custom-software" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="About" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">About page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Discover our mission and vision</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Custom Software</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Tailored software solutions</div>
                               </div>
                             </div>
                             <div>
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* Service page */}
-                          <Link href="/service" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Mobile Application */}
+                          <Link href="/service/mobile-application" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={12} alt="Service" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Service page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Explore our IT solutions</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Mobile Application</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">iOS and Android mobile apps</div>
                               </div>
                             </div>
                             <div>
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-
                         </div>
                         {/* Right column */}
                         <div className="w-layout-vflex rt-pages-menu-list-wrap">
-                          {/* Contact page */}
-                          <Link href="/contact" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Digital Marketing */}
+                          <Link href="/service/digital-marketing" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={13} height={14} alt="Contact" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Contact page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Get in touch with our experts</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Digital Marketing</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Data-driven growth strategies</div>
                               </div>
                             </div>
                             <div>
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* Portfolio page */}
-                          <Link href="/portfolio" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                          {/* Graphics Designing */}
+                          <Link href="/service/graphics-designing" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
                             <div className="w-layout-hflex rt-pages-menu-content">
                               <div>
-                                <Image width={14} height={14} alt="Portfolio" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Portfolio page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">View our successful projects</div>
+                                <div className="rt-nav-menu-link rt-padding-off">Graphics Designing</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium">Creative and intuitive designs</div>
                               </div>
                             </div>
                             <div>
                               <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                             </div>
                           </Link>
-                          {/* Blog page */}
-                          <Link href="/blog" data-w-id="b07e93b6-139e-136c-8189-3251b36d927e" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                            <div className="w-layout-hflex rt-pages-menu-content">
-                              <div>
-                                <Image width={14} height={14} alt="Blog" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" />
-                              </div>
-                              <div className="w-layout-vflex rt-pages-menu-link">
-                                <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Read our latest tech insights</div>
-                              </div>
-                            </div>
-                            <div>
-                              <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
-                            </div>
-                          </Link>
-
                         </div>
+                      </div>
                       </div>
                     </div>
                   </nav>
@@ -422,85 +371,7 @@ export default function Navbar() {
                         <div className="rt-menu-text">Portfolio</div>
                       </Link>
 
-                      {/* Pages dropdown Mobile */}
-                      <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>
-                        <div className={`rt-navbar-dropdown-toggle w-dropdown-toggle ${isActive(['/team', '/pricing', '/faq', '/404']) ? 'rt-active-link' : ''}`} id="w-dropdown-toggle-6" aria-controls="w-dropdown-list-6" aria-haspopup="menu" aria-expanded="false" role="button" tabIndex={0}>
-                          <div className="rt-menu-text">Pages</div>
-                          <div className="rt-nav-menu-arrow-holder rt-position-relative">
-                            <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
-                          </div>
-                        </div>
-                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-6" aria-labelledby="w-dropdown-toggle-6">
-                          <div className="w-layout-hflex rt-pages-menu-wrap rt-padding">
-                            <div className="w-layout-vflex rt-pages-menu-list-wrap">
-                              <Link href="/" data-w-id="b84e5def-8be0-c77c-84d1-4421928068bb" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394ce_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Home page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Connect, collaborate and stay</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-                              <Link href="/about" data-w-id="b84e5def-8be0-c77c-84d1-4421928068c6" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d4_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">About page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Learn about our story, mission</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-                              <Link href="/service" data-w-id="b84e5def-8be0-c77c-84d1-4421928068d1" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={12} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d3_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Service page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Explore our services effortlessly</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-
-                            </div>
-                            <div className="w-layout-vflex rt-pages-menu-list-wrap rt-padding">
-                              <Link href="/contact" data-w-id="b84e5def-8be0-c77c-84d1-4421928068e8" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={13} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d2_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Contact page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">We&#x2019;re here to help you 24/7</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-                              <Link href="/pricing" data-w-id="b84e5def-8be0-c77c-84d1-4421928068f3" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394c9_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Pricing page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Choose the option made for you</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-                              <Link href="/blog" data-w-id="b84e5def-8be0-c77c-84d1-4421928068dc" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
-                                <div className="w-layout-hflex rt-pages-menu-content">
-                                  <div><Image width={14} height={14} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d5_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-icon" /></div>
-                                  <div className="w-layout-vflex rt-pages-menu-link">
-                                    <div className="rt-nav-menu-link rt-padding-off">Blog page</div>
-                                    <div className="rt-pages-menu-small-text rt-text-medium">Update the latest articles</div>
-                                  </div>
-                                </div>
-                                <div><Image width={9} height={8} alt="" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" /></div>
-                              </Link>
-
-                            </div>
-                          </div>
-                        </nav>
-                      </div>
+                      {/* Pages dropdown Mobile - Removed because it is redundant and Services mega menu handles this on desktop */}
 
                       {/* Blog dropdown Mobile (commented out) 
                       <div data-delay="300" data-hover="true" className="rt-navbar-dropdown w-dropdown" style={{ maxWidth: "1750px" }}>

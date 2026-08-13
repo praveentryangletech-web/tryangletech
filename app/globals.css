@@ -38,6 +38,17 @@ body {
   pointer-events: auto !important;
 }
 
+/* Mega Menu Link Hover Colors */
+.rt-pages-menu-link-wrap:hover .rt-nav-menu-link,
+.rt-pages-menu-link-wrap:hover .rt-pages-menu-small-text,
+.rt-pages-menu-link-wrap:hover .rt-pages-menu-link-arrow-svg {
+  color: #1833fe !important;
+}
+.rt-nav-menu-link,
+.rt-pages-menu-small-text {
+  transition: color 0.3s ease;
+}
+
 .w-dropdown:hover .rt-nav-menu-arrow-holder {
   transform: rotate(180deg) !important;
   transition: transform 0.2s ease;

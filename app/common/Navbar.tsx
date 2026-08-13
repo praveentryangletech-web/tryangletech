@@ -203,7 +203,9 @@ export default function Navbar() {
                                 </div>
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
-                                <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                </svg>
                               </div>
                             </Link>
                             {/* Custom Software */}
@@ -218,7 +220,9 @@ export default function Navbar() {
                                 </div>
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
-                                <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                </svg>
                               </div>
                             </Link>
                             {/* Mobile Application */}
@@ -233,7 +237,9 @@ export default function Navbar() {
                                 </div>
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
-                                <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                </svg>
                               </div>
                             </Link>
                           </div>
@@ -251,7 +257,9 @@ export default function Navbar() {
                                 </div>
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
-                                <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                </svg>
                               </div>
                             </Link>
                             {/* Graphics Designing */}
@@ -266,7 +274,9 @@ export default function Navbar() {
                                 </div>
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
-                                <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
+                                <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                </svg>
                               </div>
 
                             </Link>

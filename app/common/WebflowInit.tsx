@@ -11,8 +11,8 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
   // elements before ix2.init() takes over, preventing a flash of visible content.
   const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
   useIsomorphicLayoutEffect(() => {
-    // Remove w-mod-ix to let Webflow's native CSS hide animated elements before ix2.init()
-    document.documentElement.classList.remove('w-mod-ix');
+    // Commented out to prevent the entire page from flashing blank on route change.
+    // document.documentElement.classList.remove('w-mod-ix');
   }, [pathname]);
 
   useEffect(() => {

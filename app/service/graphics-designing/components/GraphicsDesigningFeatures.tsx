@@ -76,7 +76,6 @@ export default function GraphicsDesigningFeatures() {
           <div
             data-w-id="f7dfaa0b-0429-3472-8e08-cf86c14810bf"
             className="w-layout-hflex rt-section-line-wrap rt-margin-auto">
-            <div className="rt-section-overlay"></div>
           </div>
         </section>
     </>

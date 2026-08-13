@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects } from '../../data/portfolioData';
-import { BLOG_POSTS } from '../../blog/data';import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
+import { BLOG_POSTS } from '../../blog/data'; import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
@@ -320,11 +320,13 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {project.technologies && project.technologies.length > 0 && (
                   <div style={{ marginTop: '4rem', marginBottom: '3rem' }}>
-                    <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                      <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
-                        <div className="rt-sub-text rt-sub-gredient">TECH STACK</div>
+                    <div className="w-layout-hflex rt-our-benefits-heading" style={{ justifyContent: 'center', marginBottom: '2.5rem' }}>
+                      <div className="rt-testimonial-v2-heading-wrap rt-desktop-text-center">
+                        <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
+                          <div className="rt-sub-text rt-sub-gredient">TECHNOLOGIES</div>
+                        </div>
+                        <h2 className="rt-gap-off" style={{ margin: 0 }}>Tools that power this project</h2>
                       </div>
-                      <h2 className="rt-gap-off" style={{ margin: 0 }}>Technologies</h2>
                     </div>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
                       <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
@@ -391,11 +393,13 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                    <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
-                      <div className="rt-sub-text rt-sub-gredient">MORE WORK</div>
+                  <div className="w-layout-hflex rt-our-benefits-heading" style={{ justifyContent: 'center', marginBottom: '2.5rem' }}>
+                    <div className="rt-testimonial-v2-heading-wrap rt-desktop-text-center">
+                      <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
+                        <div className="rt-sub-text rt-sub-gredient">PORTFOLIO</div>
+                      </div>
+                      <h2 className="rt-gap-off" style={{ margin: 0 }}>Explore similar projects</h2>
                     </div>
-                    <h2 className="rt-gap-off" style={{ margin: 0 }}>Relevant Projects</h2>
                   </div>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">

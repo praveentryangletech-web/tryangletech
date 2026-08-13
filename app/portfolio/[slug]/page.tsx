@@ -2,12 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects } from '../../data/portfolioData';
-import { BLOG_POSTS } from '../../blog/data';
-import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
+import { BLOG_POSTS } from '../../blog/data';import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
-import PortfolioButtons from '../components/PortfolioButtons';
 import PortfolioImageSlider from '../components/PortfolioImageSlider';
 
 import Image from "next/image";
@@ -207,6 +205,34 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             background-color: #1833fe;
             border-radius: 50%;
           }
+          .portfolio-view-all-btn {
+            position: relative;
+            overflow: hidden;
+            background-color: transparent !important;
+            z-index: 1;
+          }
+          .portfolio-view-all-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: #1833fe;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+          }
+          .portfolio-view-all-btn:hover::before {
+            height: 100%;
+          }
+          .portfolio-view-all-btn .rt-button-text {
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+          }
+          .portfolio-view-all-btn:hover .rt-button-text {
+            color: #ffffff !important;
+          }
         `}</style>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-blog-post--main">
@@ -221,11 +247,26 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   <span className="meta-value">{project.duration}</span>
                 </div>
                 <div className="meta-card">
-                  <span className="meta-label">Role</span>
+                  <span className="meta-label">{project.category}</span>
                   <span className="meta-value">{project.role}</span>
                 </div>
               </div>
-              <PortfolioButtons liveUrl={project.liveUrl} />
+
+              {project.liveUrl && (
+                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="rt-button-body rt-nav-btn w-inline-block portfolio-view-all-btn" style={{ display: 'inline-flex', width: 'auto', minWidth: '200px', padding: '14px 32px', justifyContent: 'center' }}>
+                    <div className="rt-button-text rt-btn-color-nav" style={{ width: 'auto', display: 'inline-flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                      View Live Site
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </div>
+                    <div className="rt-button-body-overlay rt-nav-overlay"></div>
+                  </a>
+                </div>
+              )}
 
               <div className="w-richtext">
                 {project.description && (
@@ -347,7 +388,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'left' }}>Relevant Projects</h3>
+                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'center' }}>Relevant Projects</h3>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {
@@ -411,7 +452,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   </div>
 
                   <div style={{ marginTop: '3rem', textAlign: 'center' }}>
-                    <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block" style={{ display: 'inline-flex', width: 'auto', minWidth: '200px', padding: '14px 32px', justifyContent: 'center' }}>
+                    <Link href="/portfolio" className="rt-button-body rt-nav-btn w-inline-block portfolio-view-all-btn" style={{ display: 'inline-flex', width: 'auto', minWidth: '200px', padding: '14px 32px', justifyContent: 'center' }}>
                       <div className="rt-button-text rt-btn-color-nav" style={{ width: 'auto', display: 'inline-block', margin: 0 }}>View all projects</div>
                       <div className="rt-button-body-overlay rt-nav-overlay"></div>
                     </Link>

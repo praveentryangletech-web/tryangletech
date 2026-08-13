@@ -202,7 +202,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Scalable and responsive websites</div>
                                 </div>
                               </div>
-                              <div>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -217,7 +217,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Tailored software solutions</div>
                                 </div>
                               </div>
-                              <div>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -232,7 +232,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>iOS and Android mobile apps</div>
                                 </div>
                               </div>
-                              <div>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -250,7 +250,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Data-driven growth strategies</div>
                                 </div>
                               </div>
-                              <div>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -265,7 +265,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Creative and intuitive designs</div>
                                 </div>
                               </div>
-                              <div>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
 

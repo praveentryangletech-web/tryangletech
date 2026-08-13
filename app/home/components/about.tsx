@@ -52,7 +52,7 @@ export default function About() {
               data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
               style={{ "opacity": "0" }}
               className="rt-gap-off">
-              We're a tech team based in Naroda, Ahmedabad. For over 7 years, we've helped Indian businesses launch websites, build mobile apps, and develop custom software that gets real results. You tell us what you need – we design it, build it, and launch it. No technical jargon, no disappearing acts.
+              We're a tech team based in Ahmedabad. For over 7 years, we've helped Indian businesses launch websites, build mobile apps, and develop custom software that gets real results. You tell us what you need – we design it, build it, and launch it. No technical jargon, no disappearing acts.
             </p>
             <div className="rt-about-v1-right-inner">
               <div

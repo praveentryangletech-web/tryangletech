@@ -199,7 +199,7 @@ export default function Navbar() {
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Website Development</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Scalable and responsive websites</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Scalable and responsive websites</div>
                               </div>
                             </div>
                             <div>
@@ -214,7 +214,7 @@ export default function Navbar() {
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Custom Software</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Tailored software solutions</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Tailored software solutions</div>
                               </div>
                             </div>
                             <div>
@@ -229,7 +229,7 @@ export default function Navbar() {
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Mobile Application</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">iOS and Android mobile apps</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>iOS and Android mobile apps</div>
                               </div>
                             </div>
                             <div>
@@ -247,7 +247,7 @@ export default function Navbar() {
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Digital Marketing</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Data-driven growth strategies</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Data-driven growth strategies</div>
                               </div>
                             </div>
                             <div>
@@ -262,7 +262,7 @@ export default function Navbar() {
                               </div>
                               <div className="w-layout-vflex rt-pages-menu-link">
                                 <div className="rt-nav-menu-link rt-padding-off">Graphics Designing</div>
-                                <div className="rt-pages-menu-small-text rt-text-medium">Creative and intuitive designs</div>
+                                <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Creative and intuitive designs</div>
                               </div>
                             </div>
                             <div>

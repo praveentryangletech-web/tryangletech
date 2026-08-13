@@ -107,26 +107,6 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             color: #1a0b54;
             font-weight: 600;
           }
-          .enhanced-richtext {
-            font-family: 'Inter', sans-serif;
-          }
-          .enhanced-richtext h2, .enhanced-richtext h3 {
-            color: #1a0b54;
-            font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-          }
-          .enhanced-richtext h2::after, .enhanced-richtext h3::after {
-            display: none;
-          }
-          .enhanced-richtext p {
-            font-size: 19px;
-            line-height: 1.8;
-            color: #334155;
-            margin-bottom: 24px;
-          }
           .start-project-btn {
             background: #1833fe;
             color: white;
@@ -212,9 +192,6 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             margin-bottom: 16px;
             padding-left: 1.5rem;
             position: relative;
-            color: #334155;
-            font-size: 1.1rem;
-            line-height: 1.6;
           }
           .list-item-custom::before {
             content: '';
@@ -243,7 +220,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
               </div>
               <PortfolioButtons liveUrl={project.liveUrl} />
 
-              <div className="enhanced-richtext">
+              <div className="w-richtext">
                 {project.description && (
                   <>
                     <h2>Project Overview</h2>
@@ -261,7 +238,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '2.5rem', marginBottom: '3rem' }}>
                   {project.challenges && project.challenges.length > 0 && (
                     <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
-                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.challenges.map((item, i) => (
                           <li key={i} className="list-item-custom">{item}</li>
@@ -272,7 +249,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                   {project.solutions && project.solutions.length > 0 && (
                     <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
-                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.solutions.map((item, i) => (
                           <li key={i} className="list-item-custom">{item}</li>
@@ -283,7 +260,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                   {project.results && project.results.length > 0 && (
                     <div style={{ background: '#ffffff', padding: '2.5rem 2rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
-                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', color: '#1a0b54', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
+                      <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
                       <ul style={{ listStyle: 'none', padding: 0 }}>
                         {project.results.map((item, i) => (
                           <li key={i} className="list-item-custom">{item}</li>
@@ -296,7 +273,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 {project.technologies && project.technologies.length > 0 && (
                   <div style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
                     <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                      <h3 style={{ display: 'inline-block', margin: 0, fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold' }}>Technologies</h3>
+                      <h3 style={{ display: 'inline-block', margin: 0 }}>Technologies</h3>
                     </div>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
                       <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
@@ -350,7 +327,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                   boxSizing: 'border-box',
                                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)'
                                 }}>
-                                  <span className="rt-text-style-h6" style={{ fontSize: '0.9rem', margin: 0, textAlign: 'center', color: '#1a0b54', whiteSpace: 'nowrap', fontWeight: '600' }}>{tech}</span>
+                                  <span className="rt-text-style-h6" style={{ margin: 0, textAlign: 'center', whiteSpace: 'nowrap' }}>{tech}</span>
                                 </div>
                               )}
                             </div>
@@ -363,7 +340,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
 
                 {/* Relevant Projects Section */}
                 <div style={{ marginTop: '5rem', marginBottom: '3rem' }}>
-                  <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', color: '#1a0b54', fontWeight: 'bold', textAlign: 'center' }}>Relevant Projects</h3>
+                  <h3 style={{ marginBottom: '2.5rem', textAlign: 'center' }}>Relevant Projects</h3>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {
@@ -405,7 +382,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                                 </div>
                                 <div className="rt-text-style-h6">{p.title}</div>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
-                                  <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px', margin: 0 }}>
+                                  <span className="rt-button-text rt-color-vivid-blue" style={{ margin: 0 }}>
                                     View Case Study
                                   </span>
                                   <span style={{

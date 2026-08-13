@@ -285,7 +285,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
 
                     {/* View Case Study link */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
-                      <span className="rt-button-text rt-color-vivid-blue" style={{ fontWeight: 600, fontSize: '14px', margin: 0 }}>
+                      <span className="rt-button-text rt-color-vivid-blue" style={{ margin: 0 }}>
                         View Case Study
                       </span>
                       <span style={{

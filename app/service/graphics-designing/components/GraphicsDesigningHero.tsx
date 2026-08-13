@@ -220,7 +220,6 @@ export default function GraphicsDesigningHero() {
               ))}
             </div>
           </div>
-          <div className="rt-marquee-bottom-line"></div>
         </div>
 
         {/* Hero background image */}

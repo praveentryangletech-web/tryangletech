@@ -68,51 +68,77 @@ export default function GraphicsDesigningFeatures() {
                 </span>
               </h2>
             </div>
-            <div className="rt-feaures-v2-wrapper">
-              <div
-                data-w-id="eb174494-37b0-c577-f775-a0aff8b2fae8"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+            <div className="rt-feaures-v2-wrapper" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+              {/* Logo Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
-                  <Image
-                    src="/service-2-assets/6916ec6339f890a80905a69b_Vector (33).svg"
-                    loading="lazy"
-                    alt=""
-                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  <Image src="/service-2-assets/6916ec6339f890a80905a69b_Vector (33).svg" loading="lazy" alt="Logo" width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Logo &amp; Brand Identity</div>
-                <p className="rt-gap-off">
-                  A great logo is the foundation of your brand. We create distinctive, versatile logos and full brand kits that leave a lasting mark.
-                </p>
+                <div className="rt-text-style-h6">Logo Design</div>
+                <p className="rt-gap-off">A great logo is the foundation of your brand. We create distinctive, versatile logos that leave a lasting mark.</p>
               </div>
-              <div
-                data-w-id="51a3f6a3-d1e9-e116-2ab6-7bbf62b0bfaf"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+
+              {/* Brochure Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
-                  <Image
-                    src="/service-2-assets/6916ec635353353be914aafc_Vector (32).svg"
-                    loading="lazy"
-                    alt=""
-                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  <Image src="/service-2-assets/6916ec635353353be914aafc_Vector (32).svg" loading="lazy" alt="Brochure" width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
-                <div className="rt-text-style-h6">Marketing &amp; Print Design</div>
-                <p className="rt-gap-off">
-                  From brochures and flyers to banners and presentations — we create print-ready marketing materials that command attention.
-                </p>
+                <div className="rt-text-style-h6">Brochure Design</div>
+                <p className="rt-gap-off">Communicate your brand's message effectively with beautifully crafted, print-ready brochures that command attention.</p>
               </div>
-              <div
-                data-w-id="0598657a-6564-d0cc-c595-dd3f3baae2ca"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon">
-                  <Image
-                    src="/service-2-assets/social_media_icon.svg"
-                    loading="lazy"
-                    alt="Social Media"
-                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+
+              {/* Visiting Card Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="6" width="18" height="12" rx="2" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="8" cy="12" r="2" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="12" y1="11" x2="18" y2="11" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="12" y1="14" x2="16" y2="14" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
-                <div className="rt-text-style-h6">Social Media &amp; Digital Design</div>
-                <p className="rt-gap-off">
-                  Scroll-stopping social media posts, ad creatives, and digital banners crafted to boost engagement and drive clicks.
-                </p>
+                <div className="rt-text-style-h6">Visiting Card Design</div>
+                <p className="rt-gap-off">Leave a memorable first impression with premium business card designs tailored to your unique professional identity.</p>
+              </div>
+
+              {/* Letterhead Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <polyline points="14 2 14 8 20 8" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="16" y1="13" x2="8" y2="13" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="16" y1="17" x2="8" y2="17" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="10" y1="9" x2="8" y2="9" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="rt-text-style-h6">Letterhead Design</div>
+                <p className="rt-gap-off">Ensure your official communications look polished and consistent with custom-designed letterheads.</p>
+              </div>
+
+              {/* Label Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="7" y1="7" x2="7.01" y2="7" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="rt-text-style-h6">Label Design</div>
+                <p className="rt-gap-off">Make your products stand out on the shelves with eye-catching, creative label and packaging designs.</p>
+              </div>
+
+              {/* Hoarding Design */}
+              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
+                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="5" width="18" height="10" rx="1" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="7" y1="15" x2="7" y2="21" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="17" y1="15" x2="17" y2="21" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="rt-text-style-h6">Hoarding Design</div>
+                <p className="rt-gap-off">Grab attention on a massive scale with impactful outdoor hoarding and billboard designs that drive engagement.</p>
               </div>
             </div>
           </div>

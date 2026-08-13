@@ -7,6 +7,54 @@ export default function GraphicsDesigningFeatures() {
   return (
     <>
         <section className="rt-feaures-v2 rt-position-relative">
+          <style dangerouslySetInnerHTML={{__html: `
+            .graphics-card-premium {
+              background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+              border: 1px solid rgba(255, 255, 255, 0.8);
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+              transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+              position: relative;
+              overflow: hidden;
+              z-index: 1;
+            }
+            .graphics-card-premium::before {
+              content: "";
+              position: absolute;
+              top: 0; left: -100%; width: 50%; height: 100%;
+              background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+              transform: skewX(-25deg);
+              transition: all 0.75s ease;
+              z-index: 2;
+              pointer-events: none;
+            }
+            .graphics-card-premium::after {
+              content: "";
+              position: absolute;
+              top: 0; left: 0; width: 100%; height: 100%;
+              background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 50%, #fff1f2 100%);
+              z-index: -1;
+              opacity: 0;
+              transition: opacity 0.4s ease;
+            }
+            .graphics-card-premium:hover {
+              transform: translateY(-12px) scale(1.02);
+              box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+              border-color: transparent;
+            }
+            .graphics-card-premium:hover::before {
+              left: 125%;
+            }
+            .graphics-card-premium:hover::after {
+              opacity: 1;
+            }
+            .graphics-card-premium .rt-feaures-v2-item-icon {
+              transition: transform 0.4s ease, filter 0.4s ease;
+            }
+            .graphics-card-premium:hover .rt-feaures-v2-item-icon {
+              transform: scale(1.15) translateY(-5px);
+              filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+            }
+          `}} />
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-feaures-v2-top rt-desktop-text-center">
               <div
@@ -28,7 +76,7 @@ export default function GraphicsDesigningFeatures() {
             <div className="rt-feaures-v2-wrapper">
               <div
                 data-w-id="eb174494-37b0-c577-f775-a0aff8b2fae8"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
+                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
                   <Image
                     src="/service-2-assets/6916ec6339f890a80905a69b_Vector (33).svg"
@@ -43,7 +91,7 @@ export default function GraphicsDesigningFeatures() {
               </div>
               <div
                 data-w-id="51a3f6a3-d1e9-e116-2ab6-7bbf62b0bfaf"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
+                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
                   <Image
                     src="/service-2-assets/6916ec635353353be914aafc_Vector (32).svg"
@@ -58,7 +106,7 @@ export default function GraphicsDesigningFeatures() {
               </div>
               <div
                 data-w-id="0598657a-6564-d0cc-c595-dd3f3baae2ca"
-                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
+                className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
                 <div className="rt-feaures-v2-item-icon">
                   <Image
                     src="/service-2-assets/690c7b2508ab483ef4047387_Vector (28).svg"

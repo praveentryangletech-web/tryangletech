@@ -268,7 +268,6 @@ export default function Navbar() {
                               <div>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
-                              {/* SEO */}
 
                             </Link>
                           </div>

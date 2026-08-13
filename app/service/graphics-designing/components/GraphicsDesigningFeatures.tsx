@@ -8,8 +8,15 @@ export default function GraphicsDesigningFeatures() {
     <>
         <section className="rt-feaures-v2 rt-position-relative">
           <style dangerouslySetInnerHTML={{__html: `
+            @keyframes animatedGradient {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
             .graphics-card-premium {
-              background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+              background: linear-gradient(135deg, #eff6ff, #faf5ff, #fff1f2, #eff6ff);
+              background-size: 300% 300%;
+              animation: animatedGradient 8s ease infinite;
               border: 1px solid rgba(255, 255, 255, 0.8);
               box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
               transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -21,31 +28,19 @@ export default function GraphicsDesigningFeatures() {
               content: "";
               position: absolute;
               top: 0; left: -100%; width: 50%; height: 100%;
-              background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+              background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
               transform: skewX(-25deg);
               transition: all 0.75s ease;
               z-index: 2;
               pointer-events: none;
             }
-            .graphics-card-premium::after {
-              content: "";
-              position: absolute;
-              top: 0; left: 0; width: 100%; height: 100%;
-              background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 50%, #fff1f2 100%);
-              z-index: -1;
-              opacity: 0;
-              transition: opacity 0.4s ease;
-            }
             .graphics-card-premium:hover {
               transform: translateY(-12px) scale(1.02);
-              box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-              border-color: transparent;
+              box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+              border-color: rgba(255, 255, 255, 1);
             }
             .graphics-card-premium:hover::before {
               left: 125%;
-            }
-            .graphics-card-premium:hover::after {
-              opacity: 1;
             }
             .graphics-card-premium .rt-feaures-v2-item-icon {
               transition: transform 0.4s ease, filter 0.4s ease;

@@ -185,7 +185,7 @@ export default function Navbar() {
                         </div>
                       </div>
                       <div className="w-layout-vflex" style={{ flex: 1, paddingTop: '12px' }}>
-                        <div style={{ padding: '0 32px 12px 32px', fontSize: '1.125rem', fontWeight: 700, color: '#111827' }}>
+                        <div style={{ padding: '0 32px 12px 0px', fontSize: '1.125rem', fontWeight: 700, color: '#111827' }}>
                           Explore Our IT Solutions
                         </div>
                         <div className="w-layout-hflex rt-pages-menu-wrap" style={{ paddingTop: 0 }}>
@@ -202,7 +202,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Scalable and responsive websites</div>
                                 </div>
                               </div>
-                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -217,7 +217,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Tailored software solutions</div>
                                 </div>
                               </div>
-                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -232,7 +232,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>iOS and Android mobile apps</div>
                                 </div>
                               </div>
-                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -250,7 +250,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Data-driven growth strategies</div>
                                 </div>
                               </div>
-                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
                             </Link>
@@ -265,7 +265,7 @@ export default function Navbar() {
                                   <div className="rt-pages-menu-small-text rt-text-medium" style={{ whiteSpace: 'nowrap' }}>Creative and intuitive designs</div>
                                 </div>
                               </div>
-                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                              <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <Image width={9} height={8} alt="arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394d1_kloudera-mega-menu-icon.svg`} loading="lazy" className="rt-pages-menu-link-arrow" />
                               </div>
 

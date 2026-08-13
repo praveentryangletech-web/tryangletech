@@ -101,14 +101,14 @@ export default function GraphicsDesigningPage() {
 
       <main>
         <GraphicsDesigningHero />
-        <GraphicsDesigningAIAgents />
-        <GraphicsDesigningAbout />
         <GraphicsDesigningFeatures />
+        <GraphicsDesigningAbout />
         <GraphicsDesigningServices />
         <GraphicsDesigningCore />
         <ProjectsSection hideFilter={true} categoryFilter={["Graphic Design"]} />
         <GraphicsDesigningTestimonial />
         {/* <GraphicsDesigningCTA /> */}
+        <GraphicsDesigningAIAgents />
         <GraphicsDesigningFAQ />
       </main>
 

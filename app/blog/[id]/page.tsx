@@ -5,8 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
-import CascadeSlider from "../components/CascadeSlider";
-
+import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const post = BLOG_POSTS.find(p => p.slug === resolvedParams.id);
@@ -40,7 +39,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
               className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ position: 'relative' }}>
               {post.images && post.images.length > 1 ? (
-                <CascadeSlider images={post.images} title={post.title} />
+                <PortfolioImageSlider images={post.images} title={post.title} />
               ) : (
                 <Image
                   src={post.image}

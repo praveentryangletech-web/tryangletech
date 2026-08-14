@@ -36,7 +36,7 @@ export default function CustomSoftwareFeatures() {
       color: "#ffffff",
       descColor: "rgba(255, 255, 255, 0.92)",
       shadow: "0 10px 28px rgba(255, 94, 58, 0.28)",
-      topOffset: "2%",
+      topOffset: "4%",
       leftOffset: "0%",
       border: "none",
       delay: "0.15s",
@@ -58,8 +58,8 @@ export default function CustomSoftwareFeatures() {
       color: "#ffffff",
       descColor: "rgba(255, 255, 255, 0.92)",
       shadow: "0 10px 28px rgba(99, 102, 241, 0.28)",
-      topOffset: "26%",
-      leftOffset: "21%",
+      topOffset: "28%",
+      leftOffset: "24%",
       border: "none",
       delay: "0.30s",
       icon: (
@@ -80,8 +80,8 @@ export default function CustomSoftwareFeatures() {
       color: "#0f172a",
       descColor: "#64748b",
       shadow: "0 10px 28px rgba(0, 0, 0, 0.06)",
-      topOffset: "50%",
-      leftOffset: "42%",
+      topOffset: "52%",
+      leftOffset: "48%",
       border: "1px solid #d4dcf9",
       delay: "0.45s",
       icon: (
@@ -101,8 +101,8 @@ export default function CustomSoftwareFeatures() {
       color: "#ffffff",
       descColor: "rgba(255, 255, 255, 0.92)",
       shadow: "0 10px 28px rgba(24, 51, 254, 0.28)",
-      topOffset: "74%",
-      leftOffset: "62%",
+      topOffset: "76%",
+      leftOffset: "68%",
       border: "none",
       delay: "0.60s",
       icon: (
@@ -132,7 +132,7 @@ export default function CustomSoftwareFeatures() {
 
         {/* Compact Stepped Process Cascade Canvas */}
         <div className="rt-compact-process-canvas">
-          {/* Top Column Labels & Dashed Vertical Grid Lines */}
+          {/* Top Column Labels & Continuous Vertical Dashed Grid Lines */}
           <div className="rt-columns-track">
             {steps.map((s, idx) => (
               <div key={s.id} className="rt-column-item">
@@ -140,7 +140,10 @@ export default function CustomSoftwareFeatures() {
                   <span className="rt-col-badge">{s.stepNum}</span>
                   <span className="rt-col-title">{s.column}</span>
                 </div>
-                <div className={`rt-dashed-line line-${idx + 1}`} />
+                {/* Full-height continuous dashed line track */}
+                <div className="rt-dashed-line-track">
+                  <div className={`rt-dashed-line line-${idx + 1}`} />
+                </div>
               </div>
             ))}
           </div>
@@ -175,12 +178,12 @@ export default function CustomSoftwareFeatures() {
         </div>
       </div>
 
-      {/* Embedded Styles with Native Staggered Cascade Animations */}
+      {/* Embedded Styles with Native Continuous Dashed Line Flow */}
       <style>{`
         .rt-compact-process-canvas {
           position: relative;
           width: 100%;
-          min-height: 480px;
+          min-height: 490px;
           margin-top: 10px;
         }
 
@@ -195,7 +198,7 @@ export default function CustomSoftwareFeatures() {
           transform: translateY(0);
         }
 
-        /* 4 Column Header & Dashed Guidelines */
+        /* 4 Column Grid */
         .rt-columns-track {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -209,6 +212,7 @@ export default function CustomSoftwareFeatures() {
           flex-direction: column;
           align-items: flex-start;
           position: relative;
+          height: 100%;
         }
 
         .rt-col-header {
@@ -241,37 +245,46 @@ export default function CustomSoftwareFeatures() {
           color: #475569;
         }
 
-        /* Dashed Line Growth Animation */
+        /* Continuous Dashed Guidelines matching About page */
+        .rt-dashed-line-track {
+          position: relative;
+          width: 100%;
+          height: 450px;
+          display: flex;
+          align-items: flex-start;
+        }
+
         .rt-dashed-line {
           width: 1px;
-          border-left: 1.5px dashed #cbd5e1;
+          border-left: 1.5px dashed rgba(173, 180, 216, 0.85);
+          border-right: none;
+          height: 100%;
           margin-left: 12px;
-          opacity: 0.6;
           transform: scaleY(0);
           transform-origin: top;
-          transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .is-inview .rt-dashed-line {
           transform: scaleY(1);
         }
 
-        .rt-dashed-line.line-1 { height: 440px; transition-delay: 0.1s; }
-        .rt-dashed-line.line-2 { height: 440px; transition-delay: 0.2s; }
-        .rt-dashed-line.line-3 { height: 380px; transition-delay: 0.3s; }
-        .rt-dashed-line.line-4 { height: 280px; transition-delay: 0.4s; }
+        .rt-dashed-line.line-1 { transition-delay: 0.10s; }
+        .rt-dashed-line.line-2 { transition-delay: 0.20s; }
+        .rt-dashed-line.line-3 { transition-delay: 0.30s; }
+        .rt-dashed-line.line-4 { transition-delay: 0.40s; }
 
         /* Floating Cards Overlay */
         .rt-cascade-overlay {
           position: absolute;
-          inset: 40px 0 0 0;
+          inset: 38px 0 0 0;
           pointer-events: auto;
         }
 
         /* Card Entry Animation matching About Page Flow */
         .rt-custom-process-card {
           position: absolute;
-          max-width: 360px;
-          width: 90%;
+          max-width: 350px;
+          width: 88%;
           padding: 16px 20px;
           border-radius: 16px;
           display: flex;
@@ -325,13 +338,13 @@ export default function CustomSoftwareFeatures() {
         }
 
         .rt-card-title {
-          font-size: 15.5px;
+          font-size: 15px;
           font-weight: 700;
           line-height: 1.3;
         }
 
         .rt-card-desc {
-          font-size: 13px;
+          font-size: 12.8px;
           line-height: 1.45;
           margin: 0;
         }

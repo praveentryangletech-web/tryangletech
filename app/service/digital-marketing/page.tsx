@@ -25,7 +25,7 @@ export default function DigitalMarketing() {
         <DigitalMarketingAgent />
         <DigitalMarketingAbout />
         <DigitalMarketingChooseUs />
-        <DigitalMarketingSolution />
+        {/* <DigitalMarketingSolution /> */}
         <DigitalMarketingToolsIntegration />
         <ProjectsSection hideFilter={true} categoryFilter={["Business Website", "Landing Website"]} />
         <DigitalMarketingFaq />

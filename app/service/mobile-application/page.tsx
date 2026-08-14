@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import MobileApplicationHero from './components/MobileApplicationHero';
 import MobileApplicationSimplified from './components/MobileApplicationSimplified';
+import MobileApplicationTypes from './components/MobileApplicationTypes';
 import MobileApplicationOurServices from './components/MobileApplicationOurServices';
 import MobileApplicationCases from './components/MobileApplicationCases';
 import MobileApplicationFeatures from './components/MobileApplicationFeatures';
@@ -50,6 +51,7 @@ export default function MobileApplicationPage() {
       <main>
         <MobileApplicationHero />
         <MobileApplicationSimplified />
+        <MobileApplicationTypes />
         <MobileApplicationOurServices />
         <MobileApplicationCases />
         <MobileApplicationFeatures />

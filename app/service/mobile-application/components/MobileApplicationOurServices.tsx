@@ -93,10 +93,12 @@ export default function MobileApplicationOurServices() {
                         </div>
                         <div className="rt-our-service-right-icon">
                           <div
+                            data-w-id="51e73edd-cd94-a54d-7eed-7768bb6cc864"
                             className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap" style={{ fontSize: "18px" }}>
                             Native iOS
                           </div>
                           <p
+                            data-w-id="15cfac48-955b-b56a-6e2a-fa56be3f619c"
                             className="rt-gap-off rt-color-pale-periwinkle" style={{ fontSize: "14px" }}>
                             High-performance Apple applications built with Swift.
                           </p>
@@ -105,7 +107,7 @@ export default function MobileApplicationOurServices() {
 
                       {/* Android Block */}
                       <div style={{ flex: 1 }}>
-                        <div style={{ marginBottom: "16px" }}>
+                        <div data-w-id="ecf91cbc-a037-faed-e91f-a12afbd7b4dd" style={{ marginBottom: "16px" }}>
                           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F85936" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 11.5A6.5 6.5 0 0 0 6 11.5v2h12v-2Z" />
                             <rect x="6" y="13.5" width="12" height="6" />
@@ -119,10 +121,12 @@ export default function MobileApplicationOurServices() {
                         </div>
                         <div className="rt-our-service-right-icon">
                           <div
+                            data-w-id="51e73edd-cd94-a54d-7eed-7768bb6cc864"
                             className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap" style={{ fontSize: "18px" }}>
                             Native Android
                           </div>
                           <p
+                            data-w-id="15cfac48-955b-b56a-6e2a-fa56be3f619c"
                             className="rt-gap-off rt-color-pale-periwinkle" style={{ fontSize: "14px" }}>
                             Scalable Google applications tailored for Android.
                           </p>

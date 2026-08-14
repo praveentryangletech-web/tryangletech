@@ -24,41 +24,67 @@ export default function DigitalMarketingChooseUs() {
               You'll always know what's happening with your budget
             </h2>
           </div>
-            <div className="rt-choose-v4-left-inner">
+            <div className="rt-choose-v4-left-inner" style={{ display: "flex", flexDirection: "column", gap: "24px", paddingTop: "24px" }}>
               <div
                 data-w-id="8da8b8da-dc9c-d89a-23db-e5858158f2eb"
-  
                 className="rt-choose-v4-left-inner-row"
+                style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}
               >
-                <div>
-                  <Image
-                    src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
-                    loading="lazy"
-                    alt=""
-                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
+                    border: "1px solid rgba(24, 51, 254, 0.14)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
                 </div>
-                <div>
-                  <div className="rt-text-style-h6">Clear reporting</div>
-                  <p className="rt-gap-off" style={{ marginTop: '10px' }}>
+                <div style={{ flex: 1 }}>
+                  <div className="rt-text-style-h6" style={{ fontSize: "19px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>Clear reporting</div>
+                  <p className="rt-gap-off" style={{ color: "#556987", fontSize: "14px", lineHeight: "1.5" }}>
                     You get regular updates on what we're doing and how it's performing - no vague monthly summaries.
                   </p>
                 </div>
               </div>
               <div
                 data-w-id="6eae5b6e-e72c-07d6-efbe-4fb119e2be8b"
-  
                 className="rt-choose-v4-left-inner-row"
+                style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}
               >
-                <div>
-                  <Image
-                    src="/Home3_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
-                    loading="lazy"
-                    alt=""
-                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "12px",
+                    background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
+                    border: "1px solid rgba(24, 51, 254, 0.14)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
                 </div>
-                <div>
-                  <div className="rt-text-style-h6">One team, no guesswork</div>
-                  <p className="rt-gap-off" style={{ marginTop: '10px' }}>
+                <div style={{ flex: 1 }}>
+                  <div className="rt-text-style-h6" style={{ fontSize: "19px", fontWeight: 700, color: "#0f172a", marginBottom: "4px" }}>One team, no guesswork</div>
+                  <p className="rt-gap-off" style={{ color: "#556987", fontSize: "14px", lineHeight: "1.5" }}>
                     SEO, social, and ads all handled by the same team that knows your business, not handed off between departments.
                   </p>
                 </div>

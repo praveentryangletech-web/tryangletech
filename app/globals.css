@@ -28,7 +28,29 @@ body {
   color: transparent !important;
 }
 
+
+/* ── Capabilities → Portfolio gradient blend ── */
+/* Bottom-to-top: blue/purple tint at the bottom matches the Portfolio
+   section directly below, fades to white at the top. */
+.rt-feaures-v3 {
+  background:
+    linear-gradient(
+      to top,
+      #1833fe1a 12%,
+      #812efd1a 34%,
+      #ef56450d 56%,
+      #ffaf5e00 72%
+    ),
+    linear-gradient(
+      to top,
+      #f9fbff 0%,
+      #f4f6ff 55%,
+      #ffffff 100%
+    ) !important;
+}
+
 /* Native Webflow Dropdown Hover Fix */
+
 .w-dropdown:hover .w-dropdown-list,
 .w-dropdown.w--open .w-dropdown-list {
   display: block !important;

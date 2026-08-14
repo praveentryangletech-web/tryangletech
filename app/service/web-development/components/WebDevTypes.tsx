@@ -132,9 +132,8 @@ export default function WebDevTypes() {
       ref={sectionRef}
       className="rt-speciality rt-overflow-hidden"
       style={{
-        padding: "52px 0 44px 0",
-        background: "linear-gradient(180deg, #ffffff 0%, #f9fbff 50%, #ffffff 100%)",
-        position: "relative",
+        paddingTop: "40px",
+        paddingBottom: "30px",
       }}
     >
       <div className="w-layout-blockcontainer rt-container-main w-container">

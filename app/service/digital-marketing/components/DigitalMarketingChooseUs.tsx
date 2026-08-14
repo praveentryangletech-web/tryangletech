@@ -35,13 +35,13 @@ export default function DigitalMarketingChooseUs() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "12px",
-                    background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
-                    border: "1px solid rgba(24, 51, 254, 0.14)",
+                    // background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
+                    // border: "1px solid rgba(24, 51, 254, 0.14)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
+                    // boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
                   }}
                 >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -66,13 +66,13 @@ export default function DigitalMarketingChooseUs() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "12px",
-                    background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
-                    border: "1px solid rgba(24, 51, 254, 0.14)",
+                    // background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
+                    // border: "1px solid rgba(24, 51, 254, 0.14)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
+                    // boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
                   }}
                 >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

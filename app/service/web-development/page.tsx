@@ -13,6 +13,7 @@ const SA = "/service3-assets";
 import WebDevHero from './components/WebDevHero';
 
 import WebDevSpeciality from './components/WebDevSpeciality';
+import WebDevTypes from './components/WebDevTypes';
 
 import WebDevFeatures from './components/WebDevFeatures';
 import WebDevServices from './components/WebDevServices';
@@ -36,6 +37,8 @@ export default function WebDevelopmentPage() {
         <WebDevHero />
 
         <WebDevSpeciality />
+
+        <WebDevTypes />
 
         <WebDevFeatures />
         <WebDevServices />

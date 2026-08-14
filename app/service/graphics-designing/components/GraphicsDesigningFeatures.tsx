@@ -1,152 +1,232 @@
 'use client';
+
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 export default function GraphicsDesigningFeatures() {
+  const designServices = [
+    {
+      title: "Logo Design",
+      desc: "A great logo is the foundation of your brand. We create distinctive, versatile logos that leave a lasting mark across all media.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      title: "Brochure Design",
+      desc: "Communicate your brand's message effectively with beautifully crafted, print-ready corporate brochures that command attention.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 19.5V4.5C4 3.12 5.12 2 6.5 2H20V22H6.5C5.12 22 4 20.88 4 19.5Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M6 6H16" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M6 10H16" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      title: "Visiting Card Design",
+      desc: "Leave a memorable first impression with premium business card designs tailored to your unique professional brand identity.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="8" cy="11" r="2" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="13" y1="10" x2="18" y2="10" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="13" y1="13" x2="16" y2="13" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      title: "Letterhead Design",
+      desc: "Ensure your official communications look polished, trustworthy, and consistent with custom-designed corporate stationery.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <polyline points="14 2 14 8 20 8" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      title: "Label Design",
+      desc: "Make your products stand out on retail shelves and digital catalogs with creative, high-impact label and packaging designs.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.59 13.41L13.42 20.58C12.64 21.36 11.37 21.36 10.59 20.58L2 12V2H12L20.59 10.59C21.37 11.37 21.37 12.63 20.59 13.41Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="7" cy="7" r="1.5" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      title: "Hoarding Design",
+      desc: "Grab attention on a massive scale with high-visibility outdoor hoarding, billboard, and transit banners that drive brand recall.",
+      icon: (
+        <svg className="service-card-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="7" y1="15" x2="7" y2="21" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="17" y1="15" x2="17" y2="21" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+          <line x1="4" y1="21" x2="20" y2="21" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
-    <>
-        <section className="rt-feaures-v2 rt-position-relative">
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes animatedGradient {
-              0% { background-position: 0% 50%; }
-              50% { background-position: 100% 50%; }
-              100% { background-position: 0% 50%; }
-            }
-            .graphics-card-premium {
-              background: linear-gradient(135deg, #eff6ff, #faf5ff, #fff1f2, #eff6ff);
-              background-size: 300% 300%;
-              animation: animatedGradient 8s ease infinite;
-              border: 1px solid rgba(255, 255, 255, 0.8);
-              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-              transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-              position: relative;
-              overflow: hidden;
-              z-index: 1;
-            }
-            .graphics-card-premium::before {
-              content: "";
-              position: absolute;
-              top: 0; left: -100%; width: 50%; height: 100%;
-              background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-              transform: skewX(-25deg);
-              transition: all 0.75s ease;
-              z-index: 2;
-              pointer-events: none;
-            }
-            .graphics-card-premium:hover {
-              transform: translateY(-12px) scale(1.02);
-              box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-              border-color: rgba(255, 255, 255, 1);
-            }
-            .graphics-card-premium:hover::before {
-              left: 125%;
-            }
-            .graphics-card-premium .rt-feaures-v2-item-icon {
-              transition: transform 0.4s ease, filter 0.4s ease;
-            }
-            .graphics-card-premium:hover .rt-feaures-v2-item-icon {
-              transform: scale(1.15) translateY(-5px);
-              filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
-            }
-          `}} />
-          <div className="w-layout-blockcontainer rt-container-main w-container">
-            <div className="rt-feaures-v2-top rt-desktop-text-center">
-              <div
-                data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa63"
-                className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">
-                  our design process
-                </div>
-              </div>
-              <h2
-                data-w-id="bd033fda-a78c-9194-d2d6-f701cfebaa66"
-                className="rt-gap-off">
-                A strategic approach to brilliant{" "}
-                <span className="rt-color-periwinkle-gray">
-                  graphic design
-                </span>
-              </h2>
-            </div>
-            <div className="rt-feaures-v2-wrapper" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-              {/* Logo Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon">
-                  <Image src="/service-2-assets/6916ec6339f890a80905a69b_Vector (33).svg" loading="lazy" alt="Logo" width={800} height={800} style={{ width: "100%", height: "auto" }} />
-                </div>
-                <div className="rt-text-style-h6">Logo Design</div>
-                <p className="rt-gap-off">A great logo is the foundation of your brand. We create distinctive, versatile logos that leave a lasting mark.</p>
-              </div>
+    <section
+      className="rt-feaures-v2 rt-position-relative"
+      style={{
+        background: "linear-gradient(180deg, #ffffff 0%, #f6f8fe 50%, #eff3fe 100%)",
+        paddingTop: "5rem",
+        paddingBottom: "5.5rem",
+      }}
+    >
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .graphics-card-premium {
+            background: #ffffff;
+            border: 1px solid #e1e6f4;
+            border-radius: 1.25rem;
+            padding: 2rem 1.875rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            max-width: none;
+            cursor: pointer;
+            will-change: transform, box-shadow;
+          }
 
-              {/* Brochure Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon">
-                  <Image src="/service-2-assets/6916ec635353353be914aafc_Vector (32).svg" loading="lazy" alt="Brochure" width={800} height={800} style={{ width: "100%", height: "auto" }} />
-                </div>
-                <div className="rt-text-style-h6">Brochure Design</div>
-                <p className="rt-gap-off">Communicate your brand's message effectively with beautifully crafted, print-ready brochures that command attention.</p>
-              </div>
+          /* Pure White Light-Sheen Sweep */
+          .graphics-card-premium::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+              to right,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.6) 50%,
+              rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 2;
+            pointer-events: none;
+          }
 
-              {/* Visiting Card Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="6" width="18" height="12" rx="2" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="8" cy="12" r="2" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="12" y1="11" x2="18" y2="11" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="12" y1="14" x2="16" y2="14" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="rt-text-style-h6">Visiting Card Design</div>
-                <p className="rt-gap-off">Leave a memorable first impression with premium business card designs tailored to your unique professional identity.</p>
-              </div>
+          /* Ultra-Light, Subtle Hover State */
+          .graphics-card-premium:hover {
+            transform: translateY(-8px) scale(1.015);
+            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+            border-color: #dbeafe;
+            box-shadow: 0 16px 36px -10px rgba(24, 51, 254, 0.06);
+          }
 
-              {/* Letterhead Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <polyline points="14 2 14 8 20 8" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="16" y1="13" x2="8" y2="13" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="16" y1="17" x2="8" y2="17" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="10" y1="9" x2="8" y2="9" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="rt-text-style-h6">Letterhead Design</div>
-                <p className="rt-gap-off">Ensure your official communications look polished and consistent with custom-designed letterheads.</p>
-              </div>
+          .graphics-card-premium:hover::before {
+            left: 140%;
+          }
 
-              {/* Label Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="7" y1="7" x2="7.01" y2="7" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="rt-text-style-h6">Label Design</div>
-                <p className="rt-gap-off">Make your products stand out on the shelves with eye-catching, creative label and packaging designs.</p>
-              </div>
+          /* Icon Box Transition: Soft Light Pastel Tint */
+          .graphics-card-premium .service-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: #f4f7ff;
+            border: 1px solid #e8edfa;
+            color: #1833fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        color 0.5s ease,
+                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+          }
 
-              {/* Hoarding Design */}
-              <div className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium">
-                <div className="rt-feaures-v2-item-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="5" width="18" height="10" rx="1" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="7" y1="15" x2="7" y2="21" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <line x1="17" y1="15" x2="17" y2="21" stroke="#1833FE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="rt-text-style-h6">Hoarding Design</div>
-                <p className="rt-gap-off">Grab attention on a massive scale with impactful outdoor hoarding and billboard designs that drive engagement.</p>
-              </div>
-            </div>
+          .graphics-card-premium:hover .service-icon-box {
+            transform: scale(1.08) translateY(-2px);
+            background: #eef2ff;
+            border-color: #c7d2fe;
+            color: #1833fe;
+            box-shadow: 0 6px 16px rgba(24, 51, 254, 0.08);
+          }
+
+          /* Title Color Transition */
+          .graphics-card-premium .service-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 0.25rem;
+            transition: color 0.5s ease;
+          }
+
+          .graphics-card-premium:hover .service-card-title {
+            color: #1833fe;
+          }
+        `
+      }} />
+
+      <div className="w-layout-blockcontainer rt-container-main w-container">
+        {/* Header */}
+        <div className="rt-feaures-v2-top rt-desktop-text-center" style={{ marginBottom: "3rem" }}>
+          <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "0.5rem" }}>
+            <div className="rt-sub-text rt-sub-gredient">our design process</div>
           </div>
-          <div
-            data-w-id="f7dfaa0b-0429-3472-8e08-cf86c14810bf"
-            className="w-layout-hflex rt-section-line-wrap rt-margin-auto">
-          </div>
-        </section>
-    </>
+          <h2 className="rt-gap-off">
+            A strategic approach to brilliant{" "}
+            <span className="rt-color-periwinkle-gray">graphic design</span>
+          </h2>
+        </div>
+
+        {/* 6 Clean White Cards with Attractive Hover Transitions */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "1.875rem",
+          }}
+        >
+          {designServices.map((service, index) => (
+            <div
+              key={index}
+              className="rt-feaures-v2-item rt-border-radius-medium rt-shadow graphics-card-premium"
+            >
+              <div className="service-icon-box">
+                {service.icon}
+              </div>
+              <div className="rt-text-style-h6 service-card-title">
+                {service.title}
+              </div>
+              <p
+                className="rt-gap-off"
+                style={{
+                  color: "#64748b",
+                  fontSize: "0.95rem",
+                  lineHeight: "1.6",
+                  margin: 0,
+                }}
+              >
+                {service.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

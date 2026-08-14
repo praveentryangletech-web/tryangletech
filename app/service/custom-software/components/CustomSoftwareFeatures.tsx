@@ -1,152 +1,361 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
-import Image from "next/image";
-
-const A = '/about-assets';
 
 export default function CustomSoftwareFeatures() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Native Scroll Reveal Observer
+  // Native Scroll Reveal Observer matching About page animation timing
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
+            entry.target.classList.add("is-inview");
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);
 
+  const steps = [
+    {
+      id: "step-1",
+      column: "Discovery",
+      stepNum: "01",
+      title: "Requirement Gathering & Scoping",
+      desc: "We analyze your business workflows, user edge cases, and technical prerequisites to establish a solid roadmap.",
+      bg: "linear-gradient(135deg, #ff5e3a 0%, #ff7a45 100%)",
+      color: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.92)",
+      shadow: "0 10px 28px rgba(255, 94, 58, 0.28)",
+      topOffset: "2%",
+      leftOffset: "0%",
+      border: "none",
+      delay: "0.15s",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
+        </svg>
+      ),
+    },
+    {
+      id: "step-2",
+      column: "Architecture",
+      stepNum: "02",
+      title: "System Architecture & UI/UX",
+      desc: "Interactive Figma wireframes, database schema modeling, and robust API microservice architecture designs.",
+      bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+      color: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.92)",
+      shadow: "0 10px 28px rgba(99, 102, 241, 0.28)",
+      topOffset: "26%",
+      leftOffset: "21%",
+      border: "none",
+      delay: "0.30s",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M3 9h18" />
+          <path d="M9 21V9" />
+        </svg>
+      ),
+    },
+    {
+      id: "step-3",
+      column: "Development",
+      stepNum: "03",
+      title: "Agile Full-Stack Engineering",
+      desc: "Clean code delivery across frontend and backend using modern stacks with weekly demo sprint milestones.",
+      bg: "#ffffff",
+      color: "#0f172a",
+      descColor: "#64748b",
+      shadow: "0 10px 28px rgba(0, 0, 0, 0.06)",
+      topOffset: "50%",
+      leftOffset: "42%",
+      border: "1px solid #d4dcf9",
+      delay: "0.45s",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      ),
+    },
+    {
+      id: "step-4",
+      column: "Launch & Support",
+      stepNum: "04",
+      title: "Automated QA & Cloud Launch",
+      desc: "Automated security audits, zero-downtime CI/CD deployment, performance tuning, and ongoing SLA maintenance.",
+      bg: "linear-gradient(135deg, #1833fe 0%, #0ea5e9 100%)",
+      color: "#ffffff",
+      descColor: "rgba(255, 255, 255, 0.92)",
+      shadow: "0 10px 28px rgba(24, 51, 254, 0.28)",
+      topOffset: "74%",
+      leftOffset: "62%",
+      border: "none",
+      delay: "0.60s",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
-    <section ref={sectionRef} className="rt-process-section" style={{ position: 'relative', padding: '60px 0 40px 0' }}>
+    <section ref={sectionRef} className="rt-process-section" style={{ position: "relative", padding: "40px 0 30px 0" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
-        <div className="rt-tools-iconheading rt-features-v1-top rt-heading-bottom-gap reveal-on-scroll">
-          <div data-w-id="693eb16e-3bc6-8021-f4ba-24ac39d3bdeb" className="rt-sub-gap">
+        <div className="rt-tools-iconheading rt-features-v1-top rt-heading-entry" style={{ textAlign: "center", margin: "0 auto 28px auto" }}>
+          <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
             <div className="rt-sub-text rt-sub-gredient">our development process</div>
           </div>
-          <h2 data-w-id="693eb16e-3bc6-8021-f4ba-24ac39d3bdee" className="rt-gap-off rt-desktop-text-center">
+          <h2 className="rt-gap-off rt-desktop-text-center" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}>
             Deliver projects on time through{" "}
             <span className="rt-color-periwinkle-gray">streamlined execution</span>
           </h2>
-          <p style={{ maxWidth: "680px", margin: "14px auto 0 auto", color: "#64748b", fontSize: "15px", lineHeight: "1.6", textAlign: "center" }}>
-            From in-depth requirement analysis and scalable architecture design to agile sprints, automated testing, and zero-downtime cloud launch.
+          <p style={{ maxWidth: "660px", margin: "8px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
+            A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.
           </p>
         </div>
 
-        {/* Stepped Process Cascade Layout */}
-        <div className="rt-process-main rt-position-relative reveal-on-scroll">
-          {/* Step Columns with Dashed Line Guides */}
-          <div className="rt-process-wrapper">
-            {[
-              { wid1: 'baf8e5e7-49ac-4f7f-ad09-58deaac1a659', wid2: '55254470-bac2-0dd8-dd5a-5cfe717a3c25', label: 'Discover', cls: 'one' },
-              { wid1: 'e48fada5-0185-92fe-c33e-d6a7c98377b3', wid2: 'e48fada5-0185-92fe-c33e-d6a7c98377b6', label: 'Design & Develop', cls: 'two' },
-              { wid1: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1f7', wid2: '0d8e4976-b51c-d283-cc1a-5a60ed5dc1fa', label: 'Launch & Support', cls: 'three' },
-            ].map(({ wid1, wid2, label, cls }) => (
-              <div key={cls} className="rt-process-item">
-                <div data-w-id={wid1} className="rt-process-text">
-                  <div style={{ fontWeight: 600, color: "#475569" }}>{label}</div>
+        {/* Compact Stepped Process Cascade Canvas */}
+        <div className="rt-compact-process-canvas">
+          {/* Top Column Labels & Dashed Vertical Grid Lines */}
+          <div className="rt-columns-track">
+            {steps.map((s, idx) => (
+              <div key={s.id} className="rt-column-item">
+                <div className="rt-col-header">
+                  <span className="rt-col-badge">{s.stepNum}</span>
+                  <span className="rt-col-title">{s.column}</span>
                 </div>
-                <div data-w-id={wid2} className="rt-process-item-line-main">
-                  <div className={`rt-process-item-line ${cls}`}></div>
-                </div>
+                <div className={`rt-dashed-line line-${idx + 1}`} />
               </div>
             ))}
           </div>
 
-          {/* Staggered Process Detail Boxes */}
-          <div className="rt-process-item-overlay rt-overflow-hidden">
-            {/* Step 1: Discover & Planning (Orange Card) */}
-            <div
-              data-w-id="fe26f0d6-37c8-3685-a177-c8bb05fdb9ca"
-              className="rt-process-box rt-1 rt-interactive-process-box"
-              style={{ cursor: "pointer" }}
-            >
-              <div className="rt-icon-no" style={{ marginTop: "2px" }}>
-                <Image src={`${A}/690c7b256a26b771ea0562fb_Vector (27).svg`} loading="lazy" alt="" width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-process-text-gap">
-                <div className="rt-text-style-h6 rt-text-color-white" style={{ fontSize: "18px", fontWeight: 700 }}>
-                  Requirement gathering &amp; Architecture
+          {/* Cascading Floating Step Cards */}
+          <div className="rt-cascade-overlay">
+            {steps.map((s) => (
+              <div
+                key={s.id}
+                className="rt-custom-process-card"
+                style={{
+                  top: s.topOffset,
+                  left: s.leftOffset,
+                  background: s.bg,
+                  boxShadow: s.shadow,
+                  border: s.border,
+                  transitionDelay: s.delay,
+                }}
+              >
+                <div className="rt-card-icon-pill">{s.icon}</div>
+                <div className="rt-card-text-group">
+                  <div className="rt-card-title" style={{ color: s.color }}>
+                    {s.title}
+                  </div>
+                  <p className="rt-card-desc" style={{ color: s.descColor }}>
+                    {s.desc}
+                  </p>
                 </div>
-                <p className="rt-gap-off rt-text-color-white" style={{ fontSize: "14px", lineHeight: "1.6", opacity: 0.95 }}>
-                  We understand your business goals, target audience, technical specifications, and database scope to build the right foundation.
-                </p>
               </div>
-            </div>
-
-            {/* Step 2: Design & Development (Frosted Card) */}
-            <div
-              data-w-id="9a59051b-7eac-c0f0-0d70-0d14e85112ac"
-              className="rt-process-box rt-2 rt-interactive-process-box"
-              style={{ cursor: "pointer" }}
-            >
-              <div className="rt-icon-no" style={{ marginTop: "2px" }}>
-                <Image src={`${A}/690c7b2508ab483ef4047387_Vector (28).svg`} loading="lazy" alt="" width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-process-text-gap">
-                <div className="rt-text-style-h6" style={{ fontSize: "18px", fontWeight: 700, color: "#0f172a" }}>
-                  Design &amp; Agile Development
-                </div>
-                <p className="rt-gap-off" style={{ fontSize: "14px", lineHeight: "1.6", color: "#64748b" }}>
-                  Our team crafts intuitive UI/UX designs and builds robust, scalable frontend and backend systems tailored to your workflows.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3: Launch & Support (Blue Card) */}
-            <div
-              data-w-id="6b5c6d36-e516-7ca4-cea7-722942bbc918"
-              className="rt-process-box rt-3 rt-interactive-process-box"
-              style={{ cursor: "pointer" }}
-            >
-              <div className="rt-icon-no" style={{ marginTop: "2px" }}>
-                <Image src={`${A}/6914525ddeeb169b19ad1aa4_Vector (29).svg`} loading="lazy" alt="" width={800} height={800} style={{ width: "100%", height: "auto" }} />
-              </div>
-              <div className="rt-process-text-gap">
-                <div className="rt-text-style-h6 rt-text-color-white" style={{ fontSize: "18px", fontWeight: 700 }}>
-                  Quality Testing &amp; Launch Support
-                </div>
-                <p className="rt-gap-off rt-text-color-white" style={{ fontSize: "14px", lineHeight: "1.6", opacity: 0.95 }}>
-                  We perform thorough automated testing, deploy your project to cloud infrastructure, and provide dedicated ongoing support post-launch.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div data-w-id="f7dfaa0b-0429-3472-8e08-cf86c14810bf" className="w-layout-hflex rt-section-line-wrap rt-margin-auto">
-        <div className="rt-section-overlay"></div>
-      </div>
-
-      {/* Smooth hover styles */}
+      {/* Embedded Styles with Native Staggered Cascade Animations */}
       <style>{`
-        .rt-interactive-process-box {
-          transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease !important;
+        .rt-compact-process-canvas {
+          position: relative;
+          width: 100%;
+          min-height: 480px;
+          margin-top: 10px;
         }
-        .rt-interactive-process-box:hover {
-          transform: translateY(-5px) scale(1.01);
+
+        /* Heading Reveal */
+        .rt-heading-entry {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
-        .rt-process-box.rt-1:hover {
-          box-shadow: 1.25rem 1.5rem 3.5rem rgba(248, 89, 54, 0.45) !important;
+        .is-inview .rt-heading-entry {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .rt-process-box.rt-2:hover {
-          box-shadow: 1.25rem 1.5rem 3.5rem rgba(24, 51, 254, 0.12) !important;
-          border-color: rgba(24, 51, 254, 0.3) !important;
+
+        /* 4 Column Header & Dashed Guidelines */
+        .rt-columns-track {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          position: relative;
+          width: 100%;
+          height: 100%;
         }
-        .rt-process-box.rt-3:hover {
-          box-shadow: 1.25rem 1.5rem 3.5rem rgba(60, 161, 255, 0.45) !important;
+
+        .rt-column-item {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          position: relative;
+        }
+
+        .rt-col-header {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding-bottom: 12px;
+          z-index: 2;
+          opacity: 0;
+          transform: translateY(-8px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .is-inview .rt-col-header {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .rt-col-badge {
+          font-size: 11px;
+          font-weight: 700;
+          color: #1833fe;
+          background: rgba(24, 51, 254, 0.08);
+          padding: 2px 6px;
+          border-radius: 4px;
+        }
+
+        .rt-col-title {
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #475569;
+        }
+
+        /* Dashed Line Growth Animation */
+        .rt-dashed-line {
+          width: 1px;
+          border-left: 1.5px dashed #cbd5e1;
+          margin-left: 12px;
+          opacity: 0.6;
+          transform: scaleY(0);
+          transform-origin: top;
+          transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .is-inview .rt-dashed-line {
+          transform: scaleY(1);
+        }
+
+        .rt-dashed-line.line-1 { height: 440px; transition-delay: 0.1s; }
+        .rt-dashed-line.line-2 { height: 440px; transition-delay: 0.2s; }
+        .rt-dashed-line.line-3 { height: 380px; transition-delay: 0.3s; }
+        .rt-dashed-line.line-4 { height: 280px; transition-delay: 0.4s; }
+
+        /* Floating Cards Overlay */
+        .rt-cascade-overlay {
+          position: absolute;
+          inset: 40px 0 0 0;
+          pointer-events: auto;
+        }
+
+        /* Card Entry Animation matching About Page Flow */
+        .rt-custom-process-card {
+          position: absolute;
+          max-width: 360px;
+          width: 90%;
+          padding: 16px 20px;
+          border-radius: 16px;
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          cursor: pointer;
+          opacity: 0;
+          transform: translateY(30px) scale(0.96);
+          transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+                      box-shadow 0.45s ease,
+                      opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+          will-change: transform, opacity, box-shadow;
+          z-index: 5;
+        }
+
+        .is-inview .rt-custom-process-card {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        .rt-custom-process-card:hover {
+          transform: translateY(-5px) scale(1.02) !important;
+          z-index: 10;
+        }
+
+        .rt-card-icon-pill {
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(4px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 2px;
+          transition: transform 0.4s ease;
+        }
+        .rt-custom-process-card:hover .rt-card-icon-pill {
+          transform: scale(1.1);
+        }
+
+        .rt-custom-process-card:nth-child(3) .rt-card-icon-pill {
+          background: rgba(24, 51, 254, 0.08);
+        }
+
+        .rt-card-text-group {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .rt-card-title {
+          font-size: 15.5px;
+          font-weight: 700;
+          line-height: 1.3;
+        }
+
+        .rt-card-desc {
+          font-size: 13px;
+          line-height: 1.45;
+          margin: 0;
+        }
+
+        /* ── Mobile / Tablet Responsive Fallback ── */
+        @media (max-width: 991px) {
+          .rt-compact-process-canvas {
+            min-height: auto;
+          }
+          .rt-columns-track {
+            display: none;
+          }
+          .rt-cascade-overlay {
+            position: static;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+          }
+          .rt-custom-process-card {
+            position: static !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            inset: auto !important;
+          }
         }
       `}</style>
     </section>

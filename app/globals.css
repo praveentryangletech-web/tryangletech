@@ -18,6 +18,16 @@ body {
   display: inline-block;
 }
 
+/* Enforce consistent brand gradient for all overtitles across the site */
+.rt-sub-gredient {
+  background-image: linear-gradient(90deg, var(--vivid-blue), #6366f1) !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  display: inline-block;
+  color: transparent !important;
+}
+
 /* Native Webflow Dropdown Hover Fix */
 .w-dropdown:hover .w-dropdown-list,
 .w-dropdown.w--open .w-dropdown-list {

@@ -8,7 +8,7 @@ const SA = '/service3-assets';
 export default function MobileApplicationSimplified() {
   return (
     <>
-      <section className="rt-simplified">
+      <section className="rt-simplified" style={{ paddingBottom: "3.5rem" }}>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-simplified-top rt-desktop-text-center rt-heading-bottom-gap">
               <div

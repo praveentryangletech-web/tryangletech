@@ -21,9 +21,9 @@ export default function DigitalMarketing() {
       <main>
         <DigitalMarketingHero />
         <DigitalMarketingMarquee />
+        <DigitalMarketingFeatures />
         <DigitalMarketingAgent />
         <DigitalMarketingAbout />
-        <DigitalMarketingFeatures />
         <DigitalMarketingChooseUs />
         <DigitalMarketingSolution />
         <DigitalMarketingToolsIntegration />

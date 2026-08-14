@@ -132,6 +132,11 @@ export default function CustomSoftwareFeatures() {
 
         {/* Compact Stepped Process Cascade Canvas */}
         <div className="rt-compact-process-canvas">
+         
+
+          {/* Horizontal X-Axis Line Bottom */}
+          <div className="rt-x-axis-line-bottom" />
+
           {/* Top Column Labels & Continuous Vertical Dashed Grid Lines */}
           <div className="rt-columns-track">
             {steps.map((s, idx) => (
@@ -196,6 +201,40 @@ export default function CustomSoftwareFeatures() {
         .is-inview .rt-heading-entry {
           opacity: 1;
           transform: translateY(0);
+        }
+
+        /* Horizontal X-Axis Line */
+        .rt-x-axis-line {
+          position: absolute;
+          top: 36px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          border-top: 1.5px dashed rgba(173, 180, 216, 0.85);
+          z-index: 1;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+        .is-inview .rt-x-axis-line {
+          transform: scaleX(1);
+        }
+
+        /* Horizontal X-Axis Line at Bottom */
+        .rt-x-axis-line-bottom {
+          position: absolute;
+          bottom: 0px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          border-bottom: 1.5px dashed rgba(173, 180, 216, 0.85);
+          z-index: 1;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+        }
+        .is-inview .rt-x-axis-line-bottom {
+          transform: scaleX(1);
         }
 
         /* 4 Column Grid */

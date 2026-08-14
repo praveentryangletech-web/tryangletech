@@ -21,7 +21,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           {/* Main Top Mockup Card */}
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)", marginBottom: "12px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
@@ -36,6 +36,7 @@ export default function WebDevTypes() {
 
           {/* Floating Angled Pill Notification */}
           <div
+            className="rt-floating-element-1"
             style={{
               background: "linear-gradient(135deg, #1833fe, #6366f1)",
               borderRadius: "10px",
@@ -73,7 +74,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           {/* Main Top Mockup Card with timestamps */}
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)", marginBottom: "12px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
@@ -88,6 +89,7 @@ export default function WebDevTypes() {
 
           {/* Floating Blue Gradient Message */}
           <div
+            className="rt-floating-element-2"
             style={{
               background: "linear-gradient(135deg, #1833fe, #3b82f6)",
               borderRadius: "10px",
@@ -135,7 +137,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           {/* Main Top Mockup Card with User Items & Checkmarks */}
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)", marginBottom: "12px" }}>
             {[
@@ -157,6 +159,7 @@ export default function WebDevTypes() {
 
           {/* Primary CTA / Notification Bar */}
           <div
+            className="rt-floating-element-3"
             style={{
               background: "linear-gradient(135deg, #ef5645, #ffaf5e)",
               borderRadius: "10px",
@@ -189,7 +192,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)" }}>
             <div style={{ height: "7px", width: "60%", background: "#6366f1", borderRadius: "3.5px", marginBottom: "8px" }} />
             <div style={{ height: "5px", width: "90%", background: "#cbd5e1", borderRadius: "2.5px", marginBottom: "5px" }} />
@@ -213,7 +216,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)" }}>
             <div style={{ height: "8px", width: "80%", background: "#1833fe", borderRadius: "4px", marginBottom: "8px" }} />
             <div style={{ height: "5px", width: "95%", background: "#cbd5e1", borderRadius: "2.5px", marginBottom: "12px" }} />
@@ -234,12 +237,10 @@ export default function WebDevTypes() {
           <rect x="4" y="2" width="16" height="20" rx="2" />
           <line x1="9" y1="6" x2="9.01" y2="6" />
           <line x1="15" y1="6" x2="15.01" y2="6" />
-          <line x1="9" y1="10" x2="9.01" y2="10" />
-          <line x1="15" y1="10" x2="15.01" y2="10" />
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)" }}>
             <div style={{ display: "flex", gap: "6px", marginBottom: "10px" }}>
               <div style={{ flex: 1, height: "24px", background: "#f1f5f9", borderRadius: "4px" }} />
@@ -263,7 +264,7 @@ export default function WebDevTypes() {
         </svg>
       ),
       mockup: (
-        <div style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)" }}>
+        <div className="rt-mockup-wrapper" style={{ position: "relative", width: "100%", background: "#f8faff", borderRadius: "16px", padding: "16px", border: "1px solid rgba(24, 51, 254, 0.08)", overflow: "hidden" }}>
           <div style={{ background: "#ffffff", borderRadius: "12px", padding: "14px", boxShadow: "0 4px 12px rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.04)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
               <div style={{ height: "7px", width: "50%", background: "#0ea5e9", borderRadius: "3.5px" }} />
@@ -296,12 +297,13 @@ export default function WebDevTypes() {
           </p>
         </div>
 
-        {/* Tab Filter Pills */}
-        <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "42px" }}>
+        {/* Tab Filter Pills with Active Glow */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "12px", marginBottom: "44px" }}>
           <button
             onClick={() => setActiveTab("services")}
+            className={`rt-tab-filter-btn ${activeTab === "services" ? "rt-active" : ""}`}
             style={{
-              padding: "10px 24px",
+              padding: "10px 26px",
               borderRadius: "100px",
               fontSize: "14px",
               fontWeight: 600,
@@ -309,16 +311,17 @@ export default function WebDevTypes() {
               border: activeTab === "services" ? "1px solid #1833fe" : "1px solid rgba(0,0,0,0.08)",
               background: activeTab === "services" ? "#1833fe" : "#ffffff",
               color: activeTab === "services" ? "#ffffff" : "#475569",
-              boxShadow: activeTab === "services" ? "0 4px 14px rgba(24,51,254,0.2)" : "0 2px 6px rgba(0,0,0,0.02)",
-              transition: "all 0.25s ease",
+              boxShadow: activeTab === "services" ? "0 6px 18px rgba(24,51,254,0.25)" : "0 2px 6px rgba(0,0,0,0.02)",
+              transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
             Core Services (3)
           </button>
           <button
             onClick={() => setActiveTab("types")}
+            className={`rt-tab-filter-btn ${activeTab === "types" ? "rt-active" : ""}`}
             style={{
-              padding: "10px 24px",
+              padding: "10px 26px",
               borderRadius: "100px",
               fontSize: "14px",
               fontWeight: 600,
@@ -326,26 +329,28 @@ export default function WebDevTypes() {
               border: activeTab === "types" ? "1px solid #1833fe" : "1px solid rgba(0,0,0,0.08)",
               background: activeTab === "types" ? "#1833fe" : "#ffffff",
               color: activeTab === "types" ? "#ffffff" : "#475569",
-              boxShadow: activeTab === "types" ? "0 4px 14px rgba(24,51,254,0.2)" : "0 2px 6px rgba(0,0,0,0.02)",
-              transition: "all 0.25s ease",
+              boxShadow: activeTab === "types" ? "0 6px 18px rgba(24,51,254,0.25)" : "0 2px 6px rgba(0,0,0,0.02)",
+              transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
             Website Categories (4)
           </button>
         </div>
 
-        {/* Cards Grid matching rt-speciality-wrapper */}
+        {/* Cards Grid with Enter Animation */}
         <div
+          key={activeTab}
+          className="rt-animated-grid"
           style={{
             display: "grid",
             gridTemplateColumns: activeTab === "services" ? "repeat(auto-fit, minmax(320px, 1fr))" : "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "24px",
           }}
         >
-          {currentCards.map((item) => (
+          {currentCards.map((item, idx) => (
             <div
               key={item.id}
-              className="rt-speciality-item rt-border-radius-medium rt-shadow"
+              className="rt-speciality-item rt-border-radius-medium rt-shadow rt-interactive-card"
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -355,15 +360,17 @@ export default function WebDevTypes() {
                 borderRadius: "24px",
                 boxShadow: "0 10px 40px rgba(0, 0, 0, 0.04)",
                 border: "1px solid rgba(0, 0, 0, 0.06)",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                animation: `cardSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both`,
+                animationDelay: `${idx * 0.08}s`,
               }}
             >
               {/* Card Top: Benefits Icon, Title, Description */}
               <div className="rt-speciality-item-top" style={{ marginBottom: "24px" }}>
-                <div className="rt-benefits-icon" style={{ marginBottom: "18px" }}>
+                <div className="rt-benefits-icon" style={{ marginBottom: "18px", transition: "transform 0.3s ease" }}>
                   {item.icon}
                 </div>
-                <div className="rt-text-style-h6" style={{ fontSize: "22px", fontWeight: 700, color: "#0f172a", marginBottom: "10px" }}>
+                <div className="rt-text-style-h6" style={{ fontSize: "22px", fontWeight: 700, color: "#0f172a", marginBottom: "10px", transition: "color 0.2s ease" }}>
                   {item.title}
                 </div>
                 <p className="rt-gap-off" style={{ color: "#64748b", fontSize: "14.5px", lineHeight: "1.6" }}>
@@ -372,7 +379,7 @@ export default function WebDevTypes() {
               </div>
 
               {/* Card Bottom: Interactive Visual Mockup */}
-              <div className="rt-speciality-item-bottom">
+              <div className="rt-speciality-item-bottom" style={{ transition: "transform 0.3s ease" }}>
                 {item.mockup}
               </div>
             </div>
@@ -380,12 +387,84 @@ export default function WebDevTypes() {
         </div>
       </div>
 
-      {/* Hover Styling */}
+      {/* Modern Animations & Transitions */}
       <style>{`
-        .rt-speciality-item:hover {
-          transform: translateY(-6px);
-          border-color: rgba(24, 51, 254, 0.3) !important;
-          box-shadow: 0px 20px 40px -10px rgba(24, 51, 254, 0.12) !important;
+        @keyframes cardSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes floatGentle1 {
+          0%, 100% {
+            transform: rotate(-2deg) translateY(0);
+          }
+          50% {
+            transform: rotate(-1.5deg) translateY(-4px);
+          }
+        }
+
+        @keyframes floatGentle2 {
+          0%, 100% {
+            transform: rotate(1.5deg) translateY(0);
+          }
+          50% {
+            transform: rotate(2deg) translateY(-4px);
+          }
+        }
+
+        @keyframes floatGentle3 {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+
+        .rt-floating-element-1 {
+          animation: floatGentle1 4s ease-in-out infinite;
+        }
+
+        .rt-floating-element-2 {
+          animation: floatGentle2 3.8s ease-in-out infinite;
+        }
+
+        .rt-floating-element-3 {
+          animation: floatGentle3 4.2s ease-in-out infinite;
+        }
+
+        /* Card Hover Effects */
+        .rt-interactive-card:hover {
+          transform: translateY(-8px) scale(1.01) !important;
+          border-color: rgba(24, 51, 254, 0.35) !important;
+          box-shadow: 0px 24px 50px -10px rgba(24, 51, 254, 0.14) !important;
+        }
+
+        .rt-interactive-card:hover .rt-benefits-icon {
+          transform: scale(1.12) translateY(-2px);
+        }
+
+        .rt-interactive-card:hover .rt-text-style-h6 {
+          color: #1833fe;
+        }
+
+        .rt-interactive-card:hover .rt-mockup-wrapper {
+          border-color: rgba(24, 51, 254, 0.18) !important;
+          background: #f4f7ff !important;
+          transition: all 0.3s ease;
+        }
+
+        .rt-tab-filter-btn:hover:not(.rt-active) {
+          background: #f1f5f9 !important;
+          color: #1833fe !important;
+          border-color: rgba(24, 51, 254, 0.2) !important;
+          transform: translateY(-1px);
         }
       `}</style>
     </section>

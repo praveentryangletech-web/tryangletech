@@ -53,7 +53,7 @@ export default function MobileApplicationPage() {
         <MobileApplicationOurServices />
         <MobileApplicationCases />
         <MobileApplicationFeatures />
-        <MobileApplicationCollaboration />
+        {/* <MobileApplicationCollaboration /> */}
         <ProjectsSection hideFilter={true} categoryFilter={["App Development"]} />
         <MobileApplicationTestimonial />
         <MobileApplicationFAQ />

@@ -95,7 +95,7 @@ export default function MobileApplicationOurServices() {
                           <div
                             data-w-id="51e73edd-cd94-a54d-7eed-7768bb6cc864"
                             className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap" style={{ fontSize: "18px" }}>
-                            Native iOS
+                            Native iPhone
                           </div>
                           <p
                             data-w-id="15cfac48-955b-b56a-6e2a-fa56be3f619c"

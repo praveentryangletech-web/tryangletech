@@ -82,12 +82,11 @@ export default function MobileApplicationOurServices() {
                     data-w-id="ff7f24cb-57e0-c93d-b0a4-9eba6d3e1a72"
                     className="rt-about-v1-right-line rt-why-choose-v1-line"></div>
                   <div className="rt-our-service-right-inner">
-                    <div data-w-id="ecf91cbc-a037-faed-e91f-a12afbd7b4dd">
-                      <Image
-                        src="/service-3-assets/6916b330bfe76dda628cf5ac_specialiti-icon-1.svg"
-                        loading="lazy"
-                        alt="specialiti-icon-1"
-                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                    <div data-w-id="ecf91cbc-a037-faed-e91f-a12afbd7b4dd" style={{ marginBottom: "16px" }}>
+                      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F85936" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                      </svg>
                     </div>
                     <div className="rt-our-service-right-icon">
                       <div

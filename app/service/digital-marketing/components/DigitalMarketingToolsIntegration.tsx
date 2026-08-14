@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-
 import Image from "next/image";
 
 export default function DigitalMarketingToolsIntegration() {
@@ -12,12 +11,11 @@ export default function DigitalMarketingToolsIntegration() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-fade-in-up");
-            // Optional: stop observing once it has animated
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "40px 0px" }
     );
 
     const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
@@ -29,15 +27,27 @@ export default function DigitalMarketingToolsIntegration() {
   return (
     <section className="rt-tools-icon-v1" ref={sectionRef}>
       <style>{`
+        /* Smooth, balanced scroll reveal */
+        .rt-tools-icon-v1 .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(22px);
+          transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+          will-change: opacity, transform;
+        }
 
-        /* Stagger the delays for the logos in each row to create a wave effect */
-        .rt-integration-top > div:nth-child(1) .reveal-on-scroll { transition-delay: 0.1s; }
-        .rt-integration-top > div:nth-child(2) .reveal-on-scroll { transition-delay: 0.2s; }
-        .rt-integration-top > div:nth-child(3) .reveal-on-scroll { transition-delay: 0.3s; }
-        .rt-integration-top > div:nth-child(4) .reveal-on-scroll { transition-delay: 0.4s; }
-        .rt-integration-top > div:nth-child(5) .reveal-on-scroll { transition-delay: 0.5s; }
-        .rt-integration-top > div:nth-child(6) .reveal-on-scroll { transition-delay: 0.6s; }
-        .rt-integration-top > div:nth-child(7) .reveal-on-scroll { transition-delay: 0.7s; }
+        .rt-tools-icon-v1 .reveal-on-scroll.animate-fade-in-up {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+
+        /* Balanced wave stagger */
+        .rt-integration-top > div:nth-child(1) .reveal-on-scroll { transition-delay: 0.06s !important; }
+        .rt-integration-top > div:nth-child(2) .reveal-on-scroll { transition-delay: 0.12s !important; }
+        .rt-integration-top > div:nth-child(3) .reveal-on-scroll { transition-delay: 0.18s !important; }
+        .rt-integration-top > div:nth-child(4) .reveal-on-scroll { transition-delay: 0.24s !important; }
+        .rt-integration-top.rt-bottom > div:nth-child(1) .reveal-on-scroll { transition-delay: 0.28s !important; }
+        .rt-integration-top.rt-bottom > div:nth-child(2) .reveal-on-scroll { transition-delay: 0.34s !important; }
+        .rt-integration-top.rt-bottom > div:nth-child(3) .reveal-on-scroll { transition-delay: 0.40s !important; }
       `}</style>
       <div className="w-layout-blockcontainer rt-container-extra-large w-container mt-[5rem]">
         <div className="rt-tools-icon-main rt-overflow-hidden rt-position-relative">
@@ -57,7 +67,7 @@ export default function DigitalMarketingToolsIntegration() {
               </h2>
             </div>
             <div className="w-layout-vflex rt-integration-main-v2 rt-margin-auto">
-              {/* Row 1 — 7 tools */}
+              {/* Row 1 — 4 tools */}
               <div className="rt-integration-top">
                 {/* Google Ads */}
                 <div>

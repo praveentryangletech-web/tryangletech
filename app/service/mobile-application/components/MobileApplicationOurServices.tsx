@@ -69,13 +69,13 @@ export default function MobileApplicationOurServices() {
                       <h2
                         data-w-id="0874d457-f036-2926-f3c8-80010962016e"
                         className="rt-gap-off rt-text-color-white">
-                        Apps built for businesses of all sizes
+                        Scalable apps built for high-growth businesses
                       </h2>
                     </div>
                     <p
                       data-w-id="b0ab4ba8-5be6-3c27-98c6-724a3e3820db"
                       className="rt-gap-off rt-color-pale-periwinkle">
-                      We build mobile apps designed specifically for your business so they work well and give your users a great experience.
+                      We engineer high-performance mobile applications tailored to your business logic, ensuring flawless user experiences and long-term scalability.
                     </p>
                   </div>
                   <div
@@ -93,12 +93,12 @@ export default function MobileApplicationOurServices() {
                       <div
                         data-w-id="51e73edd-cd94-a54d-7eed-7768bb6cc864"
                         className="rt-text-style-h6 rt-text-color-white rt-small-heading-para-gap">
-                        iPhone and Android Apps
+                        Native iOS and Android Engineering
                       </div>
                       <p
                         data-w-id="15cfac48-955b-b56a-6e2a-fa56be3f619c"
                         className="rt-gap-off rt-color-pale-periwinkle">
-                        We can build your app so it works perfectly on every type of phone your customers use.
+                        We deploy modern frameworks to ensure your application performs natively on any device, maximizing your market reach.
                       </p>
                     </div>
                     <div

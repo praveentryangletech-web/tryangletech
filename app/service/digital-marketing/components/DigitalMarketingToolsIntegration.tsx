@@ -96,7 +96,8 @@ export default function DigitalMarketingToolsIntegration() {
                 <div>
                   <div data-w-id="da06afd4-a9e7-dcd2-7e61-7b4d50e9d0af" className="rt-itegration-logo reveal-on-scroll" style={{ display:"flex", alignItems:"center", justifyContent:"center", width:129, height:132 }}>
                     <svg viewBox="0 0 48 48" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M24 2C11.85 2 2 11.85 2 24c0 10.96 8.04 20.03 18.56 21.71V29.98h-4.63v-5.98h4.63v-3.79c0-4.63 2.76-7.18 6.96-7.18 2.02 0 4.14.36 4.14.36v4.55h-2.33c-2.3 0-3.02 1.43-3.02 2.9v3.16h5.18l-.83 5.98h-4.35v15.73C33.96 44.03 42 34.96 42 24 42 11.85 32.15 2 24 2z" fill="#1877F2"/>
+                      <rect x="6" y="6" width="36" height="36" rx="8" fill="#1877F2"/>
+                      <path d="M29 38V24.5h4.5l.7-5.2h-5.2v-3.3c0-1.5.4-2.5 2.6-2.5H34V9c-.5-.1-2.1-.2-4-.2-4 0-6.7 2.4-6.7 6.9v3.6H19v5.2h4.3V38H29z" fill="#ffffff"/>
                     </svg>
                   </div>
                 </div>

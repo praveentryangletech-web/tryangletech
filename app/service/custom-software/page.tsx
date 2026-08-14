@@ -56,10 +56,11 @@ const faqs = [
 ];
 
 import CustomSoftwareHero from './components/CustomSoftwareHero';
+import CustomSoftwareMarquee from './components/CustomSoftwareMarquee';
+import CustomSoftwareServices from './components/CustomSoftwareServices';
 import CustomSoftwareAIAgents from './components/CustomSoftwareAIAgents';
 import CustomSoftwareAbout from './components/CustomSoftwareAbout';
 import CustomSoftwareFeatures from './components/CustomSoftwareFeatures';
-import CustomSoftwareServices from './components/CustomSoftwareServices';
 import CustomSoftwareCore from './components/CustomSoftwareCore';
 import CustomSoftwareTestimonial from './components/CustomSoftwareTestimonial';
 import CustomSoftwareCTA from './components/CustomSoftwareCTA';
@@ -96,21 +97,19 @@ export default function CustomSoftwarePage() {
     <>
       <WebflowInit pageId="68eddb96ee2e53b120952722" />
 
-
       <main>
         <CustomSoftwareHero />
+        <CustomSoftwareMarquee />
+        <CustomSoftwareServices />
         <CustomSoftwareAIAgents />
         <CustomSoftwareAbout />
         <CustomSoftwareFeatures />
-        <CustomSoftwareServices />
         <CustomSoftwareCore />
         <ProjectsSection hideFilter={true} categoryFilter={["Software Development"]} />
         <CustomSoftwareTestimonial />
         {/* <CustomSoftwareCTA /> */}
         <CustomSoftwareFAQ />
       </main>
-
-
     </>
   );
 }

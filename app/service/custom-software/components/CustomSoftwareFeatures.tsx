@@ -32,8 +32,10 @@ export default function CustomSoftwareFeatures() {
             <p className="rt-gap-off">Our designers and developers work as one team to bring your idea to life. The software we build looks good and works even better.</p>
           </div>
           <div data-w-id="0598657a-6564-d0cc-c595-dd3f3baae2ca" className="rt-feaures-v2-item rt-border-radius-medium rt-shadow">
-            <div className="rt-feaures-v2-item-icon">
-              <Image src="/service-2-assets/690c7b2508ab483ef4047387_Vector (28).svg" loading="lazy" alt="" width={800} height={800} style={{ width: "100%", height: "auto" }} />
+            <div className="rt-feaures-v2-item-icon" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 1.5L3.5 21.5H19L17 35.5L34.5 15.5H19L21 1.5Z" stroke="#1833FE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
             <div className="rt-text-style-h6">Testing and Launch Support</div>
             <p className="rt-gap-off">We check everything carefully before the software goes live. And once it does, we stay close and sort out any issues quickly so you are never left stuck.</p>

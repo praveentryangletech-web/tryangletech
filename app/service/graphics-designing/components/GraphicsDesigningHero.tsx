@@ -191,7 +191,7 @@ export default function GraphicsDesigningHero() {
           </div>
         </div>
 
-        {/* Marquee — design services text ticker */}
+        {/* Marquee — standard brand logos marquee */}
         <div
           data-w-id="924a3615-fd4e-4a46-9185-b144b8427f84"
           className="rt-marquee-v2">
@@ -199,23 +199,24 @@ export default function GraphicsDesigningHero() {
             <div className="rt-text-marquee-wrapper rt-overflow-hidden">
               {[1, 2, 3].map((train) => (
                 <div key={train} className="rt-text-marquee-train">
-                  {[
-                    { label: 'Logo Design', icon: '✦' },
-                    { label: 'Brand Identity', icon: '◆' },
-                    { label: 'Social Media Graphics', icon: '✦' },
-                    { label: 'Print Design', icon: '◆' },
-                    { label: 'UI / UX Design', icon: '✦' },
-                    { label: 'Packaging Design', icon: '◆' },
-                    { label: 'Motion Graphics', icon: '✦' },
-                    { label: 'Infographics', icon: '◆' },
-                  ].map(({ label, icon }) => (
-                    <div key={label} className="rt-text-marquee-iteme" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#4f46e5', letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-                        {label}
-                      </span>
-                      <span style={{ color: '#7c3aed', fontSize: '0.6rem', flexShrink: 0 }}>{icon}</span>
-                    </div>
-                  ))}
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg" loading="lazy" width={100} alt="" height={40} style={{ height: "30px", width: "auto" }} />
+                  </div>
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg" loading="lazy" alt="" width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  </div>
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg" loading="lazy" alt="" width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  </div>
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg" loading="lazy" alt="" width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  </div>
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg" loading="lazy" alt="" width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  </div>
+                  <div className="rt-text-marquee-iteme">
+                    <Image src="/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg" loading="lazy" alt="" width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  </div>
                 </div>
               ))}
             </div>

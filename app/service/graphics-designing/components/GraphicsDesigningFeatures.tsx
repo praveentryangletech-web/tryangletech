@@ -86,8 +86,8 @@ export default function GraphicsDesigningFeatures() {
     <section
       className="rt-feaures-v2 rt-position-relative"
       style={{
-        background: "linear-gradient(180deg, #ffffff 0%, #f6f8fe 50%, #eff3fe 100%)",
-        paddingTop: "5rem",
+        background: "transparent",
+        paddingTop: "3rem",
         paddingBottom: "5.5rem",
       }}
     >

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from 'react';
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function CustomSoftwareAbout() {
   return (
@@ -16,10 +17,10 @@ export default function CustomSoftwareAbout() {
               <div className="rt-sub-text rt-sub-gredient">Why choose us for software</div>
             </div>
             <div className="rt-heading-para-gap">
-              <h2 data-w-id="daa11c44-29ce-1d77-876f-1f47285066a5" className="rt-gap-off">
-                Software that solves real problems and{" "}
-                <span className="rt-color-periwinkle-gray">keeps growing with you</span>
-              </h2>
+              <ScrollTextReveal
+                text="Software that solves real problems and keeps growing with you"
+                align="left"
+              />
             </div>
             <p data-w-id="daa11c44-29ce-1d77-876f-1f47285066a9" className="rt-gap-off">
               We take the time to understand your business properly before we start building anything. Our goal is always to make software that your team enjoys using and that helps your business run smoothly.

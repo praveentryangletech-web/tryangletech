@@ -154,7 +154,6 @@ export default function ServiceOneSpeciality() {
           </div>
         </div>
         </div>
-        <div className="rt-marquee-bottom-line"></div>
       </div>
     </>
   );

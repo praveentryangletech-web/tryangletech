@@ -87,10 +87,9 @@ export default function MobileApplicationTypes() {
       ref={sectionRef}
       className="rt-speciality rt-overflow-hidden"
       style={{
-        paddingTop: "4.5rem",
-        paddingBottom: "5rem",
-        background: "linear-gradient(180deg, #edf2fe 0%, #f4f7fe 45%, #eaf0fd 100%)",
-        borderTop: "1px solid #e1e8f8",
+        paddingTop: "3rem",
+        paddingBottom: "4.5rem",
+        background: "transparent",
       }}
     >
       <style dangerouslySetInnerHTML={{

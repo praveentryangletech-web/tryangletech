@@ -7,7 +7,7 @@ const SA = '/service3-assets';
 export default function WebDevHero() {
   return (
     <>
-      <section className="rt-hero-v5">
+      <section className="rt-hero-v5 rt-overflow-hidden" style={{ overflow: "hidden" }}>
         <div className="w-layout-blockcontainer rt-container-main w-container">
           <div className="rt-hero-v5-wrapper">
             <div className="w-layout-vflex rt-hero-v5-heading-wrap rt-position-relative">

@@ -11,7 +11,8 @@ export default function ServiceOneSpeciality() {
     <>
       <div
           data-w-id="b007de30-f085-abcd-5147-f650cb507d94"
-          className="rt-marquee-v2 rt-hero-v5-marquee">
+          className="rt-marquee-v2 rt-hero-v5-marquee rt-overflow-hidden"
+          style={{ overflow: "hidden" }}>
         <div className="w-layout-blockcontainer rt-container-main w-container">
         <div className="rt-text-marquee-wrapper rt-overflow-hidden">
           <div className="rt-text-marquee-train">

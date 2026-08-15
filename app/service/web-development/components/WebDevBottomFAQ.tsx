@@ -1,5 +1,6 @@
 'use client';
 import Link from "next/link";
+import Script from "next/script";
 import React, { useState, useRef } from 'react';
 
 const faqData = [
@@ -109,7 +110,8 @@ export default function WebDevBottomFAQ() {
           </div>
         </div>
       </section>
-      <script
+      <Script
+        id="webdev-faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

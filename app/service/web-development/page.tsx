@@ -33,7 +33,7 @@ export default function WebDevelopmentPage() {
       <WebflowInit pageId="68eddb6fb6de895fcd6c3914" />
 
 
-      <main>
+      <main style={{ overflowX: "hidden" }}>
         <WebDevHero />
 
         <WebDevSpeciality />

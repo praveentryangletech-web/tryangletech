@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function WebDevTypes() {
   return (
-    <section className="rt-benefits pt-16 pb-16">
+    <section className="rt-benefits rt-overflow-hidden pt-16 pb-16" style={{ overflow: "hidden" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
         <div className="rt-tools-iconheading rt-heading-bottom-gap">
@@ -14,14 +14,21 @@ export default function WebDevTypes() {
             className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">website types</div>
           </div>
-          <h2
-            data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774aa"
-            className="rt-gap-off rt-desktop-text-center">
-            Unveiling the Variety in{" "}
-            <span className="rt-color-periwinkle-gray">
-              Website Types We Build
-            </span>
-          </h2>
+          <div
+            data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
+            className="rt-position-relative">
+            <h2 className="rt-gap-off rt-desktop-text-center">
+              Unveiling the Variety in Website Types We Build
+            </h2>
+            <div className="rt-position-absolute rt-text-overlay">
+              <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
+                <div className="rt-position-absolute rt-text-overlay-inner one"></div>
+              </div>
+              <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
+                <div className="rt-position-absolute rt-text-overlay-inner two"></div>
+              </div>
+            </div>
+          </div>
           <p
             className="rt-gap-off rt-desktop-text-center"
             style={{

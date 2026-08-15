@@ -2,8 +2,6 @@ export default function WebDevPricing() {
   return (
     <section style={{
       padding: '56px 0',
-      borderTop: '1px solid rgba(0,0,0,0.06)',
-      borderBottom: '1px solid rgba(0,0,0,0.06)',
     }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         <div style={{

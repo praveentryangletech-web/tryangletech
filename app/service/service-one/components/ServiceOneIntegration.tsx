@@ -134,12 +134,6 @@ export default function ServiceOneIntegration() {
                   </p>
                 </div>
               </div>
-              <div className="rt-benefits-dot rt-tab-display-none">
-                <div className="rt-box-1 one"></div>
-                <div className="rt-box-1"></div>
-                <div className="rt-box-1"></div>
-                <div className="rt-box-1 two"></div>
-              </div>
             </div>
           </div>
         </section>

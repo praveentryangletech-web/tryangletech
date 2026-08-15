@@ -49,7 +49,7 @@ export default function GraphicsDesigningServices() {
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Logo &amp; Brand Design
+                              Social media creation
                             </div>
                           </div>
                         </div>
@@ -57,7 +57,7 @@ export default function GraphicsDesigningServices() {
                       <div className="rt-services-v2-left-bottom rt-one">
                         <div className="rt-services-v2-left-bottom-inner rt-one">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We build distinctive logo systems and brand guidelines that articulate your brand's unique mission and values, ensuring consistency across every touchpoint.
+                            We design high-converting, scroll-stopping social media posts, carousel decks, story templates, and ad creatives tailored to grow your followers and drive engagement.
                           </p>
                         </div>
                       </div>
@@ -76,7 +76,7 @@ export default function GraphicsDesigningServices() {
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Print Design &amp; Packaging
+                              Video editing
                             </div>
                           </div>
                         </div>
@@ -84,7 +84,7 @@ export default function GraphicsDesigningServices() {
                       <div className="rt-services-v2-left-bottom rt-active">
                         <div className="rt-services-v2-left-bottom-inner rt-active">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We create impactful print collateral, from business cards and brochures to product packaging, that captures your brand's essence in a tangible, premium way.
+                            From cinematic brand films and viral short-form reels to corporate explainers and event highlights, our video editors craft polished visual stories that captivate.
                           </p>
                         </div>
                       </div>
@@ -103,7 +103,7 @@ export default function GraphicsDesigningServices() {
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Social Media Graphics
+                              Branding
                             </div>
                           </div>
                         </div>
@@ -111,7 +111,7 @@ export default function GraphicsDesigningServices() {
                       <div className="rt-services-v2-left-bottom rt-two">
                         <div className="rt-services-v2-left-bottom-inner rt-two">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We design high-converting, eye-catching social assets — including post templates, stories, and ad creatives — to help your brand thrive and engage your audience daily.
+                            We build cohesive brand identities from the ground up — including memorable logo design, custom typography palettes, tone-of-voice guidelines, and brand books.
                           </p>
                         </div>
                       </div>
@@ -130,7 +130,7 @@ export default function GraphicsDesigningServices() {
                         <div className="rt-services-v2-text">
                           <div>
                             <div className="rt-text-style-h6 rt-text-color-white">
-                              Illustrations &amp; Infographics
+                              Exhibition Banner
                             </div>
                           </div>
                         </div>
@@ -138,7 +138,7 @@ export default function GraphicsDesigningServices() {
                       <div className="rt-services-v2-left-bottom rt-three">
                         <div className="rt-services-v2-left-bottom-inner rt-three">
                           <p className="rt-color-pale-periwinkle rt-gap-off">
-                            We transform complex data and abstract concepts into visually compelling custom illustrations and infographics, simplifying your message and making it memorable.
+                            High-impact exhibition banners, roll-up standees, trade show backdrop displays, and large-format promotional signage engineered to draw crowds at any event.
                           </p>
                         </div>
                       </div>

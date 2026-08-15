@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 export default function CustomSoftwareTestimonial() {
   return (
@@ -17,10 +18,10 @@ export default function CustomSoftwareTestimonial() {
                     our testimonials
                   </div>
                 </div>
-                <h2 data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e6f" className="rt-gap-off">
-                  Customer experiences that speak{" "}
-                  <span className="rt-color-periwinkle-gray">for themselves</span>
-                </h2>
+                <ScrollTextReveal
+                  text="Customer experiences that speak for themselves"
+                  align="center"
+                />
               </div>
             </div>
             <div data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e73" className="w-layout-hflex rt-testimonial-v2-card-main rt-overflow-hidden rt-position-relative">

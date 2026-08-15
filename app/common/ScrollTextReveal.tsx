@@ -7,6 +7,8 @@ interface ScrollTextRevealProps {
   className?: string;
   style?: React.CSSProperties;
   align?: 'left' | 'center' | 'right';
+  textColor?: string;
+  fadedColor?: string;
 }
 
 export default function ScrollTextReveal({
@@ -15,6 +17,8 @@ export default function ScrollTextReveal({
   className = 'rt-gap-off',
   style,
   align = 'left',
+  textColor = '#0e0725',
+  fadedColor = '#94a3b8',
 }: ScrollTextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
@@ -63,7 +67,7 @@ export default function ScrollTextReveal({
               style={{
                 display: 'inline-block',
                 marginRight: '0.28em',
-                color: wordProgress > 0.45 ? '#0e0725' : '#94a3b8',
+                color: wordProgress > 0.45 ? textColor : fadedColor,
                 transition: 'color 0.22s ease-out',
                 willChange: 'color',
               }}>

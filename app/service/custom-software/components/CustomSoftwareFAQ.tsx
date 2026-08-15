@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from 'react';
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
@@ -49,14 +50,11 @@ export default function CustomSoftwareFAQ() {
                     Frequently asked questions
                   </div>
                 </div>
-                <h2
-                  data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2f"
-                  className="rt-no-margin">
-                  Everything you want to know{" "}
-                  <span className="rt-color-periwinkle-gray">
-                    explained clearly
-                  </span>
-                </h2>
+                <ScrollTextReveal
+                  text="Everything you want to know explained clearly"
+                  align="center"
+                  className="rt-no-margin"
+                />
               </div>
             </div>
             <div

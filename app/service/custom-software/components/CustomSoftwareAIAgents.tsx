@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 export default function CustomSoftwareAIAgents() {
   return (
@@ -9,25 +10,10 @@ export default function CustomSoftwareAIAgents() {
           <div data-w-id="d34d7029-6b0e-655f-892b-4c57bb0aa55d" className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">our numbers</div>
           </div>
-          <div data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2cd" className="rt-position-relative rt-overflow-hidden">
-            <h2 className="rt-gap-off">
-              Businesses across India trust us to build software that actually works
-            </h2>
-            <div data-w-id="7a841ef0-6d2b-1974-f2d2-a7ab53fce2d0" className="rt-position-absolute rt-text-overlay">
-              <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner one"></div>
-              </div>
-              <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner two"></div>
-              </div>
-              <div className="rt-position-relative rt-text-wrap-overlay three rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner three"></div>
-              </div>
-              <div className="rt-position-relative rt-text-wrap-overlay four rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner four"></div>
-              </div>
-            </div>
-          </div>
+          <ScrollTextReveal
+            text="Businesses across India trust us to build software that actually works"
+            align="center"
+          />
         </div>
         <div data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa739" className="w-layout-grid rt-ai-agents-v1-card-main rt-position-relative rt-overflow-hidden">
           <div data-w-id="815f59ed-ca55-1d01-2fde-6345deaaa73a" className="w-layout-vflex rt-ai-agents-v1card rt-position-relative rt-one">

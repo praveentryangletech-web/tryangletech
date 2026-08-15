@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 export default function CustomSoftwareFeatures() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -121,10 +122,12 @@ export default function CustomSoftwareFeatures() {
           <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
             <div className="rt-sub-text rt-sub-gredient">our development process</div>
           </div>
-          <h2 className="rt-gap-off rt-desktop-text-center" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}>
-            Deliver projects on time through{" "}
-            <span className="rt-color-periwinkle-gray">streamlined execution</span>
-          </h2>
+          <ScrollTextReveal
+            text="Deliver projects on time through streamlined execution"
+            align="center"
+            className="rt-gap-off rt-desktop-text-center"
+            style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}
+          />
           <p style={{ maxWidth: "660px", margin: "8px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
             A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.
           </p>

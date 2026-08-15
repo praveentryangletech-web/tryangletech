@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function MobileApplicationTypes() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -243,9 +244,12 @@ export default function MobileApplicationTypes() {
           <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
             <div className="rt-sub-text rt-sub-gredient">mobile app types</div>
           </div>
-          <h2 className="rt-gap-off rt-desktop-text-center" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}>
-            Unveiling the Variety in Mobile App Types We Build
-          </h2>
+          <ScrollTextReveal
+            text="Unveiling the Variety in Mobile App Types We Build"
+            align="center"
+            className="rt-gap-off rt-desktop-text-center"
+            style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}
+          />
           <p style={{ maxWidth: "640px", margin: "10px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
             From high-performance native iOS &amp; Android flagships to cross-platform frameworks, enterprise workflows, and e-commerce apps.
           </p>

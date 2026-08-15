@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
@@ -18,14 +19,10 @@ export default function MobileApplicationSimplified() {
                   development process
                 </div>
               </div>
-              <h2
-                data-w-id="d0c75e4f-f3ca-a991-c514-10c2a1c509e3"
-                className="rt-gap-off">
-                How we build your mobile app from{" "}
-                <span className="rt-color-periwinkle-gray">
-                  start to finish
-                </span>
-              </h2>
+              <ScrollTextReveal
+                text="How we build your mobile app from start to finish"
+                align="center"
+              />
             </div>
             <div className="w-layout-grid rt-simplified-wrapper">
               <div

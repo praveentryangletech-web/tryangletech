@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
@@ -18,14 +19,10 @@ export default function MobileApplicationFeatures() {
                 what you get
               </div>
             </div>
-            <h2
-              data-w-id="90bc93a4-7453-cf99-b117-5b196d3d433a"
-              className="rt-gap-off">
-              Make work easier and help your{" "}
-              <span className="rt-color-periwinkle-gray">
-                business run better
-              </span>
-            </h2>
+            <ScrollTextReveal
+              text="Make work easier and help your business run better"
+              align="center"
+            />
           </div>
           <div
             data-w-id="8e33e015-0098-3931-b15d-9ef7d71eaaea"

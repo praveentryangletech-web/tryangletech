@@ -1,9 +1,8 @@
 'use client';
 import Link from "next/link";
-
 import React, { useState } from 'react';
-
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 const SA = '/service3-assets';
 
@@ -46,14 +45,11 @@ export default function MobileApplicationFAQ() {
                       questions and answers
                     </div>
                   </div>
-                  <h2
-                    data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb879"
-                    className="rt-no-margin">
-                    All your questions answered{" "}
-                    <span className="rt-color-periwinkle-gray">
-                      clearly
-                    </span>
-                  </h2>
+                  <ScrollTextReveal
+                    text="All your questions answered clearly"
+                    align="left"
+                    className="rt-no-margin"
+                  />
                   <div
                     data-w-id="b2a480e3-6f74-2e20-f3b4-35e4eb0fb87d"
                     className="rt-button-para-gap">

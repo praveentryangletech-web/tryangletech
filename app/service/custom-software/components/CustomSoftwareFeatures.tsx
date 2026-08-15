@@ -115,7 +115,7 @@ export default function CustomSoftwareFeatures() {
   ];
 
   return (
-    <section ref={sectionRef} className="rt-process-section" style={{ position: "relative", padding: "20px 0 70px 0", background: "transparent" }}>
+    <section ref={sectionRef} className="rt-process-section" style={{ position: "relative", padding: "70px 0 80px 0", background: "transparent" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
         <div className="rt-tools-iconheading rt-features-v1-top rt-heading-entry" style={{ textAlign: "center", margin: "0 auto 28px auto" }}>

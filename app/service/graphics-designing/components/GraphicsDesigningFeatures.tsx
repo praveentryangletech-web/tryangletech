@@ -109,7 +109,7 @@ export default function GraphicsDesigningFeatures() {
       className="rt-feaures-v2 rt-position-relative"
       style={{
         background: "transparent",
-        paddingTop: "3rem",
+        paddingTop: "6rem",
         paddingBottom: "5.5rem",
       }}
     >

@@ -1,317 +1,189 @@
 'use client';
 
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
+import React from 'react';
 import Image from "next/image";
 
 export default function WebDevTypes() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Native Project Scroll & On-Load Reveal Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const websiteTypes = [
-    {
-      id: "Type-01",
-      title: "Personal Websites & Blogs",
-      description:
-        "Personal branding platforms and content hubs where creators, consultants, and professionals share insights, publish articles, and build an engaged audience.",
-      bgImage: "/services/webdev/card-personal.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-02",
-      title: "Landing Page Websites",
-      description:
-        "High-impact, single-purpose web pages engineered to promote a specific product, service, or marketing campaign with maximum lead generation rates.",
-      bgImage: "/services/webdev/card-landing.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13" />
-          <polygon points="22 2 15 22 11 13 2 9 22 2" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-03",
-      title: "Business & Corporate Websites",
-      description:
-        "Comprehensive web presences for companies and organizations that establish market authority, showcase services, and capture high-value commercial leads.",
-      bgImage: "/services/webdev/card-corporate.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="4" y="2" width="16" height="20" rx="2" />
-          <line x1="9" y1="6" x2="9.01" y2="6" />
-          <line x1="15" y1="6" x2="15.01" y2="6" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-04",
-      title: "E-Commerce Websites",
-      description:
-        "Scalable online stores with frictionless product catalogs, multi-currency payment checkout, automated stock tracking, and complete order management.",
-      bgImage: "/services/webdev/card-ecommerce.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-          <line x1="3" y1="6" x2="21" y2="6" />
-        </svg>
-      ),
-    },
-  ];
-
   return (
-    <section
-      ref={sectionRef}
-      className="rt-speciality rt-overflow-hidden"
-      style={{
-        paddingTop: "50px",
-        paddingBottom: "45px",
-        background: "linear-gradient(180deg, #ffffff 0%, #f6f8fe 50%, #eff3fe 100%)",
-      }}
-    >
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          .webdev-type-card {
-            background: #ffffff;
-            border: 1px solid #e1e6f4;
-            border-radius: 1.25rem;
-            padding: 2.2rem 2rem 2.2rem 2rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            gap: 1rem;
-            min-height: 290px;
-            cursor: pointer;
-            will-change: transform, box-shadow;
-          }
-
-          /* Top Accent Gradient Bar matching Brand Blue */
-          .webdev-type-card-topbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3.5px;
-            background: linear-gradient(90deg, #1833fe, #6366f1);
-            z-index: 4;
-          }
-
-          /* Integrated Brand Artwork Background */
-          .webdev-card-bg-art {
-            position: absolute;
-            right: -15px;
-            bottom: -20px;
-            width: 175px;
-            height: 175px;
-            opacity: 0.55;
-            transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                        opacity 0.65s ease;
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 1rem;
-            overflow: hidden;
-            mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
-            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
-          }
-
-          /* Pure White Light-Sheen Sweep */
-          .webdev-type-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(
-              to right,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0.6) 50%,
-              rgba(255, 255, 255, 0) 100%
-            );
-            transform: skewX(-25deg);
-            transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 3;
-            pointer-events: none;
-          }
-
-          /* Ultra-Light, Subtle Hover State */
-          .webdev-type-card:hover {
-            transform: translateY(-8px) scale(1.015);
-            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
-            border-color: #dbeafe;
-            box-shadow: 0 18px 40px -10px rgba(24, 51, 254, 0.08);
-          }
-
-          .webdev-type-card:hover .webdev-card-bg-art {
-            transform: scale(1.12) rotate(-3deg);
-            opacity: 0.85;
-          }
-
-          .webdev-type-card:hover::before {
-            left: 140%;
-          }
-
-          /* Icon Box Transition: Soft Light Pastel Tint */
-          .webdev-card-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: #f4f7ff;
-            border: 1px solid #e8edfa;
-            color: #1833fe;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        color 0.5s ease,
-                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-          }
-
-          .webdev-type-card:hover .webdev-card-icon-box {
-            transform: scale(1.08) translateY(-2px);
-            background: #eef2ff;
-            border-color: #c7d2fe;
-            color: #1833fe;
-            box-shadow: 0 6px 16px rgba(24, 51, 254, 0.08);
-          }
-
-          /* Content Layer */
-          .webdev-card-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            max-width: 84%;
-          }
-
-          /* Title Color Transition */
-          .webdev-card-title {
-            font-size: 1.22rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 0;
-            line-height: 1.3;
-            transition: color 0.5s ease;
-          }
-
-          .webdev-type-card:hover .webdev-card-title {
-            color: #1833fe;
-          }
-        `
-      }} />
-
+    <section className="rt-benefits pt-16 pb-16">
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
-        <div className="rt-tools-iconheading rt-speciality-heading rt-heading-bottom-gap reveal-on-scroll" style={{ margin: "0 auto 36px auto", textAlign: "center" }}>
-          <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
+        <div className="rt-tools-iconheading rt-heading-bottom-gap">
+          <div
+            data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774a7"
+            className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">website types</div>
           </div>
-          <h2 className="rt-gap-off rt-desktop-text-center" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}>
-            Unveiling the Variety in Website Types We Build
+          <h2
+            data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774aa"
+            className="rt-gap-off rt-desktop-text-center">
+            Unveiling the Variety in{" "}
+            <span className="rt-color-periwinkle-gray">
+              Website Types We Build
+            </span>
           </h2>
-          <p style={{ maxWidth: "640px", margin: "10px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
-            From high-conversion landing pages to full-scale corporate platforms and e-commerce stores, we craft solutions tailored to your goals.
+          <p
+            className="rt-gap-off rt-desktop-text-center"
+            style={{
+              maxWidth: "680px",
+              margin: "12px auto 0 auto",
+              color: "#64748b",
+              fontSize: "15px",
+              lineHeight: "1.6",
+            }}>
+            From high-conversion landing pages to full-scale corporate platforms, custom web portals, and e-commerce stores, we engineer digital solutions tailored to your business goals.
           </p>
         </div>
 
-        {/* 4 Cards Grid with TryangleTech Brand Flow Artworks & Smooth Transitions */}
+        {/* Benefits Style Cards Grid */}
         <div
-          className="rt-cards-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {websiteTypes.map((item, idx) => (
+          data-w-id="fa309af7-4c74-82d9-d77a-6bc987988f62"
+          className="rt-benefits-wrapper">
+          {/* Top Row: 3 Cards */}
+          <div className="w-layout-grid rt-benefits-content-one">
+            {/* Card 1: Business & Corporate */}
             <div
-              key={item.id}
-              className="rt-speciality-item webdev-type-card reveal-on-scroll"
-              style={{
-                transitionDelay: `${idx * 0.08}s`,
-              }}
-            >
-              {/* Top Accent Gradient Bar */}
-              <div className="webdev-type-card-topbar" />
-
-              {/* TryangleTech Brand Flow Background Artwork */}
-              <div className="webdev-card-bg-art">
+              data-w-id="2c971d5c-ac96-ff1c-d7cf-032f3df14684"
+              className="rt-benefits-item">
+              <div
+                data-w-id="b11a6bba-0fb6-b2a9-72b2-ecde0332d0e1"
+                className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
                 <Image
-                  src={item.bgImage}
-                  alt={item.title}
-                  width={220}
-                  height={220}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  src="/Home2_files/6912f62c82b64389f32cf4f2_taskopia-benefits-home-two-1.webp"
+                  loading="lazy"
+                  alt="Business & Corporate Websites"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
                 />
-              </div>
-
-              {/* Brand Icon Box */}
-              <div className="webdev-card-icon-box">
-                {item.icon}
-              </div>
-
-              {/* Text Content */}
-              <div className="webdev-card-content">
-                <div className="webdev-card-title">
-                  {item.title}
+                <div className="rt-benefits-small-image rt-1">
+                  <Image
+                    src="/Home2_files/6912f62cac10df5f2a6eba6b_Group 2085663570.webp"
+                    loading="lazy"
+                    alt="Corporate analytics badge"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
                 </div>
-                <p
-                  className="rt-gap-off"
-                  style={{
-                    color: "#64748b",
-                    fontSize: "0.90rem",
-                    lineHeight: "1.55",
-                    margin: 0,
-                  }}
-                >
-                  {item.description}
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Business &amp; Corporate Websites</div>
+                <p>
+                  Comprehensive web presences engineered for companies that establish market authority, showcase capabilities, and capture commercial leads.
                 </p>
               </div>
             </div>
-          ))}
+
+            {/* Card 2: E-Commerce */}
+            <div
+              data-w-id="71d233e7-17e3-e29f-6260-499af23458fb"
+              className="rt-benefits-item">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
+                <Image
+                  src="/Home2_files/6912f62c1b2810c6c1ca5837_taskopia-benefits-home-two-2.webp"
+                  loading="lazy"
+                  alt="E-Commerce Websites"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <div className="rt-benefits-small-image rt-2">
+                  <Image
+                    src="/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp"
+                    loading="lazy"
+                    alt="E-commerce completed orders"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">E-Commerce &amp; Online Stores</div>
+                <p>
+                  Scalable digital storefronts with frictionless product catalogs, 1-click checkout, automated inventory sync, and multi-currency payments.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: Landing Pages */}
+            <div
+              data-w-id="c5ff7e0a-813a-bab5-0c99-87ff995a45e8"
+              className="rt-benefits-item">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
+                <Image
+                  src="/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp"
+                  loading="lazy"
+                  alt="Landing Page Websites"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Landing Pages &amp; Funnels</div>
+                <p>
+                  High-impact, single-purpose web pages engineered to promote specific products or marketing campaigns with maximum conversion rates.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: 2 Wide Cards */}
+          <div
+            data-w-id="aa7bae47-4e38-6bed-00a4-c7402dde4e24"
+            className="w-layout-grid rt-benefits-content-two">
+            {/* Card 4: SaaS & Web Apps */}
+            <div className="rt-benefits-item rt-bottom">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
+                <Image
+                  src="/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp"
+                  loading="lazy"
+                  alt="SaaS & Custom Web Applications"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <div className="rt-benefits-small-image rt-3">
+                  <Image
+                    src="/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp"
+                    loading="lazy"
+                    alt="Web app metrics badge"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">SaaS Platforms &amp; Web Applications</div>
+                <p>
+                  Feature-rich cloud applications with real-time user authentication, interactive dashboards, database synchronization, and scalable API workflows.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 5: Personal Websites & Blogs */}
+            <div className="rt-benefits-item rt-bottom">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
+                <Image
+                  src="/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp"
+                  loading="lazy"
+                  alt="Personal Websites & Blogs"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Personal Websites &amp; Blogs</div>
+                <p>
+                  Personal branding platforms and content hubs where creators, consultants, and professionals share insights, publish articles, and build an audience.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

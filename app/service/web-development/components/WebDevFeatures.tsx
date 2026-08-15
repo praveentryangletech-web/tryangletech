@@ -1,41 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
-
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
 export default function WebDevFeatures() {
   return (
     <>
-      <section className="rt-speciality rt-overflow-hidden">
+      <section className="rt-speciality rt-overflow-hidden" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
         <div className="w-layout-blockcontainer rt-container-main w-container">
           <div className="rt-tools-iconheading rt-speciality-heading rt-heading-bottom-gap">
             <div className="rt-sub-gap">
               <div className="rt-sub-text rt-sub-gredient">features</div>
             </div>
-            <div
-              data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
-              className="rt-position-relative">
-              <h2 className="rt-gap-off rt-desktop-text-center">
-                Websites that work well on every device and bring real results to your business
-              </h2>
-              <div className="rt-position-absolute rt-text-overlay">
-                <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
-                  <div className="rt-position-absolute rt-text-overlay-inner one"></div>
-                </div>
-                <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
-                  <div className="rt-position-absolute rt-text-overlay-inner two"></div>
-                </div>
-                <div className="rt-position-relative rt-text-wrap-overlay three rt-overflow-hidden">
-                  <div className="rt-position-absolute rt-text-overlay-inner three"></div>
-                </div>
-                <div className="rt-position-relative rt-text-wrap-overlay four rt-overflow-hidden">
-                  <div className="rt-position-absolute rt-text-overlay-inner four"></div>
-                </div>
-              </div>
-            </div>
+            <ScrollTextReveal
+              text="Websites that work well on every device and bring real results to your business"
+              align="center"
+            />
           </div>
           <div className="rt-speciality-wrapper">
             <div

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from 'react';
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 const SA = '/service3-assets';
 
@@ -23,14 +24,10 @@ export default function GraphicsDesigningTestimonial() {
                       our testimonials
                     </div>
                   </div>
-                  <h2
-                    data-w-id="6284435a-2145-1d12-cc4a-dfa01c689e6f"
-                    className="rt-gap-off">
-                    Customer experiences that speak{" "}
-                    <span className="rt-color-periwinkle-gray">
-                      for themselves
-                    </span>
-                  </h2>
+                  <ScrollTextReveal
+                    text="Customer experiences that speak for themselves"
+                    align="center"
+                  />
                 </div>
               </div>
               <div

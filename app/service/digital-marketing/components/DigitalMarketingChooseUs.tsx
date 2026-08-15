@@ -1,6 +1,6 @@
 import React from "react";
-
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function DigitalMarketingChooseUs() {
   return (
@@ -16,14 +16,11 @@ export default function DigitalMarketingChooseUs() {
               <div className="rt-sub-text rt-sub-gredient">why tryangletech</div>
             </div>
             <div className="rt-heading-para-gap">
-              <h2
-                data-w-id="718674f5-d056-a87d-b263-49485df31d9c"
-  
-              className="rt-gap-off"
-            >
-              You'll always know what's happening with your budget
-            </h2>
-          </div>
+              <ScrollTextReveal
+                text="You'll always know what's happening with your budget"
+                align="left"
+              />
+            </div>
             <div className="rt-choose-v4-left-inner" style={{ display: "flex", flexDirection: "column", gap: "24px", paddingTop: "24px" }}>
               <div
                 data-w-id="8da8b8da-dc9c-d89a-23db-e5858158f2eb"

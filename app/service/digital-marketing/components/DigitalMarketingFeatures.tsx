@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function DigitalMarketingFeatures() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,10 +35,10 @@ export default function DigitalMarketingFeatures() {
           <div className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">our services</div>
           </div>
-          <h2 className="rt-gap-off rt-desktop-text-center">
-            Powerful services that fuel{" "}
-            <span className="rt-color-periwinkle-gray">real business growth</span>
-          </h2>
+          <ScrollTextReveal
+            text="Powerful services that fuel real business growth"
+            align="center"
+          />
         </div>
         <div className="rt-features-v2-main" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '2rem', alignItems: 'stretch' }}>
           <div className="rt-features-v2-left rt-1 rt-border-radius-l">

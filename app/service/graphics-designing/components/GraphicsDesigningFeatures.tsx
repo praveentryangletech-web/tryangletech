@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function GraphicsDesigningFeatures() {
   const designServices = [
@@ -229,10 +230,10 @@ export default function GraphicsDesigningFeatures() {
           <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "0.5rem" }}>
             <div className="rt-sub-text rt-sub-gredient">our design process</div>
           </div>
-          <h2 className="rt-gap-off">
-            A strategic approach to brilliant{" "}
-            <span className="rt-color-periwinkle-gray">graphic design</span>
-          </h2>
+          <ScrollTextReveal
+            text="A strategic approach to brilliant graphic design"
+            align="center"
+          />
         </div>
 
         {/* 6 Clean White Cards with TryangleTech Brand Flow Artworks */}

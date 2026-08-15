@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function DigitalMarketingToolsIntegration() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -59,12 +60,10 @@ export default function DigitalMarketingToolsIntegration() {
               <div className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">marketing stack</div>
               </div>
-              <h2 className="rt-gap-off rt-desktop-text-center">
-                We work with the tools{" "}
-                <span className="rt-color-periwinkle-gray">
-                  your business already uses
-                </span>
-              </h2>
+              <ScrollTextReveal
+                text="We work with the tools your business already uses"
+                align="center"
+              />
             </div>
             <div className="w-layout-vflex rt-integration-main-v2 rt-margin-auto">
               {/* Row 1 — 4 tools */}

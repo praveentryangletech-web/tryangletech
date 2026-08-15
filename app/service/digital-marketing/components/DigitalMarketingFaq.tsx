@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 export default function DigitalMarketingFaq() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -37,26 +38,20 @@ export default function DigitalMarketingFaq() {
                 <div className="rt-sub-gap">
                   <div
                     data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2d"
-                    className="rt-sub-text rt-sub-gredient"
-                    style={{ opacity: '0' }}>
+                    className="rt-sub-text rt-sub-gredient">
                     Frequently asked questions
                   </div>
                 </div>
-                <h2
-                  data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde2f"
+                <ScrollTextReveal
+                  text="Everything you want to know explained clearly"
+                  align="center"
                   className="rt-no-margin"
-                  style={{ opacity: '0' }}>
-                  Everything you want to know{' '}
-                  <span className="rt-color-periwinkle-gray">
-                    explained clearly
-                  </span>
-                </h2>
+                />
               </div>
             </div>
             <div
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
-              className="rt-faq-main rt-margin-auto"
-              style={{ opacity: '0' }}>
+              className="rt-faq-main rt-margin-auto">
               {faqs.map(({ q, a }, idx) => {
                 const isOpen = openFaq === idx;
                 return (

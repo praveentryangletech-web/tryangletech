@@ -1,6 +1,6 @@
 import React from "react";
-
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function DigitalMarketingAbout() {
   return (
@@ -53,18 +53,12 @@ export default function DigitalMarketingAbout() {
                 </div>
               </div>
               <div className="rt-heading-para-gap">
-                <h2
-                  data-w-id="b6b5152d-8f29-2a32-eff3-608643168c52"
-                  style={{
-                    opacity: "1",
-                    transform:
-                      "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
-                    transformStyle: "preserve-3d",
-                  }}
-                  className="rt-gap-off rt-text-color-white"
-                >
-                  Marketing built around your business, not a template
-                </h2>
+                <ScrollTextReveal
+                  text="Marketing built around your business, not a template"
+                  align="left"
+                  textColor="#ffffff"
+                  fadedColor="#94a3b8"
+                />
               </div>
               <div
                 data-w-id="b6b5152d-8f29-2a32-eff3-608643168c54"

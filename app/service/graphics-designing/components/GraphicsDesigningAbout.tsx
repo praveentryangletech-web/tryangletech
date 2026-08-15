@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function GraphicsDesigningAbout() {
   return (
@@ -27,14 +28,10 @@ export default function GraphicsDesigningAbout() {
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
-                  <h2
-                    data-w-id="daa11c44-29ce-1d77-876f-1f47285066a5"
-                    className="rt-gap-off">
-                    Design that speaks before your business{" "}
-                    <span className="rt-color-periwinkle-gray">
-                      says a word
-                    </span>
-                  </h2>
+                  <ScrollTextReveal
+                    text="Design that speaks before your business says a word"
+                    align="left"
+                  />
                 </div>
                 <p
                   data-w-id="daa11c44-29ce-1d77-876f-1f47285066a9"

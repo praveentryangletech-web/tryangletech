@@ -10,7 +10,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ hideFilter, categoryFilter }: ProjectsSectionProps) {
   return (
-    <section className="rt-hero-12">
+    <section className="rt-hero-12" style={{ paddingTop: '60px', background: 'transparent' }}>
       <PortfolioHero />
       <PortfolioGrid limit={6} hideFilter={hideFilter} categoryFilter={categoryFilter} />
     </section>

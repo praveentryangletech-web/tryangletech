@@ -6,7 +6,7 @@ import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function CustomSoftwareAbout() {
   return (
-    <section className="rt-about-v2">
+    <section className="rt-about-v2" style={{ paddingBottom: '40px' }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         <div className="rt-about-v2-wrapper">
           <div data-w-id="daa11c44-29ce-1d77-876f-1f472850669b" className="rt-about-v2-left rt-overflow-hidden">

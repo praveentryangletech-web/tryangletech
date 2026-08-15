@@ -148,41 +148,30 @@ export default function GraphicsDesigningServices() {
                     data-w-id="efc1e74b-43a5-b6db-7cd1-10d908e9d225"
                     className="rt-services-v2-right">
                     <Image
-                      src="/services/graphics/tryangle_brand_design.jpg"
+                      src="/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp"
                       loading="eager"
-                      alt="TryangleTech Brand &amp; Logo Design System"
+                      alt="service v3"
                       className="rt-services-v2-one"
-                      width={1000}
-                      height={750}
-                      style={{ width: "100%", height: "auto", borderRadius: "16px" }}
-                    />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <Image
-                      src="/services/graphics/tryangle_print_packaging.jpg"
+                      src="/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp"
                       loading="lazy"
-                      alt="TryangleTech Print Design &amp; Packaging"
+                      width={847}
+                      alt="taskopiya-service-two-task"
                       className="rt-services-v2-two"
-                      width={1000}
-                      height={750}
-                      style={{ width: "100%", height: "auto", borderRadius: "16px" }}
-                    />
+                      height={800} />
                     <Image
-                      src="/services/graphics/tryangle_social_media.jpg"
+                      src="/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp"
                       loading="eager"
-                      alt="TryangleTech Social Media Graphics &amp; Creatives"
+                      alt="service v3"
                       className="rt-services-v2-three"
-                      width={1000}
-                      height={750}
-                      style={{ width: "100%", height: "auto", borderRadius: "16px" }}
-                    />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     <Image
-                      src="/services/graphics/tryangle_infographics.jpg"
+                      src="/service-2-assets/69132a3f107f32facf60e873_service v4.webp"
                       loading="eager"
-                      alt="TryangleTech Custom Illustrations &amp; Infographics"
+                      alt="service v4"
                       className="rt-services-v2-four"
-                      width={1000}
-                      height={750}
-                      style={{ width: "100%", height: "auto", borderRadius: "16px" }}
-                    />
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
               </div>

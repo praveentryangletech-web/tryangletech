@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function GraphicsDesigningHero() {
   return (
     <>
-      <section className="rt-hero-v6 rt-position-relative">
+      <section className="rt-hero-v6 rt-position-relative" style={{ overflow: "hidden", paddingLeft: "clamp(1.25rem, 3.5vw, 3rem)", paddingRight: "clamp(1.25rem, 3.5vw, 3rem)" }}>
         <div className="w-layout-blockcontainer rt-container-extra-large rt-position-relative w-container">
           <div className="rt-hero-v6-top rt-desktop-text-center">
             {/* Live badge pill */}

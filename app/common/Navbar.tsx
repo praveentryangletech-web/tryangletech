@@ -75,7 +75,7 @@ export default function Navbar() {
           data-easing2="ease"
           role="banner"
           className="rt-nav w-nav">
-          <div className="w-layout-blockcontainer rt-container-nav rt-position-relative w-container">
+          <div className="w-layout-blockcontainer rt-container-nav rt-position-relative w-container" style={{ paddingLeft: 'clamp(1.5rem, 4vw, 3.5rem)', paddingRight: 'clamp(1.5rem, 4vw, 3.5rem)' }}>
             <div className="rt-navbar-wrapper rt-position-relative">
 
               {/* ── Logo ── */}

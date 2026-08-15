@@ -192,9 +192,6 @@ export default function CustomSoftwareTestimonial() {
           </div>
         </div>
       </section>
-      <div data-w-id="0797f528-f306-de25-bf92-a6f5bc1a9d92" className="w-layout-hflex rt-section-line-wrap rt-margin-auto">
-        <div className="rt-section-overlay"></div>
-      </div>
     </div>
   );
 }

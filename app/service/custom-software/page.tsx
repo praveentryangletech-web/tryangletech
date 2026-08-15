@@ -99,7 +99,6 @@ export default function CustomSoftwarePage() {
 
       <main>
         <CustomSoftwareHero />
-        <CustomSoftwareMarquee />
         <CustomSoftwareServices />
         <CustomSoftwareAIAgents />
         <CustomSoftwareAbout />

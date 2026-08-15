@@ -14,9 +14,21 @@ export default function WebDevIntegration() {
               <div className="rt-sub-gap">
                 <div className="rt-sub-text rt-sub-gredient">capabilities</div>
               </div>
-              <h2 className="rt-gap-off rt-desktop-text-center">
-                Everything we handle when we build your website
-              </h2>
+              <div
+                data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
+                className="rt-position-relative">
+                <h2 className="rt-gap-off rt-desktop-text-center">
+                  Everything we handle when we build your website
+                </h2>
+                <div className="rt-position-absolute rt-text-overlay">
+                  <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
+                    <div className="rt-position-absolute rt-text-overlay-inner one"></div>
+                  </div>
+                  <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
+                    <div className="rt-position-absolute rt-text-overlay-inner two"></div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               data-w-id="39796240-811f-2c26-9bfd-5147a107259b"

@@ -157,7 +157,13 @@ export default function GraphicsDesigningFeatures() {
                 >
                   {service.icon}
                 </div>
-                <div className="rt-text-style-h6" style={{ marginBottom: "0.5rem" }}>
+                <div
+                  className="rt-text-style-h6 rt-text-gradient"
+                  style={{
+                    fontWeight: 700,
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   {service.title}
                 </div>
                 <p className="rt-gap-off">

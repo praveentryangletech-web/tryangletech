@@ -50,7 +50,7 @@ export default function GraphicsDesigningAbout() {
                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap">
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap" style={{ color: "#0e0725", fontWeight: 700 }}>
                         100% Custom &amp; Original Designs
                       </div>
                       <p className="rt-gap-off">
@@ -69,7 +69,7 @@ export default function GraphicsDesigningAbout() {
                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div>
-                      <div className="rt-text-style-h6 rt-small-heading-para-gap">
+                      <div className="rt-text-style-h6 rt-small-heading-para-gap" style={{ color: "#0e0725", fontWeight: 700 }}>
                         Timely Delivery &amp; Revisions
                       </div>
                       <p className="rt-gap-off">

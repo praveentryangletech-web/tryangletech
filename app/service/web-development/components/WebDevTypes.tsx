@@ -68,7 +68,7 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Business &amp; Corporate Websites</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Business &amp; Corporate Websites</div>
                 <p>
                   Comprehensive web presences engineered for companies that establish market authority, showcase capabilities, and capture commercial leads.
                 </p>
@@ -100,7 +100,7 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">E-Commerce &amp; Online Stores</div>
+                <div className="rt-text-style-h6 rt-text-gradient">E-Commerce &amp; Online Stores</div>
                 <p>
                   Scalable digital storefronts with frictionless product catalogs, 1-click checkout, automated inventory sync, and multi-currency payments.
                 </p>
@@ -122,7 +122,7 @@ export default function WebDevTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Landing Pages &amp; Funnels</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Landing Pages &amp; Funnels</div>
                 <p>
                   High-impact, single-purpose web pages engineered to promote specific products or marketing campaigns with maximum conversion rates.
                 </p>
@@ -157,7 +157,7 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">SaaS Platforms &amp; Web Applications</div>
+                <div className="rt-text-style-h6 rt-text-gradient">SaaS Platforms &amp; Web Applications</div>
                 <p>
                   Feature-rich cloud applications with real-time user authentication, interactive dashboards, database synchronization, and scalable API workflows.
                 </p>
@@ -177,7 +177,7 @@ export default function WebDevTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Personal Websites &amp; Blogs</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Personal Websites &amp; Blogs</div>
                 <p>
                   Personal branding platforms and content hubs where creators, consultants, and professionals share insights, publish articles, and build an audience.
                 </p>

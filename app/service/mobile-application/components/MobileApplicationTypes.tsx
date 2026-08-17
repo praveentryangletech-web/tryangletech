@@ -68,7 +68,7 @@ export default function MobileApplicationTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Native iOS &amp; Android Apps</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Native iOS &amp; Android Apps</div>
                 <p>
                   High-performance platform-exclusive apps engineered in Swift and Kotlin for maximum frame rates, 120Hz fluid animations, and deep device hardware integration.
                 </p>
@@ -100,7 +100,7 @@ export default function MobileApplicationTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Cross-Platform Mobile Apps</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Cross-Platform Mobile Apps</div>
                 <p>
                   Single-codebase efficiency with Flutter and React Native, delivering native-grade responsiveness across both iOS and Android with reduced time-to-market.
                 </p>
@@ -122,7 +122,7 @@ export default function MobileApplicationTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">E-Commerce &amp; On-Demand Apps</div>
+                <div className="rt-text-style-h6 rt-text-gradient">E-Commerce &amp; On-Demand Apps</div>
                 <p>
                   Frictionless shopping and delivery experiences with 1-tap Apple Pay and Google Pay checkouts, live GPS order tracking, and push engagement.
                 </p>
@@ -157,7 +157,7 @@ export default function MobileApplicationTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">Enterprise &amp; Field Operations Apps</div>
+                <div className="rt-text-style-h6 rt-text-gradient">Enterprise &amp; Field Operations Apps</div>
                 <p>
                   Mission-critical mobile solutions for enterprise field teams, CRM/ERP workflows, offline-first data synchronization, biometric authentication, and role-based security access.
                 </p>
@@ -177,7 +177,7 @@ export default function MobileApplicationTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6">AI &amp; Workflow Automation Apps</div>
+                <div className="rt-text-style-h6 rt-text-gradient">AI &amp; Workflow Automation Apps</div>
                 <p>
                   Smart mobile applications engineered to eliminate repetitive manual work with camera OCR scanning, automated data entry, intelligent task routing, and autonomous AI assistants.
                 </p>

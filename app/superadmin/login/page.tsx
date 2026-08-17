@@ -103,32 +103,6 @@ export default function SuperadminLoginPage() {
               />
             </Link>
 
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '4px 14px',
-                borderRadius: '100px',
-                backgroundColor: '#EEF2FF',
-                color: '#4338CA',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-              }}>
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: '#6366F1',
-                }}
-              />
-              Superadmin Portal
-            </div>
-
             <h1
               style={{
                 fontSize: '1.65rem',
@@ -146,7 +120,7 @@ export default function SuperadminLoginPage() {
                 marginTop: '0.5rem',
                 marginBottom: 0,
               }}>
-              Access live inquiries, quote requests, and platform analytics.
+              Access live inquiries, portfolio, and platform analytics.
             </p>
           </div>
 
@@ -275,9 +249,7 @@ export default function SuperadminLoginPage() {
                 />
                 Remember this session
               </label>
-              <span style={{ color: '#4F46E5', fontSize: '0.8rem', fontWeight: 600 }}>
-                🔒 256-bit SSL
-              </span>
+                  
             </div>
 
             {/* Submit Button */}

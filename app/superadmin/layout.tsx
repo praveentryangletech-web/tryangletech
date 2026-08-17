@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import SuperadminShell from './components/SuperadminShell';
 
 export const metadata: Metadata = {
-  title: 'Superadmin Portal | TryangleTech',
+  title: 'Control Center | TryangleTech',
   description: 'TryangleTech Executive Control Center & Lead Management',
 };
 

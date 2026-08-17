@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation';
 const ROUTE_TITLES: Record<string, string> = {
   '/superadmin': 'Executive Analytics Overview',
   '/superadmin/inquiries': 'Contact Form Leads & Inquiries',
-  '/superadmin/quotes': 'Custom Project Quote Requests',
-  '/superadmin/settings': 'Database & System Configuration',
+  '/superadmin/portfolio': 'Portfolio Projects & Case Studies',
 };
 
 export default function SuperadminHeader() {
@@ -31,7 +30,7 @@ export default function SuperadminHeader() {
       {/* Breadcrumb / Dynamic Page Title */}
       <div>
         <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-          TRYANGLETECH PORTAL
+          TRYANGLETECH CONTROL CENTER
         </div>
         <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
           {currentTitle}

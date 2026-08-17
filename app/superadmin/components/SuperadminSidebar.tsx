@@ -46,33 +46,18 @@ export default function SuperadminSidebar() {
       badgeColor: '#4F46E5',
     },
     {
-      label: 'Quote Requests',
+      label: 'Portfolio',
       icon: (
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <line x1="16" y1="13" x2="8" y2="13" />
-          <line x1="16" y1="17" x2="8" y2="17" />
-          <polyline points="10 9 9 9 8 9" />
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
         </svg>
       ),
-      href: '/superadmin/quotes',
-      active: pathname === '/superadmin/quotes',
-      badge: quotes.length,
-      badgeColor: '#0369A1',
-      badgeBg: '#E0F2FE',
-    },
-    {
-      label: 'DB & System',
-      icon: (
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <ellipse cx="12" cy="5" rx="9" ry="3" />
-          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-        </svg>
-      ),
-      href: '/superadmin/settings',
-      active: pathname === '/superadmin/settings',
+      href: '/superadmin/portfolio',
+      active: pathname === '/superadmin/portfolio',
+      badge: 24,
+      badgeColor: '#15803D',
+      badgeBg: '#DCFCE7',
     },
   ];
 

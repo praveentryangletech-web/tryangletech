@@ -1,0 +1,82 @@
+// Prisma schema for TryangleTech
+// Native Next.js App Router + Supabase PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ----------------------------------------------------
+// 1. CONTACT SUBMISSIONS / LEADS (Contact Form)
+// ----------------------------------------------------
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  phone     String
+  email     String
+  message   String   @db.Text
+  subjects  String[] @default([])
+  status    String   @default("NEW") // "NEW", "REVIEWED", "CONTACTED", "ARCHIVED"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+// ----------------------------------------------------
+// 2. NEWSLETTER SUBSCRIBERS
+// ----------------------------------------------------
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    String   @default("ACTIVE") // "ACTIVE", "UNSUBSCRIBED"
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+// ----------------------------------------------------
+// 3. SERVICE QUOTE REQUESTS
+// ----------------------------------------------------
+model QuoteRequest {
+  id          String   @id @default(cuid())
+  clientName  String
+  email       String
+  phone       String?
+  serviceType String   // e.g. "Web Development", "Mobile Application", "Custom Software", etc.
+  budget      String?
+  details     String   @db.Text
+  status      String   @default("PENDING") // "PENDING", "ACCEPTED", "DECLINED"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([email])
+  @@index([serviceType])
+}
+
+// ----------------------------------------------------
+// 4. DYNAMIC BLOG POSTS & CMS
+// ----------------------------------------------------
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  category    String
+  excerpt     String?  @db.Text
+  content     String   @db.Text
+  coverImage  String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([slug])
+}

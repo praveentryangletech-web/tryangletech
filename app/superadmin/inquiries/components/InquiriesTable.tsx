@@ -24,8 +24,8 @@ export default function InquiriesTable({ inquiries, onSelectInquiry, onStatusCha
   });
 
   return (
-    <div style={{ padding: '1.25rem 0', backgroundColor: 'transparent' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+    <div style={{ padding: 0, backgroundColor: 'transparent' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1.5rem 2rem 1.25rem 2rem' }}>
         <input
           type="text"
           placeholder="🔍 Search inquiries by client, email, phone..."
@@ -65,36 +65,36 @@ export default function InquiriesTable({ inquiries, onSelectInquiry, onStatusCha
         </div>
       </div>
 
-      <div style={{ overflowX: 'auto' }}>
+      <div style={{ overflowX: 'auto', width: '100%' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.14)' }}>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CLIENT NAME</th>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CONTACT INFO</th>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>SUBJECTS</th>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>STATUS</th>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>DATE</th>
-              <th style={{ padding: '0.75rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'right' }}>ACTIONS</th>
+              <th style={{ padding: '0.85rem 1rem 0.85rem 2rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CLIENT NAME</th>
+              <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CONTACT INFO</th>
+              <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>SUBJECTS</th>
+              <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>STATUS</th>
+              <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>DATE</th>
+              <th style={{ padding: '0.85rem 2rem 0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'right' }}>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
             {filteredInquiries.length === 0 ? (
               <tr>
-                <td colSpan={6} style={{ padding: '2rem', textAlign: 'center', color: '#94A3B8' }}>
+                <td colSpan={6} style={{ padding: '2.5rem', textAlign: 'center', color: '#94A3B8' }}>
                   No inquiries found matching your filters.
                 </td>
               </tr>
             ) : (
               filteredInquiries.map((item) => (
                 <tr key={item.id} className="admin-row-hover" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
-                  <td style={{ padding: '0.75rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.9rem' }}>
+                  <td style={{ padding: '0.75rem 1rem 0.75rem 2rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.9rem' }}>
                     {item.firstName} {item.lastName}
                   </td>
-                  <td style={{ padding: '0.6rem 0.75rem' }}>
+                  <td style={{ padding: '0.6rem 1rem' }}>
                     <div style={{ color: 'var(--vivid-blue, #4f46e5)', fontWeight: 700, fontSize: '0.825rem' }}>{item.email}</div>
                     <div style={{ color: '#64748B', fontSize: '0.75rem' }}>{item.phone}</div>
                   </td>
-                  <td style={{ padding: '0.6rem 0.75rem' }}>
+                  <td style={{ padding: '0.6rem 1rem' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
                       {item.subjects.map((sub: string) => (
                         <span key={sub} style={{ fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#F1F5F9', color: '#475569', fontWeight: 600 }}>
@@ -103,7 +103,7 @@ export default function InquiriesTable({ inquiries, onSelectInquiry, onStatusCha
                       ))}
                     </div>
                   </td>
-                  <td style={{ padding: '0.6rem 0.75rem' }}>
+                  <td style={{ padding: '0.6rem 1rem' }}>
                     <select
                       value={item.status}
                       onChange={(e) => onStatusChange(item.id, e.target.value as Inquiry['status'])}
@@ -124,10 +124,10 @@ export default function InquiriesTable({ inquiries, onSelectInquiry, onStatusCha
                       <option value="ARCHIVED">ARCHIVED</option>
                     </select>
                   </td>
-                  <td style={{ padding: '0.6rem 0.75rem', fontSize: '0.8rem', color: '#64748B' }}>
+                  <td style={{ padding: '0.6rem 1rem', fontSize: '0.8rem', color: '#64748B' }}>
                     {new Date(item.createdAt).toLocaleDateString()}
                   </td>
-                  <td style={{ padding: '0.6rem 0.75rem', textAlign: 'right' }}>
+                  <td style={{ padding: '0.6rem 2rem 0.6rem 1rem', textAlign: 'right' }}>
                     <button
                       onClick={() => onSelectInquiry(item)}
                       style={{

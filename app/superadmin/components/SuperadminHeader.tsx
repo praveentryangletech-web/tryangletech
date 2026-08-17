@@ -24,7 +24,7 @@ export default function SuperadminHeader() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 1.5rem',
+        padding: '0 2rem',
         zIndex: 100,
         boxShadow: '0 2px 12px rgba(24, 72, 212, 0.04)',
       }}>

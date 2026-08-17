@@ -8,7 +8,7 @@ interface SettingsViewProps {
 
 export default function SettingsView({ dbLatency = 24 }: SettingsViewProps) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', padding: '1.25rem 0' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', padding: '1.75rem 2rem' }}>
       <div className="admin-white-card" style={{ padding: '1.5rem' }}>
         <h3 style={{ margin: '0 0 1.25rem 0', fontSize: '1.25rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
           🐘 Supabase PostgreSQL Configuration

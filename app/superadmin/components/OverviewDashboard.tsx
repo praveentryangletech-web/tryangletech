@@ -12,7 +12,7 @@ interface OverviewProps {
 
 export default function OverviewDashboard({ inquiries, quotes, onSelectInquiry }: OverviewProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.25rem 0' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.75rem 2rem' }}>
       {/* 3 Stat KPI Cards */}
       <div
         style={{

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
@@ -62,15 +63,17 @@ export default function MobileApplicationOurServices() {
                     <div
                       data-w-id="46267b11-3534-1c87-dbbb-42e400ef381e"
                       className="rt-sub-text">
-                      why choose us
+                      mobile engineering
                     </div>
                   </div>
                   <div className="rt-heading-para-gap">
-                    <h2
-                      data-w-id="0874d457-f036-2926-f3c8-80010962016e"
-                      className="rt-gap-off rt-text-color-white">
-                      Scalable apps built for high-growth businesses
-                    </h2>
+                    <ScrollTextReveal
+                      text="Scalable apps built for high-growth businesses"
+                      align="left"
+                      textColor="#ffffff"
+                      fadedColor="rgba(255, 255, 255, 0.35)"
+                      className="rt-gap-off rt-text-color-white"
+                    />
                   </div>
                   <p
                     data-w-id="b0ab4ba8-5be6-3c27-98c6-724a3e3820db"

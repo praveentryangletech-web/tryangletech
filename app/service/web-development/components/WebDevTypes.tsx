@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from "next/image";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 export default function WebDevTypes() {
   return (
@@ -14,20 +15,12 @@ export default function WebDevTypes() {
             className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">website types</div>
           </div>
-          <div
-            data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
-            className="rt-position-relative">
-            <h2 className="rt-gap-off rt-desktop-text-center">
-              Unveiling the Variety in Website Types We Build
-            </h2>
-            <div className="rt-position-absolute rt-text-overlay">
-              <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner one"></div>
-              </div>
-              <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
-                <div className="rt-position-absolute rt-text-overlay-inner two"></div>
-              </div>
-            </div>
+          <div className="rt-heading-para-gap" style={{ marginTop: "0.6rem" }}>
+            <ScrollTextReveal
+              text="Unveiling the Variety in Website Types We Build"
+              align="center"
+              className="rt-gap-off rt-desktop-text-center"
+            />
           </div>
           <p
             className="rt-gap-off rt-desktop-text-center"

@@ -41,10 +41,10 @@ export default function MobileApplicationSimplified() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part">
                   <div className="rt-text-style-h6">
-                    Clean and Simple Design
+                    Intuitive UX/UI Design
                   </div>
                   <p className="rt-gap-off">
-                    We create apps that look good and are easy for your customers to use.
+                    We craft human-centric, aesthetically stunning mobile interfaces that keep users engaged and delighted.
                   </p>
                 </div>
               </div>
@@ -75,10 +75,10 @@ export default function MobileApplicationSimplified() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part rt-3">
                   <div className="rt-text-style-h6">
-                    Clear Communication
+                    Transparent Communication
                   </div>
                   <p className="rt-gap-off">
-                    We keep you updated every step of the way so your app is finished on time.
+                    Direct access to your dedicated engineering team with regular milestone updates and on-time delivery.
                   </p>
                 </div>
               </div>
@@ -96,10 +96,10 @@ export default function MobileApplicationSimplified() {
                 </div>
                 <div className="w-layout-vflex rt-simplified-card-bottom-part rt-2">
                   <div className="rt-text-style-h6">
-                    Strong Foundation
+                    Robust Architecture &amp; Security
                   </div>
                   <p className="rt-gap-off">
-                    We make sure the technology behind your app is secure and works perfectly.
+                    Engineered with scalable backend pipelines, encrypted databases, and rock-solid codebases.
                   </p>
                 </div>
               </div>

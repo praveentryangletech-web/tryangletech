@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
 const SA = '/service3-assets';
 
@@ -18,24 +19,20 @@ export default function MobileApplicationCases() {
                     <div
                       data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401e1"
                       className="rt-sub-text rt-sub-gredient">
-                      why choose us
+                      development advantage
                     </div>
                   </div>
                   <div className="rt-heading-para-gap">
-                    <h2
-                      data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401e3"
-                      className="rt-gap-off">
-                      Fast apps delivered with{" "}
-                      <span className="rt-color-periwinkle-gray">
-                        zero stress
-                      </span>
-                    </h2>
+                    <ScrollTextReveal
+                      text="High-performance apps delivered with zero stress"
+                      align="left"
+                    />
                   </div>
                   <div
                     data-w-id="cd8e4bfe-5169-9342-1cbb-40d6510401e7"
                     className="rt-cases-para-wrap rt-gap-large">
                     <p className="rt-gap-off">
-                      Our team works hard to save you time and build a great app without any technical problems getting in the way.
+                      We accelerate your time-to-market with agile development sprints, delivering robust, high-performance mobile applications without technical friction.
                     </p>
                   </div>
                   <div
@@ -45,7 +42,7 @@ export default function MobileApplicationCases() {
                       data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
                       href="/contact"
                       className="rt-button-body w-inline-block">
-                      <div className="rt-button-text">Explore benefits</div>
+                      <div className="rt-button-text">Explore Benefits</div>
                       <div className="rt-button-body-overlay"></div>
                     </Link>
                   </div>
@@ -61,15 +58,15 @@ export default function MobileApplicationCases() {
                       <Image
                         src="/service-3-assets/6916ef876682eed2b2fd5911_Vector (34).svg"
                         loading="lazy"
-                        alt=""
+                        alt="Fast and smooth performance icon"
                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="w-layout-vflex rt-cases-box-text-wrap">
                       <div className="rt-text-style-h6">
-                        Fast and smooth
+                        Fast &amp; Smooth Performance
                       </div>
                       <p className="rt-gap-off">
-                        Your app will load quickly and run without crashing so your users stay happy.
+                        Optimized for 60fps+ fluid responsiveness, fast loading, and rock-solid stability across every device.
                       </p>
                     </div>
                   </div>
@@ -80,15 +77,15 @@ export default function MobileApplicationCases() {
                       <Image
                         src="/service-3-assets/6916f00db3051e5aed09bd3f_Group 2085663576.svg"
                         loading="lazy"
-                        alt=""
+                        alt="Tool integration icon"
                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="w-layout-vflex rt-cases-box-text-wrap rt-full-width">
                       <div className="rt-text-style-h6">
-                        Works with your tools
+                        Seamless Tool Integration
                       </div>
                       <p className="rt-gap-off">
-                        We easily connect your new app to the systems and databases you already use.
+                        Effortlessly connects with your existing databases, third-party APIs, CRM platforms, and cloud services.
                       </p>
                     </div>
                   </div>

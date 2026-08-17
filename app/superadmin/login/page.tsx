@@ -51,8 +51,10 @@ export default function SuperadminLoginPage() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem 1rem',
-        backgroundColor: '#f0f4ff',
+        background: 'radial-gradient(ellipse at 15% 15%, rgba(24, 51, 254, 0.16) 0%, transparent 55%), radial-gradient(ellipse at 85% 85%, rgba(248, 89, 54, 0.14) 0%, transparent 55%), radial-gradient(ellipse at 50% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%), linear-gradient(135deg, #eef2ff 0%, #f0f4ff 50%, #fdf2f8 100%)',
         fontFamily: 'var(--_fonts---font-family--inter, Inter, sans-serif)',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
       <style
         dangerouslySetInnerHTML={{
@@ -77,11 +79,12 @@ export default function SuperadminLoginPage() {
         {/* Card Container */}
         <div
           style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid #e1e6f4',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid rgba(225, 230, 244, 0.9)',
             borderRadius: '24px',
             padding: '2.75rem 2.25rem',
-            boxShadow: '0 20px 40px rgba(24, 72, 212, 0.08)',
+            boxShadow: '0 25px 50px -12px rgba(24, 51, 254, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8)',
           }}>
           {/* Header & Logo */}
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

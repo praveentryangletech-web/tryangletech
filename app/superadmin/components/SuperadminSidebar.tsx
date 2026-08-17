@@ -5,16 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSuperadmin } from '../context/SuperadminContext';
+import apiClient from '../utils/apiClient';
 
 export default function SuperadminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { inquiries, quotes } = useSuperadmin();
+  const { inquiries, logout } = useSuperadmin();
 
-  const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('superadmin_auth');
-    }
+  const handleLogout = async () => {
+    await logout();
     router.push('/superadmin/login');
   };
 

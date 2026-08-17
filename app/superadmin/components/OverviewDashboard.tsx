@@ -2,15 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Inquiry, Quote } from '../data/mockData';
+import { Inquiry } from '../data/mockData';
 
 interface OverviewProps {
   inquiries: Inquiry[];
-  quotes: Quote[];
   onSelectInquiry: (inquiry: Inquiry) => void;
 }
 
-export default function OverviewDashboard({ inquiries, quotes, onSelectInquiry }: OverviewProps) {
+export default function OverviewDashboard({ inquiries, onSelectInquiry }: OverviewProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.75rem 2rem' }}>
       {/* 3 Stat KPI Cards */}

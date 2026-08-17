@@ -43,26 +43,7 @@ model NewsletterSubscriber {
 }
 
 // ----------------------------------------------------
-// 3. SERVICE QUOTE REQUESTS
-// ----------------------------------------------------
-model QuoteRequest {
-  id          String   @id @default(cuid())
-  clientName  String
-  email       String
-  phone       String?
-  serviceType String   // e.g. "Web Development", "Mobile Application", "Custom Software", etc.
-  budget      String?
-  details     String   @db.Text
-  status      String   @default("PENDING") // "PENDING", "ACCEPTED", "DECLINED"
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([email])
-  @@index([serviceType])
-}
-
-// ----------------------------------------------------
-// 4. DYNAMIC BLOG POSTS & CMS
+// 3. DYNAMIC BLOG POSTS & CMS
 // ----------------------------------------------------
 model BlogPost {
   id          String   @id @default(cuid())
@@ -79,4 +60,19 @@ model BlogPost {
 
   @@index([category])
   @@index([slug])
+}
+
+// ----------------------------------------------------
+// 4. SUPERADMIN AUTHENTICATION & USERS
+// ----------------------------------------------------
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // Hashed password in DB
+  name      String   @default("Super Administrator")
+  role      String   @default("SUPERADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
 }

@@ -9,23 +9,21 @@ import { SuperadminProvider } from '../context/SuperadminContext';
 export default function SuperadminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // If on login screen, render without sidebar and top header
-  if (pathname === '/superadmin/login') {
-    return <>{children}</>;
-  }
-
   return (
     <SuperadminProvider>
-      <div
-        style={{
-          display: 'flex',
-          height: '100vh',
-          width: '100vw',
-          overflow: 'hidden',
-          backgroundColor: '#f0f4ff',
-          color: 'var(--dark-indigo, #1a0b54)',
-          fontFamily: 'var(--_fonts---font-family--inter, Inter, sans-serif)',
-        }}>
+      {pathname === '/superadmin/login' ? (
+        <>{children}</>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            height: '100vh',
+            width: '100vw',
+            overflow: 'hidden',
+            backgroundColor: '#f0f4ff',
+            color: 'var(--dark-indigo, #1a0b54)',
+            fontFamily: 'var(--_fonts---font-family--inter, Inter, sans-serif)',
+          }}>
         <style
           dangerouslySetInnerHTML={{
             __html: `

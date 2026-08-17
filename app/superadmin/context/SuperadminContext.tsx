@@ -1,18 +1,24 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import apiClient from '../utils/apiClient';
 import {
   Inquiry,
-  Quote,
-  Subscriber,
   INITIAL_INQUIRIES,
-  INITIAL_QUOTES,
-  INITIAL_SUBSCRIBERS,
 } from '../data/mockData';
 
+export interface AdminUser {
+  email: string;
+  name: string;
+  role: string;
+}
+
 interface SuperadminContextType {
+  user: AdminUser | null;
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: AdminUser }>;
+  logout: () => Promise<void>;
   inquiries: Inquiry[];
-  quotes: Quote[];
   selectedInquiry: Inquiry | null;
   setSelectedInquiry: (inquiry: Inquiry | null) => void;
   updateInquiryStatus: (id: string, newStatus: Inquiry['status']) => Promise<void>;
@@ -22,53 +28,115 @@ interface SuperadminContextType {
   stats: {
     totalInquiries: number;
     newInquiriesCount: number;
-    totalQuotes: number;
   };
 }
 
 const SuperadminContext = createContext<SuperadminContextType | undefined>(undefined);
 
 export function SuperadminProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<AdminUser | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [inquiries, setInquiries] = useState<Inquiry[]>(INITIAL_INQUIRIES);
-  const [quotes, setQuotes] = useState<Quote[]>(INITIAL_QUOTES);
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dbLatency, setDbLatency] = useState<number>(24);
 
-  // Fetch live health & inquiries from backend if available
+  // Initialize stored session on load
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedAuth = localStorage.getItem('superadmin_auth');
+      const storedUser = localStorage.getItem('superadmin_user');
+      if (storedAuth === 'true' && storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+          setIsAuthenticated(true);
+        } catch {
+          // Fallback
+        }
+      }
+    }
+  }, []);
+
+  // Centralized Login API Action
+  const login = async (email: string, password: string) => {
+    setIsLoading(true);
+    try {
+      const res = await apiClient.post('/api/superadmin/auth', {
+        email: email.trim(),
+        password: password.trim(),
+      });
+
+      if (res.success) {
+        const loggedUser: AdminUser = res.data?.user || res.data || {
+          email,
+          name: 'Praveen Gupta',
+          role: 'SUPERADMIN',
+        };
+
+        setUser(loggedUser);
+        setIsAuthenticated(true);
+
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('superadmin_auth', 'true');
+          localStorage.setItem('superadmin_user', JSON.stringify(loggedUser));
+        }
+
+        // Fetch fresh inquiries upon successful login
+        refreshData();
+
+        return { success: true, user: loggedUser };
+      } else {
+        return { success: false, error: res.error || 'Invalid credentials.' };
+      }
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Network authentication error.' };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Centralized Logout API Action
+  const logout = async () => {
+    try {
+      await apiClient.delete('/api/superadmin/auth');
+    } catch (e) {
+      console.error('Logout error:', e);
+    } finally {
+      setUser(null);
+      setIsAuthenticated(false);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('superadmin_auth');
+        localStorage.removeItem('superadmin_user');
+      }
+    }
+  };
+
+  // Fetch live health & inquiries from backend
   const refreshData = useCallback(async () => {
     setIsLoading(true);
     try {
-      // 1. Health check
-      const healthRes = await fetch('/api/health');
-      if (healthRes.ok) {
-        const healthData = await healthRes.json();
-        if (healthData.success && healthData.data?.latencyMs) {
-          setDbLatency(healthData.data.latencyMs);
-        }
+      // 1. Health check via apiClient
+      const healthRes = await apiClient.get('/api/health');
+      if (healthRes.success && healthRes.data?.latencyMs) {
+        setDbLatency(healthRes.data.latencyMs);
       }
 
-      // 2. Fetch live inquiries if API is ready
-      const contactRes = await fetch('/api/contact', {
-        headers: { 'x-admin-key': 'tryangle-superadmin-secret-2026' },
-      });
-      if (contactRes.ok) {
-        const contactData = await contactRes.json();
-        if (contactData.success && Array.isArray(contactData.data) && contactData.data.length > 0) {
-          const mapped: Inquiry[] = contactData.data.map((item: any) => ({
-            id: item.id,
-            firstName: item.firstName,
-            lastName: item.lastName,
-            email: item.email,
-            phone: item.phone || '',
-            subjects: item.subjects || [],
-            message: item.message,
-            status: item.status || 'NEW',
-            notes: item.notes || '',
-            createdAt: item.createdAt,
-          }));
-          setInquiries(mapped);
-        }
+      // 2. Fetch live inquiries via apiClient
+      const contactRes = await apiClient.get('/api/contact');
+      if (contactRes.success && Array.isArray(contactRes.data) && contactRes.data.length > 0) {
+        const mapped: Inquiry[] = contactRes.data.map((item: any) => ({
+          id: item.id,
+          firstName: item.firstName,
+          lastName: item.lastName,
+          email: item.email,
+          phone: item.phone || '',
+          subjects: item.subjects || [],
+          message: item.message,
+          status: item.status || 'NEW',
+          notes: item.notes || '',
+          createdAt: item.createdAt,
+        }));
+        setInquiries(mapped);
       }
     } catch (err) {
       console.warn('Backend sync in fallback mode:', err);
@@ -81,21 +149,31 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
     refreshData();
   }, [refreshData]);
 
-  // Update lead status in context and on selected lead
+  // Update lead status in context and persist in Supabase PostgreSQL via apiClient.patch
   const updateInquiryStatus = async (id: string, newStatus: Inquiry['status']) => {
+    // 1. Optimistic UI update
     setInquiries((prev) =>
       prev.map((item) => (item.id === id ? { ...item, status: newStatus } : item))
     );
     if (selectedInquiry?.id === id) {
       setSelectedInquiry((prev) => (prev ? { ...prev, status: newStatus } : null));
     }
+
+    // 2. Live database mutation via apiClient
+    const res = await apiClient.patch('/api/contact', { id, status: newStatus });
+    if (!res.success) {
+      console.error('Failed to persist status change to PostgreSQL:', res.error);
+    }
   };
 
   const newInquiriesCount = inquiries.filter((i) => i.status === 'NEW').length;
 
   const value: SuperadminContextType = {
+    user,
+    isAuthenticated,
+    login,
+    logout,
     inquiries,
-    quotes,
     selectedInquiry,
     setSelectedInquiry,
     updateInquiryStatus,
@@ -105,7 +183,6 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
     stats: {
       totalInquiries: inquiries.length,
       newInquiriesCount: newInquiriesCount || inquiries.length,
-      totalQuotes: quotes.length,
     },
   };
 

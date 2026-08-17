@@ -11,18 +11,6 @@ export interface Inquiry {
   createdAt: string;
 }
 
-export interface Quote {
-  id: string;
-  clientName: string;
-  email: string;
-  phone: string;
-  serviceType: string;
-  budget: string;
-  details: string;
-  status: 'PENDING' | 'ACCEPTED' | 'DECLINED';
-  createdAt: string;
-}
-
 export interface Subscriber {
   id: string;
   email: string;
@@ -78,42 +66,6 @@ export const INITIAL_INQUIRIES: Inquiry[] = [
     status: 'IN_PROGRESS',
     notes: 'Zoom call booked for Wednesday.',
     createdAt: '2026-08-15T18:20:00Z',
-  },
-];
-
-export const INITIAL_QUOTES: Quote[] = [
-  {
-    id: 'quote-1',
-    clientName: 'Rahul Verma',
-    email: 'r.verma@fintechpulse.com',
-    phone: '+91 99887 76655',
-    serviceType: 'Web Development',
-    budget: '$5,000 - $10,000',
-    details: 'Custom Next.js web application with user dashboard, stripe integration, and multi-tenant database.',
-    status: 'PENDING',
-    createdAt: '2026-08-17T08:00:00Z',
-  },
-  {
-    id: 'quote-2',
-    clientName: 'Elena Rostova',
-    email: 'elena@novabrand.co',
-    phone: '+44 20 7946 0912',
-    serviceType: 'Graphics Designing',
-    budget: '$2,000 - $5,000',
-    details: 'Complete corporate visual identity, 3D product renders, exhibition brochures, and social media templates.',
-    status: 'ACCEPTED',
-    createdAt: '2026-08-16T14:10:00Z',
-  },
-  {
-    id: 'quote-3',
-    clientName: 'Anand Kulkarni',
-    email: 'anand@agriapp.in',
-    phone: '+91 94001 23456',
-    serviceType: 'Mobile Application',
-    budget: '$10,000 - $25,000',
-    details: 'React Native mobile app with IoT hardware synchronization, multi-language support, and offline cache.',
-    status: 'PENDING',
-    createdAt: '2026-08-15T11:30:00Z',
   },
 ];
 

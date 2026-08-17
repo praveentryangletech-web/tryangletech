@@ -75,4 +75,14 @@ export const contactService = {
       orderBy: { createdAt: 'desc' },
     });
   },
+
+  /**
+   * Update submission status (e.g. NEW, CONTACTED, IN_PROGRESS, ARCHIVED)
+   */
+  async updateStatus(id: string, status: string) {
+    return await db.contactSubmission.update({
+      where: { id },
+      data: { status },
+    });
+  },
 };

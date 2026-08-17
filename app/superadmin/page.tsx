@@ -8,7 +8,6 @@ import { useSuperadmin } from './context/SuperadminContext';
 export default function SuperadminOverviewPage() {
   const {
     inquiries,
-    quotes,
     selectedInquiry,
     setSelectedInquiry,
     updateInquiryStatus,
@@ -18,7 +17,6 @@ export default function SuperadminOverviewPage() {
     <>
       <OverviewDashboard
         inquiries={inquiries}
-        quotes={quotes}
         onSelectInquiry={(inq) => setSelectedInquiry(inq)}
       />
 

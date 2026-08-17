@@ -4,43 +4,31 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSuperadmin } from '../context/SuperadminContext';
 
 export default function SuperadminLoginPage() {
   const router = useRouter();
+  const { login, isLoading } = useSuperadmin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    if (!email.trim() || !password.trim()) {
+      setErrorMessage('Please enter both email and password.');
+      return;
+    }
+
     setErrorMessage('');
 
-    setTimeout(() => {
-      if (email.trim() && password.trim()) {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('superadmin_auth', 'true');
-        }
-        router.push('/superadmin');
-      } else {
-        setErrorMessage('Please enter both email and password.');
-        setIsLoading(false);
-      }
-    }, 500);
-  };
-
-  const handleQuickDemo = () => {
-    setEmail('admin@tryangletech.com');
-    setPassword('tryangle2026');
-    setIsLoading(true);
-    setTimeout(() => {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('superadmin_auth', 'true');
-      }
+    const res = await login(email, password);
+    if (res.success) {
       router.push('/superadmin');
-    }, 300);
+    } else {
+      setErrorMessage(res.error || 'Invalid credentials. Please verify and try again.');
+    }
   };
 
   return (
@@ -301,35 +289,6 @@ export default function SuperadminLoginPage() {
               )}
             </button>
           </form>
-
-          {/* Quick Demo Shortcut */}
-          <div
-            style={{
-              marginTop: '1.75rem',
-              paddingTop: '1.25rem',
-              borderTop: '1px solid #EDF2F7',
-              textAlign: 'center',
-            }}>
-            <button
-              type="button"
-              onClick={handleQuickDemo}
-              style={{
-                background: '#F1F5F9',
-                border: '1px solid #E2E8F0',
-                color: '#334155',
-                padding: '0.6rem 1.2rem',
-                borderRadius: '100px',
-                fontSize: '0.825rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease',
-              }}>
-              ⚡ <span>Quick 1-Click Demo Login</span>
-            </button>
-          </div>
         </div>
 
         {/* Back Link */}

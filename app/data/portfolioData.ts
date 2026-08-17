@@ -625,7 +625,7 @@ export const projects: Project[] = [
   {
     slug: "varnet-enterprise",
     title: "Varnet Enterprise",
-    category: "E-Commerce Website",
+    category: "E-Commerce",
     image: "/portfolio/varnet-enterprise.webp",
     description: "A full-featured e-commerce platform built for product listing, ordering, and online sales.",
     client: "Varnet Enterprise",
@@ -653,7 +653,7 @@ export const projects: Project[] = [
   {
     slug: "tattvam-arts",
     title: "Tattvam Arts",
-    category: "E-Commerce Website",
+    category: "E-Commerce",
     image: "/portfolio/tattvam-arts.webp",
     description: "An e-commerce store for artisanal products with a clean, visually rich shopping experience.",
     client: "Tattvam Arts",
@@ -681,7 +681,7 @@ export const projects: Project[] = [
   {
     slug: "devrshree",
     title: "Devrshree",
-    category: "E-Commerce Website",
+    category: "E-Commerce",
     image: "/portfolio/devrshree.webp",
     description: "A robust e-commerce platform built for high-volume sales and seamless product discovery.",
     client: "Devrshree",
@@ -709,7 +709,7 @@ export const projects: Project[] = [
   {
     slug: "toestrand",
     title: "Toestrand",
-    category: "E-Commerce Website",
+    category: "E-Commerce",
     image: "/portfolio/toestrand.webp",
     description: "A modern e-commerce website for a fashion and lifestyle brand with a smooth shopping experience.",
     client: "Toestrand",
@@ -768,7 +768,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-edms",
     title: "My eDMS",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/software-edms.webp",
     description: "A mobile application for efficient document storage, retrieval, and workflow automation.",
     client: "Tryangletech Client",
@@ -796,7 +796,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-sparrow",
     title: "Sparrow Education",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/app-dev-1.webp",
     description: "An educational mobile application built to streamline learning and course management.",
     client: "Tryangletech Client",
@@ -824,7 +824,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-symbiot",
     title: "Symbiot (UGVCL)",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/app-dev-2.webp",
     description: "A utility management mobile app focused on service automation and client communication.",
     client: "Tryangletech Client",
@@ -852,7 +852,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-brilliant",
     title: "Brilliant Lifescience",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/app-dev-3.webp",
     description: "A healthcare and lifescience mobile application designed for secure data management.",
     client: "Tryangletech Client",
@@ -863,7 +863,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-seller",
     title: "Vepar Vruddhi Seller",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/app-dev-seller.webp",
     description: "A seller-side mobile application with inventory management, order tracking, and real-time dashboard.",
     client: "Tryangletech Client",
@@ -874,7 +874,7 @@ export const projects: Project[] = [
   {
     slug: "app-dev-user",
     title: "Vepar Vruddhi User",
-    category: "App Development",
+    category: "Mobile Application",
     image: "/portfolio/app-dev-user.webp",
     description: "A user-facing mobile application with seamless UI, product browsing, and order management.",
     client: "Tryangletech Client",
@@ -887,7 +887,7 @@ export const projects: Project[] = [
   {
     slug: "software-sevabridge",
     title: "Seva Bridge",
-    category: "Software Development",
+    category: "Custom Software",
     image: "/portfolio/software-sevabridge.webp",
     description: "A service bridge platform connecting service providers with customers through a streamlined digital workflow.",
     client: "Tryangletech Client",
@@ -898,7 +898,7 @@ export const projects: Project[] = [
   {
     slug: "software-edms",
     title: "My eDMS",
-    category: "Software Development",
+    category: "Custom Software",
     image: "/portfolio/software-edms.webp",
     description: "A Document Management System built for efficient document storage, retrieval, and workflow automation.",
     client: "Tryangletech Client",
@@ -909,7 +909,7 @@ export const projects: Project[] = [
   {
     slug: "software-eoffice",
     title: "My eOffice",
-    category: "Software Development",
+    category: "Custom Software",
     image: "/portfolio/software-eoffice.webp",
     description: "A digital office management platform for streamlining internal operations and document workflows.",
     client: "Tryangletech Client",

@@ -26,8 +26,9 @@ model ContactSubmission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([status, createdAt(sort: Desc)])
   @@index([email])
-  @@index([createdAt])
+  @@index([createdAt(sort: Desc)])
 }
 
 // ----------------------------------------------------
@@ -40,6 +41,7 @@ model NewsletterSubscriber {
   createdAt DateTime @default(now())
 
   @@index([email])
+  @@index([status, createdAt(sort: Desc)])
 }
 
 // ----------------------------------------------------
@@ -58,8 +60,9 @@ model BlogPost {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@index([category])
+  @@index([category, publishedAt(sort: Desc)])
   @@index([slug])
+  @@index([published, publishedAt(sort: Desc)])
 }
 
 // ----------------------------------------------------
@@ -100,6 +103,10 @@ model PortfolioProject {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  @@index([category])
+  // High-performance composite & single indexes for sub-millisecond lookups & sorting
+  @@index([category, order, createdAt(sort: Desc)])
+  @@index([order, createdAt(sort: Desc)])
   @@index([slug])
+  @@index([createdAt(sort: Desc)])
+  @@index([title, createdAt])
 }

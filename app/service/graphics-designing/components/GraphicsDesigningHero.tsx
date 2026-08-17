@@ -6,8 +6,17 @@ import Image from "next/image";
 export default function GraphicsDesigningHero() {
   return (
     <>
-      <section className="rt-hero-v6 rt-position-relative" style={{ overflow: "hidden", paddingLeft: "clamp(1.25rem, 3.5vw, 3rem)", paddingRight: "clamp(1.25rem, 3.5vw, 3rem)" }}>
-        <div className="w-layout-blockcontainer rt-container-extra-large rt-position-relative w-container">
+      <section
+        className="rt-hero-v6 rt-position-relative"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          paddingLeft: "clamp(1.25rem, 3.5vw, 3rem)",
+          paddingRight: "clamp(1.25rem, 3.5vw, 3rem)",
+          paddingBottom: "clamp(2rem, 4vw, 3.5rem)",
+          background: "linear-gradient(180deg, rgba(238, 242, 255, 0.7) 0%, rgba(245, 248, 255, 0.85) 45%, rgba(249, 251, 255, 1) 80%, rgba(247, 250, 255, 0.8) 100%)",
+        }}>
+        <div className="w-layout-blockcontainer rt-container-extra-large rt-position-relative w-container" style={{ position: "relative", zIndex: 2 }}>
           <div className="rt-hero-v6-top rt-desktop-text-center">
             {/* Live badge pill */}
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(79,70,229,0.08)', border: '1px solid rgba(79,70,229,0.2)', borderRadius: '999px', padding: '6px 16px', marginBottom: '1rem' }}>
@@ -191,10 +200,19 @@ export default function GraphicsDesigningHero() {
           </div>
         </div>
 
-        {/* Marquee — standard brand logos marquee */}
+        {/* Marquee — brand logos ticker seamlessly integrated inside the hero canvas */}
         <div
           data-w-id="924a3615-fd4e-4a46-9185-b144b8427f84"
-          className="rt-marquee-v2">
+          className="rt-marquee-v2"
+          style={{
+            width: "100%",
+            marginTop: "clamp(3rem, 6vw, 5rem)",
+            marginBottom: 0,
+            background: "transparent",
+            position: "relative",
+            zIndex: 3,
+            overflow: "hidden",
+          }}>
           <div className="w-layout-blockcontainer rt-container-main w-container">
             <div className="rt-text-marquee-wrapper rt-overflow-hidden">
               {[1, 2, 3].map((train) => (
@@ -223,13 +241,27 @@ export default function GraphicsDesigningHero() {
           </div>
         </div>
 
-        {/* Hero background image */}
-        <div className="rt-hero-v6-bg">
+        {/* Hero background image with multiply blend mode to eliminate white corners */}
+        <div
+          className="rt-hero-v6-bg"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
+            mixBlendMode: "multiply",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}>
           <Image
             src="/service-2-assets/69142d3301921d8eace15477_home three hero.webp"
             loading="lazy"
             alt="hero background"
-            width={800} height={800} style={{ width: "100%", height: "auto" }} />
+            fill
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "top center", mixBlendMode: "multiply" }} />
         </div>
       </section>
     </>

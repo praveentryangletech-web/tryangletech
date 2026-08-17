@@ -10,7 +10,7 @@ import apiClient from '../utils/apiClient';
 export default function SuperadminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { inquiries, logout } = useSuperadmin();
+  const { logout } = useSuperadmin();
 
   const handleLogout = async () => {
     await logout();
@@ -41,8 +41,6 @@ export default function SuperadminSidebar() {
       ),
       href: '/superadmin/inquiries',
       active: pathname === '/superadmin/inquiries',
-      badge: inquiries.length,
-      badgeColor: '#4F46E5',
     },
     {
       label: 'Portfolio',
@@ -54,9 +52,6 @@ export default function SuperadminSidebar() {
       ),
       href: '/superadmin/portfolio',
       active: pathname === '/superadmin/portfolio',
-      badge: 24,
-      badgeColor: '#15803D',
-      badgeBg: '#DCFCE7',
     },
   ];
 
@@ -137,19 +132,6 @@ export default function SuperadminSidebar() {
                 </span>
                 <span>{item.label}</span>
               </div>
-              {item.badge !== undefined && (
-                <span
-                  style={{
-                    backgroundColor: item.active ? 'rgba(255, 255, 255, 0.2)' : item.badgeBg || item.badgeColor,
-                    color: item.active ? '#FFFFFF' : item.badgeColor,
-                    fontSize: '0.725rem',
-                    fontWeight: 800,
-                    padding: '2px 8px',
-                    borderRadius: '100px',
-                  }}>
-                  {item.badge}
-                </span>
-              )}
             </Link>
           ))}
         </nav>

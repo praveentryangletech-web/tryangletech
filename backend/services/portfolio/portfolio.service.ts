@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import db from '@/backend/db/client';
 import { projects as defaultProjects, PortfolioCategory } from '@/app/data/portfolioData';
 import {
@@ -48,7 +49,7 @@ export const portfolioService = {
   },
 
   /**
-   * Secure, Paginated Query Filter for Public and Admin routes
+   * 100% Parameterized, Injection-Proof Paginated Query for Public and Admin routes
    */
   async getPaginatedProjects(params: PortfolioQueryParams): Promise<PaginatedPortfolioResult> {
     const page = Math.max(params.page || 1, 1);
@@ -60,46 +61,53 @@ export const portfolioService = {
     try {
       await this.seedIfEmpty();
 
-      const conditions: string[] = [];
+      // Parameterized WHERE conditions using Prisma.sql fragments
+      const conditions: Prisma.Sql[] = [];
 
       if (params.slug && params.slug.trim()) {
-        const safeSlug = params.slug.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '');
-        conditions.push(`LOWER("slug") = '${safeSlug}'`);
+        const safeSlug = params.slug.trim().toLowerCase();
+        conditions.push(Prisma.sql`LOWER("slug") = ${safeSlug}`);
       }
 
-      if (params.category && params.category !== 'ALL') {
-        const safeCat = params.category.trim().toLowerCase().replace(/'/g, "''");
-        conditions.push(`LOWER("category") = '${safeCat}'`);
+      if (params.category && params.category.trim().toUpperCase() !== 'ALL') {
+        const safeCat = params.category.trim().toLowerCase();
+        conditions.push(Prisma.sql`LOWER("category") = ${safeCat}`);
       }
 
       if (params.search && params.search.trim()) {
-        const s = params.search.trim().toLowerCase().replace(/'/g, "''");
-        conditions.push(`(
-          LOWER("title") LIKE '%${s}%' OR 
-          LOWER("category") LIKE '%${s}%' OR 
-          LOWER("client") LIKE '%${s}%' OR
-          LOWER("description") LIKE '%${s}%'
+        const searchPattern = `%${params.search.trim().toLowerCase()}%`;
+        conditions.push(Prisma.sql`(
+          LOWER("title") LIKE ${searchPattern} OR 
+          LOWER("category") LIKE ${searchPattern} OR 
+          LOWER("client") LIKE ${searchPattern} OR
+          LOWER("description") LIKE ${searchPattern}
         )`);
       }
 
-      const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+      const whereClause = conditions.length > 0 
+        ? Prisma.sql`WHERE ${Prisma.join(conditions, ' AND ')}` 
+        : Prisma.empty;
 
-      // 1. Get exact total count for pagination metadata
-      const countQuery = `SELECT COUNT(*) as count FROM "PortfolioProject" ${whereClause}`;
-      const countRows = await db.$queryRawUnsafe<Array<{ count: bigint | number }>>(countQuery);
+      // 1. Parameterized Total Count Query
+      const countRows = await db.$queryRaw<Array<{ count: bigint | number }>>`
+        SELECT COUNT(*) as count FROM "PortfolioProject" ${whereClause}
+      `;
       const total = Number(countRows[0]?.count || 0);
       const totalPages = Math.ceil(total / limit) || 1;
 
-      // 2. Fetch paginated records with safe ORDER BY and LIMIT / OFFSET
-      const safeSortCol = sortBy === 'title' ? '"title"' : sortBy === 'createdAt' ? '"createdAt"' : '"order"';
-      const dataQuery = `
+      // 2. Parameterized Data Query with Whitelisted Ordering
+      const orderClause = sortBy === 'title'
+        ? (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "title" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "title" ASC, "createdAt" DESC`)
+        : sortBy === 'createdAt'
+        ? (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "createdAt" DESC` : Prisma.sql`ORDER BY "createdAt" ASC`)
+        : (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "order" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "order" ASC, "createdAt" DESC`);
+
+      const rows = await db.$queryRaw<any[]>`
         SELECT * FROM "PortfolioProject" 
         ${whereClause} 
-        ORDER BY ${safeSortCol} ${sortOrder}, "createdAt" DESC 
+        ${orderClause} 
         LIMIT ${limit} OFFSET ${offset}
       `;
-
-      const rows = await db.$queryRawUnsafe<any[]>(dataQuery);
 
       const items: PortfolioItem[] = rows.map((r) => ({
         id: r.id,
@@ -207,36 +215,38 @@ export const portfolioService = {
   },
 
   /**
-   * Get all portfolio projects with optional category and search filters
+   * Parameterized Get all portfolio projects
    */
   async getAllProjects(category?: string, search?: string): Promise<PortfolioItem[]> {
     try {
       await this.seedIfEmpty();
 
-      let query = `SELECT * FROM "PortfolioProject" WHERE 1=1`;
-      const conditions: string[] = [];
+      const conditions: Prisma.Sql[] = [];
 
-      if (category && category !== 'ALL') {
-        conditions.push(`LOWER("category") = '${category.toLowerCase().replace(/'/g, "''")}'`);
+      if (category && category.trim().toUpperCase() !== 'ALL') {
+        const safeCat = category.trim().toLowerCase();
+        conditions.push(Prisma.sql`LOWER("category") = ${safeCat}`);
       }
 
       if (search && search.trim()) {
-        const s = search.trim().toLowerCase().replace(/'/g, "''");
-        conditions.push(`(
-          LOWER("title") LIKE '%${s}%' OR 
-          LOWER("category") LIKE '%${s}%' OR 
-          LOWER("client") LIKE '%${s}%' OR
-          LOWER("description") LIKE '%${s}%'
+        const searchPattern = `%${search.trim().toLowerCase()}%`;
+        conditions.push(Prisma.sql`(
+          LOWER("title") LIKE ${searchPattern} OR 
+          LOWER("category") LIKE ${searchPattern} OR 
+          LOWER("client") LIKE ${searchPattern} OR 
+          LOWER("description") LIKE ${searchPattern}
         )`);
       }
 
-      if (conditions.length > 0) {
-        query += ` AND ` + conditions.join(' AND ');
-      }
+      const whereClause = conditions.length > 0 
+        ? Prisma.sql`WHERE ${Prisma.join(conditions, ' AND ')}` 
+        : Prisma.empty;
 
-      query += ` ORDER BY "order" ASC, "createdAt" DESC`;
-
-      const rows = await db.$queryRawUnsafe<any[]>(query);
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PortfolioProject" 
+        ${whereClause} 
+        ORDER BY "order" ASC, "createdAt" DESC
+      `;
 
       return rows.map((r) => ({
         id: r.id,
@@ -285,7 +295,7 @@ export const portfolioService = {
   },
 
   /**
-   * Create a new project in PostgreSQL
+   * Parameterized Project Creation
    */
   async createProject(data: CreatePortfolioInput): Promise<PortfolioItem> {
     const id = crypto.randomUUID();
@@ -342,53 +352,49 @@ export const portfolioService = {
   },
 
   /**
-   * Update an existing project by ID
+   * Parameterized Project Update (100% Injection Safe)
    */
   async updateProject(id: string, data: UpdatePortfolioInput): Promise<PortfolioItem | null> {
-    const fields: string[] = [];
+    const updates: Prisma.Sql[] = [];
 
-    if (data.title !== undefined) fields.push(`"title" = '${data.title.replace(/'/g, "''")}'`);
-    if (data.slug !== undefined) fields.push(`"slug" = '${data.slug.replace(/'/g, "''")}'`);
-    if (data.category !== undefined) fields.push(`"category" = '${data.category.replace(/'/g, "''")}'`);
-    if (data.image !== undefined) fields.push(`"image" = '${data.image.replace(/'/g, "''")}'`);
-    if (data.description !== undefined) fields.push(`"description" = '${data.description.replace(/'/g, "''")}'`);
-    if (data.client !== undefined) fields.push(`"client" = '${data.client.replace(/'/g, "''")}'`);
-    if (data.duration !== undefined) fields.push(`"duration" = '${data.duration.replace(/'/g, "''")}'`);
-    if (data.role !== undefined) fields.push(`"role" = '${data.role.replace(/'/g, "''")}'`);
-    if (data.liveUrl !== undefined) fields.push(`"liveUrl" = '${data.liveUrl.replace(/'/g, "''")}'`);
-    if (data.content !== undefined) fields.push(`"content" = '${data.content.replace(/'/g, "''")}'`);
-    if (data.order !== undefined) fields.push(`"order" = ${data.order}`);
+    if (data.title !== undefined) updates.push(Prisma.sql`"title" = ${data.title.trim()}`);
+    if (data.slug !== undefined) updates.push(Prisma.sql`"slug" = ${data.slug.trim()}`);
+    if (data.category !== undefined) updates.push(Prisma.sql`"category" = ${data.category}`);
+    if (data.image !== undefined) updates.push(Prisma.sql`"image" = ${data.image.trim()}`);
+    if (data.description !== undefined) updates.push(Prisma.sql`"description" = ${data.description.trim()}`);
+    if (data.client !== undefined) updates.push(Prisma.sql`"client" = ${data.client.trim()}`);
+    if (data.duration !== undefined) updates.push(Prisma.sql`"duration" = ${data.duration.trim()}`);
+    if (data.role !== undefined) updates.push(Prisma.sql`"role" = ${data.role.trim()}`);
+    if (data.liveUrl !== undefined) updates.push(Prisma.sql`"liveUrl" = ${data.liveUrl.trim()}`);
+    if (data.content !== undefined) updates.push(Prisma.sql`"content" = ${data.content.trim()}`);
+    if (data.order !== undefined) updates.push(Prisma.sql`"order" = ${data.order}`);
 
     if (Array.isArray(data.technologies)) {
-      const techArray = data.technologies.map((t) => `"${t.replace(/"/g, '\\"')}"`).join(',');
-      fields.push(`"technologies" = '{${techArray}}'`);
+      updates.push(Prisma.sql`"technologies" = ${data.technologies}`);
     }
     if (Array.isArray(data.challenges)) {
-      const chArray = data.challenges.map((c) => `"${c.replace(/"/g, '\\"')}"`).join(',');
-      fields.push(`"challenges" = '{${chArray}}'`);
+      updates.push(Prisma.sql`"challenges" = ${data.challenges}`);
     }
     if (Array.isArray(data.solutions)) {
-      const solArray = data.solutions.map((s) => `"${s.replace(/"/g, '\\"')}"`).join(',');
-      fields.push(`"solutions" = '{${solArray}}'`);
+      updates.push(Prisma.sql`"solutions" = ${data.solutions}`);
     }
     if (Array.isArray(data.results)) {
-      const resArray = data.results.map((r) => `"${r.replace(/"/g, '\\"')}"`).join(',');
-      fields.push(`"results" = '{${resArray}}'`);
+      updates.push(Prisma.sql`"results" = ${data.results}`);
     }
 
-    fields.push(`"updatedAt" = NOW()`);
+    updates.push(Prisma.sql`"updatedAt" = NOW()`);
 
-    if (fields.length > 0) {
-      await db.$executeRawUnsafe(`
-        UPDATE "PortfolioProject" 
-        SET ${fields.join(', ')} 
-        WHERE "id" = '${id.replace(/'/g, "''")}'
-      `);
+    if (updates.length > 0) {
+      await db.$executeRaw`
+        UPDATE "PortfolioProject"
+        SET ${Prisma.join(updates, ', ')}
+        WHERE "id" = ${id}
+      `;
     }
 
-    const rows = await db.$queryRawUnsafe<any[]>(`
-      SELECT * FROM "PortfolioProject" WHERE "id" = '${id.replace(/'/g, "''")}' LIMIT 1
-    `);
+    const rows = await db.$queryRaw<any[]>`
+      SELECT * FROM "PortfolioProject" WHERE "id" = ${id} LIMIT 1
+    `;
 
     if (!rows || rows.length === 0) return null;
     const r = rows[0];
@@ -416,7 +422,7 @@ export const portfolioService = {
   },
 
   /**
-   * Delete project by ID
+   * Parameterized Project Deletion
    */
   async deleteProject(id: string): Promise<boolean> {
     try {

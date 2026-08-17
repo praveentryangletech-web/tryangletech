@@ -1,14 +1,86 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authService } from '@/backend/services/auth';
+import { 
+  authService, 
+  validateLoginInput, 
+  checkLoginRateLimit, 
+  recordFailedLogin, 
+  clearLoginAttempts 
+} from '@/backend/services/auth';
 
+export const dynamic = 'force-dynamic';
+
+/**
+ * POST /api/superadmin/auth
+ * Hardened Superadmin Login Endpoint with:
+ *  - SQL Injection Detection & Neutralization
+ *  - Rate Limiting (5 failed attempts -> 15 min lockout)
+ *  - Parameterized Database Query Execution
+ *  - Constant-time password hashing & verification
+ *  - Secure HttpOnly session cookie creation
+ */
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    // 1. Extract client IP for rate limiting
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : '127.0.0.1';
 
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json(
+        { success: false, error: 'Invalid JSON payload.' },
+        { status: 400 }
+      );
+    }
+
+    // 2. Validate input and check for SQL injection patterns
+    const validation = validateLoginInput(body);
+    if (!validation.valid || !validation.email || !validation.password) {
+      return NextResponse.json(
+        { success: false, error: validation.error || 'Invalid credentials provided.' },
+        { status: 400 }
+      );
+    }
+
+    const { email, password } = validation;
+    const rateLimitKey = `${clientIp}:${email}`;
+
+    // 3. Check rate limiting bounds
+    const rateLimit = checkLoginRateLimit(rateLimitKey);
+    if (!rateLimit.allowed) {
+      const minutes = Math.ceil((rateLimit.retryAfterSeconds || 900) / 60);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Too many failed login attempts. Account temporarily locked for security. Please retry in ${minutes} minutes.`,
+        },
+        { 
+          status: 429,
+          headers: {
+            'Retry-After': (rateLimit.retryAfterSeconds || 900).toString(),
+          }
+        }
+      );
+    }
+
+    // 4. Validate credentials against PostgreSQL via parameterized query
     const result = await authService.validateCredentials(email, password);
 
     if (!result.success || !result.user) {
+      // Record failed attempt
+      const failRecord = recordFailedLogin(rateLimitKey);
+      
+      if (failRecord.locked) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Maximum login attempts exceeded. Your IP is locked for 15 minutes.',
+          },
+          { status: 429 }
+        );
+      }
+
       return NextResponse.json(
         {
           success: false,
@@ -18,6 +90,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 5. Successful Login -> Clear any rate-limiting strikes
+    clearLoginAttempts(rateLimitKey);
+
+    // 6. Generate cryptographic HMAC-SHA256 session token
     const token = authService.createSessionToken(result.user);
 
     const response = NextResponse.json({
@@ -27,7 +103,7 @@ export async function POST(req: NextRequest) {
       user: result.user,
     });
 
-    // Set secure HTTP-only cookie
+    // 7. Set secure HTTP-only cookie
     response.cookies.set('superadmin_session', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -46,6 +122,10 @@ export async function POST(req: NextRequest) {
   }
 }
 
+/**
+ * GET /api/superadmin/auth
+ * Session Verification Endpoint
+ */
 export async function GET(req: NextRequest) {
   try {
     const cookieToken = req.cookies.get('superadmin_session')?.value;
@@ -71,6 +151,10 @@ export async function GET(req: NextRequest) {
   }
 }
 
+/**
+ * DELETE /api/superadmin/auth
+ * Superadmin Logout Endpoint
+ */
 export async function DELETE() {
   const response = NextResponse.json({
     success: true,

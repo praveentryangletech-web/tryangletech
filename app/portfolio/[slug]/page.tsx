@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projects } from '../../data/portfolioData';
-import { BLOG_POSTS } from '../../blog/data'; import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
+import { Project, projects, projects as staticProjects } from '../../data/portfolioData';
+import { portfolioService } from '@/backend/services/portfolio';
+import { BLOG_POSTS } from '../../blog/data'; 
+import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
@@ -12,7 +14,22 @@ import Image from "next/image";
 
 export default async function PortfolioDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const project = projects.find((p) => p.slug === resolvedParams.slug);
+
+  // 1. Fetch live from PostgreSQL
+  let project: Project | null = null;
+  try {
+    const res = await portfolioService.getPaginatedProjects({ slug: resolvedParams.slug });
+    if (res.items && res.items.length > 0) {
+      project = res.items[0] as Project;
+    }
+  } catch (err) {
+    console.warn('DB slug lookup warning, using static fallback:', err);
+  }
+
+  // 2. Fallback to static project dataset
+  if (!project) {
+    project = staticProjects.find((p) => p.slug === resolvedParams.slug) || null;
+  }
 
   if (!project) {
     notFound();
@@ -288,7 +305,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                     <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>The Challenge</div>
                       <ul className="portfolio-list">
-                        {project.challenges.map((item, i) => (
+                        {project.challenges.map((item: string, i: number) => (
                           <li key={i}>{item}</li>
                         ))}
                       </ul>
@@ -299,7 +316,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                     <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Our Solution</div>
                       <ul className="portfolio-list">
-                        {project.solutions.map((item, i) => (
+                        {project.solutions.map((item: string, i: number) => (
                           <li key={i}>{item}</li>
                         ))}
                       </ul>
@@ -310,7 +327,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                     <div style={{ background: '#ffffff', padding: '1.5rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(226, 232, 240, 0.8)', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05)' }}>
                       <div className="rt-text-style-h6" style={{ marginBottom: '1.5rem', borderBottom: '2px solid rgba(226, 232, 240, 0.8)', paddingBottom: '0.75rem' }}>Key Results</div>
                       <ul className="portfolio-list">
-                        {project.results.map((item, i) => (
+                        {project.results.map((item: string, i: number) => (
                           <li key={i}>{item}</li>
                         ))}
                       </ul>
@@ -330,7 +347,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                     </div>
                     <div className="w-layout-vflex rt-integration-main-v2" style={{ margin: '0 auto', maxWidth: '900px' }}>
                       <div className="rt-integration-top" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
-                        {project.technologies.map((tech, i) => {
+                        {project.technologies.map((tech: string, i: number) => {
                           const techIconMap: Record<string, string> = {
                             "React": "/tech-icons/react.svg",
                             "React Native": "/tech-icons/react.svg",
@@ -404,9 +421,9 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
                       {(() => {
-                        let relevant = projects.filter(p => p.category === project.category && p.slug !== project.slug).slice(0, 3);
+                        let relevant = staticProjects.filter(p => p.category === project.category && p.slug !== project.slug).slice(0, 3);
                         if (relevant.length < 3) {
-                          const more = projects.filter(p => p.category !== project.category && p.slug !== project.slug).slice(0, 3 - relevant.length);
+                          const more = staticProjects.filter(p => p.category !== project.category && p.slug !== project.slug).slice(0, 3 - relevant.length);
                           relevant.push(...more);
                         }
                         return relevant.map((p, idx) => (

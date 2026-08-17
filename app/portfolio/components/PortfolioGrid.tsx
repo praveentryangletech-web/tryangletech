@@ -1,26 +1,16 @@
 "use client";
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
-import { projects } from '../../data/portfolioData';
-
-// Map each project to a fixed author avatar using existing public assets
-const authorAvatars: Record<string, string> = {
-  "fintech-dashboard":  "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp",
-  "ecommerce-mobile":   "/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp",
-  "healthtech-portal":  "/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp",
-  "ai-marketing-tool":  "/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp",
-  "smart-crm":          "/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp",
-  "logistics-tracker":  "/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp",
-};
+import { Project, projects as staticProjects } from '../../data/portfolioData';
 
 const categories = [
   "All",
   "Business Website", 
-  "E-Commerce Website",
+  "E-Commerce",
   "Landing Website",
-  "App Development",
-  "Software Development",
+  "Mobile Application",
+  "Custom Software",
   "Graphic Design"
 ];
 
@@ -35,25 +25,79 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
   
-  // Infinite scroll state
-  const [visibleCount, setVisibleCount] = useState(limit || 9);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  // API Data & Pagination States
+  const [projectsList, setProjectsList] = useState<Project[]>(staticProjects);
+  const [page, setPage] = useState<number>(1);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false);
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [totalCount, setTotalCount] = useState<number>(staticProjects.length);
 
-  const filteredProjects = useMemo(() => {
-    let filtered = projects;
-    if (categoryFilter && categoryFilter.length > 0) {
-      filtered = filtered.filter(p => categoryFilter.includes(p.category));
+  // Fetch projects from public GET /api/portfolio endpoint
+  const fetchProjects = useCallback(async (pageNum: number, category: string, isAppend = false) => {
+    if (isAppend) {
+      setIsLoadingMore(true);
+    } else {
+      setIsInitialLoading(true);
     }
-    if (activeFilter === "All") return filtered;
-    return filtered.filter(p => p.category === activeFilter);
-  }, [activeFilter, categoryFilter]);
 
-  // Reset visible count when filter changes
+    try {
+      const params = new URLSearchParams();
+      params.set('page', pageNum.toString());
+      params.set('limit', (limit || 9).toString());
+      
+      if (category && category !== 'All') {
+        params.set('category', category);
+      }
+
+      const res = await fetch(`/api/portfolio?${params.toString()}`);
+      if (!res.ok) throw new Error(`API error: ${res.status}`);
+      
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data)) {
+        if (isAppend) {
+          setProjectsList(prev => [...prev, ...json.data]);
+        } else {
+          setProjectsList(json.data);
+        }
+
+        if (json.pagination) {
+          setHasNextPage(Boolean(json.pagination.hasNextPage));
+          setTotalCount(json.pagination.total || json.data.length);
+        } else {
+          setHasNextPage(false);
+        }
+      }
+    } catch (err) {
+      console.warn('API fetch failed, falling back to static dataset:', err);
+      // Fallback filtering on static data
+      let filtered = staticProjects;
+      if (category && category !== 'All') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === category.toLowerCase());
+      }
+      setProjectsList(filtered.slice(0, (limit || 9) * pageNum));
+      setHasNextPage(filtered.length > (limit || 9) * pageNum);
+    } finally {
+      setIsInitialLoading(false);
+      setIsLoadingMore(false);
+    }
+  }, [limit]);
+
+  // Handle Category Filter changes -> Reset to Page 1 and fetch
+  const handleCategoryChange = (category: string) => {
+    if (activeFilter === category) return;
+    setActiveFilter(category);
+    setPage(1);
+    setHasNextPage(true);
+    fetchProjects(1, category, false);
+  };
+
+  // Initial mount fetch
   useEffect(() => {
-    setVisibleCount(limit || 9);
-  }, [activeFilter, limit]);
+    fetchProjects(1, activeFilter, false);
+  }, [fetchProjects, activeFilter]);
 
-  // Scroll-reveal: re-observe every time filter or visibleCount changes
+  // Scroll reveal animation trigger
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -69,11 +113,8 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
 
     const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll:not(.animate-fade-in-up)");
 
-    // Delay slightly so Next.js finishes layout before we measure positions
     const timer = setTimeout(() => {
       elements?.forEach((el) => {
-        // If element is already in viewport (e.g. after client-side navigation),
-        // reveal it immediately — don't wait for IntersectionObserver
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           el.classList.add("animate-fade-in-up");
@@ -87,18 +128,18 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, [activeFilter, visibleCount]);
+  }, [projectsList, activeFilter]);
 
-  // Infinite scroll observer
+  // Infinite Scroll Trigger using IntersectionObserver
   useEffect(() => {
+    if (limit) return; // Don't infinite scroll if bounded by props
+
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isLoadingMore && visibleCount < filteredProjects.length) {
-          setIsLoadingMore(true);
-          setTimeout(() => {
-            setVisibleCount(prev => prev + 6);
-            setIsLoadingMore(false);
-          }, 500);
+        if (entries[0].isIntersecting && !isLoadingMore && !isInitialLoading && hasNextPage) {
+          const nextPage = page + 1;
+          setPage(nextPage);
+          fetchProjects(nextPage, activeFilter, true);
         }
       },
       { threshold: 0.1 }
@@ -111,7 +152,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
     return () => {
       observer.disconnect();
     };
-  }, [isLoadingMore, visibleCount, filteredProjects.length]);
+  }, [isLoadingMore, isInitialLoading, hasNextPage, page, activeFilter, fetchProjects, limit]);
 
   return (
     <div ref={sectionRef}>
@@ -128,7 +169,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
           padding: 9px 22px;
           border-radius: 100px;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 600;
           cursor: pointer;
           border: 1px solid #e1e6f4;
           background: #fff;
@@ -149,7 +190,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
           transform: translateY(-2px);
         }
 
-        /* ── Image zoom on hover (matches BLOG3 Webflow animation) ── */
+        /* ── Image zoom on hover ── */
         .rt-blog-v3-card .rt-blog-image {
           transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
           display: block;
@@ -170,7 +211,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
           box-shadow: 0 28px 50px rgba(24, 72, 212, 0.14) !important;
         }
 
-        /* ── Force left align on card bottom — override Webflow centering ── */
+        /* ── Force left align on card bottom ── */
         .rt-blog-v3-card .rt-blog-v3-card-bottom-part {
           text-align: left !important;
           align-items: flex-start !important;
@@ -198,16 +239,28 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
           }
         }
 
+        /* ── Shimmer Animation for Skeletons ── */
+        @keyframes pfShimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        .pf-skeleton-box {
+          background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+          background-size: 200% 100%;
+          animation: pfShimmer 1.5s infinite;
+          border-radius: 12px;
+        }
+
         /* ── Loading Spinner ── */
         @keyframes spin { 
           to { transform: rotate(360deg); } 
         }
         .pf-spinner {
-          width: 36px;
-          height: 36px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
           border: 3px solid #e5e7eb;
-          border-top-color: var(--vivid-blue, #1833fe);
+          border-top-color: var(--brand-blue, #1833fe);
           animation: spin 0.7s linear infinite;
           margin: 0 auto;
         }
@@ -215,14 +268,14 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
 
       <div className="w-layout-blockcontainer rt-container-main w-container">
 
-        {/* Filter pills */}
+        {/* Category Filter Chips */}
         {!hideFilter && (
           <div className="pf-filter-wrap">
             {categories.map((cat, idx) => (
               <button
                 key={idx}
                 className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
-                onClick={() => setActiveFilter(cat)}
+                onClick={() => handleCategoryChange(cat)}
               >
                 {cat}
               </button>
@@ -230,91 +283,121 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
           </div>
         )}
 
-        {/* Card grid — identical HTML structure to BLOG3.html */}
-        <div style={{ display: 'block' }} className="rt-blog-three-all w-dyn-list">
-          <div
-            role="list"
-            className="rt-blog-v3-card-main w-dyn-items pf-grid"
-            key={activeFilter}
-          >
-            {filteredProjects.slice(0, visibleCount).map((project, idx) => (
-              <div
-                key={`${activeFilter}-${project.slug}`}
-                role="listitem"
-                className="w-dyn-item reveal-on-scroll"
-                style={{ transitionDelay: `${idx * 0.08}s` }}
-              >
-                {/* Same anchor + card as BLOG3 */}
-                <Link
-                  href={`/portfolio/${project.slug}`}
-                  className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
-                >
-                  {/* Top image — same class as template */}
-                  <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
-                    <Image
-                      className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
-                      src={project.image}
-                      alt={project.title}
-                      width={410}
-                      height={290}
-                      loading="lazy"
-                      unoptimized={project.image.endsWith('.gif')}
-                      style={{ height: '220px' }}
-                    />
-                  </div>
-
-                  {/* Bottom content — same classes as BLOG3 */}
-                  <div className="rt-blog-v3-card-bottom-part">
-
-                    {/* Publish date row — shows category instead */}
-                    <div className="w-layout-hflex rt-blog-v3-publish-date">
-                      <div className="w-layout-vflex">
-                        <Image
-                          width={15}
-                          height={16}
-                          alt=""
-                          src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div>{project.category}</div>
-                    </div>
-
-                    {/* Title */}
-                    <div className="rt-text-style-h6">{project.title}</div>
-
-                    {/* View Case Study link */}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
-                      <span className="rt-button-text rt-color-vivid-blue" style={{ margin: 0 }}>
-                        View Case Study
-                      </span>
-                      <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'start',
-                        color: 'var(--vivid-blue, #1833fe)',
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        lineHeight: 1,
-                        transition: 'transform 0.3s ease',
-                      }} className="pf-arrow-icon">›</span>
-                    </div>
-                  </div>
-                </Link>
+        {/* Initial Loading Skeleton State */}
+        {isInitialLoading && (
+          <div className="rt-blog-v3-card-main w-dyn-items pf-grid" style={{ display: 'grid', gap: '2rem' }}>
+            {[1, 2, 3, 4, 5, 6].map((sk) => (
+              <div key={sk} style={{ borderRadius: '20px', border: '1px solid #E2E8F0', padding: '16px', backgroundColor: '#FFFFFF' }}>
+                <div className="pf-skeleton-box" style={{ height: '220px', width: '100%', marginBottom: '16px' }} />
+                <div className="pf-skeleton-box" style={{ height: '18px', width: '35%', marginBottom: '12px' }} />
+                <div className="pf-skeleton-box" style={{ height: '24px', width: '80%', marginBottom: '16px' }} />
+                <div className="pf-skeleton-box" style={{ height: '14px', width: '45%' }} />
               </div>
             ))}
           </div>
-        </div>
+        )}
 
-        {/* Infinite Scroll Sentinel & Loading indicator */}
-        {!limit && (
-          visibleCount < filteredProjects.length ? (
-            <div ref={sentinelRef} style={{ height: '20px', display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-              {isLoadingMore && <div className="pf-spinner"></div>}
+        {/* Dynamic Card Grid */}
+        {!isInitialLoading && (
+          <div style={{ display: 'block' }} className="rt-blog-three-all w-dyn-list">
+            <div
+              role="list"
+              className="rt-blog-v3-card-main w-dyn-items pf-grid"
+              key={activeFilter}
+            >
+              {projectsList.map((project, idx) => (
+                <div
+                  key={`${activeFilter}-${project.slug}-${idx}`}
+                  role="listitem"
+                  className="w-dyn-item reveal-on-scroll"
+                  style={{ transitionDelay: `${(idx % 6) * 0.08}s` }}
+                >
+                  <Link
+                    href={`/portfolio/${project.slug}`}
+                    className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
+                  >
+                    {/* Top Image */}
+                    <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
+                      <Image
+                        className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
+                        src={project.image || '/portfolio/vh-accounting.webp'}
+                        alt={project.title}
+                        width={410}
+                        height={290}
+                        loading="lazy"
+                        unoptimized={project.image ? project.image.endsWith('.gif') : false}
+                        style={{ height: '220px' }}
+                      />
+                    </div>
+
+                    {/* Bottom Content */}
+                    <div className="rt-blog-v3-card-bottom-part">
+                      {/* Category Label */}
+                      <div className="w-layout-hflex rt-blog-v3-publish-date">
+                        <div className="w-layout-vflex">
+                          <Image
+                            width={15}
+                            height={16}
+                            alt=""
+                            src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div>{project.category}</div>
+                      </div>
+
+                      {/* Title */}
+                      <div className="rt-text-style-h6">{project.title}</div>
+
+                      {/* View Case Study Link */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
+                        <span className="rt-button-text rt-color-vivid-blue" style={{ margin: 0 }}>
+                          View Case Study
+                        </span>
+                        <span
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'start',
+                            color: 'var(--vivid-blue, #1833fe)',
+                            fontSize: '16px',
+                            fontWeight: 600,
+                            lineHeight: 1,
+                            transition: 'transform 0.3s ease',
+                          }}
+                          className="pf-arrow-icon"
+                        >
+                          ›
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!isInitialLoading && projectsList.length === 0 && (
+          <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#64748B' }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📁</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--dark-indigo, #1a0b54)' }}>No projects found</div>
+            <p style={{ fontSize: '0.9rem', marginTop: '0.25rem' }}>There are currently no case studies available in the {activeFilter} category.</p>
+          </div>
+        )}
+
+        {/* Infinite Scroll Sentinel & Loading Indicator */}
+        {!limit && !isInitialLoading && (
+          hasNextPage ? (
+            <div ref={sentinelRef} style={{ height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2.5rem' }}>
+              {isLoadingMore && <div className="pf-spinner" />}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', fontSize: '13px', color: '#9ca3af', padding: '1.5rem 0' }}>
-              ✓ All projects loaded
-            </div>
+            projectsList.length > 0 && (
+              <div style={{ textAlign: 'center', fontSize: '13px', color: '#94A3B8', padding: '2.5rem 0', fontWeight: 600 }}>
+                ✓ All {totalCount} case studies loaded
+              </div>
+            )
           )
         )}
 

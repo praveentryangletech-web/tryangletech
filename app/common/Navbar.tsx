@@ -13,6 +13,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
+  // Hide public Navbar on superadmin app portal
+  if (pathname?.startsWith('/superadmin')) {
+    return null;
+  }
+
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -60,6 +66,16 @@ export default function Navbar() {
         }
         .rt-active-link .rt-menu-text {
           color: #1833fe !important;
+        }
+        .rt-pages-menu-link-wrap.is-active .rt-nav-menu-link {
+          color: #1833fe !important;
+        }
+        .rt-pages-menu-link-wrap.is-active .rt-pages-menu-link-arrow-svg {
+          color: #1833fe !important;
+          transform: translateX(4px);
+        }
+        .rt-pages-menu-link-arrow-svg {
+          transition: transform 0.2s ease, color 0.2s ease;
         }
       `}</style>
       <div
@@ -192,7 +208,7 @@ export default function Navbar() {
                           {/* Left column */}
                           <div className="w-layout-vflex rt-pages-menu-list-wrap">
                             {/* Web Development */}
-                            <Link href="/service/web-development" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <Link href="/service/web-development" data-w-id="b07e93b6-139e-136c-8189-3251b36d925d" className={`rt-pages-menu-link-wrap w-inline-block ${pathname === '/service/web-development' ? 'is-active' : ''}`} tabIndex={0}>
                               <div className="w-layout-hflex rt-pages-menu-content">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -204,12 +220,12 @@ export default function Navbar() {
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
-                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor" />
                                 </svg>
                               </div>
                             </Link>
                             {/* Custom Software */}
-                            <Link href="/service/custom-software" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <Link href="/service/custom-software" data-w-id="b07e93b6-139e-136c-8189-3251b36d9268" className={`rt-pages-menu-link-wrap w-inline-block ${pathname === '/service/custom-software' ? 'is-active' : ''}`} tabIndex={0}>
                               <div className="w-layout-hflex rt-pages-menu-content">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -221,12 +237,12 @@ export default function Navbar() {
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
-                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor" />
                                 </svg>
                               </div>
                             </Link>
                             {/* Mobile Application */}
-                            <Link href="/service/mobile-application" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <Link href="/service/mobile-application" data-w-id="b07e93b6-139e-136c-8189-3251b36d9273" className={`rt-pages-menu-link-wrap w-inline-block ${pathname === '/service/mobile-application' ? 'is-active' : ''}`} tabIndex={0}>
                               <div className="w-layout-hflex rt-pages-menu-content">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
@@ -238,7 +254,7 @@ export default function Navbar() {
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
-                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor" />
                                 </svg>
                               </div>
                             </Link>
@@ -246,7 +262,7 @@ export default function Navbar() {
                           {/* Right column */}
                           <div className="w-layout-vflex rt-pages-menu-list-wrap">
                             {/* Digital Marketing */}
-                            <Link href="/service/digital-marketing" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <Link href="/service/digital-marketing" data-w-id="b07e93b6-139e-136c-8189-3251b36d928a" className={`rt-pages-menu-link-wrap w-inline-block ${pathname === '/service/digital-marketing' ? 'is-active' : ''}`} tabIndex={0}>
                               <div className="w-layout-hflex rt-pages-menu-content">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
@@ -258,12 +274,12 @@ export default function Navbar() {
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
-                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor" />
                                 </svg>
                               </div>
                             </Link>
                             {/* Graphics Designing */}
-                            <Link href="/service/graphics-designing" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className="rt-pages-menu-link-wrap w-inline-block" tabIndex={0}>
+                            <Link href="/service/graphics-designing" data-w-id="b07e93b6-139e-136c-8189-3251b36d9295" className={`rt-pages-menu-link-wrap w-inline-block ${pathname === '/service/graphics-designing' ? 'is-active' : ''}`} tabIndex={0}>
                               <div className="w-layout-hflex rt-pages-menu-content">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rt-pages-menu-icon"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
@@ -275,10 +291,9 @@ export default function Navbar() {
                               </div>
                               <div style={{ flexShrink: 0, display: 'flex', alignItems: 'flex-start', paddingTop: '6px' }}>
                                 <svg width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="rt-pages-menu-link-arrow-svg" style={{ transition: 'color 0.3s ease' }}>
-                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor"/>
+                                  <path d="M8.35355 4.35331C8.54882 4.15805 8.54882 3.84146 8.35355 3.6462L5.17157 0.464222C4.97631 0.26896 4.65973 0.26896 4.46447 0.464222C4.2692 0.659484 4.2692 0.976067 4.46447 1.17133L7.29289 3.99976L4.46447 6.82818C4.2692 7.02345 4.2692 7.34003 4.46447 7.53529C4.65973 7.73055 4.97631 7.73055 5.17157 7.53529L8.35355 4.35331ZM0 3.99976V4.49976H8V3.99976V3.49976H0V3.99976Z" fill="currentColor" />
                                 </svg>
                               </div>
-
                             </Link>
                           </div>
                         </div>
@@ -364,11 +379,12 @@ export default function Navbar() {
                             <Image width={10} height={6} alt="dropdown arrow" src={`${NAV_ASSETS}/68ff46366a330717f35394cb_kloudera-home-one-navbar-dropdown-icon.svg`} loading="lazy" />
                           </div>
                         </div>
-                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "200px" }}>
-                          <Link href="/service/web-development" className="rt-nav-menu-link rt-first w-dropdown-link" tabIndex={0}>Web Development</Link>
-                          <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Mobile Application</Link>
-                          <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" tabIndex={0}>Digital Marketing</Link>
-                          <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" tabIndex={0}>Graphics Designing</Link>
+                        <nav className="rt-navbar-menu-dropdown rt-overflow-hidden w-dropdown-list" id="w-dropdown-list-5" aria-labelledby="w-dropdown-toggle-5" style={{ width: "max-content", minWidth: "220px" }}>
+                          <Link href="/service/web-development" className="rt-nav-menu-link rt-first w-dropdown-link" style={pathname === '/service/web-development' ? { color: '#1833fe', fontWeight: 700 } : undefined} tabIndex={0}>Website Development</Link>
+                          <Link href="/service/custom-software" className="rt-nav-menu-link w-dropdown-link" style={pathname === '/service/custom-software' ? { color: '#1833fe', fontWeight: 700 } : undefined} tabIndex={0}>Custom Software</Link>
+                          <Link href="/service/mobile-application" className="rt-nav-menu-link w-dropdown-link" style={pathname === '/service/mobile-application' ? { color: '#1833fe', fontWeight: 700 } : undefined} tabIndex={0}>Mobile Application</Link>
+                          <Link href="/service/digital-marketing" className="rt-nav-menu-link w-dropdown-link" style={pathname === '/service/digital-marketing' ? { color: '#1833fe', fontWeight: 700 } : undefined} tabIndex={0}>Digital Marketing</Link>
+                          <Link href="/service/graphics-designing" className="rt-nav-menu-link rt-last w-dropdown-link" style={pathname === '/service/graphics-designing' ? { color: '#1833fe', fontWeight: 700 } : undefined} tabIndex={0}>Graphics Designing</Link>
                         </nav>
                       </div>
 

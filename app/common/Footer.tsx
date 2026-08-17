@@ -2,8 +2,15 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Hide public Footer on superadmin portal
+  if (pathname?.startsWith('/superadmin')) {
+    return null;
+  }
   return (
     <>
       <section className="rt-footer-carde">

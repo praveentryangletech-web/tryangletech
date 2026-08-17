@@ -1,4 +1,4 @@
-import { healthService } from '@/backend/services/healthService';
+import { healthService } from '@/backend/services/health';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 
 export const dynamic = 'force-dynamic';

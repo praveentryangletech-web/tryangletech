@@ -118,6 +118,21 @@ function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
             .admin-row-hover:hover {
               background-color: rgba(255, 255, 255, 0.6);
             }
+            /* Skeleton Shimmer Loading Animation */
+            @keyframes skeleton-pulse {
+              0% {
+                background-position: 100% 50%;
+              }
+              100% {
+                background-position: 0 50%;
+              }
+            }
+            .skeleton-shimmer {
+              background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+              background-size: 200% 100%;
+              animation: skeleton-pulse 1.5s infinite ease-in-out;
+              border-radius: 6px;
+            }
             /* Custom sleek scrollbar */
             .admin-scroll-area::-webkit-scrollbar {
               width: 8px;

@@ -1,20 +1,22 @@
 import db from '@/backend/db/client';
+import { HealthCheckResult } from './health.types';
 
 export const healthService = {
   /**
-   * Perform database connection healthcheck
+   * Check database connection and latency against PostgreSQL
    */
-  async checkHealth() {
-    const startTime = Date.now();
+  async checkHealth(): Promise<HealthCheckResult> {
+    const start = Date.now();
     await db.$queryRaw`SELECT 1 as health_check`;
-    const latencyMs = Date.now() - startTime;
+    const latencyMs = Date.now() - start;
 
     return {
       status: 'healthy',
       database: 'connected',
-      engine: 'PostgreSQL (Supabase)',
       latencyMs,
       timestamp: new Date().toISOString(),
     };
   },
 };
+
+export default healthService;

@@ -1,7 +1,19 @@
+export const PORTFOLIO_CATEGORIES = [
+  'Business Website',
+  'E-Commerce',
+  'Mobile Application',
+  'Custom Software',
+  'Graphic Design',
+  'Landing Website',
+] as const;
+
+export type PortfolioCategory = (typeof PORTFOLIO_CATEGORIES)[number];
+
 export interface Project {
+  id?: string;
   slug: string;
   title: string;
-  category: string;
+  category: PortfolioCategory;
   image: string;
   description: string;
   client?: string;

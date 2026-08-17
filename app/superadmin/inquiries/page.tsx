@@ -6,12 +6,13 @@ import InquiryDetailsModal from './components/InquiryDetailsModal';
 import { useSuperadmin } from '../context/SuperadminContext';
 
 export default function SuperadminInquiriesPage() {
-  const { inquiries, selectedInquiry, setSelectedInquiry, updateInquiryStatus } = useSuperadmin();
+  const { inquiries, selectedInquiry, setSelectedInquiry, updateInquiryStatus, isLoading } = useSuperadmin();
 
   return (
     <>
       <InquiriesTable
         inquiries={inquiries}
+        isLoading={isLoading}
         onSelectInquiry={(inq) => setSelectedInquiry(inq)}
         onStatusChange={updateInquiryStatus}
       />

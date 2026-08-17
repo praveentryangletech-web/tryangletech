@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { newsletterService } from '@/backend/services/newsletterService';
+import { newsletterService } from '@/backend/services/newsletter';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 import { formatBackendError } from '@/backend/utils/errorHandler';
 

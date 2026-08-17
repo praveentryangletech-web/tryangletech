@@ -3,7 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Inquiry } from '../data/mockData';
-import { useSuperadmin } from '../context/SuperadminContext';
+import { useAuth } from '../context/AuthContext';
+import { useInquiries } from '../context/InquiriesContext';
 import Tooltip from './Tooltip';
 
 interface OverviewProps {
@@ -12,7 +13,8 @@ interface OverviewProps {
 }
 
 export default function OverviewDashboard({ inquiries, onSelectInquiry }: OverviewProps) {
-  const { user, dbLatency, isLoading } = useSuperadmin();
+  const { user, dbLatency } = useAuth();
+  const { isLoading } = useInquiries();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.75rem 2rem' }}>

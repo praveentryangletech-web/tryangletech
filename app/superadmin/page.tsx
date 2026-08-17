@@ -3,15 +3,15 @@
 import React from 'react';
 import OverviewDashboard from './components/OverviewDashboard';
 import InquiryDetailsModal from './inquiries/components/InquiryDetailsModal';
-import { useSuperadmin } from './context/SuperadminContext';
+import { InquiriesProvider, useInquiries } from './context/InquiriesContext';
 
-export default function SuperadminOverviewPage() {
+function OverviewContent() {
   const {
     inquiries,
     selectedInquiry,
     setSelectedInquiry,
     updateInquiryStatus,
-  } = useSuperadmin();
+  } = useInquiries();
 
   return (
     <>
@@ -26,5 +26,13 @@ export default function SuperadminOverviewPage() {
         onStatusChange={updateInquiryStatus}
       />
     </>
+  );
+}
+
+export default function SuperadminOverviewPage() {
+  return (
+    <InquiriesProvider>
+      <OverviewContent />
+    </InquiriesProvider>
   );
 }

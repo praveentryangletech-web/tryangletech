@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSuperadmin } from '../context/SuperadminContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function SuperadminLoginPage() {
   const router = useRouter();
-  const { login, isLoading } = useSuperadmin();
+  const { login, isLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

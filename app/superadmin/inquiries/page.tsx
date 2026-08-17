@@ -3,10 +3,10 @@
 import React from 'react';
 import InquiriesTable from './components/InquiriesTable';
 import InquiryDetailsModal from './components/InquiryDetailsModal';
-import { useSuperadmin } from '../context/SuperadminContext';
+import { InquiriesProvider, useInquiries } from '../context/InquiriesContext';
 
-export default function SuperadminInquiriesPage() {
-  const { inquiries, selectedInquiry, setSelectedInquiry, updateInquiryStatus, isLoading } = useSuperadmin();
+function InquiriesView() {
+  const { inquiries, selectedInquiry, setSelectedInquiry, updateInquiryStatus, isLoading } = useInquiries();
 
   return (
     <>
@@ -23,5 +23,13 @@ export default function SuperadminInquiriesPage() {
         onStatusChange={updateInquiryStatus}
       />
     </>
+  );
+}
+
+export default function SuperadminInquiriesPage() {
+  return (
+    <InquiriesProvider>
+      <InquiriesView />
+    </InquiriesProvider>
   );
 }

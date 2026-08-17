@@ -4,12 +4,12 @@ import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import SuperadminSidebar from './SuperadminSidebar';
 import SuperadminHeader from './SuperadminHeader';
-import { SuperadminProvider, useSuperadmin } from '../context/SuperadminContext';
+import { AuthProvider, useAuth } from '../context/AuthContext';
 
 function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, isAuthChecking } = useSuperadmin();
+  const { isAuthenticated, isAuthChecking } = useAuth();
 
   useEffect(() => {
     if (isAuthChecking) return;
@@ -183,8 +183,8 @@ function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
 
 export default function SuperadminShell({ children }: { children: React.ReactNode }) {
   return (
-    <SuperadminProvider>
+    <AuthProvider>
       <SuperadminContentGuard>{children}</SuperadminContentGuard>
-    </SuperadminProvider>
+    </AuthProvider>
   );
 }

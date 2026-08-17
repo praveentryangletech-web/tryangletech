@@ -4,13 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useSuperadmin } from '../context/SuperadminContext';
+import { useAuth } from '../context/AuthContext';
 import Tooltip from './Tooltip';
 
 export default function SuperadminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useSuperadmin();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();

@@ -26,8 +26,8 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
   });
 
   return (
-    <div style={{ padding: 0, backgroundColor: 'transparent' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1.5rem 2rem 1.25rem 2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 75px)', minHeight: 0, backgroundColor: 'transparent' }}>
+      <div style={{ flexShrink: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1.25rem 2rem 1rem 2rem' }}>
         <input
           type="text"
           placeholder="🔍 Search inquiries by client, email, phone..."
@@ -68,10 +68,10 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
         </div>
       </div>
 
-      <div style={{ overflowX: 'auto', width: '100%' }}>
+      <div className="admin-scroll-area" style={{ flex: 1, overflowY: 'auto', overflowX: 'auto', width: '100%', minHeight: 0 }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '850px' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.14)' }}>
+          <thead style={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: '#f0f4ff', boxShadow: '0 1px 0 rgba(0, 0, 0, 0.12)' }}>
+            <tr>
               <th style={{ padding: '0.85rem 1rem 0.85rem 2rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CLIENT NAME</th>
               <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CONTACT INFO</th>
               <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>SUBJECTS</th>

@@ -417,7 +417,6 @@ export default function PortfolioTable({
                       {/* Edit Project Button with Standard SVG Pencil */}
                       <Tooltip text="Edit project details and tech stack" position="top">
                         <button
-                          title="Edit Project"
                           onClick={() => onEditProject(item)}
                           style={{
                             backgroundColor: '#FFFFFF',
@@ -442,7 +441,6 @@ export default function PortfolioTable({
                       {/* Delete Project Button with Standard SVG Trash Can */}
                       <Tooltip text="Permanently delete project" position="top">
                         <button
-                          title="Delete Project"
                           onClick={() => onDeleteProject(item)}
                           style={{
                             backgroundColor: '#FFFFFF',

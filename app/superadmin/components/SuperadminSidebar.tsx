@@ -74,8 +74,8 @@ export default function SuperadminSidebar() {
         width: '280px',
         height: '100vh',
         flexShrink: 0,
-        borderRight: '1px solid #e1e6f4',
-        backgroundColor: '#ffffff',
+        borderRight: '1px solid #E2E8F0',
+        backgroundColor: '#F8FAFC',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -120,66 +120,79 @@ export default function SuperadminSidebar() {
           </Tooltip>
         </div>
 
-        {/* Sidebar Nav Links with Tooltips */}
+        {/* Sidebar Nav Links */}
         <nav style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {navItems.map((item) => (
-            <Tooltip key={item.href} text={item.tooltip} position="right">
-              <Link
-                href={item.href}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '12px',
-                  textDecoration: 'none',
-                  backgroundColor: item.active ? 'var(--dark-indigo, #1a0b54)' : 'transparent',
-                  color: item.active ? '#FFFFFF' : '#64748B',
-                  fontWeight: item.active ? 700 : 600,
-                  fontSize: '0.925rem',
-                  boxSizing: 'border-box',
-                  transition: 'all 0.2s ease',
-                  boxShadow: item.active ? '0 4px 12px rgba(26, 11, 84, 0.2)' : 'none',
-                }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', opacity: item.active ? 1 : 0.85 }}>
-                    {item.icon}
-                  </span>
-                  <span>{item.label}</span>
-                </div>
-              </Link>
-            </Tooltip>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`admin-sidebar-link ${item.active ? 'active' : ''}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '100%',
+                padding: '0.75rem 1rem',
+                borderRadius: '12px',
+                textDecoration: 'none',
+                backgroundColor: item.active ? 'var(--dark-indigo, #1a0b54)' : 'transparent',
+                color: item.active ? '#FFFFFF' : '#64748B',
+                fontWeight: item.active ? 700 : 600,
+                fontSize: '0.925rem',
+                boxSizing: 'border-box',
+                transition: 'all 0.2s ease',
+                boxShadow: item.active ? '0 4px 12px rgba(26, 11, 84, 0.2)' : 'none',
+              }}>
+              <span style={{ marginRight: '12px', display: 'flex', alignItems: 'center', color: item.active ? 'var(--electric-cyan, #00d2fe)' : '#64748B' }}>
+                {item.icon}
+              </span>
+              <span style={{ flex: 1 }}>{item.label}</span>
+            </Link>
           ))}
         </nav>
       </div>
 
-      {/* User Profile & Actions Bottom */}
-      <div style={{ borderTop: '1px solid #edf2f7', paddingTop: '1.25rem' }}>
-        <Tooltip text={`Admin User: ${user?.email || 'admin@tryangletech.com'}`} position="top">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem', width: '100%' }}>
+      {/* Dynamic Logged In Admin Profile & Bottom Actions */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem' }}>
+        {/* Dynamic Admin User Card with Tooltip */}
+        <Tooltip text={`Signed in as ${user?.email || 'admin@tryangletech.com'}`} position="top">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '8px 10px',
+              backgroundColor: '#EEF2F6',
+              borderRadius: '10px',
+              border: '1px solid #E2E8F0',
+              cursor: 'default',
+              width: '100%',
+              boxSizing: 'border-box',
+            }}
+          >
+            {/* Initials Avatar Badge */}
             <div
               style={{
-                width: '38px',
-                height: '38px',
+                width: '32px',
+                height: '32px',
                 borderRadius: '50%',
                 backgroundColor: 'var(--vivid-blue, #4f46e5)',
+                color: '#FFFFFF',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 800,
-                fontSize: '0.85rem',
-                color: '#FFFFFF',
-                boxShadow: '0 2px 8px rgba(79, 70, 229, 0.3)',
+                fontSize: '0.8rem',
                 flexShrink: 0,
-              }}>
+              }}
+            >
               {initials}
             </div>
-            <div style={{ minWidth: 0, overflow: 'hidden' }}>
-              <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div style={{ overflow: 'hidden', flex: 1 }}>
+              <div style={{ fontSize: '0.825rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {user?.name || 'Super Administrator'}
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {user?.email || 'Super Administrator'}
+              <div style={{ fontSize: '0.725rem', color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {user?.email || 'admin@tryangletech.com'}
               </div>
             </div>
           </div>

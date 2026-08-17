@@ -170,7 +170,7 @@ export default function PortfolioTable({
               position: 'sticky',
               top: 0,
               zIndex: 10,
-              backgroundColor: '#f0f4ff',
+              backgroundColor: '#F1F5F9',
               boxShadow: '0 1px 0 rgba(0, 0, 0, 0.12)',
             }}
           >
@@ -503,7 +503,7 @@ export default function PortfolioTable({
         style={{
           flexShrink: 0,
           borderTop: '1px solid #E2E8F0',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#F8FAFC',
           padding: '0.85rem 2rem',
           display: 'flex',
           justifyContent: 'space-between',

@@ -85,7 +85,7 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
       {/* 2. SCROLLABLE TBODY CONTAINER WITH STICKY THEAD */}
       <div className="admin-scroll-area" style={{ flex: 1, overflowY: 'auto', overflowX: 'auto', width: '100%', minHeight: 0 }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '850px' }}>
-          <thead style={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: '#f0f4ff', boxShadow: '0 1px 0 rgba(0, 0, 0, 0.12)' }}>
+          <thead style={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: '#F1F5F9', boxShadow: '0 1px 0 rgba(0, 0, 0, 0.12)' }}>
             <tr>
               <th style={{ padding: '0.85rem 1rem 0.85rem 2rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CLIENT NAME</th>
               <th style={{ padding: '0.85rem 1rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>CONTACT INFO</th>
@@ -206,7 +206,7 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
         style={{
           flexShrink: 0,
           borderTop: '1px solid #E2E8F0',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#F8FAFC',
           padding: '0.85rem 2rem',
           display: 'flex',
           justifyContent: 'space-between',

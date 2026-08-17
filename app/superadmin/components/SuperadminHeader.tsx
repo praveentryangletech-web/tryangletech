@@ -17,15 +17,14 @@ export default function SuperadminHeader() {
       style={{
         height: '75px',
         flexShrink: 0,
-        borderBottom: '1px solid #e1e6f4',
-        backgroundColor: 'rgba(255, 255, 255, 0.96)',
-        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #E2E8F0',
+        backgroundColor: '#F8FAFC',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 2rem',
         zIndex: 100,
-        boxShadow: '0 2px 12px rgba(24, 72, 212, 0.04)',
+        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.02)',
       }}>
       {/* Breadcrumb / Dynamic Page Title */}
       <div>

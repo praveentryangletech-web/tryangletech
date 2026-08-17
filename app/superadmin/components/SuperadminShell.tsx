@@ -88,7 +88,7 @@ function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
         height: '100vh',
         width: '100vw',
         overflow: 'hidden',
-        backgroundColor: '#f0f4ff',
+        backgroundColor: '#F1F5F9',
         color: 'var(--dark-indigo, #1a0b54)',
         fontFamily: 'var(--_fonts---font-family--inter, Inter, sans-serif)',
       }}>
@@ -116,7 +116,7 @@ function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
               transition: background-color 0.15s ease;
             }
             .admin-row-hover:hover {
-              background-color: rgba(255, 255, 255, 0.6);
+              background-color: rgba(255, 255, 255, 0.75);
             }
             /* Skeleton Shimmer Loading Animation */
             @keyframes skeleton-pulse {
@@ -172,7 +172,7 @@ function SuperadminContentGuard({ children }: { children: React.ReactNode }) {
             flex: 1,
             overflowY: 'auto',
             padding: 0,
-            backgroundColor: '#f0f4ff',
+            backgroundColor: '#F1F5F9',
           }}>
           {children}
         </main>

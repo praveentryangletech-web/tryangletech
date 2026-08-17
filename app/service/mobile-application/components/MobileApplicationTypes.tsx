@@ -1,318 +1,196 @@
 'use client';
 
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
+import React from 'react';
 import Image from "next/image";
-import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
 export default function MobileApplicationTypes() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Native Project Scroll & On-Load Reveal Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const mobileAppTypes = [
-    {
-      id: "Type-01",
-      title: "Native iOS & Android Apps",
-      description:
-        "High-performance platform-exclusive apps engineered in Swift and Kotlin for maximum frame rates, 120Hz fluid animations, and deep device hardware integration.",
-      bgImage: "/services/mobile/card-native.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect width="14" height="20" x="5" y="2" rx="3" />
-          <path d="M12 18h.01" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-02",
-      title: "Cross-Platform Mobile Apps",
-      description:
-        "Single-codebase efficiency with native-grade performance across both iOS and Android, drastically reducing time-to-market and ongoing maintenance overhead.",
-      bgImage: "/services/mobile/card-cross.jpg",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-03",
-      title: "Enterprise & Business Apps",
-      description:
-        "Mission-critical mobile solutions for enterprise field teams, CRM/ERP workflows, offline-first data synchronization, and role-based security access.",
-      bgImage: "/services/mobile/card-enterprise.webp",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
-      ),
-    },
-    {
-      id: "Type-04",
-      title: "E-Commerce & On-Demand Apps",
-      description:
-        "Frictionless shopping and delivery experiences with 1-tap Apple Pay and Google Pay checkouts, live GPS order tracking, and push engagement.",
-      bgImage: "/services/mobile/card-ecommerce.webp",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-          <line x1="3" y1="6" x2="21" y2="6" />
-        </svg>
-      ),
-    },
-  ];
-
   return (
-    <section
-      ref={sectionRef}
-      className="rt-speciality rt-overflow-hidden"
-      style={{
-        paddingTop: "3rem",
-        paddingBottom: "4.5rem",
-        background: "transparent",
-      }}
-    >
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          .mobile-type-card {
-            background: #ffffff;
-            border: 1px solid #e1e6f4;
-            border-radius: 1.25rem;
-            padding: 2.2rem 2rem 2.2rem 2rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            gap: 1rem;
-            min-height: 290px;
-            cursor: pointer;
-            will-change: transform, box-shadow;
-          }
-
-          /* Top Accent Gradient Bar matching Brand Blue */
-          .mobile-type-card-topbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3.5px;
-            background: linear-gradient(90deg, #1833fe, #6366f1);
-            z-index: 4;
-          }
-
-          /* Integrated Brand Artwork Background */
-          .mobile-card-bg-art {
-            position: absolute;
-            right: -15px;
-            bottom: -20px;
-            width: 175px;
-            height: 175px;
-            opacity: 0.55;
-            transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                        opacity 0.65s ease;
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 1rem;
-            overflow: hidden;
-            mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
-            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
-          }
-
-          /* Pure White Light-Sheen Sweep */
-          .mobile-type-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(
-              to right,
-              rgba(255, 255, 255, 0) 0%,
-              rgba(255, 255, 255, 0.6) 50%,
-              rgba(255, 255, 255, 0) 100%
-            );
-            transform: skewX(-25deg);
-            transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 3;
-            pointer-events: none;
-          }
-
-          /* Ultra-Light, Subtle Hover State */
-          .mobile-type-card:hover {
-            transform: translateY(-8px) scale(1.015);
-            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
-            border-color: #dbeafe;
-            box-shadow: 0 18px 40px -10px rgba(24, 51, 254, 0.08);
-          }
-
-          .mobile-type-card:hover .mobile-card-bg-art {
-            transform: scale(1.12) rotate(-3deg);
-            opacity: 0.85;
-          }
-
-          .mobile-type-card:hover::before {
-            left: 140%;
-          }
-
-          /* Icon Box Transition: Soft Light Pastel Tint */
-          .mobile-card-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: #f4f7ff;
-            border: 1px solid #e8edfa;
-            color: #1833fe;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        background 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                        color 0.5s ease,
-                        box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-          }
-
-          .mobile-type-card:hover .mobile-card-icon-box {
-            transform: scale(1.08) translateY(-2px);
-            background: #eef2ff;
-            border-color: #c7d2fe;
-            color: #1833fe;
-            box-shadow: 0 6px 16px rgba(24, 51, 254, 0.08);
-          }
-
-          /* Content Layer */
-          .mobile-card-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            max-width: 84%;
-          }
-
-          /* Title Color Transition */
-          .mobile-card-title {
-            font-size: 1.22rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 0;
-            line-height: 1.3;
-            transition: color 0.5s ease;
-          }
-
-          .mobile-type-card:hover .mobile-card-title {
-            color: #1833fe;
-          }
-        `
-      }} />
-
+    <section className="rt-benefits rt-overflow-hidden pt-16 pb-16" style={{ overflow: "hidden" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
-        <div className="rt-tools-iconheading rt-speciality-heading rt-heading-bottom-gap reveal-on-scroll" style={{ margin: "0 auto 36px auto", textAlign: "center" }}>
-          <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
+        <div className="rt-tools-iconheading rt-heading-bottom-gap">
+          <div
+            data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774a7"
+            className="rt-sub-gap">
             <div className="rt-sub-text rt-sub-gredient">mobile app types</div>
           </div>
-          <ScrollTextReveal
-            text="Unveiling the Variety in Mobile App Types We Build"
-            align="center"
+          <div
+            data-w-id="a60e50fe-a27d-8fb6-5747-bbbaa935d16d"
+            className="rt-position-relative">
+            <h2 className="rt-gap-off rt-desktop-text-center">
+              Unveiling the Variety in Mobile App Types We Build
+            </h2>
+            <div className="rt-position-absolute rt-text-overlay">
+              <div className="rt-position-relative rt-text-wrap-overlay one rt-overflow-hidden">
+                <div className="rt-position-absolute rt-text-overlay-inner one"></div>
+              </div>
+              <div className="rt-position-relative rt-text-wrap-overlay two rt-overflow-hidden">
+                <div className="rt-position-absolute rt-text-overlay-inner two"></div>
+              </div>
+            </div>
+          </div>
+          <p
             className="rt-gap-off rt-desktop-text-center"
-            style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}
-          />
-          <p style={{ maxWidth: "640px", margin: "10px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
+            style={{
+              maxWidth: "680px",
+              margin: "12px auto 0 auto",
+              color: "#64748b",
+              fontSize: "15px",
+              lineHeight: "1.6",
+            }}>
             From high-performance native iOS &amp; Android flagships to cross-platform frameworks, enterprise workflows, and e-commerce apps.
           </p>
         </div>
 
-        {/* 4 Cards Grid with TryangleTech Brand Flow Artworks & Smooth Transitions */}
+        {/* Benefits Style Cards Grid (Identical to Website Types Component) */}
         <div
-          className="rt-cards-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {mobileAppTypes.map((item, idx) => (
+          data-w-id="fa309af7-4c74-82d9-d77a-6bc987988f62"
+          className="rt-benefits-wrapper">
+          {/* Top Row: 3 Cards */}
+          <div className="w-layout-grid rt-benefits-content-one">
+            {/* Card 1: Native iOS & Android Apps */}
             <div
-              key={item.id}
-              className="rt-speciality-item mobile-type-card reveal-on-scroll"
-              style={{
-                transitionDelay: `${idx * 0.08}s`,
-              }}
-            >
-              {/* Top Accent Gradient Bar */}
-              <div className="mobile-type-card-topbar" />
-
-              {/* TryangleTech Brand Flow Background Artwork */}
-              <div className="mobile-card-bg-art">
+              data-w-id="2c971d5c-ac96-ff1c-d7cf-032f3df14684"
+              className="rt-benefits-item">
+              <div
+                data-w-id="b11a6bba-0fb6-b2a9-72b2-ecde0332d0e1"
+                className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
                 <Image
-                  src={item.bgImage}
-                  alt={item.title}
-                  width={220}
-                  height={220}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  src="/Home2_files/6912f62c82b64389f32cf4f2_taskopia-benefits-home-two-1.webp"
+                  loading="lazy"
+                  alt="Native iOS & Android Apps"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
                 />
-              </div>
-
-              {/* Brand Icon Box */}
-              <div className="mobile-card-icon-box">
-                {item.icon}
-              </div>
-
-              {/* Text Content */}
-              <div className="mobile-card-content">
-                <div className="mobile-card-title">
-                  {item.title}
+                <div className="rt-benefits-small-image rt-1">
+                  <Image
+                    src="/Home2_files/6912f62cac10df5f2a6eba6b_Group 2085663570.webp"
+                    loading="lazy"
+                    alt="iOS and Android performance badge"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
                 </div>
-                <p
-                  className="rt-gap-off"
-                  style={{
-                    color: "#64748b",
-                    fontSize: "0.90rem",
-                    lineHeight: "1.55",
-                    margin: 0,
-                  }}
-                >
-                  {item.description}
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Native iOS &amp; Android Apps</div>
+                <p>
+                  High-performance platform-exclusive apps engineered in Swift and Kotlin for maximum frame rates, 120Hz fluid animations, and deep device hardware integration.
                 </p>
               </div>
             </div>
-          ))}
+
+            {/* Card 2: Cross-Platform Mobile Apps */}
+            <div
+              data-w-id="71d233e7-17e3-e29f-6260-499af23458fb"
+              className="rt-benefits-item">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
+                <Image
+                  src="/Home2_files/6912f62c1b2810c6c1ca5837_taskopia-benefits-home-two-2.webp"
+                  loading="lazy"
+                  alt="Cross-Platform Mobile Apps"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <div className="rt-benefits-small-image rt-2">
+                  <Image
+                    src="/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp"
+                    loading="lazy"
+                    alt="Cross-platform sync badge"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Cross-Platform Mobile Apps</div>
+                <p>
+                  Single-codebase efficiency with Flutter and React Native, delivering native-grade responsiveness across both iOS and Android with reduced time-to-market.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: E-Commerce & On-Demand Apps */}
+            <div
+              data-w-id="c5ff7e0a-813a-bab5-0c99-87ff995a45e8"
+              className="rt-benefits-item">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
+                <Image
+                  src="/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp"
+                  loading="lazy"
+                  alt="E-Commerce & On-Demand Apps"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">E-Commerce &amp; On-Demand Apps</div>
+                <p>
+                  Frictionless shopping and delivery experiences with 1-tap Apple Pay and Google Pay checkouts, live GPS order tracking, and push engagement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: 2 Wide Cards */}
+          <div
+            data-w-id="aa7bae47-4e38-6bed-00a4-c7402dde4e24"
+            className="w-layout-grid rt-benefits-content-two">
+            {/* Card 4: Enterprise & Field Operations Apps */}
+            <div className="rt-benefits-item rt-bottom">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
+                <Image
+                  src="/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp"
+                  loading="lazy"
+                  alt="Enterprise & Business Apps"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <div className="rt-benefits-small-image rt-3">
+                  <Image
+                    src="/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp"
+                    loading="lazy"
+                    alt="Enterprise security badge"
+                    width={800}
+                    height={800}
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                </div>
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">Enterprise &amp; Field Operations Apps</div>
+                <p>
+                  Mission-critical mobile solutions for enterprise field teams, CRM/ERP workflows, offline-first data synchronization, biometric authentication, and role-based security access.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 5: AI & Workflow Automation Apps */}
+            <div className="rt-benefits-item rt-bottom">
+              <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden">
+                <Image
+                  src="/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp"
+                  loading="lazy"
+                  alt="AI & Workflow Automation Apps"
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </div>
+              <div className="rt-benefits-item-text">
+                <div className="rt-text-style-h6">AI &amp; Workflow Automation Apps</div>
+                <p>
+                  Smart mobile applications engineered to eliminate repetitive manual work with camera OCR scanning, automated data entry, intelligent task routing, and autonomous AI assistants.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

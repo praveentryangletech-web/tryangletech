@@ -11,6 +11,14 @@ export interface AdminUserDTO {
   role: string;
 }
 
+interface AdminUserRecord {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+}
+
 /**
  * Hash password using crypto scrypt with random salt
  */
@@ -34,39 +42,58 @@ function verifyPassword(password: string, storedHash: string): boolean {
     return crypto.timingSafeEqual(keyBuffer, derivedKey);
   }
 
-  // Plain text fallback (e.g. if directly inserted into DB)
+  // Plain text fallback
   return password === storedHash;
 }
 
 export const authService = {
   /**
-   * Ensure default Superadmin exists in Supabase PostgreSQL database using .env values
+   * Ensure default Superadmin exists in Supabase PostgreSQL database using Prisma
    */
   async ensureSuperadminExists() {
     try {
       const email = (process.env.SUPERADMIN_EMAIL || DEFAULT_EMAIL).trim().toLowerCase();
       const rawPassword = (process.env.SUPERADMIN_PASSWORD || DEFAULT_PASSWORD).trim();
 
-      const existing = await (db as any).adminUser.findUnique({
-        where: { email },
-      });
-
-      if (!existing) {
-        const id = crypto.randomUUID();
-        const hashedPassword = hashPassword(rawPassword);
-        await (db as any).adminUser.create({
-          data: {
-            id,
-            email,
-            password: hashedPassword,
-            name: 'Praveen Gupta',
-            role: 'SUPERADMIN',
-          },
+      // 1. Try standard Prisma ORM model delegate
+      if (typeof (db as any).adminUser?.findUnique === 'function') {
+        const existing = await (db as any).adminUser.findUnique({
+          where: { email },
         });
-        console.log(`[DB Auth] Superadmin account seeded in PostgreSQL for: ${email}`);
+
+        if (!existing) {
+          await (db as any).adminUser.create({
+            data: {
+              id: crypto.randomUUID(),
+              email,
+              password: hashPassword(rawPassword),
+              name: 'Praveen Gupta',
+              role: 'SUPERADMIN',
+            },
+          });
+          console.log(`[Prisma Auth] Superadmin account seeded in PostgreSQL for: ${email}`);
+        }
+      } else {
+        // 2. Direct Prisma raw query fallback
+        const rows = await db.$queryRaw<AdminUserRecord[]>`
+          SELECT "id", "email", "password", "name", "role" 
+          FROM "AdminUser" 
+          WHERE LOWER("email") = LOWER(${email}) 
+          LIMIT 1
+        `;
+
+        if (!rows || rows.length === 0) {
+          const id = crypto.randomUUID();
+          const hashedPassword = hashPassword(rawPassword);
+          await db.$executeRaw`
+            INSERT INTO "AdminUser" ("id", "email", "password", "name", "role", "createdAt", "updatedAt")
+            VALUES (${id}, ${email}, ${hashedPassword}, 'Praveen Gupta', 'SUPERADMIN', NOW(), NOW())
+          `;
+          console.log(`[Prisma Auth] Superadmin account seeded in PostgreSQL for: ${email}`);
+        }
       }
     } catch (err) {
-      console.error('[DB Auth] ensureSuperadminExists warning:', err);
+      console.error('[Prisma Auth] ensureSuperadminExists warning:', err);
     }
   },
 
@@ -88,10 +115,22 @@ export const authService = {
       // 1. Ensure superadmin record is initialized from .env if table is empty
       await this.ensureSuperadminExists();
 
+      let user: AdminUserRecord | null = null;
+
       // 2. Query admin user from Supabase PostgreSQL
-      const user = await (db as any).adminUser.findUnique({
-        where: { email: inputEmail },
-      });
+      if (typeof (db as any).adminUser?.findUnique === 'function') {
+        user = await (db as any).adminUser.findUnique({
+          where: { email: inputEmail },
+        });
+      } else {
+        const rows = await db.$queryRaw<AdminUserRecord[]>`
+          SELECT "id", "email", "password", "name", "role" 
+          FROM "AdminUser" 
+          WHERE LOWER("email") = LOWER(${inputEmail}) 
+          LIMIT 1
+        `;
+        user = rows && rows.length > 0 ? rows[0] : null;
+      }
 
       if (!user) {
         return { success: false, error: 'Invalid email address or password.' };
@@ -107,10 +146,19 @@ export const authService = {
       // 4. If password was stored in plain text, auto-upgrade to scrypt hash in DB
       if (!user.password.includes(':')) {
         try {
-          await (db as any).adminUser.update({
-            where: { id: user.id },
-            data: { password: hashPassword(inputPassword) },
-          });
+          const newHash = hashPassword(inputPassword);
+          if (typeof (db as any).adminUser?.update === 'function') {
+            await (db as any).adminUser.update({
+              where: { id: user.id },
+              data: { password: newHash },
+            });
+          } else {
+            await db.$executeRaw`
+              UPDATE "AdminUser" 
+              SET "password" = ${newHash}, "updatedAt" = NOW() 
+              WHERE "id" = ${user.id}
+            `;
+          }
         } catch {
           // Non-blocking hash upgrade
         }
@@ -125,7 +173,7 @@ export const authService = {
         },
       };
     } catch (error: any) {
-      console.error('[DB Auth] validateCredentials error:', error);
+      console.error('[Prisma Auth] validateCredentials error:', error);
       return { success: false, error: 'Database authentication error. Please try again.' };
     }
   },

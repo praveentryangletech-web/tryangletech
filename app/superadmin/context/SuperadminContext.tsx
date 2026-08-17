@@ -16,6 +16,7 @@ export interface AdminUser {
 interface SuperadminContextType {
   user: AdminUser | null;
   isAuthenticated: boolean;
+  isAuthChecking: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: AdminUser }>;
   logout: () => Promise<void>;
   inquiries: Inquiry[];
@@ -36,28 +37,56 @@ const SuperadminContext = createContext<SuperadminContextType | undefined>(undef
 export function SuperadminProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthChecking, setIsAuthChecking] = useState<boolean>(true);
   const [inquiries, setInquiries] = useState<Inquiry[]>(INITIAL_INQUIRIES);
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dbLatency, setDbLatency] = useState<number>(24);
 
-  // Initialize stored session on load
+  // 1. Verify Authentication & Session on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedAuth = localStorage.getItem('superadmin_auth');
-      const storedUser = localStorage.getItem('superadmin_user');
-      if (storedAuth === 'true' && storedUser) {
-        try {
-          setUser(JSON.parse(storedUser));
+    const verifySession = async () => {
+      setIsAuthChecking(true);
+      try {
+        // First check backend session API
+        const authRes = await apiClient.get('/api/superadmin/auth', { skipAuth: false });
+        if (authRes.success && authRes.data?.authenticated) {
+          const authUser = authRes.data.user;
+          setUser(authUser);
           setIsAuthenticated(true);
-        } catch {
-          // Fallback
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('superadmin_auth', 'true');
+            localStorage.setItem('superadmin_user', JSON.stringify(authUser));
+          }
+          return;
         }
+
+        // Fallback check from localStorage
+        if (typeof window !== 'undefined') {
+          const storedAuth = localStorage.getItem('superadmin_auth');
+          const storedUser = localStorage.getItem('superadmin_user');
+          if (storedAuth === 'true' && storedUser) {
+            setUser(JSON.parse(storedUser));
+            setIsAuthenticated(true);
+            return;
+          }
+        }
+
+        // Not authenticated
+        setUser(null);
+        setIsAuthenticated(false);
+      } catch {
+        setUser(null);
+        setIsAuthenticated(false);
+      } finally {
+        setIsAuthChecking(false);
       }
-    }
+    };
+
+    verifySession();
   }, []);
 
-  // Centralized Login API Action
+  // 2. Centralized Login API Action
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
@@ -95,7 +124,7 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Centralized Logout API Action
+  // 3. Centralized Logout API Action
   const logout = async () => {
     try {
       await apiClient.delete('/api/superadmin/auth');
@@ -111,7 +140,7 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Fetch live health & inquiries from backend
+  // 4. Fetch live health & inquiries from backend
   const refreshData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -146,12 +175,14 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    refreshData();
-  }, [refreshData]);
+    if (isAuthenticated) {
+      refreshData();
+    }
+  }, [isAuthenticated, refreshData]);
 
-  // Update lead status in context and persist in Supabase PostgreSQL via apiClient.patch
+  // 5. Update lead status in context and persist in Supabase PostgreSQL via apiClient.patch
   const updateInquiryStatus = async (id: string, newStatus: Inquiry['status']) => {
-    // 1. Optimistic UI update
+    // Optimistic UI update
     setInquiries((prev) =>
       prev.map((item) => (item.id === id ? { ...item, status: newStatus } : item))
     );
@@ -159,7 +190,7 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
       setSelectedInquiry((prev) => (prev ? { ...prev, status: newStatus } : null));
     }
 
-    // 2. Live database mutation via apiClient
+    // Live database mutation via apiClient
     const res = await apiClient.patch('/api/contact', { id, status: newStatus });
     if (!res.success) {
       console.error('Failed to persist status change to PostgreSQL:', res.error);
@@ -171,6 +202,7 @@ export function SuperadminProvider({ children }: { children: ReactNode }) {
   const value: SuperadminContextType = {
     user,
     isAuthenticated,
+    isAuthChecking,
     login,
     logout,
     inquiries,

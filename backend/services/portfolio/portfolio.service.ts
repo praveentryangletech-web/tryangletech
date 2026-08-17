@@ -1,6 +1,12 @@
 import db from '@/backend/db/client';
 import { projects as defaultProjects, PortfolioCategory } from '@/app/data/portfolioData';
-import { PortfolioItem, CreatePortfolioInput, UpdatePortfolioInput } from './portfolio.types';
+import {
+  PortfolioItem,
+  CreatePortfolioInput,
+  UpdatePortfolioInput,
+  PortfolioQueryParams,
+  PaginatedPortfolioResult,
+} from './portfolio.types';
 import { generateSlug } from './portfolio.utils';
 
 export const portfolioService = {
@@ -38,6 +44,165 @@ export const portfolioService = {
       }
     } catch (err) {
       console.error('[DB Portfolio] seedIfEmpty warning:', err);
+    }
+  },
+
+  /**
+   * Secure, Paginated Query Filter for Public and Admin routes
+   */
+  async getPaginatedProjects(params: PortfolioQueryParams): Promise<PaginatedPortfolioResult> {
+    const page = Math.max(params.page || 1, 1);
+    const limit = Math.min(Math.max(params.limit || 10, 1), 50);
+    const offset = (page - 1) * limit;
+    const sortBy = params.sortBy || 'order';
+    const sortOrder = (params.sortOrder || 'asc').toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+
+    try {
+      await this.seedIfEmpty();
+
+      const conditions: string[] = [];
+
+      if (params.slug && params.slug.trim()) {
+        const safeSlug = params.slug.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '');
+        conditions.push(`LOWER("slug") = '${safeSlug}'`);
+      }
+
+      if (params.category && params.category !== 'ALL') {
+        const safeCat = params.category.trim().toLowerCase().replace(/'/g, "''");
+        conditions.push(`LOWER("category") = '${safeCat}'`);
+      }
+
+      if (params.search && params.search.trim()) {
+        const s = params.search.trim().toLowerCase().replace(/'/g, "''");
+        conditions.push(`(
+          LOWER("title") LIKE '%${s}%' OR 
+          LOWER("category") LIKE '%${s}%' OR 
+          LOWER("client") LIKE '%${s}%' OR
+          LOWER("description") LIKE '%${s}%'
+        )`);
+      }
+
+      const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+
+      // 1. Get exact total count for pagination metadata
+      const countQuery = `SELECT COUNT(*) as count FROM "PortfolioProject" ${whereClause}`;
+      const countRows = await db.$queryRawUnsafe<Array<{ count: bigint | number }>>(countQuery);
+      const total = Number(countRows[0]?.count || 0);
+      const totalPages = Math.ceil(total / limit) || 1;
+
+      // 2. Fetch paginated records with safe ORDER BY and LIMIT / OFFSET
+      const safeSortCol = sortBy === 'title' ? '"title"' : sortBy === 'createdAt' ? '"createdAt"' : '"order"';
+      const dataQuery = `
+        SELECT * FROM "PortfolioProject" 
+        ${whereClause} 
+        ORDER BY ${safeSortCol} ${sortOrder}, "createdAt" DESC 
+        LIMIT ${limit} OFFSET ${offset}
+      `;
+
+      const rows = await db.$queryRawUnsafe<any[]>(dataQuery);
+
+      const items: PortfolioItem[] = rows.map((r) => ({
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        category: r.category as PortfolioCategory,
+        image: r.image,
+        description: r.description,
+        client: r.client || '',
+        duration: r.duration || '',
+        role: r.role || '',
+        liveUrl: r.liveUrl || '',
+        content: r.content || '',
+        challenges: Array.isArray(r.challenges) ? r.challenges : [],
+        solutions: Array.isArray(r.solutions) ? r.solutions : [],
+        results: Array.isArray(r.results) ? r.results : [],
+        technologies: Array.isArray(r.technologies) ? r.technologies : [],
+        order: r.order || 0,
+        createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+        updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
+      }));
+
+      return {
+        items,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages,
+          hasNextPage: page < totalPages,
+          hasPrevPage: page > 1,
+        },
+        filters: {
+          category: params.category,
+          search: params.search,
+          sortBy,
+          sortOrder: sortOrder.toLowerCase(),
+        },
+      };
+    } catch (err) {
+      console.error('[DB Portfolio] getPaginatedProjects fallback:', err);
+
+      // Fallback with in-memory filtering and pagination on static projects
+      let filtered = [...defaultProjects];
+      if (params.slug) {
+        filtered = filtered.filter((p) => p.slug === params.slug);
+      }
+      if (params.category && params.category !== 'ALL') {
+        filtered = filtered.filter((p) => p.category.toLowerCase() === params.category!.toLowerCase());
+      }
+      if (params.search && params.search.trim()) {
+        const s = params.search.toLowerCase();
+        filtered = filtered.filter(
+          (p) =>
+            p.title.toLowerCase().includes(s) ||
+            p.category.toLowerCase().includes(s) ||
+            (p.client && p.client.toLowerCase().includes(s)) ||
+            p.description.toLowerCase().includes(s)
+        );
+      }
+
+      const total = filtered.length;
+      const totalPages = Math.ceil(total / limit) || 1;
+      const paginated = filtered.slice(offset, offset + limit);
+
+      const items: PortfolioItem[] = paginated.map((p, idx) => ({
+        id: `mock-${offset + idx}`,
+        slug: p.slug,
+        title: p.title,
+        category: p.category,
+        image: p.image,
+        description: p.description,
+        client: p.client || '',
+        duration: p.duration || '',
+        role: p.role || '',
+        liveUrl: p.liveUrl || '',
+        content: p.content || '',
+        challenges: p.challenges || [],
+        solutions: p.solutions || [],
+        results: p.results || [],
+        technologies: p.technologies || [],
+        order: offset + idx,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
+
+      return {
+        items,
+        pagination: {
+          total,
+          page,
+          limit,
+          totalPages,
+          hasNextPage: page < totalPages,
+          hasPrevPage: page > 1,
+        },
+        filters: {
+          category: params.category,
+          search: params.search,
+          sortBy,
+          sortOrder: sortOrder.toLowerCase(),
+        },
+      };
     }
   },
 

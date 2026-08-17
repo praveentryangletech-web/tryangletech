@@ -23,3 +23,33 @@ export interface PortfolioItem {
 
 export type CreatePortfolioInput = Partial<Omit<PortfolioItem, 'id' | 'createdAt' | 'updatedAt'>>;
 export type UpdatePortfolioInput = Partial<PortfolioItem>;
+
+export interface PortfolioQueryParams {
+  page?: number;
+  limit?: number;
+  category?: string;
+  search?: string;
+  sortBy?: 'order' | 'createdAt' | 'title';
+  sortOrder?: 'asc' | 'desc';
+  slug?: string;
+}
+
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+export interface PaginatedPortfolioResult {
+  items: PortfolioItem[];
+  pagination: PaginationMeta;
+  filters: {
+    category?: string;
+    search?: string;
+    sortBy: string;
+    sortOrder: string;
+  };
+}

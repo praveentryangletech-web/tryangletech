@@ -33,6 +33,7 @@ export interface Project {
   keywords?: string[];
   geoRegion?: string;
   canonicalUrl?: string;
+  order?: number;
 }
 
 export const projects: Project[] = [

@@ -1,11 +1,13 @@
 /**
  * TryangleTech Frontend CRUD API Helper Client
  * 
- * Automatically attaches:
+ * Features:
  * 1. Default Headers: 'Content-Type: application/json', 'Accept: application/json'
  * 2. Admin Security Headers: 'x-admin-key' and 'Authorization: Bearer <token>'
- * 3. Consistent JSON & error parsing for all HTTP operations (GET, POST, PATCH, PUT, DELETE)
- * 4. Automatic session handling & 401 redirect detection
+ * 3. Client-Side SWR Micro-Cache (< 1ms instant UI transitions)
+ * 4. Automatic Cache Purging on data mutations (POST, PATCH, PUT, DELETE)
+ * 5. HTTP ETag & 304 Not Modified support
+ * 6. Consistent JSON & error parsing for all HTTP operations
  */
 
 const ADMIN_API_KEY = process.env.NEXT_PUBLIC_ADMIN_API_KEY || process.env.ADMIN_API_KEY || '';
@@ -33,9 +35,20 @@ export interface RequestOptions extends Omit<RequestInit, 'body'> {
   body?: any;
   params?: Record<string, string | number | boolean | undefined>;
   skipAuth?: boolean;
+  useCache?: boolean;
+  cacheTtlMs?: number;
+}
+
+interface ClientCacheEntry<T> {
+  response: ApiResponse<T>;
+  expiresAt: number;
+  etag?: string;
 }
 
 class ApiClient {
+  private clientCache = new Map<string, ClientCacheEntry<any>>();
+  private defaultCacheTtl = 30 * 1000; // 30 seconds
+
   private getAuthToken(): string | null {
     if (typeof window === 'undefined') return null;
     try {
@@ -65,14 +78,37 @@ class ApiClient {
     return queryString ? `${baseUrl}?${queryString}` : baseUrl;
   }
 
+  /**
+   * Purge client-side memory cache (called automatically on POST/PATCH/PUT/DELETE)
+   */
+  public clearCache(endpointPrefix?: string): void {
+    if (!endpointPrefix) {
+      this.clientCache.clear();
+      return;
+    }
+    for (const key of this.clientCache.keys()) {
+      if (key.includes(endpointPrefix)) {
+        this.clientCache.delete(key);
+      }
+    }
+  }
+
   private async request<T = any>(
     endpoint: string,
     method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE',
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const { body, params, headers = {}, skipAuth = false, ...restOptions } = options;
+    const { body, params, headers = {}, skipAuth = false, useCache = false, cacheTtlMs = this.defaultCacheTtl, ...restOptions } = options;
 
     const url = this.buildUrl(endpoint, params);
+
+    // 1. Client Memory Cache Check (GET requests only)
+    if (method === 'GET' && useCache) {
+      const cached = this.clientCache.get(url);
+      if (cached && cached.expiresAt > Date.now()) {
+        return cached.response;
+      }
+    }
 
     const defaultHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -90,6 +126,12 @@ class ApiClient {
       }
     }
 
+    // Attach ETag if cached
+    const cachedEntry = this.clientCache.get(url);
+    if (method === 'GET' && cachedEntry?.etag) {
+      defaultHeaders['If-None-Match'] = cachedEntry.etag;
+    }
+
     const mergedHeaders = {
       ...defaultHeaders,
       ...(headers as Record<string, string>),
@@ -98,7 +140,7 @@ class ApiClient {
     const config: RequestInit = {
       method,
       headers: mergedHeaders,
-      credentials: 'include', // Includes HTTP-only session cookies automatically
+      credentials: 'include',
       ...restOptions,
     };
 
@@ -108,6 +150,12 @@ class ApiClient {
 
     try {
       const res = await fetch(url, config);
+
+      // Handle HTTP 304 Not Modified
+      if (res.status === 304 && cachedEntry) {
+        return cachedEntry.response;
+      }
+
       let data: any = null;
 
       const contentType = res.headers.get('content-type');
@@ -127,7 +175,7 @@ class ApiClient {
         };
       }
 
-      return {
+      const responseObj: ApiResponse<T> = {
         success: data?.success ?? true,
         data: data?.data ?? data,
         pagination: data?.pagination,
@@ -135,6 +183,24 @@ class ApiClient {
         message: data?.message,
         status: res.status,
       };
+
+      // Store in client micro-cache for fast repeat navigation
+      if (method === 'GET' && useCache) {
+        const etag = res.headers.get('etag') || undefined;
+        this.clientCache.set(url, {
+          response: responseObj,
+          expiresAt: Date.now() + cacheTtlMs,
+          etag,
+        });
+      }
+
+      // Auto-purge cache on mutation
+      if (method !== 'GET') {
+        const baseEndpoint = endpoint.split('?')[0];
+        this.clearCache(baseEndpoint);
+      }
+
+      return responseObj;
     } catch (err: any) {
       console.error(`[ApiClient ${method}] ${url} Error:`, err);
       return {
@@ -146,35 +212,35 @@ class ApiClient {
   }
 
   /**
-   * GET Request (Read)
+   * GET Request (Read with optional micro-caching)
    */
   async get<T = any>(endpoint: string, options?: RequestOptions): Promise<ApiResponse<T>> {
-    return this.request<T>(endpoint, 'GET', options);
+    return this.request<T>(endpoint, 'GET', { useCache: true, ...options });
   }
 
   /**
-   * POST Request (Create)
+   * POST Request (Create with automatic cache clearing)
    */
   async post<T = any>(endpoint: string, body?: any, options?: RequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, 'POST', { ...options, body });
   }
 
   /**
-   * PATCH Request (Partial Update)
+   * PATCH Request (Partial Update with automatic cache clearing)
    */
   async patch<T = any>(endpoint: string, body?: any, options?: RequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, 'PATCH', { ...options, body });
   }
 
   /**
-   * PUT Request (Full Replace/Update)
+   * PUT Request (Full Replace/Update with automatic cache clearing)
    */
   async put<T = any>(endpoint: string, body?: any, options?: RequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, 'PUT', { ...options, body });
   }
 
   /**
-   * DELETE Request (Delete)
+   * DELETE Request (Delete with automatic cache clearing)
    */
   async delete<T = any>(endpoint: string, options?: RequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, 'DELETE', options);

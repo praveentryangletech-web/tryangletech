@@ -2119,6 +2119,53 @@ function PortfolioEditorInner() {
                   Add Tag
                 </button>
               </div>
+
+              {/* Active Selected Technologies List */}
+              {technologies.length > 0 && (
+                <div style={{ marginTop: '14px', padding: '12px 16px', borderRadius: '12px', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748B', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Active Project Technologies ({technologies.length}):
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          padding: '4px 10px',
+                          borderRadius: '16px',
+                          backgroundColor: '#0F172A',
+                          color: '#FFFFFF',
+                          fontSize: '0.8rem',
+                          fontWeight: 600,
+                        }}
+                      >
+                        <span>{tech}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveTech(tech)}
+                          style={{
+                            border: 'none',
+                            background: 'none',
+                            color: '#94A3B8',
+                            cursor: 'pointer',
+                            fontWeight: 800,
+                            fontSize: '0.8rem',
+                            padding: 0,
+                            lineHeight: 1,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          ✕
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

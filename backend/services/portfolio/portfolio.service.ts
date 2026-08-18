@@ -722,6 +722,55 @@ export const portfolioService = {
       return false;
     }
   },
+
+  /**
+   * Cascades an image filename rename across all database portfolio items
+   * Updates `image` (cover) and `images` (slider array), then clears server cache.
+   */
+  async cascadeRenameImage(oldUrl: string, newUrl: string): Promise<{ affectedCount: number }> {
+    clearPortfolioCache();
+    await ensureColumnsExist();
+
+    let affectedCount = 0;
+    try {
+      const rows = await db.$queryRaw<any[]>`
+        SELECT "id", "image", "images" FROM "PortfolioProject"
+      `;
+
+      if (rows && rows.length > 0) {
+        for (const r of rows) {
+          let needsUpdate = false;
+          let newImage = r.image;
+          let newImages = Array.isArray(r.images) ? [...r.images] : (r.image ? [r.image] : []);
+
+          if (r.image === oldUrl) {
+            newImage = newUrl;
+            needsUpdate = true;
+          }
+
+          if (newImages.includes(oldUrl)) {
+            newImages = newImages.map((img: string) => (img === oldUrl ? newUrl : img));
+            needsUpdate = true;
+          }
+
+          if (needsUpdate) {
+            await db.$executeRaw`
+              UPDATE "PortfolioProject"
+              SET "image" = ${newImage},
+                  "images" = ${newImages},
+                  "updatedAt" = NOW()
+              WHERE "id" = ${r.id}
+            `;
+            affectedCount++;
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[DB Portfolio] cascadeRenameImage error:', err);
+    }
+
+    return { affectedCount };
+  },
 };
 
 /**

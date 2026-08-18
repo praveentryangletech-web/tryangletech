@@ -166,44 +166,6 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
 ];
 
-const SAMPLE_COVER_PRESETS = [
-  '/portfolio/vh-accounting.webp',
-  '/portfolio/7d-design-studios.webp',
-  '/portfolio/devrshree.webp',
-  '/portfolio/software-eoffice.webp',
-  '/portfolio/software-edms.webp',
-  '/portfolio/software-sevabridge.webp',
-  '/portfolio/makewell-elevators.webp',
-  '/portfolio/patel-associates.webp',
-  '/portfolio/shivganga-marbles.webp',
-  '/portfolio/someshwar-tmt.webp',
-  '/portfolio/varnet-enterprise.webp',
-  '/portfolio/varnet-landing.webp',
-  '/portfolio/akshar-industry.webp',
-  '/portfolio/ansh-exports.webp',
-  '/portfolio/app-dev-1.webp',
-  '/portfolio/app-dev-2.webp',
-  '/portfolio/app-dev-3.webp',
-  '/portfolio/app-dev-seller.webp',
-  '/portfolio/app-dev-user.webp',
-  '/portfolio/evon-ceramics.webp',
-  '/portfolio/graphic-1.webp',
-  '/portfolio/hrk-air-compressor.webp',
-  '/portfolio/krupashree.webp',
-  '/portfolio/marckit-analysts.webp',
-  '/portfolio/nira-energy.webp',
-  '/portfolio/paperwork-llp.webp',
-  '/portfolio/pious-events.webp',
-  '/portfolio/ramashray.webp',
-  '/portfolio/sahjanand-test-lab.webp',
-  '/portfolio/secure-edge-life.webp',
-  '/portfolio/sevenam.webp',
-  '/portfolio/stonils.webp',
-  '/portfolio/sundaram-corpo.webp',
-  '/portfolio/tattvam-arts.webp',
-  '/portfolio/toestrand.webp',
-];
-
 function PortfolioEditorInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -264,6 +226,11 @@ function PortfolioEditorInner() {
   const [uploadFeedback, setUploadFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [mediaSearchQuery, setMediaSearchQuery] = useState('');
 
+  // Pre-upload rename states
+  const [selectedUploadFile, setSelectedUploadFile] = useState<File | null>(null);
+  const [customFilenameInput, setCustomFilenameInput] = useState('');
+  const [uploadFilePreview, setUploadFilePreview] = useState<string | null>(null);
+
   const fetchMediaList = async () => {
     setIsLoadingMedia(true);
     try {
@@ -280,19 +247,47 @@ function PortfolioEditorInner() {
   };
 
   useEffect(() => {
+    fetchMediaList();
+  }, []);
+
+  useEffect(() => {
     if (activeTab === 'media') {
       fetchMediaList();
     }
   }, [activeTab]);
 
-  const handleFileUpload = async (files: FileList | null) => {
+  const handleSelectFileToUpload = (files: FileList | null, target: 'cover' | 'slider' = 'cover') => {
     if (!files || files.length === 0) return;
     const file = files[0];
+    setUploadTarget(target);
+    setSelectedUploadFile(file);
+
+    // Auto extract clean base filename
+    const lastDot = file.name.lastIndexOf('.');
+    const baseName = lastDot !== -1 ? file.name.substring(0, lastDot) : file.name;
+    const cleanBase = baseName
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+
+    setCustomFilenameInput(cleanBase || (target === 'cover' ? 'cover-image' : 'slide-image'));
+
+    const objectUrl = URL.createObjectURL(file);
+    setUploadFilePreview(objectUrl);
+    setUploadFeedback(null);
+  };
+
+  const handleExecuteUpload = async () => {
+    if (!selectedUploadFile) return;
     setIsUploading(true);
     setUploadFeedback(null);
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', selectedUploadFile);
+    if (customFilenameInput.trim()) {
+      formData.append('customName', customFilenameInput.trim());
+    }
 
     try {
       const res = await fetch('/api/superadmin/media', {
@@ -316,12 +311,23 @@ function PortfolioEditorInner() {
           setSliderImages((prev) => [...prev, data.url]);
         }
       }
+
+      // Cleanup pre-upload state
+      setSelectedUploadFile(null);
+      setCustomFilenameInput('');
+      setUploadFilePreview(null);
       fetchMediaList();
     } catch (err: any) {
       setUploadFeedback({ type: 'error', text: err?.message || 'Upload failed.' });
     } finally {
       setIsUploading(false);
     }
+  };
+
+  const handleCancelSelectedFile = () => {
+    setSelectedUploadFile(null);
+    setCustomFilenameInput('');
+    setUploadFilePreview(null);
   };
 
   const handleDeleteMedia = async (filename: string) => {
@@ -1090,11 +1096,11 @@ function PortfolioEditorInner() {
         )}
 
         {/* ============================================================ */}
-        {/* TAB 2: MEDIA & PUBLIC ASSET MANAGER                          */}
+        {/* TAB 2: MEDIA (COVER & SHOWCASE SLIDER)                       */}
         {/* ============================================================ */}
         {activeTab === 'media' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {/* 1. Direct File Upload Card (Stores directly to public/portfolio) */}
+            {/* 1. Main Listing Cover Image Card */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
@@ -1105,108 +1111,22 @@ function PortfolioEditorInner() {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span>Direct Asset Uploader</span>
-                  <span style={{ fontSize: '0.725rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
-                    public/portfolio
-                  </span>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+                  Main Listing Cover Image
                 </h3>
+                <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
+                  Card Thumbnail & OpenGraph
+                </span>
               </div>
-              <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Directly uploads and stores image files into your local <code>public/portfolio/</code> directory.
+              <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
+                The primary card thumbnail displayed across portfolio index grids and social media share previews.
               </p>
 
-              {/* Upload Target Selector */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#334155' }}>Upload Target:</span>
-                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 600, color: '#1E293B', cursor: 'pointer' }}>
-                  <input
-                    type="radio"
-                    name="uploadTarget"
-                    checked={uploadTarget === 'cover'}
-                    onChange={() => setUploadTarget('cover')}
-                    style={{ accentColor: '#1833FE' }}
-                  />
-                  <span>Set as Main Cover Image</span>
-                </label>
-                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 600, color: '#1E293B', cursor: 'pointer' }}>
-                  <input
-                    type="radio"
-                    name="uploadTarget"
-                    checked={uploadTarget === 'slider'}
-                    onChange={() => setUploadTarget('slider')}
-                    style={{ accentColor: '#1833FE' }}
-                  />
-                  <span>Add to Showcase Slider</span>
-                </label>
-              </div>
-
-              {/* Drag & Drop Upload Dropzone */}
-              <div
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                    handleFileUpload(e.dataTransfer.files);
-                  }
-                }}
-                style={{
-                  border: '2px dashed #CBD5E1',
-                  borderRadius: '16px',
-                  padding: '2.5rem 1.5rem',
-                  textAlign: 'center',
-                  backgroundColor: isUploading ? '#EFF6FF' : '#F8FAFC',
-                  transition: 'all 0.2s ease',
-                  cursor: isUploading ? 'not-allowed' : 'pointer',
-                }}
-                onClick={() => {
-                  if (!isUploading) {
-                    document.getElementById('portfolio-file-input')?.click();
-                  }
-                }}
-              >
-                <input
-                  id="portfolio-file-input"
-                  type="file"
-                  accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleFileUpload(e.target.files)}
-                />
-
-                <div style={{ width: '52px', height: '52px', borderRadius: '50%', backgroundColor: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: '#1833FE' }}>
-                  {isUploading ? (
-                    <div
-                      style={{
-                        width: '24px',
-                        height: '24px',
-                        border: '3px solid #1833FE',
-                        borderTopColor: 'transparent',
-                        borderRadius: '50%',
-                        animation: 'spin 0.8s linear infinite',
-                      }}
-                    />
-                  ) : (
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="17 8 12 3 7 8" />
-                      <line x1="12" y1="3" x2="12" y2="15" />
-                    </svg>
-                  )}
-                </div>
-
-                <p style={{ margin: '0 0 6px 0', fontSize: '0.95rem', fontWeight: 700, color: '#1E293B' }}>
-                  {isUploading ? 'Uploading file directly to public/portfolio...' : 'Click to Browse or Drag & Drop Image Here'}
-                </p>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748B' }}>
-                  Supports WebP, PNG, JPG, SVG, GIF (Up to 10MB)
-                </p>
-              </div>
-
-              {/* Upload Status Alert */}
+              {/* Upload Feedback Alert */}
               {uploadFeedback && (
                 <div
                   style={{
-                    marginTop: '1.25rem',
+                    marginBottom: '1.5rem',
                     padding: '0.85rem 1.25rem',
                     borderRadius: '12px',
                     backgroundColor: uploadFeedback.type === 'success' ? '#ECFDF5' : '#FEF2F2',
@@ -1229,40 +1149,161 @@ function PortfolioEditorInner() {
                   </button>
                 </div>
               )}
-            </div>
 
-            {/* 2. Main Listing Cover Image Card */}
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
-              }}
-            >
-              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                Main Listing Cover Image
-              </h3>
-              <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                The primary card thumbnail displayed across portfolio index grids and OpenGraph cards.
-              </p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 340px) 1fr', gap: '2rem', alignItems: 'start' }}>
+              {/* Cover Pre-upload renaming box */}
+              {selectedUploadFile && uploadTarget === 'cover' && (
                 <div
                   style={{
-                    border: '1.5px solid #CBD5E1',
+                    marginBottom: '1.75rem',
+                    border: '1.5px solid #BFDBFE',
                     borderRadius: '16px',
-                    padding: '8px',
-                    backgroundColor: '#F8FAFC',
-                    textAlign: 'center',
+                    padding: '1.5rem',
+                    backgroundColor: '#F0F9FF',
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(120px, 150px) 1fr',
+                    gap: '1.5rem',
+                    alignItems: 'center',
                   }}
                 >
                   <div
                     style={{
                       position: 'relative',
                       width: '100%',
-                      height: '190px',
+                      height: '110px',
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      border: '1px solid #CBD5E1',
+                      backgroundColor: '#FFFFFF',
+                    }}
+                  >
+                    {uploadFilePreview && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={uploadFilePreview}
+                        alt="Selected File Preview"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                    )}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: '4px',
+                        left: '4px',
+                        backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                        color: '#FFFFFF',
+                        fontSize: '0.65rem',
+                        fontWeight: 700,
+                        padding: '2px 5px',
+                        borderRadius: '4px',
+                      }}
+                    >
+                      {(selectedUploadFile.size / 1024).toFixed(0)} KB
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                        Modify Image Filename before storing in <code>public/portfolio/</code>:
+                      </label>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <input
+                          type="text"
+                          value={customFilenameInput}
+                          onChange={(e) => setCustomFilenameInput(e.target.value)}
+                          placeholder="e.g. vh-accounting-cover"
+                          style={{
+                            flex: 1,
+                            padding: '8px 12px',
+                            borderRadius: '8px',
+                            border: '1.5px solid #3B82F6',
+                            backgroundColor: '#FFFFFF',
+                            fontSize: '0.875rem',
+                            fontWeight: 600,
+                            color: '#0F172A',
+                            outline: 'none',
+                          }}
+                        />
+                        <span
+                          style={{
+                            padding: '8px 12px',
+                            borderRadius: '8px',
+                            backgroundColor: '#E0F2FE',
+                            color: '#0369A1',
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            fontFamily: 'monospace',
+                          }}
+                        >
+                          {selectedUploadFile.name.substring(selectedUploadFile.name.lastIndexOf('.')) || '.webp'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+                      <button
+                        type="button"
+                        onClick={handleExecuteUpload}
+                        disabled={isUploading}
+                        style={{
+                          padding: '8px 18px',
+                          borderRadius: '8px',
+                          border: 'none',
+                          backgroundColor: '#1833FE',
+                          color: '#FFFFFF',
+                          fontSize: '0.825rem',
+                          fontWeight: 700,
+                          cursor: isUploading ? 'not-allowed' : 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                        }}
+                      >
+                        {isUploading ? 'Uploading...' : '🚀 Save & Set as Cover'}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleCancelSelectedFile}
+                        disabled={isUploading}
+                        style={{
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          border: '1px solid #CBD5E1',
+                          backgroundColor: '#FFFFFF',
+                          color: '#475569',
+                          fontSize: '0.825rem',
+                          fontWeight: 600,
+                          cursor: isUploading ? 'not-allowed' : 'pointer',
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Cover Main Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 320px) 1fr', gap: '2rem', alignItems: 'start' }}>
+                {/* Left: Preview & Browse Button */}
+                <div
+                  style={{
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '16px',
+                    padding: '12px',
+                    backgroundColor: '#F8FAFC',
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'relative',
+                      width: '100%',
+                      height: '180px',
                       borderRadius: '12px',
                       overflow: 'hidden',
                       backgroundColor: '#F1F5F9',
@@ -1284,53 +1325,76 @@ function PortfolioEditorInner() {
                       </div>
                     )}
                   </div>
-                  <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginTop: '8px' }}>
-                    Live Cover Preview
-                  </span>
-                </div>
 
-                <div>
-                  <label style={labelStyle}>Image Path or CDN URL</label>
                   <input
-                    type="text"
-                    placeholder="/portfolio/7d-design-studios.webp"
-                    value={coverImage}
-                    onChange={(e) => setCoverImage(e.target.value)}
-                    style={{ ...inputStyle, marginBottom: '1.25rem' }}
+                    id="cover-file-input"
+                    type="file"
+                    accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
+                    style={{ display: 'none' }}
+                    onChange={(e) => handleSelectFileToUpload(e.target.files, 'cover')}
                   />
 
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('cover-file-input')?.click()}
+                    style={{
+                      width: '100%',
+                      padding: '9px 14px',
+                      borderRadius: '10px',
+                      border: '1.5px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
+                      fontSize: '0.825rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <span>📁</span>
+                    <span>Upload Image from Device</span>
+                  </button>
+                </div>
+
+                {/* Right: Dropdown & Direct URL Field */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div>
-                    <span style={{ fontSize: '0.775rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '8px' }}>
-                      Sample Asset Presets:
-                    </span>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px' }}>
-                      {SAMPLE_COVER_PRESETS.map((preset) => (
-                        <button
-                          key={preset}
-                          type="button"
-                          onClick={() => setCoverImage(preset)}
-                          style={{
-                            padding: '5px 12px',
-                            borderRadius: '8px',
-                            border: coverImage === preset ? '1.5px solid #1833FE' : '1px solid #E2E8F0',
-                            backgroundColor: coverImage === preset ? '#EFF6FF' : '#FFFFFF',
-                            color: coverImage === preset ? '#1833FE' : '#475569',
-                            fontSize: '0.775rem',
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            transition: 'all 0.15s ease',
-                          }}
-                        >
-                          {preset.replace('/portfolio/', '')}
-                        </button>
-                      ))}
-                    </div>
+                    <label style={labelStyle}>Select from Public Assets Library</label>
+                    <CustomDropdown
+                      value={mediaList.some((m) => m.url === coverImage) ? coverImage : ''}
+                      onChange={(val) => {
+                        if (val) setCoverImage(val);
+                      }}
+                      options={[
+                        { label: '— Choose an existing image from /public/portfolio —', value: '' },
+                        ...mediaList.map((m) => ({
+                          label: `${m.filename} (${(m.size / 1024).toFixed(0)} KB)`,
+                          value: m.url,
+                        })),
+                      ]}
+                      placeholder="Select image from public/portfolio..."
+                      size="form"
+                      fullWidth
+                    />
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>Or Enter Direct URL / File Path</label>
+                    <input
+                      type="text"
+                      placeholder="/portfolio/7d-design-studios.webp"
+                      value={coverImage}
+                      onChange={(e) => setCoverImage(e.target.value)}
+                      style={inputStyle}
+                    />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* 3. Slider Showcase Card */}
+            {/* 2. Slider Showcase Card */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
@@ -1349,39 +1413,205 @@ function PortfolioEditorInner() {
                 Multiple high-resolution screenshots displayed in the hero carousel on <code>/portfolio/[slug]</code>.
               </p>
 
-              {/* Add Slide Input */}
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '1.25rem' }}>
-                <input
-                  type="text"
-                  placeholder="Enter image URL or path (e.g. /portfolio/7d-design-studios.webp)"
-                  value={newSliderUrl}
-                  onChange={(e) => setNewSliderUrl(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      handleAddSliderImage();
-                    }
-                  }}
-                  style={{ ...inputStyle, flex: 1 }}
-                />
-                <button
-                  type="button"
-                  onClick={handleAddSliderImage}
+              {/* Slider Pre-upload renaming box */}
+              {selectedUploadFile && uploadTarget === 'slider' && (
+                <div
                   style={{
-                    padding: '11px 22px',
-                    borderRadius: '12px',
-                    border: 'none',
-                    backgroundColor: '#1833FE',
-                    color: '#FFFFFF',
-                    fontWeight: 700,
-                    fontSize: '0.875rem',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
+                    marginBottom: '1.75rem',
+                    border: '1.5px solid #BFDBFE',
+                    borderRadius: '16px',
+                    padding: '1.5rem',
+                    backgroundColor: '#F0F9FF',
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(120px, 150px) 1fr',
+                    gap: '1.5rem',
+                    alignItems: 'center',
                   }}
                 >
-                  + Add Slide
-                </button>
+                  <div
+                    style={{
+                      position: 'relative',
+                      width: '100%',
+                      height: '110px',
+                      borderRadius: '10px',
+                      overflow: 'hidden',
+                      border: '1px solid #CBD5E1',
+                      backgroundColor: '#FFFFFF',
+                    }}
+                  >
+                    {uploadFilePreview && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={uploadFilePreview}
+                        alt="Selected File Preview"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                    )}
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: '4px',
+                        left: '4px',
+                        backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                        color: '#FFFFFF',
+                        fontSize: '0.65rem',
+                        fontWeight: 700,
+                        padding: '2px 5px',
+                        borderRadius: '4px',
+                      }}
+                    >
+                      {(selectedUploadFile.size / 1024).toFixed(0)} KB
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                        Modify Image Filename before saving to <code>public/portfolio/</code>:
+                      </label>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <input
+                          type="text"
+                          value={customFilenameInput}
+                          onChange={(e) => setCustomFilenameInput(e.target.value)}
+                          placeholder="e.g. project-slide-2"
+                          style={{
+                            flex: 1,
+                            padding: '8px 12px',
+                            borderRadius: '8px',
+                            border: '1.5px solid #3B82F6',
+                            backgroundColor: '#FFFFFF',
+                            fontSize: '0.875rem',
+                            fontWeight: 600,
+                            color: '#0F172A',
+                            outline: 'none',
+                          }}
+                        />
+                        <span
+                          style={{
+                            padding: '8px 12px',
+                            borderRadius: '8px',
+                            backgroundColor: '#E0F2FE',
+                            color: '#0369A1',
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            fontFamily: 'monospace',
+                          }}
+                        >
+                          {selectedUploadFile.name.substring(selectedUploadFile.name.lastIndexOf('.')) || '.webp'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+                      <button
+                        type="button"
+                        onClick={handleExecuteUpload}
+                        disabled={isUploading}
+                        style={{
+                          padding: '8px 18px',
+                          borderRadius: '8px',
+                          border: 'none',
+                          backgroundColor: '#1833FE',
+                          color: '#FFFFFF',
+                          fontSize: '0.825rem',
+                          fontWeight: 700,
+                          cursor: isUploading ? 'not-allowed' : 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                        }}
+                      >
+                        {isUploading ? 'Uploading...' : '🚀 Save & Add to Slider'}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleCancelSelectedFile}
+                        disabled={isUploading}
+                        style={{
+                          padding: '8px 14px',
+                          borderRadius: '8px',
+                          border: '1px solid #CBD5E1',
+                          backgroundColor: '#FFFFFF',
+                          color: '#475569',
+                          fontSize: '0.825rem',
+                          fontWeight: 600,
+                          cursor: isUploading ? 'not-allowed' : 'pointer',
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Add Slide Controls */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '10px', marginBottom: '1.5rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <input
+                    type="text"
+                    placeholder="Enter image URL or path (e.g. /portfolio/7d-design-studios.webp)"
+                    value={newSliderUrl}
+                    onChange={(e) => setNewSliderUrl(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddSliderImage();
+                      }
+                    }}
+                    style={{ ...inputStyle, flex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddSliderImage}
+                    style={{
+                      padding: '11px 20px',
+                      borderRadius: '12px',
+                      border: 'none',
+                      backgroundColor: '#1833FE',
+                      color: '#FFFFFF',
+                      fontWeight: 700,
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    + Add URL Slide
+                  </button>
+                </div>
+
+                {/* Upload Slide Button */}
+                <div>
+                  <input
+                    id="slider-file-input"
+                    type="file"
+                    accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
+                    style={{ display: 'none' }}
+                    onChange={(e) => handleSelectFileToUpload(e.target.files, 'slider')}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('slider-file-input')?.click()}
+                    style={{
+                      padding: '11px 18px',
+                      borderRadius: '12px',
+                      border: '1.5px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
+                      fontWeight: 700,
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    <span>📁 Upload Slide File</span>
+                  </button>
+                </div>
               </div>
 
               {/* Slider Grid */}
@@ -1475,188 +1705,6 @@ function PortfolioEditorInner() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* 4. Public Asset Library & Storage Manager (with Delete from Disk) */}
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                    Public Portfolio Asset Manager ({mediaList.length})
-                  </h3>
-                  <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: '#64748B' }}>
-                    Browse all physical image assets currently stored inside <code>public/portfolio/</code>. You can set as cover, add to slider, or permanently delete obsolete assets.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={fetchMediaList}
-                  disabled={isLoadingMedia}
-                  style={{
-                    padding: '8px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    backgroundColor: '#FFFFFF',
-                    color: '#334155',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <span>🔄</span>
-                  <span>{isLoadingMedia ? 'Refreshing...' : 'Refresh Assets'}</span>
-                </button>
-              </div>
-
-              {/* Search Assets Filter */}
-              <div style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
-                <input
-                  type="text"
-                  placeholder="🔍 Search assets by filename (e.g. 7d, devrshree, vh, eoffice)..."
-                  value={mediaSearchQuery}
-                  onChange={(e) => setMediaSearchQuery(e.target.value)}
-                  style={inputStyle}
-                />
-              </div>
-
-              {/* Asset Library Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', maxHeight: '480px', overflowY: 'auto', paddingRight: '4px' }}>
-                {mediaList
-                  .filter((m) => m.filename.toLowerCase().includes(mediaSearchQuery.toLowerCase()))
-                  .map((item) => (
-                    <div
-                      key={item.filename}
-                      style={{
-                        border: '1px solid #E2E8F0',
-                        borderRadius: '12px',
-                        padding: '8px',
-                        backgroundColor: '#F8FAFC',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '8px',
-                        transition: 'all 0.15s ease',
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '110px',
-                          borderRadius: '8px',
-                          overflow: 'hidden',
-                          backgroundColor: '#E2E8F0',
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={item.url}
-                          alt={item.filename}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
-                          }}
-                        />
-                        <span
-                          style={{
-                            position: 'absolute',
-                            bottom: '4px',
-                            right: '4px',
-                            backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                            color: '#FFFFFF',
-                            fontSize: '0.65rem',
-                            fontWeight: 700,
-                            padding: '2px 6px',
-                            borderRadius: '4px',
-                          }}
-                        >
-                          {(item.size / 1024).toFixed(0)} KB
-                        </span>
-                      </div>
-
-                      <div style={{ overflow: 'hidden' }}>
-                        <p style={{ margin: 0, fontSize: '0.75rem', fontWeight: 700, color: '#1E293B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={item.filename}>
-                          {item.filename}
-                        </p>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: 'auto' }}>
-                        <button
-                          type="button"
-                          onClick={() => setCoverImage(item.url)}
-                          title="Set as Main Cover"
-                          style={{
-                            flex: 1,
-                            padding: '4px 6px',
-                            borderRadius: '6px',
-                            border: '1px solid #CBD5E1',
-                            backgroundColor: coverImage === item.url ? '#1833FE' : '#FFFFFF',
-                            color: coverImage === item.url ? '#FFFFFF' : '#334155',
-                            fontSize: '0.7rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          {coverImage === item.url ? '✓ Cover' : 'Cover'}
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (!sliderImages.includes(item.url)) {
-                              setSliderImages([...sliderImages, item.url]);
-                            }
-                          }}
-                          title="Add to Slider"
-                          style={{
-                            flex: 1,
-                            padding: '4px 6px',
-                            borderRadius: '6px',
-                            border: '1px solid #CBD5E1',
-                            backgroundColor: sliderImages.includes(item.url) ? '#EFF6FF' : '#FFFFFF',
-                            color: sliderImages.includes(item.url) ? '#1833FE' : '#334155',
-                            fontSize: '0.7rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          + Slide
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteMedia(item.filename)}
-                          title="Permanently Delete File from Disk"
-                          style={{
-                            padding: '4px 8px',
-                            borderRadius: '6px',
-                            border: '1px solid #FECACA',
-                            backgroundColor: '#FEF2F2',
-                            color: '#DC2626',
-                            fontSize: '0.75rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                          }}
-                        >
-                          🗑
-                        </button>
-                      </div>
-                    </div>
-                  ))}
               </div>
             </div>
           </div>

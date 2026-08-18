@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import portfolioService from '@/backend/services/portfolio/portfolio.service';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,17 +12,19 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 /**
  * Sanitize filename to ensure safe alphanumeric naming with no path traversal
  */
-function sanitizeFilename(originalName: string): string {
+function sanitizeFilename(originalName: string, customName?: string): string {
   const ext = path.extname(originalName).toLowerCase();
-  const nameWithoutExt = path.basename(originalName, ext);
-  const cleanName = nameWithoutExt
+  const rawBase = customName && customName.trim() ? customName.trim() : originalName;
+  const rawWithoutExt = path.extname(rawBase) ? path.basename(rawBase, path.extname(rawBase)) : rawBase;
+
+  const cleanName = rawWithoutExt
     .toLowerCase()
     .replace(/[^a-z0-9_-]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 
   const safeBase = cleanName || 'portfolio-asset';
-  return `${safeBase}-${Date.now()}${ext}`;
+  return `${safeBase}${ext}`;
 }
 
 /**
@@ -81,7 +84,7 @@ export async function GET() {
 
 /**
  * POST /api/superadmin/media
- * Directly stores uploaded image file into public/portfolio
+ * Directly stores uploaded image file into public/portfolio with optional custom filename
  */
 export async function POST(req: NextRequest) {
   try {
@@ -115,22 +118,41 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Generate safe unique filename
-    const safeFilename = sanitizeFilename(file.name);
-    const targetFilePath = path.join(PORTFOLIO_DIR, safeFilename);
+    // Support custom user-specified filename or sanitize original
+    const customName = (formData.get('customName') as string | null) || (formData.get('filename') as string | null);
+    const safeFilename = sanitizeFilename(file.name, customName || undefined);
+    let targetFilename = safeFilename;
+    let targetFilePath = path.join(PORTFOLIO_DIR, targetFilename);
+
+    // If file already exists and overwrite is not requested, append clean counter
+    const overwrite = formData.get('overwrite') === 'true';
+    if (!overwrite) {
+      let counter = 1;
+      const baseName = path.basename(safeFilename, ext);
+      while (true) {
+        try {
+          await fs.access(targetFilePath);
+          targetFilename = `${baseName}-${counter}${ext}`;
+          targetFilePath = path.join(PORTFOLIO_DIR, targetFilename);
+          counter++;
+        } catch {
+          break; // File does not exist, safe to write
+        }
+      }
+    }
 
     // Convert file to Buffer and write directly to disk
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     await fs.writeFile(targetFilePath, buffer);
 
-    const publicUrl = `/portfolio/${safeFilename}`;
+    const publicUrl = `/portfolio/${targetFilename}`;
 
     return NextResponse.json({
       success: true,
       message: 'Asset uploaded and stored in public/portfolio successfully.',
       url: publicUrl,
-      filename: safeFilename,
+      filename: targetFilename,
       size: file.size,
     });
   } catch (err: any) {
@@ -200,6 +222,96 @@ export async function DELETE(req: NextRequest) {
     console.error('[Media API DELETE error]:', err);
     return NextResponse.json(
       { success: false, error: err?.message || 'Failed to delete asset from disk.' },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * PATCH /api/superadmin/media
+ * Renames an image in public/portfolio AND cascades the rename to all database portfolio projects
+ */
+export async function PATCH(req: NextRequest) {
+  try {
+    let body: any = {};
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ success: false, error: 'Invalid JSON payload.' }, { status: 400 });
+    }
+
+    const { oldFilename, newFilename } = body;
+    if (!oldFilename || !newFilename) {
+      return NextResponse.json(
+        { success: false, error: 'Both oldFilename and newFilename are required.' },
+        { status: 400 }
+      );
+    }
+
+    const oldBase = path.basename(oldFilename);
+    const oldPath = path.resolve(PORTFOLIO_DIR, oldBase);
+
+    // Verify old file exists and stays inside PORTFOLIO_DIR
+    if (!oldPath.startsWith(PORTFOLIO_DIR)) {
+      return NextResponse.json({ success: false, error: 'Security violation: Unauthorized path access.' }, { status: 403 });
+    }
+
+    try {
+      await fs.access(oldPath);
+    } catch {
+      return NextResponse.json({ success: false, error: `Original file "${oldBase}" not found in public/portfolio.` }, { status: 404 });
+    }
+
+    // Determine new extension (keep original ext if not provided or clean it)
+    const cleanNewName = sanitizeFilename(oldBase, newFilename);
+    const newPath = path.resolve(PORTFOLIO_DIR, cleanNewName);
+
+    if (!newPath.startsWith(PORTFOLIO_DIR)) {
+      return NextResponse.json({ success: false, error: 'Security violation: Unauthorized path access.' }, { status: 403 });
+    }
+
+    // If name is unchanged
+    if (oldPath === newPath) {
+      return NextResponse.json({
+        success: true,
+        message: 'Filename is identical, no change needed.',
+        filename: cleanNewName,
+        url: `/portfolio/${cleanNewName}`,
+        affectedProjects: 0,
+      });
+    }
+
+    // Check if destination file already exists
+    try {
+      await fs.access(newPath);
+      return NextResponse.json(
+        { success: false, error: `A file named "${cleanNewName}" already exists in public/portfolio.` },
+        { status: 409 }
+      );
+    } catch {
+      // Good, destination does not exist
+    }
+
+    // 1. Rename physical file on disk
+    await fs.rename(oldPath, newPath);
+
+    // 2. Cascade rename across all projects in the database
+    const oldUrl = `/portfolio/${oldBase}`;
+    const newUrl = `/portfolio/${cleanNewName}`;
+    const { affectedCount } = await portfolioService.cascadeRenameImage(oldUrl, newUrl);
+
+    return NextResponse.json({
+      success: true,
+      message: `Asset successfully renamed to "${cleanNewName}" and cascaded across ${affectedCount} project(s).`,
+      filename: cleanNewName,
+      oldUrl,
+      newUrl,
+      affectedProjects: affectedCount,
+    });
+  } catch (err: any) {
+    console.error('[Media API PATCH error]:', err);
+    return NextResponse.json(
+      { success: false, error: err?.message || 'Failed to rename asset.' },
       { status: 500 }
     );
   }

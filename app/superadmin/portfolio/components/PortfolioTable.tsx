@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Project, PORTFOLIO_CATEGORIES } from '../../../data/portfolioData';
 import Tooltip from '../../components/Tooltip';
+import CustomDropdown from '../../components/CustomDropdown';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 /**
@@ -517,28 +518,14 @@ export default function PortfolioTable({
             <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{endIndex}</strong> of{' '}
             <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{totalItems}</strong> projects
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '0.775rem' }}>Rows per page:</span>
-            <select
+            <CustomDropdown<number>
               value={itemsPerPage}
-              onChange={(e) => setLimit(Number(e.target.value))}
-              style={{
-                padding: '4px 8px',
-                borderRadius: '6px',
-                border: '1px solid #CBD5E1',
-                fontSize: '0.775rem',
-                outline: 'none',
-                backgroundColor: '#F8FAFC',
-                fontWeight: 700,
-                color: '#334155',
-                cursor: 'pointer',
-              }}
-            >
-              <option value={5}>5</option>
-              <option value={8}>8</option>
-              <option value={10}>10</option>
-              <option value={20}>20</option>
-            </select>
+              options={[5, 8, 10, 20]}
+              onChange={(val) => setLimit(Number(val))}
+              direction="up"
+            />
           </div>
         </div>
 

@@ -1,63 +1,61 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Project, PORTFOLIO_CATEGORIES, projects as staticProjects } from '../../../data/portfolioData';
+import { Project, PORTFOLIO_CATEGORIES } from '../../../data/portfolioData';
 import Tooltip from '../../components/Tooltip';
+import { usePortfolio } from '../../context/PortfolioContext';
 
+/**
+ * Props for PortfolioTable component defining modal trigger callbacks
+ */
 interface PortfolioTableProps {
-  projectsList: Project[];
-  isLoading: boolean;
   onSelectProject: (project: Project) => void;
   onEditProject: (project: Project) => void;
   onDeleteProject: (project: Project) => void;
   onAddNewProject: () => void;
 }
 
+/**
+ * PortfolioTable Component
+ * 
+ * Renders the 100% original Superadmin portfolio UI connected directly
+ * to server-side API querying and pagination.
+ * 
+ * @param {PortfolioTableProps} props - Modal trigger callbacks
+ */
 export default function PortfolioTable({
-  projectsList,
-  isLoading,
   onSelectProject,
   onEditProject,
   onDeleteProject,
   onAddNewProject,
 }: PortfolioTableProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('ALL');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  // Server-side state & metadata from PortfolioContext
+  const {
+    projectsList,
+    isLoading,
+    page,
+    setPage,
+    limit,
+    setLimit,
+    categoryFilter,
+    setCategoryFilter,
+    searchQuery,
+    setSearchQuery,
+    pagination,
+  } = usePortfolio();
 
   const categories = ['ALL', ...PORTFOLIO_CATEGORIES];
 
-  const currentList = projectsList && projectsList.length > 0 ? projectsList : staticProjects;
+  // Derive pagination bounds from the API response
+  const totalItems = pagination?.total ?? projectsList.length;
+  const totalPages = pagination?.totalPages ?? 1;
+  const currentPage = pagination?.page ?? page;
+  const itemsPerPage = pagination?.limit ?? limit;
 
-  const filteredProjects = currentList.filter((item) => {
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (item.client && item.client.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.technologies && item.technologies.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())));
-
-    const matchesCategory =
-      categoryFilter === 'ALL' ||
-      item.category.toLowerCase() === categoryFilter.toLowerCase() ||
-      (categoryFilter === 'E-Commerce' && item.category.includes('E-Commerce')) ||
-      (categoryFilter === 'Mobile Application' && item.category.includes('Mobile'));
-
-    return matchesSearch && matchesCategory;
-  });
-
-  // Reset page to 1 when search query, filter, or itemsPerPage changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, categoryFilter, itemsPerPage]);
-
-  const totalItems = filteredProjects.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-  const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+  const startIndex = totalItems > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0;
+  const endIndex = Math.min((currentPage - 1) * itemsPerPage + projectsList.length, totalItems);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 75px)', minHeight: 0, backgroundColor: 'transparent' }}>
@@ -247,14 +245,14 @@ export default function PortfolioTable({
                   </td>
                 </tr>
               ))
-            ) : paginatedProjects.length === 0 ? (
+            ) : projectsList.length === 0 ? (
               <tr>
                 <td colSpan={6} style={{ padding: '3rem', textAlign: 'center', color: '#94A3B8' }}>
                   No portfolio projects found matching your search.
                 </td>
               </tr>
             ) : (
-              paginatedProjects.map((item) => (
+              projectsList.map((item) => (
                 <tr key={item.slug || (item as any).id} className="admin-row-hover" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
                   {/* Project Column */}
                   <td style={{ padding: '0.75rem 0.75rem 0.75rem 2rem', overflow: 'hidden' }}>
@@ -510,13 +508,12 @@ export default function PortfolioTable({
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1rem',
-          boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.03)',
         }}
       >
         {/* Left: Summary & Rows per Page Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '0.825rem', color: '#64748B' }}>
           <span>
-            Showing <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{totalItems > 0 ? startIndex + 1 : 0}</strong> to{' '}
+            Showing <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{startIndex}</strong> to{' '}
             <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{endIndex}</strong> of{' '}
             <strong style={{ color: 'var(--dark-indigo, #1a0b54)' }}>{totalItems}</strong> projects
           </span>
@@ -524,7 +521,7 @@ export default function PortfolioTable({
             <span style={{ fontSize: '0.775rem' }}>Rows per page:</span>
             <select
               value={itemsPerPage}
-              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              onChange={(e) => setLimit(Number(e.target.value))}
               style={{
                 padding: '4px 8px',
                 borderRadius: '6px',
@@ -549,8 +546,8 @@ export default function PortfolioTable({
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Tooltip text="Go to previous page" position="top">
             <button
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              disabled={!pagination.hasPrevPage || currentPage <= 1}
+              onClick={() => setPage(Math.max(currentPage - 1, 1))}
               style={{
                 padding: '5px 12px',
                 borderRadius: '6px',
@@ -577,7 +574,7 @@ export default function PortfolioTable({
             return (
               <button
                 key={pageNum}
-                onClick={() => setCurrentPage(pageNum)}
+                onClick={() => setPage(pageNum)}
                 style={{
                   minWidth: '30px',
                   height: '30px',
@@ -599,8 +596,8 @@ export default function PortfolioTable({
 
           <Tooltip text="Go to next page" position="top">
             <button
-              disabled={currentPage === totalPages || totalPages === 0}
-              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              disabled={!pagination.hasNextPage || currentPage >= totalPages || totalPages === 0}
+              onClick={() => setPage(Math.min(currentPage + 1, totalPages))}
               style={{
                 padding: '5px 12px',
                 borderRadius: '6px',

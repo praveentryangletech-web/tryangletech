@@ -10,9 +10,19 @@
 
 const ADMIN_API_KEY = process.env.NEXT_PUBLIC_ADMIN_API_KEY || process.env.ADMIN_API_KEY || '';
 
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
 export interface ApiResponse<T = any> {
   success: boolean;
   data?: T;
+  pagination?: PaginationMeta;
   count?: number;
   message?: string;
   error?: string;
@@ -120,6 +130,7 @@ class ApiClient {
       return {
         success: data?.success ?? true,
         data: data?.data ?? data,
+        pagination: data?.pagination,
         count: data?.count,
         message: data?.message,
         status: res.status,

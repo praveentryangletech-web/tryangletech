@@ -319,9 +319,16 @@ export default function PortfolioTable({
                     </span>
                   </td>
 
-                  {/* Client Column */}
-                  <td style={{ padding: '0.75rem 0.5rem', color: '#475569', fontSize: '0.825rem', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {item.client || <span style={{ color: '#94A3B8' }}>Internal Project</span>}
+                  {/* Client / Role Column */}
+                  <td style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div style={{ color: '#334155', fontSize: '0.825rem', fontWeight: 700 }}>
+                      {item.client || <span style={{ color: '#94A3B8', fontWeight: 500 }}>Internal Project</span>}
+                    </div>
+                    {item.role && (
+                      <div style={{ color: '#64748B', fontSize: '0.725rem', fontWeight: 500, marginTop: '2px' }}>
+                        {item.role}
+                      </div>
+                    )}
                   </td>
 
                   {/* Tech Stack Chips */}

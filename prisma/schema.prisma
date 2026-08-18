@@ -117,3 +117,20 @@ model PortfolioProject {
   @@index([createdAt(sort: Desc)])
   @@index([title, createdAt])
 }
+
+// ----------------------------------------------------
+// 6. DYNAMIC MEDIA ASSETS & UPLOADS
+// ----------------------------------------------------
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String   @unique
+  mimeType  String   @default("image/webp")
+  size      Int      @default(0)
+  data      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([filename])
+  @@index([updatedAt(sort: Desc)])
+}
+

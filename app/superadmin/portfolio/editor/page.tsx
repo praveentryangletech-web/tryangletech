@@ -231,6 +231,12 @@ function PortfolioEditorInner() {
   const [customFilenameInput, setCustomFilenameInput] = useState('');
   const [uploadFilePreview, setUploadFilePreview] = useState<string | null>(null);
 
+  // 6. Asset Picker Modal State
+  const [isAssetPickerOpen, setIsAssetPickerOpen] = useState(false);
+  const [assetPickerTarget, setAssetPickerTarget] = useState<'cover' | 'slider'>('cover');
+  const [assetPickerSearch, setAssetPickerSearch] = useState('');
+  const [selectedAssetUrls, setSelectedAssetUrls] = useState<string[]>([]);
+
   const fetchMediaList = async () => {
     setIsLoadingMedia(true);
     try {
@@ -1356,6 +1362,38 @@ function PortfolioEditorInner() {
                     <span>📁</span>
                     <span>Upload Image from Device</span>
                   </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      fetchMediaList();
+                      setAssetPickerTarget('cover');
+                      setIsAssetPickerOpen(true);
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '9px 14px',
+                      marginTop: '8px',
+                      borderRadius: '10px',
+                      border: '1.5px solid #CBD5E1',
+                      backgroundColor: '#FFFFFF',
+                      color: '#1E293B',
+                      fontSize: '0.825rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span>Select from Existing</span>
+                  </button>
                 </div>
 
                 {/* Right: Dropdown & Direct URL Field */}
@@ -1582,8 +1620,8 @@ function PortfolioEditorInner() {
                   </button>
                 </div>
 
-                {/* Upload Slide Button */}
-                <div>
+                {/* Upload Slide Button & Select Existing Button */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <input
                     id="slider-file-input"
                     type="file"
@@ -1610,6 +1648,38 @@ function PortfolioEditorInner() {
                     }}
                   >
                     <span>📁 Upload Slide File</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      fetchMediaList();
+                      setAssetPickerTarget('slider');
+                      setSelectedAssetUrls([]);
+                      setIsAssetPickerOpen(true);
+                    }}
+                    style={{
+                      padding: '11px 18px',
+                      borderRadius: '12px',
+                      border: '1.5px solid #CBD5E1',
+                      backgroundColor: '#FFFFFF',
+                      color: '#1E293B',
+                      fontWeight: 700,
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      whiteSpace: 'nowrap',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span>Select from Existing</span>
                   </button>
                 </div>
               </div>
@@ -2342,6 +2412,288 @@ function PortfolioEditorInner() {
           </div>
         </div>
       </form>
+
+      {/* Asset Picker Modal */}
+      {isAssetPickerOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10000,
+            padding: '1.5rem',
+          }}
+          onClick={() => setIsAssetPickerOpen(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '20px',
+              maxWidth: '860px',
+              width: '100%',
+              maxHeight: '90vh',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+              border: '1px solid #E2E8F0',
+            }}
+          >
+            {/* Modal Header */}
+            <div style={{ padding: '1.25rem 1.75rem', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#0F172A' }}>
+                  Select from Existing Assets {assetPickerTarget === 'cover' ? '(Cover Image)' : '(Hero Showcase Slider)'}
+                </h3>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.8rem', color: '#64748B' }}>
+                  Pick existing images from <code>/public/portfolio/</code>.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAssetPickerOpen(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  fontSize: '1.35rem',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  color: '#64748B',
+                }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Search Filter Toolbar */}
+            <div style={{ padding: '1rem 1.75rem', borderBottom: '1px solid #F1F5F9', backgroundColor: '#F8FAFC', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ flex: 1, minWidth: '240px', position: 'relative' }}>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#94A3B8"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search assets by filename (e.g. 7d, devrshree, vh)..."
+                  value={assetPickerSearch}
+                  onChange={(e) => setAssetPickerSearch(e.target.value)}
+                  autoFocus
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px 8px 34px',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    fontSize: '0.85rem',
+                    outline: 'none',
+                    color: '#0F172A',
+                  }}
+                />
+              </div>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#64748B' }}>
+                {mediaList.filter((m) => m.filename.toLowerCase().includes(assetPickerSearch.toLowerCase())).length} Assets
+              </span>
+            </div>
+
+            {/* Assets Grid */}
+            <div style={{ padding: '1.5rem 1.75rem', overflowY: 'auto', flex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.25rem' }}>
+              {mediaList
+                .filter((asset) => asset.filename.toLowerCase().includes(assetPickerSearch.toLowerCase()))
+                .map((asset) => {
+                  const isCover = coverImage === asset.url;
+                  const isInSlider = sliderImages.includes(asset.url);
+                  const isSelected = selectedAssetUrls.includes(asset.url);
+
+                  return (
+                    <div
+                      key={asset.filename}
+                      onClick={() => {
+                        if (assetPickerTarget === 'cover') {
+                          setCoverImage(asset.url);
+                          setIsAssetPickerOpen(false);
+                        } else {
+                          if (isSelected) {
+                            setSelectedAssetUrls(selectedAssetUrls.filter((u) => u !== asset.url));
+                          } else {
+                            setSelectedAssetUrls([...selectedAssetUrls, asset.url]);
+                          }
+                        }
+                      }}
+                      style={{
+                        border: (assetPickerTarget === 'cover' ? isCover : isSelected || isInSlider)
+                          ? '2px solid #1833FE'
+                          : '1px solid #E2E8F0',
+                        borderRadius: '12px',
+                        padding: '8px',
+                        backgroundColor: '#FFFFFF',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '6px',
+                        position: 'relative',
+                        transition: 'all 0.15s ease',
+                        boxShadow: (assetPickerTarget === 'cover' ? isCover : isSelected)
+                          ? '0 4px 12px rgba(24, 51, 254, 0.15)'
+                          : '0 1px 3px rgba(0,0,0,0.02)',
+                      }}
+                    >
+                      <div style={{ position: 'relative', width: '100%', height: '110px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#F1F5F9' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={asset.url}
+                          alt={asset.filename}
+                          loading="lazy"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        {assetPickerTarget === 'cover' && isCover && (
+                          <span style={{ position: 'absolute', top: '4px', left: '4px', backgroundColor: '#1833FE', color: '#FFFFFF', fontSize: '0.65rem', fontWeight: 800, padding: '2px 6px', borderRadius: '4px' }}>
+                            Current Cover
+                          </span>
+                        )}
+                        {assetPickerTarget === 'slider' && isInSlider && (
+                          <span style={{ position: 'absolute', top: '4px', left: '4px', backgroundColor: '#059669', color: '#FFFFFF', fontSize: '0.65rem', fontWeight: 800, padding: '2px 6px', borderRadius: '4px' }}>
+                            In Slider
+                          </span>
+                        )}
+                        {assetPickerTarget === 'slider' && isSelected && !isInSlider && (
+                          <span style={{ position: 'absolute', top: '4px', right: '4px', backgroundColor: '#1833FE', color: '#FFFFFF', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 800 }}>
+                            ✓
+                          </span>
+                        )}
+                      </div>
+
+                      <div style={{ overflow: 'hidden' }}>
+                        <p style={{ margin: 0, fontSize: '0.775rem', fontWeight: 700, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} title={asset.filename}>
+                          {asset.filename}
+                        </p>
+                        <span style={{ fontSize: '0.675rem', color: '#64748B' }}>
+                          {(asset.size / 1024).toFixed(0)} KB
+                        </span>
+                      </div>
+
+                      {assetPickerTarget === 'cover' ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCoverImage(asset.url);
+                            setIsAssetPickerOpen(false);
+                          }}
+                          style={{
+                            padding: '5px 8px',
+                            borderRadius: '6px',
+                            border: 'none',
+                            backgroundColor: isCover ? '#EFF6FF' : '#1833FE',
+                            color: isCover ? '#1833FE' : '#FFFFFF',
+                            fontSize: '0.725rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {isCover ? '✓ Active Cover' : 'Select Cover'}
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (!isInSlider) {
+                              setSliderImages([...sliderImages, asset.url]);
+                            }
+                          }}
+                          disabled={isInSlider}
+                          style={{
+                            padding: '5px 8px',
+                            borderRadius: '6px',
+                            border: isInSlider ? '1px solid #E2E8F0' : 'none',
+                            backgroundColor: isInSlider ? '#F1F5F9' : '#EFF6FF',
+                            color: isInSlider ? '#94A3B8' : '#1833FE',
+                            fontSize: '0.725rem',
+                            fontWeight: 700,
+                            cursor: isInSlider ? 'default' : 'pointer',
+                          }}
+                        >
+                          {isInSlider ? '✓ In Slider' : '+ Add Slide'}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+
+            {/* Modal Footer */}
+            <div style={{ padding: '1.25rem 1.75rem', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F8FAFC' }}>
+              <button
+                type="button"
+                onClick={() => setIsAssetPickerOpen(false)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: '8px',
+                  border: '1px solid #CBD5E1',
+                  backgroundColor: '#FFFFFF',
+                  color: '#475569',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Close
+              </button>
+
+              {assetPickerTarget === 'slider' && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '0.825rem', color: '#64748B', fontWeight: 600 }}>
+                    {selectedAssetUrls.length} selected
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (selectedAssetUrls.length > 0) {
+                        const newImages = [...sliderImages];
+                        selectedAssetUrls.forEach((u) => {
+                          if (!newImages.includes(u)) newImages.push(u);
+                        });
+                        setSliderImages(newImages);
+                        setSelectedAssetUrls([]);
+                        setIsAssetPickerOpen(false);
+                      }
+                    }}
+                    disabled={selectedAssetUrls.length === 0}
+                    style={{
+                      padding: '8px 20px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      backgroundColor: selectedAssetUrls.length > 0 ? '#1833FE' : '#CBD5E1',
+                      color: '#FFFFFF',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      cursor: selectedAssetUrls.length > 0 ? 'pointer' : 'not-allowed',
+                      boxShadow: selectedAssetUrls.length > 0 ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
+                    }}
+                  >
+                    Add Selected ({selectedAssetUrls.length}) to Slider
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

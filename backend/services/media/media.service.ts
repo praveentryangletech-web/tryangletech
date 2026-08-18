@@ -33,12 +33,21 @@ class MediaService {
           "data" TEXT NOT NULL,
           "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-        );
-        CREATE INDEX IF NOT EXISTS "idx_mediaasset_filename" ON "MediaAsset" ("filename");
+        )
       `);
+
+      try {
+        await db.$executeRawUnsafe(`
+          CREATE INDEX IF NOT EXISTS "idx_mediaasset_filename" ON "MediaAsset" ("filename")
+        `);
+      } catch {
+        // Index creation is non-blocking
+      }
+
       this.tableInitialized = true;
-    } catch (err) {
-      console.warn('[MediaService] Error ensuring MediaAsset table:', err);
+    } catch (err: any) {
+      console.error('[MediaService] Error ensuring MediaAsset table:', err?.message || err);
+      throw new Error(`Database table initialization failed: ${err?.message || 'Unknown database error'}`);
     }
   }
 

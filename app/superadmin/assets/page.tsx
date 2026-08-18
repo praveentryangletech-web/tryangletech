@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Tooltip from '../components/Tooltip';
 
@@ -11,12 +11,20 @@ interface MediaAsset {
   updatedAt: string;
 }
 
+const INITIAL_BATCH = 16;
+const BATCH_SIZE = 12;
+
 export default function AssetManagementPage() {
   const [mediaList, setMediaList] = useState<MediaAsset[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'size-desc' | 'size-asc' | 'name-asc'>('newest');
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+
+  // Infinite Scroll & Pagination States
+  const [visibleCount, setVisibleCount] = useState(INITIAL_BATCH);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   // Upload States
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -58,6 +66,11 @@ export default function AssetManagementPage() {
   useEffect(() => {
     fetchAssets();
   }, []);
+
+  // Reset pagination when search query or sort order changes
+  useEffect(() => {
+    setVisibleCount(INITIAL_BATCH);
+  }, [searchQuery, sortBy]);
 
   const handleSelectFile = (files: FileList | null) => {
     if (!files || files.length === 0) return;
@@ -222,6 +235,39 @@ export default function AssetManagementPage() {
       if (sortBy === 'name-asc') return a.filename.localeCompare(b.filename);
       return 0;
     });
+
+  const paginatedAssets = filteredAssets.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredAssets.length;
+
+  const handleLoadMore = useCallback(() => {
+    if (isLoadingMore || !hasMore) return;
+    setIsLoadingMore(true);
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + BATCH_SIZE, filteredAssets.length));
+      setIsLoadingMore(false);
+    }, 250);
+  }, [isLoadingMore, hasMore, filteredAssets.length]);
+
+  // Setup Intersection Observer for Infinite Scrolling
+  useEffect(() => {
+    if (!hasMore || isLoadingMore) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 0.1, rootMargin: '200px' }
+    );
+
+    const target = sentinelRef.current;
+    if (target) observer.observe(target);
+
+    return () => {
+      if (target) observer.unobserve(target);
+      observer.disconnect();
+    };
+  }, [hasMore, isLoadingMore, handleLoadMore]);
 
   const totalBytes = mediaList.reduce((acc, curr) => acc + curr.size, 0);
   const totalMB = (totalBytes / (1024 * 1024)).toFixed(2);
@@ -612,7 +658,22 @@ export default function AssetManagementPage() {
             />
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            {/* Live Count Chip */}
+            <span
+              style={{
+                fontSize: '0.775rem',
+                fontWeight: 700,
+                color: '#64748B',
+                backgroundColor: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                padding: '6px 12px',
+                borderRadius: '8px',
+              }}
+            >
+              Showing {paginatedAssets.length} of {filteredAssets.length}
+            </span>
+
             {/* Sort By */}
             <select
               value={sortBy}
@@ -696,10 +757,26 @@ export default function AssetManagementPage() {
           </div>
         </div>
 
-        {/* Grid View */}
-        {viewMode === 'grid' ? (
+        {/* Empty State */}
+        {filteredAssets.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: '#64748B' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: '#94A3B8' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+            <p style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: 700, color: '#1E293B' }}>
+              No Assets Found
+            </p>
+            <p style={{ margin: 0, fontSize: '0.85rem' }}>
+              {searchQuery ? `No assets matching "${searchQuery}"` : 'Upload an image above to get started.'}
+            </p>
+          </div>
+        ) : viewMode === 'grid' ? (
+          /* Grid View */
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.25rem' }}>
-            {filteredAssets.map((asset) => (
+            {paginatedAssets.map((asset) => (
               <div
                 key={asset.filename}
                 style={{
@@ -731,6 +808,7 @@ export default function AssetManagementPage() {
                   <img
                     src={asset.url}
                     alt={asset.filename}
+                    loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
@@ -922,7 +1000,7 @@ export default function AssetManagementPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredAssets.map((asset) => (
+                {paginatedAssets.map((asset) => (
                   <tr key={asset.filename} style={{ borderBottom: '1px solid #F1F5F9' }}>
                     <td style={{ padding: '0.75rem 1rem' }}>
                       <div
@@ -940,6 +1018,7 @@ export default function AssetManagementPage() {
                         <img
                           src={asset.url}
                           alt={asset.filename}
+                          loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
                       </div>
@@ -1072,6 +1151,97 @@ export default function AssetManagementPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {/* Infinite Scroll Sentinel & Load More Trigger */}
+        {filteredAssets.length > 0 && (
+          <div
+            ref={sentinelRef}
+            style={{
+              paddingTop: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.75rem',
+            }}
+          >
+            {hasMore ? (
+              <button
+                type="button"
+                onClick={handleLoadMore}
+                disabled={isLoadingMore}
+                style={{
+                  padding: '10px 24px',
+                  borderRadius: '12px',
+                  border: '1.5px solid #CBD5E1',
+                  backgroundColor: '#FFFFFF',
+                  color: '#1E293B',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  cursor: isLoadingMore ? 'not-allowed' : 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {isLoadingMore ? (
+                  <>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#1833FE"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ animation: 'spin 1s linear infinite' }}
+                    >
+                      <line x1="12" y1="2" x2="12" y2="6" />
+                      <line x1="12" y1="18" x2="12" y2="22" />
+                      <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+                      <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+                      <line x1="2" y1="12" x2="6" y2="12" />
+                      <line x1="18" y1="12" x2="22" y2="12" />
+                      <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+                      <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+                    </svg>
+                    <span>Loading next batch of assets...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                    <span>Auto-loading on scroll • or click to load more</span>
+                  </>
+                )}
+              </button>
+            ) : (
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: '#94A3B8',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  padding: '8px 16px',
+                  backgroundColor: '#F8FAFC',
+                  borderRadius: '20px',
+                  border: '1px solid #F1F5F9',
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>All {filteredAssets.length} assets loaded</span>
+              </div>
+            )}
           </div>
         )}
       </div>

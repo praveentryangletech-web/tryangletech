@@ -6,6 +6,7 @@ export interface PortfolioItem {
   title: string;
   category: PortfolioCategory;
   image: string;
+  images?: string[];
   description: string;
   client?: string;
   duration?: string;
@@ -16,6 +17,12 @@ export interface PortfolioItem {
   solutions: string[];
   results: string[];
   technologies: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  aeoSummary?: string;
+  keywords?: string[];
+  geoRegion?: string;
+  canonicalUrl?: string;
   order: number;
   createdAt: string;
   updatedAt: string;

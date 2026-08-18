@@ -18,6 +18,26 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const clientEtag = req.headers.get('if-none-match');
+    const singleId = searchParams.get('id');
+    const singleSlug = searchParams.get('slug');
+
+    // Single item query by ID
+    if (singleId) {
+      const project = await portfolioService.getProjectById(singleId);
+      if (!project) {
+        return errorResponse('Project not found.', 404);
+      }
+      return successResponse(project, 'Project retrieved successfully.');
+    }
+
+    // Single item query by slug (when not paginated)
+    if (singleSlug && !searchParams.get('page')) {
+      const project = await portfolioService.getProjectBySlug(singleSlug);
+      if (!project) {
+        return errorResponse('Project not found.', 404);
+      }
+      return successResponse(project, 'Project retrieved successfully.');
+    }
 
     // 1. Validate and sanitize query parameters
     const validation = validatePortfolioQueryParams({

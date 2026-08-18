@@ -25,9 +25,9 @@ export default function PortfolioDeleteModal({
     setIsDeleting(true);
     setErrorMessage('');
     try {
-      // Pass ID or slug
-      const idOrSlug = (project as any).id || project.slug;
-      await onConfirm(idOrSlug);
+      // Pass primary key ID
+      const projectId = (project as any).id || project.slug;
+      await onConfirm(projectId);
       onClose();
     } catch (err: any) {
       setErrorMessage(err?.message || 'Failed to delete project.');

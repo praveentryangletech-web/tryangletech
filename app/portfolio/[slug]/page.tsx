@@ -10,7 +10,57 @@ import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
 import PortfolioImageSlider from '../components/PortfolioImageSlider';
 
+import type { Metadata } from 'next';
 import Image from "next/image";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  let project: Project | null = null;
+  try {
+    const res = await portfolioService.getPaginatedProjects({ slug: resolvedParams.slug });
+    if (res.items && res.items.length > 0) {
+      project = res.items[0] as Project;
+    }
+  } catch (err) {
+    // fallback
+  }
+
+  if (!project) {
+    project = staticProjects.find((p) => p.slug === resolvedParams.slug) || null;
+  }
+
+  if (!project) {
+    return {
+      title: 'Portfolio Case Study | TryangleTech',
+      description: 'Explore custom software and web development case studies by TryangleTech.',
+    };
+  }
+
+  const title = project.metaTitle || `${project.title} - ${project.category} | TryangleTech Case Study`;
+  const description = project.metaDescription || project.description || 'Custom software design and development case study by TryangleTech.';
+  const keywords = project.keywords && project.keywords.length > 0 ? project.keywords : [project.category, 'Web Development', 'TryangleTech'];
+
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: project.image || '/portfolio/vh-accounting.webp',
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    alternates: {
+      canonical: project.canonicalUrl || `https://tryangletech.com/portfolio/${project.slug}`,
+    },
+  };
+}
 
 export default async function PortfolioDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;

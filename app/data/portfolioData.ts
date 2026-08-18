@@ -27,6 +27,12 @@ export interface Project {
   solutions?: string[];
   results?: string[];
   technologies?: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  aeoSummary?: string;
+  keywords?: string[];
+  geoRegion?: string;
+  canonicalUrl?: string;
 }
 
 export const projects: Project[] = [

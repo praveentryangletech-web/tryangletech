@@ -115,11 +115,10 @@ export const portfolioService = {
         SELECT COUNT(*) as count FROM "PortfolioProject"
       `;
       const count = Number(rows[0]?.count || 0);
-
       if (count === 0) {
         for (let i = 0; i < defaultProjects.length; i++) {
           const p = defaultProjects[i];
-          const id = crypto.randomUUID();
+          const id = String(i + 1);
           await db.$executeRaw`
             INSERT INTO "PortfolioProject" (
               "id", "slug", "title", "category", "image", "description",
@@ -136,8 +135,34 @@ export const portfolioService = {
             )
           `;
         }
-        console.log(`[DB Portfolio] Seeded ${defaultProjects.length} initial projects into PostgreSQL.`);
+        console.log(`[DB Portfolio] Seeded ${defaultProjects.length} initial projects with standard numeric IDs into PostgreSQL.`);
       }
+
+      // Standardize any existing UUIDs or non-numeric IDs in the DB into clean sequential numbers
+      const existingRows = await db.$queryRaw<Array<{ id: string }>>`
+        SELECT "id" FROM "PortfolioProject" ORDER BY "order" ASC, "createdAt" ASC
+      `;
+      let seq = 1;
+      for (const row of existingRows) {
+        if (isNaN(Number(row.id))) {
+          const newNumericId = String(seq);
+          await db.$executeRaw`
+            UPDATE "PortfolioProject" SET "id" = ${newNumericId} WHERE "id" = ${row.id}
+          `.catch(() => {});
+        }
+        seq++;
+      }
+
+      // Ensure columns exist for images array and SEO/AEO/GEO metadata
+      await db.$executeRawUnsafe(`
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "images" text[] DEFAULT '{}';
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "metaTitle" text;
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "metaDescription" text;
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "aeoSummary" text;
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "keywords" text[] DEFAULT '{}';
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "geoRegion" text;
+        ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "canonicalUrl" text;
+      `).catch(() => {});
 
       // Ensure high-performance composite & functional indexes exist on PostgreSQL
       await db.$executeRawUnsafe(`
@@ -249,26 +274,7 @@ export const portfolioService = {
 
       const totalPages = Math.ceil(total / limit) || 1;
 
-      const items: PortfolioItem[] = rows.map((r) => ({
-        id: r.id,
-        slug: r.slug,
-        title: r.title,
-        category: r.category as PortfolioCategory,
-        image: r.image,
-        description: r.description,
-        client: r.client || '',
-        duration: r.duration || '',
-        role: r.role || '',
-        liveUrl: r.liveUrl || '',
-        content: r.content || '',
-        challenges: Array.isArray(r.challenges) ? r.challenges : [],
-        solutions: Array.isArray(r.solutions) ? r.solutions : [],
-        results: Array.isArray(r.results) ? r.results : [],
-        technologies: Array.isArray(r.technologies) ? r.technologies : [],
-        order: r.order || 0,
-        createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
-        updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
-      }));
+      const items: PortfolioItem[] = rows.map((r) => mapRowToPortfolioItem(r));
 
       const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
@@ -320,11 +326,12 @@ export const portfolioService = {
       const paginated = filtered.slice(offset, offset + limit);
 
       const items: PortfolioItem[] = paginated.map((p, idx) => ({
-        id: `mock-${offset + idx}`,
+        id: String(offset + idx + 1),
         slug: p.slug,
         title: p.title,
         category: p.category,
         image: p.image,
+        images: p.images || (p.image ? [p.image] : []),
         description: p.description,
         client: p.client || '',
         duration: p.duration || '',
@@ -335,6 +342,12 @@ export const portfolioService = {
         solutions: p.solutions || [],
         results: p.results || [],
         technologies: p.technologies || [],
+        metaTitle: p.metaTitle || '',
+        metaDescription: p.metaDescription || '',
+        aeoSummary: p.aeoSummary || '',
+        keywords: p.keywords || [],
+        geoRegion: p.geoRegion || '',
+        canonicalUrl: p.canonicalUrl || '',
         order: offset + idx,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -405,26 +418,7 @@ export const portfolioService = {
         ORDER BY "order" ASC, "createdAt" DESC
       `;
 
-      const items: PortfolioItem[] = rows.map((r) => ({
-        id: r.id,
-        slug: r.slug,
-        title: r.title,
-        category: r.category as PortfolioCategory,
-        image: r.image,
-        description: r.description,
-        client: r.client || '',
-        duration: r.duration || '',
-        role: r.role || '',
-        liveUrl: r.liveUrl || '',
-        content: r.content || '',
-        challenges: Array.isArray(r.challenges) ? r.challenges : [],
-        solutions: Array.isArray(r.solutions) ? r.solutions : [],
-        results: Array.isArray(r.results) ? r.results : [],
-        technologies: Array.isArray(r.technologies) ? r.technologies : [],
-        order: r.order || 0,
-        createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
-        updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
-      }));
+      const items: PortfolioItem[] = rows.map((r) => mapRowToPortfolioItem(r));
 
       const cachedEntry = portfolioCache.set(cacheKey, items);
       const result = items as PortfolioItem[] & { etag?: string };
@@ -433,11 +427,12 @@ export const portfolioService = {
     } catch (err) {
       console.error('[DB Portfolio] getAllProjects error:', err);
       const items = defaultProjects.map((p, idx) => ({
-        id: `mock-${idx}`,
+        id: String(idx + 1),
         slug: p.slug,
         title: p.title,
         category: p.category,
         image: p.image,
+        images: p.images || (p.image ? [p.image] : []),
         description: p.description,
         client: p.client || '',
         duration: p.duration || '',
@@ -448,6 +443,12 @@ export const portfolioService = {
         solutions: p.solutions || [],
         results: p.results || [],
         technologies: p.technologies || [],
+        metaTitle: p.metaTitle || '',
+        metaDescription: p.metaDescription || '',
+        aeoSummary: p.aeoSummary || '',
+        keywords: p.keywords || [],
+        geoRegion: p.geoRegion || '',
+        canonicalUrl: p.canonicalUrl || '',
         order: idx,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -458,16 +459,124 @@ export const portfolioService = {
   },
 
   /**
+   * Get Single Project by Unique Primary Key ID
+   */
+  async getProjectById(id: string): Promise<PortfolioItem | null> {
+    try {
+      await this.seedIfEmpty();
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PortfolioProject" WHERE "id" = ${id} LIMIT 1
+      `;
+      if (!rows || rows.length === 0) return null;
+      return mapRowToPortfolioItem(rows[0]);
+    } catch (err) {
+      console.error('[DB Portfolio] getProjectById error:', err);
+      const found = defaultProjects.find((p) => p.slug === id || (p as any).id === id);
+      if (!found) return null;
+      return {
+        id,
+        slug: found.slug,
+        title: found.title,
+        category: found.category,
+        image: found.image,
+        images: found.images || (found.image ? [found.image] : []),
+        description: found.description,
+        client: found.client || '',
+        duration: found.duration || '',
+        role: found.role || '',
+        liveUrl: found.liveUrl || '',
+        content: found.content || '',
+        challenges: found.challenges || [],
+        solutions: found.solutions || [],
+        results: found.results || [],
+        technologies: found.technologies || [],
+        metaTitle: found.metaTitle || '',
+        metaDescription: found.metaDescription || '',
+        aeoSummary: found.aeoSummary || '',
+        keywords: found.keywords || [],
+        geoRegion: found.geoRegion || '',
+        canonicalUrl: found.canonicalUrl || '',
+        order: 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    }
+  },
+
+  /**
+   * Get Single Project by Slug
+   */
+  async getProjectBySlug(slug: string): Promise<PortfolioItem | null> {
+    try {
+      await this.seedIfEmpty();
+      const safeSlug = slug.trim().toLowerCase();
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PortfolioProject" WHERE LOWER("slug") = ${safeSlug} LIMIT 1
+      `;
+      if (!rows || rows.length === 0) return null;
+      return mapRowToPortfolioItem(rows[0]);
+    } catch (err) {
+      console.error('[DB Portfolio] getProjectBySlug error:', err);
+      const found = defaultProjects.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+      if (!found) return null;
+      return {
+        id: (found as any).id || found.slug,
+        slug: found.slug,
+        title: found.title,
+        category: found.category,
+        image: found.image,
+        images: found.images || (found.image ? [found.image] : []),
+        description: found.description,
+        client: found.client || '',
+        duration: found.duration || '',
+        role: found.role || '',
+        liveUrl: found.liveUrl || '',
+        content: found.content || '',
+        challenges: found.challenges || [],
+        solutions: found.solutions || [],
+        results: found.results || [],
+        technologies: found.technologies || [],
+        metaTitle: found.metaTitle || '',
+        metaDescription: found.metaDescription || '',
+        aeoSummary: found.aeoSummary || '',
+        keywords: found.keywords || [],
+        geoRegion: found.geoRegion || '',
+        canonicalUrl: found.canonicalUrl || '',
+        order: 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    }
+  },
+
+  /**
    * Create a new project (immediately invalidates all server caches)
    */
   async createProject(data: CreatePortfolioInput): Promise<PortfolioItem> {
     clearPortfolioCache();
 
-    const id = crypto.randomUUID();
+    // Generate standard sequential numeric ID (e.g. 1, 2, 3...)
+    let nextId = 1;
+    try {
+      const allIdRows = await db.$queryRaw<Array<{ id: string }>>`
+        SELECT "id" FROM "PortfolioProject"
+      `;
+      if (allIdRows && allIdRows.length > 0) {
+        const nums = allIdRows
+          .map((r) => parseInt(r.id, 10))
+          .filter((n) => !isNaN(n));
+        nextId = nums.length > 0 ? Math.max(...nums) + 1 : allIdRows.length + 1;
+      }
+    } catch {
+      nextId = Date.now();
+    }
+    const id = String(nextId);
+
     const slug = (data.slug || (data.title ? generateSlug(data.title) : '') || `project-${Date.now()}`).trim();
     const title = data.title?.trim() || 'Untitled Project';
     const category = data.category || 'Business Website';
     const image = data.image?.trim() || '/portfolio/vh-accounting.webp';
+    const images = Array.isArray(data.images) && data.images.length > 0 ? data.images : (image ? [image] : []);
     const description = data.description?.trim() || '';
     const client = data.client?.trim() || '';
     const duration = data.duration?.trim() || '3 Weeks';
@@ -478,19 +587,27 @@ export const portfolioService = {
     const solutions = Array.isArray(data.solutions) ? data.solutions : [];
     const results = Array.isArray(data.results) ? data.results : [];
     const technologies = Array.isArray(data.technologies) ? data.technologies : [];
+    const metaTitle = data.metaTitle?.trim() || '';
+    const metaDescription = data.metaDescription?.trim() || '';
+    const aeoSummary = data.aeoSummary?.trim() || '';
+    const keywords = Array.isArray(data.keywords) ? data.keywords : [];
+    const geoRegion = data.geoRegion?.trim() || '';
+    const canonicalUrl = data.canonicalUrl?.trim() || '';
     const order = data.order ?? 0;
 
     await db.$executeRaw`
       INSERT INTO "PortfolioProject" (
-        "id", "slug", "title", "category", "image", "description",
+        "id", "slug", "title", "category", "image", "images", "description",
         "client", "duration", "role", "liveUrl", "content",
-        "challenges", "solutions", "results", "technologies", "order",
-        "createdAt", "updatedAt"
+        "challenges", "solutions", "results", "technologies",
+        "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl",
+        "order", "createdAt", "updatedAt"
       ) VALUES (
-        ${id}, ${slug}, ${title}, ${category}, ${image},
-        ${description}, ${client}, ${duration}, ${role}, ${liveUrl},
-        ${content}, ${challenges}, ${solutions}, ${results}, ${technologies}, ${order},
-        NOW(), NOW()
+        ${id}, ${slug}, ${title}, ${category}, ${image}, ${images}, ${description},
+        ${client}, ${duration}, ${role}, ${liveUrl}, ${content},
+        ${challenges}, ${solutions}, ${results}, ${technologies},
+        ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl},
+        ${order}, NOW(), NOW()
       )
     `;
 
@@ -500,6 +617,7 @@ export const portfolioService = {
       title,
       category,
       image,
+      images,
       description,
       client,
       duration,
@@ -510,6 +628,12 @@ export const portfolioService = {
       solutions,
       results,
       technologies,
+      metaTitle,
+      metaDescription,
+      aeoSummary,
+      keywords,
+      geoRegion,
+      canonicalUrl,
       order,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -517,7 +641,7 @@ export const portfolioService = {
   },
 
   /**
-   * Update project (immediately invalidates all server caches)
+   * Update project by Primary Key ID (immediately invalidates all server caches)
    */
   async updateProject(id: string, data: UpdatePortfolioInput): Promise<PortfolioItem | null> {
     clearPortfolioCache();
@@ -528,6 +652,9 @@ export const portfolioService = {
     if (data.slug !== undefined) updates.push(Prisma.sql`"slug" = ${data.slug.trim()}`);
     if (data.category !== undefined) updates.push(Prisma.sql`"category" = ${data.category}`);
     if (data.image !== undefined) updates.push(Prisma.sql`"image" = ${data.image.trim()}`);
+    if (Array.isArray(data.images)) {
+      updates.push(Prisma.sql`"images" = ${data.images}`);
+    }
     if (data.description !== undefined) updates.push(Prisma.sql`"description" = ${data.description.trim()}`);
     if (data.client !== undefined) updates.push(Prisma.sql`"client" = ${data.client.trim()}`);
     if (data.duration !== undefined) updates.push(Prisma.sql`"duration" = ${data.duration.trim()}`);
@@ -549,6 +676,15 @@ export const portfolioService = {
       updates.push(Prisma.sql`"results" = ${data.results}`);
     }
 
+    if (data.metaTitle !== undefined) updates.push(Prisma.sql`"metaTitle" = ${data.metaTitle.trim()}`);
+    if (data.metaDescription !== undefined) updates.push(Prisma.sql`"metaDescription" = ${data.metaDescription.trim()}`);
+    if (data.aeoSummary !== undefined) updates.push(Prisma.sql`"aeoSummary" = ${data.aeoSummary.trim()}`);
+    if (Array.isArray(data.keywords)) {
+      updates.push(Prisma.sql`"keywords" = ${data.keywords}`);
+    }
+    if (data.geoRegion !== undefined) updates.push(Prisma.sql`"geoRegion" = ${data.geoRegion.trim()}`);
+    if (data.canonicalUrl !== undefined) updates.push(Prisma.sql`"canonicalUrl" = ${data.canonicalUrl.trim()}`);
+
     updates.push(Prisma.sql`"updatedAt" = NOW()`);
 
     if (updates.length > 0) {
@@ -564,32 +700,11 @@ export const portfolioService = {
     `;
 
     if (!rows || rows.length === 0) return null;
-    const r = rows[0];
-
-    return {
-      id: r.id,
-      slug: r.slug,
-      title: r.title,
-      category: r.category as PortfolioCategory,
-      image: r.image,
-      description: r.description,
-      client: r.client || '',
-      duration: r.duration || '',
-      role: r.role || '',
-      liveUrl: r.liveUrl || '',
-      content: r.content || '',
-      challenges: Array.isArray(r.challenges) ? r.challenges : [],
-      solutions: Array.isArray(r.solutions) ? r.solutions : [],
-      results: Array.isArray(r.results) ? r.results : [],
-      technologies: Array.isArray(r.technologies) ? r.technologies : [],
-      order: r.order || 0,
-      createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
-      updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
-    };
+    return mapRowToPortfolioItem(rows[0]);
   },
 
   /**
-   * Delete project (immediately invalidates all server caches)
+   * Delete project by Primary Key ID (immediately invalidates all server caches)
    */
   async deleteProject(id: string): Promise<boolean> {
     clearPortfolioCache();
@@ -604,5 +719,38 @@ export const portfolioService = {
     }
   },
 };
+
+/**
+ * Universal Mapper from PostgreSQL Raw Row to PortfolioItem
+ */
+function mapRowToPortfolioItem(r: any): PortfolioItem {
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    category: r.category as PortfolioCategory,
+    image: r.image,
+    images: Array.isArray(r.images) && r.images.length > 0 ? r.images : (r.image ? [r.image] : []),
+    description: r.description,
+    client: r.client || '',
+    duration: r.duration || '',
+    role: r.role || '',
+    liveUrl: r.liveUrl || '',
+    content: r.content || '',
+    challenges: Array.isArray(r.challenges) ? r.challenges : [],
+    solutions: Array.isArray(r.solutions) ? r.solutions : [],
+    results: Array.isArray(r.results) ? r.results : [],
+    technologies: Array.isArray(r.technologies) ? r.technologies : [],
+    metaTitle: r.metaTitle || '',
+    metaDescription: r.metaDescription || '',
+    aeoSummary: r.aeoSummary || '',
+    keywords: Array.isArray(r.keywords) ? r.keywords : [],
+    geoRegion: r.geoRegion || '',
+    canonicalUrl: r.canonicalUrl || '',
+    order: r.order || 0,
+    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
+  };
+}
 
 export default portfolioService;

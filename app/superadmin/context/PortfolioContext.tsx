@@ -175,16 +175,19 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   /**
    * Save (Create or Update) Project Handler
    * 
-   * Submits a POST request (for new projects) or PATCH request (for existing projects)
+   * Submits a POST request (for new projects) or PATCH request with ID (for existing projects)
    * to `/api/portfolio` and refreshes the live data table.
    * 
    * @param {Partial<Project>} projectData - The form fields and media URLs to persist
    */
   const saveProject = async (projectData: Partial<Project>) => {
     if (editingProject) {
-      const targetId = (editingProject as any).id || editingProject.slug;
+      const projectId = (editingProject as any).id;
+      if (!projectId) {
+        throw new Error('Project ID is required to update this project.');
+      }
 
-      const res = await apiClient.patch('/api/portfolio', { id: targetId, ...projectData });
+      const res = await apiClient.patch('/api/portfolio', { id: projectId, ...projectData });
       if (!res.success) {
         throw new Error(res.error || 'Failed to update project in database.');
       }
@@ -196,24 +199,28 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     }
 
     // Refresh current page & total count from database
-    fetchPortfolio();
+    await fetchPortfolio();
   };
 
   /**
    * Delete Project Handler
    * 
-   * Submits a DELETE request to `/api/portfolio?id=...` to remove a project record permanently
-   * from Supabase PostgreSQL and re-queries the updated page.
+   * Submits a DELETE request to `/api/portfolio?id=...` by project ID
+   * to remove the record permanently from PostgreSQL.
    * 
-   * @param {string} projectIdOrSlug - ID or Slug of the project to remove
+   * @param {string} projectId - Primary Key ID of the project to remove
    */
-  const deleteProject = async (projectIdOrSlug: string) => {
-    const res = await apiClient.delete('/api/portfolio', { params: { id: projectIdOrSlug } });
+  const deleteProject = async (projectId: string) => {
+    if (!projectId) {
+      throw new Error('Project ID is required to delete this project.');
+    }
+
+    const res = await apiClient.delete('/api/portfolio', { params: { id: projectId } });
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete project from database.');
     }
 
-    fetchPortfolio();
+    await fetchPortfolio();
   };
 
   return (

@@ -333,32 +333,6 @@ export default function AssetManagementPage() {
               {totalMB} MB
             </span>
           </div>
-          <button
-            type="button"
-            onClick={fetchAssets}
-            disabled={isLoading}
-            style={{
-              padding: '8px 14px',
-              borderRadius: '10px',
-              border: '1px solid #CBD5E1',
-              backgroundColor: '#FFFFFF',
-              color: '#334155',
-              fontSize: '0.825rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="23 4 23 10 17 10" />
-              <polyline points="1 20 1 14 7 14" />
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-            </svg>
-            <span>{isLoading ? 'Refreshing...' : 'Refresh'}</span>
-          </button>
         </div>
       </div>
 
@@ -605,11 +579,10 @@ export default function AssetManagementPage() {
       {/* Assets Filter & Gallery Section */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '16px',
-          border: '1px solid #E2E8F0',
-          padding: '1.25rem 1.5rem',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          backgroundColor: 'transparent',
+          border: 'none',
+          padding: 0,
+          boxShadow: 'none',
         }}
       >
         {/* Controls Bar */}
@@ -621,8 +594,6 @@ export default function AssetManagementPage() {
             flexWrap: 'wrap',
             gap: '1rem',
             marginBottom: '1.25rem',
-            paddingBottom: '1rem',
-            borderBottom: '1px solid #F1F5F9',
           }}
         >
           <div style={{ flex: 1, minWidth: '240px', maxWidth: '420px', position: 'relative' }}>
@@ -988,10 +959,10 @@ export default function AssetManagementPage() {
           </div>
         ) : (
           /* Table View */
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <div style={{ overflowX: 'auto', backgroundColor: 'transparent' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', backgroundColor: 'transparent' }}>
               <thead>
-                <tr style={{ borderBottom: '1.5px solid #E2E8F0' }}>
+                <tr style={{ borderBottom: '1.5px solid #CBD5E1', backgroundColor: '#F1F5F9' }}>
                   <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Preview</th>
                   <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Filename</th>
                   <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Public Path</th>
@@ -1001,7 +972,7 @@ export default function AssetManagementPage() {
               </thead>
               <tbody>
                 {paginatedAssets.map((asset) => (
-                  <tr key={asset.filename} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                  <tr key={asset.filename} style={{ borderBottom: '1px solid #E2E8F0', backgroundColor: 'transparent' }}>
                     <td style={{ padding: '0.75rem 1rem' }}>
                       <div
                         onClick={() => setLightboxImage(asset)}

@@ -729,10 +729,10 @@ export const portfolioService = {
    */
   async cascadeRenameImage(oldUrl: string, newUrl: string): Promise<{ affectedCount: number }> {
     clearPortfolioCache();
-    await ensureColumnsExist();
 
     let affectedCount = 0;
     try {
+      await ensureColumnsExist();
       const rows = await db.$queryRaw<any[]>`
         SELECT "id", "image", "images" FROM "PortfolioProject"
       `;
@@ -757,7 +757,7 @@ export const portfolioService = {
             await db.$executeRaw`
               UPDATE "PortfolioProject"
               SET "image" = ${newImage},
-                  "images" = ${newImages},
+                  "images" = ${newImages}::text[],
                   "updatedAt" = NOW()
               WHERE "id" = ${r.id}
             `;

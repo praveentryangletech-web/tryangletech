@@ -123,7 +123,8 @@ export default function AssetManagementPage() {
     setRenameFeedback(null);
   };
 
-  const handleExecuteRename = async () => {
+  const handleExecuteRename = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!renamingAsset || !newFilenameInput.trim()) return;
     setIsRenaming(true);
     setRenameFeedback(null);
@@ -157,7 +158,7 @@ export default function AssetManagementPage() {
       }
 
       setRenamingAsset(null);
-      fetchAssets();
+      await fetchAssets();
     } catch (err: any) {
       setRenameFeedback({ type: 'error', text: err?.message || 'Rename failed.' });
     } finally {
@@ -1111,151 +1112,147 @@ export default function AssetManagementPage() {
               </button>
             </div>
 
-            {/* Body */}
-            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {/* Asset Preview Mini Row */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '10px 14px', backgroundColor: '#F8FAFC', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#E2E8F0', flexShrink: 0 }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={renamingAsset.url}
-                    alt={renamingAsset.filename}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
+            {/* Form */}
+            <form onSubmit={handleExecuteRename} style={{ margin: 0, padding: 0 }}>
+              {/* Body */}
+              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {/* Asset Preview Mini Row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '10px 14px', backgroundColor: '#F8FAFC', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#E2E8F0', flexShrink: 0 }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={renamingAsset.url}
+                      alt={renamingAsset.filename}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div style={{ overflow: 'hidden' }}>
+                    <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase' }}>
+                      Current Filename
+                    </span>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0F172A', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+                      {renamingAsset.filename}
+                    </span>
+                  </div>
                 </div>
-                <div style={{ overflow: 'hidden' }}>
-                  <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase' }}>
-                    Current Filename
-                  </span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0F172A', fontFamily: 'monospace', wordBreak: 'break-all' }}>
-                    {renamingAsset.filename}
-                  </span>
-                </div>
-              </div>
 
-              {/* Input field */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
-                  New Filename:
-                </label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <input
-                    type="text"
-                    value={newFilenameInput}
-                    onChange={(e) => setNewFilenameInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleExecuteRename();
-                      }
-                    }}
-                    placeholder="e.g. accounting-hero-dashboard"
-                    autoFocus
+                {/* Input field */}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
+                    New Filename:
+                  </label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <input
+                      type="text"
+                      value={newFilenameInput}
+                      onChange={(e) => setNewFilenameInput(e.target.value)}
+                      placeholder="e.g. accounting-hero-dashboard"
+                      autoFocus
+                      style={{
+                        flex: 1,
+                        padding: '10px 14px',
+                        borderRadius: '10px',
+                        border: '1.5px solid #3B82F6',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        color: '#0F172A',
+                        outline: 'none',
+                      }}
+                    />
+                    <span
+                      style={{
+                        padding: '10px 14px',
+                        borderRadius: '10px',
+                        backgroundColor: '#EFF6FF',
+                        color: '#1833FE',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        fontFamily: 'monospace',
+                      }}
+                    >
+                      {renamingAsset.filename.substring(renamingAsset.filename.lastIndexOf('.')) || '.webp'}
+                    </span>
+                  </div>
+                  <p style={{ margin: '6px 0 0 0', fontSize: '0.75rem', color: '#0369A1' }}>
+                    Target Path: <strong>/portfolio/{newFilenameInput.toLowerCase().replace(/[^a-z0-9_-]/g, '-') || 'asset'}{renamingAsset.filename.substring(renamingAsset.filename.lastIndexOf('.')) || '.webp'}</strong>
+                  </p>
+                </div>
+
+                {/* Cascade Notification Banner */}
+                <div style={{ padding: '10px 14px', borderRadius: '10px', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE', color: '#1E40AF', fontSize: '0.8rem', lineHeight: '1.4', display: 'flex', gap: '8px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}>
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>
+                    <strong>Automatic Global Cascade</strong>: Renaming this asset will instantly update all Portfolio project cover images and slider showcases across the database and live website.
+                  </span>
+                </div>
+
+                {/* Feedback Error */}
+                {renameFeedback && (
+                  <div
                     style={{
-                      flex: 1,
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      border: '1.5px solid #3B82F6',
-                      fontSize: '0.9rem',
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      backgroundColor: renameFeedback.type === 'success' ? '#ECFDF5' : '#FEF2F2',
+                      color: renameFeedback.type === 'success' ? '#047857' : '#B91C1C',
+                      border: `1px solid ${renameFeedback.type === 'success' ? '#A7F3D0' : '#FECACA'}`,
+                      fontSize: '0.825rem',
                       fontWeight: 600,
-                      color: '#0F172A',
-                      outline: 'none',
-                    }}
-                  />
-                  <span
-                    style={{
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      backgroundColor: '#EFF6FF',
-                      color: '#1833FE',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      fontFamily: 'monospace',
                     }}
                   >
-                    {renamingAsset.filename.substring(renamingAsset.filename.lastIndexOf('.')) || '.webp'}
-                  </span>
-                </div>
-                <p style={{ margin: '6px 0 0 0', fontSize: '0.75rem', color: '#0369A1' }}>
-                  Target Path: <strong>/portfolio/{newFilenameInput.toLowerCase().replace(/[^a-z0-9_-]/g, '-') || 'asset'}{renamingAsset.filename.substring(renamingAsset.filename.lastIndexOf('.')) || '.webp'}</strong>
-                </p>
+                    {renameFeedback.text}
+                  </div>
+                )}
               </div>
 
-              {/* Cascade Notification Banner */}
-              <div style={{ padding: '10px 14px', borderRadius: '10px', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE', color: '#1E40AF', fontSize: '0.8rem', lineHeight: '1.4', display: 'flex', gap: '8px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}>
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-                <span>
-                  <strong>Automatic Global Cascade</strong>: Renaming this asset will instantly update all Portfolio project cover images and slider showcases across the database and live website.
-                </span>
-              </div>
-
-              {/* Feedback Error */}
-              {renameFeedback && (
-                <div
+              {/* Footer */}
+              <div style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'flex-end', gap: '10px', backgroundColor: '#F8FAFC' }}>
+                <button
+                  type="button"
+                  onClick={() => setRenamingAsset(null)}
+                  disabled={isRenaming}
                   style={{
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    backgroundColor: renameFeedback.type === 'success' ? '#ECFDF5' : '#FEF2F2',
-                    color: renameFeedback.type === 'success' ? '#047857' : '#B91C1C',
-                    border: `1px solid ${renameFeedback.type === 'success' ? '#A7F3D0' : '#FECACA'}`,
-                    fontSize: '0.825rem',
+                    padding: '9px 16px',
+                    borderRadius: '10px',
+                    border: '1px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    color: '#475569',
+                    fontSize: '0.85rem',
                     fontWeight: 600,
+                    cursor: isRenaming ? 'not-allowed' : 'pointer',
                   }}
                 >
-                  {renameFeedback.text}
-                </div>
-              )}
-            </div>
+                  Cancel
+                </button>
 
-            {/* Footer */}
-            <div style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'flex-end', gap: '10px', backgroundColor: '#F8FAFC' }}>
-              <button
-                type="button"
-                onClick={() => setRenamingAsset(null)}
-                disabled={isRenaming}
-                style={{
-                  padding: '9px 16px',
-                  borderRadius: '10px',
-                  border: '1px solid #CBD5E1',
-                  backgroundColor: '#FFFFFF',
-                  color: '#475569',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  cursor: isRenaming ? 'not-allowed' : 'pointer',
-                }}
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={handleExecuteRename}
-                disabled={isRenaming || !newFilenameInput.trim()}
-                style={{
-                  padding: '9px 20px',
-                  borderRadius: '10px',
-                  border: 'none',
-                  backgroundColor: '#1833FE',
-                  color: '#FFFFFF',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  cursor: isRenaming || !newFilenameInput.trim() ? 'not-allowed' : 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-                  <polyline points="17 21 17 13 7 13 7 21" />
-                  <polyline points="7 3 7 8 15 8" />
-                </svg>
-                <span>{isRenaming ? 'Renaming everywhere...' : 'Save & Cascade Everywhere'}</span>
-              </button>
-            </div>
+                <button
+                  type="submit"
+                  disabled={isRenaming || !newFilenameInput.trim()}
+                  style={{
+                    padding: '9px 20px',
+                    borderRadius: '10px',
+                    border: 'none',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    cursor: isRenaming || !newFilenameInput.trim() ? 'not-allowed' : 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                  </svg>
+                  <span>{isRenaming ? 'Renaming everywhere...' : 'Save & Cascade Everywhere'}</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

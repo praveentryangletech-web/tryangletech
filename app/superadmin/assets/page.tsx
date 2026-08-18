@@ -274,68 +274,6 @@ export default function AssetManagementPage() {
 
   return (
     <div style={{ width: '100%', padding: '1.25rem 2rem 3rem 2rem' }}>
-      {/* Top Header Card */}
-      <div
-        style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '16px',
-          border: '1px solid #E2E8F0',
-          padding: '1.25rem 1.5rem',
-          marginBottom: '1.25rem',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1.25rem',
-        }}
-      >
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
-            <h1 style={{ fontSize: '1.65rem', fontWeight: 900, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
-              Asset Management
-            </h1>
-            <span
-              style={{
-                backgroundColor: '#EFF6FF',
-                color: '#1833FE',
-                border: '1px solid #BFDBFE',
-                padding: '3px 10px',
-                borderRadius: '20px',
-                fontSize: '0.75rem',
-                fontWeight: 800,
-              }}
-            >
-              /public/portfolio
-            </span>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#64748B', margin: 0 }}>
-            Manage physical image files on disk. Upload, rename everywhere, preview, copy URLs, or delete obsolete assets.
-          </p>
-        </div>
-
-        {/* KPI Stats */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ textAlign: 'right' }}>
-            <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase' }}>
-              Total Assets
-            </span>
-            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#0F172A' }}>
-              {mediaList.length}
-            </span>
-          </div>
-          <div style={{ height: '32px', width: '1px', backgroundColor: '#E2E8F0' }} />
-          <div style={{ textAlign: 'right' }}>
-            <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase' }}>
-              Disk Usage
-            </span>
-            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#1833FE' }}>
-              {totalMB} MB
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Upload Card */}
       <div
         style={{
@@ -630,19 +568,20 @@ export default function AssetManagementPage() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-            {/* Live Count Chip */}
+            {/* Live Count & Storage Chip */}
             <span
               style={{
                 fontSize: '0.775rem',
                 fontWeight: 700,
                 color: '#64748B',
-                backgroundColor: '#F8FAFC',
+                backgroundColor: '#FFFFFF',
                 border: '1px solid #E2E8F0',
                 padding: '6px 12px',
                 borderRadius: '8px',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
               }}
             >
-              Showing {paginatedAssets.length} of {filteredAssets.length}
+              Showing {paginatedAssets.length} of {filteredAssets.length} assets ({totalMB} MB)
             </span>
 
             {/* Sort By */}

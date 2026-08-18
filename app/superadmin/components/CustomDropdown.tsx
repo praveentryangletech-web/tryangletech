@@ -13,6 +13,11 @@ interface CustomDropdownProps<T = string | number> {
   onChange: (val: T) => void;
   direction?: 'up' | 'down';
   placeholder?: string;
+  fullWidth?: boolean;
+  size?: 'sm' | 'form';
+  className?: string;
+  style?: React.CSSProperties;
+  buttonStyle?: React.CSSProperties;
 }
 
 /**
@@ -23,6 +28,7 @@ interface CustomDropdownProps<T = string | number> {
  * - Upward / downward positioning
  * - Active checkmark indicator
  * - Smooth hover and focus states
+ * - Standard form size (matching text inputs) or compact size (for table footers)
  */
 export default function CustomDropdown<T extends string | number>({
   value,
@@ -30,9 +36,16 @@ export default function CustomDropdown<T extends string | number>({
   onChange,
   direction = 'up',
   placeholder,
+  fullWidth = false,
+  size = 'sm',
+  className,
+  style,
+  buttonStyle,
 }: CustomDropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const isFormSize = size === 'form' || fullWidth;
 
   // Normalize options array
   const formattedOptions: DropdownOption<T>[] = options.map((opt) =>
@@ -76,35 +89,52 @@ export default function CustomDropdown<T extends string | number>({
   }, [isOpen]);
 
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-block' }}>
+    <div
+      ref={dropdownRef}
+      className={className}
+      style={{
+        position: 'relative',
+        display: isFormSize ? 'block' : 'inline-block',
+        width: isFormSize ? '100%' : 'auto',
+        ...style,
+      }}
+    >
       {/* Dropdown Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         style={{
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '8px',
-          padding: '4px 10px',
-          borderRadius: '6px',
-          border: '1px solid',
-          borderColor: isOpen ? 'var(--brand-blue, #1833fe)' : '#CBD5E1',
+          width: isFormSize ? '100%' : 'auto',
+          minWidth: isFormSize ? '100%' : '58px',
+          height: isFormSize ? '46px' : 'auto',
+          padding: isFormSize ? '11px 16px' : '4px 10px',
+          borderRadius: isFormSize ? '12px' : '6px',
+          border: isFormSize ? '1.5px solid' : '1px solid',
+          borderColor: isOpen ? 'var(--brand-blue, #1833fe)' : '#E2E8F0',
           backgroundColor: '#FFFFFF',
-          fontSize: '0.775rem',
-          fontWeight: 700,
-          color: '#334155',
+          fontSize: isFormSize ? '0.9rem' : '0.775rem',
+          fontWeight: isFormSize ? 500 : 700,
+          color: '#0F172A',
           cursor: 'pointer',
-          boxShadow: isOpen ? '0 0 0 2px rgba(24, 51, 254, 0.12)' : '0 1px 2px rgba(0, 0, 0, 0.04)',
-          transition: 'all 0.15s ease',
-          minWidth: '58px',
+          outline: 'none',
+          boxShadow: isOpen
+            ? '0 0 0 3px rgba(24, 51, 254, 0.1)'
+            : '0 1px 2px rgba(0, 0, 0, 0.02)',
+          transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+          ...buttonStyle,
         }}
       >
-        <span>{selectedOption ? (selectedOption.label ?? selectedOption.value) : placeholder ?? value}</span>
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {selectedOption ? (selectedOption.label ?? selectedOption.value) : placeholder ?? value}
+        </span>
         <svg
-          width="10"
-          height="10"
+          width={isFormSize ? '14' : '10'}
+          height={isFormSize ? '14' : '10'}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -112,8 +142,15 @@ export default function CustomDropdown<T extends string | number>({
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{
+            flexShrink: 0,
             color: '#64748B',
-            transform: isOpen ? (direction === 'up' ? 'rotate(0deg)' : 'rotate(180deg)') : (direction === 'up' ? 'rotate(180deg)' : 'rotate(0deg)'),
+            transform: isOpen
+              ? direction === 'up'
+                ? 'rotate(0deg)'
+                : 'rotate(180deg)'
+              : direction === 'up'
+              ? 'rotate(180deg)'
+              : 'rotate(0deg)',
             transition: 'transform 0.2s ease',
           }}
         >
@@ -128,14 +165,19 @@ export default function CustomDropdown<T extends string | number>({
             position: 'absolute',
             left: 0,
             zIndex: 50,
+            width: isFormSize ? '100%' : 'max-content',
             minWidth: '100%',
             backgroundColor: '#FFFFFF',
-            borderRadius: '8px',
-            border: '1px solid #E2E8F0',
-            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06)',
-            padding: '4px',
+            borderRadius: isFormSize ? '14px' : '8px',
+            border: isFormSize ? '1.5px solid #E2E8F0' : '1px solid #E2E8F0',
+            boxShadow: isFormSize
+              ? '0 12px 30px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0,0,0,0.03)'
+              : '0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06)',
+            padding: isFormSize ? '6px' : '4px',
             overflow: 'hidden',
             animation: 'fadeIn 0.15s ease-out',
+            maxHeight: '260px',
+            overflowY: 'auto',
             ...(direction === 'up'
               ? { bottom: 'calc(100% + 5px)' }
               : { top: 'calc(100% + 5px)' }),
@@ -157,12 +199,12 @@ export default function CustomDropdown<T extends string | number>({
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   gap: '12px',
-                  padding: '6px 10px',
-                  borderRadius: '5px',
+                  padding: isFormSize ? '10px 14px' : '6px 10px',
+                  borderRadius: isFormSize ? '8px' : '5px',
                   border: 'none',
                   backgroundColor: isSelected ? '#EFF6FF' : 'transparent',
                   color: isSelected ? 'var(--brand-blue, #1833fe)' : '#334155',
-                  fontSize: '0.775rem',
+                  fontSize: isFormSize ? '0.875rem' : '0.775rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
@@ -178,8 +220,8 @@ export default function CustomDropdown<T extends string | number>({
                 <span>{opt.label ?? opt.value}</span>
                 {isSelected && (
                   <svg
-                    width="12"
-                    height="12"
+                    width={isFormSize ? '14' : '12'}
+                    height={isFormSize ? '14' : '12'}
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="var(--brand-blue, #1833fe)"

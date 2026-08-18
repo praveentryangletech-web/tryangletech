@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Project, PORTFOLIO_CATEGORIES, PortfolioCategory } from '@/app/data/portfolioData';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
+import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
 
 /**
  * Clean SVG Tech Stack Definition with Brand Icons
@@ -18,7 +19,7 @@ interface TechStackItem {
 const TECH_STACK_CONFIG: TechStackItem[] = [
   {
     name: 'React',
-    icon: ({ size = 14, color = '#00D8FF' }) => (
+    icon: ({ size = 15, color = '#00D8FF' }) => (
       <svg width={size} height={size} viewBox="-11.5 -10.23174 23 20.46348" fill="none">
         <circle cx="0" cy="0" r="2.05" fill={color} />
         <g stroke={color} strokeWidth="1" fill="none">
@@ -31,7 +32,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Next.js',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 180 180" fill="none">
         <circle cx="90" cy="90" r="90" fill="#000000" />
         <path d="M149.508 157.438L69.1478 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.137 149.508 157.438Z" fill="#FFFFFF" />
@@ -41,7 +42,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'TypeScript',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <rect width="24" height="24" rx="4" fill="#3178C6" />
         <path d="M4 9h7v2.5H8.8v7.5H6.2v-7.5H4V9zm9.3 6.3c.6.4 1.4.7 2.2.7 1 0 1.5-.4 1.5-1 0-.6-.5-.9-1.7-1.3-1.6-.6-2.6-1.5-2.6-2.8 0-1.6 1.3-2.9 3.4-2.9 1 0 1.9.3 2.5.7l-.7 2c-.5-.3-1.1-.5-1.8-.5-.8 0-1.3.4-1.3.9 0 .5.4.8 1.6 1.2 1.8.6 2.7 1.5 2.7 2.9 0 1.8-1.4 3-3.6 3-1.2 0-2.3-.4-3-1l.8-2z" fill="#FFFFFF" />
@@ -50,7 +51,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Tailwind CSS',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" fill="#06B6D4" />
       </svg>
@@ -58,7 +59,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Node.js',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M12 2L2 7.8v11.4L12 25l10-5.8V7.8L12 2z" fill="#339933" />
         <path d="M12 4.2l7.8 4.5v9L12 22.2 4.2 17.7v-9L12 4.2z" fill="#215732" />
@@ -67,7 +68,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'PostgreSQL',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#336791" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <ellipse cx="12" cy="5" rx="9" ry="3" />
         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
@@ -77,7 +78,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Prisma',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M20.5 17.5L13.8 2.6c-.3-.7-1.3-.7-1.6 0L3.5 17.5c-.3.7.2 1.5 1 1.5h15c.8 0 1.3-.8 1-1.5z" fill="#2D3748" />
         <path d="M13 3.5l6.5 14.5H13V3.5z" fill="#5A67D8" />
@@ -86,7 +87,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'GSAP',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#88CE02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#88CE02" />
       </svg>
@@ -94,7 +95,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Three.js',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
         <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
@@ -104,7 +105,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Figma',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M8 2h8a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v0a4 4 0 0 1 4-4z" fill="#F24E1E" />
         <path d="M4 10a4 4 0 0 1 4-4h4v8H8a4 4 0 0 1-4-4z" fill="#A259FF" />
@@ -116,7 +117,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Python',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M11.9 2c-3.1 0-4.9.4-4.9 1.8v2.3h5v.8H5.1c-1.8 0-3.1 1.2-3.1 3.2 0 2.2 1.4 3.3 3.1 3.3h1.3v-1.6c0-1.8 1.5-3.3 3.3-3.3h4.9v-2.3c0-1.8-1.5-4.2-5.8-4.2zm-2.4 1.3c.4 0 .8.4.8.8 0 .4-.4.8-.8.8-.4 0-.8-.4-.8-.8 0-.4.4-.8.8-.8z" fill="#3776AB" />
         <path d="M12.1 22c3.1 0 4.9-.4 4.9-1.8v-2.3h-5v-.8h6.9c1.8 0 3.1-1.2 3.1-3.2 0-2.2-1.4-3.3-3.1-3.3h-1.3v1.6c0 1.8-1.5 3.3-3.3 3.3H9.4v2.3c0 1.8 1.5 4.2 5.8 4.2zm2.4-1.3c-.4 0-.8-.4-.8-.8 0-.4.4-.8.8-.8.4 0 .8.4.8.8 0 .4-.4.8-.8.8z" fill="#FFD43B" />
@@ -125,7 +126,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'AWS',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
         <path d="M6.5 10c0-.8.6-1.5 1.5-1.5h9c.9 0 1.5.7 1.5 1.5v4c0 .8-.6 1.5-1.5 1.5h-9c-.9 0-1.5-.7-1.5-1.5v-4z" fill="#FF9900" />
         <path d="M4 17c5 3 11 3 16 0" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
@@ -134,7 +135,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'GraphQL',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#E10098" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2" />
         <line x1="12" y1="2" x2="12" y2="22" />
@@ -143,7 +144,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Redux',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#764ABC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="9" />
         <path d="M12 3a9 9 0 0 1 9 9" />
@@ -153,7 +154,7 @@ const TECH_STACK_CONFIG: TechStackItem[] = [
   },
   {
     name: 'Styled Components',
-    icon: ({ size = 14 }) => (
+    icon: ({ size = 15 }) => (
       <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#DB7093" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="13.5" cy="6.5" r=".5" fill="#DB7093" />
         <circle cx="17.5" cy="10.5" r=".5" fill="#DB7093" />
@@ -170,10 +171,37 @@ const SAMPLE_COVER_PRESETS = [
   '/portfolio/7d-design-studios.webp',
   '/portfolio/devrshree.webp',
   '/portfolio/software-eoffice.webp',
-  '/portfolio/grocifi.webp',
-  '/portfolio/edtech.webp',
-  '/portfolio/real-estate.webp',
-  '/portfolio/healthcare.webp',
+  '/portfolio/software-edms.webp',
+  '/portfolio/software-sevabridge.webp',
+  '/portfolio/makewell-elevators.webp',
+  '/portfolio/patel-associates.webp',
+  '/portfolio/shivganga-marbles.webp',
+  '/portfolio/someshwar-tmt.webp',
+  '/portfolio/varnet-enterprise.webp',
+  '/portfolio/varnet-landing.webp',
+  '/portfolio/akshar-industry.webp',
+  '/portfolio/ansh-exports.webp',
+  '/portfolio/app-dev-1.webp',
+  '/portfolio/app-dev-2.webp',
+  '/portfolio/app-dev-3.webp',
+  '/portfolio/app-dev-seller.webp',
+  '/portfolio/app-dev-user.webp',
+  '/portfolio/evon-ceramics.webp',
+  '/portfolio/graphic-1.webp',
+  '/portfolio/hrk-air-compressor.webp',
+  '/portfolio/krupashree.webp',
+  '/portfolio/marckit-analysts.webp',
+  '/portfolio/nira-energy.webp',
+  '/portfolio/paperwork-llp.webp',
+  '/portfolio/pious-events.webp',
+  '/portfolio/ramashray.webp',
+  '/portfolio/sahjanand-test-lab.webp',
+  '/portfolio/secure-edge-life.webp',
+  '/portfolio/sevenam.webp',
+  '/portfolio/stonils.webp',
+  '/portfolio/sundaram-corpo.webp',
+  '/portfolio/tattvam-arts.webp',
+  '/portfolio/toestrand.webp',
 ];
 
 function PortfolioEditorInner() {
@@ -415,13 +443,36 @@ function PortfolioEditorInner() {
     }
   };
 
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '11px 16px',
+    borderRadius: '12px',
+    border: '1.5px solid #E2E8F0',
+    fontSize: '0.9rem',
+    outline: 'none',
+    backgroundColor: '#FFFFFF',
+    color: '#0F172A',
+    fontWeight: 500,
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    fontSize: '0.825rem',
+    fontWeight: 700,
+    color: '#1E293B',
+    marginBottom: '7px',
+    letterSpacing: '0.01em',
+  };
+
   if (isLoading) {
     return (
-      <div style={{ padding: '4rem 2rem', textAlign: 'center', color: '#64748B' }}>
+      <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#64748B' }}>
         <div
           style={{
-            width: '40px',
-            height: '40px',
+            width: '42px',
+            height: '42px',
             border: '3px solid #E2E8F0',
             borderTopColor: '#1833FE',
             borderRadius: '50%',
@@ -429,15 +480,16 @@ function PortfolioEditorInner() {
             margin: '0 auto 1.5rem',
           }}
         />
-        <p style={{ fontSize: '1rem', fontWeight: 600 }}>Loading case study editor...</p>
+        <p style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1E293B' }}>Loading case study editor...</p>
+        <p style={{ fontSize: '0.85rem', color: '#64748B', margin: 0 }}>Fetching project data from Supabase PostgreSQL</p>
         <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '5rem' }}>
-      {/* 1. Header & Action Bar */}
+    <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.75rem 2rem 6rem 2rem' }}>
+      {/* 1. Header Action Toolbar */}
       <div
         style={{
           display: 'flex',
@@ -445,64 +497,33 @@ function PortfolioEditorInner() {
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '1rem',
-          marginBottom: '1.75rem',
-          paddingBottom: '1.25rem',
-          borderBottom: '1px solid #E2E8F0',
+          marginBottom: '1.25rem',
         }}
       >
-        <div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.8rem',
-              color: '#64748B',
-              marginBottom: '6px',
-              fontWeight: 500,
-            }}
-          >
-            <Link href="/superadmin" style={{ color: '#64748B', textDecoration: 'none' }}>
-              Control Center
-            </Link>
-            <span>/</span>
-            <Link href="/superadmin/portfolio" style={{ color: '#64748B', textDecoration: 'none' }}>
-              Portfolio
-            </Link>
-            <span>/</span>
-            <span style={{ color: '#1833FE', fontWeight: 700 }}>
-              {isEditMode ? 'Edit Case Study' : 'Create Case Study'}
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontSize: '1.65rem',
-              fontWeight: 800,
-              color: '#0F172A',
-              margin: 0,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            {isEditMode ? `Edit: ${title || 'Case Study'}` : 'Create New Portfolio Case Study'}
-            {isEditMode && (
-              <span
-                style={{
-                  fontSize: '0.75rem',
-                  padding: '3px 10px',
-                  borderRadius: '12px',
-                  backgroundColor: '#EFF6FF',
-                  color: '#1833FE',
-                  fontWeight: 700,
-                }}
-              >
-                {category}
-              </span>
-            )}
-          </h1>
-        </div>
+        <Link
+          href="/superadmin/portfolio"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '10px 18px',
+            borderRadius: '12px',
+            border: '1px solid #E2E8F0',
+            backgroundColor: '#FFFFFF',
+            color: '#334155',
+            fontSize: '0.875rem',
+            fontWeight: 700,
+            textDecoration: 'none',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          <span>Back to Portfolio</span>
+        </Link>
 
         {/* Top Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -514,19 +535,21 @@ function PortfolioEditorInner() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '9px 16px',
-                borderRadius: '10px',
+                gap: '7px',
+                padding: '10px 18px',
+                borderRadius: '12px',
                 border: '1px solid #CBD5E1',
                 backgroundColor: '#FFFFFF',
                 color: '#334155',
-                fontSize: '0.85rem',
+                fontSize: '0.875rem',
                 fontWeight: 600,
                 textDecoration: 'none',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                transition: 'all 0.15s ease',
               }}
             >
               <span>Preview Live</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -537,14 +560,15 @@ function PortfolioEditorInner() {
           <Link
             href="/superadmin/portfolio"
             style={{
-              padding: '9px 18px',
-              borderRadius: '10px',
+              padding: '10px 20px',
+              borderRadius: '12px',
               border: '1px solid #E2E8F0',
-              backgroundColor: '#F8FAFC',
+              backgroundColor: '#FFFFFF',
               color: '#475569',
-              fontSize: '0.85rem',
+              fontSize: '0.875rem',
               fontWeight: 600,
               textDecoration: 'none',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
             }}
           >
             Discard
@@ -558,8 +582,8 @@ function PortfolioEditorInner() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '9px 24px',
-              borderRadius: '10px',
+              padding: '10px 26px',
+              borderRadius: '12px',
               border: 'none',
               backgroundColor: '#1833FE',
               color: '#FFFFFF',
@@ -567,6 +591,7 @@ function PortfolioEditorInner() {
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+              transition: 'all 0.2s ease',
             }}
           >
             {isSubmitting ? (
@@ -595,19 +620,20 @@ function PortfolioEditorInner() {
       {errorMessage && (
         <div
           style={{
-            padding: '0.9rem 1.25rem',
+            padding: '1rem 1.25rem',
             backgroundColor: '#FEF2F2',
             border: '1px solid #FCA5A5',
-            borderRadius: '12px',
+            borderRadius: '14px',
             color: '#B91C1C',
             fontSize: '0.875rem',
-            marginBottom: '1.5rem',
+            fontWeight: 600,
+            marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '10px',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
             <line x1="12" y1="9" x2="12" y2="13" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
@@ -619,55 +645,64 @@ function PortfolioEditorInner() {
       {successMessage && (
         <div
           style={{
-            padding: '0.9rem 1.25rem',
+            padding: '1rem 1.25rem',
             backgroundColor: '#ECFDF5',
             border: '1px solid #6EE7B7',
-            borderRadius: '12px',
+            borderRadius: '14px',
             color: '#047857',
             fontSize: '0.875rem',
-            marginBottom: '1.5rem',
+            fontWeight: 600,
+            marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '10px',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <polyline points="20 6 9 17 4 12" />
           </svg>
           <span>{successMessage}</span>
         </div>
       )}
 
-      {/* 2. Navigation Tabs */}
+      {/* 2. Modern Segmented Tab Navigation Bar */}
       <div
         style={{
           display: 'flex',
-          gap: '8px',
-          borderBottom: '2px solid #F1F5F9',
-          marginBottom: '2rem',
-          paddingBottom: '2px',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '16px',
+          padding: '6px',
+          border: '1px solid #E2E8F0',
+          marginBottom: '1.75rem',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          gap: '6px',
           overflowX: 'auto',
         }}
       >
+        {/* Tab 1 */}
         <button
           type="button"
           onClick={() => setActiveTab('general')}
           style={{
-            padding: '10px 18px',
-            borderRadius: '10px 10px 0 0',
+            flex: '1 1 auto',
+            padding: '10px 20px',
+            borderRadius: '10px',
             border: 'none',
-            backgroundColor: activeTab === 'general' ? '#FFFFFF' : 'transparent',
-            color: activeTab === 'general' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'general' ? 700 : 500,
-            fontSize: '0.9rem',
+            backgroundColor: activeTab === 'general' ? '#1833FE' : 'transparent',
+            color: activeTab === 'general' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'general' ? 700 : 600,
+            fontSize: '0.875rem',
             cursor: 'pointer',
-            borderBottom: activeTab === 'general' ? '3px solid #1833FE' : '3px solid transparent',
+            boxShadow: activeTab === 'general' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
             <polyline points="14 2 14 8 20 8" />
             <line x1="16" y1="13" x2="8" y2="13" />
@@ -676,25 +711,30 @@ function PortfolioEditorInner() {
           <span>General Details</span>
         </button>
 
+        {/* Tab 2 */}
         <button
           type="button"
           onClick={() => setActiveTab('media')}
           style={{
-            padding: '10px 18px',
-            borderRadius: '10px 10px 0 0',
+            flex: '1 1 auto',
+            padding: '10px 20px',
+            borderRadius: '10px',
             border: 'none',
-            backgroundColor: activeTab === 'media' ? '#FFFFFF' : 'transparent',
-            color: activeTab === 'media' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'media' ? 700 : 500,
-            fontSize: '0.9rem',
+            backgroundColor: activeTab === 'media' ? '#1833FE' : 'transparent',
+            color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'media' ? 700 : 600,
+            fontSize: '0.875rem',
             cursor: 'pointer',
-            borderBottom: activeTab === 'media' ? '3px solid #1833FE' : '3px solid transparent',
+            boxShadow: activeTab === 'media' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
             <circle cx="8.5" cy="8.5" r="1.5" />
             <polyline points="21 15 16 10 5 21" />
@@ -702,10 +742,11 @@ function PortfolioEditorInner() {
           <span>Media & Showcase Slider</span>
           <span
             style={{
-              fontSize: '0.7rem',
-              backgroundColor: '#F1F5F9',
-              padding: '2px 7px',
-              borderRadius: '8px',
+              fontSize: '0.725rem',
+              backgroundColor: activeTab === 'media' ? 'rgba(255, 255, 255, 0.25)' : '#F1F5F9',
+              color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
+              padding: '2px 8px',
+              borderRadius: '10px',
               fontWeight: 700,
             }}
           >
@@ -713,62 +754,72 @@ function PortfolioEditorInner() {
           </span>
         </button>
 
+        {/* Tab 3 */}
         <button
           type="button"
           onClick={() => setActiveTab('narrative')}
           style={{
-            padding: '10px 18px',
-            borderRadius: '10px 10px 0 0',
+            flex: '1 1 auto',
+            padding: '10px 20px',
+            borderRadius: '10px',
             border: 'none',
-            backgroundColor: activeTab === 'narrative' ? '#FFFFFF' : 'transparent',
-            color: activeTab === 'narrative' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'narrative' ? 700 : 500,
-            fontSize: '0.9rem',
+            backgroundColor: activeTab === 'narrative' ? '#1833FE' : 'transparent',
+            color: activeTab === 'narrative' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'narrative' ? 700 : 600,
+            fontSize: '0.875rem',
             cursor: 'pointer',
-            borderBottom: activeTab === 'narrative' ? '3px solid #1833FE' : '3px solid transparent',
+            boxShadow: activeTab === 'narrative' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 20h9" />
             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
           </svg>
           <span>Case Study Story & Metrics</span>
         </button>
 
+        {/* Tab 4 */}
         <button
           type="button"
           onClick={() => setActiveTab('seo')}
           style={{
-            padding: '10px 18px',
-            borderRadius: '10px 10px 0 0',
+            flex: '1 1 auto',
+            padding: '10px 20px',
+            borderRadius: '10px',
             border: 'none',
-            backgroundColor: activeTab === 'seo' ? '#FFFFFF' : 'transparent',
-            color: activeTab === 'seo' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'seo' ? 700 : 500,
-            fontSize: '0.9rem',
+            backgroundColor: activeTab === 'seo' ? '#1833FE' : 'transparent',
+            color: activeTab === 'seo' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'seo' ? 700 : 600,
+            fontSize: '0.875rem',
             cursor: 'pointer',
-            borderBottom: activeTab === 'seo' ? '3px solid #1833FE' : '3px solid transparent',
+            boxShadow: activeTab === 'seo' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <line x1="2" y1="12" x2="22" y2="12" />
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
           </svg>
           <span>SEO, AEO & GEO Suite</span>
           <span
             style={{
-              fontSize: '0.7rem',
-              backgroundColor: '#ECFDF5',
-              color: '#059669',
-              padding: '2px 7px',
-              borderRadius: '8px',
+              fontSize: '0.725rem',
+              backgroundColor: activeTab === 'seo' ? 'rgba(255, 255, 255, 0.25)' : '#ECFDF5',
+              color: activeTab === 'seo' ? '#FFFFFF' : '#059669',
+              padding: '2px 8px',
+              borderRadius: '10px',
               fontWeight: 700,
             }}
           >
@@ -779,28 +830,35 @@ function PortfolioEditorInner() {
 
       {/* 3. Form Content */}
       <form onSubmit={handleSave}>
-        {/* TAB 1: GENERAL */}
+        {/* ============================================================ */}
+        {/* TAB 1: GENERAL                                               */}
+        {/* ============================================================ */}
         {activeTab === 'general' && (
           <div
             style={{
               backgroundColor: '#FFFFFF',
               borderRadius: '20px',
-              border: '1px solid #E2E8F0',
-              padding: '2rem',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+              border: '1.5px solid #E2E8F0',
+              padding: '2.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
+              gap: '1.75rem',
             }}
           >
-            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#1E293B' }}>
-              Project Identity & Meta Information
-            </h3>
+            <div>
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+                Project Identity & Meta Information
+              </h3>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748B' }}>
+                Configure core identity, category assignment, client name, and duration.
+              </p>
+            </div>
 
-            {/* Title & Category */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            {/* Row 1: Title & Category Custom Dropdown */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                <label style={labelStyle}>
                   Project Title <span style={{ color: '#EF4444' }}>*</span>
                 </label>
                 <input
@@ -809,55 +867,33 @@ function PortfolioEditorInner() {
                   placeholder="e.g. 7D Design Studios"
                   value={title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                <label style={labelStyle}>
                   Category <span style={{ color: '#EF4444' }}>*</span>
                 </label>
-                <select
+                <CustomDropdown
                   value={category}
-                  onChange={(e) => setCategory(e.target.value as PortfolioCategory)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                    fontWeight: 600,
-                    color: '#334155',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {PORTFOLIO_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
+                  options={PORTFOLIO_CATEGORIES.map((c) => ({ value: c, label: c }))}
+                  onChange={(val) => setCategory(val as PortfolioCategory)}
+                  direction="down"
+                  size="form"
+                  fullWidth
+                />
               </div>
             </div>
 
-            {/* Slug */}
+            {/* Row 2: Slug */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px' }}>
+                <label style={{ ...labelStyle, margin: 0 }}>
                   URL Slug <span style={{ color: '#EF4444' }}>*</span>
                 </label>
                 <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-                  Live Path: <code style={{ color: '#1833FE', fontWeight: 700 }}>/portfolio/{slug || 'project-slug'}</code>
+                  Live Path: <code style={{ color: '#1833FE', fontWeight: 700, backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px' }}>/portfolio/{slug || 'project-slug'}</code>
                 </span>
               </div>
               <input
@@ -869,98 +905,57 @@ function PortfolioEditorInner() {
                   setSlug(e.target.value);
                   setIsSlugManual(true);
                 }}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: '10px',
-                  border: '1px solid #CBD5E1',
-                  fontSize: '0.9rem',
-                  outline: 'none',
-                  backgroundColor: '#F8FAFC',
-                  fontFamily: 'monospace',
-                }}
+                style={{ ...inputStyle, fontFamily: 'monospace', fontSize: '0.925rem' }}
               />
             </div>
 
-            {/* Client, Role, Duration */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+            {/* Row 3: Client, Role, Duration */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Client / Brand Name
-                </label>
+                <label style={labelStyle}>Client / Brand Name</label>
                 <input
                   type="text"
                   placeholder="e.g. 7D Design Studios Inc."
                   value={client}
                   onChange={(e) => setClient(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Project Role
-                </label>
+                <label style={labelStyle}>Project Role</label>
                 <input
                   type="text"
                   placeholder="e.g. Website Design & Development"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Duration
-                </label>
+                <label style={labelStyle}>Duration</label>
                 <input
                   type="text"
                   placeholder="e.g. 3 Weeks"
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
             </div>
 
-            {/* Live URL & Order */}
-            <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1.25rem' }}>
+            {/* Row 4: Live URL & Order */}
+            <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1.5rem' }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155' }}>
-                    Live Website / Demo URL
-                  </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px' }}>
+                  <label style={{ ...labelStyle, margin: 0 }}>Live Website / Demo URL</label>
                   {liveUrl && (
                     <a
                       href={liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: '0.75rem', color: '#1833FE', fontWeight: 600, textDecoration: 'none' }}
+                      style={{ fontSize: '0.75rem', color: '#1833FE', fontWeight: 700, textDecoration: 'none' }}
                     >
                       Test Link ↗
                     </a>
@@ -971,67 +966,51 @@ function PortfolioEditorInner() {
                   placeholder="https://example.com"
                   value={liveUrl}
                   onChange={(e) => setLiveUrl(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Sort Order
-                </label>
+                <label style={labelStyle}>Sort Order</label>
                 <input
                   type="number"
                   placeholder="0"
                   value={order}
                   onChange={(e) => setOrder(Number(e.target.value))}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 2: MEDIA */}
+        {/* ============================================================ */}
+        {/* TAB 2: MEDIA                                                 */}
+        {/* ============================================================ */}
         {activeTab === 'media' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-            {/* Cover Image */}
+            {/* Cover Image Card */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
-                border: '1px solid #E2E8F0',
-                padding: '2rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                border: '1.5px solid #E2E8F0',
+                padding: '2.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               }}
             >
-              <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.15rem', fontWeight: 700, color: '#1E293B' }}>
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
                 Main Listing Cover Image
               </h3>
-              <p style={{ margin: '0 0 1.25rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Primary card thumbnail displayed across portfolio index grids and social share cards.
+              <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.85rem', color: '#64748B' }}>
+                The primary card thumbnail displayed across portfolio index grids and OpenGraph cards.
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(200px, 320px) 1fr', gap: '1.5rem', alignItems: 'start' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 340px) 1fr', gap: '2rem', alignItems: 'start' }}>
                 <div
                   style={{
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '14px',
+                    border: '1.5px solid #CBD5E1',
+                    borderRadius: '16px',
                     padding: '8px',
                     backgroundColor: '#F8FAFC',
                     textAlign: 'center',
@@ -1041,19 +1020,21 @@ function PortfolioEditorInner() {
                     style={{
                       position: 'relative',
                       width: '100%',
-                      height: '180px',
-                      borderRadius: '10px',
+                      height: '190px',
+                      borderRadius: '12px',
                       overflow: 'hidden',
-                      backgroundColor: '#E2E8F0',
+                      backgroundColor: '#F1F5F9',
                     }}
                   >
                     {coverImage ? (
-                      <Image
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
                         src={coverImage}
                         alt="Cover Preview"
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        onError={() => {}}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
+                        }}
                       />
                     ) : (
                       <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center', color: '#94A3B8' }}>
@@ -1061,51 +1042,41 @@ function PortfolioEditorInner() {
                       </div>
                     )}
                   </div>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginTop: '6px' }}>
+                  <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginTop: '8px' }}>
                     Live Cover Preview
                   </span>
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                    Image Path or CDN URL
-                  </label>
+                  <label style={labelStyle}>Image Path or CDN URL</label>
                   <input
                     type="text"
                     placeholder="/portfolio/7d-design-studios.webp"
                     value={coverImage}
                     onChange={(e) => setCoverImage(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      border: '1px solid #CBD5E1',
-                      fontSize: '0.9rem',
-                      outline: 'none',
-                      backgroundColor: '#F8FAFC',
-                      marginBottom: '1rem',
-                    }}
+                    style={{ ...inputStyle, marginBottom: '1.25rem' }}
                   />
 
                   <div>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '6px' }}>
-                      Sample Assets:
+                    <span style={{ fontSize: '0.775rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '8px' }}>
+                      Sample Asset Presets:
                     </span>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px' }}>
                       {SAMPLE_COVER_PRESETS.map((preset) => (
                         <button
                           key={preset}
                           type="button"
                           onClick={() => setCoverImage(preset)}
                           style={{
-                            padding: '4px 10px',
+                            padding: '5px 12px',
                             borderRadius: '8px',
-                            border: '1px solid #E2E8F0',
+                            border: coverImage === preset ? '1.5px solid #1833FE' : '1px solid #E2E8F0',
                             backgroundColor: coverImage === preset ? '#EFF6FF' : '#FFFFFF',
                             color: coverImage === preset ? '#1833FE' : '#475569',
-                            fontSize: '0.75rem',
+                            fontSize: '0.775rem',
                             fontWeight: 600,
                             cursor: 'pointer',
+                            transition: 'all 0.15s ease',
                           }}
                         >
                           {preset.replace('/portfolio/', '')}
@@ -1117,27 +1088,27 @@ function PortfolioEditorInner() {
               </div>
             </div>
 
-            {/* Slider Images */}
+            {/* Slider Showcase Card */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
-                border: '1px solid #E2E8F0',
-                padding: '2rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                border: '1.5px solid #E2E8F0',
+                padding: '2.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#1E293B' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
                   Public Hero Showcase Image Slider ({sliderImages.length})
                 </h3>
               </div>
-              <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Multiple high-resolution screenshots displayed in the hero slider on <code>/portfolio/[slug]</code>.
+              <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
+                Multiple high-resolution screenshots displayed in the hero carousel on <code>/portfolio/[slug]</code>.
               </p>
 
               {/* Add Slide Input */}
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '1.25rem' }}>
                 <input
                   type="text"
                   placeholder="Enter image URL or path (e.g. /portfolio/7d-design-studios.webp)"
@@ -1149,72 +1120,107 @@ function PortfolioEditorInner() {
                       handleAddSliderImage();
                     }
                   }}
-                  style={{
-                    flex: 1,
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={{ ...inputStyle, flex: 1 }}
                 />
                 <button
                   type="button"
                   onClick={handleAddSliderImage}
                   style={{
-                    padding: '10px 20px',
-                    borderRadius: '10px',
+                    padding: '11px 22px',
+                    borderRadius: '12px',
                     border: 'none',
                     backgroundColor: '#1833FE',
                     color: '#FFFFFF',
                     fontWeight: 700,
-                    fontSize: '0.85rem',
+                    fontSize: '0.875rem',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
+                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
                   }}
                 >
                   + Add Slide
                 </button>
               </div>
 
+              {/* Quick Add Presets for Slider */}
+              <div style={{ marginBottom: '1.75rem' }}>
+                <span style={{ fontSize: '0.775rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '8px' }}>
+                  Quick Add Verified Assets to Slider:
+                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px' }}>
+                  {SAMPLE_COVER_PRESETS.slice(0, 10).map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => {
+                        if (!sliderImages.includes(preset)) {
+                          setSliderImages([...sliderImages, preset]);
+                        }
+                      }}
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        border: '1px solid #E2E8F0',
+                        backgroundColor: sliderImages.includes(preset) ? '#EFF6FF' : '#FFFFFF',
+                        color: sliderImages.includes(preset) ? '#1833FE' : '#475569',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      + {preset.replace('/portfolio/', '')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Slider Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
                 {sliderImages.map((imgUrl, idx) => (
                   <div
                     key={idx}
                     style={{
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '14px',
+                      border: '1.5px solid #E2E8F0',
+                      borderRadius: '16px',
                       padding: '10px',
-                      backgroundColor: '#F8FAFC',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '8px',
+                      gap: '10px',
                     }}
                   >
                     <div
                       style={{
                         position: 'relative',
                         width: '100%',
-                        height: '140px',
-                        borderRadius: '10px',
+                        height: '145px',
+                        borderRadius: '12px',
                         overflow: 'hidden',
-                        backgroundColor: '#CBD5E1',
+                        backgroundColor: '#F1F5F9',
                       }}
                     >
-                      <Image src={imgUrl} alt={`Slide ${idx + 1}`} fill style={{ objectFit: 'cover' }} onError={() => {}} />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={imgUrl}
+                        alt={`Slide ${idx + 1}`}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
+                        }}
+                      />
                       <span
                         style={{
                           position: 'absolute',
-                          top: '6px',
-                          left: '6px',
-                          backgroundColor: 'rgba(15, 23, 42, 0.8)',
+                          top: '8px',
+                          left: '8px',
+                          backgroundColor: 'rgba(15, 23, 42, 0.85)',
                           color: '#FFFFFF',
-                          fontSize: '0.7rem',
+                          fontSize: '0.725rem',
                           fontWeight: 700,
-                          padding: '2px 8px',
-                          borderRadius: '6px',
+                          padding: '3px 9px',
+                          borderRadius: '8px',
+                          backdropFilter: 'blur(4px)',
                         }}
                       >
                         Slide #{idx + 1}
@@ -1232,11 +1238,11 @@ function PortfolioEditorInner() {
                         }}
                         style={{
                           flex: 1,
-                          fontSize: '0.75rem',
-                          padding: '6px 8px',
-                          borderRadius: '6px',
+                          fontSize: '0.775rem',
+                          padding: '7px 10px',
+                          borderRadius: '8px',
                           border: '1px solid #CBD5E1',
-                          backgroundColor: '#FFFFFF',
+                          backgroundColor: '#F8FAFC',
                           fontFamily: 'monospace',
                         }}
                       />
@@ -1244,9 +1250,9 @@ function PortfolioEditorInner() {
                         type="button"
                         onClick={() => handleRemoveSliderImage(idx)}
                         style={{
-                          padding: '6px 10px',
-                          borderRadius: '6px',
-                          border: '1px solid #FCA5A5',
+                          padding: '7px 10px',
+                          borderRadius: '8px',
+                          border: '1px solid #FECACA',
                           backgroundColor: '#FEF2F2',
                           color: '#DC2626',
                           fontSize: '0.75rem',
@@ -1264,26 +1270,28 @@ function PortfolioEditorInner() {
           </div>
         )}
 
-        {/* TAB 3: NARRATIVE & BULLETS */}
+        {/* ============================================================ */}
+        {/* TAB 3: NARRATIVE & BULLETS                                   */}
+        {/* ============================================================ */}
         {activeTab === 'narrative' && (
           <div
             style={{
               backgroundColor: '#FFFFFF',
               borderRadius: '20px',
-              border: '1px solid #E2E8F0',
-              padding: '2rem',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+              border: '1.5px solid #E2E8F0',
+              padding: '2.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '2rem',
+              gap: '2.25rem',
             }}
           >
             {/* Summary */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+              <label style={labelStyle}>
                 Summary / Card Description <span style={{ color: '#EF4444' }}>*</span>
               </label>
-              <p style={{ margin: '0 0 8px 0', fontSize: '0.775rem', color: '#64748B' }}>
+              <p style={{ margin: '0 0 8px 0', fontSize: '0.8rem', color: '#64748B' }}>
                 Short 1-2 sentence hook shown on the portfolio card and Google search snippets.
               </p>
               <textarea
@@ -1291,24 +1299,16 @@ function PortfolioEditorInner() {
                 placeholder="A portfolio and service website for an interior design studio, showcasing their work and expertise."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: '10px',
-                  border: '1px solid #CBD5E1',
-                  fontSize: '0.9rem',
-                  outline: 'none',
-                  backgroundColor: '#F8FAFC',
-                }}
+                style={{ ...inputStyle, lineHeight: '1.5' }}
               />
             </div>
 
             {/* Story */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+              <label style={labelStyle}>
                 Full Case Study Story / In-Depth Narrative
               </label>
-              <p style={{ margin: '0 0 8px 0', fontSize: '0.775rem', color: '#64748B' }}>
+              <p style={{ margin: '0 0 8px 0', fontSize: '0.8rem', color: '#64748B' }}>
                 Detailed background, design process, and architectural decisions.
               </p>
               <textarea
@@ -1316,26 +1316,17 @@ function PortfolioEditorInner() {
                 placeholder="For 7D Design Studios, the website itself had to be a masterpiece of design. We created a visually stunning, minimalist portfolio platform..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px 14px',
-                  borderRadius: '10px',
-                  border: '1px solid #CBD5E1',
-                  fontSize: '0.9rem',
-                  outline: 'none',
-                  backgroundColor: '#F8FAFC',
-                  lineHeight: '1.6',
-                }}
+                style={{ ...inputStyle, lineHeight: '1.6' }}
               />
             </div>
 
-            {/* Challenges, Solutions, Results */}
+            {/* Challenges, Solutions, Results Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
               {/* Challenges */}
-              <div style={{ border: '1px solid #E2E8F0', borderRadius: '16px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+              <div style={{ border: '1.5px solid #FEE2E2', borderRadius: '16px', padding: '1.5rem', backgroundColor: '#FFFBFB' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2">
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#991B1B', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2.5">
                       <circle cx="12" cy="12" r="10" />
                       <line x1="12" y1="8" x2="12" y2="12" />
                       <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -1348,10 +1339,10 @@ function PortfolioEditorInner() {
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: '8px',
+                      border: '1px solid #FECACA',
                       backgroundColor: '#FFFFFF',
-                      color: '#1833FE',
+                      color: '#DC2626',
                       fontWeight: 700,
                       cursor: 'pointer',
                     }}
@@ -1369,10 +1360,10 @@ function PortfolioEditorInner() {
                         onChange={(e) => handleBulletChange(setChallenges, challenges, idx, e.target.value)}
                         style={{
                           flex: 1,
-                          padding: '7px 10px',
-                          borderRadius: '8px',
+                          padding: '8px 12px',
+                          borderRadius: '10px',
                           border: '1px solid #CBD5E1',
-                          fontSize: '0.825rem',
+                          fontSize: '0.85rem',
                           backgroundColor: '#FFFFFF',
                         }}
                       />
@@ -1389,10 +1380,10 @@ function PortfolioEditorInner() {
               </div>
 
               {/* Solutions */}
-              <div style={{ border: '1px solid #E2E8F0', borderRadius: '16px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+              <div style={{ border: '1.5px solid #DBEAFE', borderRadius: '16px', padding: '1.5rem', backgroundColor: '#F8FAFF' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2">
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#1E40AF', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5">
                       <line x1="9" y1="18" x2="15" y2="18" />
                       <line x1="10" y1="22" x2="14" y2="22" />
                       <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
@@ -1405,8 +1396,8 @@ function PortfolioEditorInner() {
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: '8px',
+                      border: '1px solid #BFDBFE',
                       backgroundColor: '#FFFFFF',
                       color: '#1833FE',
                       fontWeight: 700,
@@ -1426,10 +1417,10 @@ function PortfolioEditorInner() {
                         onChange={(e) => handleBulletChange(setSolutions, solutions, idx, e.target.value)}
                         style={{
                           flex: 1,
-                          padding: '7px 10px',
-                          borderRadius: '8px',
+                          padding: '8px 12px',
+                          borderRadius: '10px',
                           border: '1px solid #CBD5E1',
-                          fontSize: '0.825rem',
+                          fontSize: '0.85rem',
                           backgroundColor: '#FFFFFF',
                         }}
                       />
@@ -1446,10 +1437,10 @@ function PortfolioEditorInner() {
               </div>
 
               {/* Results */}
-              <div style={{ border: '1px solid #E2E8F0', borderRadius: '16px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+              <div style={{ border: '1.5px solid #D1FAE5', borderRadius: '16px', padding: '1.5rem', backgroundColor: '#F6FEF9' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2">
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#065F46', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
                       <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
                       <polyline points="17 6 23 6 23 12" />
                     </svg>
@@ -1461,10 +1452,10 @@ function PortfolioEditorInner() {
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: '8px',
+                      border: '1px solid #A7F3D0',
                       backgroundColor: '#FFFFFF',
-                      color: '#1833FE',
+                      color: '#059669',
                       fontWeight: 700,
                       cursor: 'pointer',
                     }}
@@ -1482,10 +1473,10 @@ function PortfolioEditorInner() {
                         onChange={(e) => handleBulletChange(setResults, results, idx, e.target.value)}
                         style={{
                           flex: 1,
-                          padding: '7px 10px',
-                          borderRadius: '8px',
+                          padding: '8px 12px',
+                          borderRadius: '10px',
                           border: '1px solid #CBD5E1',
-                          fontSize: '0.825rem',
+                          fontSize: '0.85rem',
                           backgroundColor: '#FFFFFF',
                         }}
                       />
@@ -1504,11 +1495,11 @@ function PortfolioEditorInner() {
 
             {/* Tech Stack Pills with Brand SVG Icons */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+              <label style={labelStyle}>
                 Tools & Technologies Powering This Project
               </label>
-              <p style={{ margin: '0 0 12px 0', fontSize: '0.775rem', color: '#64748B' }}>
-                Select popular framework presets with official SVG icons or add custom technologies below.
+              <p style={{ margin: '0 0 12px 0', fontSize: '0.8rem', color: '#64748B' }}>
+                Select popular framework presets with official SVG icons or type custom technologies below.
               </p>
 
               {/* Brand SVG Chip Buttons */}
@@ -1524,19 +1515,20 @@ function PortfolioEditorInner() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '7px',
-                        padding: '6px 14px',
+                        padding: '7px 14px',
                         borderRadius: '20px',
-                        border: isSelected ? '1px solid #1833FE' : '1px solid #CBD5E1',
+                        border: isSelected ? '1.5px solid #1833FE' : '1.5px solid #E2E8F0',
                         backgroundColor: isSelected ? '#1833FE' : '#FFFFFF',
                         color: isSelected ? '#FFFFFF' : '#334155',
-                        fontSize: '0.8rem',
+                        fontSize: '0.825rem',
                         fontWeight: 600,
                         cursor: 'pointer',
                         transition: 'all 0.15s ease',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                       }}
                     >
                       <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-                        {tech.icon({ size: 14, color: isSelected ? '#FFFFFF' : undefined })}
+                        {tech.icon({ size: 15, color: isSelected ? '#FFFFFF' : undefined })}
                       </span>
                       <span>{tech.name}</span>
                       {isSelected && <span style={{ fontSize: '0.75rem', fontWeight: 800 }}>✓</span>}
@@ -1558,26 +1550,19 @@ function PortfolioEditorInner() {
                       handleAddTech(techInput);
                     }
                   }}
-                  style={{
-                    flex: 1,
-                    padding: '9px 14px',
-                    borderRadius: '8px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.85rem',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={{ ...inputStyle, flex: 1 }}
                 />
                 <button
                   type="button"
                   onClick={() => handleAddTech(techInput)}
                   style={{
-                    padding: '9px 18px',
-                    borderRadius: '8px',
+                    padding: '11px 20px',
+                    borderRadius: '12px',
                     border: 'none',
                     backgroundColor: '#0F172A',
                     color: '#FFFFFF',
                     fontWeight: 700,
-                    fontSize: '0.8rem',
+                    fontSize: '0.85rem',
                     cursor: 'pointer',
                   }}
                 >
@@ -1588,7 +1573,9 @@ function PortfolioEditorInner() {
           </div>
         )}
 
-        {/* TAB 4: SEO / AEO / GEO */}
+        {/* ============================================================ */}
+        {/* TAB 4: SEO / AEO / GEO                                       */}
+        {/* ============================================================ */}
         {activeTab === 'seo' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
             {/* SEO */}
@@ -1596,34 +1583,34 @@ function PortfolioEditorInner() {
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
-                border: '1px solid #E2E8F0',
-                padding: '2rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                border: '1.5px solid #E2E8F0',
+                padding: '2.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.5rem',
+                gap: '1.75rem',
               }}
             >
-              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2">
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
                 <span>Search Engine Optimization (SEO)</span>
               </h3>
 
-              {/* SERP Preview */}
+              {/* Live SERP Snippet Preview */}
               <div
                 style={{
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '14px',
-                  padding: '1.25rem',
+                  border: '1.5px solid #E2E8F0',
+                  borderRadius: '16px',
+                  padding: '1.5rem',
                   backgroundColor: '#FFFFFF',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
                 }}
               >
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '8px' }}>
-                  Live Google Search Snippet Preview:
+                <span style={{ fontSize: '0.775rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '10px' }}>
+                  Live Google Search Result Preview:
                 </span>
                 <div style={{ fontFamily: 'Arial, sans-serif' }}>
                   <div style={{ fontSize: '0.8rem', color: '#202124', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '4px' }}>
@@ -1644,11 +1631,9 @@ function PortfolioEditorInner() {
 
               {/* Meta Title */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155' }}>
-                    Meta Title
-                  </label>
-                  <span style={{ fontSize: '0.75rem', color: metaTitle.length > 60 ? '#EF4444' : '#64748B' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px' }}>
+                  <label style={{ ...labelStyle, margin: 0 }}>Meta Title</label>
+                  <span style={{ fontSize: '0.75rem', color: metaTitle.length > 60 ? '#EF4444' : '#64748B', fontWeight: 600 }}>
                     {metaTitle.length}/60 chars
                   </span>
                 </div>
@@ -1657,25 +1642,15 @@ function PortfolioEditorInner() {
                   placeholder="7D Design Studios - Modern Architecture & Interior Portfolio | TryangleTech"
                   value={metaTitle}
                   onChange={(e) => setMetaTitle(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
 
               {/* Meta Description */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155' }}>
-                    Meta Description
-                  </label>
-                  <span style={{ fontSize: '0.75rem', color: metaDescription.length > 160 ? '#EF4444' : '#64748B' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px' }}>
+                  <label style={{ ...labelStyle, margin: 0 }}>Meta Description</label>
+                  <span style={{ fontSize: '0.75rem', color: metaDescription.length > 160 ? '#EF4444' : '#64748B', fontWeight: 600 }}>
                     {metaDescription.length}/160 chars
                   </span>
                 </div>
@@ -1684,37 +1659,19 @@ function PortfolioEditorInner() {
                   placeholder="Case study on how TryangleTech engineered a minimalist, lightning-fast portfolio platform for 7D Design Studios..."
                   value={metaDescription}
                   onChange={(e) => setMetaDescription(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={{ ...inputStyle, lineHeight: '1.5' }}
                 />
               </div>
 
               {/* Canonical URL */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Canonical URL Override (Optional)
-                </label>
+                <label style={labelStyle}>Canonical URL Override (Optional)</label>
                 <input
                   type="url"
                   placeholder="https://tryangletech.com/portfolio/7d-design-studios"
                   value={canonicalUrl}
                   onChange={(e) => setCanonicalUrl(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                  }}
+                  style={inputStyle}
                 />
               </div>
             </div>
@@ -1724,18 +1681,18 @@ function PortfolioEditorInner() {
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
-                border: '1px solid #E2E8F0',
-                padding: '2rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                border: '1.5px solid #E2E8F0',
+                padding: '2.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.25rem',
+                gap: '1.5rem',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="2">
+                  <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="2.5">
                       <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
                       <rect x="4" y="8" width="16" height="12" rx="2" />
                       <circle cx="9" cy="13" r="1" fill="#7C3AED" />
@@ -1751,8 +1708,8 @@ function PortfolioEditorInner() {
                 <span
                   style={{
                     fontSize: '0.75rem',
-                    padding: '4px 10px',
-                    borderRadius: '12px',
+                    padding: '4px 12px',
+                    borderRadius: '14px',
                     backgroundColor: '#EFF6FF',
                     color: '#1833FE',
                     fontWeight: 700,
@@ -1763,24 +1720,13 @@ function PortfolioEditorInner() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Direct Answer Summary for AI Crawlers
-                </label>
+                <label style={labelStyle}>Direct Answer Summary for AI Crawlers</label>
                 <textarea
                   rows={4}
                   placeholder="TryangleTech designed and developed a bespoke portfolio web application for 7D Design Studios using Next.js and Three.js..."
                   value={aeoSummary}
                   onChange={(e) => setAeoSummary(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    backgroundColor: '#F8FAFC',
-                    lineHeight: '1.5',
-                  }}
+                  style={{ ...inputStyle, lineHeight: '1.5' }}
                 />
               </div>
             </div>
@@ -1790,49 +1736,37 @@ function PortfolioEditorInner() {
               style={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: '20px',
-                border: '1px solid #E2E8F0',
-                padding: '2rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                border: '1.5px solid #E2E8F0',
+                padding: '2.5rem',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
               }}
             >
-              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: '#1E293B', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2">
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
                 <span>Generative Engine Optimization (GEO) & Semantic Keywords</span>
               </h3>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                    Target Geographic Scope / Region
-                  </label>
+                  <label style={labelStyle}>Target Geographic Scope / Region</label>
                   <input
                     type="text"
                     placeholder="e.g. Global, United States, India, UAE"
                     value={geoRegion}
                     onChange={(e) => setGeoRegion(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: '10px',
-                      border: '1px solid #CBD5E1',
-                      fontSize: '0.9rem',
-                      outline: 'none',
-                      backgroundColor: '#F8FAFC',
-                    }}
+                    style={inputStyle}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                    Focus Semantic Keywords ({keywords.length})
-                  </label>
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <label style={labelStyle}>Focus Semantic Keywords ({keywords.length})</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
                     <input
                       type="text"
                       placeholder="Add keyword (press Enter)"
@@ -1844,27 +1778,19 @@ function PortfolioEditorInner() {
                           handleAddKeyword(keywordInput);
                         }
                       }}
-                      style={{
-                        flex: 1,
-                        padding: '10px 14px',
-                        borderRadius: '10px',
-                        border: '1px solid #CBD5E1',
-                        fontSize: '0.9rem',
-                        outline: 'none',
-                        backgroundColor: '#F8FAFC',
-                      }}
+                      style={{ ...inputStyle, flex: 1 }}
                     />
                     <button
                       type="button"
                       onClick={() => handleAddKeyword(keywordInput)}
                       style={{
-                        padding: '10px 16px',
-                        borderRadius: '10px',
+                        padding: '11px 18px',
+                        borderRadius: '12px',
                         border: 'none',
                         backgroundColor: '#1833FE',
                         color: '#FFFFFF',
                         fontWeight: 700,
-                        fontSize: '0.85rem',
+                        fontSize: '0.875rem',
                         cursor: 'pointer',
                       }}
                     >
@@ -1875,7 +1801,7 @@ function PortfolioEditorInner() {
               </div>
 
               {keywords.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {keywords.map((kw) => (
                     <span
                       key={kw}
@@ -1883,11 +1809,12 @@ function PortfolioEditorInner() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        padding: '4px 12px',
+                        padding: '5px 12px',
                         borderRadius: '16px',
                         backgroundColor: '#EFF6FF',
+                        border: '1px solid #BFDBFE',
                         color: '#1833FE',
-                        fontSize: '0.775rem',
+                        fontSize: '0.78rem',
                         fontWeight: 600,
                       }}
                     >
@@ -1902,6 +1829,7 @@ function PortfolioEditorInner() {
                           cursor: 'pointer',
                           fontWeight: 700,
                           padding: 0,
+                          fontSize: '0.85rem',
                         }}
                       >
                         ✕
@@ -1919,9 +1847,10 @@ function PortfolioEditorInner() {
           style={{
             marginTop: '2.5rem',
             padding: '1.25rem 2rem',
-            backgroundColor: '#FFFFFF',
-            borderRadius: '16px',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(12px)',
+            borderRadius: '18px',
+            border: '1.5px solid #E2E8F0',
             boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
             display: 'flex',
             justifyContent: 'space-between',
@@ -1930,7 +1859,7 @@ function PortfolioEditorInner() {
             gap: '1rem',
           }}
         >
-          <div style={{ fontSize: '0.85rem', color: '#64748B' }}>
+          <div style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: 500 }}>
             <span>Changes will be saved to Supabase PostgreSQL and synced across Edge CDNs.</span>
           </div>
 
@@ -1940,8 +1869,8 @@ function PortfolioEditorInner() {
               style={{
                 padding: '10px 20px',
                 borderRadius: '10px',
-                border: '1px solid #E2E8F0',
-                backgroundColor: '#F8FAFC',
+                border: '1.5px solid #E2E8F0',
+                backgroundColor: '#FFFFFF',
                 color: '#475569',
                 fontSize: '0.875rem',
                 fontWeight: 600,
@@ -1981,8 +1910,8 @@ export default function PortfolioEditorPage() {
   return (
     <Suspense
       fallback={
-        <div style={{ padding: '4rem 2rem', textAlign: 'center', color: '#64748B' }}>
-          <p style={{ fontSize: '1rem', fontWeight: 600 }}>Loading editor...</p>
+        <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#64748B' }}>
+          <p style={{ fontSize: '1.05rem', fontWeight: 700 }}>Loading editor...</p>
         </div>
       }
     >

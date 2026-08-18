@@ -1868,6 +1868,12 @@ function PortfolioEditorInner() {
                         placeholder={`Challenge #${idx + 1}`}
                         value={c}
                         onChange={(e) => handleBulletChange(setChallenges, challenges, idx, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddBullet(setChallenges, challenges);
+                          }
+                        }}
                         style={{
                           flex: 1,
                           padding: '8px 12px',
@@ -1925,6 +1931,12 @@ function PortfolioEditorInner() {
                         placeholder={`Solution #${idx + 1}`}
                         value={s}
                         onChange={(e) => handleBulletChange(setSolutions, solutions, idx, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddBullet(setSolutions, solutions);
+                          }
+                        }}
                         style={{
                           flex: 1,
                           padding: '8px 12px',
@@ -1981,6 +1993,12 @@ function PortfolioEditorInner() {
                         placeholder={`e.g. 100/100 Lighthouse Performance`}
                         value={r}
                         onChange={(e) => handleBulletChange(setResults, results, idx, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddBullet(setResults, results);
+                          }
+                        }}
                         style={{
                           flex: 1,
                           padding: '8px 12px',

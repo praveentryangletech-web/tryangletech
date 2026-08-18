@@ -4,16 +4,11 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: [],
-      afterFiles: [
-        {
-          source: '/portfolio/:filename*',
-          destination: '/api/media/:filename*',
-        },
-      ],
+      afterFiles: [],
       fallback: [
         {
-          source: '/portfolio/:filename*',
-          destination: '/api/media/:filename*',
+          source: '/portfolio/:file(.+\\.(?:webp|png|jpg|jpeg|svg|gif|avif))',
+          destination: '/api/media/:file',
         },
       ],
     };

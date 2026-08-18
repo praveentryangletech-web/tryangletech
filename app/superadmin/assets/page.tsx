@@ -31,6 +31,11 @@ export default function AssetManagementPage() {
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameFeedback, setRenameFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  // Delete States (Custom Confirmation Modal)
+  const [deletingAsset, setDeletingAsset] = useState<MediaAsset | null>(null);
+  const [isDeletingAsset, setIsDeletingAsset] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
   // Lightbox Modal
   const [lightboxImage, setLightboxImage] = useState<MediaAsset | null>(null);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
@@ -166,11 +171,12 @@ export default function AssetManagementPage() {
     }
   };
 
-  const handleDeleteAsset = async (filename: string) => {
-    if (!confirm(`Are you sure you want to permanently delete "${filename}" from public/portfolio? This action cannot be undone.`)) {
-      return;
-    }
+  const handleConfirmDelete = async () => {
+    if (!deletingAsset) return;
+    setIsDeletingAsset(true);
+    setDeleteError(null);
 
+    const filename = deletingAsset.filename;
     try {
       const res = await fetch('/api/superadmin/media', {
         method: 'DELETE',
@@ -184,14 +190,18 @@ export default function AssetManagementPage() {
 
       setUploadFeedback({
         type: 'success',
-        text: `Asset "${filename}" deleted from disk.`,
+        text: `Asset "${filename}" permanently deleted from disk.`,
       });
+
       if (lightboxImage?.filename === filename) {
         setLightboxImage(null);
       }
-      fetchAssets();
+      setDeletingAsset(null);
+      await fetchAssets();
     } catch (err: any) {
-      alert(`Delete failed: ${err?.message || 'Error deleting file.'}`);
+      setDeleteError(err?.message || 'Error deleting file.');
+    } finally {
+      setIsDeletingAsset(false);
     }
   };
 
@@ -868,7 +878,7 @@ export default function AssetManagementPage() {
                   <Tooltip text="Permanently delete from disk" position="top">
                     <button
                       type="button"
-                      onClick={() => handleDeleteAsset(asset.filename)}
+                      onClick={() => setDeletingAsset(asset)}
                       style={{
                         width: '32px',
                         height: '32px',
@@ -1033,7 +1043,7 @@ export default function AssetManagementPage() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleDeleteAsset(asset.filename)}
+                          onClick={() => setDeletingAsset(asset)}
                           style={{
                             height: '30px',
                             padding: '0 10px',
@@ -1273,6 +1283,172 @@ export default function AssetManagementPage() {
         </div>
       )}
 
+      {/* Custom Delete Confirmation Modal */}
+      {deletingAsset && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10000,
+            padding: '1.5rem',
+          }}
+          onClick={() => {
+            if (!isDeletingAsset) setDeletingAsset(null);
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '20px',
+              maxWidth: '480px',
+              width: '100%',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+              border: '1px solid #FECACA',
+              textAlign: 'center',
+              padding: '2rem 1.75rem 1.5rem',
+            }}
+          >
+            {/* Red Circle SVG Icon */}
+            <div
+              style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '50%',
+                backgroundColor: '#FEF2F2',
+                color: '#DC2626',
+                border: '1.5px solid #FECACA',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.25rem',
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <line x1="10" y1="11" x2="10" y2="17" />
+                <line x1="14" y1="11" x2="14" y2="17" />
+              </svg>
+            </div>
+
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+              Delete Asset from Disk?
+            </h3>
+
+            <p style={{ margin: '0 0 1.25rem 0', fontSize: '0.875rem', color: '#64748B', lineHeight: 1.5 }}>
+              Are you sure you want to permanently delete <strong style={{ color: '#0F172A' }}>{deletingAsset.filename}</strong>? This action cannot be undone.
+            </p>
+
+            {/* Asset Preview Card */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: '10px 14px',
+                backgroundColor: '#F8FAFC',
+                borderRadius: '12px',
+                border: '1px solid #E2E8F0',
+                marginBottom: '1.25rem',
+                textAlign: 'left',
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#E2E8F0', flexShrink: 0 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={deletingAsset.url}
+                  alt={deletingAsset.filename}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+              <div style={{ overflow: 'hidden', flex: 1 }}>
+                <span style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {deletingAsset.filename}
+                </span>
+                <span style={{ fontSize: '0.75rem', color: '#64748B', fontFamily: 'monospace' }}>
+                  {deletingAsset.url} • {(deletingAsset.size / 1024).toFixed(0)} KB
+                </span>
+              </div>
+            </div>
+
+            {deleteError && (
+              <div
+                style={{
+                  marginBottom: '1.25rem',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  backgroundColor: '#FEF2F2',
+                  color: '#B91C1C',
+                  border: '1px solid #FECACA',
+                  fontSize: '0.825rem',
+                  fontWeight: 600,
+                  textAlign: 'left',
+                }}
+              >
+                {deleteError}
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+              <button
+                type="button"
+                onClick={() => setDeletingAsset(null)}
+                disabled={isDeletingAsset}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  borderRadius: '10px',
+                  border: '1px solid #CBD5E1',
+                  backgroundColor: '#FFFFFF',
+                  color: '#475569',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: isDeletingAsset ? 'not-allowed' : 'pointer',
+                }}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={handleConfirmDelete}
+                disabled={isDeletingAsset}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  backgroundColor: '#DC2626',
+                  color: '#FFFFFF',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: isDeletingAsset ? 'not-allowed' : 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  boxShadow: '0 2px 8px rgba(220, 38, 38, 0.25)',
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="3 6 5 6 21 6" />
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
+                <span>{isDeletingAsset ? 'Deleting...' : 'Delete from Disk'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Full Preview Lightbox Modal */}
       {lightboxImage && (
         <div
@@ -1403,7 +1579,7 @@ export default function AssetManagementPage() {
 
               <button
                 type="button"
-                onClick={() => handleDeleteAsset(lightboxImage.filename)}
+                onClick={() => setDeletingAsset(lightboxImage)}
                 style={{
                   padding: '8px 16px',
                   borderRadius: '10px',

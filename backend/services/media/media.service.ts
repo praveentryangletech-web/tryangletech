@@ -194,8 +194,12 @@ class MediaService {
     if (!this.isCloudinaryConfigured) return;
     try {
       const timestamp = Math.floor(Date.now() / 1000);
-      const baseName = path.basename(filenameOrPublicId, path.extname(filenameOrPublicId));
-      const publicId = filenameOrPublicId.includes('/') ? filenameOrPublicId : `${CLOUDINARY_FOLDER}/${baseName}`;
+      let baseName = path.basename(filenameOrPublicId);
+      const ext = path.extname(baseName);
+      if (ext) {
+        baseName = path.basename(baseName, ext);
+      }
+      const publicId = `${CLOUDINARY_FOLDER}/${baseName}`;
 
       const signParams: Record<string, any> = {
         public_id: publicId,
@@ -210,10 +214,12 @@ class MediaService {
       formData.append('timestamp', timestamp.toString());
       formData.append('signature', signature);
 
-      await fetch(`https://api.cloudinary.com/v1_1/${this.cloudName}/image/destroy`, {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${this.cloudName}/image/destroy`, {
         method: 'POST',
         body: formData,
       });
+      const data = await res.json();
+      console.log(`[MediaService] Cloudinary delete result for "${publicId}":`, data);
     } catch (err) {
       console.warn('[MediaService] Cloudinary destroy error:', err);
     }

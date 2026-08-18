@@ -24,6 +24,9 @@ export default function Tooltip({
 
   useEffect(() => {
     setMounted(true);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   const updatePosition = () => {

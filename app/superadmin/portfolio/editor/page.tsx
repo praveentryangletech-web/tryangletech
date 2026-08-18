@@ -482,7 +482,6 @@ function PortfolioEditorInner() {
         />
         <p style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1E293B' }}>Loading case study editor...</p>
         <p style={{ fontSize: '0.85rem', color: '#64748B', margin: 0 }}>Fetching project data from Supabase PostgreSQL</p>
-        <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }

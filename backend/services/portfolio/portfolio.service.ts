@@ -168,7 +168,7 @@ export const portfolioService = {
    * Ultra-Fast Parameterized Paginated Query using Single CTE Roundtrip & LRU Cache
    * Response Time: < 1ms on Cache Hit, < 15ms on PostgreSQL Query Execution
    */
-  async getPaginatedProjects(params: PortfolioQueryParams): Promise<{ result: PaginatedPortfolioResult; etag: string }> {
+  async getPaginatedProjects(params: PortfolioQueryParams): Promise<PaginatedPortfolioResult & { etag?: string }> {
     const page = Math.max(params.page || 1, 1);
     const limit = Math.min(Math.max(params.limit || 10, 1), 50);
     const offset = (page - 1) * limit;
@@ -179,7 +179,7 @@ export const portfolioService = {
     const cacheKey = portfolioCache.generateKey('paginated', { page, limit, sortBy, sortOrder, ...params });
     const cached = portfolioCache.get<PaginatedPortfolioResult>(cacheKey);
     if (cached) {
-      return { result: cached.data, etag: cached.etag };
+      return { ...cached.data, etag: cached.etag };
     }
 
     try {
@@ -270,7 +270,7 @@ export const portfolioService = {
         updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
       }));
 
-      const result: PaginatedPortfolioResult = {
+      const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
         pagination: {
           total,
@@ -290,8 +290,9 @@ export const portfolioService = {
 
       // Store in memory LRU cache
       const cachedEntry = portfolioCache.set(cacheKey, result);
+      result.etag = cachedEntry.etag;
 
-      return { result, etag: cachedEntry.etag };
+      return result;
     } catch (err) {
       console.error('[DB Portfolio] getPaginatedProjects fallback:', err);
 
@@ -339,7 +340,7 @@ export const portfolioService = {
         updatedAt: new Date().toISOString(),
       }));
 
-      const result: PaginatedPortfolioResult = {
+      const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
         pagination: {
           total,
@@ -357,19 +358,21 @@ export const portfolioService = {
         },
       };
 
-      const etag = portfolioCache.generateEtag(result);
-      return { result, etag };
+      result.etag = portfolioCache.generateEtag(result);
+      return result;
     }
   },
 
   /**
    * Fast Get All Projects with In-Memory Caching & ETags
    */
-  async getAllProjects(category?: string, search?: string): Promise<{ items: PortfolioItem[]; etag: string }> {
+  async getAllProjects(category?: string, search?: string): Promise<PortfolioItem[] & { etag?: string }> {
     const cacheKey = portfolioCache.generateKey('all', { category, search });
     const cached = portfolioCache.get<PortfolioItem[]>(cacheKey);
     if (cached) {
-      return { items: cached.data, etag: cached.etag };
+      const items = [...cached.data] as PortfolioItem[] & { etag?: string };
+      items.etag = cached.etag;
+      return items;
     }
 
     try {
@@ -424,7 +427,9 @@ export const portfolioService = {
       }));
 
       const cachedEntry = portfolioCache.set(cacheKey, items);
-      return { items, etag: cachedEntry.etag };
+      const result = items as PortfolioItem[] & { etag?: string };
+      result.etag = cachedEntry.etag;
+      return result;
     } catch (err) {
       console.error('[DB Portfolio] getAllProjects error:', err);
       const items = defaultProjects.map((p, idx) => ({
@@ -446,9 +451,9 @@ export const portfolioService = {
         order: idx,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-      }));
-      const etag = portfolioCache.generateEtag(items);
-      return { items, etag };
+      })) as PortfolioItem[] & { etag?: string };
+      items.etag = portfolioCache.generateEtag(items);
+      return items;
     }
   },
 

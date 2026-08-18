@@ -38,10 +38,11 @@ export async function GET(req: NextRequest) {
     const isUnpaginated = searchParams.get('all') === 'true' || searchParams.get('limit') === 'all';
 
     if (isUnpaginated) {
-      const { items, etag } = await portfolioService.getAllProjects(
+      const items = await portfolioService.getAllProjects(
         validation.data.category,
         validation.data.search
       );
+      const etag = items.etag || '';
 
       // Return 304 Not Modified if client cache is fresh
       if (clientEtag && clientEtag === etag) {
@@ -73,7 +74,8 @@ export async function GET(req: NextRequest) {
     }
 
     // 3. Execute parameterized query with CTE optimization & server-side LRU cache
-    const { result, etag } = await portfolioService.getPaginatedProjects(validation.data);
+    const result = await portfolioService.getPaginatedProjects(validation.data);
+    const etag = result.etag || '';
 
     // Return 304 Not Modified if client cache is fresh
     if (clientEtag && clientEtag === etag) {

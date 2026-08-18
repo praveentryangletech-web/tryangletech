@@ -483,9 +483,28 @@ function PortfolioEditorInner() {
 
   const handleAddBullet = (
     setter: React.Dispatch<React.SetStateAction<string[]>>,
-    list: string[]
+    list: string[],
+    focusPrefix?: string,
+    currentIndex?: number
   ) => {
+    if (typeof currentIndex === 'number' && currentIndex < list.length - 1 && focusPrefix) {
+      const nextInput = document.getElementById(`${focusPrefix}-${currentIndex + 1}`);
+      if (nextInput) {
+        (nextInput as HTMLInputElement).focus();
+        return;
+      }
+    }
+
+    const nextIdx = list.length;
     setter([...list, '']);
+    if (focusPrefix) {
+      setTimeout(() => {
+        const nextInput = document.getElementById(`${focusPrefix}-${nextIdx}`);
+        if (nextInput) {
+          (nextInput as HTMLInputElement).focus();
+        }
+      }, 50);
+    }
   };
 
   const handleRemoveBullet = (
@@ -1845,7 +1864,7 @@ function PortfolioEditorInner() {
                   </h4>
                   <button
                     type="button"
-                    onClick={() => handleAddBullet(setChallenges, challenges)}
+                    onClick={() => handleAddBullet(setChallenges, challenges, 'challenge-input')}
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
@@ -1864,6 +1883,7 @@ function PortfolioEditorInner() {
                   {challenges.map((c, idx) => (
                     <div key={idx} style={{ display: 'flex', gap: '6px' }}>
                       <input
+                        id={`challenge-input-${idx}`}
                         type="text"
                         placeholder={`Challenge #${idx + 1}`}
                         value={c}
@@ -1871,7 +1891,7 @@ function PortfolioEditorInner() {
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
-                            handleAddBullet(setChallenges, challenges);
+                            handleAddBullet(setChallenges, challenges, 'challenge-input', idx);
                           }
                         }}
                         style={{
@@ -1908,7 +1928,7 @@ function PortfolioEditorInner() {
                   </h4>
                   <button
                     type="button"
-                    onClick={() => handleAddBullet(setSolutions, solutions)}
+                    onClick={() => handleAddBullet(setSolutions, solutions, 'solution-input')}
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
@@ -1927,6 +1947,7 @@ function PortfolioEditorInner() {
                   {solutions.map((s, idx) => (
                     <div key={idx} style={{ display: 'flex', gap: '6px' }}>
                       <input
+                        id={`solution-input-${idx}`}
                         type="text"
                         placeholder={`Solution #${idx + 1}`}
                         value={s}
@@ -1934,7 +1955,7 @@ function PortfolioEditorInner() {
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
-                            handleAddBullet(setSolutions, solutions);
+                            handleAddBullet(setSolutions, solutions, 'solution-input', idx);
                           }
                         }}
                         style={{
@@ -1970,7 +1991,7 @@ function PortfolioEditorInner() {
                   </h4>
                   <button
                     type="button"
-                    onClick={() => handleAddBullet(setResults, results)}
+                    onClick={() => handleAddBullet(setResults, results, 'result-input')}
                     style={{
                       fontSize: '0.75rem',
                       padding: '4px 10px',
@@ -1989,6 +2010,7 @@ function PortfolioEditorInner() {
                   {results.map((r, idx) => (
                     <div key={idx} style={{ display: 'flex', gap: '6px' }}>
                       <input
+                        id={`result-input-${idx}`}
                         type="text"
                         placeholder={`e.g. 100/100 Lighthouse Performance`}
                         value={r}
@@ -1996,7 +2018,7 @@ function PortfolioEditorInner() {
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
-                            handleAddBullet(setResults, results);
+                            handleAddBullet(setResults, results, 'result-input', idx);
                           }
                         }}
                         style={{

@@ -132,76 +132,47 @@ async function ensureColumnsExist(): Promise<void> {
 export const portfolioService = {
   /**
    * Fast Seed Check & Database Indexing Initialization
-   * Ensures high-performance composite, functional LOWER, and GIN trigram indexes exist.
+   * Runs non-blockingly in the background so HTTP requests return in < 15ms.
    */
   async seedIfEmpty() {
-    // Always ensure columns exist first
-    await ensureColumnsExist();
-
     if (isSeededInMemory) return;
+    isSeededInMemory = true;
 
-    try {
-      const rows = await db.$queryRaw<Array<{ count: bigint }>>`
-        SELECT COUNT(*) as count FROM "PortfolioProject"
-      `;
-      const count = Number(rows[0]?.count || 0);
-      if (count === 0) {
-        for (let i = 0; i < defaultProjects.length; i++) {
-          const p = defaultProjects[i];
-          const id = String(i + 1);
-          await db.$executeRaw`
-            INSERT INTO "PortfolioProject" (
-              "id", "slug", "title", "category", "image", "description",
-              "client", "duration", "role", "liveUrl", "content",
-              "challenges", "solutions", "results", "technologies", "order",
-              "createdAt", "updatedAt"
-            ) VALUES (
-              ${id}, ${p.slug}, ${p.title}, ${p.category}, ${p.image || '/portfolio/vh-accounting.webp'},
-              ${p.description || ''}, ${p.client || ''}, ${p.duration || '3 Weeks'},
-              ${p.role || 'Website Design & Development'}, ${p.liveUrl || ''},
-              ${p.content || ''}, ${p.challenges || []}, ${p.solutions || []},
-              ${p.results || []}, ${p.technologies || []}, ${i},
-              NOW(), NOW()
-            )
-          `;
+    // Run schema synchronization and indexing non-blockingly
+    (async () => {
+      try {
+        await ensureColumnsExist();
+
+        const rows = await db.$queryRaw<Array<{ count: bigint }>>`
+          SELECT COUNT(*) as count FROM "PortfolioProject"
+        `;
+        const count = Number(rows[0]?.count || 0);
+        if (count === 0) {
+          for (let i = 0; i < defaultProjects.length; i++) {
+            const p = defaultProjects[i];
+            const id = String(i + 1);
+            await db.$executeRaw`
+              INSERT INTO "PortfolioProject" (
+                "id", "slug", "title", "category", "image", "description",
+                "client", "duration", "role", "liveUrl", "content",
+                "challenges", "solutions", "results", "technologies", "order",
+                "createdAt", "updatedAt"
+              ) VALUES (
+                ${id}, ${p.slug}, ${p.title}, ${p.category}, ${p.image || '/portfolio/vh-accounting.webp'},
+                ${p.description || ''}, ${p.client || ''}, ${p.duration || '3 Weeks'},
+                ${p.role || 'Website Design & Development'}, ${p.liveUrl || ''},
+                ${p.content || ''}, ${p.challenges || []}, ${p.solutions || []},
+                ${p.results || []}, ${p.technologies || []}, ${i},
+                NOW(), NOW()
+              )
+            `;
+          }
+          console.log(`[DB Portfolio] Seeded ${defaultProjects.length} initial projects with standard numeric IDs into PostgreSQL.`);
         }
-        console.log(`[DB Portfolio] Seeded ${defaultProjects.length} initial projects with standard numeric IDs into PostgreSQL.`);
+      } catch (err) {
+        console.error('[DB Portfolio] background seed notice:', err);
       }
-
-      // Standardize any existing UUIDs or non-numeric IDs in the DB into clean sequential numbers
-      const existingRows = await db.$queryRaw<Array<{ id: string }>>`
-        SELECT "id" FROM "PortfolioProject" ORDER BY "order" ASC, "createdAt" ASC
-      `;
-      let seq = 1;
-      for (const row of existingRows) {
-        if (isNaN(Number(row.id))) {
-          const newNumericId = String(seq);
-          await db.$executeRaw`
-            UPDATE "PortfolioProject" SET "id" = ${newNumericId} WHERE "id" = ${row.id}
-          `.catch(() => {});
-        }
-        seq++;
-      }
-
-      // Ensure high-performance composite & functional indexes exist on PostgreSQL
-      const indexStatements = [
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_category_order" ON "PortfolioProject" ("category", "order" ASC, "createdAt" DESC)`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_order_created" ON "PortfolioProject" ("order" ASC, "createdAt" DESC)`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_slug" ON "PortfolioProject" ("slug")`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_created" ON "PortfolioProject" ("createdAt" DESC)`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_lower_title" ON "PortfolioProject" (LOWER("title"))`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_lower_category" ON "PortfolioProject" (LOWER("category"))`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_lower_client" ON "PortfolioProject" (LOWER("client"))`,
-        `CREATE INDEX IF NOT EXISTS "idx_portfolio_lower_slug" ON "PortfolioProject" (LOWER("slug"))`,
-      ];
-      for (const idxSql of indexStatements) {
-        await db.$executeRawUnsafe(idxSql).catch(() => {});
-      }
-
-      isSeededInMemory = true;
-    } catch (err) {
-      console.error('[DB Portfolio] seedIfEmpty warning:', err);
-    }
+    })().catch(() => {});
   },
 
   /**

@@ -12,10 +12,10 @@ import { usePortfolio } from '../../context/PortfolioContext';
  * Props for PortfolioTable component defining modal trigger callbacks
  */
 interface PortfolioTableProps {
-  onSelectProject: (project: Project) => void;
   onEditProject: (project: Project) => void;
   onDeleteProject: (project: Project) => void;
   onAddNewProject: () => void;
+  onSelectProject?: (project: Project) => void;
 }
 
 /**
@@ -24,7 +24,7 @@ interface PortfolioTableProps {
  * Renders the 100% original Superadmin portfolio UI connected directly
  * to server-side API querying and pagination.
  * 
- * @param {PortfolioTableProps} props - Modal trigger callbacks
+ * @param {PortfolioTableProps} props - Action callbacks
  */
 export default function PortfolioTable({
   onSelectProject,
@@ -257,7 +257,10 @@ export default function PortfolioTable({
                 <tr key={item.slug || (item as any).id} className="admin-row-hover" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
                   {/* Project Column */}
                   <td style={{ padding: '0.75rem 0.75rem 0.75rem 2rem', overflow: 'hidden' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      onClick={() => onEditProject(item)}
+                      style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
+                    >
                       <div
                         style={{
                           width: '42px',
@@ -299,50 +302,42 @@ export default function PortfolioTable({
                   </td>
 
                   {/* Category Column */}
-                  <td style={{ padding: '0.75rem 0.5rem', overflow: 'hidden' }}>
+                  <td style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>
                     <span
                       style={{
-                        backgroundColor: '#EEF2FF',
-                        color: 'var(--brand-blue, #1833fe)',
-                        padding: '3px 8px',
-                        borderRadius: '6px',
+                        display: 'inline-block',
+                        padding: '4px 10px',
+                        borderRadius: '20px',
+                        backgroundColor: '#F1F5F9',
+                        color: 'var(--dark-indigo, #1a0b54)',
                         fontSize: '0.725rem',
                         fontWeight: 700,
-                        whiteSpace: 'nowrap',
-                        display: 'inline-block',
-                        maxWidth: '100%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
+                        border: '1px solid #E2E8F0',
                       }}
                     >
                       {item.category}
                     </span>
                   </td>
 
-                  {/* Client & Role */}
-                  <td style={{ padding: '0.75rem 0.5rem', overflow: 'hidden' }}>
-                    <div style={{ fontWeight: 700, color: '#334155', fontSize: '0.825rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {item.client || 'TryangleTech Client'}
-                    </div>
-                    <div style={{ fontSize: '0.725rem', color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {item.role || 'Design & Dev'}
-                    </div>
+                  {/* Client Column */}
+                  <td style={{ padding: '0.75rem 0.5rem', color: '#475569', fontSize: '0.825rem', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {item.client || <span style={{ color: '#94A3B8' }}>Internal Project</span>}
                   </td>
 
-                  {/* Tech Stack Column */}
-                  <td style={{ padding: '0.75rem 0.5rem', overflow: 'hidden' }}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px', alignItems: 'center' }}>
-                      {item.technologies && item.technologies.slice(0, 2).map((t, idx) => (
+                  {/* Tech Stack Chips */}
+                  <td style={{ padding: '0.75rem 0.5rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                      {item.technologies && item.technologies.slice(0, 2).map((t) => (
                         <span
-                          key={idx}
+                          key={t}
                           style={{
-                            backgroundColor: '#F1F5F9',
+                            backgroundColor: '#F8FAFC',
+                            border: '1px solid #E2E8F0',
                             color: '#475569',
                             padding: '2px 6px',
                             borderRadius: '4px',
                             fontSize: '0.675rem',
                             fontWeight: 600,
-                            whiteSpace: 'nowrap',
                           }}
                         >
                           {t}
@@ -382,39 +377,42 @@ export default function PortfolioTable({
                     )}
                   </td>
 
-                  {/* Actions Column: Standard Professional SVG Action Icons */}
+                  {/* Actions Column: Direct Live Link, Edit, and Delete */}
                   <td style={{ padding: '0.75rem 2rem 0.75rem 0.5rem', textAlign: 'right', whiteSpace: 'nowrap' }}>
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                      {/* View Details with SVG Eye Icon */}
-                      <Tooltip text="View complete case study preview" position="top">
-                        <button
-                          onClick={() => onSelectProject(item)}
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      {/* Direct Link to Public Case Study Page */}
+                      <Tooltip text="View public case study page in new tab" position="top">
+                        <a
+                          href={`/portfolio/${item.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           style={{
-                            backgroundColor: 'var(--vivid-blue, #4f46e5)',
-                            color: '#FFFFFF',
-                            padding: '5px 9px',
+                            backgroundColor: '#EFF6FF',
+                            color: 'var(--brand-blue, #1833fe)',
+                            border: '1px solid #BFDBFE',
+                            padding: '5px 10px',
                             borderRadius: '6px',
-                            border: 'none',
                             fontSize: '0.75rem',
                             fontWeight: 700,
-                            cursor: 'pointer',
-                            transition: 'opacity 0.15s ease',
+                            textDecoration: 'none',
+                            transition: 'all 0.15s ease',
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '4px',
                             whiteSpace: 'nowrap',
                           }}
                         >
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
                           </svg>
-                          <span>View Details</span>
-                        </button>
+                          <span>View Live</span>
+                        </a>
                       </Tooltip>
 
                       {/* Edit Project Button with Standard SVG Pencil */}
-                      <Tooltip text="Edit project details and tech stack" position="top">
+                      <Tooltip text="Edit case study in full-page editor" position="top">
                         <button
                           onClick={() => onEditProject(item)}
                           style={{
@@ -461,32 +459,6 @@ export default function PortfolioTable({
                             <line x1="14" y1="11" x2="14" y2="17" />
                           </svg>
                         </button>
-                      </Tooltip>
-
-                      {/* Live Public Page Link with Standard SVG External Link */}
-                      <Tooltip text="View public portfolio webpage" position="top">
-                        <Link
-                          href={`/portfolio/${item.slug}`}
-                          target="_blank"
-                          style={{
-                            backgroundColor: '#FFFFFF',
-                            border: '1px solid #CBD5E1',
-                            color: '#475569',
-                            padding: '5px 7px',
-                            borderRadius: '6px',
-                            textDecoration: 'none',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            transition: 'all 0.15s ease',
-                          }}
-                        >
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                            <polyline points="15 3 21 3 21 9" />
-                            <line x1="10" y1="14" x2="21" y2="3" />
-                          </svg>
-                        </Link>
                       </Tooltip>
                     </div>
                   </td>

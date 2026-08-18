@@ -3,7 +3,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import PortfolioTable from './components/PortfolioTable';
-import PortfolioDetailsModal from './components/PortfolioDetailsModal';
 import PortfolioDeleteModal from './components/PortfolioDeleteModal';
 import { PortfolioProvider, usePortfolio } from '../context/PortfolioContext';
 
@@ -16,8 +15,6 @@ import { PortfolioProvider, usePortfolio } from '../context/PortfolioContext';
 function PortfolioContentView() {
   const router = useRouter();
   const {
-    selectedProject,
-    setSelectedProject,
     deletingProject,
     setDeletingProject,
     deleteProject,
@@ -53,19 +50,12 @@ function PortfolioContentView() {
     <>
       {/* 1. Server-Paginated Interactive Portfolio Table */}
       <PortfolioTable
-        onSelectProject={(project) => setSelectedProject(project)}
         onEditProject={handleEdit}
         onDeleteProject={handleDelete}
         onAddNewProject={handleAddNew}
       />
 
-      {/* 2. Quick View Case Study Details Modal */}
-      <PortfolioDetailsModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
-
-      {/* 3. Delete Confirmation Modal */}
+      {/* 2. Delete Confirmation Modal */}
       <PortfolioDeleteModal
         isOpen={!!deletingProject}
         project={deletingProject}

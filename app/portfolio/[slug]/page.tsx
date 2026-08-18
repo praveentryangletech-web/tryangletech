@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const resolvedParams = await params;
   let project: Project | null = null;
   try {
-    const res = await portfolioService.getPaginatedProjects({ slug: resolvedParams.slug });
-    if (res.items && res.items.length > 0) {
-      project = res.items[0] as Project;
+    const item = await portfolioService.getProjectBySlug(resolvedParams.slug);
+    if (item) {
+      project = item as Project;
     }
   } catch (err) {
     // fallback
@@ -65,12 +65,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function PortfolioDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
 
-  // 1. Fetch live from PostgreSQL
+  // 1. Fetch live case study from Database
   let project: Project | null = null;
   try {
-    const res = await portfolioService.getPaginatedProjects({ slug: resolvedParams.slug });
-    if (res.items && res.items.length > 0) {
-      project = res.items[0] as Project;
+    const item = await portfolioService.getProjectBySlug(resolvedParams.slug);
+    if (item) {
+      project = item as Project;
     }
   } catch (err) {
     console.warn('DB slug lookup warning, using static fallback:', err);

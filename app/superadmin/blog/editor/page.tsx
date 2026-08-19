@@ -332,12 +332,17 @@ function BlogEditorInner() {
     setKeywords(keywords.filter((k) => k !== kw));
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSave = async (e?: React.FormEvent, overridePublished?: boolean) => {
+    if (e) e.preventDefault();
     if (!title.trim()) {
       setErrorMessage('Article Title is required.');
       setActiveTab('general');
       return;
+    }
+
+    const finalPublished = typeof overridePublished === 'boolean' ? overridePublished : published;
+    if (typeof overridePublished === 'boolean') {
+      setPublished(overridePublished);
     }
 
     setIsSubmitting(true);
@@ -354,7 +359,7 @@ function BlogEditorInner() {
         authorImage: authorImage.trim(),
         authorBio: authorBio.trim(),
         readTime: readTime.trim(),
-        published,
+        published: finalPublished,
         publishedAt: new Date(publishedAt).toISOString(),
         order,
         coverImage: coverImage.trim(),
@@ -384,11 +389,11 @@ function BlogEditorInner() {
       if (isEditMode) {
         const res = await apiClient.patch('/api/blog', { id: postId, ...payload });
         if (!res.success) throw new Error(res.error || 'Failed to update article.');
-        setSuccessMessage('Article updated successfully!');
+        setSuccessMessage(finalPublished ? '✅ Article updated & published live!' : '📝 Article updated & saved as Draft!');
       } else {
         const res = await apiClient.post<BlogPostItem>('/api/blog', payload);
         if (!res.success) throw new Error(res.error || 'Failed to create article.');
-        setSuccessMessage('Article published successfully!');
+        setSuccessMessage(finalPublished ? '🚀 Article published live on public website!' : '📝 Article created & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
         }, 1200);
@@ -453,22 +458,37 @@ function BlogEditorInner() {
             ←
           </Link>
           <div>
-            <h1 style={{ margin: 0, fontSize: '1.65rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
-              {isEditMode ? 'Edit Blog Article' : 'New Blog Article'}
-            </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h1 style={{ margin: 0, fontSize: '1.65rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
+                {isEditMode ? 'Edit Blog Article' : 'New Blog Article'}
+              </h1>
+              <span
+                style={{
+                  fontSize: '0.725rem',
+                  fontWeight: 700,
+                  padding: '3px 8px',
+                  borderRadius: '6px',
+                  backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
+                  color: published ? '#047857' : '#B45309',
+                  border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`,
+                }}
+              >
+                {published ? '● Live Published' : '● Draft Mode'}
+              </span>
+            </div>
             <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#64748B' }}>
-              {isEditMode ? `Editing: ${title || 'Article'}` : 'Configure section-wise content, media showcase, and SEO.'}
+              {isEditMode ? `Editing: ${title || 'Article'}` : 'Configure section-wise content, media showcase, draft status, and SEO.'}
             </p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           {isEditMode && slug && (
             <Link
               href={`/blog/${slug}`}
               target="_blank"
               style={{
-                padding: '9px 16px',
+                padding: '9px 15px',
                 borderRadius: '10px',
                 backgroundColor: '#EFF6FF',
                 color: '#1833FE',
@@ -482,12 +502,37 @@ function BlogEditorInner() {
             </Link>
           )}
 
+          {/* Option A: Save as Draft */}
           <button
             type="button"
-            onClick={handleSave}
+            onClick={() => handleSave(undefined, false)}
             disabled={isSubmitting}
             style={{
-              padding: '10px 24px',
+              padding: '9px 18px',
+              borderRadius: '10px',
+              backgroundColor: '#FFFFFF',
+              color: '#334155',
+              border: '1.5px solid #CBD5E1',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+            }}
+          >
+            <span>📝</span>
+            <span>{isSubmitting ? 'Saving...' : 'Save Draft'}</span>
+          </button>
+
+          {/* Option B: Save & Publish Live */}
+          <button
+            type="button"
+            onClick={() => handleSave(undefined, true)}
+            disabled={isSubmitting}
+            style={{
+              padding: '10px 22px',
               borderRadius: '10px',
               backgroundColor: '#1833FE',
               color: '#FFFFFF',
@@ -495,10 +540,14 @@ function BlogEditorInner() {
               fontSize: '0.875rem',
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
             }}
           >
-            {isSubmitting ? 'Saving...' : isEditMode ? 'Update Article' : 'Publish Article'}
+            <span>🚀</span>
+            <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish' : 'Publish Live'}</span>
           </button>
         </div>
       </div>
@@ -663,17 +712,79 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingTop: '8px' }}>
-              <input
-                type="checkbox"
-                id="editorPublishedCheckbox"
-                checked={published}
-                onChange={(e) => setPublished(e.target.checked)}
-                style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: '#1833FE' }}
-              />
-              <label htmlFor="editorPublishedCheckbox" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
-                Published (Live on Public Website)
-              </label>
+            {/* Publication Workflow Status Card */}
+            <div style={{ backgroundColor: '#F8FAFC', border: '1.5px solid #E2E8F0', borderRadius: '14px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 800, color: '#0F172A', display: 'block' }}>
+                    Publication & Workflow Status
+                  </span>
+                  <span style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                    Choose whether this article is live publicly or kept in draft mode for future edits.
+                  </span>
+                </div>
+                <span style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  padding: '4px 10px',
+                  borderRadius: '8px',
+                  backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
+                  color: published ? '#047857' : '#B45309',
+                  border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`
+                }}>
+                  {published ? '● Live on Public Website' : '● Draft (Private for editing)'}
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px', marginTop: '4px', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={() => setPublished(false)}
+                  style={{
+                    flex: 1,
+                    minWidth: '180px',
+                    padding: '10px 14px',
+                    borderRadius: '10px',
+                    border: !published ? '2px solid #F59E0B' : '1px solid #CBD5E1',
+                    backgroundColor: !published ? '#FFFBEB' : '#FFFFFF',
+                    color: !published ? '#B45309' : '#64748B',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <span>📝 Draft Mode</span>
+                  <span style={{ fontSize: '0.725rem', fontWeight: 500, opacity: 0.8 }}>(Unpublished)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setPublished(true)}
+                  style={{
+                    flex: 1,
+                    minWidth: '180px',
+                    padding: '10px 14px',
+                    borderRadius: '10px',
+                    border: published ? '2px solid #10B981' : '1px solid #CBD5E1',
+                    backgroundColor: published ? '#ECFDF5' : '#FFFFFF',
+                    color: published ? '#047857' : '#64748B',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <span>🚀 Published Live</span>
+                  <span style={{ fontSize: '0.725rem', fontWeight: 500, opacity: 0.8 }}>(Visible to public)</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -1958,6 +2069,89 @@ function BlogEditorInner() {
           </div>
         )}
       </form>
+
+      {/* Bottom Action Footer Bar */}
+      <div
+        style={{
+          marginTop: '2.5rem',
+          padding: '1.25rem 2rem',
+          borderRadius: '16px',
+          backgroundColor: '#FFFFFF',
+          border: '1.5px solid #E2E8F0',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.85rem', color: '#64748B' }}>
+            Current Status:
+          </span>
+          <span
+            style={{
+              fontSize: '0.775rem',
+              fontWeight: 700,
+              padding: '3px 10px',
+              borderRadius: '6px',
+              backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
+              color: published ? '#047857' : '#B45309',
+              border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`,
+            }}
+          >
+            {published ? '● Published Live' : '● Draft Mode'}
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => handleSave(undefined, false)}
+            disabled={isSubmitting}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '10px',
+              backgroundColor: '#FFFFFF',
+              color: '#334155',
+              border: '1.5px solid #CBD5E1',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <span>📝</span>
+            <span>{isSubmitting ? 'Saving...' : 'Save as Draft'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleSave(undefined, true)}
+            disabled={isSubmitting}
+            style={{
+              padding: '10px 24px',
+              borderRadius: '10px',
+              backgroundColor: '#1833FE',
+              color: '#FFFFFF',
+              border: 'none',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+            }}
+          >
+            <span>🚀</span>
+            <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish Live' : 'Publish Live'}</span>
+          </button>
+        </div>
+      </div>
 
       {/* Full Asset Picker Modal */}
       {isAssetPickerOpen && (

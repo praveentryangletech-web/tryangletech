@@ -130,160 +130,78 @@ export class BlogService {
    */
   private async ensureBlogSchema(): Promise<void> {
     if (isBlogTableEnsured) return;
-    try {
-      await db.$executeRawUnsafe(`
-        CREATE TABLE IF NOT EXISTS "BlogPost" (
-          "id" TEXT PRIMARY KEY,
-          "slug" TEXT UNIQUE NOT NULL,
-          "title" TEXT NOT NULL,
-          "category" TEXT NOT NULL,
-          "excerpt" TEXT NOT NULL DEFAULT '',
-          "content" TEXT NOT NULL DEFAULT '',
-          "coverImage" TEXT NOT NULL DEFAULT '',
-          "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
-          "authorName" TEXT DEFAULT 'TryangleTech Team',
-          "authorRole" TEXT DEFAULT 'Editorial Team',
-          "authorImage" TEXT DEFAULT '',
-          "authorBio" TEXT DEFAULT '',
-          "readTime" TEXT DEFAULT '5 min read',
-          "published" BOOLEAN DEFAULT true,
-          "publishedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
-          "order" INTEGER DEFAULT 0,
-          "tags" TEXT[] DEFAULT ARRAY[]::TEXT[],
-          "section1Heading" TEXT DEFAULT '',
-          "section1Paragraph1" TEXT DEFAULT '',
-          "section1Paragraph2" TEXT DEFAULT '',
-          "quoteText" TEXT DEFAULT '',
-          "quoteAuthor" TEXT DEFAULT '',
-          "stepsTitle" TEXT DEFAULT '',
-          "step1" TEXT DEFAULT '',
-          "step2" TEXT DEFAULT '',
-          "contentImage1" TEXT DEFAULT '',
-          "contentImage2" TEXT DEFAULT '',
-          "conclusionTitle" TEXT DEFAULT '',
-          "conclusionBody" TEXT DEFAULT '',
-          "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[],
-          "metaTitle" TEXT DEFAULT '',
-          "metaDescription" TEXT DEFAULT '',
-          "canonicalUrl" TEXT DEFAULT '',
-          "keywords" TEXT[] DEFAULT ARRAY[]::TEXT[],
-          "viewsCount" INTEGER DEFAULT 0,
-          "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-        );
-      `);
+    isBlogTableEnsured = true;
 
-      // Safe column migrations in case table was created earlier
-      const columnsToAdd = [
-        'section1Heading',
-        'section1Paragraph1',
-        'section1Paragraph2',
-        'quoteText',
-        'quoteAuthor',
-        'stepsTitle',
-        'step1',
-        'step2',
-        'contentImage1',
-        'contentImage2',
-        'conclusionTitle',
-        'conclusionBody',
-        'authorImage',
-        'authorBio',
-      ];
-      for (const col of columnsToAdd) {
+    // Run schema synchronization and indexing in background without blocking API queries
+    (async () => {
+      try {
         await db.$executeRawUnsafe(`
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "${col}" TEXT DEFAULT '';
-        `).catch(() => {});
-      }
-      await db.$executeRawUnsafe(`
-        ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[];
-      `).catch(() => {});
-
-      // Seed initial posts if empty
-      const countResult: any = await db.$queryRawUnsafe(`SELECT COUNT(*)::int as count FROM "BlogPost"`);
-      const count = Number(countResult?.[0]?.count || 0);
-
-      if (count === 0) {
-        const fallbacks = this.getFallbackPosts();
-        for (const post of fallbacks) {
-          await db.$executeRawUnsafe(
-            `
-            INSERT INTO "BlogPost" (
-              "id", "slug", "title", "category", "excerpt", "content",
-              "coverImage", "images", "authorName", "authorRole", "authorImage", "authorBio", "readTime",
-              "published", "order", "tags",
-              "section1Heading", "section1Paragraph1", "section1Paragraph2",
-              "quoteText", "quoteAuthor", "stepsTitle", "step1", "step2",
-              "contentImage1", "contentImage2", "conclusionTitle", "conclusionBody", "conclusionPoints",
-              "createdAt", "updatedAt"
-            ) VALUES (
-              $1, $2, $3, $4, $5, $6,
-              $7, $8, $9, $10, $11, $12, $13,
-              $14, $15, $16,
-              $17, $18, $19,
-              $20, $21, $22, $23, $24,
-              $25, $26, $27, $28, $29,
-              NOW(), NOW()
-            )
-            ON CONFLICT ("slug") DO NOTHING
-            `,
-            post.id,
-            post.slug,
-            post.title,
-            post.category,
-            post.excerpt,
-            post.content,
-            post.coverImage,
-            post.images || [],
-            post.authorName,
-            post.authorRole,
-            post.authorImage || '',
-            post.authorBio || '',
-            post.readTime,
-            post.published,
-            post.order,
-            post.tags || [],
-            post.section1Heading || '',
-            post.section1Paragraph1 || '',
-            post.section1Paragraph2 || '',
-            post.quoteText || '',
-            post.quoteAuthor || '',
-            post.stepsTitle || '',
-            post.step1 || '',
-            post.step2 || '',
-            post.contentImage1 || '',
-            post.contentImage2 || '',
-            post.conclusionTitle || '',
-            post.conclusionBody || '',
-            post.conclusionPoints || []
+          CREATE TABLE IF NOT EXISTS "BlogPost" (
+            "id" TEXT PRIMARY KEY,
+            "slug" TEXT UNIQUE NOT NULL,
+            "title" TEXT NOT NULL,
+            "category" TEXT NOT NULL,
+            "excerpt" TEXT NOT NULL DEFAULT '',
+            "content" TEXT NOT NULL DEFAULT '',
+            "coverImage" TEXT NOT NULL DEFAULT '',
+            "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            "authorName" TEXT DEFAULT 'TryangleTech Team',
+            "authorRole" TEXT DEFAULT 'Content Creators',
+            "authorImage" TEXT DEFAULT '',
+            "authorBio" TEXT DEFAULT '',
+            "readTime" TEXT DEFAULT '5 min read',
+            "published" BOOLEAN DEFAULT true,
+            "publishedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+            "order" INTEGER DEFAULT 0,
+            "tags" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            "section1Heading" TEXT DEFAULT '',
+            "section1Paragraph1" TEXT DEFAULT '',
+            "section1Paragraph2" TEXT DEFAULT '',
+            "quoteText" TEXT DEFAULT '',
+            "quoteAuthor" TEXT DEFAULT '',
+            "stepsTitle" TEXT DEFAULT '',
+            "step1" TEXT DEFAULT '',
+            "step2" TEXT DEFAULT '',
+            "contentImage1" TEXT DEFAULT '',
+            "contentImage2" TEXT DEFAULT '',
+            "conclusionTitle" TEXT DEFAULT '',
+            "conclusionBody" TEXT DEFAULT '',
+            "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            "metaTitle" TEXT DEFAULT '',
+            "metaDescription" TEXT DEFAULT '',
+            "canonicalUrl" TEXT DEFAULT '',
+            "keywords" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            "viewsCount" INTEGER DEFAULT 0,
+            "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
           );
-        }
+
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Heading" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph1" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph2" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteText" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteAuthor" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "stepsTitle" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step1" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step2" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage1" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage2" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionTitle" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionBody" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorImage" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorBio" TEXT DEFAULT '';
+          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[];
+
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_slug" ON "BlogPost" ("slug");
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_created" ON "BlogPost" ("published", "createdAt" DESC);
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub" ON "BlogPost" ("category", "published");
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_order_created" ON "BlogPost" ("order" ASC, "createdAt" DESC);
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);
+        `);
+      } catch (err) {
+        console.warn('[DB Blog] Background schema check notice:', err);
       }
-
-      // Clean up any stale or placeholder author photos and roles
-      await db.$executeRawUnsafe(`
-        UPDATE "BlogPost" 
-        SET "authorImage" = '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp'
-        WHERE "authorImage" IS NULL OR "authorImage" = '' OR "authorImage" LIKE '%varnet%' OR "authorImage" LIKE '%/portfolio/%';
-      `).catch(() => {});
-
-      await db.$executeRawUnsafe(`
-        UPDATE "BlogPost"
-        SET "authorRole" = 'Content Creators'
-        WHERE "authorRole" IS NULL OR "authorRole" = '' OR "authorRole" = 'Editorial Team' OR "authorRole" = 'Engineering & Marketing';
-      `).catch(() => {});
-
-      // High-Performance Database Compound Indexes for 5-10ms query execution
-      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_slug" ON "BlogPost" ("slug");`).catch(() => {});
-      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_created" ON "BlogPost" ("published", "createdAt" DESC);`).catch(() => {});
-      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub" ON "BlogPost" ("category", "published");`).catch(() => {});
-      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_order_created" ON "BlogPost" ("order" ASC, "createdAt" DESC);`).catch(() => {});
-      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);`).catch(() => {});
-
-      isBlogTableEnsured = true;
-    } catch (err) {
-      console.warn('Failed to ensure BlogPost table or seed, will use fallback data:', err);
-    }
+    })().catch(() => {});
   }
 
   private mapRowToPost(row: any): BlogPostItem {
@@ -355,7 +273,7 @@ export class BlogService {
       return cached.data;
     }
 
-    await this.ensureBlogSchema();
+    this.ensureBlogSchema();
 
     try {
       const conditions: string[] = [];
@@ -484,7 +402,7 @@ export class BlogService {
     const cached = blogCache.get<BlogPostItem>(cacheKey);
     if (cached) return cached.data;
 
-    await this.ensureBlogSchema();
+    this.ensureBlogSchema();
 
     try {
       const rows: any = await db.$queryRawUnsafe(
@@ -509,7 +427,11 @@ export class BlogService {
    * Get single post by ID
    */
   public async getPostById(id: string): Promise<BlogPostItem | null> {
-    await this.ensureBlogSchema();
+    const cacheKey = `blog:id:${id}`;
+    const cached = blogCache.get<BlogPostItem>(cacheKey);
+    if (cached) return cached.data;
+
+    this.ensureBlogSchema();
 
     try {
       const rows: any = await db.$queryRawUnsafe(
@@ -518,13 +440,17 @@ export class BlogService {
       );
 
       if (Array.isArray(rows) && rows.length > 0) {
-        return this.mapRowToPost(rows[0]);
+        const post = this.mapRowToPost(rows[0]);
+        blogCache.set(cacheKey, post);
+        return post;
       }
     } catch (err) {
       console.warn('Database error in getPostById:', err);
     }
 
-    return this.getFallbackPosts().find((p) => p.id === id || p.slug === id) || null;
+    const fallback = this.getFallbackPosts().find((p) => p.id === id || p.slug === id) || null;
+    if (fallback) blogCache.set(cacheKey, fallback);
+    return fallback;
   }
 
   /**

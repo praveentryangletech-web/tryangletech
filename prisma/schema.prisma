@@ -48,21 +48,53 @@ model NewsletterSubscriber {
 // 3. DYNAMIC BLOG POSTS & CMS
 // ----------------------------------------------------
 model BlogPost {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  category    String
-  excerpt     String?  @db.Text
-  content     String   @db.Text
-  coverImage  String?
-  published   Boolean  @default(true)
-  publishedAt DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  title              String
+  category           String
+  excerpt            String?  @db.Text
+  content            String   @db.Text
+  coverImage         String?
+  images             String[] @default([])
+  authorName         String?  @default("TryangleTech Team")
+  authorRole         String?  @default("Content Creators")
+  authorImage        String?
+  authorBio          String?  @db.Text
+  readTime           String?  @default("5 min read")
+  published          Boolean  @default(true)
+  publishedAt        DateTime @default(now())
+  order              Int      @default(0)
+  tags               String[] @default([])
+  
+  // Section-wise fields
+  section1Heading    String?
+  section1Paragraph1 String?  @db.Text
+  section1Paragraph2 String?  @db.Text
+  quoteText          String?  @db.Text
+  quoteAuthor        String?
+  stepsTitle         String?
+  step1              String?  @db.Text
+  step2              String?  @db.Text
+  contentImage1      String?
+  contentImage2      String?
+  conclusionTitle    String?
+  conclusionBody     String?  @db.Text
+  conclusionPoints   String[] @default([])
 
-  @@index([category, publishedAt(sort: Desc)])
+  // SEO & AEO
+  metaTitle          String?
+  metaDescription    String?  @db.Text
+  canonicalUrl       String?
+  keywords           String[] @default([])
+  viewsCount         Int      @default(0)
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([category, published, createdAt(sort: Desc)])
   @@index([slug])
-  @@index([published, publishedAt(sort: Desc)])
+  @@index([published, createdAt(sort: Desc)])
+  @@index([order, createdAt(sort: Desc)])
 }
 
 // ----------------------------------------------------
@@ -133,4 +165,3 @@ model MediaAsset {
   @@index([filename])
   @@index([updatedAt(sort: Desc)])
 }
-

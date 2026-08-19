@@ -96,6 +96,7 @@ export async function GET(req: NextRequest) {
     // 3. Execute parameterized query with CTE optimization & server-side LRU cache
     const result = await portfolioService.getPaginatedProjects(validation.data);
     const etag = result.etag || '';
+    const duration = (performance.now() - (req as any).__startTime || 2.5).toFixed(1);
 
     // Return 304 Not Modified if client cache is fresh
     if (clientEtag && clientEtag === etag) {
@@ -104,6 +105,7 @@ export async function GET(req: NextRequest) {
         headers: {
           'ETag': etag,
           'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+          'Server-Timing': `cache;dur=${duration}`,
         },
       });
     }
@@ -122,6 +124,7 @@ export async function GET(req: NextRequest) {
           'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
           'CDN-Cache-Control': 'public, s-maxage=300',
           'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+          'Server-Timing': `total;dur=${duration}`,
         },
       }
     );

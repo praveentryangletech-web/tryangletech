@@ -118,6 +118,10 @@ async function ensureColumnsExist(): Promise<void> {
     `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "keywords" text[] DEFAULT '{}'`,
     `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "geoRegion" text`,
     `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "canonicalUrl" text`,
+    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_slug" ON "PortfolioProject" ("slug");`,
+    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_order" ON "PortfolioProject" ("order" ASC, "createdAt" DESC);`,
+    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_category" ON "PortfolioProject" ("category");`,
+    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_created" ON "PortfolioProject" ("createdAt" DESC);`,
   ];
 
   for (const sql of columnStatements) {

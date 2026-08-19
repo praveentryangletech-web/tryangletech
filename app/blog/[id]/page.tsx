@@ -1,18 +1,68 @@
-
 import WebflowInit from "../../common/WebflowInit";
-
 import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
+import { blogService } from "@/backend/services/blog/blog.service";
+
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
-  const post = BLOG_POSTS.find(p => p.slug === resolvedParams.id);
+  
+  // 1. Try fetching from dynamic database first
+  let post: any = null;
+  try {
+    post = await blogService.getPostBySlug(resolvedParams.id);
+  } catch {}
+
+  // 2. Fallback to static data
+  if (!post) {
+    post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
+  }
 
   if (!post) {
     return notFound();
   }
+
+  const coverImage = post.coverImage || post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
+  const sliderImages = post.images && post.images.length > 0 ? post.images : (coverImage ? [coverImage] : []);
+  const authorName = post.authorName || 'TryangleTech Team';
+  const authorRole = post.authorRole || 'Content Creators';
+  const authorImage = (post.authorImage && !post.authorImage.includes('/portfolio/')) ? post.authorImage : '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';
+  const publishDate = post.publishedAt
+    ? (post.publishedAt.includes('T') ? new Date(post.publishedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) : post.publishedAt)
+    : (post.date || '29 Oct 2025');
+
+  // Section 1: Intro Story
+  const s1Heading = post.section1Heading || "Blending human creativity with machine Intelligence";
+  const s1P1 = post.section1Paragraph1 || post.content || "The combination of human creativity and AI intelligence unlocks new possibilities for innovation and efficiency. AI tools augment human ideas, automate repetitive tasks, and provide data-driven insights that inspire creative solutions.";
+  const s1P2 = post.section1Paragraph2 || "By leveraging AI-powered analytics, generative models, and intelligent workflows, teams can focus on conceptual thinking while leaving mundane tasks to machines. This collaboration ensures that human imagination and computational precision work together to produce remarkable outcomes.";
+
+  // Section 2: Quote Box
+  const quoteText = post.quoteText || "Using this task management system has transformed how we work. Tasks are organized, deadlines are clear, and team collaboration is seamless. Productivity has improved, and projects are delivered on time. Highly recommended for teams looking to streamline workflows and boost efficiency.";
+  const quoteAuthor = post.quoteAuthor || "Tanya Erin";
+
+  // Section 3: Steps
+  const stepsTitle = post.stepsTitle || "Steps to integrate AI with creative workflows";
+  const step1 = post.step1 || "Successful integration requires identifying areas where AI can assist, selecting the right tools, and fostering a culture of experimentation. Encourage teams to explore AI-generated suggestions, iterate quickly, and combine them with human intuition.";
+  const step2 = post.step2 || "Develop a step-by-step plan, including testing, monitoring, and continuous optimization. Train teams to adapt to AI-augmented workflows while maintaining governance, security, and compliance. Regularly evaluate outcomes and refine processes for maximum creative impact.";
+
+  // Section 4: Mid-Article Images
+  const img1 = post.contentImage1 || "/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png";
+  const img2 = post.contentImage2 || "/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp";
+
+  // Section 5: Conclusion & Takeaways
+  const concTitle = post.conclusionTitle || "The future of human-AI collaboration";
+  const concBody = post.conclusionBody || "The collaboration of humans and AI will transform industries, combining artistic expression, strategic thinking, and technical execution. Organizations embracing this partnership will create richer experiences, solve complex problems efficiently, and drive innovation in ways previously unimaginable.";
+  const concPoints = post.conclusionPoints && post.conclusionPoints.length > 0 ? post.conclusionPoints : [
+    "AI-powered tools enhance creative workflows.",
+    "Data-driven insights inform better decisions.",
+    "Collaboration between humans and AI accelerates innovation.",
+    "Future solutions will be smarter, faster, and more imaginative.",
+  ];
+
+  // Section 6: Author Bio
+  const authorBio = post.authorBio || "By combining human ingenuity with AI capabilities, organizations can unlock new forms of creative expression. Intelligent systems support ideation, experimentation, and execution, while humans provide vision, empathy, and imagination. Together, they form a powerful partnership for innovation and growth.";
 
   return (
     <>
@@ -38,11 +88,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
               className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ position: 'relative' }}>
-              {post.images && post.images.length > 1 ? (
-                <PortfolioImageSlider images={post.images} title={post.title} coverImage={post.image} />
+              {sliderImages.length > 1 ? (
+                <PortfolioImageSlider images={sliderImages} title={post.title} coverImage={coverImage} />
               ) : (
                 <Image
-                  src={post.image}
+                  src={coverImage}
                   loading="lazy"
                   data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
                   alt={post.title}
@@ -109,11 +159,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   transform: translateX(-4px);
                 }
               `}</style>
+
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9ca"
                 className="w-layout-hflex rt-blog-post-date-wrap">
                 <p className="rt-gap-off rt-color-vivid-blue">
-                  {post.date}
+                  {publishDate}
                 </p>
                 <div className="rt-author-name-wrap">
                   <div className="rt-dot-small"></div>
@@ -123,39 +174,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 </div>
               </div>
 
-                           <div
+              {/* 1. SECTION 1: Dynamic Introduction & Story Section */}
+              <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbac9d1"
                 className="w-richtext">
-                <h2>Blending human creativity with hachine Intelligence</h2>
-                <p>
-                  The combination of human creativity and AI intelligence
-                  unlocks new possibilities for innovation and efficiency. AI
-                  tools augment human ideas, automate repetitive tasks, and
-                  provide data-driven insights that inspire creative solutions.
-                </p>
-                <p>
-                  By leveraging AI-powered analytics, generative models, and
-                  intelligent workflows, teams can focus on conceptual thinking
-                  while leaving mundane tasks to machines. This collaboration
-                  ensures that human imagination and computational precision
-                  work together to produce remarkable outcomes.
-                </p>
+                <h2>{s1Heading}</h2>
+                <p style={{ whiteSpace: 'pre-line' }}>{s1P1}</p>
+                {s1P2 && <p style={{ whiteSpace: 'pre-line' }}>{s1P2}</p>}
               </div>
-               <div className="project-meta-grid">
+
+              {/* Meta Grid */}
+              <div className="project-meta-grid">
                 <div className="meta-card">
                   <span className="meta-label">Category</span>
                   <span className="meta-value">{post.category}</span>
                 </div>
                 <div className="meta-card">
                   <span className="meta-label">Author</span>
-                  <span className="meta-value">TryangleTech Team</span>
+                  <span className="meta-value">{authorName}</span>
                 </div>
                 <div className="meta-card">
-                  <span className="meta-label">Author</span>
-                  <span className="meta-value">TryangleTech Team</span>
+                  <span className="meta-label">Read Time</span>
+                  <span className="meta-value">{post.readTime || '5 min read'}</span>
                 </div>
               </div>
-               <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
+
+              <div style={{ marginTop: '24px', marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
                 <Link href="/blog" className="rt-button-body w-inline-block back-btn-animated" style={{ borderRadius: '100px' }}>
                   <div className="rt-button-text" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -165,6 +209,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   </div>
                 </Link>
               </div>
+
+              {/* 2. SECTION 2: Highlight Quote Box */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca03"
                 className="rt-blog-details-overlay">
@@ -181,11 +227,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   </div>
                   <div className="w-layout-vflex rt-blog-overlay-wrap">
                     <div className="rt-text-style-h6 rt-text-color-white">
-                      Using this task management system has transformed how we
-                      work. Tasks are organized, deadlines are clear, and team
-                      collaboration is seamless. productivity has improved, and
-                      projects are delivered on time. highly recommended for
-                      teams looking to streamline workflows and boost efficienc
+                      {quoteText}
                     </div>
                     <div className="w-layout-hflex rt-blog-author">
                       <div>
@@ -198,81 +240,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                           className="rt-auto-fit rt-desktop-image-full-width"
                         />
                       </div>
-                      <div className="rt-text-color-white">Tanya Erin</div>
+                      <div className="rt-text-color-white">{quoteAuthor}</div>
                     </div>
                   </div>
                 </div>
               </div>
-{/*               
+
+              {/* 3. SECTION 3: Key Steps Section */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
                 className="w-richtext">
-                <h3>Steps to integrate AI with creative workflows</h3>
-                <div className="flex flex-col md:flex-row gap-6 my-8">
-                  <div className="w-full md:w-1/2 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex items-start gap-4">
-                    <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <p className="m-0 leading-relaxed text-gray-600">
-                      Successful integration requires identifying areas where AI can
-                      assist, selecting the right tools, and fostering a culture of
-                      experimentation. Encourage teams to explore AI-generated
-                      suggestions, iterate quickly, and combine them with human
-                      intuition.
-                    </p>
-                  </div>
-                  <div className="w-full md:w-1/2 p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex items-start gap-4">
-                    <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                      </svg>
-                    </div>
-                    <p className="m-0 leading-relaxed text-gray-600">
-                      Develop a step-by-step plan, including testing, monitoring,
-                      and continuous optimization. Train teams to adapt to
-                      AI-augmented workflows while maintaining governance, security,
-                      and compliance. Regularly evaluate outcomes and refine
-                      processes for maximum creative impact.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <h5>--These both are sample</h5> */}
-
-              <div
-                data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca0f"
-                className="w-richtext">
-                <h3>Steps to integrate AI with creative workflows</h3>
+                <h3>{stepsTitle}</h3>
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="w-full md:w-1/2 flex items-start gap-3">
                     <svg className="w-5 h-5 mt-1 flex-shrink-0 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    <p className="m-0">
-                      Successful integration requires identifying areas where AI can
-                      assist, selecting the right tools, and fostering a culture of
-                      experimentation. Encourage teams to explore AI-generated
-                      suggestions, iterate quickly, and combine them with human
-                      intuition.
+                    <p className="m-0" style={{ whiteSpace: 'pre-line' }}>
+                      {step1}
                     </p>
                   </div>
                   <div className="w-full md:w-1/2 flex items-start gap-3">
                     <svg className="w-5 h-5 mt-1 flex-shrink-0 text-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    <p className="m-0">
-                      Develop a step-by-step plan, including testing, monitoring,
-                      and continuous optimization. Train teams to adapt to
-                      AI-augmented workflows while maintaining governance, security,
-                      and compliance. Regularly evaluate outcomes and refine
-                      processes for maximum creative impact.
+                    <p className="m-0" style={{ whiteSpace: 'pre-line' }}>
+                      {step2}
                     </p>
                   </div>
                 </div>
               </div>
+
+              {/* 4. SECTION 4: Mid-Article Images */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
                 className="rt-blog-details-content-image">
@@ -281,7 +280,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                     width={458}
                     height={291}
                     alt=""
-                    src="/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png"
+                    src={img1}
                     loading="lazy"
                   />
                 </div>
@@ -290,35 +289,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                     width={537}
                     height={357}
                     alt=""
-                    src="/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp"
+                    src={img2}
                     loading="lazy"
                   />
                 </div>
               </div>
+
+              {/* 5. SECTION 5: Conclusion & Future Outlook */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca46"
                 className="w-richtext">
-                <h4>The future of human-AI collaboration</h4>
-                <p>
-                  The collaboration of humans and AI will transform industries,
-                  combining artistic expression, strategic thinking, and
-                  technical execution. Organizations embracing this partnership
-                  will create richer experiences, solve complex problems
-                  efficiently, and drive innovation in ways previously
-                  unimaginable.
-                </p>
+                <h4>{concTitle}</h4>
+                <p style={{ whiteSpace: 'pre-line' }}>{concBody}</p>
                 <ul role="list">
-                  <li>AI-powered tools enhance creative workflows.</li>
-                  <li>Data-driven insights inform better decisions.</li>
-                  <li>
-                    Collaboration between humans and AI accelerates innovation.
-                  </li>
-                  <li>
-                    Future solutions will be smarter, faster, and more
-                    imaginative.
-                  </li>
+                  {concPoints.map((pt: string, idx: number) => (
+                    <li key={idx}>{pt}</li>
+                  ))}
                 </ul>
               </div>
+
+              {/* 6. SECTION 6: Author Bio Footer */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca78"
                 className="w-layout-hflex rt-bottom-blog">
@@ -326,28 +316,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   <Image
                     width={110}
                     height={110}
-                    alt=""
-                    src="/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp"
+                    alt={authorName}
+                    src={authorImage}
                     loading="lazy"
                     className="rt-auto-fit rt-desktop-image-full-width"
                   />
                 </div>
                 <div className="w-layout-vflex rt-author-content-wrap rt-mobile-text-center">
                   <div className="w-layout-hflex rt-blog-post-author-wrap">
-                    <div className="rt-text-style-h6">TryangleTech Team</div>
+                    <div className="rt-text-style-h6">{authorName}</div>
                     <div className="rt-author-degignation-wrap">
                       <div className="rt-blog-degignation-text rt-text-color-white-2">
-                        Content Creators
+                        {authorRole}
                       </div>
                     </div>
                   </div>
-                  <p className="rt-no-margin">
-                    By combining human ingenuity with AI capabilities,
-                    organizations can unlock new forms of creative expression.
-                    Intelligent systems support ideation, experimentation, and
-                    execution, while humans provide vision, empathy, and
-                    imagination. Together, they form a powerful partnership for
-                    innovation and growth.
+                  <p className="rt-no-margin" style={{ whiteSpace: 'pre-line' }}>
+                    {authorBio}
                   </p>
                 </div>
               </div>
@@ -355,7 +340,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
           </div>
         </section>
       </main>
-
     </>
   );
 }

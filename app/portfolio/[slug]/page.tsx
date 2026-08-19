@@ -15,6 +15,9 @@ import SafeImage from '@/app/common/SafeImage';
 import type { Metadata } from 'next';
 import Image from "next/image";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   let project: Project | null = null;

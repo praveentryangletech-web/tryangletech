@@ -6,6 +6,9 @@ import PortfolioGrid from "./components/PortfolioGrid";
 import HomeThreeFaq from "../home-three/components/Faq";
 import HomeTwoTestimonial from "../home-two/components/HomeTwoTestimonial";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function PortfolioPage() {
   return (
     <>

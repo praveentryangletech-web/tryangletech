@@ -27,7 +27,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   const coverImage = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
     ? post.coverImage.trim()
     : (post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png');
-  const sliderImages = post.images && post.images.length > 0 ? post.images : (coverImage ? [coverImage] : []);
+  const sliderImages = (post.images && post.images.length > 0 && post.images.some((img: string) => img && img.trim()))
+    ? post.images.filter((img: string) => img && typeof img === 'string' && img.trim())
+    : [coverImage];
   const authorName = post.authorName || 'TryangleTech Team';
   const authorRole = post.authorRole || 'Content Creators';
   const authorImage = (post.authorImage && !post.authorImage.includes('/portfolio/')) ? post.authorImage : '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';

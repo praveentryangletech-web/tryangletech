@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import SafeImage from '@/app/common/SafeImage';
 
 interface PortfolioImageSliderProps {
   images: string[];
@@ -11,18 +11,20 @@ interface PortfolioImageSliderProps {
 
 export default function PortfolioImageSlider({ images, title, coverImage }: PortfolioImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [failedIndices, setFailedIndices] = useState<Record<number, boolean>>({});
 
-  const fallback = coverImage || '/portfolio/vh-accounting.webp';
+  const fallback = (coverImage && coverImage.trim()) || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
+
+  const validImages = images && images.length > 0 ? images.filter(img => img && typeof img === 'string' && img.trim()) : [];
+  const displayImages = validImages.length > 0 ? validImages : [fallback];
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? displayImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const goToNext = () => {
-    const isLastSlide = currentIndex === images.length - 1;
+    const isLastSlide = currentIndex === displayImages.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -33,15 +35,14 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
 
   // Auto slide every 5 seconds
   useEffect(() => {
+    if (displayImages.length <= 1) return;
     const timer = setInterval(() => {
       goToNext();
     }, 5000);
     return () => clearInterval(timer);
-  }, [currentIndex, images.length]);
+  }, [currentIndex, displayImages.length]);
 
-  if (!images || images.length === 0) return null;
-
-  const currentSrc = failedIndices[currentIndex] ? fallback : (images[currentIndex] || fallback);
+  const currentSrc = displayImages[currentIndex] || fallback;
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -51,9 +52,10 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
           to { opacity: 1; }
         }
       `}</style>
-      <Image
+      <SafeImage
         key={currentIndex}
         src={currentSrc}
+        fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
         loading="lazy"
         alt={`${title} - image ${currentIndex + 1}`}
         className="rt-image-scale"
@@ -61,12 +63,9 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
         width={800}
         height={800}
         unoptimized
-        onError={() => {
-          setFailedIndices((prev) => ({ ...prev, [currentIndex]: true }));
-        }}
       />
       
-      {images.length > 1 && (
+      {displayImages.length > 1 && (
         <>
           {/* Left Arrow */}
           <button 
@@ -102,18 +101,23 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
             &#10095;
           </button>
 
-          {/* Dots Container */}
-          <div style={{ position: 'absolute', bottom: '15px', display: 'flex', gap: '8px', justifyContent: 'center', width: '100%' }}>
-            {images.map((_, slideIndex) => (
-              <div
-                key={slideIndex}
-                onClick={() => goToSlide(slideIndex)}
-                style={{ 
-                  width: '10px', height: '10px', borderRadius: '50%', cursor: 'pointer',
-                  backgroundColor: currentIndex === slideIndex ? '#1833fe' : 'rgba(24,51,254,0.3)',
-                  transition: 'background-color 0.3s ease, transform 0.3s ease',
-                  transform: currentIndex === slideIndex ? 'scale(1.2)' : 'scale(1)'
+          {/* Dots Indicator */}
+          <div style={{ position: 'absolute', bottom: '15px', display: 'flex', gap: '8px', zIndex: 10 }}>
+            {displayImages.map((_, dotIndex) => (
+              <button
+                key={dotIndex}
+                onClick={() => goToSlide(dotIndex)}
+                style={{
+                  width: currentIndex === dotIndex ? '20px' : '8px',
+                  height: '8px',
+                  borderRadius: '4px',
+                  backgroundColor: currentIndex === dotIndex ? 'var(--brand-blue, #1833fe)' : 'rgba(24, 51, 254, 0.25)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                  transition: 'all 0.3s ease'
                 }}
+                aria-label={`Go to slide ${dotIndex + 1}`}
               />
             ))}
           </div>

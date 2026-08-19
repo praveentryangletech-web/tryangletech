@@ -129,85 +129,9 @@ export class BlogService {
    * Ensure BlogPost schema columns exist in PostgreSQL
    */
   private async ensureBlogSchema(): Promise<void> {
-    if (isBlogTableEnsured) return;
+    // Schema is managed statically via Prisma schema.
+    // Avoid running runtime ALTER TABLE locks during live queries.
     isBlogTableEnsured = true;
-
-    // Run schema synchronization and indexing in background without blocking API queries
-    (async () => {
-      try {
-        const schemaStatements = [
-          `CREATE TABLE IF NOT EXISTS "BlogPost" (
-            "id" TEXT PRIMARY KEY,
-            "slug" TEXT UNIQUE NOT NULL,
-            "title" TEXT NOT NULL,
-            "category" TEXT NOT NULL,
-            "excerpt" TEXT NOT NULL DEFAULT '',
-            "content" TEXT NOT NULL DEFAULT '',
-            "coverImage" TEXT NOT NULL DEFAULT '',
-            "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "authorName" TEXT DEFAULT 'TryangleTech Team',
-            "authorRole" TEXT DEFAULT 'Content Creators',
-            "authorImage" TEXT DEFAULT '',
-            "authorBio" TEXT DEFAULT '',
-            "readTime" TEXT DEFAULT '5 min read',
-            "published" BOOLEAN DEFAULT true,
-            "publishedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
-            "order" INTEGER DEFAULT 0,
-            "tags" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "section1Heading" TEXT DEFAULT '',
-            "section1Paragraph1" TEXT DEFAULT '',
-            "section1Paragraph2" TEXT DEFAULT '',
-            "quoteText" TEXT DEFAULT '',
-            "quoteAuthor" TEXT DEFAULT '',
-            "stepsTitle" TEXT DEFAULT '',
-            "step1" TEXT DEFAULT '',
-            "step2" TEXT DEFAULT '',
-            "contentImage1" TEXT DEFAULT '',
-            "contentImage2" TEXT DEFAULT '',
-            "conclusionTitle" TEXT DEFAULT '',
-            "conclusionBody" TEXT DEFAULT '',
-            "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "metaTitle" TEXT DEFAULT '',
-            "metaDescription" TEXT DEFAULT '',
-            "canonicalUrl" TEXT DEFAULT '',
-            "keywords" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "viewsCount" INTEGER DEFAULT 0,
-            "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-          )`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Heading" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph1" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph2" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteText" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteAuthor" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "stepsTitle" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step1" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step2" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage1" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage2" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionTitle" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionBody" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorImage" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorBio" TEXT DEFAULT ''`,
-          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[]`,
-          `CREATE INDEX IF NOT EXISTS "idx_blogpost_slug" ON "BlogPost" ("slug")`,
-          `CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_created" ON "BlogPost" ("published", "createdAt" DESC)`,
-          `CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub" ON "BlogPost" ("category", "published")`,
-          `CREATE INDEX IF NOT EXISTS "idx_blogpost_order_created" ON "BlogPost" ("order" ASC, "createdAt" DESC)`,
-          `CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC)`
-        ];
-
-        for (const sql of schemaStatements) {
-          try {
-            await db.$executeRawUnsafe(sql);
-          } catch {
-            // Ignore non-fatal column/index existence errors
-          }
-        }
-      } catch (err) {
-        console.warn('[DB Blog] Background schema check notice:', err);
-      }
-    })().catch(() => {});
   }
 
   private mapRowToPost(row: any): BlogPostItem {

@@ -104,33 +104,10 @@ export function clearPortfolioCache(): void {
 }
 
 /**
- * Guarantees that all required columns exist in PostgreSQL by executing individual safe DDL statements (runs ONCE)
+ * Guarantees that schema initialization is handled via Prisma schema without acquiring exclusive locks.
  */
 async function ensureColumnsExist(): Promise<void> {
-  if (isColumnsEnsured) return;
   isColumnsEnsured = true;
-
-  const columnStatements = [
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "images" text[] DEFAULT '{}'`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "metaTitle" text`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "metaDescription" text`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "aeoSummary" text`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "keywords" text[] DEFAULT '{}'`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "geoRegion" text`,
-    `ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "canonicalUrl" text`,
-    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_slug" ON "PortfolioProject" ("slug");`,
-    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_order" ON "PortfolioProject" ("order" ASC, "createdAt" DESC);`,
-    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_category" ON "PortfolioProject" ("category");`,
-    `CREATE INDEX IF NOT EXISTS "idx_portfolioproject_created" ON "PortfolioProject" ("createdAt" DESC);`,
-  ];
-
-  for (const sql of columnStatements) {
-    try {
-      await db.$executeRawUnsafe(sql);
-    } catch {
-      // Non-fatal if column already exists
-    }
-  }
 }
 
 export const portfolioService = {

@@ -812,7 +812,7 @@ function BlogEditorInner() {
                   required
                   placeholder="e.g. Transforming businesses with innovative technology"
                   value={title}
-                  onChange={(e) => handleTitleChange(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)}
                   style={inputStyle}
                 />
               </div>
@@ -841,9 +841,7 @@ function BlogEditorInner() {
                 <button
                   type="button"
                   onClick={() => {
-                    const auto = generateBlogSlug(title);
-                    setSlug(auto);
-                    setIsSlugManual(false);
+                    setSlug(generateBlogSlug(title));
                   }}
                   style={{
                     border: 'none',
@@ -878,7 +876,7 @@ function BlogEditorInner() {
                   required
                   placeholder="transforming-businesses-with-innovative-technology"
                   value={slug}
-                  onChange={(e) => handleSlugChange(e.target.value)}
+                  onChange={(e) => setSlug(e.target.value)}
                   style={{ ...inputStyle, flex: 1, fontFamily: 'monospace' }}
                 />
               </div>

@@ -696,9 +696,11 @@ function PortfolioEditorInner() {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '8px',
-            padding: '10px 18px',
-            borderRadius: '12px',
+            height: '42px',
+            padding: '0 18px',
+            borderRadius: '10px',
             border: '1px solid #E2E8F0',
             backgroundColor: '#FFFFFF',
             color: '#334155',
@@ -706,6 +708,7 @@ function PortfolioEditorInner() {
             fontWeight: 700,
             textDecoration: 'none',
             boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+            boxSizing: 'border-box',
             transition: 'all 0.15s ease',
           }}
         >
@@ -726,16 +729,18 @@ function PortfolioEditorInner() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '7px',
-                padding: '10px 18px',
-                borderRadius: '12px',
-                border: '1px solid #CBD5E1',
-                backgroundColor: '#FFFFFF',
-                color: '#334155',
+                height: '42px',
+                padding: '0 18px',
+                borderRadius: '10px',
+                border: '1.5px solid #BFDBFE',
+                backgroundColor: '#EFF6FF',
+                color: '#1833FE',
                 fontSize: '0.875rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 textDecoration: 'none',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                boxSizing: 'border-box',
                 transition: 'all 0.15s ease',
               }}
             >
@@ -751,14 +756,19 @@ function PortfolioEditorInner() {
           <Link
             href="/superadmin/portfolio"
             style={{
-              padding: '10px 20px',
-              borderRadius: '12px',
-              border: '1px solid #E2E8F0',
+              height: '42px',
+              padding: '0 20px',
+              borderRadius: '10px',
+              border: '1px solid #CBD5E1',
               backgroundColor: '#FFFFFF',
               color: '#475569',
               fontSize: '0.875rem',
-              fontWeight: 600,
+              fontWeight: 700,
               textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxSizing: 'border-box',
               boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
             }}
           >
@@ -772,9 +782,11 @@ function PortfolioEditorInner() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '8px',
-              padding: '10px 26px',
-              borderRadius: '12px',
+              height: '42px',
+              padding: '0 24px',
+              borderRadius: '10px',
               border: 'none',
               backgroundColor: '#1833FE',
               color: '#FFFFFF',
@@ -782,6 +794,7 @@ function PortfolioEditorInner() {
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+              boxSizing: 'border-box',
               transition: 'all 0.2s ease',
             }}
           >
@@ -801,7 +814,15 @@ function PortfolioEditorInner() {
                 <span>Saving...</span>
               </>
             ) : (
-              <span>{isEditMode ? 'Update Project' : 'Publish Project'}</span>
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+                <span>{isEditMode ? 'Update Project' : 'Publish Project'}</span>
+              </>
             )}
           </button>
         </div>

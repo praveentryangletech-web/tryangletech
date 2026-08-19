@@ -570,17 +570,29 @@ function BlogEditorInner() {
               href={`/blog/${slug}`}
               target="_blank"
               style={{
-                padding: '9px 15px',
+                height: '42px',
+                padding: '0 16px',
                 borderRadius: '10px',
                 backgroundColor: '#EFF6FF',
                 color: '#1833FE',
                 border: '1.5px solid #BFDBFE',
-                fontSize: '0.85rem',
+                fontSize: '0.875rem',
                 fontWeight: 700,
                 textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '7px',
+                boxSizing: 'border-box',
+                transition: 'all 0.15s ease',
               }}
             >
-              View Live ↗
+              <span>View Live</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
             </Link>
           )}
 
@@ -590,21 +602,29 @@ function BlogEditorInner() {
             onClick={() => handleSave(undefined, false)}
             disabled={isSubmitting}
             style={{
-              padding: '9px 18px',
+              height: '42px',
+              padding: '0 18px',
               borderRadius: '10px',
               backgroundColor: '#FFFFFF',
               color: '#334155',
               border: '1.5px solid #CBD5E1',
-              fontSize: '0.85rem',
+              fontSize: '0.875rem',
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+              justifyContent: 'center',
+              gap: '8px',
+              boxSizing: 'border-box',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+              transition: 'all 0.15s ease',
             }}
           >
-            <span>📝</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
             <span>{isSubmitting ? 'Saving...' : 'Save Draft'}</span>
           </button>
 
@@ -614,7 +634,8 @@ function BlogEditorInner() {
             onClick={() => handleSave(undefined, true)}
             disabled={isSubmitting}
             style={{
-              padding: '10px 22px',
+              height: '42px',
+              padding: '0 22px',
               borderRadius: '10px',
               backgroundColor: '#1833FE',
               color: '#FFFFFF',
@@ -624,11 +645,19 @@ function BlogEditorInner() {
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              justifyContent: 'center',
+              gap: '8px',
+              boxSizing: 'border-box',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+              transition: 'all 0.15s ease',
             }}
           >
-            <span>🚀</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
             <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish' : 'Publish Live'}</span>
           </button>
         </div>
@@ -2119,7 +2148,8 @@ function BlogEditorInner() {
             onClick={() => handleSave(undefined, false)}
             disabled={isSubmitting}
             style={{
-              padding: '10px 20px',
+              height: '42px',
+              padding: '0 20px',
               borderRadius: '10px',
               backgroundColor: '#FFFFFF',
               color: '#334155',
@@ -2129,10 +2159,17 @@ function BlogEditorInner() {
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              justifyContent: 'center',
+              gap: '8px',
+              boxSizing: 'border-box',
+              transition: 'all 0.15s ease',
             }}
           >
-            <span>📝</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
             <span>{isSubmitting ? 'Saving...' : 'Save as Draft'}</span>
           </button>
 
@@ -2141,7 +2178,8 @@ function BlogEditorInner() {
             onClick={() => handleSave(undefined, true)}
             disabled={isSubmitting}
             style={{
-              padding: '10px 24px',
+              height: '42px',
+              padding: '0 24px',
               borderRadius: '10px',
               backgroundColor: '#1833FE',
               color: '#FFFFFF',
@@ -2151,11 +2189,19 @@ function BlogEditorInner() {
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
+              justifyContent: 'center',
+              gap: '8px',
+              boxSizing: 'border-box',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+              transition: 'all 0.15s ease',
             }}
           >
-            <span>🚀</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
             <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish Live' : 'Publish Live'}</span>
           </button>
         </div>

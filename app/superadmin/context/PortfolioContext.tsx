@@ -215,11 +215,20 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       throw new Error('Project ID is required to delete this project.');
     }
 
+    // Optimistic removal from table
+    setProjectsList((prev) => prev.filter((item: any) => item.id !== projectId && item.slug !== projectId));
+    setPagination((prev) => ({
+      ...prev,
+      total: Math.max(prev.total - 1, 0),
+      totalPages: Math.ceil(Math.max(prev.total - 1, 0) / limit) || 1,
+    }));
+
     const res = await apiClient.delete('/api/portfolio', { params: { id: projectId } });
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete project from database.');
     }
 
+    setDeletingProject(null);
     await fetchPortfolio();
   };
 

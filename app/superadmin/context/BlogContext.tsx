@@ -38,23 +38,26 @@ interface BlogContextType {
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
-const initialStaticPosts: BlogPostItem[] = staticBlogPosts.map((p, idx) => ({
-  id: p.id || String(idx + 1),
-  slug: p.slug,
-  title: p.title,
-  category: p.category,
-  excerpt: p.title,
-  content: '',
-  coverImage: p.image,
-  images: p.images || (p.image ? [p.image] : []),
-  authorName: 'TryangleTech Team',
-  authorRole: 'Editorial Team',
-  readTime: '5 min read',
-  published: true,
-  publishedAt: p.date || '29 Oct 2025',
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-}));
+const initialStaticPosts: BlogPostItem[] = staticBlogPosts.map((p, idx) => {
+  const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
+  return {
+    id: p.id || String(idx + 1),
+    slug: p.slug,
+    title: p.title,
+    category: p.category,
+    excerpt: p.title,
+    content: '',
+    coverImage: p.image,
+    images: p.images || (p.image ? [p.image] : []),
+    authorName: 'TryangleTech Team',
+    authorRole: 'Editorial Team',
+    readTime: '5 min read',
+    published: true,
+    publishedAt: parsedDate,
+    createdAt: parsedDate,
+    updatedAt: parsedDate,
+  };
+});
 
 /**
  * BlogProvider Component
@@ -140,6 +143,8 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       const params: Record<string, string | number> = {
         page,
         limit,
+        sortBy: 'publishedAt',
+        sortOrder: 'desc',
       };
 
       if (categoryFilter && categoryFilter !== 'ALL') {

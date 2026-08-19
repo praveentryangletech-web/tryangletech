@@ -93,21 +93,63 @@ export default function BlogContent() {
             </div>
           </div>
           
+          <style>{`
+            .blog-tabs-menu {
+              display: flex !important;
+              justify-content: center !important;
+              align-items: flex-end !important;
+              border-bottom: 2px solid #E2E8F0 !important;
+              padding-bottom: 0 !important;
+              margin-bottom: 3.5rem !important;
+              gap: 0.5rem !important;
+              overflow-x: auto !important;
+              scrollbar-width: none !important;
+              -ms-overflow-style: none !important;
+              width: 100% !important;
+            }
+            .blog-tabs-menu::-webkit-scrollbar {
+              display: none !important;
+            }
+            .blog-tab-btn {
+              display: inline-flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              white-space: nowrap !important;
+              padding: 0.875rem 1.35rem !important;
+              color: #64748B !important;
+              font-size: 0.95rem !important;
+              font-weight: 600 !important;
+              position: relative !important;
+              cursor: pointer !important;
+              border: none !important;
+              background: transparent !important;
+              border-bottom: 3px solid transparent !important;
+              margin-bottom: -2px !important;
+              transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+              text-decoration: none !important;
+            }
+            .blog-tab-btn:hover {
+              color: #0F172A !important;
+            }
+            .blog-tab-btn.w--current {
+              color: var(--brand-blue, #1833FE) !important;
+              font-weight: 700 !important;
+              border-bottom: 3px solid var(--brand-blue, #1833FE) !important;
+            }
+          `}</style>
+          
           <div className="tabs w-tabs">
-            <div className="tabs-menu w-tab-menu" role="tablist">
-              {categories.map((category, index) => (
-                <div
+            <div className="tabs-menu w-tab-menu blog-tabs-menu" role="tablist">
+              {categories.map((category) => (
+                <button
+                  type="button"
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`rt-tab-link w-inline-block w-tab-link ${activeCategory === category ? 'w--current' : ''}`}
-                  style={{ cursor: 'pointer' }}
+                  className={`blog-tab-btn ${activeCategory === category ? 'w--current' : ''}`}
                   role="tab"
                 >
-                  <div>{category}</div>
-                  <div className="rt-tab-main-border-line">
-                    <div className={`rt-tab-inner-booder-line rt-${(index % 4) + 1}${index === 1 ? '-bg' : ''}`}></div>
-                  </div>
-                </div>
+                  <span>{category}</span>
+                </button>
               ))}
             </div>
 

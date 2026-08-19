@@ -315,9 +315,7 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
               style={{
                 backgroundColor: '#EFF6FF',
                 color: '#1833FE',
-                border: '1px solid #BFDBFE',
-                padding: '8px 16px',
-                borderRadius: '8px',
+                border: '1.5px solid #BFDBFE',
                 textDecoration: 'none',
                 fontSize: '0.85rem',
                 fontWeight: 700,

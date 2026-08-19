@@ -1346,6 +1346,13 @@ function PortfolioEditorInner() {
                         src={blobPreviewMap[coverImage] || coverImage}
                         alt="Cover Preview"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (coverImage && coverImage.startsWith('/portfolio/') && !img.src.includes('/api/media/')) {
+                            const filename = coverImage.replace('/portfolio/', '');
+                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          }
+                        }}
                       />
                     ) : (
                       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', gap: '6px' }}>
@@ -1755,6 +1762,13 @@ function PortfolioEditorInner() {
                         src={blobPreviewMap[imgUrl] || imgUrl}
                         alt={`Slide ${idx + 1}`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (imgUrl && imgUrl.startsWith('/portfolio/') && !img.src.includes('/api/media/')) {
+                            const filename = imgUrl.replace('/portfolio/', '');
+                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          }
+                        }}
                       />
                       <span
                         style={{
@@ -2665,6 +2679,12 @@ function PortfolioEditorInner() {
                           alt={asset.filename}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          onError={(e) => {
+                            const img = e.target as HTMLImageElement;
+                            if (asset.filename && !img.src.includes('/api/media/')) {
+                              img.src = `/api/media/${encodeURIComponent(asset.filename)}`;
+                            }
+                          }}
                         />
                         {assetPickerTarget === 'cover' && isCover && (
                           <span style={{ position: 'absolute', top: '4px', left: '4px', backgroundColor: '#1833FE', color: '#FFFFFF', fontSize: '0.65rem', fontWeight: 800, padding: '2px 6px', borderRadius: '4px' }}>

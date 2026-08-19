@@ -17,9 +17,11 @@ export default function SafeImage({
 }: SafeImageProps) {
   const initial = src || fallbackSrc;
   const [imgSrc, setImgSrc] = useState<string>(initial);
+  const [triedApiMedia, setTriedApiMedia] = useState<boolean>(false);
 
   useEffect(() => {
     setImgSrc(src || fallbackSrc);
+    setTriedApiMedia(false);
   }, [src, fallbackSrc]);
 
   return (
@@ -29,7 +31,11 @@ export default function SafeImage({
       alt={alt || ''}
       unoptimized={unoptimized}
       onError={() => {
-        if (imgSrc !== fallbackSrc) {
+        if (imgSrc && imgSrc.startsWith('/portfolio/') && !triedApiMedia) {
+          const filename = imgSrc.replace('/portfolio/', '');
+          setTriedApiMedia(true);
+          setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
+        } else if (imgSrc !== fallbackSrc) {
           setImgSrc(fallbackSrc);
         }
       }}

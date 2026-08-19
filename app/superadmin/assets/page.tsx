@@ -721,7 +721,12 @@ export default function AssetManagementPage() {
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
+                      const img = e.target as HTMLImageElement;
+                      if (asset.filename && !img.src.includes('/api/media/')) {
+                        img.src = `/api/media/${encodeURIComponent(asset.filename)}`;
+                      } else {
+                        img.src = '/portfolio/vh-accounting.webp';
+                      }
                     }}
                   />
                   <span

@@ -135,8 +135,8 @@ export class BlogService {
     // Run schema synchronization and indexing in background without blocking API queries
     (async () => {
       try {
-        await db.$executeRawUnsafe(`
-          CREATE TABLE IF NOT EXISTS "BlogPost" (
+        const schemaStatements = [
+          `CREATE TABLE IF NOT EXISTS "BlogPost" (
             "id" TEXT PRIMARY KEY,
             "slug" TEXT UNIQUE NOT NULL,
             "title" TEXT NOT NULL,
@@ -174,30 +174,36 @@ export class BlogService {
             "viewsCount" INTEGER DEFAULT 0,
             "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
             "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-          );
+          )`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Heading" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph1" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph2" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteText" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteAuthor" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "stepsTitle" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step1" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step2" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage1" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage2" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionTitle" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionBody" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorImage" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorBio" TEXT DEFAULT ''`,
+          `ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[]`,
+          `CREATE INDEX IF NOT EXISTS "idx_blogpost_slug" ON "BlogPost" ("slug")`,
+          `CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_created" ON "BlogPost" ("published", "createdAt" DESC)`,
+          `CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub" ON "BlogPost" ("category", "published")`,
+          `CREATE INDEX IF NOT EXISTS "idx_blogpost_order_created" ON "BlogPost" ("order" ASC, "createdAt" DESC)`,
+          `CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC)`
+        ];
 
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Heading" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph1" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "section1Paragraph2" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteText" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "quoteAuthor" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "stepsTitle" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step1" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "step2" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage1" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage2" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionTitle" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionBody" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorImage" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "authorBio" TEXT DEFAULT '';
-          ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "conclusionPoints" TEXT[] DEFAULT ARRAY[]::TEXT[];
-
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_slug" ON "BlogPost" ("slug");
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_created" ON "BlogPost" ("published", "createdAt" DESC);
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub" ON "BlogPost" ("category", "published");
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_order_created" ON "BlogPost" ("order" ASC, "createdAt" DESC);
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);
-        `);
+        for (const sql of schemaStatements) {
+          try {
+            await db.$executeRawUnsafe(sql);
+          } catch {
+            // Ignore non-fatal column/index existence errors
+          }
+        }
       } catch (err) {
         console.warn('[DB Blog] Background schema check notice:', err);
       }

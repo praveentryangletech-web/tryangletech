@@ -23,50 +23,6 @@ export default function BlogLoading() {
             </div>
           </div>
 
-          <style>{`
-            .tabs-menu.w-tab-menu {
-              display: flex !important;
-              justify-content: center !important;
-              align-items: flex-end !important;
-              flex-wrap: nowrap !important;
-              overflow-x: auto !important;
-              scrollbar-width: none !important;
-              -ms-overflow-style: none !important;
-              margin-left: auto !important;
-              margin-right: auto !important;
-              width: 100% !important;
-              max-width: 100% !important;
-              gap: 1.5rem !important;
-              padding-bottom: 0.75rem !important;
-              border-bottom: 1px solid #E2E8F0 !important;
-              margin-bottom: 2.5rem !important;
-            }
-            .rt-blog-two-wrapper {
-              grid-column-gap: 1.875rem !important;
-              grid-row-gap: 3.2rem !important;
-              grid-template-columns: repeat(3, 1fr) !important;
-              display: grid !important;
-            }
-            @media (max-width: 991px) {
-              .rt-blog-two-wrapper {
-                grid-template-columns: repeat(2, 1fr) !important;
-                grid-row-gap: 2.2rem !important;
-              }
-            }
-            @media (max-width: 640px) {
-              .rt-blog-two-wrapper {
-                grid-template-columns: 1fr !important;
-                grid-row-gap: 2rem !important;
-              }
-            }
-            .blog-skeleton-shimmer {
-              background-color: #F8FAFC;
-              background-image: linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%);
-              background-size: 200% 100%;
-              animation: safeImgShimmer 1.8s infinite linear;
-            }
-          `}</style>
-
           {/* Skeleton Category Tabs */}
           <div className="tabs-menu w-tab-menu">
             {[60, 140, 110, 130, 120, 110].map((w, idx) => (

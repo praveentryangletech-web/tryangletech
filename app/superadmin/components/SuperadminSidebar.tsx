@@ -119,6 +119,7 @@ export default function SuperadminSidebar() {
               alt="TryangleTech"
               width={150}
               height={40}
+              priority
               style={{ objectFit: 'contain', height: '36px', width: 'auto' }}
             />
           </Link>

@@ -104,7 +104,7 @@ export default function Navbar() {
                     style={{ height: '50px', width: 'auto' }}
                     alt="TryangleTech logo"
                     src={`/logo.png`}
-                    loading="lazy"
+                    priority
                     className="rt-auto-fit rt-desktop-image-full-width" width={800} height={800} />
                   <div className="rt-link-discernible">link<br />&#x200D;</div>
                 </Link>

@@ -45,14 +45,7 @@ export default function SafeImage({
       className={className}
       onLoad={() => setIsLoaded(true)}
       style={{
-        backgroundColor: isLoaded ? 'transparent' : '#F8FAFC',
-        backgroundImage: !isLoaded
-          ? 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)'
-          : 'none',
-        backgroundSize: '200% 100%',
-        animation: !isLoaded ? 'safeImgShimmer 1.8s infinite linear' : 'none',
-        opacity: isLoaded ? 1 : 0.85,
-        transition: 'opacity 0.3s ease-in-out',
+        backgroundColor: 'transparent',
         ...style,
       }}
       onError={() => {

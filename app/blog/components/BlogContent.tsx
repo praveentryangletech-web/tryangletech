@@ -21,6 +21,29 @@ const getBlogFallbackImage = (index: number = 0) => {
   return BLOG_FALLBACK_IMAGES[index % BLOG_FALLBACK_IMAGES.length];
 };
 
+const getInitialDefaultPosts = (): BlogPostItem[] => {
+  return staticBlogPosts.map((p, idx) => {
+    const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
+    return {
+      id: p.id || String(idx + 1),
+      slug: p.slug,
+      title: p.title,
+      category: p.category,
+      excerpt: p.title,
+      content: '',
+      coverImage: p.image,
+      images: p.images || (p.image ? [p.image] : []),
+      authorName: 'TryangleTech Team',
+      authorRole: 'Editorial Team',
+      readTime: '5 min read',
+      published: true,
+      publishedAt: parsedDate,
+      createdAt: parsedDate,
+      updatedAt: parsedDate,
+    };
+  });
+};
+
 interface BlogContentProps {
   initialPosts?: BlogPostItem[];
   initialCategories?: string[];
@@ -28,17 +51,16 @@ interface BlogContentProps {
 
 export default function BlogContent({ initialPosts, initialCategories }: BlogContentProps = {}) {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [isLoading, setIsLoading] = useState<boolean>(() => !initialPosts || initialPosts.length === 0);
   const [posts, setPosts] = useState<BlogPostItem[]>(() => {
     if (initialPosts && initialPosts.length > 0) return initialPosts;
-    return [];
+    return getInitialDefaultPosts();
   });
   const [categories, setCategories] = useState<string[]>(() => {
     if (initialCategories && initialCategories.length > 0) return initialCategories;
     return staticCategories;
   });
 
-  // Fetch live articles from API
+  // Fetch live articles from API in background without blocking initial render
   useEffect(() => {
     let isMounted = true;
     const fetchLivePosts = async () => {
@@ -53,56 +75,9 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
             new Set(['All', ...data.data.map((p: BlogPostItem) => p.category)])
           );
           setCategories(dynamicCats);
-        } else if (isMounted && (!posts || posts.length === 0)) {
-          // Fallback only if no data from API
-          setPosts(staticBlogPosts.map((p, idx) => {
-            const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
-            return {
-              id: p.id || String(idx + 1),
-              slug: p.slug,
-              title: p.title,
-              category: p.category,
-              excerpt: p.title,
-              content: '',
-              coverImage: p.image,
-              images: p.images || (p.image ? [p.image] : []),
-              authorName: 'TryangleTech Team',
-              authorRole: 'Editorial Team',
-              readTime: '5 min read',
-              published: true,
-              publishedAt: parsedDate,
-              createdAt: parsedDate,
-              updatedAt: parsedDate,
-            };
-          }));
         }
-      } catch {
-        if (isMounted && (!posts || posts.length === 0)) {
-          setPosts(staticBlogPosts.map((p, idx) => {
-            const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
-            return {
-              id: p.id || String(idx + 1),
-              slug: p.slug,
-              title: p.title,
-              category: p.category,
-              excerpt: p.title,
-              content: '',
-              coverImage: p.image,
-              images: p.images || (p.image ? [p.image] : []),
-              authorName: 'TryangleTech Team',
-              authorRole: 'Editorial Team',
-              readTime: '5 min read',
-              published: true,
-              publishedAt: parsedDate,
-              createdAt: parsedDate,
-              updatedAt: parsedDate,
-            };
-          }));
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+      } catch (err) {
+        console.warn('Failed to fetch live blog posts in background:', err);
       }
     };
 
@@ -186,81 +161,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
               <div className="w-tab-pane w--tab-active" role="tabpanel">
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
-                    {isLoading ? (
-                      [1, 2, 3, 4, 5, 6].map((skel) => (
-                        <div key={skel} role="listitem" className="w-dyn-item">
-                          <div className="rt-blog-v1-card-wrap" style={{ cursor: 'default' }}>
-                            <div
-                              className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden"
-                              style={{
-                                height: '245px',
-                                width: '100%',
-                                borderRadius: '1.5625rem',
-                                backgroundColor: '#F8FAFC',
-                                backgroundImage: 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)',
-                                backgroundSize: '200% 100%',
-                                animation: 'safeImgShimmer 1.8s infinite linear',
-                                border: '1px solid #d3d3f4',
-                              }}
-                            />
-                            <div className="w-layout-vflex rt-blog-card-v1-top-part">
-                              <div className="w-layout-hflex rt-blog-v1-text-wrap" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                <div
-                                  style={{
-                                    width: '110px',
-                                    height: '14px',
-                                    borderRadius: '4px',
-                                    backgroundColor: '#EEF2F6',
-                                    backgroundImage: 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)',
-                                    backgroundSize: '200% 100%',
-                                    animation: 'safeImgShimmer 1.8s infinite linear',
-                                  }}
-                                />
-                                <div
-                                  style={{
-                                    width: '80px',
-                                    height: '12px',
-                                    borderRadius: '4px',
-                                    backgroundColor: '#EEF2F6',
-                                    backgroundImage: 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)',
-                                    backgroundSize: '200% 100%',
-                                    animation: 'safeImgShimmer 1.8s infinite linear',
-                                  }}
-                                />
-                              </div>
-                              <div className="rt-blog-v1-line rt-v2">
-                                <div className="rt-blog-v3-line-overlay"></div>
-                              </div>
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <div
-                                  style={{
-                                    width: '92%',
-                                    height: '20px',
-                                    borderRadius: '6px',
-                                    backgroundColor: '#EEF2F6',
-                                    backgroundImage: 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)',
-                                    backgroundSize: '200% 100%',
-                                    animation: 'safeImgShimmer 1.8s infinite linear',
-                                  }}
-                                />
-                                <div
-                                  style={{
-                                    width: '65%',
-                                    height: '20px',
-                                    borderRadius: '6px',
-                                    backgroundColor: '#EEF2F6',
-                                    backgroundImage: 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)',
-                                    backgroundSize: '200% 100%',
-                                    animation: 'safeImgShimmer 1.8s infinite linear',
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      filteredPosts.map((post, idx) => {
+                    {filteredPosts.map((post, idx) => {
                         const postFallback = getBlogFallbackImage(idx);
                         const resolvedCover = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
                           ? post.coverImage.trim()
@@ -319,8 +220,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
                             </Link>
                           </div>
                         );
-                      })
-                    )}
+                      })}
                   </div>
                 </div>
               </div>

@@ -338,10 +338,7 @@ body {
 }
 
 .blog-skeleton-shimmer {
-  background-color: #F8FAFC !important;
-  background-image: linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%) !important;
-  background-size: 200% 100% !important;
-  animation: safeImgShimmer 1.8s infinite linear !important;
+  background-color: #F1F5F9 !important;
 }
 
 /* ── Blog Post Details ── */

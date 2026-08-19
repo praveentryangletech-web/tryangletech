@@ -127,6 +127,35 @@ export default function BlogContent() {
             </div>
           </div>
           <style>{`
+            .tabs-menu.w-tab-menu {
+              display: flex !important;
+              justify-content: center !important;
+              align-items: flex-end !important;
+              flex-wrap: nowrap !important;
+              overflow-x: auto !important;
+              scrollbar-width: none !important;
+              -ms-overflow-style: none !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            .tabs-menu.w-tab-menu::-webkit-scrollbar {
+              display: none !important;
+            }
+            .rt-tab-link {
+              white-space: nowrap !important;
+              padding-left: 1.75rem !important;
+              padding-right: 1.75rem !important;
+              padding-bottom: 0.75rem !important;
+              display: inline-flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              flex-shrink: 0 !important;
+            }
+            .rt-tab-link div:first-child {
+              white-space: nowrap !important;
+            }
             .rt-blog-two-wrapper {
               grid-column-gap: 1.875rem !important;
               grid-row-gap: 3.2rem !important;

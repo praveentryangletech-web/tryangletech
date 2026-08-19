@@ -1573,12 +1573,12 @@ function BlogEditorInner() {
                     )}
                   </div>
                   {contentImage1 && (
-                    <div style={{ marginTop: '10px', height: '100px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#F1F5F9', position: 'relative' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage1}
                         alt="Preview 1"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           if (contentImage1 && !img.src.includes('/api/media/')) {
@@ -1587,12 +1587,15 @@ function BlogEditorInner() {
                           }
                         }}
                       />
+                      <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
+                        Left Mid-Article (458×291)
+                      </span>
                     </div>
                   )}
                 </div>
 
                 {/* Image 2 */}
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1rem', backgroundColor: '#F8FAFC' }}>
+                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
                   <label style={labelStyle}>Right Image URL / Path</label>
                   <input
                     type="text"
@@ -1624,12 +1627,12 @@ function BlogEditorInner() {
                     )}
                   </div>
                   {contentImage2 && (
-                    <div style={{ marginTop: '10px', height: '100px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#F1F5F9', position: 'relative' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage2}
                         alt="Preview 2"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           if (contentImage2 && !img.src.includes('/api/media/')) {
@@ -1638,6 +1641,9 @@ function BlogEditorInner() {
                           }
                         }}
                       />
+                      <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
+                        Right Mid-Article (537×357)
+                      </span>
                     </div>
                   )}
                 </div>

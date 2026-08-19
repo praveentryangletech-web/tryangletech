@@ -227,6 +227,51 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
             )}
           </div>
 
+          {/* Section 4: Mid-Article Images */}
+          {(post.contentImage1 || post.contentImage2) && (
+            <div style={{ padding: '1rem', backgroundColor: '#F8FAFC', borderRadius: '14px', border: '1px solid #E2E8F0' }}>
+              <h5 style={{ margin: '0 0 0.75rem 0', fontSize: '0.85rem', fontWeight: 800, color: '#0F172A' }}>
+                🖼️ Mid-Article Images
+              </h5>
+              <div style={{ display: 'grid', gridTemplateColumns: post.contentImage1 && post.contentImage2 ? '1fr 1fr' : '1fr', gap: '0.75rem' }}>
+                {post.contentImage1 && (
+                  <div style={{ height: '140px', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#E2E8F0' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.contentImage1}
+                      alt="Mid 1"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        if (post.contentImage1 && !img.src.includes('/api/media/')) {
+                          const filename = post.contentImage1.split('?')[0].split('/').pop();
+                          if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+                {post.contentImage2 && (
+                  <div style={{ height: '140px', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#E2E8F0' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.contentImage2}
+                      alt="Mid 2"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        if (post.contentImage2 && !img.src.includes('/api/media/')) {
+                          const filename = post.contentImage2.split('?')[0].split('/').pop();
+                          if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Section 5: Conclusion & Takeaways */}
           {post.conclusionTitle && (
             <div style={{ padding: '1.25rem', backgroundColor: '#FAF5FF', borderRadius: '14px', border: '1px solid #F3E8FF' }}>

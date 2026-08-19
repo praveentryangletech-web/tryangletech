@@ -155,86 +155,67 @@ export default function BlogContent() {
               border-bottom: 3px solid var(--brand-blue, #1833FE) !important;
             }
 
-            /* ── Card Grid Layout & Constant Dimensions ── */
+            /* ── Card Grid Layout Matching Original Webflow UI Exactly ── */
             .rt-blog-two-wrapper {
-              display: grid !important;
+              grid-column-gap: 1.875rem !important;
+              grid-row-gap: 3.2rem !important;
               grid-template-columns: repeat(3, 1fr) !important;
-              gap: 2rem !important;
-              align-items: stretch !important;
+              display: grid !important;
             }
             @media (max-width: 991px) {
               .rt-blog-two-wrapper {
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 1.5rem !important;
+                grid-row-gap: 2.2rem !important;
               }
             }
             @media (max-width: 640px) {
               .rt-blog-two-wrapper {
                 grid-template-columns: 1fr !important;
+                grid-row-gap: 2rem !important;
               }
             }
             .rt-blog-v1-card-wrap {
+              grid-column-gap: 1.8rem !important;
+              grid-row-gap: 1.8rem !important;
+              flex-flow: column !important;
               display: flex !important;
-              flex-direction: column !important;
-              height: 100% !important;
-              width: 100% !important;
-              background: #FFFFFF !important;
-              border-radius: 20px !important;
-              border: 1.5px solid #E2E8F0 !important;
-              overflow: hidden !important;
-              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
-              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
               text-decoration: none !important;
-              box-sizing: border-box !important;
-            }
-            .rt-blog-v1-card-wrap:hover {
-              transform: translateY(-5px) !important;
-              box-shadow: 0 16px 35px rgba(24, 51, 254, 0.08) !important;
-              border-color: #CBD5E1 !important;
+              background: transparent !important;
+              border: none !important;
+              box-shadow: none !important;
+              padding: 0 !important;
+              border-radius: 0 !important;
             }
             .rt-blog-v3-card-top-part {
-              width: 100% !important;
-              height: 240px !important;
-              min-height: 240px !important;
-              max-height: 240px !important;
-              position: relative !important;
+              border: 1px solid #d3d3f4 !important;
+              border-radius: 1.5625rem !important;
               overflow: hidden !important;
-              background-color: #F8FAFC !important;
-              border-bottom: 1.5px solid #F1F5F9 !important;
-              border-radius: 0 !important;
-              border: none !important;
+              height: 245px !important;
+              width: 100% !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              background-color: #FFFFFF !important;
+              position: relative !important;
             }
             .rt-blog-v3-card-top-part img,
             .rt-blog-v3-card-top-part .rt-image-scale {
               width: 100% !important;
               height: 100% !important;
-              object-fit: cover !important;
-              object-position: center !important;
+              object-fit: contain !important;
               display: block !important;
               transition: transform 0.4s ease !important;
             }
             .rt-blog-v1-card-wrap:hover .rt-blog-v3-card-top-part img,
             .rt-blog-v1-card-wrap:hover .rt-image-scale {
-              transform: scale(1.05) !important;
+              transform: scale(1.04) !important;
             }
             .rt-blog-card-v1-top-part {
-              padding: 1.5rem !important;
+              grid-column-gap: 1rem !important;
+              grid-row-gap: 1rem !important;
               display: flex !important;
               flex-direction: column !important;
-              flex: 1 !important;
-              justify-content: space-between !important;
-              gap: 1rem !important;
-            }
-            .rt-text-style-h6 {
-              font-size: 1.15rem !important;
-              font-weight: 700 !important;
-              color: #0F172A !important;
-              line-height: 1.4 !important;
-              margin: 0 !important;
-              display: -webkit-box !important;
-              -webkit-line-clamp: 2 !important;
-              -webkit-box-orient: vertical !important;
-              overflow: hidden !important;
+              padding: 0 !important;
             }
           `}</style>
           
@@ -263,7 +244,7 @@ export default function BlogContent() {
                           href={`/blog/${post.slug}`}
                           className="rt-blog-v1-card-wrap w-inline-block"
                         >
-                          <div className="rt-blog-v3-card-top-part rt-overflow-hidden">
+                          <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                             <SafeImage
                               src={post.coverImage || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png'}
                               fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
@@ -271,7 +252,7 @@ export default function BlogContent() {
                               className="rt-image-scale"
                               width={800}
                               height={500}
-                              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
+                              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
                             />
                           </div>
                           <div className="w-layout-vflex rt-blog-card-v1-top-part">
@@ -302,7 +283,7 @@ export default function BlogContent() {
                             <div className="rt-blog-v1-line rt-v2">
                               <div className="rt-blog-v3-line-overlay"></div>
                             </div>
-                            <div className="rt-text-style-h6" title={post.title}>
+                            <div className="rt-text-style-h6">
                               {post.title}
                             </div>
                           </div>

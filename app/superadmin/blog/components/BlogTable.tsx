@@ -180,8 +180,8 @@ export default function BlogTable({
               <th style={{ width: '16%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 AUTHOR / ROLE
               </th>
-              <th style={{ width: '12%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                READ TIME
+              <th style={{ width: '14%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                DATE & TIME
               </th>
               <th style={{ width: '10%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 STATUS
@@ -322,11 +322,18 @@ export default function BlogTable({
                     )}
                   </td>
 
-                  {/* Read Time Column */}
+                  {/* Publish Date & Time Column */}
                   <td style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>
-                    <span style={{ fontSize: '0.775rem', color: '#475569', fontWeight: 600 }}>
-                      {item.readTime || '5 min read'}
-                    </span>
+                    <div style={{ fontSize: '0.8rem', color: '#1E293B', fontWeight: 600 }}>
+                      {item.publishedAt
+                        ? new Date(item.publishedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
+                        : '29 Oct 2025'}
+                    </div>
+                    <div style={{ fontSize: '0.7rem', color: '#64748B', marginTop: '2px' }}>
+                      {item.publishedAt && item.publishedAt.includes('T')
+                        ? new Date(item.publishedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                        : item.readTime || '5 min read'}
+                    </div>
                   </td>
 
                   {/* Status Badge */}

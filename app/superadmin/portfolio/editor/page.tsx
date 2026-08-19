@@ -1348,9 +1348,9 @@ function PortfolioEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (coverImage && coverImage.startsWith('/portfolio/') && !img.src.includes('/api/media/')) {
-                            const filename = coverImage.replace('/portfolio/', '');
-                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          if (coverImage && !img.src.includes('/api/media/')) {
+                            const filename = coverImage.split('?')[0].split('/').pop();
+                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                           }
                         }}
                       />
@@ -1764,9 +1764,9 @@ function PortfolioEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (imgUrl && imgUrl.startsWith('/portfolio/') && !img.src.includes('/api/media/')) {
-                            const filename = imgUrl.replace('/portfolio/', '');
-                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          if (imgUrl && !img.src.includes('/api/media/')) {
+                            const filename = imgUrl.split('?')[0].split('/').pop();
+                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                           }
                         }}
                       />

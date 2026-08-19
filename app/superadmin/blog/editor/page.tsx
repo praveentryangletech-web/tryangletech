@@ -1737,7 +1737,18 @@ function BlogEditorInner() {
                   <label style={labelStyle}>Author Avatar Image</label>
                   <div style={{ width: '80px', height: '80px', borderRadius: '50%', overflow: 'hidden', margin: '0 auto 10px', backgroundColor: '#E2E8F0' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={authorImage || '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp'} alt="Author" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img
+                      src={authorImage || '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp'}
+                      alt="Author"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        if (authorImage && !img.src.includes('/api/media/')) {
+                          const filename = authorImage.split('?')[0].split('/').pop();
+                          if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                        }
+                      }}
+                    />
                   </div>
                   <input
                     type="text"

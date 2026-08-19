@@ -345,7 +345,7 @@ export default function BlogEditModal({
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.825rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Cover Image Path / URL (Recommended Size: 800 × 500 px • 16:10 Ratio)
+                  Cover Image URL / Path (Required Card Size: 820 × 490 px • 16:10 Ratio)
                 </label>
                 <input
                   type="text"

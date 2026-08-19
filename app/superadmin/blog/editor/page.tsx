@@ -1158,7 +1158,7 @@ function BlogEditorInner() {
                   </div>
 
                   <div>
-                    <label style={labelStyle}>Or Enter Direct URL / File Path</label>
+                    <label style={labelStyle}>Or Enter Direct URL / File Path (Required Size: 820 × 490 px • 16:10 Ratio)</label>
                     <input
                       type="text"
                       placeholder="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"

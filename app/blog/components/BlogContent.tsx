@@ -126,52 +126,7 @@ export default function BlogContent() {
               </div>
             </div>
           </div>
-          
           <style>{`
-            .blog-tabs-menu {
-              display: flex !important;
-              justify-content: center !important;
-              align-items: flex-end !important;
-              border-bottom: 2px solid #E2E8F0 !important;
-              padding-bottom: 0 !important;
-              margin-bottom: 3.5rem !important;
-              gap: 0.5rem !important;
-              overflow-x: auto !important;
-              scrollbar-width: none !important;
-              -ms-overflow-style: none !important;
-              width: 100% !important;
-            }
-            .blog-tabs-menu::-webkit-scrollbar {
-              display: none !important;
-            }
-            .blog-tab-btn {
-              display: inline-flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              white-space: nowrap !important;
-              padding: 0.875rem 1.35rem !important;
-              color: #64748B !important;
-              font-size: 0.95rem !important;
-              font-weight: 600 !important;
-              position: relative !important;
-              cursor: pointer !important;
-              border: none !important;
-              background: transparent !important;
-              border-bottom: 3px solid transparent !important;
-              margin-bottom: -2px !important;
-              transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-              text-decoration: none !important;
-            }
-            .blog-tab-btn:hover {
-              color: #0F172A !important;
-            }
-            .blog-tab-btn.w--current {
-              color: var(--brand-blue, #1833FE) !important;
-              font-weight: 700 !important;
-              border-bottom: 3px solid var(--brand-blue, #1833FE) !important;
-            }
-
-            /* ── Card Grid Layout Matching Original Webflow UI Exactly ── */
             .rt-blog-two-wrapper {
               grid-column-gap: 1.875rem !important;
               grid-row-gap: 3.2rem !important;
@@ -202,10 +157,6 @@ export default function BlogContent() {
               padding: 0 !important;
               border-radius: 0 !important;
             }
-            @keyframes blogImgSkeletonShimmer {
-              0% { background-position: -200% 0; }
-              100% { background-position: 200% 0; }
-            }
             .rt-blog-v3-card-top-part {
               border: 1px solid #d3d3f4 !important;
               border-radius: 1.5625rem !important;
@@ -215,9 +166,7 @@ export default function BlogContent() {
               display: flex !important;
               align-items: center !important;
               justify-content: center !important;
-              background: linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%) !important;
-              background-size: 200% 100% !important;
-              animation: blogImgSkeletonShimmer 1.8s infinite linear !important;
+              background-color: #FFFFFF !important;
               position: relative !important;
             }
             .rt-blog-v3-card-top-part img,
@@ -242,19 +191,21 @@ export default function BlogContent() {
               padding: 0 !important;
             }
           `}</style>
-          
           <div className="tabs w-tabs">
-            <div className="tabs-menu w-tab-menu blog-tabs-menu" role="tablist">
-              {categories.map((category) => (
-                <button
-                  type="button"
+            <div className="tabs-menu w-tab-menu" role="tablist">
+              {categories.map((category, index) => (
+                <div
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`blog-tab-btn ${activeCategory === category ? 'w--current' : ''}`}
+                  className={`rt-tab-link w-inline-block w-tab-link ${activeCategory === category ? 'w--current' : ''}`}
+                  style={{ cursor: 'pointer' }}
                   role="tab"
                 >
-                  <span>{category}</span>
-                </button>
+                  <div>{category}</div>
+                  <div className="rt-tab-main-border-line">
+                    <div className={`rt-tab-inner-booder-line rt-${(index % 4) + 1}${index === 1 ? '-bg' : ''}`}></div>
+                  </div>
+                </div>
               ))}
             </div>
 
@@ -276,52 +227,53 @@ export default function BlogContent() {
                           >
                             <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                               <SafeImage
+                                loading="lazy"
+                                alt={post.title}
                                 src={resolvedCover}
                                 fallbackSrc={postFallback}
-                                alt={post.title}
                                 className="rt-image-scale"
-                                width={800}
-                                height={500}
+                                width={820}
+                                height={490}
                                 style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
                               />
                             </div>
-                          <div className="w-layout-vflex rt-blog-card-v1-top-part">
-                            <div className="w-layout-hflex rt-blog-v1-text-wrap">
-                              <div className="rt-sub-text rt-sub-gredient">
-                                {post.category}
-                              </div>
-                              <div className="w-layout-hflex rt-blog-v1-publish-wrap">
-                                <div className="rt-blog-card-icon">
-                                  <SafeImage
-                                    width={14}
-                                    height={15}
-                                    alt="icon"
-                                    src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
-                                    fallbackSrc="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
-                                    loading="lazy"
-                                  />
+                            <div className="w-layout-vflex rt-blog-card-v1-top-part">
+                              <div className="w-layout-hflex rt-blog-v1-text-wrap">
+                                <div className="rt-sub-text rt-sub-gredient">
+                                  {post.category}
                                 </div>
-                                <div>
-                                  {post.publishedAt
-                                    ? (post.publishedAt.includes('T')
-                                        ? new Date(post.publishedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
-                                        : post.publishedAt)
-                                    : '29 Oct 2025'}
+                                <div className="w-layout-hflex rt-blog-v1-publish-wrap">
+                                  <div className="rt-blog-card-icon">
+                                    <SafeImage
+                                      width={14}
+                                      height={15}
+                                      alt="icon"
+                                      src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
+                                      fallbackSrc="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                  <div>
+                                    {post.publishedAt
+                                      ? (post.publishedAt.includes('T')
+                                          ? new Date(post.publishedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
+                                          : post.publishedAt)
+                                      : '29 Oct 2025'}
+                                  </div>
                                 </div>
                               </div>
+                              <div className="rt-blog-v1-line rt-v2">
+                                <div className="rt-blog-v3-line-overlay"></div>
+                              </div>
+                              <div className="rt-text-style-h6">
+                                {post.title}
+                              </div>
                             </div>
-                            <div className="rt-blog-v1-line rt-v2">
-                              <div className="rt-blog-v3-line-overlay"></div>
-                            </div>
-                            <div className="rt-text-style-h6">
-                              {post.title}
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>

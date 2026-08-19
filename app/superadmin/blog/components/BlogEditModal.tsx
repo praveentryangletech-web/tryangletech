@@ -18,6 +18,18 @@ export default function BlogEditModal({
 }: BlogEditModalProps) {
   const isEdit = !!post;
 
+  const formatForDateTimeInput = (dateStr?: string | Date) => {
+    if (!dateStr) {
+      const d = new Date();
+      const pad = (n: number) => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [category, setCategory] = useState<string>('Web Development');
@@ -25,7 +37,7 @@ export default function BlogEditModal({
   const [authorRole, setAuthorRole] = useState('Editorial Team');
   const [readTime, setReadTime] = useState('5 min read');
   const [published, setPublished] = useState(true);
-  const [publishedAt, setPublishedAt] = useState(new Date().toISOString().split('T')[0]);
+  const [publishedAt, setPublishedAt] = useState<string>(() => formatForDateTimeInput());
   const [coverImage, setCoverImage] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
@@ -44,7 +56,7 @@ export default function BlogEditModal({
       setAuthorRole(post.authorRole || 'Editorial Team');
       setReadTime(post.readTime || '5 min read');
       setPublished(post.published);
-      setPublishedAt(post.publishedAt ? post.publishedAt.split('T')[0] : new Date().toISOString().split('T')[0]);
+      setPublishedAt(formatForDateTimeInput(post.publishedAt || post.createdAt));
       setCoverImage(post.coverImage || '');
       setExcerpt(post.excerpt || '');
       setContent(post.content || post.excerpt || '');
@@ -58,7 +70,7 @@ export default function BlogEditModal({
       setAuthorRole('Editorial Team');
       setReadTime('5 min read');
       setPublished(true);
-      setPublishedAt(new Date().toISOString().split('T')[0]);
+      setPublishedAt(formatForDateTimeInput());
       setCoverImage('');
       setExcerpt('');
       setContent('');
@@ -99,7 +111,7 @@ export default function BlogEditModal({
         authorRole: authorRole.trim(),
         readTime: readTime.trim(),
         published,
-        publishedAt: new Date(publishedAt).toISOString(),
+        publishedAt: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
         coverImage: coverImage.trim(),
         excerpt: excerpt.trim(),
         content: content.trim() || excerpt.trim(),
@@ -354,10 +366,10 @@ export default function BlogEditModal({
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.825rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Publish Date
+                  Publish Date & Time
                 </label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   value={publishedAt}
                   onChange={(e) => setPublishedAt(e.target.value)}
                   style={{

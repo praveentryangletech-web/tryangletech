@@ -26,6 +26,18 @@ function BlogEditorInner() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  const formatForDateTimeInput = (dateStr?: string | Date) => {
+    if (!dateStr) {
+      const d = new Date();
+      const pad = (n: number) => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+
   // 1. General & Author
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -37,7 +49,7 @@ function BlogEditorInner() {
   const [authorBio, setAuthorBio] = useState('');
   const [readTime, setReadTime] = useState('5 min read');
   const [published, setPublished] = useState(true);
-  const [publishedAt, setPublishedAt] = useState<string>(new Date().toISOString().split('T')[0]);
+  const [publishedAt, setPublishedAt] = useState<string>(() => formatForDateTimeInput());
   const [order, setOrder] = useState<number>(0);
 
   // 2. Media
@@ -238,7 +250,7 @@ function BlogEditorInner() {
           setAuthorBio(p.authorBio || '');
           setReadTime(p.readTime || '5 min read');
           setPublished(p.published);
-          setPublishedAt(p.publishedAt ? p.publishedAt.split('T')[0] : new Date().toISOString().split('T')[0]);
+          setPublishedAt(formatForDateTimeInput(p.publishedAt || p.createdAt));
           setOrder(p.order || 0);
 
           setCoverImage(p.coverImage || '');
@@ -773,10 +785,10 @@ function BlogEditorInner() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>
-                  Publish Date 📅
+                  Publish Date & Time 📅
                 </label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   value={publishedAt}
                   onChange={(e) => setPublishedAt(e.target.value)}
                   style={{ ...inputStyle, cursor: 'pointer' }}

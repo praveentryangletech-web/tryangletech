@@ -46,12 +46,6 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
-      <style>{`
-        @keyframes fadeInSlider {
-          from { opacity: 0.3; }
-          to { opacity: 1; }
-        }
-      `}</style>
       <SafeImage
         key={currentIndex}
         src={currentSrc}

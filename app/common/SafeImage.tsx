@@ -37,49 +37,41 @@ export default function SafeImage({
   }, [src, fallbackSrc]);
 
   return (
-    <>
-      <style>{`
-        @keyframes safeImgShimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
+    <Image
+      {...props}
+      src={hasError ? fallbackSrc : (imgSrc || fallbackSrc)}
+      alt={alt || ''}
+      unoptimized={unoptimized}
+      className={className}
+      onLoad={() => setIsLoaded(true)}
+      style={{
+        backgroundColor: isLoaded ? 'transparent' : '#F8FAFC',
+        backgroundImage: !isLoaded
+          ? 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)'
+          : 'none',
+        backgroundSize: '200% 100%',
+        animation: !isLoaded ? 'safeImgShimmer 1.8s infinite linear' : 'none',
+        ...style,
+      }}
+      onError={() => {
+        // 1. If static file doesn't exist on disk, check if it's stored in database /api/media/
+        if (imgSrc && !triedApiMedia && !imgSrc.startsWith('/api/media/')) {
+          const clean = imgSrc.split('?')[0];
+          const filename = clean.split('/').pop();
+          if (filename) {
+            setTriedApiMedia(true);
+            setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
+            return;
+          }
         }
-      `}</style>
-      <Image
-        {...props}
-        src={hasError ? fallbackSrc : (imgSrc || fallbackSrc)}
-        alt={alt || ''}
-        unoptimized={unoptimized}
-        className={className}
-        onLoad={() => setIsLoaded(true)}
-        style={{
-          backgroundColor: isLoaded ? 'transparent' : '#F8FAFC',
-          backgroundImage: !isLoaded
-            ? 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)'
-            : 'none',
-          backgroundSize: '200% 100%',
-          animation: !isLoaded ? 'safeImgShimmer 1.8s infinite linear' : 'none',
-          ...style,
-        }}
-        onError={() => {
-          // 1. If static file doesn't exist on disk, check if it's stored in database /api/media/
-          if (imgSrc && !triedApiMedia && !imgSrc.startsWith('/api/media/')) {
-            const clean = imgSrc.split('?')[0];
-            const filename = clean.split('/').pop();
-            if (filename) {
-              setTriedApiMedia(true);
-              setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
-              return;
-            }
-          }
 
-          // 2. Otherwise switch to fallback illustration
-          if (!hasError) {
-            setHasError(true);
-            setImgSrc(fallbackSrc);
-          }
-          setIsLoaded(true);
-        }}
-      />
-    </>
+        // 2. Otherwise switch to fallback illustration
+        if (!hasError) {
+          setHasError(true);
+          setImgSrc(fallbackSrc);
+        }
+        setIsLoaded(true);
+      }}
+    />
   );
 }

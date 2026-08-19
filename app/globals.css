@@ -405,3 +405,40 @@ body {
   transform: translateX(-4px);
 }
 
+/* ── Modal & Superadmin Utility Animations ── */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes agyPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.agy-skeleton {
+  background-color: #E2E8F0;
+  border-radius: 8px;
+  animation: agyPulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+

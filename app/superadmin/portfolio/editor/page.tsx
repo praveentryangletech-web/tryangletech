@@ -612,18 +612,6 @@ function PortfolioEditorInner() {
   if (isLoading) {
     return (
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.75rem 2rem 6rem 2rem' }}>
-        <style>{`
-          @keyframes agyPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-          }
-          .agy-skeleton {
-            background-color: #E2E8F0;
-            border-radius: 8px;
-            animation: agyPulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-          }
-        `}</style>
-
         {/* Header Toolbar Skeleton */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div className="agy-skeleton" style={{ width: '160px', height: '42px', borderRadius: '12px' }} />

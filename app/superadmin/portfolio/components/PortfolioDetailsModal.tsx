@@ -45,20 +45,6 @@ export default function PortfolioDetailsModal({ project, onClose }: PortfolioDet
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <style>{`
-          @keyframes modalSlideUp {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-          }
-          .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-          }
-        `}</style>
-
         {/* Modal Header */}
         <div
           style={{

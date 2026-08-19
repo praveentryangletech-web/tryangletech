@@ -446,18 +446,6 @@ function BlogEditorInner() {
   if (isLoading) {
     return (
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 6rem' }}>
-        <style>{`
-          @keyframes agyPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-          }
-          .agy-skeleton {
-            background-color: #E2E8F0;
-            border-radius: 8px;
-            animation: agyPulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-          }
-        `}</style>
-
         {/* Header Toolbar Skeleton */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -700,33 +688,113 @@ function BlogEditorInner() {
         </div>
       )}
 
-      {/* 2. Tabs Navigation */}
-      <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid #E2E8F0', marginBottom: '2rem', flexWrap: 'wrap' }}>
+      {/* 2. Modern Segmented Tab Navigation Bar */}
+      <div
+        style={{
+          display: 'flex',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '16px',
+          padding: '6px',
+          border: '1.5px solid #E2E8F0',
+          marginBottom: '2rem',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+          gap: '6px',
+          overflowX: 'auto',
+        }}
+      >
         {[
-          { key: 'general', label: '1. General & Author' },
-          { key: 'media', label: '2. Media Showcase & Slider' },
-          { key: 'narrative', label: '3. Story & Sections' },
-          { key: 'seo', label: '4. SEO & Search Engine' },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={() => setActiveTab(tab.key as any)}
-            style={{
-              padding: '12px 20px',
-              fontSize: '0.925rem',
-              fontWeight: activeTab === tab.key ? 700 : 500,
-              color: activeTab === tab.key ? '#1833FE' : '#64748B',
-              backgroundColor: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === tab.key ? '3px solid #1833FE' : '3px solid transparent',
-              cursor: 'pointer',
-              marginBottom: '-2px',
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+          {
+            key: 'general',
+            label: '1. General & Author',
+            icon: (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            ),
+          },
+          {
+            key: 'media',
+            label: '2. Media Showcase & Slider',
+            icon: (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+              </svg>
+            ),
+            badge: sliderImages.length > 0 ? `${sliderImages.length}` : undefined,
+          },
+          {
+            key: 'narrative',
+            label: '3. Story & Sections',
+            icon: (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            ),
+            badge: '6 Sections',
+          },
+          {
+            key: 'seo',
+            label: '4. SEO & Search Engine',
+            icon: (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+            ),
+            badge: 'SERP Live',
+          },
+        ].map((tab) => {
+          const isActive = activeTab === tab.key;
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              onClick={() => setActiveTab(tab.key as any)}
+              style={{
+                flex: '1 1 auto',
+                padding: '11px 20px',
+                borderRadius: '10px',
+                border: 'none',
+                backgroundColor: isActive ? '#1833FE' : 'transparent',
+                color: isActive ? '#FFFFFF' : '#64748B',
+                fontWeight: isActive ? 700 : 600,
+                fontSize: '0.875rem',
+                cursor: 'pointer',
+                boxShadow: isActive ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                transition: 'all 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab.icon}
+              <span>{tab.label}</span>
+              {tab.badge && (
+                <span
+                  style={{
+                    fontSize: '0.725rem',
+                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : '#F1F5F9',
+                    color: isActive ? '#FFFFFF' : '#64748B',
+                    padding: '2px 8px',
+                    borderRadius: '10px',
+                    fontWeight: 700,
+                  }}
+                >
+                  {tab.badge}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* 3. Form Content */}
@@ -764,44 +832,72 @@ function BlogEditorInner() {
               </div>
             </div>
 
+            {/* URL Slug */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '7px' }}>
-                <label style={{ ...labelStyle, margin: 0 }}>
+                <label style={{ ...labelStyle, marginBottom: 0 }}>
                   URL Slug <span style={{ color: '#EF4444' }}>*</span>
                 </label>
-                <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-                  Live Path: <code style={{ color: '#1833FE', fontWeight: 700, backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px' }}>/blog/{slug || 'article-slug'}</code>
-                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const auto = generateBlogSlug(title);
+                    setSlug(auto);
+                    setIsSlugManual(false);
+                  }}
+                  style={{
+                    border: 'none',
+                    background: 'none',
+                    color: '#1833FE',
+                    fontSize: '0.775rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                  }}
+                >
+                  Regenerate from Title
+                </button>
               </div>
-              <input
-                type="text"
-                required
-                placeholder="e.g. transforming-businesses"
-                value={slug}
-                onChange={(e) => {
-                  setSlug(e.target.value);
-                  setIsSlugManual(true);
-                }}
-                style={{ ...inputStyle, fontFamily: 'monospace' }}
-              />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span
+                  style={{
+                    padding: '0.75rem 1rem',
+                    borderRadius: '10px',
+                    backgroundColor: '#F8FAFC',
+                    border: '1.5px solid #E2E8F0',
+                    color: '#64748B',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    fontFamily: 'monospace',
+                  }}
+                >
+                  /blog/
+                </span>
+                <input
+                  type="text"
+                  required
+                  placeholder="transforming-businesses-with-innovative-technology"
+                  value={slug}
+                  onChange={(e) => handleSlugChange(e.target.value)}
+                  style={{ ...inputStyle, flex: 1, fontFamily: 'monospace' }}
+                />
+              </div>
             </div>
 
-            {/* Publishing & Article Metadata Row (Date & Read Time) */}
+            {/* 2-Column Metadata */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
-                <label style={labelStyle}>
-                  Publish Date & Time 📅
-                </label>
+                <label style={labelStyle}>Published Date & Time</label>
                 <input
                   type="datetime-local"
                   value={publishedAt}
                   onChange={(e) => setPublishedAt(e.target.value)}
-                  style={{ ...inputStyle, cursor: 'pointer' }}
+                  style={inputStyle}
                 />
               </div>
 
               <div>
-                <label style={labelStyle}>Read Time</label>
+                <label style={labelStyle}>Read Time Estimate</label>
                 <input
                   type="text"
                   placeholder="e.g. 5 min read"
@@ -812,7 +908,7 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            {/* Author Information Row */}
+            {/* 2-Column Author Info */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>Author Name</label>
@@ -826,24 +922,23 @@ function BlogEditorInner() {
               </div>
 
               <div>
-                <label style={labelStyle}>Author Role / Designation</label>
+                <label style={labelStyle}>Author Role / Subtitle</label>
                 <input
                   type="text"
-                  placeholder="e.g. Content Creators"
+                  placeholder="e.g. Senior Cloud Architect"
                   value={authorRole}
                   onChange={(e) => setAuthorRole(e.target.value)}
                   style={inputStyle}
                 />
               </div>
             </div>
-
           </div>
         )}
 
-        {/* TAB 2: MEDIA (COVER & SHOWCASE SLIDER) */}
+        {/* TAB 2: MEDIA SHOWCASE */}
         {activeTab === 'media' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {/* 1. Main Listing Cover Image Card */}
+            {/* 1. Cover Image Card */}
             <div
               style={{
                 backgroundColor: '#FFFFFF',
@@ -855,43 +950,15 @@ function BlogEditorInner() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
                 <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                  Main Listing Cover Image
+                  Article Cover Image (Hero Banner)
                 </h3>
                 <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
-                  Recommended: 800 × 500 px • 16:10 Ratio
+                  Standard Size: 820 × 490 px • 16:10 Ratio
                 </span>
               </div>
               <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                The primary card thumbnail displayed across blog listings and hero banners. Recommended image dimensions: <strong>800 × 500 px</strong> (or 16:10 aspect ratio).
+                The main banner image displayed on blog listing cards and at the top of the article. Upload a crisp screenshot or artwork. Standard dimensions: <strong>820 × 490 px</strong>.
               </p>
-
-              {/* Upload Feedback Alert */}
-              {uploadFeedback && (
-                <div
-                  style={{
-                    marginBottom: '1.5rem',
-                    padding: '0.85rem 1.25rem',
-                    borderRadius: '12px',
-                    backgroundColor: uploadFeedback.type === 'success' ? '#ECFDF5' : '#FEF2F2',
-                    color: uploadFeedback.type === 'success' ? '#047857' : '#B91C1C',
-                    border: `1px solid ${uploadFeedback.type === 'success' ? '#A7F3D0' : '#FECACA'}`,
-                    fontSize: '0.875rem',
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span>{uploadFeedback.text}</span>
-                  <button
-                    type="button"
-                    onClick={() => setUploadFeedback(null)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontWeight: 800 }}
-                  >
-                    ✕
-                  </button>
-                </div>
-              )}
 
               {/* Cover Pre-upload renaming box */}
               {selectedUploadFile && uploadTarget === 'cover' && (
@@ -947,14 +1014,14 @@ function BlogEditorInner() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
-                        Modify Image Filename before storing in <code>public/blog-assets/</code>:
+                        Modify Image Filename before saving to <code>public/blog-assets/</code>:
                       </label>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <input
                           type="text"
                           value={customFilenameInput}
                           onChange={(e) => setCustomFilenameInput(e.target.value)}
-                          placeholder="e.g. blog-article-cover"
+                          placeholder="e.g. taskopia-blog-cover"
                           style={{
                             flex: 1,
                             padding: '8px 12px',
@@ -1027,32 +1094,26 @@ function BlogEditorInner() {
                 </div>
               )}
 
-              {/* Cover Main Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 320px) 1fr', gap: '2rem', alignItems: 'start' }}>
-                {/* Left: Preview & Browse Button */}
-                <div
-                  style={{
-                    border: '1.5px solid #CBD5E1',
-                    borderRadius: '16px',
-                    padding: '12px',
-                    backgroundColor: '#F8FAFC',
-                    textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '10px',
-                  }}
-                >
+              {/* Cover Image 2-Column Layout (Left: Preview & Upload Controls, Right: Selection from Library) */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 340px) 1fr', gap: '2rem', alignItems: 'start' }}>
+                {/* Left: Thumbnail & Trigger Buttons */}
+                <div>
                   <div
                     style={{
-                      position: 'relative',
                       width: '100%',
-                      height: '180px',
-                      borderRadius: '12px',
+                      height: '200px',
+                      borderRadius: '16px',
                       overflow: 'hidden',
-                      backgroundColor: '#F1F5F9',
+                      border: '1.5px solid #E2E8F0',
+                      backgroundColor: '#F8FAFC',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
                     }}
                   >
-                    {coverImage && coverImage.trim() ? (
+                    {coverImage ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={blobPreviewMap[coverImage] || coverImage}
@@ -1069,10 +1130,36 @@ function BlogEditorInner() {
                         }}
                       />
                     ) : (
-                      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', gap: '6px' }}>
-                        <span style={{ fontSize: '1.75rem' }}>🖼️</span>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>No Cover Image Selected</span>
+                      <div style={{ textAlign: 'center', padding: '1rem', color: '#94A3B8' }}>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ margin: '0 auto 6px', display: 'block' }}>
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>No Cover Image Set</span>
                       </div>
+                    )}
+
+                    {coverImage && (
+                      <button
+                        type="button"
+                        onClick={() => setCoverImage('')}
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          right: '8px',
+                          padding: '5px 10px',
+                          borderRadius: '8px',
+                          border: 'none',
+                          backgroundColor: 'rgba(239, 68, 68, 0.9)',
+                          color: '#FFFFFF',
+                          fontSize: '0.725rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Remove
+                      </button>
                     )}
                   </div>
 
@@ -1089,12 +1176,13 @@ function BlogEditorInner() {
                     onClick={() => document.getElementById('cover-file-input')?.click()}
                     style={{
                       width: '100%',
-                      padding: '9px 14px',
+                      padding: '10px 14px',
+                      marginTop: '12px',
                       borderRadius: '10px',
                       border: '1.5px solid #BFDBFE',
                       backgroundColor: '#EFF6FF',
                       color: '#1833FE',
-                      fontSize: '0.825rem',
+                      fontSize: '0.85rem',
                       fontWeight: 700,
                       cursor: 'pointer',
                       display: 'inline-flex',
@@ -1103,8 +1191,7 @@ function BlogEditorInner() {
                       gap: '6px',
                     }}
                   >
-                    <span>📁</span>
-                    <span>Upload Image from Device</span>
+                    <span>📁 Upload Image</span>
                   </button>
 
                   <button
@@ -1116,309 +1203,19 @@ function BlogEditorInner() {
                     }}
                     style={{
                       width: '100%',
-                      padding: '9px 14px',
+                      padding: '10px 14px',
                       marginTop: '8px',
                       borderRadius: '10px',
                       border: '1.5px solid #CBD5E1',
                       backgroundColor: '#FFFFFF',
                       color: '#1E293B',
-                      fontSize: '0.825rem',
+                      fontSize: '0.85rem',
                       fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                    }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21 15 16 10 5 21" />
-                    </svg>
-                    <span>Select from Existing</span>
-                  </button>
-                </div>
-
-                {/* Right: Dropdown & Direct URL Field */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div>
-                    <label style={labelStyle}>Select from Public Assets Library</label>
-                    <CustomDropdown
-                      value={mediaList.some((m) => m.url === coverImage) ? coverImage : ''}
-                      onChange={(val) => {
-                        if (val) setCoverImage(val);
-                      }}
-                      options={[
-                        { label: '— Choose an existing image from Asset Library —', value: '' },
-                        ...mediaList.map((m) => ({
-                          label: `${m.filename} (${(m.size / 1024).toFixed(0)} KB)`,
-                          value: m.url,
-                        })),
-                      ]}
-                      placeholder="Select image from Asset Library..."
-                      size="form"
-                      fullWidth
-                    />
-                  </div>
-
-                  <div>
-                    <label style={labelStyle}>Or Enter Direct URL / File Path (Required Size: 820 × 490 px • 16:10 Ratio)</label>
-                    <input
-                      type="text"
-                      placeholder="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
-                      value={coverImage}
-                      onChange={(e) => setCoverImage(e.target.value)}
-                      style={inputStyle}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. Slider Showcase Card */}
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                  Public Hero Showcase Image Slider ({sliderImages.length})
-                </h3>
-                <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
-                  Recommended: 1200 × 600 px • 2:1 Ratio
-                </span>
-              </div>
-              <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Multiple high-resolution screenshots displayed in the hero carousel on <code>/blog/[slug]</code>. Recommended image dimensions: <strong>1200 × 600 px</strong> (or 2:1 aspect ratio).
-              </p>
-
-              {/* Slider Pre-upload renaming box */}
-              {selectedUploadFile && uploadTarget === 'slider' && (
-                <div
-                  style={{
-                    marginBottom: '1.75rem',
-                    border: '1.5px solid #BFDBFE',
-                    borderRadius: '16px',
-                    padding: '1.5rem',
-                    backgroundColor: '#F0F9FF',
-                    display: 'grid',
-                    gridTemplateColumns: 'minmax(120px, 150px) 1fr',
-                    gap: '1.5rem',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      position: 'relative',
-                      width: '100%',
-                      height: '110px',
-                      borderRadius: '10px',
-                      overflow: 'hidden',
-                      border: '1px solid #CBD5E1',
-                      backgroundColor: '#FFFFFF',
-                    }}
-                  >
-                    {uploadFilePreview && (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={uploadFilePreview}
-                        alt="Selected File Preview"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      />
-                    )}
-                    <span
-                      style={{
-                        position: 'absolute',
-                        bottom: '4px',
-                        left: '4px',
-                        backgroundColor: 'rgba(15, 23, 42, 0.85)',
-                        color: '#FFFFFF',
-                        fontSize: '0.65rem',
-                        fontWeight: 700,
-                        padding: '2px 5px',
-                        borderRadius: '4px',
-                      }}
-                    >
-                      {(selectedUploadFile.size / 1024).toFixed(0)} KB
-                    </span>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
-                        Modify Image Filename before saving to <code>public/blog-assets/</code>:
-                      </label>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <input
-                          type="text"
-                          value={customFilenameInput}
-                          onChange={(e) => setCustomFilenameInput(e.target.value)}
-                          placeholder="e.g. blog-slide-2"
-                          style={{
-                            flex: 1,
-                            padding: '8px 12px',
-                            borderRadius: '8px',
-                            border: '1.5px solid #3B82F6',
-                            backgroundColor: '#FFFFFF',
-                            fontSize: '0.875rem',
-                            fontWeight: 600,
-                            color: '#0F172A',
-                            outline: 'none',
-                          }}
-                        />
-                        <span
-                          style={{
-                            padding: '8px 12px',
-                            borderRadius: '8px',
-                            backgroundColor: '#E0F2FE',
-                            color: '#0369A1',
-                            fontSize: '0.8rem',
-                            fontWeight: 700,
-                            fontFamily: 'monospace',
-                          }}
-                        >
-                          {selectedUploadFile.name.substring(selectedUploadFile.name.lastIndexOf('.')) || '.webp'}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                      <button
-                        type="button"
-                        onClick={handleExecuteUpload}
-                        disabled={isUploading}
-                        style={{
-                          padding: '8px 18px',
-                          borderRadius: '8px',
-                          border: 'none',
-                          backgroundColor: '#1833FE',
-                          color: '#FFFFFF',
-                          fontSize: '0.825rem',
-                          fontWeight: 700,
-                          cursor: isUploading ? 'not-allowed' : 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                        }}
-                      >
-                        {isUploading ? 'Uploading...' : '🚀 Save & Add to Slider'}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={handleCancelSelectedFile}
-                        disabled={isUploading}
-                        style={{
-                          padding: '8px 14px',
-                          borderRadius: '8px',
-                          border: '1px solid #CBD5E1',
-                          backgroundColor: '#FFFFFF',
-                          color: '#475569',
-                          fontSize: '0.825rem',
-                          fontWeight: 600,
-                          cursor: isUploading ? 'not-allowed' : 'pointer',
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Add Slide Controls */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '10px', marginBottom: '1.5rem', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <input
-                    type="text"
-                    placeholder="Enter image URL or path (e.g. /blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png)"
-                    value={newSliderUrl}
-                    onChange={(e) => setNewSliderUrl(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleAddSliderImage();
-                      }
-                    }}
-                    style={{ ...inputStyle, flex: 1 }}
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddSliderImage}
-                    style={{
-                      padding: '11px 20px',
-                      borderRadius: '12px',
-                      border: 'none',
-                      backgroundColor: '#1833FE',
-                      color: '#FFFFFF',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    + Add URL Slide
-                  </button>
-                </div>
-
-                {/* Upload Slide Button & Select Existing Button */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input
-                    id="slider-file-input"
-                    type="file"
-                    accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
-                    style={{ display: 'none' }}
-                    onChange={(e) => handleSelectFileToUpload(e.target.files, 'slider')}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => document.getElementById('slider-file-input')?.click()}
-                    style={{
-                      padding: '11px 18px',
-                      borderRadius: '12px',
-                      border: '1.5px solid #BFDBFE',
-                      backgroundColor: '#EFF6FF',
-                      color: '#1833FE',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
                       whiteSpace: 'nowrap',
-                    }}
-                  >
-                    <span>📁 Upload Slide File</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      fetchMediaList();
-                      setAssetPickerTarget('slider');
-                      setSelectedAssetUrls([]);
-                      setIsAssetPickerOpen(true);
-                    }}
-                    style={{
-                      padding: '11px 18px',
-                      borderRadius: '12px',
-                      border: '1.5px solid #CBD5E1',
-                      backgroundColor: '#FFFFFF',
-                      color: '#1E293B',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      whiteSpace: 'nowrap',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                     }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1426,27 +1223,17 @@ function BlogEditorInner() {
                       <circle cx="8.5" cy="8.5" r="1.5" />
                       <polyline points="21 15 16 10 5 21" />
                     </svg>
-                    <span>Select from Existing</span>
+                    <span>Select Existing Assets</span>
                   </button>
                 </div>
               </div>
 
-              {/* Slider Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
+              {/* Slider Image List Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
                 {sliderImages.length === 0 ? (
-                  <div
-                    style={{
-                      gridColumn: '1 / -1',
-                      padding: '2.5rem 1.5rem',
-                      textAlign: 'center',
-                      border: '2px dashed #CBD5E1',
-                      borderRadius: '16px',
-                      backgroundColor: '#F8FAFC',
-                      color: '#64748B',
-                    }}
-                  >
-                    <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🖼️</div>
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1E293B', marginBottom: '4px' }}>No Slider Images Added Yet</div>
+                  <div style={{ gridColumn: '1 / -1', padding: '2.5rem', textAlign: 'center', border: '1.5px dashed #CBD5E1', borderRadius: '16px', backgroundColor: '#F8FAFC' }}>
+                    <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>🖼️</div>
+                    <div style={{ fontWeight: 700, color: '#334155', marginBottom: '4px' }}>No Carousel Slider Images Added Yet</div>
                     <div style={{ fontSize: '0.8rem', color: '#64748B' }}>Add screenshot URLs, upload slide files from your device, or pick from the existing library above.</div>
                   </div>
                 ) : (
@@ -1555,16 +1342,37 @@ function BlogEditorInner() {
         {activeTab === 'narrative' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Article Hook / Excerpt */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-              <label style={labelStyle}>Article Excerpt / Hook (Summary on Listing Cards) *</label>
-              <textarea
-                rows={2}
-                required
-                value={excerpt}
-                onChange={(e) => setExcerpt(e.target.value)}
-                placeholder="Short 1-2 sentence hook shown on cards..."
-                style={{ ...inputStyle, fontFamily: 'inherit' }}
-              />
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                  <span>Article Excerpt & Hook (Listing Cards Summary)</span>
+                </h3>
+                <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
+                  Featured Summary
+                </span>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.825rem', color: '#64748B' }}>
+                Short 1-2 sentence compelling summary displayed on the main blog grid cards and Google search snippet.
+              </p>
+              <div>
+                <label style={labelStyle}>
+                  Excerpt Content <span style={{ color: '#EF4444' }}>*</span>
+                </label>
+                <textarea
+                  rows={3}
+                  required
+                  value={excerpt}
+                  onChange={(e) => setExcerpt(e.target.value)}
+                  placeholder="e.g. Discover how modern AI workflows and human creativity collaborate to drive digital transformation..."
+                  style={{ ...inputStyle, fontFamily: 'inherit', lineHeight: 1.6 }}
+                />
+              </div>
             </div>
 
             {/* Section 1: Main Story & Intro */}

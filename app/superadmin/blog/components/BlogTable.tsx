@@ -94,13 +94,11 @@ export default function BlogTable({
             <button
               onClick={onAddNewPost}
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                backgroundColor: 'var(--brand-blue, #1833fe)',
+                height: '42px',
+                padding: '0 20px',
+                borderRadius: '10px',
+                backgroundColor: '#1833FE',
                 color: '#FFFFFF',
-                padding: '0.65rem 1.35rem',
-                borderRadius: '8px',
                 border: 'none',
                 fontSize: '0.875rem',
                 fontWeight: 700,
@@ -108,9 +106,16 @@ export default function BlogTable({
                 boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
                 transition: 'all 0.2s ease',
                 whiteSpace: 'nowrap',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxSizing: 'border-box',
               }}
             >
-              <span style={{ fontSize: '1.15rem', lineHeight: 1 }}>+</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
               <span>Add New Article</span>
             </button>
           </Tooltip>

@@ -1811,7 +1811,8 @@ function PortfolioEditorInner() {
                       </button>
                     </div>
                   </div>
-                ))}
+                ))
+              )}
               </div>
             </div>
           </div>

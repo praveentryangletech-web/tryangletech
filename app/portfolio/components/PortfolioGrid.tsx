@@ -93,7 +93,8 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
       console.warn('API fetch warning, using static fallback:', err);
       let filtered = staticProjects;
       if (category && category !== 'All') {
-        filtered = filtered.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        const cleanCat = category.toLowerCase().replace(/[-\s]/g, '');
+        filtered = filtered.filter(p => p.category.toLowerCase().replace(/[-\s]/g, '') === cleanCat);
       }
       setProjectsList(filtered.slice(0, (limit || 9) * pageNum));
       setHasNextPage(filtered.length > (limit || 9) * pageNum);

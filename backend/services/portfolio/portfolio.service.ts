@@ -143,31 +143,25 @@ export const portfolioService = {
       try {
         await ensureColumnsExist();
 
-        const rows = await db.$queryRaw<Array<{ count: bigint }>>`
-          SELECT COUNT(*) as count FROM "PortfolioProject"
-        `;
-        const count = Number(rows[0]?.count || 0);
-        if (count === 0) {
-          for (let i = 0; i < defaultProjects.length; i++) {
-            const p = defaultProjects[i];
-            const id = String(i + 1);
-            await db.$executeRaw`
-              INSERT INTO "PortfolioProject" (
-                "id", "slug", "title", "category", "image", "description",
-                "client", "duration", "role", "liveUrl", "content",
-                "challenges", "solutions", "results", "technologies", "order",
-                "createdAt", "updatedAt"
-              ) VALUES (
-                ${id}, ${p.slug}, ${p.title}, ${p.category}, ${p.image || '/portfolio/vh-accounting.webp'},
-                ${p.description || ''}, ${p.client || ''}, ${p.duration || '3 Weeks'},
-                ${p.role || 'Website Design & Development'}, ${p.liveUrl || ''},
-                ${p.content || ''}, ${p.challenges || []}, ${p.solutions || []},
-                ${p.results || []}, ${p.technologies || []}, ${i},
-                NOW(), NOW()
-              )
-            `;
-          }
-          console.log(`[DB Portfolio] Seeded ${defaultProjects.length} initial projects with standard numeric IDs into PostgreSQL.`);
+        for (let i = 0; i < defaultProjects.length; i++) {
+          const p = defaultProjects[i];
+          const id = String(i + 1);
+          await db.$executeRaw`
+            INSERT INTO "PortfolioProject" (
+              "id", "slug", "title", "category", "image", "description",
+              "client", "duration", "role", "liveUrl", "content",
+              "challenges", "solutions", "results", "technologies", "order",
+              "createdAt", "updatedAt"
+            ) VALUES (
+              ${id}, ${p.slug}, ${p.title}, ${p.category}, ${p.image || '/portfolio/vh-accounting.webp'},
+              ${p.description || ''}, ${p.client || ''}, ${p.duration || '3 Weeks'},
+              ${p.role || 'Website Design & Development'}, ${p.liveUrl || ''},
+              ${p.content || ''}, ${p.challenges || []}, ${p.solutions || []},
+              ${p.results || []}, ${p.technologies || []}, ${i},
+              NOW(), NOW()
+            )
+            ON CONFLICT ("id") DO NOTHING
+          `;
         }
       } catch (err) {
         console.error('[DB Portfolio] background seed notice:', err);
@@ -205,8 +199,8 @@ export const portfolioService = {
       }
 
       if (params.category && params.category.trim().toUpperCase() !== 'ALL') {
-        const safeCat = params.category.trim().toLowerCase();
-        conditions.push(Prisma.sql`LOWER("category") = ${safeCat}`);
+        const cleanCat = params.category.trim().toLowerCase().replace(/[-\s]/g, '');
+        conditions.push(Prisma.sql`LOWER(REPLACE(REPLACE("category", '-', ''), ' ', '')) = ${cleanCat}`);
       }
 
       if (params.search && params.search.trim()) {
@@ -293,8 +287,9 @@ export const portfolioService = {
       if (params.slug) {
         filtered = filtered.filter((p) => p.slug === params.slug);
       }
-      if (params.category && params.category !== 'ALL') {
-        filtered = filtered.filter((p) => p.category.toLowerCase() === params.category!.toLowerCase());
+      if (params.category && params.category.trim().toUpperCase() !== 'ALL') {
+        const cleanCat = params.category.trim().toLowerCase().replace(/[-\s]/g, '');
+        filtered = filtered.filter((p) => p.category.toLowerCase().replace(/[-\s]/g, '') === cleanCat);
       }
       if (params.search && params.search.trim()) {
         const s = params.search.toLowerCase();
@@ -380,8 +375,8 @@ export const portfolioService = {
       const conditions: Prisma.Sql[] = [];
 
       if (category && category.trim().toUpperCase() !== 'ALL') {
-        const safeCat = category.trim().toLowerCase();
-        conditions.push(Prisma.sql`LOWER("category") = ${safeCat}`);
+        const cleanCat = category.trim().toLowerCase().replace(/[-\s]/g, '');
+        conditions.push(Prisma.sql`LOWER(REPLACE(REPLACE("category", '-', ''), ' ', '')) = ${cleanCat}`);
       }
 
       if (search && search.trim()) {

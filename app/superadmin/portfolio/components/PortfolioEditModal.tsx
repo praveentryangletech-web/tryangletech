@@ -25,7 +25,7 @@ export default function PortfolioEditModal({
   const [duration, setDuration] = useState('3 Weeks');
   const [role, setRole] = useState('Website Design & Development');
   const [liveUrl, setLiveUrl] = useState('');
-  const [image, setImage] = useState('/portfolio/vh-accounting.webp');
+  const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
   const [techInput, setTechInput] = useState('');
@@ -46,7 +46,7 @@ export default function PortfolioEditModal({
       setDuration(project.duration || '3 Weeks');
       setRole(project.role || 'Website Design & Development');
       setLiveUrl(project.liveUrl || '');
-      setImage(project.image || '/portfolio/vh-accounting.webp');
+      setImage(project.image || '');
       setDescription(project.description || '');
       setContent(project.content || project.description || '');
       setTechnologies(project.technologies || []);
@@ -62,7 +62,7 @@ export default function PortfolioEditModal({
       setDuration('3 Weeks');
       setRole('Website Design & Development');
       setLiveUrl('');
-      setImage('/portfolio/vh-accounting.webp');
+      setImage('');
       setDescription('');
       setContent('');
       setTechnologies(['React', 'Next.js', 'Tailwind CSS']);
@@ -105,7 +105,7 @@ export default function PortfolioEditModal({
         duration: duration.trim(),
         role: role.trim(),
         liveUrl: liveUrl.trim(),
-        image: image.trim() || '/portfolio/vh-accounting.webp',
+        image: image.trim(),
         description: description.trim(),
         content: content.trim() || description.trim(),
         technologies,

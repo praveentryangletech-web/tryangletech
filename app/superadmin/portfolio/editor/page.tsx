@@ -190,8 +190,8 @@ function PortfolioEditorInner() {
   const [order, setOrder] = useState<number>(0);
 
   // 2. Media
-  const [coverImage, setCoverImage] = useState('/portfolio/vh-accounting.webp');
-  const [sliderImages, setSliderImages] = useState<string[]>(['/portfolio/vh-accounting.webp']);
+  const [coverImage, setCoverImage] = useState('');
+  const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [newSliderUrl, setNewSliderUrl] = useState('');
 
   // 3. Narrative
@@ -228,8 +228,9 @@ function PortfolioEditorInner() {
 
   // Pre-upload rename states
   const [selectedUploadFile, setSelectedUploadFile] = useState<File | null>(null);
-  const [customFilenameInput, setCustomFilenameInput] = useState('');
   const [uploadFilePreview, setUploadFilePreview] = useState<string | null>(null);
+  const [customFilenameInput, setCustomFilenameInput] = useState('');
+  const [blobPreviewMap, setBlobPreviewMap] = useState<Record<string, string>>({});
 
   // 6. Asset Picker Modal State
   const [isAssetPickerOpen, setIsAssetPickerOpen] = useState(false);
@@ -318,6 +319,11 @@ function PortfolioEditorInner() {
         }
       }
 
+      if (uploadFilePreview) {
+        const previewUrl = uploadFilePreview;
+        setBlobPreviewMap((prev) => ({ ...prev, [data.url]: previewUrl }));
+      }
+
       // Cleanup pre-upload state
       setSelectedUploadFile(null);
       setCustomFilenameInput('');
@@ -360,7 +366,7 @@ function PortfolioEditorInner() {
       fetchMediaList();
 
       if (coverImage.includes(filename)) {
-        setCoverImage('/portfolio/vh-accounting.webp');
+        setCoverImage('');
       }
       setSliderImages((prev) => prev.filter((img) => !img.includes(filename)));
     } catch (err: any) {
@@ -402,11 +408,11 @@ function PortfolioEditorInner() {
           setLiveUrl(p.liveUrl || '');
           setOrder((p as any).order || 0);
 
-          setCoverImage(p.image || '/portfolio/vh-accounting.webp');
+          setCoverImage(p.image || '');
           setSliderImages(
             p.images && p.images.length > 0
               ? p.images
-              : [p.image || '/portfolio/vh-accounting.webp']
+              : (p.image ? [p.image] : [])
           );
 
           setDescription(p.description || '');
@@ -542,7 +548,7 @@ function PortfolioEditorInner() {
         duration: duration.trim(),
         role: role.trim(),
         liveUrl: liveUrl.trim(),
-        image: coverImage.trim() || '/portfolio/vh-accounting.webp',
+        image: coverImage.trim(),
         images: sliderImages.filter((img) => img.trim().length > 0),
         description: description.trim(),
         content: content.trim() || description.trim(),
@@ -1334,19 +1340,17 @@ function PortfolioEditorInner() {
                       backgroundColor: '#F1F5F9',
                     }}
                   >
-                    {coverImage ? (
+                    {coverImage && coverImage.trim() ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
-                        src={coverImage}
+                        src={blobPreviewMap[coverImage] || coverImage}
                         alt="Cover Preview"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
-                        }}
                       />
                     ) : (
-                      <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center', color: '#94A3B8' }}>
-                        No Image
+                      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', gap: '6px' }}>
+                        <span style={{ fontSize: '1.75rem' }}>🖼️</span>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>No Cover Image Selected</span>
                       </div>
                     )}
                   </div>
@@ -1705,7 +1709,24 @@ function PortfolioEditorInner() {
 
               {/* Slider Grid */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
-                {sliderImages.map((imgUrl, idx) => (
+                {sliderImages.length === 0 ? (
+                  <div
+                    style={{
+                      gridColumn: '1 / -1',
+                      padding: '2.5rem 1.5rem',
+                      textAlign: 'center',
+                      border: '2px dashed #CBD5E1',
+                      borderRadius: '16px',
+                      backgroundColor: '#F8FAFC',
+                      color: '#64748B',
+                    }}
+                  >
+                    <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🖼️</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1E293B', marginBottom: '4px' }}>No Slider Images Added Yet</div>
+                    <div style={{ fontSize: '0.8rem', color: '#64748B' }}>Add screenshot URLs, upload slide files from your device, or pick from the existing library above.</div>
+                  </div>
+                ) : (
+                  sliderImages.map((imgUrl, idx) => (
                   <div
                     key={idx}
                     style={{
@@ -1731,12 +1752,9 @@ function PortfolioEditorInner() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={imgUrl}
+                        src={blobPreviewMap[imgUrl] || imgUrl}
                         alt={`Slide ${idx + 1}`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/portfolio/vh-accounting.webp';
-                        }}
                       />
                       <span
                         style={{
@@ -2642,7 +2660,7 @@ function PortfolioEditorInner() {
                       <div style={{ position: 'relative', width: '100%', height: '110px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#F1F5F9' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={asset.url}
+                          src={blobPreviewMap[asset.url] || asset.url}
                           alt={asset.filename}
                           loading="lazy"
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}

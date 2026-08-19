@@ -45,7 +45,7 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
   const currentSrc = displayImages[currentIndex] || fallback;
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
       <style>{`
         @keyframes fadeInSlider {
           from { opacity: 0.3; }
@@ -59,7 +59,7 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
         loading="lazy"
         alt={`${title} - image ${currentIndex + 1}`}
         className="rt-image-scale"
-        style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px', animation: 'fadeInSlider 0.5s ease-in-out' }}
+        style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px', animation: 'fadeInSlider 0.5s ease-in-out', backgroundColor: 'transparent' }}
         width={800}
         height={800}
         unoptimized

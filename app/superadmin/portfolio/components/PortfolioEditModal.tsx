@@ -362,7 +362,7 @@ export default function PortfolioEditModal({
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.825rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                  Cover Image Path
+                  Cover Image Path (Recommended Size: 800 × 500 px • 16:10 Ratio)
                 </label>
                 <input
                   type="text"

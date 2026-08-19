@@ -1216,11 +1216,11 @@ function PortfolioEditorInner() {
                   Main Listing Cover Image
                 </h3>
                 <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
-                  Card Thumbnail & OpenGraph
+                  Recommended: 800 × 500 px • 16:10 Ratio
                 </span>
               </div>
               <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                The primary card thumbnail displayed across portfolio index grids and social media share previews.
+                The primary card thumbnail displayed across portfolio index grids and social media share previews. Recommended image dimensions: <strong>800 × 500 px</strong> (or 16:10 aspect ratio).
               </p>
 
               {/* Upload Feedback Alert */}
@@ -1542,13 +1542,16 @@ function PortfolioEditorInner() {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
                 <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
                   Public Hero Showcase Image Slider ({sliderImages.length})
                 </h3>
+                <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
+                  Recommended: 1200 × 600 px • 2:1 Ratio
+                </span>
               </div>
               <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Multiple high-resolution screenshots displayed in the hero carousel on <code>/portfolio/[slug]</code>.
+                Multiple high-resolution screenshots displayed in the hero carousel on <code>/portfolio/[slug]</code>. Recommended image dimensions: <strong>1200 × 600 px</strong> (or 2:1 aspect ratio).
               </p>
 
               {/* Slider Pre-upload renaming box */}

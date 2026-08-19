@@ -853,11 +853,11 @@ function BlogEditorInner() {
                   Main Listing Cover Image
                 </h3>
                 <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
-                  Card Thumbnail & OpenGraph
+                  Recommended: 800 × 500 px • 16:10 Ratio
                 </span>
               </div>
               <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                The primary card thumbnail displayed across blog listings and hero banners.
+                The primary card thumbnail displayed across blog listings and hero banners. Recommended image dimensions: <strong>800 × 500 px</strong> (or 16:10 aspect ratio).
               </p>
 
               {/* Upload Feedback Alert */}
@@ -1181,13 +1181,16 @@ function BlogEditorInner() {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
                 <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
                   Public Hero Showcase Image Slider ({sliderImages.length})
                 </h3>
+                <span style={{ fontSize: '0.75rem', backgroundColor: '#EFF6FF', color: '#1833FE', padding: '4px 12px', borderRadius: '12px', fontWeight: 700 }}>
+                  Recommended: 1200 × 600 px • 2:1 Ratio
+                </span>
               </div>
               <p style={{ margin: '0 0 1.75rem 0', fontSize: '0.85rem', color: '#64748B' }}>
-                Multiple high-resolution screenshots displayed in the hero carousel on <code>/blog/[slug]</code>.
+                Multiple high-resolution screenshots displayed in the hero carousel on <code>/blog/[slug]</code>. Recommended image dimensions: <strong>1200 × 600 px</strong> (or 2:1 aspect ratio).
               </p>
 
               {/* Slider Pre-upload renaming box */}
@@ -1713,14 +1716,19 @@ function BlogEditorInner() {
                   <span>Section 4: Mid-Article Image Showcase (Side-by-Side)</span>
                 </h3>
                 <span style={{ fontSize: '0.75rem', backgroundColor: '#FEF3C7', color: '#D97706', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
-                  2 Media Cards
+                  Card Size: 520 × 360 px (Recommended)
                 </span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                 {/* Image 1 */}
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1rem', backgroundColor: '#F8FAFC' }}>
-                  <label style={labelStyle}>Left Image URL / Path</label>
+                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+                  <label style={labelStyle}>
+                    Left Image URL / Path
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginLeft: '6px' }}>
+                      (Size: 520 × 360 px • ~16:11 ratio)
+                    </span>
+                  </label>
                   <input
                     type="text"
                     value={contentImage1}
@@ -1751,12 +1759,12 @@ function BlogEditorInner() {
                     )}
                   </div>
                   {contentImage1 && (
-                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#F1F5F9', position: 'relative' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage1}
                         alt="Preview 1"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           if (contentImage1 && !img.src.includes('/api/media/')) {
@@ -1766,7 +1774,7 @@ function BlogEditorInner() {
                         }}
                       />
                       <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
-                        Left Mid-Article (458×291)
+                        Left Card (520 × 360 px)
                       </span>
                     </div>
                   )}
@@ -1774,7 +1782,12 @@ function BlogEditorInner() {
 
                 {/* Image 2 */}
                 <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
-                  <label style={labelStyle}>Right Image URL / Path</label>
+                  <label style={labelStyle}>
+                    Right Image URL / Path
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginLeft: '6px' }}>
+                      (Size: 520 × 360 px • ~16:11 ratio)
+                    </span>
+                  </label>
                   <input
                     type="text"
                     value={contentImage2}
@@ -1805,12 +1818,12 @@ function BlogEditorInner() {
                     )}
                   </div>
                   {contentImage2 && (
-                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#F1F5F9', position: 'relative' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage2}
                         alt="Preview 2"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           if (contentImage2 && !img.src.includes('/api/media/')) {
@@ -1820,7 +1833,7 @@ function BlogEditorInner() {
                         }}
                       />
                       <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
-                        Right Mid-Article (537×357)
+                        Right Card (520 × 360 px)
                       </span>
                     </div>
                   )}

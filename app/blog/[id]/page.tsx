@@ -1,6 +1,7 @@
 import WebflowInit from "../../common/WebflowInit";
 import Image from "next/image";
 import Link from "next/link";
+import SafeImage from "@/app/common/SafeImage";
 import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
@@ -91,17 +92,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             </div>
             <div
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
-              className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ position: 'relative' }}>
+              className="rt-hero-13-main-image rt-overflow-hidden"
+              style={{ position: 'relative', backgroundColor: 'transparent', boxShadow: 'none' }}
+            >
               {sliderImages.length > 1 ? (
                 <PortfolioImageSlider images={sliderImages} title={post.title} coverImage={coverImage} />
               ) : (
-                <Image
+                <SafeImage
                   src={coverImage}
+                  fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
                   loading="lazy"
-                  data-w-id="5ce2f69e-2f8f-ad7b-1370-36d38e3211f5"
                   alt={post.title}
                   className="rt-image-scale"
-                  width={800} height={800} style={{ width: "100%", height: "auto", objectFit: "cover", maxHeight: "60vh" }} />
+                  width={800}
+                  height={800}
+                  style={{ width: "100%", height: "auto", objectFit: "contain", maxHeight: "60vh", backgroundColor: 'transparent' }}
+                />
               )}
             </div>
           </div>
@@ -278,22 +284,58 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
               {/* 4. SECTION 4: Mid-Article Images */}
               <div
                 data-w-id="0b9dc695-d306-eb81-56f1-71ef2dbaca41"
-                className="rt-blog-details-content-image">
-                <div className="rt-blog-post-image-wrap rt-overflow-hidden">
-                  <Image
-                    width={458}
-                    height={291}
-                    alt=""
+                className="rt-blog-details-content-image"
+                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'stretch' }}
+              >
+                <div
+                  className="rt-blog-post-image-wrap rt-overflow-hidden"
+                  style={{
+                    width: '100%',
+                    height: '360px',
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #d3d3f4',
+                    borderRadius: '1.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '1.25rem',
+                    boxSizing: 'border-box',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <SafeImage
+                    width={520}
+                    height={360}
+                    alt="Section showcase 1"
                     src={img1}
+                    fallbackSrc="/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                     loading="lazy"
                   />
                 </div>
-                <div className="rt-blog-post-image-wrap rt-overflow-hidden">
-                  <Image
-                    width={537}
-                    height={357}
-                    alt=""
+                <div
+                  className="rt-blog-post-image-wrap rt-overflow-hidden"
+                  style={{
+                    width: '100%',
+                    height: '360px',
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #d3d3f4',
+                    borderRadius: '1.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '1.25rem',
+                    boxSizing: 'border-box',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <SafeImage
+                    width={520}
+                    height={360}
+                    alt="Section showcase 2"
                     src={img2}
+                    fallbackSrc="/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                     loading="lazy"
                   />
                 </div>

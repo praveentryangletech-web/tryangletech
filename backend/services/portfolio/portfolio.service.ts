@@ -124,6 +124,9 @@ export const portfolioService = {
       try {
         await ensureColumnsExist();
 
+        const existingCount = await db.portfolioProject.count();
+        if (existingCount > 0) return;
+
         for (let i = 0; i < defaultProjects.length; i++) {
           const p = defaultProjects[i];
           const id = String(i + 1);
@@ -145,7 +148,7 @@ export const portfolioService = {
           `;
         }
       } catch (err) {
-        console.error('[DB Portfolio] background seed notice:', err);
+        console.warn('[DB Portfolio] background seed notice:', err);
       }
     })().catch(() => {});
   },

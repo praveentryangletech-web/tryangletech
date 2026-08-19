@@ -57,6 +57,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -98,6 +99,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -140,6 +142,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -184,6 +187,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -225,6 +229,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -267,6 +272,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -311,6 +317,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -352,6 +359,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">
@@ -394,6 +402,7 @@ export default function HomeTwoTestimonial() {
                               src="/Home2_files/6900857a13043eba725f30ee_kloudera-home-one-testimonial-star.svg"
                               loading="lazy"
                               className="rt-height-auto"
+                              style={{ width: 'auto', height: 'auto' }}
                              />
                           </div>
                           <div className="rt-text-style-h6">

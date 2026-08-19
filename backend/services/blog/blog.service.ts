@@ -303,12 +303,19 @@ export class BlogService {
       }
 
       const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
-      const sortColumn = ['publishedAt', 'createdAt', 'title', 'viewsCount', 'order'].includes(sortBy)
-        ? `"${sortBy}"`
-        : '"publishedAt"';
+      const allowedSortColumns = ['publishedAt', 'createdAt', 'title', 'viewsCount', 'order'];
+      const sortColumn = allowedSortColumns.includes(sortBy) ? `"${sortBy}"` : '"publishedAt"';
       const sortDirection = sortOrder.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
 
-      const offset = (page - 1) * limit;
+      const validatedLimit = Math.min(Math.max(Number(limit) || 10, 1), 100);
+      const validatedPage = Math.max(Number(page) || 1, 1);
+      const offset = (validatedPage - 1) * validatedLimit;
+
+      const limitIdx = paramIndex++;
+      queryParams.push(validatedLimit);
+
+      const offsetIdx = paramIndex++;
+      queryParams.push(offset);
 
       const rawRows: any = await db.$queryRawUnsafe(`
         WITH filtered_posts AS (
@@ -324,7 +331,7 @@ export class BlogService {
         FROM filtered_posts p
         CROSS JOIN total_count c
         ORDER BY p.${sortColumn} ${sortDirection}, p."createdAt" DESC
-        LIMIT ${limit} OFFSET ${offset}
+        LIMIT $${limitIdx} OFFSET $${offsetIdx}
       `, ...queryParams);
 
       let total = 0;

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { blogService, validateBlogQueryParams } from '@/backend/services/blog';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -114,9 +115,12 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/blog
- * Create a new article
+ * Create a new article (Requires Superadmin)
  */
 export async function POST(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
     if (!body || !body.title) {
@@ -133,9 +137,12 @@ export async function POST(req: NextRequest) {
 
 /**
  * PATCH /api/blog
- * Update an existing article
+ * Update an existing article (Requires Superadmin)
  */
 export async function PATCH(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
     const id = body?.id || body?.slug;
@@ -154,9 +161,12 @@ export async function PATCH(req: NextRequest) {
 
 /**
  * DELETE /api/blog
- * Delete an article
+ * Delete an article (Requires Superadmin)
  */
 export async function DELETE(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id') || searchParams.get('slug');

@@ -1,7 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { contactService } from '@/backend/services/contact';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
+import { enforceRateLimit } from '@/backend/utils/rateLimiter';
+import { validateInteger } from '@/backend/utils/sqlSecurity';
 
+export const dynamic = 'force-dynamic';
+
+/**
+ * POST /api/contact
+ * Public Contact Form Submission (Protected with anti-spam rate limiting)
+ */
 export async function POST(req: NextRequest) {
+  // Enforce rate limiting: max 5 submissions per 10 minutes per IP
+  const rateLimitError = enforceRateLimit(req, 'contact_submission', 5, 10 * 60 * 1000);
+  if (rateLimitError) return rateLimitError;
+
   try {
     const body = await req.json();
     const submission = await contactService.createSubmission(body);
@@ -26,20 +39,17 @@ export async function POST(req: NextRequest) {
   }
 }
 
+/**
+ * GET /api/contact
+ * List contact submissions (Requires Superadmin)
+ */
 export async function GET(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
-    const adminKey = req.headers.get('x-admin-key');
-    const configuredKey = process.env.ADMIN_API_KEY || process.env.NEXT_PUBLIC_ADMIN_API_KEY;
-
-    if (configuredKey && adminKey !== configuredKey) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized.' },
-        { status: 401 }
-      );
-    }
-
     const { searchParams } = new URL(req.url);
-    const limit = parseInt(searchParams.get('limit') || '50', 10);
+    const limit = validateInteger(searchParams.get('limit'), 50, 1, 500);
 
     const submissions = await contactService.getSubmissions(limit);
 
@@ -57,7 +67,14 @@ export async function GET(req: NextRequest) {
   }
 }
 
+/**
+ * PATCH /api/contact
+ * Update inquiry status (Requires Superadmin)
+ */
 export async function PATCH(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
     const { id, status } = body;

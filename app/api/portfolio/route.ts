@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { portfolioService, validatePortfolioQueryParams } from '@/backend/services/portfolio';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
-// Cache at Vercel Edge CDN for millisecond response times globally
-export const revalidate = 300; // 5 minutes automatic ISR revalidation
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 /**
  * GET /api/portfolio
@@ -136,9 +137,12 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/portfolio
- * Creates a new portfolio project & immediately purges server cache
+ * Creates a new portfolio project (Requires Superadmin)
  */
 export async function POST(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
 
@@ -147,7 +151,7 @@ export async function POST(req: NextRequest) {
     }
 
     const created = await portfolioService.createProject(body);
-    return successResponse(created, 'Project created successfully.');
+    return successResponse(created, 'Project created successfully.', 201);
   } catch (error: any) {
     console.error('POST /api/portfolio error:', error);
     return errorResponse(error?.message || 'Failed to create portfolio project', 500);
@@ -156,9 +160,12 @@ export async function POST(req: NextRequest) {
 
 /**
  * PATCH /api/portfolio
- * Updates an existing project by ID & immediately purges server cache
+ * Updates an existing project by ID (Requires Superadmin)
  */
 export async function PATCH(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
     const { id, ...data } = body;
@@ -181,9 +188,12 @@ export async function PATCH(req: NextRequest) {
 
 /**
  * DELETE /api/portfolio?id=...
- * Deletes project by ID & immediately purges server cache
+ * Deletes project by ID (Requires Superadmin)
  */
 export async function DELETE(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');

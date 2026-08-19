@@ -1,13 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mediaService from '@/backend/services/media/media.service';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 
+const ALLOWED_MIME_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/svg+xml',
+  'image/gif',
+  'image/avif',
+  'image/x-icon',
+];
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
 /**
  * GET /api/superadmin/media
- * Lists all assets (merging static public/portfolio assets and PostgreSQL database-backed assets)
+ * Lists all assets (Requires Superadmin)
  */
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const mediaList = await mediaService.listAssets();
 
@@ -27,9 +43,12 @@ export async function GET() {
 
 /**
  * POST /api/superadmin/media
- * Stores uploaded image file into public/portfolio and Supabase PostgreSQL (works on Vercel Serverless & Local)
+ * Stores uploaded image file (Requires Superadmin)
  */
 export async function POST(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File | null;
@@ -37,6 +56,20 @@ export async function POST(req: NextRequest) {
     if (!file) {
       return NextResponse.json(
         { success: false, error: 'No file provided in form data.' },
+        { status: 400 }
+      );
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { success: false, error: 'File size exceeds maximum allowed limit of 10MB.' },
+        { status: 400 }
+      );
+    }
+
+    if (file.type && !ALLOWED_MIME_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { success: false, error: 'Unsupported file type. Only images (PNG, JPG, WebP, SVG, GIF, AVIF) are allowed.' },
         { status: 400 }
       );
     }
@@ -68,9 +101,12 @@ export async function POST(req: NextRequest) {
 
 /**
  * DELETE /api/superadmin/media
- * Deletes an asset from disk and Supabase PostgreSQL
+ * Deletes an asset from disk and Supabase PostgreSQL (Requires Superadmin)
  */
 export async function DELETE(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     let body: any = {};
     try {
@@ -108,9 +144,12 @@ export async function DELETE(req: NextRequest) {
 
 /**
  * PATCH /api/superadmin/media
- * Renames an image in storage AND cascades the rename to all database portfolio projects
+ * Renames an image in storage AND cascades the rename to all database portfolio projects (Requires Superadmin)
  */
 export async function PATCH(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     let body: any = {};
     try {

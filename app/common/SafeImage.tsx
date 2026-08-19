@@ -51,6 +51,8 @@ export default function SafeImage({
           : 'none',
         backgroundSize: '200% 100%',
         animation: !isLoaded ? 'safeImgShimmer 1.8s infinite linear' : 'none',
+        opacity: isLoaded ? 1 : 0.85,
+        transition: 'opacity 0.3s ease-in-out',
         ...style,
       }}
       onError={() => {

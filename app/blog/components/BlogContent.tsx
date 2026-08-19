@@ -173,7 +173,7 @@ export default function BlogContent() {
             .rt-blog-v3-card-top-part .rt-image-scale {
               width: 100% !important;
               height: 100% !important;
-              object-fit: contain !important;
+              object-fit: cover !important;
               display: block !important;
               position: relative !important;
               z-index: 2 !important;
@@ -234,7 +234,7 @@ export default function BlogContent() {
                                 className="rt-image-scale"
                                 width={820}
                                 height={490}
-                                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                               />
                             </div>
                             <div className="w-layout-vflex rt-blog-card-v1-top-part">

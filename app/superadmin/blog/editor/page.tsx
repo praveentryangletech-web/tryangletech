@@ -269,12 +269,13 @@ function BlogEditorInner() {
             'Future solutions will be smarter, faster, and more imaginative.',
           ]);
 
-          setTags(p.tags || ['Engineering']);
+          const loadedKeywords = (p.keywords && p.keywords.length > 0) ? p.keywords : (p.tags || []);
+          setKeywords(loadedKeywords);
+          setTags(loadedKeywords);
 
           setMetaTitle(p.metaTitle || p.title || '');
           setMetaDescription(p.metaDescription || p.excerpt || '');
           setCanonicalUrl(p.canonicalUrl || '');
-          setKeywords(p.keywords || []);
         } else {
           setErrorMessage(res.error || 'Failed to load article details.');
         }
@@ -379,7 +380,7 @@ function BlogEditorInner() {
         conclusionTitle: conclusionTitle.trim(),
         conclusionBody: conclusionBody.trim(),
         conclusionPoints,
-        tags,
+        tags: keywords,
         metaTitle: metaTitle.trim() || title.trim(),
         metaDescription: metaDescription.trim() || excerpt.trim(),
         canonicalUrl: canonicalUrl.trim(),
@@ -1920,63 +1921,6 @@ function BlogEditorInner() {
                   />
                 </div>
               </div>
-            </div>
-
-            {/* Tags */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-              <label style={labelStyle}>Article Tags</label>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-                <input
-                  type="text"
-                  placeholder="Type tag (e.g. Next.js, Cloud, AI) and click Add"
-                  value={tagInput}
-                  onChange={(e) => setTagInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      handleAddTag();
-                    }
-                  }}
-                  style={inputStyle}
-                />
-                <button
-                  type="button"
-                  onClick={handleAddTag}
-                  style={{ padding: '0 18px', borderRadius: '10px', backgroundColor: '#1833FE', color: '#FFF', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  + Add Tag
-                </button>
-              </div>
-
-              {tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        backgroundColor: '#EEF2FF',
-                        color: '#4338CA',
-                        padding: '4px 10px',
-                        borderRadius: '6px',
-                        fontSize: '0.775rem',
-                        fontWeight: 700,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                      }}
-                    >
-                      #{t}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveTag(t)}
-                        style={{ border: 'none', background: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '0.9rem', padding: 0 }}
-                      >
-                        ✕
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         )}

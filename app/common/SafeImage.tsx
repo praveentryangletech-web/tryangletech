@@ -31,11 +31,16 @@ export default function SafeImage({
       alt={alt || ''}
       unoptimized={unoptimized}
       onError={() => {
-        if (imgSrc && imgSrc.startsWith('/portfolio/') && !triedApiMedia) {
-          const filename = imgSrc.replace('/portfolio/', '');
-          setTriedApiMedia(true);
-          setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
-        } else if (imgSrc !== fallbackSrc) {
+        if (imgSrc && !triedApiMedia && !imgSrc.startsWith('/api/media/')) {
+          const clean = imgSrc.split('?')[0];
+          const filename = clean.split('/').pop();
+          if (filename) {
+            setTriedApiMedia(true);
+            setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
+            return;
+          }
+        }
+        if (imgSrc !== fallbackSrc) {
           setImgSrc(fallbackSrc);
         }
       }}

@@ -427,9 +427,91 @@ function BlogEditorInner() {
 
   if (isLoading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh', flexDirection: 'column', gap: '1rem' }}>
-        <div style={{ width: '40px', height: '40px', border: '3px solid #E2E8F0', borderTopColor: '#1833FE', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-        <span style={{ fontSize: '0.9rem', color: '#64748B', fontWeight: 600 }}>Loading article editor...</span>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 6rem' }}>
+        <style>{`
+          @keyframes agyPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+          }
+          .agy-skeleton {
+            background-color: #E2E8F0;
+            border-radius: 8px;
+            animation: agyPulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          }
+        `}</style>
+
+        {/* Header Toolbar Skeleton */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div className="agy-skeleton" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div className="agy-skeleton" style={{ width: '220px', height: '28px', borderRadius: '6px' }} />
+              <div className="agy-skeleton" style={{ width: '340px', height: '16px', borderRadius: '4px' }} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <div className="agy-skeleton" style={{ width: '120px', height: '42px', borderRadius: '10px' }} />
+            <div className="agy-skeleton" style={{ width: '140px', height: '42px', borderRadius: '10px' }} />
+          </div>
+        </div>
+
+        {/* Tabs Skeleton */}
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid #E2E8F0', paddingBottom: '12px', marginBottom: '2rem' }}>
+          <div className="agy-skeleton" style={{ width: '160px', height: '36px', borderRadius: '8px' }} />
+          <div className="agy-skeleton" style={{ width: '140px', height: '36px', borderRadius: '8px' }} />
+          <div className="agy-skeleton" style={{ width: '170px', height: '36px', borderRadius: '8px' }} />
+          <div className="agy-skeleton" style={{ width: '130px', height: '36px', borderRadius: '8px' }} />
+        </div>
+
+        {/* Form Main Card Skeleton */}
+        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.75rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          {/* Title & Category Row */}
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
+            <div>
+              <div className="agy-skeleton" style={{ width: '100px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="agy-skeleton" style={{ width: '90px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+          </div>
+
+          {/* URL Slug */}
+          <div>
+            <div className="agy-skeleton" style={{ width: '120px', height: '14px', marginBottom: '8px' }} />
+            <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+          </div>
+
+          {/* 3-Column Metadata */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+            <div>
+              <div className="agy-skeleton" style={{ width: '110px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="agy-skeleton" style={{ width: '80px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="agy-skeleton" style={{ width: '130px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+          </div>
+
+          {/* 2-Column Author Info */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <div>
+              <div className="agy-skeleton" style={{ width: '95px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="agy-skeleton" style={{ width: '150px', height: '14px', marginBottom: '8px' }} />
+              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }
@@ -712,80 +794,6 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            {/* Publication Workflow Status Card */}
-            <div style={{ backgroundColor: '#F8FAFC', border: '1.5px solid #E2E8F0', borderRadius: '14px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-                <div>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 800, color: '#0F172A', display: 'block' }}>
-                    Publication & Workflow Status
-                  </span>
-                  <span style={{ fontSize: '0.78rem', color: '#64748B' }}>
-                    Choose whether this article is live publicly or kept in draft mode for future edits.
-                  </span>
-                </div>
-                <span style={{
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
-                  color: published ? '#047857' : '#B45309',
-                  border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`
-                }}>
-                  {published ? '● Live on Public Website' : '● Draft (Private for editing)'}
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', gap: '10px', marginTop: '4px', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  onClick={() => setPublished(false)}
-                  style={{
-                    flex: 1,
-                    minWidth: '180px',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: !published ? '2px solid #F59E0B' : '1px solid #CBD5E1',
-                    backgroundColor: !published ? '#FFFBEB' : '#FFFFFF',
-                    color: !published ? '#B45309' : '#64748B',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <span>📝 Draft Mode</span>
-                  <span style={{ fontSize: '0.725rem', fontWeight: 500, opacity: 0.8 }}>(Unpublished)</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setPublished(true)}
-                  style={{
-                    flex: 1,
-                    minWidth: '180px',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    border: published ? '2px solid #10B981' : '1px solid #CBD5E1',
-                    backgroundColor: published ? '#ECFDF5' : '#FFFFFF',
-                    color: published ? '#047857' : '#64748B',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <span>🚀 Published Live</span>
-                  <span style={{ fontSize: '0.725rem', fontWeight: 500, opacity: 0.8 }}>(Visible to public)</span>
-                </button>
-              </div>
-            </div>
           </div>
         )}
 

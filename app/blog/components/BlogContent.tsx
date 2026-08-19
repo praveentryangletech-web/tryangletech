@@ -5,6 +5,22 @@ import SafeImage from "@/app/common/SafeImage";
 import { CATEGORIES as staticCategories, BLOG_POSTS as staticBlogPosts } from "../data";
 import { BlogPostItem } from "@/backend/services/blog";
 
+const BLOG_FALLBACK_IMAGES = [
+  "/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png",
+  "/blog-assets/690333f5e01881a7f1a4f838_blog-two-H.png",
+  "/blog-assets/690334335e613d605998a49f_blog-two-G.png",
+  "/blog-assets/6903348b628bea456749d51f_blog-two-F.png",
+  "/blog-assets/690334ce350586b1ee9594e3_blog-two-E.png",
+  "/blog-assets/690335125e318fe0479213b7_blog-two-D.png",
+  "/blog-assets/6903355a56854d99c23063f0_blog-two-C.png",
+  "/blog-assets/690335bdf5bb94e8937089e8_blog-two-B.png",
+  "/blog-assets/6903360856c5072575d9fe32_blog-two-A.png",
+];
+
+const getBlogFallbackImage = (index: number = 0) => {
+  return BLOG_FALLBACK_IMAGES[index % BLOG_FALLBACK_IMAGES.length];
+};
+
 export default function BlogContent() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [posts, setPosts] = useState<BlogPostItem[]>(() =>
@@ -186,7 +202,7 @@ export default function BlogContent() {
               padding: 0 !important;
               border-radius: 0 !important;
             }
-            @keyframes blogCardShimmer {
+            @keyframes blogImgSkeletonShimmer {
               0% { background-position: -200% 0; }
               100% { background-position: 200% 0; }
             }
@@ -201,7 +217,7 @@ export default function BlogContent() {
               justify-content: center !important;
               background: linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%) !important;
               background-size: 200% 100% !important;
-              animation: blogCardShimmer 1.8s infinite linear !important;
+              animation: blogImgSkeletonShimmer 1.8s infinite linear !important;
               position: relative !important;
             }
             .rt-blog-v3-card-top-part img,
@@ -210,6 +226,8 @@ export default function BlogContent() {
               height: 100% !important;
               object-fit: contain !important;
               display: block !important;
+              position: relative !important;
+              z-index: 2 !important;
               transition: transform 0.4s ease !important;
             }
             .rt-blog-v1-card-wrap:hover .rt-blog-v3-card-top-part img,
@@ -244,23 +262,29 @@ export default function BlogContent() {
               <div className="w-tab-pane w--tab-active" role="tabpanel">
                 <div className="w-dyn-list">
                   <div role="list" className="rt-blog-two-wrapper w-dyn-items">
-                    {filteredPosts.map((post) => (
-                      <div key={post.id} role="listitem" className="w-dyn-item">
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="rt-blog-v1-card-wrap w-inline-block"
-                        >
-                          <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
-                            <SafeImage
-                              src={post.coverImage || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png'}
-                              fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
-                              alt={post.title}
-                              className="rt-image-scale"
-                              width={800}
-                              height={500}
-                              style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                            />
-                          </div>
+                    {filteredPosts.map((post, idx) => {
+                      const postFallback = getBlogFallbackImage(idx);
+                      const resolvedCover = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
+                        ? post.coverImage.trim()
+                        : postFallback;
+
+                      return (
+                        <div key={post.id} role="listitem" className="w-dyn-item">
+                          <Link
+                            href={`/blog/${post.slug}`}
+                            className="rt-blog-v1-card-wrap w-inline-block"
+                          >
+                            <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
+                              <SafeImage
+                                src={resolvedCover}
+                                fallbackSrc={postFallback}
+                                alt={post.title}
+                                className="rt-image-scale"
+                                width={800}
+                                height={500}
+                                style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                              />
+                            </div>
                           <div className="w-layout-vflex rt-blog-card-v1-top-part">
                             <div className="w-layout-hflex rt-blog-v1-text-wrap">
                               <div className="rt-sub-text rt-sub-gredient">
@@ -295,8 +319,9 @@ export default function BlogContent() {
                           </div>
                         </Link>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
+                </div>
                 </div>
               </div>
             </div>

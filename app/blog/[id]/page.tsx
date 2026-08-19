@@ -24,7 +24,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
     return notFound();
   }
 
-  const coverImage = post.coverImage || post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
+  const coverImage = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
+    ? post.coverImage.trim()
+    : (post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png');
   const sliderImages = post.images && post.images.length > 0 ? post.images : (coverImage ? [coverImage] : []);
   const authorName = post.authorName || 'TryangleTech Team';
   const authorRole = post.authorRole || 'Content Creators';
@@ -308,34 +310,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 </ul>
               </div>
 
-              {/* 6. Topic Tags Badges */}
-              {((post.keywords && post.keywords.length > 0) || (post.tags && post.tags.length > 0)) && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', margin: '2.5rem 0 1.5rem' }}>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-                      <line x1="7" y1="7" x2="7.01" y2="7" />
-                    </svg>
-                    Article Topics:
-                  </span>
-                  {(post.keywords && post.keywords.length > 0 ? post.keywords : post.tags).map((tag: string) => (
-                    <span
-                      key={tag}
-                      style={{
-                        padding: '4px 12px',
-                        borderRadius: '100px',
-                        backgroundColor: '#EFF6FF',
-                        color: '#1833FE',
-                        fontSize: '0.8rem',
-                        fontWeight: 700,
-                        border: '1px solid #BFDBFE',
-                      }}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
 
               {/* 7. SECTION 6: Author Bio Footer */}
               <div

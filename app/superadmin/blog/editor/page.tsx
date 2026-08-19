@@ -103,7 +103,7 @@ function BlogEditorInner() {
   ]);
   const [newPointInput, setNewPointInput] = useState('');
   const [tagInput, setTagInput] = useState('');
-  const [tags, setTags] = useState<string[]>(['Engineering', 'Web Development']);
+  const [tags, setTags] = useState<string[]>([]);
 
   // 4. SEO & AEO Engine
   const [metaTitle, setMetaTitle] = useState('');

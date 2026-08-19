@@ -74,7 +74,7 @@ export default function BlogEditModal({
       setCoverImage('');
       setExcerpt('');
       setContent('');
-      setTags(['Engineering', 'Web Development']);
+      setTags([]);
     }
     setErrorMessage('');
   }, [post, isOpen]);
@@ -431,80 +431,6 @@ export default function BlogEditModal({
               />
             </div>
 
-            {/* Row 6: Tags Input */}
-            <div>
-              <label style={{ display: 'block', fontSize: '0.825rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                Article Tags
-              </label>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-                <input
-                  type="text"
-                  placeholder="Type tag (e.g. Next.js, Cloud, AI) and click Add"
-                  value={tagInput}
-                  onChange={(e) => setTagInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      handleAddTag();
-                    }
-                  }}
-                  style={{
-                    flex: 1,
-                    padding: '0.6rem 0.9rem',
-                    borderRadius: '8px',
-                    border: '1px solid #CBD5E1',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={handleAddTag}
-                  style={{
-                    backgroundColor: 'var(--dark-indigo, #1a0b54)',
-                    color: '#FFFFFF',
-                    padding: '0 1rem',
-                    borderRadius: '8px',
-                    border: 'none',
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                    cursor: 'pointer',
-                  }}
-                >
-                  + Add Tag
-                </button>
-              </div>
-
-              {tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {tags.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        backgroundColor: '#EEF2FF',
-                        color: '#4338CA',
-                        padding: '4px 10px',
-                        borderRadius: '6px',
-                        fontSize: '0.775rem',
-                        fontWeight: 700,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                      }}
-                    >
-                      #{t}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveTag(t)}
-                        style={{ border: 'none', background: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '0.9rem', padding: 0 }}
-                      >
-                        ✕
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
 
             {/* Row 7: Published Toggle Switch */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingTop: '4px' }}>

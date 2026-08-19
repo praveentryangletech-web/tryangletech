@@ -6,27 +6,31 @@ import Image, { ImageProps } from 'next/image';
 interface SafeImageProps extends Omit<ImageProps, 'src'> {
   src?: string | null;
   fallbackSrc?: string;
-  showShimmer?: boolean;
 }
+
+const DEFAULT_FALLBACK = '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
 
 export default function SafeImage({
   src,
-  fallbackSrc = '/portfolio/vh-accounting.webp',
+  fallbackSrc = DEFAULT_FALLBACK,
   alt,
   unoptimized = true,
-  showShimmer = true,
   style,
   className,
   ...props
 }: SafeImageProps) {
-  const initial = src || fallbackSrc;
-  const [imgSrc, setImgSrc] = useState<string>(initial);
-  const [triedApiMedia, setTriedApiMedia] = useState<boolean>(false);
+  const getCleanSrc = (s?: string | null, fb: string = DEFAULT_FALLBACK) => {
+    if (!s || typeof s !== 'string' || !s.trim()) return fb;
+    return s.trim();
+  };
+
+  const [imgSrc, setImgSrc] = useState<string>(() => getCleanSrc(src, fallbackSrc));
+  const [hasError, setHasError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    setImgSrc(src || fallbackSrc);
-    setTriedApiMedia(false);
+    setImgSrc(getCleanSrc(src, fallbackSrc));
+    setHasError(false);
     setIsLoaded(false);
   }, [src, fallbackSrc]);
 
@@ -38,46 +42,25 @@ export default function SafeImage({
           100% { background-position: 200% 0; }
         }
       `}</style>
-      {showShimmer && !isLoaded && (
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(90deg, #F1F5F9 0%, #E2E8F0 25%, #FFFFFF 50%, #E2E8F0 75%, #F1F5F9 100%)',
-            backgroundSize: '200% 100%',
-            animation: 'safeImgShimmer 1.5s infinite linear',
-            borderRadius: 'inherit',
-            zIndex: 1,
-            pointerEvents: 'none',
-          }}
-        />
-      )}
       <Image
         {...props}
-        src={imgSrc || fallbackSrc}
+        src={hasError ? fallbackSrc : (imgSrc || fallbackSrc)}
         alt={alt || ''}
         unoptimized={unoptimized}
         className={className}
         onLoad={() => setIsLoaded(true)}
         style={{
+          backgroundColor: '#F8FAFC',
+          backgroundImage: !isLoaded
+            ? 'linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%)'
+            : 'none',
+          backgroundSize: '200% 100%',
+          animation: !isLoaded ? 'safeImgShimmer 1.8s infinite linear' : 'none',
           ...style,
-          opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.35s ease',
         }}
         onError={() => {
-          if (imgSrc && !triedApiMedia && !imgSrc.startsWith('/api/media/')) {
-            const clean = imgSrc.split('?')[0];
-            const filename = clean.split('/').pop();
-            if (filename) {
-              setTriedApiMedia(true);
-              setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
-              return;
-            }
-          }
-          if (imgSrc !== fallbackSrc) {
+          if (!hasError) {
+            setHasError(true);
             setImgSrc(fallbackSrc);
           }
           setIsLoaded(true);

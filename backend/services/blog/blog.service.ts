@@ -101,7 +101,7 @@ export class BlogService {
       published: true,
       publishedAt: p.date || '29 Oct 2025',
       order: idx,
-      tags: ['Engineering', 'Technology'],
+      tags: [],
       section1Heading: 'Blending human creativity with machine Intelligence',
       section1Paragraph1: 'The combination of human creativity and AI intelligence unlocks new possibilities for innovation and efficiency. AI tools augment human ideas, automate repetitive tasks, and provide data-driven insights that inspire creative solutions.',
       section1Paragraph2: 'By leveraging AI-powered analytics, generative models, and intelligent workflows, teams can focus on conceptual thinking while leaving mundane tasks to machines. This collaboration ensures that human imagination and computational precision work together to produce remarkable outcomes.',

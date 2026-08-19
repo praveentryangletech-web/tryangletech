@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SafeImage from '@/app/common/SafeImage';
 import { Project, PORTFOLIO_CATEGORIES } from '../../../data/portfolioData';
 import Tooltip from '../../components/Tooltip';
 import CustomDropdown from '../../components/CustomDropdown';
@@ -274,15 +275,13 @@ export default function PortfolioTable({
                         }}
                       >
                         {item.image ? (
-                          <Image
+                          <SafeImage
                             src={item.image}
+                            fallbackSrc="/portfolio/vh-accounting.webp"
                             alt={item.title}
                             fill
                             sizes="42px"
                             style={{ objectFit: 'cover' }}
-                            onError={(e) => {
-                              (e.target as HTMLElement).style.display = 'none';
-                            }}
                           />
                         ) : (
                           <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>

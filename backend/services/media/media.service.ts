@@ -555,6 +555,25 @@ class MediaService {
       }
     }
 
+    // 3. Try Cloudinary fallback if configured
+    if (this.isCloudinaryConfigured) {
+      try {
+        const baseName = path.basename(cleanFilename, path.extname(cleanFilename));
+        const ext = (path.extname(cleanFilename) || '.png').replace('.', '');
+        const cloudinaryUrl = `https://res.cloudinary.com/${this.cloudName}/image/upload/${CLOUDINARY_FOLDER}/${baseName}.${ext}`;
+        const res = await fetch(cloudinaryUrl);
+        if (res.ok) {
+          const arrayBuffer = await res.arrayBuffer();
+          return {
+            buffer: Buffer.from(arrayBuffer),
+            mimeType: this.getMimeType(cleanFilename),
+          };
+        }
+      } catch (err) {
+        console.warn('[MediaService] Cloudinary buffer fallback warning:', err);
+      }
+    }
+
     return null;
   }
 

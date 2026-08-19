@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SafeImage from '@/app/common/SafeImage';
 import { Project } from '../../../data/portfolioData';
 
 interface PortfolioDetailsModalProps {
@@ -131,8 +132,9 @@ export default function PortfolioDetailsModal({ project, onClose }: PortfolioDet
                 boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
               }}
             >
-              <Image
+              <SafeImage
                 src={project.image}
+                fallbackSrc="/portfolio/vh-accounting.webp"
                 alt={project.title}
                 width={500}
                 height={350}

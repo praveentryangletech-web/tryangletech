@@ -6,10 +6,14 @@ import Image from 'next/image';
 interface PortfolioImageSliderProps {
   images: string[];
   title: string;
+  coverImage?: string;
 }
 
-export default function PortfolioImageSlider({ images, title }: PortfolioImageSliderProps) {
+export default function PortfolioImageSlider({ images, title, coverImage }: PortfolioImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [failedIndices, setFailedIndices] = useState<Record<number, boolean>>({});
+
+  const fallback = coverImage || '/portfolio/vh-accounting.webp';
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -37,6 +41,8 @@ export default function PortfolioImageSlider({ images, title }: PortfolioImageSl
 
   if (!images || images.length === 0) return null;
 
+  const currentSrc = failedIndices[currentIndex] ? fallback : (images[currentIndex] || fallback);
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <style>{`
@@ -47,12 +53,17 @@ export default function PortfolioImageSlider({ images, title }: PortfolioImageSl
       `}</style>
       <Image
         key={currentIndex}
-        src={images[currentIndex]}
+        src={currentSrc}
         loading="lazy"
         alt={`${title} - image ${currentIndex + 1}`}
         className="rt-image-scale"
         style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px', animation: 'fadeInSlider 0.5s ease-in-out' }}
-        width={800} height={800} 
+        width={800}
+        height={800}
+        unoptimized
+        onError={() => {
+          setFailedIndices((prev) => ({ ...prev, [currentIndex]: true }));
+        }}
       />
       
       {images.length > 1 && (

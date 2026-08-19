@@ -8,10 +8,13 @@ export async function GET(
   { params }: { params: Promise<{ filename: string }> }
 ) {
   try {
-    const { filename } = await params;
-    if (!filename) {
+    const rawParams = await params;
+    const rawFilename = rawParams?.filename;
+    if (!rawFilename) {
       return new NextResponse('Filename missing', { status: 400 });
     }
+
+    const filename = decodeURIComponent(rawFilename);
 
     const asset = await mediaService.getAssetBuffer(filename);
     if (!asset) {

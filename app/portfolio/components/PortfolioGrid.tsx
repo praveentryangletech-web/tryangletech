@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
+import SafeImage from '@/app/common/SafeImage';
 import { Project, projects as staticProjects } from '../../data/portfolioData';
 
 const categories = [
@@ -337,14 +338,14 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
                   >
                     {/* Top Image */}
                     <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
-                      <Image
+                      <SafeImage
                         className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
-                        src={project.image || '/portfolio/vh-accounting.webp'}
+                        src={project.image}
+                        fallbackSrc="/portfolio/vh-accounting.webp"
                         alt={project.title}
                         width={410}
                         height={290}
                         loading="lazy"
-                        unoptimized={project.image ? project.image.endsWith('.gif') : false}
                         style={{ height: '220px' }}
                       />
                     </div>

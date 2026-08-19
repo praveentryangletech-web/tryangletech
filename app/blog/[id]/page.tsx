@@ -39,7 +39,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
               data-w-id="d22c76d6-a21f-c2ce-07ca-5c00f34c816e"
               className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ position: 'relative' }}>
               {post.images && post.images.length > 1 ? (
-                <PortfolioImageSlider images={post.images} title={post.title} />
+                <PortfolioImageSlider images={post.images} title={post.title} coverImage={post.image} />
               ) : (
                 <Image
                   src={post.image}

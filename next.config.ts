@@ -1,14 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
+  },
   async rewrites() {
     return {
       beforeFiles: [],
       afterFiles: [],
       fallback: [
         {
-          source: '/portfolio/:file(.+\\.(?:webp|png|jpg|jpeg|svg|gif|avif))',
-          destination: '/api/media/:file',
+          source: '/portfolio/:filename',
+          destination: '/api/media/:filename',
         },
       ],
     };
@@ -16,3 +24,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

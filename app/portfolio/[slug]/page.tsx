@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -9,6 +10,7 @@ import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';
 import WebflowInit from '../../common/WebflowInit';
 import PortfolioImageSlider from '../components/PortfolioImageSlider';
+import SafeImage from '@/app/common/SafeImage';
 
 import type { Metadata } from 'next';
 import Image from "next/image";
@@ -118,15 +120,18 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             </div>
             <div className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
               {project.images && project.images.length > 1 ? (
-                <PortfolioImageSlider images={project.images} title={project.title} />
+                <PortfolioImageSlider images={project.images} title={project.title} coverImage={project.image} />
               ) : (
-                <Image
+                <SafeImage
                   src={project.image}
+                  fallbackSrc="/portfolio/vh-accounting.webp"
                   loading="lazy"
                   alt={project.title}
                   className="rt-image-scale"
                   style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
-                  width={800} height={800} />
+                  width={800}
+                  height={800}
+                />
               )}
             </div>
           </div>
@@ -483,14 +488,14 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                               className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
                             >
                               <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
-                                <Image
+                                <SafeImage
                                   className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
                                   src={p.image}
+                                  fallbackSrc="/portfolio/vh-accounting.webp"
                                   alt={p.title}
                                   width={410}
                                   height={290}
                                   loading="lazy"
-                                  unoptimized={p.image.endsWith('.gif')}
                                   style={{ height: '175px' }}
                                 />
                               </div>

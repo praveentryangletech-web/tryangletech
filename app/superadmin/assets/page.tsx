@@ -1451,6 +1451,12 @@ export default function AssetManagementPage() {
                   src={deletingAsset.url}
                   alt={deletingAsset.filename}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    if (deletingAsset.filename && !img.src.includes('/api/media/')) {
+                      img.src = `/api/media/${encodeURIComponent(deletingAsset.filename)}`;
+                    }
+                  }}
                 />
               </div>
               <div style={{ overflow: 'hidden', flex: 1 }}>
@@ -1596,6 +1602,12 @@ export default function AssetManagementPage() {
                 src={lightboxImage.url}
                 alt={lightboxImage.filename}
                 style={{ maxWidth: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '12px' }}
+                onError={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  if (lightboxImage.filename && !img.src.includes('/api/media/')) {
+                    img.src = `/api/media/${encodeURIComponent(lightboxImage.filename)}`;
+                  }
+                }}
               />
             </div>
 

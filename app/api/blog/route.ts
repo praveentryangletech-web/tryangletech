@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { blogService, validateBlogQueryParams } from '@/backend/services/blog';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 
-// Cache at Vercel Edge CDN for millisecond response times globally
-export const revalidate = 300; // 5 minutes automatic ISR revalidation
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 /**
  * GET /api/blog
@@ -100,9 +100,8 @@ export async function GET(req: NextRequest) {
         status: 200,
         headers: {
           'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-          'CDN-Cache-Control': 'public, s-maxage=300',
-          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+          'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
+          'Pragma': 'no-cache',
           'Server-Timing': `total;dur=${duration}`,
         },
       }

@@ -34,6 +34,7 @@ interface BlogContextType {
   fetchBlog: () => Promise<void>;
   savePost: (postData: Partial<BlogPostItem>) => Promise<void>;
   deletePost: (postIdOrSlug: string) => Promise<void>;
+  togglePostStatus: (post: BlogPostItem) => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -190,6 +191,43 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, [fetchBlog]);
 
   /**
+   * Toggle Published Status Handler (with instant optimistic UI update)
+   */
+  const togglePostStatus = async (post: BlogPostItem) => {
+    const newStatus = !post.published;
+    
+    // 1. Optimistic immediate UI reflection (0ms latency)
+    setPostsList((prev) =>
+      prev.map((item) =>
+        item.id === post.id ? { ...item, published: newStatus } : item
+      )
+    );
+
+    try {
+      const res = await apiClient.patch('/api/blog', {
+        id: post.id,
+        published: newStatus,
+      });
+
+      if (!res.success) {
+        // Rollback on error
+        setPostsList((prev) =>
+          prev.map((item) =>
+            item.id === post.id ? { ...item, published: post.published } : item
+          )
+        );
+        throw new Error(res.error || 'Failed to update article status.');
+      }
+
+      // Sync fresh data from database
+      await fetchBlog();
+    } catch (err: any) {
+      console.error('Failed to toggle article status:', err);
+      await fetchBlog();
+    }
+  };
+
+  /**
    * Save (Create or Update) Post Handler
    */
   const savePost = async (postData: Partial<BlogPostItem>) => {
@@ -198,6 +236,13 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       if (!postId) {
         throw new Error('Article ID is required to update this article.');
       }
+
+      // Optimistic update
+      setPostsList((prev) =>
+        prev.map((item) =>
+          item.id === postId ? { ...item, ...postData } : item
+        )
+      );
 
       const res = await apiClient.patch('/api/blog', { id: postId, ...postData });
       if (!res.success) {
@@ -219,6 +264,9 @@ export function BlogProvider({ children }: { children: ReactNode }) {
    * Delete Post Handler
    */
   const deletePost = async (postIdOrSlug: string) => {
+    // Optimistic removal
+    setPostsList((prev) => prev.filter((item) => item.id !== postIdOrSlug && item.slug !== postIdOrSlug));
+
     const res = await apiClient.delete(`/api/blog?id=${encodeURIComponent(postIdOrSlug)}`);
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete article.');
@@ -255,6 +303,7 @@ export function BlogProvider({ children }: { children: ReactNode }) {
         fetchBlog,
         savePost,
         deletePost,
+        togglePostStatus,
       }}
     >
       {children}

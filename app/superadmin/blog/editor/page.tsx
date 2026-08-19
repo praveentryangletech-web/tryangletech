@@ -402,14 +402,19 @@ function BlogEditorInner() {
       if (isEditMode) {
         const res = await apiClient.patch('/api/blog', { id: postId, ...payload });
         if (!res.success) throw new Error(res.error || 'Failed to update article.');
+        apiClient.clearCache();
         setSuccessMessage(finalPublished ? '✅ Article updated & published live!' : '📝 Article updated & saved as Draft!');
+        setTimeout(() => {
+          router.push('/superadmin/blog');
+        }, 1000);
       } else {
         const res = await apiClient.post<BlogPostItem>('/api/blog', payload);
         if (!res.success) throw new Error(res.error || 'Failed to create article.');
+        apiClient.clearCache();
         setSuccessMessage(finalPublished ? '🚀 Article published live on public website!' : '📝 Article created & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
-        }, 1200);
+        }, 1000);
       }
     } catch (err: any) {
       setErrorMessage(err?.message || 'Failed to save article.');

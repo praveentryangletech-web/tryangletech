@@ -42,6 +42,7 @@ export default function BlogTable({
     searchQuery,
     setSearchQuery,
     pagination,
+    togglePostStatus,
   } = useBlog();
 
   const categories = ['ALL', ...BLOG_CATEGORIES];
@@ -336,21 +337,31 @@ export default function BlogTable({
                     </div>
                   </td>
 
-                  {/* Status Badge */}
+                  {/* Status Badge (Click to toggle Draft / Live directly) */}
                   <td style={{ padding: '0.75rem 0.5rem', whiteSpace: 'nowrap' }}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        padding: '3px 8px',
-                        borderRadius: '12px',
-                        fontSize: '0.7rem',
-                        fontWeight: 700,
-                        backgroundColor: item.published ? '#ECFDF5' : '#FEF3C7',
-                        color: item.published ? '#059669' : '#D97706',
-                      }}
-                    >
-                      {item.published ? '● Live' : '○ Draft'}
-                    </span>
+                    <Tooltip text={`Click to change status to ${item.published ? 'Draft' : 'Live'}`} position="top">
+                      <button
+                        type="button"
+                        onClick={() => togglePostStatus(item)}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          padding: '4px 10px',
+                          borderRadius: '12px',
+                          fontSize: '0.725rem',
+                          fontWeight: 700,
+                          backgroundColor: item.published ? '#ECFDF5' : '#FEF3C7',
+                          color: item.published ? '#059669' : '#D97706',
+                          border: `1px solid ${item.published ? '#A7F3D0' : '#FDE68A'}`,
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease',
+                          outline: 'none',
+                        }}
+                      >
+                        <span>{item.published ? '● Live' : '○ Draft'}</span>
+                      </button>
+                    </Tooltip>
                   </td>
 
                   {/* Actions Column: Direct Live Link, Edit, and Delete */}

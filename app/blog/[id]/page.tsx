@@ -7,6 +7,9 @@ import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
 import { blogService } from "@/backend/services/blog/blog.service";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   

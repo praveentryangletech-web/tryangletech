@@ -25,11 +25,13 @@ export default function SafeImage({
   };
 
   const [imgSrc, setImgSrc] = useState<string>(() => getCleanSrc(src, fallbackSrc));
+  const [triedApiMedia, setTriedApiMedia] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     setImgSrc(getCleanSrc(src, fallbackSrc));
+    setTriedApiMedia(false);
     setHasError(false);
     setIsLoaded(false);
   }, [src, fallbackSrc]);
@@ -59,6 +61,18 @@ export default function SafeImage({
           ...style,
         }}
         onError={() => {
+          // 1. If static file doesn't exist on disk, check if it's stored in database /api/media/
+          if (imgSrc && !triedApiMedia && !imgSrc.startsWith('/api/media/')) {
+            const clean = imgSrc.split('?')[0];
+            const filename = clean.split('/').pop();
+            if (filename) {
+              setTriedApiMedia(true);
+              setImgSrc(`/api/media/${encodeURIComponent(filename)}`);
+              return;
+            }
+          }
+
+          // 2. Otherwise switch to fallback illustration
           if (!hasError) {
             setHasError(true);
             setImgSrc(fallbackSrc);

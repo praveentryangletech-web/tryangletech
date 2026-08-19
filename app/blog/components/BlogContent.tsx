@@ -186,6 +186,10 @@ export default function BlogContent() {
               padding: 0 !important;
               border-radius: 0 !important;
             }
+            @keyframes blogCardShimmer {
+              0% { background-position: -200% 0; }
+              100% { background-position: 200% 0; }
+            }
             .rt-blog-v3-card-top-part {
               border: 1px solid #d3d3f4 !important;
               border-radius: 1.5625rem !important;
@@ -195,7 +199,9 @@ export default function BlogContent() {
               display: flex !important;
               align-items: center !important;
               justify-content: center !important;
-              background-color: #FFFFFF !important;
+              background: linear-gradient(90deg, #F8FAFC 0%, #EEF2F6 25%, #FFFFFF 50%, #EEF2F6 75%, #F8FAFC 100%) !important;
+              background-size: 200% 100% !important;
+              animation: blogCardShimmer 1.8s infinite linear !important;
               position: relative !important;
             }
             .rt-blog-v3-card-top-part img,

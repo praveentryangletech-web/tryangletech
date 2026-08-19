@@ -898,9 +898,11 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (coverImage && coverImage.startsWith('/blog-assets/') && !img.src.includes('/api/media/')) {
-                            const filename = coverImage.replace('/blog-assets/', '');
-                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          if (coverImage && !img.src.includes('/api/media/')) {
+                            const filename = coverImage.split('?')[0].split('/').pop();
+                            if (filename) {
+                              img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            }
                           }
                         }}
                       />
@@ -1314,9 +1316,11 @@ function BlogEditorInner() {
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           onError={(e) => {
                             const img = e.target as HTMLImageElement;
-                            if (imgUrl && imgUrl.startsWith('/blog-assets/') && !img.src.includes('/api/media/')) {
-                              const filename = imgUrl.replace('/blog-assets/', '');
-                              img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            if (imgUrl && !img.src.includes('/api/media/')) {
+                              const filename = imgUrl.split('?')[0].split('/').pop();
+                              if (filename) {
+                                img.src = `/api/media/${encodeURIComponent(filename)}`;
+                              }
                             }
                           }}
                         />
@@ -1571,7 +1575,18 @@ function BlogEditorInner() {
                   {contentImage1 && (
                     <div style={{ marginTop: '10px', height: '100px', borderRadius: '8px', overflow: 'hidden' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={contentImage1} alt="Preview 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img
+                        src={contentImage1}
+                        alt="Preview 1"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (contentImage1 && !img.src.includes('/api/media/')) {
+                            const filename = contentImage1.split('?')[0].split('/').pop();
+                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          }
+                        }}
+                      />
                     </div>
                   )}
                 </div>
@@ -1611,7 +1626,18 @@ function BlogEditorInner() {
                   {contentImage2 && (
                     <div style={{ marginTop: '10px', height: '100px', borderRadius: '8px', overflow: 'hidden' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={contentImage2} alt="Preview 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img
+                        src={contentImage2}
+                        alt="Preview 2"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (contentImage2 && !img.src.includes('/api/media/')) {
+                            const filename = contentImage2.split('?')[0].split('/').pop();
+                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          }
+                        }}
+                      />
                     </div>
                   )}
                 </div>

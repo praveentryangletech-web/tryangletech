@@ -303,9 +303,9 @@ export class BlogService {
       }
 
       const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
-      const sortColumn = ['order', 'createdAt', 'publishedAt', 'title', 'viewsCount'].includes(sortBy)
+      const sortColumn = ['publishedAt', 'createdAt', 'title', 'viewsCount', 'order'].includes(sortBy)
         ? `"${sortBy}"`
-        : '"createdAt"';
+        : '"publishedAt"';
       const sortDirection = sortOrder.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
 
       const offset = (page - 1) * limit;

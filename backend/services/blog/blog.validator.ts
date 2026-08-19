@@ -92,9 +92,9 @@ export function validateBlogQueryParams(params: {
     }
   }
 
-  // 7. Validate Sort Field
-  const allowedSorts = ['order', 'createdAt', 'publishedAt', 'title', 'viewsCount'];
-  let sortBy: 'order' | 'createdAt' | 'publishedAt' | 'title' | 'viewsCount' = 'createdAt';
+  // 7. Validate Sort Field (Default: publishedAt DESC for newest articles first)
+  const allowedSorts = ['publishedAt', 'createdAt', 'title', 'viewsCount', 'order'];
+  let sortBy: 'order' | 'createdAt' | 'publishedAt' | 'title' | 'viewsCount' = 'publishedAt';
   if (params.sortBy && allowedSorts.includes(params.sortBy)) {
     sortBy = params.sortBy as any;
   }

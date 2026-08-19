@@ -483,18 +483,14 @@ function BlogEditorInner() {
             <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
           </div>
 
-          {/* 3-Column Metadata */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+          {/* 2-Column Metadata (Date & Read Time) */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <div>
               <div className="agy-skeleton" style={{ width: '110px', height: '14px', marginBottom: '8px' }} />
               <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
             </div>
             <div>
               <div className="agy-skeleton" style={{ width: '80px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
-            </div>
-            <div>
-              <div className="agy-skeleton" style={{ width: '130px', height: '14px', marginBottom: '8px' }} />
               <div className="agy-skeleton" style={{ width: '100%', height: '46px', borderRadius: '10px' }} />
             </div>
           </div>
@@ -761,8 +757,8 @@ function BlogEditorInner() {
               />
             </div>
 
-            {/* Publishing & Article Metadata Row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+            {/* Publishing & Article Metadata Row (Date & Read Time) */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>
                   Publish Date 📅
@@ -782,17 +778,6 @@ function BlogEditorInner() {
                   placeholder="e.g. 5 min read"
                   value={readTime}
                   onChange={(e) => setReadTime(e.target.value)}
-                  style={inputStyle}
-                />
-              </div>
-
-              <div>
-                <label style={labelStyle}>Sort Order Priority</label>
-                <input
-                  type="number"
-                  placeholder="0"
-                  value={order}
-                  onChange={(e) => setOrder(Number(e.target.value))}
                   style={inputStyle}
                 />
               </div>

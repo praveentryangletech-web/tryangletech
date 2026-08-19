@@ -57,9 +57,15 @@ export default function BlogContent() {
 
   const cleanActiveCat = activeCategory.toLowerCase().replace(/[-\s]/g, '');
 
+  const sortedPosts = [...posts].sort((a, b) => {
+    const timeA = new Date(a.publishedAt || a.createdAt || 0).getTime();
+    const timeB = new Date(b.publishedAt || b.createdAt || 0).getTime();
+    return timeB - timeA;
+  });
+
   const filteredPosts = activeCategory === "All"
-    ? posts
-    : posts.filter((post) => {
+    ? sortedPosts
+    : sortedPosts.filter((post) => {
         const postCat = (post.category || '').toLowerCase().replace(/[-\s]/g, '');
         return postCat === cleanActiveCat;
       });

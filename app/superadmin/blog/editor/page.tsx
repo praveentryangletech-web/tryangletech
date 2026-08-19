@@ -548,7 +548,7 @@ function BlogEditorInner() {
       <form onSubmit={handleSave}>
         {/* TAB 1: GENERAL */}
         {activeTab === 'general' && (
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2.5rem', minHeight: '560px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>
@@ -601,26 +601,17 @@ function BlogEditorInner() {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+            {/* Publishing & Article Metadata Row */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
               <div>
-                <label style={labelStyle}>Author Name</label>
+                <label style={labelStyle}>
+                  Publish Date 📅
+                </label>
                 <input
-                  type="text"
-                  placeholder="e.g. TryangleTech Team"
-                  value={authorName}
-                  onChange={(e) => setAuthorName(e.target.value)}
-                  style={inputStyle}
-                />
-              </div>
-
-              <div>
-                <label style={labelStyle}>Author Role</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Content Creators"
-                  value={authorRole}
-                  onChange={(e) => setAuthorRole(e.target.value)}
-                  style={inputStyle}
+                  type="date"
+                  value={publishedAt}
+                  onChange={(e) => setPublishedAt(e.target.value)}
+                  style={{ ...inputStyle, cursor: 'pointer' }}
                 />
               </div>
 
@@ -631,18 +622,6 @@ function BlogEditorInner() {
                   placeholder="e.g. 5 min read"
                   value={readTime}
                   onChange={(e) => setReadTime(e.target.value)}
-                  style={inputStyle}
-                />
-              </div>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-              <div>
-                <label style={labelStyle}>Publish Date</label>
-                <input
-                  type="date"
-                  value={publishedAt}
-                  onChange={(e) => setPublishedAt(e.target.value)}
                   style={inputStyle}
                 />
               </div>
@@ -659,7 +638,32 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingTop: '4px' }}>
+            {/* Author Information Row */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              <div>
+                <label style={labelStyle}>Author Name</label>
+                <input
+                  type="text"
+                  placeholder="e.g. TryangleTech Team"
+                  value={authorName}
+                  onChange={(e) => setAuthorName(e.target.value)}
+                  style={inputStyle}
+                />
+              </div>
+
+              <div>
+                <label style={labelStyle}>Author Role / Designation</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Content Creators"
+                  value={authorRole}
+                  onChange={(e) => setAuthorRole(e.target.value)}
+                  style={inputStyle}
+                />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingTop: '8px' }}>
               <input
                 type="checkbox"
                 id="editorPublishedCheckbox"

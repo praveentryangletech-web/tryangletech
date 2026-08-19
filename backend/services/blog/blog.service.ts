@@ -323,7 +323,7 @@ export class BlogService {
           c.full_count
         FROM filtered_posts p
         CROSS JOIN total_count c
-        ORDER BY p.${sortColumn} ${sortDirection}
+        ORDER BY p.${sortColumn} ${sortDirection}, p."createdAt" DESC
         LIMIT ${limit} OFFSET ${offset}
       `, ...queryParams);
 
@@ -473,7 +473,17 @@ export class BlogService {
     const authorBio = input.authorBio || '';
     const readTime = input.readTime || '5 min read';
     const published = input.published !== undefined ? input.published : true;
-    const publishedAt = input.publishedAt ? new Date(input.publishedAt) : new Date();
+    let publishedAt: Date;
+    if (input.publishedAt) {
+      const d = new Date(input.publishedAt);
+      if (d.toDateString() === new Date().toDateString()) {
+        publishedAt = new Date();
+      } else {
+        publishedAt = d;
+      }
+    } else {
+      publishedAt = new Date();
+    }
     const order = Number(input.order || 0);
     const tags = input.tags || [];
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Project, PORTFOLIO_CATEGORIES, PortfolioCategory } from '../../../data/portfolioData';
+import { usePortfolio } from '../../context/PortfolioContext';
 
 interface PortfolioEditModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ export default function PortfolioEditModal({
   onSave,
 }: PortfolioEditModalProps) {
   const isEdit = !!project;
+  const { categories: dynamicCategories } = usePortfolio();
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -275,7 +277,7 @@ export default function PortfolioEditModal({
                     boxSizing: 'border-box',
                   }}
                 >
-                  {Array.from(new Set([...PORTFOLIO_CATEGORIES, 'General', category])).filter(Boolean).map((cat) => (
+                  {Array.from(new Set([...(dynamicCategories || []), ...PORTFOLIO_CATEGORIES, 'General', category])).filter(Boolean).map((cat) => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>

@@ -597,7 +597,7 @@ export default function PortfolioTable({
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Tooltip text="Go to previous page" position="top">
             <button
-              disabled={!pagination.hasPrevPage || currentPage <= 1}
+              disabled={!pagination?.hasPrevPage || currentPage <= 1}
               onClick={() => setPage(Math.max(currentPage - 1, 1))}
               style={{
                 padding: '5px 12px',
@@ -618,7 +618,6 @@ export default function PortfolioTable({
               <span>Prev</span>
             </button>
           </Tooltip>
-
 
           {/* Page Numbers */}
           {Array.from({ length: totalPages }).map((_, idx) => {
@@ -648,7 +647,7 @@ export default function PortfolioTable({
 
           <Tooltip text="Go to next page" position="top">
             <button
-              disabled={!pagination.hasNextPage || currentPage >= totalPages || totalPages === 0}
+              disabled={!pagination?.hasNextPage || currentPage >= totalPages || totalPages === 0}
               onClick={() => setPage(Math.min(currentPage + 1, totalPages))}
               style={{
                 padding: '5px 12px',

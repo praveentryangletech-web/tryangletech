@@ -584,7 +584,7 @@ export default function BlogTable({
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Tooltip text="Go to previous page" position="top">
             <button
-              disabled={!pagination.hasPrevPage || currentPage <= 1}
+              disabled={!pagination?.hasPrevPage || currentPage <= 1}
               onClick={() => setPage(Math.max(currentPage - 1, 1))}
               style={{
                 padding: '5px 12px',
@@ -634,7 +634,7 @@ export default function BlogTable({
 
           <Tooltip text="Go to next page" position="top">
             <button
-              disabled={!pagination.hasNextPage || currentPage >= totalPages || totalPages === 0}
+              disabled={!pagination?.hasNextPage || currentPage >= totalPages || totalPages === 0}
               onClick={() => setPage(Math.min(currentPage + 1, totalPages))}
               style={{
                 padding: '5px 12px',

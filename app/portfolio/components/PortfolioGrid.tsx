@@ -56,7 +56,10 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
         const res = await fetch('/api/portfolio/categories');
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          const dynamicCats = ['All', ...json.data.map((c: any) => c.name)];
+          const dynamicCats = [
+            'All',
+            ...json.data.filter((c: any) => (c.projectCount ?? 0) > 0).map((c: any) => c.name),
+          ];
           setCategoriesList(dynamicCats);
         }
       } catch {

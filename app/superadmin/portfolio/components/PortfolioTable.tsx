@@ -168,63 +168,76 @@ export default function PortfolioTable({
           </div>
         </div>
 
-        {/* Category Filter Chips */}
+        {/* Category Filter Chips (Left) & Quick Manage Pill (Right) */}
         <div
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
             alignItems: 'center',
-            gap: '8px',
+            justifyContent: 'space-between',
+            gap: '12px',
             padding: '0 2rem 1rem 2rem',
+            flexWrap: 'wrap',
           }}
         >
-          {categories.map((cat) => (
-            <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
+          {/* Left Side: Filter Chips */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            {categories.map((cat) => (
+              <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
+                <button
+                  onClick={() => setCategoryFilter(cat)}
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: '8px',
+                    border: '1px solid',
+                    borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
+                    backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
+                    color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
+                    fontSize: '0.775rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {cat}
+                </button>
+              </Tooltip>
+            ))}
+          </div>
+
+          {/* Right Side: Quick Add/Manage Categories Pill */}
+          <div style={{ marginLeft: 'auto' }}>
+            <Tooltip text="Add new category or delete existing categories" position="top">
               <button
-                onClick={() => setCategoryFilter(cat)}
+                onClick={() => setIsCategoryModalOpen(true)}
                 style={{
-                  padding: '6px 14px',
+                  padding: '5px 12px',
                   borderRadius: '8px',
-                  border: '1px solid',
-                  borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
-                  backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
-                  color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
-                  fontSize: '0.775rem',
+                  border: '1.5px dashed #94A3B8',
+                  backgroundColor: '#F8FAFC',
+                  color: 'var(--brand-blue, #1833fe)',
+                  fontSize: '0.75rem',
                   fontWeight: 700,
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                   whiteSpace: 'nowrap',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
                 }}
               >
-                {cat}
+                <span>+</span>
+                <span>Manage Categories</span>
               </button>
             </Tooltip>
-          ))}
-
-          {/* Quick Add/Manage Categories Pill */}
-          <Tooltip text="Add new category or delete existing categories" position="top">
-            <button
-              onClick={() => setIsCategoryModalOpen(true)}
-              style={{
-                padding: '5px 12px',
-                borderRadius: '8px',
-                border: '1.5px dashed #94A3B8',
-                backgroundColor: '#F8FAFC',
-                color: 'var(--brand-blue, #1833fe)',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                whiteSpace: 'nowrap',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-              }}
-            >
-              <span>+</span>
-              <span>Manage Categories</span>
-            </button>
-          </Tooltip>
+          </div>
         </div>
       </div>
 

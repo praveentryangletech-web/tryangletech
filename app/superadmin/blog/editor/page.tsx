@@ -403,7 +403,7 @@ function BlogEditorInner() {
         const res = await apiClient.patch('/api/blog', { id: postId, ...payload });
         if (!res.success) throw new Error(res.error || 'Failed to update article.');
         apiClient.clearCache();
-        setSuccessMessage(finalPublished ? '✅ Article updated & published live!' : '📝 Article updated & saved as Draft!');
+        setSuccessMessage(finalPublished ? 'Article updated & published live!' : 'Article updated & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
         }, 1000);
@@ -411,7 +411,7 @@ function BlogEditorInner() {
         const res = await apiClient.post<BlogPostItem>('/api/blog', payload);
         if (!res.success) throw new Error(res.error || 'Failed to create article.');
         apiClient.clearCache();
-        setSuccessMessage(finalPublished ? '🚀 Article published live on public website!' : '📝 Article created & saved as Draft!');
+        setSuccessMessage(finalPublished ? 'Article published live on public website!' : 'Article created & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
         }, 1000);
@@ -1051,7 +1051,7 @@ function BlogEditorInner() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                       <button
                         type="button"
-                        onClick={handleExecuteUpload}
+                        onClick={() => handleConfirmUploadFile(uploadTarget)}
                         disabled={isUploading}
                         style={{
                           padding: '8px 18px',
@@ -1067,7 +1067,31 @@ function BlogEditorInner() {
                           gap: '6px',
                         }}
                       >
-                        {isUploading ? 'Uploading...' : '🚀 Save & Set as Cover'}
+                        {isUploading ? (
+                          <>
+                            <span
+                              style={{
+                                width: '12px',
+                                height: '12px',
+                                border: '2px solid #FFFFFF',
+                                borderTopColor: 'transparent',
+                                borderRadius: '50%',
+                                display: 'inline-block',
+                                animation: 'spin 0.8s linear infinite',
+                              }}
+                            />
+                            <span>Uploading...</span>
+                          </>
+                        ) : (
+                          <>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="17 8 12 3 7 8" />
+                              <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <span>Save &amp; Set as Cover</span>
+                          </>
+                        )}
                       </button>
 
                       <button
@@ -1189,7 +1213,12 @@ function BlogEditorInner() {
                       gap: '6px',
                     }}
                   >
-                    <span>📁 Upload Image</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    <span>Upload Image</span>
                   </button>
 
                   <button
@@ -1230,7 +1259,13 @@ function BlogEditorInner() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
                 {sliderImages.length === 0 ? (
                   <div style={{ gridColumn: '1 / -1', padding: '2.5rem', textAlign: 'center', border: '1.5px dashed #CBD5E1', borderRadius: '16px', backgroundColor: '#F8FAFC' }}>
-                    <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>🖼️</div>
+                    <div style={{ marginBottom: '8px', color: '#94A3B8', display: 'flex', justifyContent: 'center' }}>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
                     <div style={{ fontWeight: 700, color: '#334155', marginBottom: '4px' }}>No Carousel Slider Images Added Yet</div>
                     <div style={{ fontSize: '0.8rem', color: '#64748B' }}>Add screenshot URLs, upload slide files from your device, or pick from the existing library above.</div>
                   </div>
@@ -1320,12 +1355,17 @@ function BlogEditorInner() {
                             border: '1px solid #FECACA',
                             backgroundColor: '#FEF2F2',
                             color: '#DC2626',
-                            fontSize: '0.75rem',
-                            fontWeight: 700,
                             cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                           }}
+                          aria-label="Remove slide"
                         >
-                          ✕
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
                         </button>
                       </div>
                     </div>
@@ -2069,13 +2109,17 @@ function BlogEditorInner() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  fontSize: '1.35rem',
-                  fontWeight: 800,
                   cursor: 'pointer',
                   color: '#64748B',
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
+                aria-label="Close asset picker"
               >
-                ✕
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
             </div>
 

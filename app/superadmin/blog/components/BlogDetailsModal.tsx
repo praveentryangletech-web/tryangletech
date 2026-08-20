@@ -171,8 +171,12 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
           {/* Section 1: Intro Story */}
           {(post.section1Heading || post.section1Paragraph1) && (
             <div style={{ padding: '1.25rem', backgroundColor: '#F8FAFC', borderRadius: '14px', border: '1px solid #E2E8F0' }}>
-              <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.95rem', fontWeight: 800, color: '#0F172A' }}>
-                📖 {post.section1Heading || 'Introduction'}
+              <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.95rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+                <span>{post.section1Heading || 'Introduction'}</span>
               </h4>
               <p style={{ margin: '0 0 8px', color: '#475569', fontSize: '0.85rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
                 {post.section1Paragraph1}
@@ -189,8 +193,11 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             {post.quoteText && (
               <div style={{ padding: '1rem', backgroundColor: '#FFF1F2', borderRadius: '14px', border: '1px solid #FFE4E6' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#BE123C' }}>
-                  💬 Highlight Quote
+                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#BE123C', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E11D48" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  <span>Highlight Quote</span>
                 </h5>
                 <p style={{ margin: '0 0 4px', color: '#881337', fontSize: '0.8rem', lineHeight: 1.6, fontStyle: 'italic' }}>
                   &ldquo;{post.quoteText}&rdquo;
@@ -203,8 +210,11 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
 
             {post.stepsTitle && (
               <div style={{ padding: '1rem', backgroundColor: '#F0FDF4', borderRadius: '14px', border: '1px solid #DCFCE7' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#15803D' }}>
-                  ⚡ {post.stepsTitle}
+                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#15803D', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>{post.stepsTitle}</span>
                 </h5>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#14532D', fontSize: '0.8rem', lineHeight: 1.6 }}>
                   {post.step1 && <li>{post.step1}</li>}
@@ -217,8 +227,13 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
           {/* Section 4: Mid-Article Images */}
           {(post.contentImage1 || post.contentImage2) && (
             <div style={{ padding: '1rem', backgroundColor: '#F8FAFC', borderRadius: '14px', border: '1px solid #E2E8F0' }}>
-              <h5 style={{ margin: '0 0 0.75rem 0', fontSize: '0.85rem', fontWeight: 800, color: '#0F172A' }}>
-                🖼️ Mid-Article Images
+              <h5 style={{ margin: '0 0 0.75rem 0', fontSize: '0.85rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+                <span>Mid-Article Images</span>
               </h5>
               <div style={{ display: 'grid', gridTemplateColumns: post.contentImage1 && post.contentImage2 ? '1fr 1fr' : '1fr', gap: '0.75rem' }}>
                 {post.contentImage1 && (
@@ -262,8 +277,13 @@ export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProp
           {/* Section 5: Conclusion & Takeaways */}
           {post.conclusionTitle && (
             <div style={{ padding: '1.25rem', backgroundColor: '#FAF5FF', borderRadius: '14px', border: '1px solid #F3E8FF' }}>
-              <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9rem', fontWeight: 800, color: '#6B21A8' }}>
-                🎯 {post.conclusionTitle}
+              <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9rem', fontWeight: 800, color: '#6B21A8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="6" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+                <span>{post.conclusionTitle}</span>
               </h5>
               {post.conclusionBody && (
                 <p style={{ margin: '0 0 8px', color: '#581C87', fontSize: '0.825rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>

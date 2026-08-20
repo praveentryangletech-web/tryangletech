@@ -35,7 +35,7 @@ export default function OverviewDashboard({ inquiries, onSelectInquiry }: Overvi
       >
         <div>
           <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
-            Welcome back, {user?.name || 'Administrator'} 👋
+            Welcome back, {user?.name || 'Administrator'}
           </h2>
           <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: '#64748B' }}>
             Signed in as <strong style={{ color: 'var(--brand-blue, #1833fe)' }}>{user?.email || 'admin@tryangletech.com'}</strong> · Full Control Session
@@ -120,7 +120,7 @@ export default function OverviewDashboard({ inquiries, onSelectInquiry }: Overvi
         </Tooltip>
 
         {/* Portfolio Projects */}
-        <Tooltip text="Dynamic case studies across 6 core industry categories" position="top">
+        <Tooltip text="Dynamic case studies across core industry categories" position="top">
           <Link href="/superadmin/portfolio" style={{ textDecoration: 'none', display: 'block' }}>
             <div className="admin-white-card" style={{ padding: '1.25rem 1.5rem', cursor: 'pointer' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -140,7 +140,12 @@ export default function OverviewDashboard({ inquiries, onSelectInquiry }: Overvi
                 </div>
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '0.4rem', fontSize: '0.775rem', color: '#15803D', fontWeight: 700 }}>
-                <span>⚡ 6 Core Categories</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>Dynamic Categories</span>
+                </span>
                 <span style={{ color: '#94A3B8', fontWeight: 400 }}>· View All →</span>
               </div>
             </div>

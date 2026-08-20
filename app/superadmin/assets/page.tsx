@@ -506,9 +506,13 @@ export default function AssetManagementPage() {
             <button
               type="button"
               onClick={() => setUploadFeedback(null)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontWeight: 800 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}
+              aria-label="Dismiss feedback"
             >
-              ✕
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
         )}
@@ -1213,13 +1217,17 @@ export default function AssetManagementPage() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  fontSize: '1.25rem',
-                  fontWeight: 800,
                   cursor: isRenaming ? 'not-allowed' : 'pointer',
                   color: '#64748B',
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
+                aria-label="Close rename modal"
               >
-                ✕
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
             </div>
 
@@ -1585,13 +1593,17 @@ export default function AssetManagementPage() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  fontSize: '1.25rem',
-                  fontWeight: 800,
                   cursor: 'pointer',
                   color: '#64748B',
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
+                aria-label="Close preview modal"
               >
-                ✕
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
             </div>
 

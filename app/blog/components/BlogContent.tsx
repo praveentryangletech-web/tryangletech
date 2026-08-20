@@ -60,17 +60,31 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     return staticCategories;
   });
 
-  // Fetch live articles from API in background without blocking initial render
+  // Fetch live articles and dynamic categories from API in background without blocking initial render
   useEffect(() => {
     let isMounted = true;
     const fetchLivePosts = async () => {
       try {
-        const res = await fetch('/api/blog?limit=100&status=published&sortBy=publishedAt&sortOrder=desc');
-        const data = await res.json();
-        if (isMounted && data.success && Array.isArray(data.data) && data.data.length > 0) {
-          setPosts(data.data);
-          const dynamicCats = Array.from(new Set(['All', ...data.data.map((p: BlogPostItem) => p.category)]));
-          setCategories(dynamicCats);
+        const [postsRes, catsRes] = await Promise.allSettled([
+          fetch('/api/blog?limit=100&status=published&sortBy=publishedAt&sortOrder=desc'),
+          fetch('/api/blog/categories'),
+        ]);
+
+        if (postsRes.status === 'fulfilled') {
+          const data = await postsRes.value.json();
+          if (isMounted && data.success && Array.isArray(data.data)) {
+            setPosts(data.data);
+          }
+        }
+
+        if (catsRes.status === 'fulfilled') {
+          const catsData = await catsRes.value.json();
+          if (isMounted && catsData.success && Array.isArray(catsData.data) && catsData.data.length > 0) {
+            const activeCats = catsData.data
+              .filter((c: any) => (c.postCount ?? 0) > 0)
+              .map((c: any) => c.name);
+            setCategories(['All', ...activeCats]);
+          }
         }
       } catch (err) {
         console.warn('Failed to fetch live blog posts in background:', err);

@@ -19,24 +19,35 @@ interface PortfolioGridProps {
   limit?: number;
   hideFilter?: boolean;
   categoryFilter?: string[];
+  initialProjects?: Project[];
+  initialCategories?: string[];
 }
 
 // Client-side in-memory SWR cache for 0ms instantaneous UI feedback
 const clientMemoryCache = new Map<string, { items: Project[]; total: number; hasNextPage: boolean }>();
 
-export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: PortfolioGridProps) {
+export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initialProjects, initialCategories }: PortfolioGridProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
-  const [categoriesList, setCategoriesList] = useState<string[]>(DEFAULT_CATEGORIES);
+  const [categoriesList, setCategoriesList] = useState<string[]>(() => {
+    if (initialCategories && initialCategories.length > 0) return initialCategories;
+    return DEFAULT_CATEGORIES;
+  });
   
   // API Data & Pagination States
-  const [projectsList, setProjectsList] = useState<Project[]>(staticProjects);
+  const [projectsList, setProjectsList] = useState<Project[]>(() => {
+    if (initialProjects && initialProjects.length > 0) return initialProjects;
+    return staticProjects;
+  });
   const [page, setPage] = useState<number>(1);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
-  const [totalCount, setTotalCount] = useState<number>(staticProjects.length);
+  const [totalCount, setTotalCount] = useState<number>(() => {
+    if (initialProjects && initialProjects.length > 0) return initialProjects.length;
+    return staticProjects.length;
+  });
 
   // Fetch dynamic categories on mount
   useEffect(() => {

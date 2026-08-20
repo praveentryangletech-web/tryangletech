@@ -171,100 +171,60 @@ export default function BlogTable({
           </div>
         </div>
 
-        {/* Category Filter Chips (Left - Scrollable with hidden scrollbar) & Quick Manage Pill (Right) */}
+        {/* Category Filter Chips (Scrollable with hidden scrollbar) */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
+            flexWrap: 'nowrap',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px',
+            gap: '8px',
             padding: '0 2rem 1rem 2rem',
+            overflowX: 'auto',
+            overflowY: 'hidden',
             minWidth: 0,
           }}
         >
-          {/* Left Side: Filter Chips Container - Smooth horizontal scroll with hidden scrollbar */}
-          <div
-            className="no-scrollbar"
-            style={{
-              display: 'flex',
-              flexWrap: 'nowrap',
-              alignItems: 'center',
-              gap: '8px',
-              overflowX: 'auto',
-              overflowY: 'hidden',
-              minWidth: 0,
-              flex: 1,
-              paddingBottom: '2px',
-            }}
-          >
-            {isLoadingCategories ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-                {[55, 120, 100, 130, 115, 95, 110, 80].map((width, idx) => (
-                  <div
-                    key={idx}
-                    className="agy-skeleton"
-                    style={{
-                      width: `${width}px`,
-                      height: '29px',
-                      borderRadius: '8px',
-                      flexShrink: 0,
-                    }}
-                  />
-                ))}
-              </div>
-            ) : (
-              categories.map((cat) => (
-                <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
-                  <button
-                    onClick={() => setCategoryFilter(cat)}
-                    style={{
-                      padding: '6px 14px',
-                      borderRadius: '8px',
-                      border: '1px solid',
-                      borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
-                      backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
-                      color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
-                      fontSize: '0.775rem',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      whiteSpace: 'nowrap',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {cat}
-                  </button>
-                </Tooltip>
-              ))
-            )}
-          </div>
-
-          {/* Right Side: Quick Add/Manage Categories Pill (Pinned) */}
-          <div style={{ flexShrink: 0, marginLeft: '8px' }}>
-            <Tooltip text="Add new category or delete existing categories" position="top">
-              <button
-                onClick={() => setIsCategoryModalOpen(true)}
-                style={{
-                  padding: '5px 12px',
-                  borderRadius: '8px',
-                  border: '1.5px dashed #94A3B8',
-                  backgroundColor: '#F8FAFC',
-                  color: 'var(--brand-blue, #1833fe)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <span>+</span>
-                <span>Manage Categories</span>
-              </button>
-            </Tooltip>
-          </div>
+          {isLoadingCategories ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+              {[55, 120, 100, 130, 115, 95, 110, 80].map((width, idx) => (
+                <div
+                  key={idx}
+                  className="agy-skeleton"
+                  style={{
+                    width: `${width}px`,
+                    height: '29px',
+                    borderRadius: '8px',
+                    flexShrink: 0,
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            categories.map((cat) => (
+              <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
+                <button
+                  onClick={() => setCategoryFilter(cat)}
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: '8px',
+                    border: '1px solid',
+                    borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
+                    backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
+                    color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
+                    fontSize: '0.775rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                  }}
+                >
+                  {cat}
+                </button>
+              </Tooltip>
+            ))
+          )}
         </div>
       </div>
 

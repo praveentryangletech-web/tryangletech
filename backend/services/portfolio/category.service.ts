@@ -270,46 +270,53 @@ export const portfolioCategoryService = {
     }
 
     const trimmed = idOrName.trim();
-    await this.ensureTableExists();
+    if (trimmed.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase()) {
+      throw new Error(`The default "${DEFAULT_PORTFOLIO_CATEGORY}" category is protected and cannot be deleted.`);
+    }
 
+    await this.seedIfEmpty();
+
+    // Query category by id, name, or slug
     const target = await db.$queryRaw<any[]>`
       SELECT * FROM "PortfolioCategory" 
-      WHERE "id" = ${trimmed} OR LOWER("name") = LOWER(${trimmed}) OR "slug" = ${trimmed}
+      WHERE "id" = ${trimmed} 
+         OR LOWER("name") = LOWER(${trimmed}) 
+         OR LOWER("slug") = LOWER(${trimmed})
       LIMIT 1
     `;
 
-    if (!target || target.length === 0) {
-      throw new Error('Category not found.');
-    }
-
-    const categoryRecord = target[0];
+    const categoryName = target && target.length > 0 ? target[0].name : trimmed;
+    const categoryId = target && target.length > 0 ? target[0].id : null;
 
     // Protection check: Cannot delete default category
-    if (categoryRecord.name.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase()) {
+    if (categoryName.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase()) {
       throw new Error(`The default "${DEFAULT_PORTFOLIO_CATEGORY}" category is protected and cannot be deleted.`);
     }
 
     // Automatically reassign any projects in this category to default 'General'
     let reassignedCount = 0;
     try {
-      // Ensure 'General' category exists first
-      await this.seedIfEmpty();
-
       const updateRes = await db.$executeRaw`
         UPDATE "PortfolioProject"
         SET "category" = ${DEFAULT_PORTFOLIO_CATEGORY},
             "updatedAt" = NOW()
-        WHERE LOWER("category") = LOWER(${categoryRecord.name})
+        WHERE LOWER("category") = LOWER(${categoryName})
       `;
       reassignedCount = Number(updateRes || 0);
     } catch (err) {
       console.warn('[DB Category] project reassignment notice:', err);
     }
 
-    // Delete category
-    await db.$executeRaw`
-      DELETE FROM "PortfolioCategory" WHERE "id" = ${categoryRecord.id}
-    `;
+    // Delete category from DB table if it exists
+    if (categoryId) {
+      await db.$executeRaw`
+        DELETE FROM "PortfolioCategory" WHERE "id" = ${categoryId}
+      `;
+    } else {
+      await db.$executeRaw`
+        DELETE FROM "PortfolioCategory" WHERE LOWER("name") = LOWER(${categoryName})
+      `;
+    }
 
     // Clear caches
     categoryCache.clear();
@@ -317,7 +324,7 @@ export const portfolioCategoryService = {
 
     return {
       success: true,
-      deletedName: categoryRecord.name,
+      deletedName: categoryName,
       reassignedCount,
     };
   },

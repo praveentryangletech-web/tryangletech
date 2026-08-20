@@ -42,22 +42,39 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 75px)', minHeight: 0, backgroundColor: 'transparent' }}>
       {/* 1. FIXED TOP TOOLBAR & STATUS FILTERS */}
       <div style={{ flexShrink: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', padding: '1.25rem 2rem 1rem 2rem' }}>
-        <input
-          type="text"
-          placeholder="🔍 Search inquiries by client, email, phone..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '8px',
-            border: '1px solid #CBD5E1',
-            width: '320px',
-            fontSize: '0.875rem',
-            outline: 'none',
-            backgroundColor: '#FFFFFF',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-          }}
-        />
+        <div style={{ position: 'relative', width: '320px', maxWidth: '100%' }}>
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#94A3B8"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search inquiries by client, email, phone..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              padding: '0.65rem 1.15rem 0.65rem 2.4rem',
+              borderRadius: '8px',
+              border: '1px solid #CBD5E1',
+              width: '100%',
+              boxSizing: 'border-box',
+              fontSize: '0.875rem',
+              outline: 'none',
+              backgroundColor: '#FFFFFF',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+            }}
+          />
+        </div>
         <div style={{ display: 'flex', gap: '6px' }}>
           {['ALL', 'NEW', 'CONTACTED', 'IN_PROGRESS', 'ARCHIVED'].map((st) => (
             <Tooltip key={st} text={st === 'ALL' ? 'Show all lead statuses' : `Filter by ${st} leads`} position="top">

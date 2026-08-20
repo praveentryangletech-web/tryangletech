@@ -1945,12 +1945,17 @@ function PortfolioEditorInner() {
                           border: '1px solid #FECACA',
                           backgroundColor: '#FEF2F2',
                           color: '#DC2626',
-                          fontSize: '0.75rem',
-                          fontWeight: 700,
                           cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
+                        aria-label="Remove slide"
                       >
-                        ✕
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </div>
                   </div>
@@ -2068,9 +2073,13 @@ function PortfolioEditorInner() {
                       <button
                         type="button"
                         onClick={() => handleRemoveBullet(setChallenges, challenges, idx)}
-                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', fontWeight: 700 }}
+                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', padding: '0 4px' }}
+                        aria-label="Remove challenge point"
                       >
-                        ✕
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </div>
                   ))}
@@ -2132,9 +2141,13 @@ function PortfolioEditorInner() {
                       <button
                         type="button"
                         onClick={() => handleRemoveBullet(setSolutions, solutions, idx)}
-                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', fontWeight: 700 }}
+                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', padding: '0 4px' }}
+                        aria-label="Remove solution point"
                       >
-                        ✕
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </div>
                   ))}
@@ -2195,9 +2208,13 @@ function PortfolioEditorInner() {
                       <button
                         type="button"
                         onClick={() => handleRemoveBullet(setResults, results, idx)}
-                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', fontWeight: 700 }}
+                        style={{ border: 'none', backgroundColor: 'transparent', color: '#94A3B8', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', padding: '0 4px' }}
+                        aria-label="Remove metric point"
                       >
-                        ✕
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </div>
                   ))}
@@ -2243,7 +2260,11 @@ function PortfolioEditorInner() {
                         {tech.icon({ size: 15, color: isSelected ? '#FFFFFF' : undefined })}
                       </span>
                       <span>{tech.name}</span>
-                      {isSelected && <span style={{ fontSize: '0.75rem', fontWeight: 800 }}>✓</span>}
+                      {isSelected && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      )}
                     </button>
                   );
                 })}
@@ -2313,15 +2334,16 @@ function PortfolioEditorInner() {
                             background: 'none',
                             color: '#94A3B8',
                             cursor: 'pointer',
-                            fontWeight: 800,
-                            fontSize: '0.8rem',
                             padding: 0,
-                            lineHeight: 1,
                             display: 'inline-flex',
                             alignItems: 'center',
                           }}
+                          aria-label={`Remove ${tech}`}
                         >
-                          ✕
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
                         </button>
                       </span>
                     ))}
@@ -2586,12 +2608,16 @@ function PortfolioEditorInner() {
                           backgroundColor: 'transparent',
                           color: '#1833FE',
                           cursor: 'pointer',
-                          fontWeight: 700,
                           padding: 0,
-                          fontSize: '0.85rem',
+                          display: 'inline-flex',
+                          alignItems: 'center',
                         }}
+                        aria-label={`Remove ${kw}`}
                       >
-                        ✕
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </span>
                   ))}
@@ -2709,13 +2735,17 @@ function PortfolioEditorInner() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  fontSize: '1.35rem',
-                  fontWeight: 800,
                   cursor: 'pointer',
                   color: '#64748B',
+                  display: 'inline-flex',
+                  alignItems: 'center',
                 }}
+                aria-label="Close asset picker"
               >
-                ✕
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
             </div>
 
@@ -2826,8 +2856,10 @@ function PortfolioEditorInner() {
                           </span>
                         )}
                         {assetPickerTarget === 'slider' && isSelected && !isInSlider && (
-                          <span style={{ position: 'absolute', top: '4px', right: '4px', backgroundColor: '#1833FE', color: '#FFFFFF', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 800 }}>
-                            ✓
+                          <span style={{ position: 'absolute', top: '4px', right: '4px', backgroundColor: '#1833FE', color: '#FFFFFF', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
                           </span>
                         )}
                       </div>
@@ -2858,9 +2890,22 @@ function PortfolioEditorInner() {
                             fontSize: '0.725rem',
                             fontWeight: 700,
                             cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '4px',
                           }}
                         >
-                          {isCover ? '✓ Active Cover' : 'Select Cover'}
+                          {isCover ? (
+                            <>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                              <span>Active Cover</span>
+                            </>
+                          ) : (
+                            'Select Cover'
+                          )}
                         </button>
                       ) : (
                         <button
@@ -2881,9 +2926,22 @@ function PortfolioEditorInner() {
                             fontSize: '0.725rem',
                             fontWeight: 700,
                             cursor: isInSlider ? 'default' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '4px',
                           }}
                         >
-                          {isInSlider ? '✓ In Slider' : '+ Add Slide'}
+                          {isInSlider ? (
+                            <>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                              <span>In Slider</span>
+                            </>
+                          ) : (
+                            '+ Add Slide'
+                          )}
                         </button>
                       )}
                     </div>

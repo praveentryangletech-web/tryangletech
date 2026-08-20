@@ -225,11 +225,17 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
-   * Delete category by ID or Name
+   * Delete category by ID or Name (removes from UI once API responds successfully)
    */
   const deleteCategory = useCallback(async (idOrName: string) => {
-    const prevCategories = [...categoriesData];
-    // Optimistic removal for instant UI response
+    const res = await apiClient.delete('/api/portfolio/categories', {
+      params: { id: idOrName, name: idOrName },
+    });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to delete category.');
+    }
+
+    // Remove from in-memory state after successful API response
     setCategoriesData((prev) =>
       prev.filter(
         (c) =>
@@ -241,23 +247,11 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       prev.filter((c) => c.toLowerCase() !== idOrName.toLowerCase())
     );
 
-    try {
-      const res = await apiClient.delete('/api/portfolio/categories', {
-        params: { id: idOrName, name: idOrName },
-      });
-      if (!res.success) {
-        throw new Error(res.error || 'Failed to delete category.');
-      }
-      // If the currently filtered category was deleted, reset filter to 'ALL'
-      if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
-        setCategoryFilter('ALL');
-      }
-      await fetchPortfolio();
-    } catch (err) {
-      setCategoriesData(prevCategories);
-      setCategories(prevCategories.map((c) => c.name));
-      throw err;
+    // If the currently filtered category was deleted, reset filter to 'ALL'
+    if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
+      setCategoryFilter('ALL');
     }
+    await fetchPortfolio();
   }, [categoryFilter, fetchPortfolio]);
 
   /**

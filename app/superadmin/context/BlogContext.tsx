@@ -263,31 +263,22 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
-   * Delete a category (with immediate optimistic UI removal and rollback protection)
+   * Delete a category (removes from UI once API responds successfully)
    */
   const deleteCategory = useCallback(async (idOrName: string) => {
-    const prevCategories = [...categories];
-    const prevData = [...categoriesData];
+    const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
+      `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
+    );
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to delete category.');
+    }
 
-    // Optimistic UI update
+    // Remove from in-memory state after successful API response
     setCategories((prev) => prev.filter((c) => c !== idOrName && c.toLowerCase() !== idOrName.toLowerCase()));
     setCategoriesData((prev) => prev.filter((c) => c.id !== idOrName && c.name.toLowerCase() !== idOrName.toLowerCase()));
 
-    try {
-      const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
-        `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
-      );
-      if (!res.success) {
-        throw new Error(res.error || 'Failed to delete category.');
-      }
-      await fetchBlog();
-    } catch (err) {
-      // Rollback on error
-      setCategories(prevCategories);
-      setCategoriesData(prevData);
-      throw err;
-    }
-  }, [categories, categoriesData, fetchBlog]);
+    await fetchBlog();
+  }, [fetchBlog]);
 
   /**
    * Toggle Published Status Handler (with instant optimistic UI update)

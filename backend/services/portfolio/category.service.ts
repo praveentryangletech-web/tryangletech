@@ -96,6 +96,32 @@ export const portfolioCategoryService = {
       } catch {
         // Ignored if column already exists
       }
+
+      // Drop legacy single-column unique constraints to allow same category name across different types (PORTFOLIO vs BLOG)
+      try {
+        await db.$executeRaw`ALTER TABLE "PortfolioCategory" DROP CONSTRAINT IF EXISTS "PortfolioCategory_name_key";`;
+      } catch {}
+      try {
+        await db.$executeRaw`ALTER TABLE "PortfolioCategory" DROP CONSTRAINT IF EXISTS "PortfolioCategory_slug_key";`;
+      } catch {}
+      try {
+        await db.$executeRaw`DROP INDEX IF EXISTS "PortfolioCategory_name_key";`;
+      } catch {}
+      try {
+        await db.$executeRaw`DROP INDEX IF EXISTS "PortfolioCategory_slug_key";`;
+      } catch {}
+
+      // Ensure compound unique indexes on (name, type) and (slug, type)
+      try {
+        await db.$executeRaw`
+          CREATE UNIQUE INDEX IF NOT EXISTS "PortfolioCategory_name_type_unique" ON "PortfolioCategory" ("name", "type");
+        `;
+      } catch {}
+      try {
+        await db.$executeRaw`
+          CREATE UNIQUE INDEX IF NOT EXISTS "PortfolioCategory_slug_type_unique" ON "PortfolioCategory" ("slug", "type");
+        `;
+      } catch {}
       isCategoryTableEnsured = true;
     } catch (err) {
       console.warn('[DB Category] ensureTableExists notice:', err);
@@ -103,8 +129,8 @@ export const portfolioCategoryService = {
   },
 
   /**
-   * Seed default protected 'General' category for given type (PORTFOLIO, BLOG, etc.) if not present.
-   * No hardcoded arbitrary categories are seeded.
+   * Seed default protected 'General' category and auto-discover active categories
+   * from existing records (BlogPost / PortfolioProject) if not yet registered.
    */
   async seedIfEmpty(type: string = 'PORTFOLIO'): Promise<void> {
     try {
@@ -114,12 +140,63 @@ export const portfolioCategoryService = {
       const defaultSlug = generateSlug(DEFAULT_CATEGORY);
       const defaultId = `cat_default_${normalizedType.toLowerCase()}_${defaultSlug}`;
 
-      // Ensure the protected default 'General' fallback category exists for this type
-      await db.$executeRaw`
-        INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
-        VALUES (${defaultId}, ${DEFAULT_CATEGORY}, ${defaultSlug}, ${normalizedType}, 999, NOW(), NOW())
-        ON CONFLICT DO NOTHING
-      `;
+      // 1. Ensure the protected default 'General' fallback category exists for this type
+      try {
+        const existingDefault = await db.$queryRaw<any[]>`
+          SELECT "id" FROM "PortfolioCategory" WHERE "type" = ${normalizedType} AND LOWER("name") = LOWER(${DEFAULT_CATEGORY}) LIMIT 1
+        `;
+        if (!existingDefault || existingDefault.length === 0) {
+          await db.$executeRaw`
+            INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+            VALUES (${defaultId}, ${DEFAULT_CATEGORY}, ${defaultSlug}, ${normalizedType}, 999, NOW(), NOW())
+            ON CONFLICT DO NOTHING
+          `;
+        }
+      } catch (err) {
+        console.warn(`[DB Category] seed default 'General' (${type}) notice:`, err);
+      }
+
+      // 2. Auto-discover and register any active categories from existing records (Blog posts or Portfolio projects)
+      try {
+        let distinctCategories: string[] = [];
+        if (normalizedType === 'BLOG') {
+          const rows = await db.$queryRaw<Array<{ category: string }>>`
+            SELECT DISTINCT "category" FROM "BlogPost" WHERE "category" IS NOT NULL AND TRIM("category") != ''
+          `;
+          distinctCategories = rows.map((r) => r.category.trim()).filter(Boolean);
+        } else {
+          const rows = await db.$queryRaw<Array<{ category: string }>>`
+            SELECT DISTINCT "category" FROM "PortfolioProject" WHERE "category" IS NOT NULL AND TRIM("category") != ''
+          `;
+          distinctCategories = rows.map((r) => r.category.trim()).filter(Boolean);
+        }
+
+        if (distinctCategories.length > 0) {
+          const existingCats = await db.$queryRaw<Array<{ name: string }>>`
+            SELECT "name" FROM "PortfolioCategory" WHERE "type" = ${normalizedType}
+          `;
+          const existingNamesSet = new Set(existingCats.map((c) => (c.name || '').toLowerCase().trim()));
+
+          for (const catName of distinctCategories) {
+            if (!existingNamesSet.has(catName.toLowerCase().trim())) {
+              const catSlug = generateSlug(catName);
+              const catId = `cat_${normalizedType.toLowerCase()}_${catSlug}_${Date.now().toString(36)}`;
+              try {
+                await db.$executeRaw`
+                  INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+                  VALUES (${catId}, ${catName}, ${catSlug}, ${normalizedType}, 0, NOW(), NOW())
+                  ON CONFLICT DO NOTHING
+                `;
+                existingNamesSet.add(catName.toLowerCase().trim());
+              } catch {
+                // Silently ignore concurrent race condition conflicts
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn(`[DB Category] auto-discover categories notice:`, err);
+      }
     } catch (err) {
       console.warn(`[DB Category] seedIfEmpty (${type}) notice:`, err);
     }
@@ -131,15 +208,16 @@ export const portfolioCategoryService = {
   async getAllCategories(type: string = 'PORTFOLIO'): Promise<PortfolioCategoryItem[] & { etag?: string }> {
     const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
     const cacheKey = `all_categories_${normalizedType.toLowerCase()}`;
-    const cached = categoryCache.get<PortfolioCategoryItem[]>(cacheKey);
-    if (cached) {
-      const items = [...cached.data] as PortfolioCategoryItem[] & { etag?: string };
-      items.etag = cached.etag;
-      return items;
-    }
 
     try {
       await this.seedIfEmpty(normalizedType);
+
+      const cached = categoryCache.get<PortfolioCategoryItem[]>(cacheKey);
+      if (cached) {
+        const items = [...cached.data] as PortfolioCategoryItem[] & { etag?: string };
+        items.etag = cached.etag;
+        return items;
+      }
 
       // Fetch categories by type
       const categoryRows = await db.$queryRaw<any[]>`

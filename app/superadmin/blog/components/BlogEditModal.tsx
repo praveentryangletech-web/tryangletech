@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BlogPostItem, BLOG_CATEGORIES } from '@/backend/services/blog';
+import { BlogPostItem } from '@/backend/services/blog';
+import { useBlog } from '../../context/BlogContext';
 
 interface BlogEditModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export default function BlogEditModal({
   onClose,
   onSave,
 }: BlogEditModalProps) {
+  const { categories: dynamicCategories } = useBlog();
   const isEdit = !!post;
 
   const formatForDateTimeInput = (dateStr?: string | Date) => {
@@ -279,7 +281,13 @@ export default function BlogEditModal({
                     boxSizing: 'border-box',
                   }}
                 >
-                  {BLOG_CATEGORIES.map((cat) => (
+                  {Array.from(
+                    new Set([
+                      ...(dynamicCategories || []),
+                      'General',
+                      category,
+                    ].filter(Boolean))
+                  ).map((cat) => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>

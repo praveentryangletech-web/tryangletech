@@ -1,4 +1,3 @@
-import { PORTFOLIO_CATEGORIES } from '@/app/data/portfolioData';
 import { hasSqlInjectionPattern, sanitizeSqlString } from '@/backend/utils/sqlSecurity';
 import { PortfolioQueryParams } from './portfolio.types';
 
@@ -52,15 +51,12 @@ export function validatePortfolioQueryParams(params: {
     limit = Math.min(Math.max(parsedLimit, 1), 50); // Clamp strictly between 1 and 50
   }
 
-  // 4. Validate Category Filter against whitelisted categories
+  // 4. Validate Category Filter dynamically
   let category: string | undefined = undefined;
   if (params.category && params.category.trim()) {
     const rawCategory = params.category.trim();
     if (rawCategory.toUpperCase() !== 'ALL') {
-      const matched = PORTFOLIO_CATEGORIES.find(
-        (c) => c.toLowerCase() === rawCategory.toLowerCase()
-      );
-      category = matched || sanitizeSearchString(rawCategory);
+      category = sanitizeSearchString(rawCategory);
     }
   }
 

@@ -167,16 +167,19 @@ model MediaAsset {
 }
 
 // ----------------------------------------------------
-// 7. DYNAMIC PORTFOLIO CATEGORIES
+// 7. DYNAMIC CATEGORIES (PORTFOLIO, BLOG, ETC.)
 // ----------------------------------------------------
 model PortfolioCategory {
   id        String   @id @default(cuid())
-  name      String   @unique
-  slug      String   @unique
+  name      String
+  slug      String
+  type      String   @default("PORTFOLIO") // "PORTFOLIO", "BLOG", etc.
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([order, name])
-  @@index([slug])
+  @@unique([name, type])
+  @@unique([slug, type])
+  @@index([type, order, name])
+  @@index([type, slug])
 }

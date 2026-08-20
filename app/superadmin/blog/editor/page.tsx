@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { BlogPostItem, BLOG_CATEGORIES, generateBlogSlug } from '@/backend/services/blog';
+import { BlogPostItem, generateBlogSlug } from '@/backend/services/blog';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
 
@@ -42,7 +42,8 @@ function BlogEditorInner() {
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
-  const [category, setCategory] = useState<string>('Web Development');
+  const [category, setCategory] = useState<string>('General');
+  const [dynamicCategories, setDynamicCategories] = useState<string[]>(['General']);
   const [authorName, setAuthorName] = useState('TryangleTech Team');
   const [authorRole, setAuthorRole] = useState('Content Creators');
   const [authorImage, setAuthorImage] = useState('/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp');
@@ -51,6 +52,22 @@ function BlogEditorInner() {
   const [published, setPublished] = useState(true);
   const [publishedAt, setPublishedAt] = useState<string>(() => formatForDateTimeInput());
   const [order, setOrder] = useState<number>(0);
+
+  // Load dynamic categories from database
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const res = await fetch('/api/blog/categories');
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setDynamicCategories(json.data.map((c: any) => c.name));
+        }
+      } catch (err) {
+        console.warn('Failed to load dynamic blog categories:', err);
+      }
+    }
+    loadCategories();
+  }, []);
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');
@@ -823,7 +840,7 @@ function BlogEditorInner() {
                 </label>
                 <CustomDropdown
                   value={category}
-                  options={BLOG_CATEGORIES.map((c) => ({ value: c, label: c }))}
+                  options={Array.from(new Set([...dynamicCategories, category].filter(Boolean))).map((c) => ({ value: c, label: c }))}
                   onChange={(val) => setCategory(val as string)}
                   direction="down"
                   size="form"

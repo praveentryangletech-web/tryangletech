@@ -1,17 +1,6 @@
 import { hasSqlInjectionPattern, sanitizeSqlString } from '@/backend/utils/sqlSecurity';
 import { BlogQueryParams } from './blog.types';
 
-export const BLOG_CATEGORIES = [
-  'Web Development',
-  'Software Engineering',
-  'Cloud Computing',
-  'Artificial Intelligence',
-  'DevOps & Automation',
-  'UI/UX Design',
-  'Case Studies',
-  'Technology Trends',
-] as const;
-
 export const sanitizeSearchString = sanitizeSqlString;
 
 export function generateBlogSlug(title: string): string {
@@ -68,15 +57,12 @@ export function validateBlogQueryParams(params: {
     limit = Math.min(Math.max(parsedLimit, 1), 100);
   }
 
-  // 4. Validate Category Filter
+  // 4. Validate Category Filter dynamically
   let category: string | undefined = undefined;
   if (params.category && params.category.trim()) {
     const rawCategory = params.category.trim();
     if (rawCategory.toUpperCase() !== 'ALL') {
-      const matched = BLOG_CATEGORIES.find(
-        (c) => c.toLowerCase() === rawCategory.toLowerCase()
-      );
-      category = matched || sanitizeSearchString(rawCategory);
+      category = sanitizeSearchString(rawCategory);
     }
   }
 

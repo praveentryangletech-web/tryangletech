@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
-import { Project, projects as staticProjects, PORTFOLIO_CATEGORIES } from '../../data/portfolioData';
+import { Project, projects as staticProjects } from '../../data/portfolioData';
 import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
 
 /**
@@ -29,18 +29,19 @@ interface PortfolioContextType {
   setIsEditModalOpen: (open: boolean) => void;
   deletingProject: Project | null;
   setDeletingProject: (project: Project | null) => void;
-  // Dynamic categories
-  categories: string[];
+  fetchPortfolio: () => Promise<void>;
+  saveProject: (projectData: Partial<Project>) => Promise<void>;
+  deleteProject: (projectIdOrSlug: string) => Promise<void>;
+
+  // Dynamic Category Management
   categoriesData: PortfolioCategoryItem[];
+  categories: string[];
   isLoadingCategories: boolean;
   isCategoryModalOpen: boolean;
   setIsCategoryModalOpen: (open: boolean) => void;
   fetchCategories: () => Promise<void>;
   addCategory: (name: string) => Promise<void>;
   deleteCategory: (idOrName: string) => Promise<void>;
-  fetchPortfolio: () => Promise<void>;
-  saveProject: (projectData: Partial<Project>) => Promise<void>;
-  deleteProject: (projectIdOrSlug: string) => Promise<void>;
 }
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
@@ -57,22 +58,23 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [projectsList, setProjectsList] = useState<Project[]>(staticProjects.slice(0, 8));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Dynamic Categories state
-  const defaultList = [...PORTFOLIO_CATEGORIES, DEFAULT_PORTFOLIO_CATEGORY];
-  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>(
-    defaultList.map((c, i) => ({
-      id: `cat_${i + 1}`,
-      name: c,
-      slug: c.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      order: i,
+  // Dynamic Categories state initialized with protected 'General' default
+  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>([
+    {
+      id: 'cat_default_general',
+      name: DEFAULT_PORTFOLIO_CATEGORY,
+      slug: 'general',
+      type: 'PORTFOLIO',
+      order: 0,
       projectCount: 0,
-      isDefault: c.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase(),
+      postCount: 0,
+      isDefault: true,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-    }))
-  );
-  const [categories, setCategories] = useState<string[]>(defaultList);
-  const [isLoadingCategories, setIsLoadingCategories] = useState<boolean>(false);
+    },
+  ]);
+  const [categories, setCategories] = useState<string[]>([DEFAULT_PORTFOLIO_CATEGORY]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState<boolean>(true);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState<boolean>(false);
 
   // Server-side Pagination & Filter states

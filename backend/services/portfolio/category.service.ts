@@ -1,17 +1,20 @@
 import { Prisma } from '@prisma/client';
 import db from '@/backend/db/client';
-import { PORTFOLIO_CATEGORIES } from '@/app/data/portfolioData';
 import { portfolioCache } from './portfolio.service';
 import { generateSlug } from './portfolio.utils';
 
 export const DEFAULT_PORTFOLIO_CATEGORY = 'General';
+export const DEFAULT_BLOG_CATEGORY = 'General';
+export const DEFAULT_CATEGORY = 'General';
 
 export interface PortfolioCategoryItem {
   id: string;
   name: string;
   slug: string;
+  type: string;
   order: number;
   projectCount: number;
+  postCount: number;
   isDefault: boolean;
   createdAt: string;
   updatedAt: string;
@@ -66,11 +69,10 @@ class CategoryCacheManager {
 const categoryCache = new CategoryCacheManager();
 
 let isCategoryTableEnsured = false;
-let isCategoriesSeeded = false;
 
 export const portfolioCategoryService = {
   /**
-   * Auto-creates the PortfolioCategory table in PostgreSQL if missing.
+   * Auto-creates the PortfolioCategory table with `type` column in PostgreSQL if missing.
    */
   async ensureTableExists(): Promise<void> {
     if (isCategoryTableEnsured) return;
@@ -78,13 +80,22 @@ export const portfolioCategoryService = {
       await db.$executeRaw`
         CREATE TABLE IF NOT EXISTS "PortfolioCategory" (
           "id" TEXT PRIMARY KEY,
-          "name" TEXT UNIQUE NOT NULL,
-          "slug" TEXT UNIQUE NOT NULL,
+          "name" TEXT NOT NULL,
+          "slug" TEXT NOT NULL,
+          "type" TEXT NOT NULL DEFAULT 'PORTFOLIO',
           "order" INTEGER DEFAULT 0,
           "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
       `;
+      // Ensure type column exists for backward compatibility
+      try {
+        await db.$executeRaw`
+          ALTER TABLE "PortfolioCategory" ADD COLUMN IF NOT EXISTS "type" TEXT NOT NULL DEFAULT 'PORTFOLIO';
+        `;
+      } catch {
+        // Ignored if column already exists
+      }
       isCategoryTableEnsured = true;
     } catch (err) {
       console.warn('[DB Category] ensureTableExists notice:', err);
@@ -92,56 +103,34 @@ export const portfolioCategoryService = {
   },
 
   /**
-   * Seed default categories if table is completely empty, and ensure protected "General" fallback exists.
+   * Seed default protected 'General' category for given type (PORTFOLIO, BLOG, etc.) if not present.
+   * No hardcoded arbitrary categories are seeded.
    */
-  async seedIfEmpty(): Promise<void> {
+  async seedIfEmpty(type: string = 'PORTFOLIO'): Promise<void> {
     try {
       await this.ensureTableExists();
 
-      // Check current row count in PortfolioCategory table
-      const countRows = await db.$queryRaw<Array<{ count: bigint | number }>>`
-        SELECT COUNT(*) as count FROM "PortfolioCategory"
+      const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
+      const defaultSlug = generateSlug(DEFAULT_CATEGORY);
+      const defaultId = `cat_default_${normalizedType.toLowerCase()}_${defaultSlug}`;
+
+      // Ensure the protected default 'General' fallback category exists for this type
+      await db.$executeRaw`
+        INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+        VALUES (${defaultId}, ${DEFAULT_CATEGORY}, ${defaultSlug}, ${normalizedType}, 999, NOW(), NOW())
+        ON CONFLICT DO NOTHING
       `;
-      const currentCount = Number(countRows[0]?.count ?? 0);
-
-      // Only seed initial 6 categories if the table is completely empty (first time run)
-      if (currentCount === 0) {
-        const seedList = [...PORTFOLIO_CATEGORIES];
-        if (!seedList.includes(DEFAULT_PORTFOLIO_CATEGORY as any)) {
-          seedList.push(DEFAULT_PORTFOLIO_CATEGORY as any);
-        }
-
-        for (let i = 0; i < seedList.length; i++) {
-          const name = seedList[i];
-          const slug = generateSlug(name);
-          const id = `cat_${i + 1}_${slug}`;
-
-          await db.$executeRaw`
-            INSERT INTO "PortfolioCategory" ("id", "name", "slug", "order", "createdAt", "updatedAt")
-            VALUES (${id}, ${name}, ${slug}, ${i}, NOW(), NOW())
-            ON CONFLICT ("name") DO NOTHING
-          `;
-        }
-      } else {
-        // Table already has categories. Only ensure protected 'General' fallback category exists.
-        const defaultSlug = generateSlug(DEFAULT_PORTFOLIO_CATEGORY);
-        const defaultId = `cat_default_${defaultSlug}`;
-        await db.$executeRaw`
-          INSERT INTO "PortfolioCategory" ("id", "name", "slug", "order", "createdAt", "updatedAt")
-          VALUES (${defaultId}, ${DEFAULT_PORTFOLIO_CATEGORY}, ${defaultSlug}, 999, NOW(), NOW())
-          ON CONFLICT ("name") DO NOTHING
-        `;
-      }
     } catch (err) {
-      console.warn('[DB Category] seedIfEmpty notice:', err);
+      console.warn(`[DB Category] seedIfEmpty (${type}) notice:`, err);
     }
   },
 
   /**
-   * Get all active categories with project counts
+   * Get all active categories filtered by type (e.g. 'PORTFOLIO' or 'BLOG')
    */
-  async getAllCategories(): Promise<PortfolioCategoryItem[] & { etag?: string }> {
-    const cacheKey = 'all_categories';
+  async getAllCategories(type: string = 'PORTFOLIO'): Promise<PortfolioCategoryItem[] & { etag?: string }> {
+    const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
+    const cacheKey = `all_categories_${normalizedType.toLowerCase()}`;
     const cached = categoryCache.get<PortfolioCategoryItem[]>(cacheKey);
     if (cached) {
       const items = [...cached.data] as PortfolioCategoryItem[] & { etag?: string };
@@ -150,26 +139,36 @@ export const portfolioCategoryService = {
     }
 
     try {
-      await this.seedIfEmpty();
+      await this.seedIfEmpty(normalizedType);
 
-      // Fetch categories
+      // Fetch categories by type
       const categoryRows = await db.$queryRaw<any[]>`
-        SELECT * FROM "PortfolioCategory" ORDER BY "order" ASC, "createdAt" ASC
+        SELECT * FROM "PortfolioCategory" 
+        WHERE "type" = ${normalizedType} 
+        ORDER BY "order" ASC, "createdAt" ASC
       `;
 
-      // Fetch project counts grouped by category
+      // Fetch entity counts (Portfolio projects or Blog posts)
       let countsMap: Record<string, number> = {};
       try {
-        const countRows = await db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
-          SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
-        `;
-        if (countRows && Array.isArray(countRows)) {
-          countRows.forEach((r) => {
-            if (r.category) {
-              const clean = r.category.toLowerCase().trim();
-              countsMap[clean] = Number(r.count || 0);
-            }
-          });
+        if (normalizedType === 'BLOG') {
+          const countRows = await db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
+            SELECT "category", COUNT(*)::int as count FROM "BlogPost" GROUP BY "category"
+          `;
+          if (countRows && Array.isArray(countRows)) {
+            countRows.forEach((r) => {
+              if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
+            });
+          }
+        } else {
+          const countRows = await db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
+            SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
+          `;
+          if (countRows && Array.isArray(countRows)) {
+            countRows.forEach((r) => {
+              if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
+            });
+          }
         }
       } catch (err) {
         console.warn('[DB Category] count query notice:', err);
@@ -177,13 +176,16 @@ export const portfolioCategoryService = {
 
       const items: PortfolioCategoryItem[] = categoryRows.map((r) => {
         const nameClean = (r.name || '').toLowerCase().trim();
-        const isDefault = nameClean === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase();
+        const isDefault = nameClean === DEFAULT_CATEGORY.toLowerCase();
+        const count = countsMap[nameClean] || 0;
         return {
           id: r.id,
           name: r.name,
           slug: r.slug,
-          order: r.order ?? 0,
-          projectCount: countsMap[nameClean] ?? 0,
+          type: r.type || normalizedType,
+          order: Number(r.order || 0),
+          projectCount: count,
+          postCount: count,
           isDefault,
           createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
           updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
@@ -191,145 +193,145 @@ export const portfolioCategoryService = {
       });
 
       const entry = categoryCache.set(cacheKey, items);
-      const result = items as PortfolioCategoryItem[] & { etag?: string };
+      const result = [...items] as PortfolioCategoryItem[] & { etag?: string };
       result.etag = entry.etag;
       return result;
     } catch (err) {
-      console.error('[DB Category] getAllCategories fallback:', err);
-      // Static fallback
-      const fallbackList = [...PORTFOLIO_CATEGORIES, DEFAULT_PORTFOLIO_CATEGORY];
-      const fallbackItems: PortfolioCategoryItem[] = fallbackList.map((name, idx) => ({
-        id: `cat_${idx + 1}`,
-        name,
-        slug: generateSlug(name),
-        order: idx,
-        projectCount: 0,
-        isDefault: name.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }));
-      const result = fallbackItems as PortfolioCategoryItem[] & { etag?: string };
-      result.etag = categoryCache.generateEtag(fallbackItems);
-      return result;
+      console.error(`[DB Category] getAllCategories (${type}) fallback:`, err);
+      // Clean dynamic fallback with protected 'General'
+      return [
+        {
+          id: `cat_default_${normalizedType.toLowerCase()}_general`,
+          name: DEFAULT_CATEGORY,
+          slug: generateSlug(DEFAULT_CATEGORY),
+          type: normalizedType,
+          order: 0,
+          projectCount: 0,
+          postCount: 0,
+          isDefault: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      ] as PortfolioCategoryItem[] & { etag?: string };
     }
   },
 
   /**
-   * Create a new category
+   * Create a new category for a given type (PORTFOLIO, BLOG, etc.)
    */
-  async createCategory(name: string): Promise<PortfolioCategoryItem> {
-    const trimmedName = name.trim();
-    if (!trimmedName) {
-      throw new Error('Category name is required.');
-    }
-    if (trimmedName.length > 60) {
-      throw new Error('Category name cannot exceed 60 characters.');
-    }
-
+  async createCategory(name: string, type: string = 'PORTFOLIO'): Promise<PortfolioCategoryItem> {
     await this.ensureTableExists();
 
-    const slug = generateSlug(trimmedName);
-    const id = `cat_${Date.now()}_${slug}`;
-
-    // Check if category already exists (case-insensitive)
-    const existing = await db.$queryRaw<any[]>`
-      SELECT "id", "name" FROM "PortfolioCategory" 
-      WHERE LOWER("name") = LOWER(${trimmedName}) OR LOWER("slug") = LOWER(${slug})
-      LIMIT 1
-    `;
-
-    if (existing && existing.length > 0) {
-      throw new Error(`Category "${trimmedName}" already exists.`);
+    const cleanName = name.trim();
+    if (!cleanName) {
+      throw new Error('Category name cannot be empty.');
     }
 
-    // Determine next order
-    let nextOrder = 0;
+    const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
+    const slug = generateSlug(cleanName);
+    const id = `cat_${normalizedType.toLowerCase()}_${Date.now()}_${slug}`;
+
+    // Get max order for this type
+    const maxOrderRows = await db.$queryRaw<Array<{ max_order: number | null }>>`
+      SELECT MAX("order") as max_order FROM "PortfolioCategory" WHERE "type" = ${normalizedType}
+    `;
+    const nextOrder = (maxOrderRows[0]?.max_order ?? -1) + 1;
+
     try {
-      const orderRows = await db.$queryRaw<Array<{ max_order: number }>>`
-        SELECT COALESCE(MAX("order"), -1) as max_order FROM "PortfolioCategory"
+      await db.$executeRaw`
+        INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+        VALUES (${id}, ${cleanName}, ${slug}, ${normalizedType}, ${nextOrder}, NOW(), NOW())
       `;
-      nextOrder = Number(orderRows[0]?.max_order ?? -1) + 1;
-    } catch {
-      nextOrder = Date.now();
+    } catch (err: any) {
+      if (err?.code === 'P2002' || err?.message?.includes('unique') || err?.message?.includes('duplicate')) {
+        throw new Error(`Category "${cleanName}" already exists for ${normalizedType}.`);
+      }
+      throw err;
     }
 
-    await db.$executeRaw`
-      INSERT INTO "PortfolioCategory" ("id", "name", "slug", "order", "createdAt", "updatedAt")
-      VALUES (${id}, ${trimmedName}, ${slug}, ${nextOrder}, NOW(), NOW())
-    `;
-
-    // Clear caches
     categoryCache.clear();
     portfolioCache.clear();
 
     return {
       id,
-      name: trimmedName,
+      name: cleanName,
       slug,
+      type: normalizedType,
       order: nextOrder,
       projectCount: 0,
-      isDefault: trimmedName.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase(),
+      postCount: 0,
+      isDefault: cleanName.toLowerCase() === DEFAULT_CATEGORY.toLowerCase(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
   },
 
   /**
-   * Delete category by ID or name.
+   * Delete category by ID or name for a given type.
    * Protects the default category ('General') and automatically reassigns
-   * any orphaned projects to 'General'.
+   * any orphaned projects / posts to 'General'.
    */
-  async deleteCategory(idOrName: string): Promise<{ success: boolean; deletedName: string; reassignedCount: number }> {
+  async deleteCategory(idOrName: string, type: string = 'PORTFOLIO'): Promise<{ success: boolean; deletedName: string; reassignedCount: number }> {
     if (!idOrName || !idOrName.trim()) {
       throw new Error('Category identifier is required.');
     }
 
+    const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
     const trimmed = idOrName.trim();
-    if (trimmed.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase()) {
-      throw new Error(`The default "${DEFAULT_PORTFOLIO_CATEGORY}" category is protected and cannot be deleted.`);
+
+    if (trimmed.toLowerCase() === DEFAULT_CATEGORY.toLowerCase()) {
+      throw new Error(`The default "${DEFAULT_CATEGORY}" category is protected and cannot be deleted.`);
     }
 
-    await this.seedIfEmpty();
+    await this.seedIfEmpty(normalizedType);
 
-    // Query category by id, name, or slug
+    // Query category by id, name, or slug for this specific type
     const target = await db.$queryRaw<any[]>`
       SELECT * FROM "PortfolioCategory" 
-      WHERE "id" = ${trimmed} 
-         OR LOWER("name") = LOWER(${trimmed}) 
-         OR LOWER("slug") = LOWER(${trimmed})
+      WHERE ("id" = ${trimmed} OR LOWER("name") = LOWER(${trimmed}) OR LOWER("slug") = LOWER(${trimmed}))
+        AND "type" = ${normalizedType}
       LIMIT 1
     `;
 
     const categoryName = target && target.length > 0 ? target[0].name : trimmed;
     const categoryId = target && target.length > 0 ? target[0].id : null;
 
-    // Protection check: Cannot delete default category
-    if (categoryName.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase()) {
-      throw new Error(`The default "${DEFAULT_PORTFOLIO_CATEGORY}" category is protected and cannot be deleted.`);
+    if (categoryName.toLowerCase() === DEFAULT_CATEGORY.toLowerCase()) {
+      throw new Error(`The default "${DEFAULT_CATEGORY}" category is protected and cannot be deleted.`);
     }
 
-    // Automatically reassign any projects in this category to default 'General'
+    // Automatically reassign orphaned records to default 'General'
     let reassignedCount = 0;
     try {
-      const updateRes = await db.$executeRaw`
-        UPDATE "PortfolioProject"
-        SET "category" = ${DEFAULT_PORTFOLIO_CATEGORY},
-            "updatedAt" = NOW()
-        WHERE LOWER("category") = LOWER(${categoryName})
-      `;
-      reassignedCount = Number(updateRes || 0);
+      if (normalizedType === 'BLOG') {
+        const updatePosts = await db.$executeRaw`
+          UPDATE "BlogPost"
+          SET "category" = ${DEFAULT_CATEGORY},
+              "updatedAt" = NOW()
+          WHERE LOWER("category") = LOWER(${categoryName})
+        `;
+        reassignedCount = Number(updatePosts || 0);
+      } else {
+        const updateProjects = await db.$executeRaw`
+          UPDATE "PortfolioProject"
+          SET "category" = ${DEFAULT_CATEGORY},
+              "updatedAt" = NOW()
+          WHERE LOWER("category") = LOWER(${categoryName})
+        `;
+        reassignedCount = Number(updateProjects || 0);
+      }
     } catch (err) {
-      console.warn('[DB Category] project reassignment notice:', err);
+      console.warn('[DB Category] item reassignment notice:', err);
     }
 
-    // Delete category from DB table if it exists
+    // Delete category from DB table
     if (categoryId) {
       await db.$executeRaw`
         DELETE FROM "PortfolioCategory" WHERE "id" = ${categoryId}
       `;
     } else {
       await db.$executeRaw`
-        DELETE FROM "PortfolioCategory" WHERE LOWER("name") = LOWER(${categoryName})
+        DELETE FROM "PortfolioCategory" WHERE LOWER("name") = LOWER(${categoryName}) AND "type" = ${normalizedType}
       `;
     }
 

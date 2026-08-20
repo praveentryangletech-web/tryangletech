@@ -1,8 +1,8 @@
-
 import WebflowInit from "../common/WebflowInit";
 import BlogContent from './components/BlogContent';
 import BlogFAQ from './components/BlogFAQ';
 import { blogService, BlogPostItem } from '@/backend/services/blog';
+import { portfolioCategoryService } from '@/backend/services/portfolio/category.service';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -12,18 +12,24 @@ export default async function BlogPage() {
   let initialCategories: string[] = ['All'];
 
   try {
-    const result = await blogService.getPaginatedPosts({
-      limit: 100,
-      status: 'published',
-      sortBy: 'publishedAt',
-      sortOrder: 'desc',
-    });
+    const [postsResult, catsResult] = await Promise.allSettled([
+      blogService.getPaginatedPosts({
+        limit: 100,
+        status: 'published',
+        sortBy: 'publishedAt',
+        sortOrder: 'desc',
+      }),
+      portfolioCategoryService.getAllCategories('BLOG'),
+    ]);
 
-    if (result && Array.isArray(result.items) && result.items.length > 0) {
-      initialPosts = result.items;
-      initialCategories = Array.from(
-        new Set(['All', ...result.items.map((p: BlogPostItem) => p.category)])
-      );
+    if (postsResult.status === 'fulfilled' && postsResult.value && Array.isArray(postsResult.value.items)) {
+      initialPosts = postsResult.value.items;
+    }
+
+    if (catsResult.status === 'fulfilled' && catsResult.value && Array.isArray(catsResult.value) && catsResult.value.length > 0) {
+      initialCategories = ['All', ...catsResult.value.map((c) => c.name)];
+    } else if (initialPosts.length > 0) {
+      initialCategories = Array.from(new Set(['All', ...initialPosts.map((p) => p.category)]));
     }
   } catch (err) {
     console.warn('Failed to prefetch SSR blog posts, fallback will be used:', err);

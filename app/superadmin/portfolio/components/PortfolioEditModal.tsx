@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Project, PORTFOLIO_CATEGORIES, PortfolioCategory } from '../../../data/portfolioData';
+import { Project, PortfolioCategory } from '../../../data/portfolioData';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 interface PortfolioEditModalProps {
@@ -277,7 +277,7 @@ export default function PortfolioEditModal({
                     boxSizing: 'border-box',
                   }}
                 >
-                  {Array.from(new Set([...(dynamicCategories || []), ...PORTFOLIO_CATEGORIES, 'General', category])).filter(Boolean).map((cat) => (
+                  {Array.from(new Set([...(dynamicCategories || []), 'General', category])).filter(Boolean).map((cat) => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>

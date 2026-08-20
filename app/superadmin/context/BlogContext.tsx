@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode, useCa
 import apiClient, { PaginationMeta } from '../utils/apiClient';
 import { BlogPostItem } from '@/backend/services/blog';
 import { BLOG_POSTS as staticBlogPosts } from '@/app/blog/data';
+import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
 
 /**
  * Blog Context Interface defining the global state and API mutation functions
@@ -35,6 +36,16 @@ interface BlogContextType {
   savePost: (postData: Partial<BlogPostItem>) => Promise<void>;
   deletePost: (postIdOrSlug: string) => Promise<void>;
   togglePostStatus: (post: BlogPostItem) => Promise<void>;
+
+  // Dynamic Category Management (Synced across Portfolio and Blog)
+  categoriesData: PortfolioCategoryItem[];
+  categories: string[];
+  isLoadingCategories: boolean;
+  isCategoryModalOpen: boolean;
+  setIsCategoryModalOpen: (open: boolean) => void;
+  fetchCategories: () => Promise<void>;
+  addCategory: (name: string) => Promise<void>;
+  deleteCategory: (idOrName: string) => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -64,11 +75,30 @@ const initialStaticPosts: BlogPostItem[] = staticBlogPosts.map((p, idx) => {
  * BlogProvider Component
  * 
  * Manages server-side blog querying, pagination metadata, search debouncing,
- * category filtering, and CRUD operations (Create, Read, Update, Delete) against PostgreSQL.
+ * category filtering, dynamic category management, and CRUD operations against PostgreSQL.
  */
 export function BlogProvider({ children }: { children: ReactNode }) {
   const [postsList, setPostsList] = useState<BlogPostItem[]>(initialStaticPosts.slice(0, 8));
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // Dynamic Categories state initialized with protected 'General' default
+  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>([
+    {
+      id: 'cat_default_blog_general',
+      name: DEFAULT_PORTFOLIO_CATEGORY,
+      slug: 'general',
+      type: 'BLOG',
+      order: 0,
+      projectCount: 0,
+      postCount: 0,
+      isDefault: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  ]);
+  const [categories, setCategories] = useState<string[]>([DEFAULT_PORTFOLIO_CATEGORY]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState<boolean>(true);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState<boolean>(false);
 
   // Server-side Pagination & Filter states
   const [page, setPage] = useState<number>(1);
@@ -102,6 +132,68 @@ export function BlogProvider({ children }: { children: ReactNode }) {
     }, 300);
     return () => clearTimeout(timer);
   }, [searchQuery]);
+
+  /**
+   * Fetch live dynamic categories from /api/blog/categories (shared table with type='BLOG')
+   */
+  const fetchCategories = useCallback(async () => {
+    setIsLoadingCategories(true);
+    try {
+      const res = await apiClient.get<PortfolioCategoryItem[]>('/api/blog/categories', { useCache: false });
+      if (res.success && Array.isArray(res.data)) {
+        setCategoriesData(res.data);
+        setCategories(res.data.map((c) => c.name));
+      }
+    } catch (err) {
+      console.warn('Failed to load dynamic categories, using fallback:', err);
+    } finally {
+      setIsLoadingCategories(false);
+    }
+  }, []);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  /**
+   * Add a new category
+   */
+  const addCategory = async (name: string) => {
+    const res = await apiClient.post<PortfolioCategoryItem>('/api/blog/categories', { name });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to add category.');
+    }
+    await fetchCategories();
+  };
+
+  /**
+   * Delete a category (with immediate optimistic UI removal and rollback protection)
+   */
+  const deleteCategory = async (idOrName: string) => {
+    const prevCategories = [...categories];
+    const prevData = [...categoriesData];
+
+    // Optimistic UI update
+    setCategories((prev) => prev.filter((c) => c !== idOrName && c.toLowerCase() !== idOrName.toLowerCase()));
+    setCategoriesData((prev) => prev.filter((c) => c.id !== idOrName && c.name.toLowerCase() !== idOrName.toLowerCase()));
+
+    try {
+      const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
+        `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
+      );
+      if (!res.success) {
+        throw new Error(res.error || 'Failed to delete category.');
+      }
+      await fetchCategories();
+      await fetchBlog();
+    } catch (err) {
+      // Rollback on error
+      setCategories(prevCategories);
+      setCategoriesData(prevData);
+      throw err;
+    }
+  };
 
   /**
    * Category Filter Handler
@@ -304,6 +396,16 @@ export function BlogProvider({ children }: { children: ReactNode }) {
         savePost,
         deletePost,
         togglePostStatus,
+
+        // Dynamic categories
+        categoriesData,
+        categories,
+        isLoadingCategories,
+        isCategoryModalOpen,
+        setIsCategoryModalOpen,
+        fetchCategories,
+        addCategory,
+        deleteCategory,
       }}
     >
       {children}

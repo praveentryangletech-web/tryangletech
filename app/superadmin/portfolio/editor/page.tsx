@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Project, PORTFOLIO_CATEGORIES, PortfolioCategory } from '@/app/data/portfolioData';
+import { Project, PortfolioCategory } from '@/app/data/portfolioData';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
 
@@ -182,13 +182,29 @@ function PortfolioEditorInner() {
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
-  const [category, setCategory] = useState<string>('Business Website');
-  const [availableCategories, setAvailableCategories] = useState<string[]>([...PORTFOLIO_CATEGORIES]);
+  const [category, setCategory] = useState<string>('General');
+  const [availableCategories, setAvailableCategories] = useState<string[]>(['General']);
   const [client, setClient] = useState('');
   const [duration, setDuration] = useState('3 Weeks');
   const [role, setRole] = useState('Website Design & Development');
   const [liveUrl, setLiveUrl] = useState('');
   const [order, setOrder] = useState<number>(0);
+
+  // Load dynamic categories from database
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const res = await fetch('/api/portfolio/categories');
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          setAvailableCategories(json.data.map((c: any) => c.name));
+        }
+      } catch (err) {
+        console.warn('Failed to load portfolio categories:', err);
+      }
+    }
+    loadCategories();
+  }, []);
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');

@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SafeImage from '@/app/common/SafeImage';
-import { Project, PORTFOLIO_CATEGORIES } from '../../../data/portfolioData';
+import { Project } from '../../../data/portfolioData';
 import Tooltip from '../../components/Tooltip';
 import CustomDropdown from '../../components/CustomDropdown';
 import { usePortfolio } from '../../context/PortfolioContext';
@@ -47,6 +47,7 @@ export default function PortfolioTable({
     setSearchQuery,
     pagination,
     categories: dynamicCategories,
+    isLoadingCategories,
     setIsCategoryModalOpen,
   } = usePortfolio();
 
@@ -112,7 +113,7 @@ export default function PortfolioTable({
 
           {/* Action Buttons: Manage Categories & Add New Project */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Tooltip text="View, add, or delete dynamic portfolio categories" position="left">
+            <Tooltip text="View, add, or delete dynamic categories" position="left">
               <button
                 onClick={() => setIsCategoryModalOpen(true)}
                 style={{
@@ -168,33 +169,37 @@ export default function PortfolioTable({
           </div>
         </div>
 
-        {/* Category Filter Chips (Left - Scrollable with hidden scrollbar) & Quick Manage Pill (Right) */}
+        {/* Category Filter Chips (Scrollable with hidden scrollbar) */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
+            flexWrap: 'nowrap',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px',
+            gap: '8px',
             padding: '0 2rem 1rem 2rem',
+            overflowX: 'auto',
+            overflowY: 'hidden',
             minWidth: 0,
           }}
         >
-          {/* Left Side: Filter Chips Container - Smooth horizontal scroll with hidden scrollbar */}
-          <div
-            className="no-scrollbar"
-            style={{
-              display: 'flex',
-              flexWrap: 'nowrap',
-              alignItems: 'center',
-              gap: '8px',
-              overflowX: 'auto',
-              overflowY: 'hidden',
-              minWidth: 0,
-              flex: 1,
-              paddingBottom: '2px',
-            }}
-          >
-            {categories.map((cat) => (
+          {isLoadingCategories ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+              {[55, 120, 100, 130, 115, 95, 110, 80].map((width, idx) => (
+                <div
+                  key={idx}
+                  className="agy-skeleton"
+                  style={{
+                    width: `${width}px`,
+                    height: '29px',
+                    borderRadius: '8px',
+                    flexShrink: 0,
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            categories.map((cat) => (
               <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
                 <button
                   onClick={() => setCategoryFilter(cat)}
@@ -216,35 +221,8 @@ export default function PortfolioTable({
                   {cat}
                 </button>
               </Tooltip>
-            ))}
-          </div>
-
-          {/* Right Side: Quick Add/Manage Categories Pill (Pinned) */}
-          <div style={{ flexShrink: 0, marginLeft: '8px' }}>
-            <Tooltip text="Add new category or delete existing categories" position="top">
-              <button
-                onClick={() => setIsCategoryModalOpen(true)}
-                style={{
-                  padding: '5px 12px',
-                  borderRadius: '8px',
-                  border: '1.5px dashed #94A3B8',
-                  backgroundColor: '#F8FAFC',
-                  color: 'var(--brand-blue, #1833fe)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                }}
-              >
-                <span>+</span>
-                <span>Manage Categories</span>
-              </button>
-            </Tooltip>
-          </div>
+            ))
+          )}
         </div>
       </div>
 

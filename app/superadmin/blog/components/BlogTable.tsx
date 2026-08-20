@@ -2,10 +2,11 @@
 
 import React from 'react';
 import SafeImage from '@/app/common/SafeImage';
-import { BlogPostItem, BLOG_CATEGORIES } from '@/backend/services/blog';
+import { BlogPostItem } from '@/backend/services/blog';
 import Tooltip from '../../components/Tooltip';
 import CustomDropdown from '../../components/CustomDropdown';
 import { useBlog } from '../../context/BlogContext';
+import BlogCategoryManageModal from './BlogCategoryManageModal';
 
 /**
  * Props for BlogTable component defining modal trigger callbacks
@@ -43,9 +44,16 @@ export default function BlogTable({
     setSearchQuery,
     pagination,
     togglePostStatus,
+    categories: dynamicCategories,
+    categoriesData,
+    isLoadingCategories,
+    isCategoryModalOpen,
+    setIsCategoryModalOpen,
+    addCategory,
+    deleteCategory,
   } = useBlog();
 
-  const categories = ['ALL', ...BLOG_CATEGORIES];
+  const categories = ['ALL', ...(dynamicCategories || [])];
 
   // Derive pagination bounds from the API response
   const totalItems = pagination?.total ?? postsList.length;
@@ -60,7 +68,7 @@ export default function BlogTable({
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 75px)', minHeight: 0, backgroundColor: 'transparent' }}>
       {/* 1. FIXED TOP TOOLBAR & CATEGORY FILTER CHIPS */}
       <div style={{ flexShrink: 0 }}>
-        {/* Search Input on Left, "+ Add New Article" Action Button on Right */}
+        {/* Search Input on Left, Actions on Right */}
         <div
           style={{
             display: 'flex',
@@ -105,75 +113,158 @@ export default function BlogTable({
             />
           </div>
 
-          {/* "+ Add New Article" Primary Action Button with Tooltip */}
-          <Tooltip text="Create and publish a new blog article" position="left">
-            <button
-              onClick={onAddNewPost}
-              style={{
-                height: '42px',
-                padding: '0 20px',
-                borderRadius: '10px',
-                backgroundColor: '#1833FE',
-                color: '#FFFFFF',
-                border: 'none',
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
-                transition: 'all 0.2s ease',
-                whiteSpace: 'nowrap',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxSizing: 'border-box',
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-              <span>Add New Article</span>
-            </button>
-          </Tooltip>
+          {/* Action Buttons: Manage Categories & Add New Article */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Tooltip text="View, add, or delete dynamic categories" position="left">
+              <button
+                onClick={() => setIsCategoryModalOpen(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  backgroundColor: '#FFFFFF',
+                  color: '#334155',
+                  padding: '0.65rem 1.15rem',
+                  borderRadius: '8px',
+                  border: '1.5px solid #CBD5E1',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  transition: 'all 0.15s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                  <line x1="7" y1="7" x2="7.01" y2="7" />
+                </svg>
+                <span>Manage Categories</span>
+              </button>
+            </Tooltip>
+
+            {/* "+ Add New Article" Primary Action Button with Tooltip */}
+            <Tooltip text="Create and publish a new blog article" position="left">
+              <button
+                onClick={onAddNewPost}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: 'var(--brand-blue, #1833fe)',
+                  color: '#FFFFFF',
+                  padding: '0.65rem 1.35rem',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span style={{ fontSize: '1.15rem', lineHeight: 1 }}>+</span>
+                <span>Add New Article</span>
+              </button>
+            </Tooltip>
+          </div>
         </div>
 
-        {/* Category Filter Chips (Scrollable with hidden scrollbar) */}
+        {/* Category Filter Chips (Left - Scrollable with hidden scrollbar) & Quick Manage Pill (Right) */}
         <div
-          className="no-scrollbar"
           style={{
             display: 'flex',
-            flexWrap: 'nowrap',
             alignItems: 'center',
-            gap: '8px',
+            justifyContent: 'space-between',
+            gap: '12px',
             padding: '0 2rem 1rem 2rem',
-            overflowX: 'auto',
-            overflowY: 'hidden',
             minWidth: 0,
           }}
         >
-          {categories.map((cat) => (
-            <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
+          {/* Left Side: Filter Chips Container - Smooth horizontal scroll with hidden scrollbar */}
+          <div
+            className="no-scrollbar"
+            style={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              alignItems: 'center',
+              gap: '8px',
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              minWidth: 0,
+              flex: 1,
+              paddingBottom: '2px',
+            }}
+          >
+            {isLoadingCategories ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                {[55, 120, 100, 130, 115, 95, 110, 80].map((width, idx) => (
+                  <div
+                    key={idx}
+                    className="agy-skeleton"
+                    style={{
+                      width: `${width}px`,
+                      height: '29px',
+                      borderRadius: '8px',
+                      flexShrink: 0,
+                    }}
+                  />
+                ))}
+              </div>
+            ) : (
+              categories.map((cat) => (
+                <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
+                  <button
+                    onClick={() => setCategoryFilter(cat)}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid',
+                      borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
+                      backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
+                      color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
+                      fontSize: '0.775rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {cat}
+                  </button>
+                </Tooltip>
+              ))
+            )}
+          </div>
+
+          {/* Right Side: Quick Add/Manage Categories Pill (Pinned) */}
+          <div style={{ flexShrink: 0, marginLeft: '8px' }}>
+            <Tooltip text="Add new category or delete existing categories" position="top">
               <button
-                onClick={() => setCategoryFilter(cat)}
+                onClick={() => setIsCategoryModalOpen(true)}
                 style={{
-                  padding: '6px 14px',
+                  padding: '5px 12px',
                   borderRadius: '8px',
-                  border: '1px solid',
-                  borderColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#E2E8F0',
-                  backgroundColor: categoryFilter === cat ? 'var(--dark-indigo, #1a0b54)' : '#FFFFFF',
-                  color: categoryFilter === cat ? '#FFFFFF' : '#64748B',
-                  fontSize: '0.775rem',
+                  border: '1.5px dashed #94A3B8',
+                  backgroundColor: '#F8FAFC',
+                  color: 'var(--brand-blue, #1833fe)',
+                  fontSize: '0.75rem',
                   fontWeight: 700,
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                   whiteSpace: 'nowrap',
-                  flexShrink: 0,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
                 }}
               >
-                {cat}
+                <span>+</span>
+                <span>Manage Categories</span>
               </button>
             </Tooltip>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -606,6 +697,16 @@ export default function BlogTable({
           </Tooltip>
         </div>
       </div>
+
+      {/* Dynamic Category Management Modal */}
+      <BlogCategoryManageModal
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+        categories={categoriesData}
+        isLoading={isLoadingCategories}
+        onAddCategory={addCategory}
+        onDeleteCategory={deleteCategory}
+      />
     </div>
   );
 }

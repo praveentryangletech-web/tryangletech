@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Project, PortfolioCategory } from '@/app/data/portfolioData';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
+import { PortfolioProvider, usePortfolio } from '@/app/superadmin/context/PortfolioContext';
 
 /**
  * Clean SVG Tech Stack Definition with Brand Icons
@@ -178,33 +179,18 @@ function PortfolioEditorInner() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  const { categories: availableCategories, saveProject } = usePortfolio();
+
   // 1. General
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
   const [category, setCategory] = useState<string>('General');
-  const [availableCategories, setAvailableCategories] = useState<string[]>(['General']);
   const [client, setClient] = useState('');
   const [duration, setDuration] = useState('3 Weeks');
   const [role, setRole] = useState('Website Design & Development');
   const [liveUrl, setLiveUrl] = useState('');
   const [order, setOrder] = useState<number>(0);
-
-  // Load dynamic categories from database
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const res = await fetch('/api/portfolio/categories');
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          setAvailableCategories(json.data.map((c: any) => c.name));
-        }
-      } catch (err) {
-        console.warn('Failed to load portfolio categories:', err);
-      }
-    }
-    loadCategories();
-  }, []);
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');
@@ -270,22 +256,8 @@ function PortfolioEditorInner() {
     }
   };
 
-  const fetchAvailableCategories = async () => {
-    try {
-      const res = await fetch('/api/portfolio/categories');
-      const data = await res.json();
-      if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-        const names = data.data.map((c: any) => c.name);
-        setAvailableCategories(names);
-      }
-    } catch {
-      // Ignored, uses defaults
-    }
-  };
-
   useEffect(() => {
     fetchMediaList();
-    fetchAvailableCategories();
   }, []);
 
   useEffect(() => {
@@ -598,12 +570,10 @@ function PortfolioEditorInner() {
 
       if (isEditMode && projectId) {
         payload.id = projectId;
-        const res = await apiClient.patch('/api/portfolio', payload);
-        if (!res.success) throw new Error(res.error || 'Failed to update project.');
+        await saveProject(payload);
         setSuccessMessage('Case study updated successfully!');
       } else {
-        const res = await apiClient.post('/api/portfolio', payload);
-        if (!res.success) throw new Error(res.error || 'Failed to create project.');
+        await saveProject(payload);
         setSuccessMessage('Case study created and published successfully!');
       }
 
@@ -3033,14 +3003,16 @@ function PortfolioEditorInner() {
 
 export default function PortfolioEditorPage() {
   return (
-    <Suspense
-      fallback={
-        <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#64748B' }}>
-          <p style={{ fontSize: '1.05rem', fontWeight: 700 }}>Loading editor...</p>
-        </div>
-      }
-    >
-      <PortfolioEditorInner />
-    </Suspense>
+    <PortfolioProvider>
+      <Suspense
+        fallback={
+          <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#64748B' }}>
+            <p style={{ fontSize: '1.05rem', fontWeight: 700 }}>Loading editor...</p>
+          </div>
+        }
+      >
+        <PortfolioEditorInner />
+      </Suspense>
+    </PortfolioProvider>
   );
 }

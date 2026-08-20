@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { BlogPostItem, generateBlogSlug } from '@/backend/services/blog';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
+import { BlogProvider, useBlog } from '@/app/superadmin/context/BlogContext';
 
 interface MediaAssetItem {
   filename: string;
@@ -19,6 +20,8 @@ function BlogEditorInner() {
   const searchParams = useSearchParams();
   const postId = searchParams.get('id');
   const isEditMode = Boolean(postId);
+
+  const { categories: dynamicCategories, savePost } = useBlog();
 
   const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo'>('general');
   const [isLoading, setIsLoading] = useState(isEditMode);
@@ -43,7 +46,6 @@ function BlogEditorInner() {
   const [slug, setSlug] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
   const [category, setCategory] = useState<string>('General');
-  const [dynamicCategories, setDynamicCategories] = useState<string[]>(['General']);
   const [authorName, setAuthorName] = useState('TryangleTech Team');
   const [authorRole, setAuthorRole] = useState('Content Creators');
   const [authorImage, setAuthorImage] = useState('/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp');
@@ -52,22 +54,6 @@ function BlogEditorInner() {
   const [published, setPublished] = useState(true);
   const [publishedAt, setPublishedAt] = useState<string>(() => formatForDateTimeInput());
   const [order, setOrder] = useState<number>(0);
-
-  // Load dynamic categories from database
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const res = await fetch('/api/blog/categories');
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          setDynamicCategories(json.data.map((c: any) => c.name));
-        }
-      } catch (err) {
-        console.warn('Failed to load dynamic blog categories:', err);
-      }
-    }
-    loadCategories();
-  }, []);
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');
@@ -260,7 +246,7 @@ function BlogEditorInner() {
           setTitle(p.title || '');
           setSlug(p.slug || '');
           setIsSlugManual(true);
-          setCategory(p.category || 'Web Development');
+          setCategory(p.category || 'General');
           setAuthorName(p.authorName || 'TryangleTech Team');
           setAuthorRole(p.authorRole || 'Content Creators');
           setAuthorImage(p.authorImage || '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp');
@@ -416,18 +402,14 @@ function BlogEditorInner() {
         keywords,
       };
 
-      if (isEditMode) {
-        const res = await apiClient.patch('/api/blog', { id: postId, ...payload });
-        if (!res.success) throw new Error(res.error || 'Failed to update article.');
-        apiClient.clearCache();
+      if (isEditMode && postId) {
+        await savePost({ id: postId, ...payload });
         setSuccessMessage(finalPublished ? 'Article updated & published live!' : 'Article updated & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
         }, 1000);
       } else {
-        const res = await apiClient.post<BlogPostItem>('/api/blog', payload);
-        if (!res.success) throw new Error(res.error || 'Failed to create article.');
-        apiClient.clearCache();
+        await savePost(payload);
         setSuccessMessage(finalPublished ? 'Article published live on public website!' : 'Article created & saved as Draft!');
         setTimeout(() => {
           router.push('/superadmin/blog');
@@ -2351,8 +2333,10 @@ function BlogEditorInner() {
 
 export default function BlogEditorPage() {
   return (
-    <Suspense fallback={<div style={{ padding: '3rem', textAlign: 'center' }}>Loading Blog Editor...</div>}>
-      <BlogEditorInner />
-    </Suspense>
+    <BlogProvider>
+      <Suspense fallback={<div style={{ padding: '3rem', textAlign: 'center' }}>Loading Blog Editor...</div>}>
+        <BlogEditorInner />
+      </Suspense>
+    </BlogProvider>
   );
 }

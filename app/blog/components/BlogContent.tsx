@@ -69,11 +69,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
         const data = await res.json();
         if (isMounted && data.success && Array.isArray(data.data) && data.data.length > 0) {
           setPosts(data.data);
-
-          // Extract unique categories dynamically
-          const dynamicCats = Array.from(
-            new Set(['All', ...data.data.map((p: BlogPostItem) => p.category)])
-          );
+          const dynamicCats = Array.from(new Set(['All', ...data.data.map((p: BlogPostItem) => p.category)]));
           setCategories(dynamicCats);
         }
       } catch (err) {

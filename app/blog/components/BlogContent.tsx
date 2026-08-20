@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import SafeImage from "@/app/common/SafeImage";
 import { CATEGORIES as staticCategories, BLOG_POSTS as staticBlogPosts } from "../data";
@@ -181,22 +181,14 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
                 padding: 0 0 0.85rem 0 !important;
                 border-bottom: 1px solid var(--lavender-blue, #E2E8F0) !important;
                 -webkit-overflow-scrolling: touch !important;
-                scrollbar-width: thin !important;
-                scrollbar-color: #CBD5E1 transparent !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
                 scroll-behavior: smooth !important;
               }
               .custom-blog-tabs-bar::-webkit-scrollbar {
-                height: 4px !important;
-              }
-              .custom-blog-tabs-bar::-webkit-scrollbar-track {
-                background: transparent !important;
-              }
-              .custom-blog-tabs-bar::-webkit-scrollbar-thumb {
-                background: #CBD5E1 !important;
-                border-radius: 4px !important;
-              }
-              .custom-blog-tabs-bar::-webkit-scrollbar-thumb:hover {
-                background: #94A3B8 !important;
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
               }
               .custom-blog-tabs-inner {
                 display: flex !important;

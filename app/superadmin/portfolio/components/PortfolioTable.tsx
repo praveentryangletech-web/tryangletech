@@ -51,7 +51,7 @@ export default function PortfolioTable({
     setIsCategoryModalOpen,
   } = usePortfolio();
 
-  const categories = ['ALL', ...(dynamicCategories || [])];
+  const categories = React.useMemo(() => ['ALL', ...(dynamicCategories || [])], [dynamicCategories]);
 
   // Derive pagination bounds from the API response
   const totalItems = pagination?.total ?? projectsList.length;

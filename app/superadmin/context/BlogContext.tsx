@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
 import { BlogPostItem } from '@/backend/services/blog';
 import { BLOG_POSTS as staticBlogPosts } from '@/app/blog/data';
@@ -157,45 +157,6 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, [fetchCategories]);
 
   /**
-   * Add a new category
-   */
-  const addCategory = async (name: string) => {
-    const res = await apiClient.post<PortfolioCategoryItem>('/api/blog/categories', { name });
-    if (!res.success) {
-      throw new Error(res.error || 'Failed to add category.');
-    }
-    await fetchCategories();
-  };
-
-  /**
-   * Delete a category (with immediate optimistic UI removal and rollback protection)
-   */
-  const deleteCategory = async (idOrName: string) => {
-    const prevCategories = [...categories];
-    const prevData = [...categoriesData];
-
-    // Optimistic UI update
-    setCategories((prev) => prev.filter((c) => c !== idOrName && c.toLowerCase() !== idOrName.toLowerCase()));
-    setCategoriesData((prev) => prev.filter((c) => c.id !== idOrName && c.name.toLowerCase() !== idOrName.toLowerCase()));
-
-    try {
-      const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
-        `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
-      );
-      if (!res.success) {
-        throw new Error(res.error || 'Failed to delete category.');
-      }
-      await fetchCategories();
-      await fetchBlog();
-    } catch (err) {
-      // Rollback on error
-      setCategories(prevCategories);
-      setCategoriesData(prevData);
-      throw err;
-    }
-  };
-
-  /**
    * Category Filter Handler
    */
   const handleSetCategoryFilter = useCallback((cat: string) => {
@@ -283,9 +244,48 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, [fetchBlog]);
 
   /**
+   * Add a new category
+   */
+  const addCategory = useCallback(async (name: string) => {
+    const res = await apiClient.post<PortfolioCategoryItem>('/api/blog/categories', { name });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to add category.');
+    }
+    await fetchCategories();
+  }, [fetchCategories]);
+
+  /**
+   * Delete a category (with immediate optimistic UI removal and rollback protection)
+   */
+  const deleteCategory = useCallback(async (idOrName: string) => {
+    const prevCategories = [...categories];
+    const prevData = [...categoriesData];
+
+    // Optimistic UI update
+    setCategories((prev) => prev.filter((c) => c !== idOrName && c.toLowerCase() !== idOrName.toLowerCase()));
+    setCategoriesData((prev) => prev.filter((c) => c.id !== idOrName && c.name.toLowerCase() !== idOrName.toLowerCase()));
+
+    try {
+      const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
+        `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
+      );
+      if (!res.success) {
+        throw new Error(res.error || 'Failed to delete category.');
+      }
+      await fetchCategories();
+      await fetchBlog();
+    } catch (err) {
+      // Rollback on error
+      setCategories(prevCategories);
+      setCategoriesData(prevData);
+      throw err;
+    }
+  }, [categories, categoriesData, fetchCategories, fetchBlog]);
+
+  /**
    * Toggle Published Status Handler (with instant optimistic UI update)
    */
-  const togglePostStatus = async (post: BlogPostItem) => {
+  const togglePostStatus = useCallback(async (post: BlogPostItem) => {
     const newStatus = !post.published;
     
     // 1. Optimistic immediate UI reflection (0ms latency)
@@ -317,12 +317,12 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       console.error('Failed to toggle article status:', err);
       await fetchBlog();
     }
-  };
+  }, [fetchBlog]);
 
   /**
    * Save (Create or Update) Post Handler
    */
-  const savePost = async (postData: Partial<BlogPostItem>) => {
+  const savePost = useCallback(async (postData: Partial<BlogPostItem>) => {
     if (editingPost) {
       const postId = editingPost.id;
       if (!postId) {
@@ -350,12 +350,12 @@ export function BlogProvider({ children }: { children: ReactNode }) {
     await fetchBlog();
     setIsEditModalOpen(false);
     setEditingPost(null);
-  };
+  }, [editingPost, fetchBlog]);
 
   /**
    * Delete Post Handler
    */
-  const deletePost = async (postIdOrSlug: string) => {
+  const deletePost = useCallback(async (postIdOrSlug: string) => {
     // Optimistic removal
     setPostsList((prev) => prev.filter((item) => item.id !== postIdOrSlug && item.slug !== postIdOrSlug));
 
@@ -366,48 +366,79 @@ export function BlogProvider({ children }: { children: ReactNode }) {
 
     await fetchBlog();
     setDeletingPost(null);
-  };
+  }, [fetchBlog]);
+
+  const contextValue = useMemo(
+    () => ({
+      postsList,
+      isLoading,
+      page,
+      setPage,
+      limit,
+      setLimit: handleSetLimit,
+      categoryFilter,
+      setCategoryFilter: handleSetCategoryFilter,
+      statusFilter,
+      setStatusFilter: handleSetStatusFilter,
+      searchQuery,
+      setSearchQuery: handleSetSearchQuery,
+      pagination,
+      selectedPost,
+      setSelectedPost,
+      editingPost,
+      setEditingPost,
+      isEditModalOpen,
+      setIsEditModalOpen,
+      deletingPost,
+      setDeletingPost,
+      fetchBlog,
+      savePost,
+      deletePost,
+      togglePostStatus,
+
+      // Dynamic categories
+      categoriesData,
+      categories,
+      isLoadingCategories,
+      isCategoryModalOpen,
+      setIsCategoryModalOpen,
+      fetchCategories,
+      addCategory,
+      deleteCategory,
+    }),
+    [
+      postsList,
+      isLoading,
+      page,
+      limit,
+      handleSetLimit,
+      categoryFilter,
+      handleSetCategoryFilter,
+      statusFilter,
+      handleSetStatusFilter,
+      searchQuery,
+      handleSetSearchQuery,
+      pagination,
+      selectedPost,
+      editingPost,
+      isEditModalOpen,
+      deletingPost,
+      fetchBlog,
+      savePost,
+      deletePost,
+      togglePostStatus,
+      categoriesData,
+      categories,
+      isLoadingCategories,
+      isCategoryModalOpen,
+      fetchCategories,
+      addCategory,
+      deleteCategory,
+    ]
+  );
 
   return (
-    <BlogContext.Provider
-      value={{
-        postsList,
-        isLoading,
-        page,
-        setPage,
-        limit,
-        setLimit: handleSetLimit,
-        categoryFilter,
-        setCategoryFilter: handleSetCategoryFilter,
-        statusFilter,
-        setStatusFilter: handleSetStatusFilter,
-        searchQuery,
-        setSearchQuery: handleSetSearchQuery,
-        pagination,
-        selectedPost,
-        setSelectedPost,
-        editingPost,
-        setEditingPost,
-        isEditModalOpen,
-        setIsEditModalOpen,
-        deletingPost,
-        setDeletingPost,
-        fetchBlog,
-        savePost,
-        deletePost,
-        togglePostStatus,
-
-        // Dynamic categories
-        categoriesData,
-        categories,
-        isLoadingCategories,
-        isCategoryModalOpen,
-        setIsCategoryModalOpen,
-        fetchCategories,
-        addCategory,
-        deleteCategory,
-      }}
-    >
+    <BlogContext.Provider value={contextValue}>
       {children}
     </BlogContext.Provider>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
 import { Project, projects as staticProjects } from '../../data/portfolioData';
 import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
@@ -133,54 +133,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   }, [fetchCategories]);
 
   /**
-   * Add a new category
-   */
-  const addCategory = async (name: string) => {
-    const res = await apiClient.post<PortfolioCategoryItem>('/api/portfolio/categories', { name });
-    if (!res.success) {
-      throw new Error(res.error || 'Failed to add category.');
-    }
-    await fetchCategories();
-  };
-
-  /**
-   * Delete category by ID or Name
-   */
-  const deleteCategory = async (idOrName: string) => {
-    const prevCategories = [...categoriesData];
-    // Optimistic removal for instant UI response
-    setCategoriesData((prev) =>
-      prev.filter(
-        (c) =>
-          c.id !== idOrName &&
-          c.name.toLowerCase() !== idOrName.toLowerCase()
-      )
-    );
-    setCategories((prev) =>
-      prev.filter((c) => c.toLowerCase() !== idOrName.toLowerCase())
-    );
-
-    try {
-      const res = await apiClient.delete('/api/portfolio/categories', {
-        params: { id: idOrName, name: idOrName },
-      });
-      if (!res.success) {
-        throw new Error(res.error || 'Failed to delete category.');
-      }
-      // If the currently filtered category was deleted, reset filter to 'ALL'
-      if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
-        setCategoryFilter('ALL');
-      }
-      await fetchCategories();
-      await fetchPortfolio();
-    } catch (err) {
-      setCategoriesData(prevCategories);
-      setCategories(prevCategories.map((c) => c.name));
-      throw err;
-    }
-  };
-
-  /**
    * Category Filter Handler
    */
   const handleSetCategoryFilter = useCallback((cat: string) => {
@@ -254,9 +206,57 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   }, [fetchPortfolio]);
 
   /**
+   * Add a new category
+   */
+  const addCategory = useCallback(async (name: string) => {
+    const res = await apiClient.post<PortfolioCategoryItem>('/api/portfolio/categories', { name });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to add category.');
+    }
+    await fetchCategories();
+  }, [fetchCategories]);
+
+  /**
+   * Delete category by ID or Name
+   */
+  const deleteCategory = useCallback(async (idOrName: string) => {
+    const prevCategories = [...categoriesData];
+    // Optimistic removal for instant UI response
+    setCategoriesData((prev) =>
+      prev.filter(
+        (c) =>
+          c.id !== idOrName &&
+          c.name.toLowerCase() !== idOrName.toLowerCase()
+      )
+    );
+    setCategories((prev) =>
+      prev.filter((c) => c.toLowerCase() !== idOrName.toLowerCase())
+    );
+
+    try {
+      const res = await apiClient.delete('/api/portfolio/categories', {
+        params: { id: idOrName, name: idOrName },
+      });
+      if (!res.success) {
+        throw new Error(res.error || 'Failed to delete category.');
+      }
+      // If the currently filtered category was deleted, reset filter to 'ALL'
+      if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
+        setCategoryFilter('ALL');
+      }
+      await fetchCategories();
+      await fetchPortfolio();
+    } catch (err) {
+      setCategoriesData(prevCategories);
+      setCategories(prevCategories.map((c) => c.name));
+      throw err;
+    }
+  }, [categoriesData, categoryFilter, fetchCategories, fetchPortfolio]);
+
+  /**
    * Save (Create or Update) Project Handler
    */
-  const saveProject = async (projectData: Partial<Project>) => {
+  const saveProject = useCallback(async (projectData: Partial<Project>) => {
     if (editingProject) {
       const projectId = (editingProject as any).id;
       if (!projectId) {
@@ -277,12 +277,12 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     // Refresh current page, total count, and category counts
     await fetchPortfolio();
     await fetchCategories();
-  };
+  }, [editingProject, fetchPortfolio, fetchCategories]);
 
   /**
    * Delete Project Handler
    */
-  const deleteProject = async (projectId: string) => {
+  const deleteProject = useCallback(async (projectId: string) => {
     if (!projectId) {
       throw new Error('Project ID is required to delete this project.');
     }
@@ -303,43 +303,71 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     setDeletingProject(null);
     await fetchPortfolio();
     await fetchCategories();
-  };
+  }, [limit, fetchPortfolio, fetchCategories]);
+
+  const contextValue = useMemo(
+    () => ({
+      projectsList,
+      isLoading,
+      page,
+      setPage,
+      limit,
+      setLimit: handleSetLimit,
+      categoryFilter,
+      setCategoryFilter: handleSetCategoryFilter,
+      searchQuery,
+      setSearchQuery: handleSetSearchQuery,
+      pagination,
+      selectedProject,
+      setSelectedProject,
+      editingProject,
+      setEditingProject,
+      isEditModalOpen,
+      setIsEditModalOpen,
+      deletingProject,
+      setDeletingProject,
+      categories,
+      categoriesData,
+      isLoadingCategories,
+      isCategoryModalOpen,
+      setIsCategoryModalOpen,
+      fetchCategories,
+      addCategory,
+      deleteCategory,
+      fetchPortfolio,
+      saveProject,
+      deleteProject,
+    }),
+    [
+      projectsList,
+      isLoading,
+      page,
+      limit,
+      handleSetLimit,
+      categoryFilter,
+      handleSetCategoryFilter,
+      searchQuery,
+      handleSetSearchQuery,
+      pagination,
+      selectedProject,
+      editingProject,
+      isEditModalOpen,
+      deletingProject,
+      categories,
+      categoriesData,
+      isLoadingCategories,
+      isCategoryModalOpen,
+      fetchCategories,
+      addCategory,
+      deleteCategory,
+      fetchPortfolio,
+      saveProject,
+      deleteProject,
+    ]
+  );
 
   return (
-    <PortfolioContext.Provider
-      value={{
-        projectsList,
-        isLoading,
-        page,
-        setPage,
-        limit,
-        setLimit: handleSetLimit,
-        categoryFilter,
-        setCategoryFilter: handleSetCategoryFilter,
-        searchQuery,
-        setSearchQuery: handleSetSearchQuery,
-        pagination,
-        selectedProject,
-        setSelectedProject,
-        editingProject,
-        setEditingProject,
-        isEditModalOpen,
-        setIsEditModalOpen,
-        deletingProject,
-        setDeletingProject,
-        categories,
-        categoriesData,
-        isLoadingCategories,
-        isCategoryModalOpen,
-        setIsCategoryModalOpen,
-        fetchCategories,
-        addCategory,
-        deleteCategory,
-        fetchPortfolio,
-        saveProject,
-        deleteProject,
-      }}
-    >
+    <PortfolioContext.Provider value={contextValue}>
       {children}
     </PortfolioContext.Provider>
   );

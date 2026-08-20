@@ -85,27 +85,30 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
 
   const cleanActiveCat = activeCategory.toLowerCase().replace(/[-\s]/g, '');
 
-  const sortedPosts = [...posts].sort((a, b) => {
-    // 1. Primary sort: publishedAt date DESC
-    const timeA = new Date(a.publishedAt || a.createdAt || 0).getTime();
-    const timeB = new Date(b.publishedAt || b.createdAt || 0).getTime();
-    if (timeB !== timeA) return timeB - timeA;
+  const sortedPosts = React.useMemo(() => {
+    return [...posts].sort((a, b) => {
+      // 1. Primary sort: publishedAt date DESC
+      const timeA = new Date(a.publishedAt || a.createdAt || 0).getTime();
+      const timeB = new Date(b.publishedAt || b.createdAt || 0).getTime();
+      if (timeB !== timeA) return timeB - timeA;
 
-    // 2. Secondary sort: createdAt timestamp DESC
-    const createdA = new Date(a.createdAt || a.publishedAt || 0).getTime();
-    const createdB = new Date(b.createdAt || b.publishedAt || 0).getTime();
-    if (createdB !== createdA) return createdB - createdA;
+      // 2. Secondary sort: createdAt timestamp DESC
+      const createdA = new Date(a.createdAt || a.publishedAt || 0).getTime();
+      const createdB = new Date(b.createdAt || b.publishedAt || 0).getTime();
+      if (createdB !== createdA) return createdB - createdA;
 
-    // 3. Fallback tie-breaker: ID comparison
-    return String(b.id).localeCompare(String(a.id));
-  });
+      // 3. Fallback tie-breaker: ID comparison
+      return String(b.id).localeCompare(String(a.id));
+    });
+  }, [posts]);
 
-  const filteredPosts = activeCategory === "All"
-    ? sortedPosts
-    : sortedPosts.filter((post) => {
-        const postCat = (post.category || '').toLowerCase().replace(/[-\s]/g, '');
-        return postCat === cleanActiveCat;
-      });
+  const filteredPosts = React.useMemo(() => {
+    if (activeCategory === "All") return sortedPosts;
+    return sortedPosts.filter((post) => {
+      const postCat = (post.category || '').toLowerCase().replace(/[-\s]/g, '');
+      return postCat === cleanActiveCat;
+    });
+  }, [activeCategory, cleanActiveCat, sortedPosts]);
 
   return (
     <main>

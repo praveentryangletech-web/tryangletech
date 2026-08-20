@@ -59,8 +59,11 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     if (initialCategories && initialCategories.length > 0) return initialCategories;
     return staticCategories;
   });
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(() => {
+    return !initialPosts || initialPosts.length === 0;
+  });
 
-  // Fetch live articles and dynamic categories from API in background without blocking initial render
+  // Fetch live articles and dynamic categories from API in background
   useEffect(() => {
     let isMounted = true;
     const fetchLivePosts = async () => {
@@ -85,6 +88,10 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
         }
       } catch (err) {
         console.warn('Failed to fetch live blog posts in background:', err);
+      } finally {
+        if (isMounted) {
+          setIsInitialLoading(false);
+        }
       }
     };
 
@@ -116,7 +123,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
 
   const cleanActiveCat = activeCategory.toLowerCase().replace(/[-\s]/g, '');
 
-  const sortedPosts = React.useMemo(() => {
+  const sortedPosts = useMemo(() => {
     return [...posts].sort((a, b) => {
       // 1. Primary sort: publishedAt date DESC
       const timeA = new Date(a.publishedAt || a.createdAt || 0).getTime();
@@ -133,7 +140,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     });
   }, [posts]);
 
-  const filteredPosts = React.useMemo(() => {
+  const filteredPosts = useMemo(() => {
     if (activeCategory === "All") return sortedPosts;
     return sortedPosts.filter((post) => {
       const postCat = (post.category || '').toLowerCase().replace(/[-\s]/g, '');
@@ -215,6 +222,15 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
               .custom-blog-tab-btn:hover {
                 color: var(--dark-indigo, #1a0b54) !important;
               }
+              @keyframes blogShimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+              }
+              .blog-skeleton-box {
+                background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+                background-size: 200% 100%;
+                animation: blogShimmer 1.5s infinite;
+              }
             `}</style>
             <div
               ref={tabsBarRef}
@@ -247,8 +263,41 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
             <div className="rt-tads-content w-tab-content">
               <div className="w-tab-pane w--tab-active" role="tabpanel">
                 <div className="w-dyn-list">
-                  <div role="list" className="rt-blog-two-wrapper w-dyn-items">
-                    {filteredPosts.map((post, idx) => {
+                  {isInitialLoading ? (
+                    <div role="list" className="rt-blog-two-wrapper w-dyn-items">
+                      {[1, 2, 3, 4, 5, 6].map((sk) => (
+                        <div key={sk} role="listitem" className="w-dyn-item">
+                          <div className="rt-blog-v1-card-wrap" style={{ pointerEvents: 'none' }}>
+                            <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
+                              <div className="blog-skeleton-box" style={{ width: '100%', height: '240px', borderRadius: '16px' }} />
+                            </div>
+                            <div className="w-layout-vflex rt-blog-card-v1-top-part" style={{ marginTop: '1rem', gap: '0.75rem' }}>
+                              <div className="w-layout-hflex rt-blog-v1-text-wrap" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div className="blog-skeleton-box" style={{ width: '100px', height: '16px', borderRadius: '6px' }} />
+                                <div className="blog-skeleton-box" style={{ width: '80px', height: '14px', borderRadius: '6px' }} />
+                              </div>
+                              <div className="rt-blog-v1-line rt-v2">
+                                <div className="rt-blog-v3-line-overlay" style={{ opacity: 0.3 }} />
+                              </div>
+                              <div className="blog-skeleton-box" style={{ width: '92%', height: '22px', borderRadius: '6px' }} />
+                              <div className="blog-skeleton-box" style={{ width: '65%', height: '22px', borderRadius: '6px' }} />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : filteredPosts.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#64748B' }}>
+                      <div style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--dark-indigo, #1a0b54)', marginBottom: '0.5rem' }}>
+                        No articles found
+                      </div>
+                      <p style={{ fontSize: '0.9rem', color: '#94A3B8' }}>
+                        There are currently no articles in this category.
+                      </p>
+                    </div>
+                  ) : (
+                    <div role="list" className="rt-blog-two-wrapper w-dyn-items">
+                      {filteredPosts.map((post, idx) => {
                         const postFallback = getBlogFallbackImage(idx);
                         const resolvedCover = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
                           ? post.coverImage.trim()
@@ -308,7 +357,8 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
                           </div>
                         );
                       })}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

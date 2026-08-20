@@ -200,12 +200,19 @@ export default function InquiriesTable({ inquiries, isLoading, onSelectInquiry, 
                         style={{
                           backgroundColor: 'var(--vivid-blue, #4f46e5)',
                           color: '#FFFFFF',
-                          padding: '5px 12px',
-                          borderRadius: '6px',
+                          height: '30px',
+                          padding: '0 14px',
+                          borderRadius: '7px',
                           border: 'none',
                           fontSize: '0.8rem',
                           fontWeight: 700,
                           cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxSizing: 'border-box',
+                          transition: 'all 0.15s ease',
+                          whiteSpace: 'nowrap',
                         }}>
                         View Message
                       </button>

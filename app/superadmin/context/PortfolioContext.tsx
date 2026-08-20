@@ -113,8 +113,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const fetchCategories = useCallback(async () => {
     setIsLoadingCategories(true);
     try {
-      const res = await apiClient.get<PortfolioCategoryItem[]>('/api/portfolio/categories');
-      if (res.success && Array.isArray(res.data) && res.data.length > 0) {
+      const res = await apiClient.get<PortfolioCategoryItem[]>('/api/portfolio/categories', { useCache: false });
+      if (res.success && Array.isArray(res.data)) {
         setCategoriesData(res.data);
         setCategories(res.data.map((c) => c.name));
       }

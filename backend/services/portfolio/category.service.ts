@@ -92,28 +92,43 @@ export const portfolioCategoryService = {
   },
 
   /**
-   * Seed default 6 categories + 1 protected default category ("General") if missing.
+   * Seed default categories if table is completely empty, and ensure protected "General" fallback exists.
    */
   async seedIfEmpty(): Promise<void> {
-    if (isCategoriesSeeded) return;
-    isCategoriesSeeded = true;
-
     try {
       await this.ensureTableExists();
 
-      const seedList = [...PORTFOLIO_CATEGORIES];
-      if (!seedList.includes(DEFAULT_PORTFOLIO_CATEGORY as any)) {
-        seedList.push(DEFAULT_PORTFOLIO_CATEGORY as any);
-      }
+      // Check current row count in PortfolioCategory table
+      const countRows = await db.$queryRaw<Array<{ count: bigint | number }>>`
+        SELECT COUNT(*) as count FROM "PortfolioCategory"
+      `;
+      const currentCount = Number(countRows[0]?.count ?? 0);
 
-      for (let i = 0; i < seedList.length; i++) {
-        const name = seedList[i];
-        const slug = generateSlug(name);
-        const id = `cat_${i + 1}_${slug}`;
+      // Only seed initial 6 categories if the table is completely empty (first time run)
+      if (currentCount === 0) {
+        const seedList = [...PORTFOLIO_CATEGORIES];
+        if (!seedList.includes(DEFAULT_PORTFOLIO_CATEGORY as any)) {
+          seedList.push(DEFAULT_PORTFOLIO_CATEGORY as any);
+        }
 
+        for (let i = 0; i < seedList.length; i++) {
+          const name = seedList[i];
+          const slug = generateSlug(name);
+          const id = `cat_${i + 1}_${slug}`;
+
+          await db.$executeRaw`
+            INSERT INTO "PortfolioCategory" ("id", "name", "slug", "order", "createdAt", "updatedAt")
+            VALUES (${id}, ${name}, ${slug}, ${i}, NOW(), NOW())
+            ON CONFLICT ("name") DO NOTHING
+          `;
+        }
+      } else {
+        // Table already has categories. Only ensure protected 'General' fallback category exists.
+        const defaultSlug = generateSlug(DEFAULT_PORTFOLIO_CATEGORY);
+        const defaultId = `cat_default_${defaultSlug}`;
         await db.$executeRaw`
           INSERT INTO "PortfolioCategory" ("id", "name", "slug", "order", "createdAt", "updatedAt")
-          VALUES (${id}, ${name}, ${slug}, ${i}, NOW(), NOW())
+          VALUES (${defaultId}, ${DEFAULT_PORTFOLIO_CATEGORY}, ${defaultSlug}, 999, NOW(), NOW())
           ON CONFLICT ("name") DO NOTHING
         `;
       }

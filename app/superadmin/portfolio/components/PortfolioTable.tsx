@@ -50,7 +50,7 @@ export default function PortfolioTable({
     setIsCategoryModalOpen,
   } = usePortfolio();
 
-  const categories = ['ALL', ...(dynamicCategories && dynamicCategories.length > 0 ? dynamicCategories : PORTFOLIO_CATEGORIES)];
+  const categories = ['ALL', ...(dynamicCategories || [])];
 
   // Derive pagination bounds from the API response
   const totalItems = pagination?.total ?? projectsList.length;
@@ -266,19 +266,19 @@ export default function PortfolioTable({
               <th style={{ width: '25%', padding: '0.85rem 0.75rem 0.85rem 2rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 PROJECT
               </th>
-              <th style={{ width: '13%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '14%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 CATEGORY
               </th>
-              <th style={{ width: '15%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '17%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 CLIENT / ROLE
               </th>
-              <th style={{ width: '14%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '16%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 TECH STACK
               </th>
-              <th style={{ width: '10%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '11%', padding: '0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 LIVE DEMO
               </th>
-              <th style={{ width: '23%', padding: '0.85rem 2rem 0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'right' }}>
+              <th style={{ width: '17%', padding: '0.85rem 2rem 0.85rem 0.5rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'right' }}>
                 ACTIONS
               </th>
             </tr>

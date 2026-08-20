@@ -27,10 +27,7 @@ export default async function BlogPage() {
     }
 
     if (catsResult.status === 'fulfilled' && catsResult.value && Array.isArray(catsResult.value) && catsResult.value.length > 0) {
-      const activeCats = catsResult.value
-        .filter((c) => (c.postCount ?? 0) > 0)
-        .map((c) => c.name);
-      initialCategories = ['All', ...activeCats];
+      initialCategories = ['All', ...catsResult.value.map((c) => c.name)];
     } else if (initialPosts.length > 0) {
       initialCategories = Array.from(new Set(['All', ...initialPosts.map((p) => p.category)]));
     }

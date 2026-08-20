@@ -206,15 +206,23 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   }, [fetchPortfolio]);
 
   /**
-   * Add a new category
+   * Add a new category (direct in-memory update with zero redundant GET fetches)
    */
   const addCategory = useCallback(async (name: string) => {
     const res = await apiClient.post<PortfolioCategoryItem>('/api/portfolio/categories', { name });
-    if (!res.success) {
+    if (!res.success || !res.data) {
       throw new Error(res.error || 'Failed to add category.');
     }
-    await fetchCategories();
-  }, [fetchCategories]);
+    const newCat = res.data;
+    setCategoriesData((prev) => {
+      if (prev.some((c) => c.name.toLowerCase() === newCat.name.toLowerCase())) return prev;
+      return [...prev, newCat];
+    });
+    setCategories((prev) => {
+      if (prev.some((c) => c.toLowerCase() === newCat.name.toLowerCase())) return prev;
+      return [...prev, newCat.name];
+    });
+  }, []);
 
   /**
    * Delete category by ID or Name
@@ -244,14 +252,13 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
         setCategoryFilter('ALL');
       }
-      await fetchCategories();
       await fetchPortfolio();
     } catch (err) {
       setCategoriesData(prevCategories);
       setCategories(prevCategories.map((c) => c.name));
       throw err;
     }
-  }, [categoriesData, categoryFilter, fetchCategories, fetchPortfolio]);
+  }, [categoryFilter, fetchPortfolio]);
 
   /**
    * Save (Create or Update) Project Handler

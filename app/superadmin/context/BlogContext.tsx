@@ -244,15 +244,23 @@ export function BlogProvider({ children }: { children: ReactNode }) {
   }, [fetchBlog]);
 
   /**
-   * Add a new category
+   * Add a new category (direct in-memory update with zero redundant GET fetches)
    */
   const addCategory = useCallback(async (name: string) => {
     const res = await apiClient.post<PortfolioCategoryItem>('/api/blog/categories', { name });
-    if (!res.success) {
+    if (!res.success || !res.data) {
       throw new Error(res.error || 'Failed to add category.');
     }
-    await fetchCategories();
-  }, [fetchCategories]);
+    const newCat = res.data;
+    setCategoriesData((prev) => {
+      if (prev.some((c) => c.name.toLowerCase() === newCat.name.toLowerCase())) return prev;
+      return [...prev, newCat];
+    });
+    setCategories((prev) => {
+      if (prev.some((c) => c.toLowerCase() === newCat.name.toLowerCase())) return prev;
+      return [...prev, newCat.name];
+    });
+  }, []);
 
   /**
    * Delete a category (with immediate optimistic UI removal and rollback protection)
@@ -272,7 +280,6 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       if (!res.success) {
         throw new Error(res.error || 'Failed to delete category.');
       }
-      await fetchCategories();
       await fetchBlog();
     } catch (err) {
       // Rollback on error
@@ -280,7 +287,7 @@ export function BlogProvider({ children }: { children: ReactNode }) {
       setCategoriesData(prevData);
       throw err;
     }
-  }, [categories, categoriesData, fetchCategories, fetchBlog]);
+  }, [categories, categoriesData, fetchBlog]);
 
   /**
    * Toggle Published Status Handler (with instant optimistic UI update)

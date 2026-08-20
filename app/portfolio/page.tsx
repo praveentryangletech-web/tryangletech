@@ -30,10 +30,7 @@ export default async function PortfolioPage() {
     }
 
     if (catsResult.status === 'fulfilled' && catsResult.value && Array.isArray(catsResult.value) && catsResult.value.length > 0) {
-      const activeCats = catsResult.value
-        .filter((c) => (c.projectCount ?? 0) > 0)
-        .map((c) => c.name);
-      initialCategories = ['All', ...activeCats];
+      initialCategories = ['All', ...catsResult.value.map((c) => c.name)];
     }
   } catch (err) {
     console.warn('Failed to prefetch SSR portfolio:', err);

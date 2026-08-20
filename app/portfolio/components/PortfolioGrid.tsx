@@ -56,10 +56,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
         const res = await fetch('/api/portfolio/categories');
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          const dynamicCats = [
-            'All',
-            ...json.data.filter((c: any) => (c.projectCount ?? 0) > 0).map((c: any) => c.name),
-          ];
+          const dynamicCats = ['All', ...json.data.map((c: any) => c.name)];
           setCategoriesList(dynamicCats);
         }
       } catch {
@@ -213,12 +210,23 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
         /* ── Filter Buttons ── */
         .pf-filter-wrap {
           display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
           gap: 10px;
-          padding-bottom: 3rem;
+          padding-bottom: 2.5rem;
+          max-width: 100%;
+          scrollbar-width: none;
+        }
+        .pf-filter-wrap::-webkit-scrollbar {
+          display: none;
         }
         .pf-filter-btn {
+          flex-shrink: 0;
+          white-space: nowrap;
           padding: 9px 22px;
           border-radius: 100px;
           font-size: 14px;

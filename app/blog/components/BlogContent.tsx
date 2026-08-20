@@ -80,10 +80,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
         if (catsRes.status === 'fulfilled') {
           const catsData = await catsRes.value.json();
           if (isMounted && catsData.success && Array.isArray(catsData.data) && catsData.data.length > 0) {
-            const activeCats = catsData.data
-              .filter((c: any) => (c.postCount ?? 0) > 0)
-              .map((c: any) => c.name);
-            setCategories(['All', ...activeCats]);
+            setCategories(['All', ...catsData.data.map((c: any) => c.name)]);
           }
         }
       } catch (err) {
@@ -152,22 +149,75 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
               </div>
             </div>
           </div>
-          <div className="tabs w-tabs">
-            <div className="tabs-menu w-tab-menu" role="tablist">
-              {categories.map((category, index) => (
-                <div
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`rt-tab-link w-inline-block w-tab-link ${activeCategory === category ? 'w--current' : ''}`}
-                  style={{ cursor: 'pointer' }}
-                  role="tab"
-                >
-                  <div>{category}</div>
-                  <div className="rt-tab-main-border-line">
-                    <div className={`rt-tab-inner-booder-line rt-${(index % 4) + 1}${index === 1 ? '-bg' : ''}`}></div>
-                  </div>
-                </div>
-              ))}
+          <div className="tabs" style={{ width: '100%', maxWidth: '100%' }}>
+            <style>{`
+              .custom-blog-tabs-bar {
+                display: flex !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 0 0.85rem 0 !important;
+                border-bottom: 1px solid var(--lavender-blue, #E2E8F0) !important;
+                -webkit-overflow-scrolling: touch !important;
+                scrollbar-width: none !important;
+                -ms-overflow-style: none !important;
+              }
+              .custom-blog-tabs-bar::-webkit-scrollbar {
+                display: none !important;
+              }
+              .custom-blog-tabs-inner {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                min-width: 100% !important;
+                width: max-content !important;
+                gap: 2rem !important;
+                padding: 0 0.5rem !important;
+              }
+              .custom-blog-tab-btn {
+                cursor: pointer !important;
+                flex-shrink: 0 !important;
+                white-space: nowrap !important;
+                padding: 0.25rem 0 !important;
+                margin: 0 !important;
+                border: none !important;
+                background: transparent !important;
+                font-size: 1rem !important;
+                line-height: 1.5 !important;
+                transition: color 0.2s ease, font-weight 0.2s ease !important;
+                user-select: none !important;
+              }
+              .custom-blog-tab-btn:hover {
+                color: var(--dark-indigo, #1a0b54) !important;
+              }
+            `}</style>
+            <div
+              className="custom-blog-tabs-bar"
+              role="tablist"
+            >
+              <div className="custom-blog-tabs-inner">
+                {categories.map((category) => {
+                  const isActive = activeCategory === category;
+                  return (
+                    <button
+                      type="button"
+                      key={category}
+                      onClick={() => setActiveCategory(category)}
+                      className="custom-blog-tab-btn"
+                      style={{
+                        color: isActive ? 'var(--dark-indigo, #1a0b54)' : 'var(--blue-yonder, #64748B)',
+                        fontWeight: isActive ? 700 : 500,
+                      }}
+                      role="tab"
+                      aria-selected={isActive}
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="rt-tads-content w-tab-content">

@@ -137,13 +137,18 @@ export default function BlogTable({
           </Tooltip>
         </div>
 
-        {/* Category Filter Chips */}
+        {/* Category Filter Chips (Scrollable with hidden scrollbar) */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
             gap: '8px',
             padding: '0 2rem 1rem 2rem',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            minWidth: 0,
           }}
         >
           {categories.map((cat) => (
@@ -162,6 +167,7 @@ export default function BlogTable({
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                   whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
                 {cat}

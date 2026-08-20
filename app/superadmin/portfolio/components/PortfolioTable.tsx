@@ -168,7 +168,7 @@ export default function PortfolioTable({
           </div>
         </div>
 
-        {/* Category Filter Chips (Left) & Quick Manage Pill (Right) */}
+        {/* Category Filter Chips (Left - Scrollable with hidden scrollbar) & Quick Manage Pill (Right) */}
         <div
           style={{
             display: 'flex',
@@ -176,16 +176,22 @@ export default function PortfolioTable({
             justifyContent: 'space-between',
             gap: '12px',
             padding: '0 2rem 1rem 2rem',
-            flexWrap: 'wrap',
+            minWidth: 0,
           }}
         >
-          {/* Left Side: Filter Chips */}
+          {/* Left Side: Filter Chips Container - Smooth horizontal scroll with hidden scrollbar */}
           <div
+            className="no-scrollbar"
             style={{
               display: 'flex',
-              flexWrap: 'wrap',
+              flexWrap: 'nowrap',
               alignItems: 'center',
               gap: '8px',
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              minWidth: 0,
+              flex: 1,
+              paddingBottom: '2px',
             }}
           >
             {categories.map((cat) => (
@@ -204,6 +210,7 @@ export default function PortfolioTable({
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
                     whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                 >
                   {cat}
@@ -212,8 +219,8 @@ export default function PortfolioTable({
             ))}
           </div>
 
-          {/* Right Side: Quick Add/Manage Categories Pill */}
-          <div style={{ marginLeft: 'auto' }}>
+          {/* Right Side: Quick Add/Manage Categories Pill (Pinned) */}
+          <div style={{ flexShrink: 0, marginLeft: '8px' }}>
             <Tooltip text="Add new category or delete existing categories" position="top">
               <button
                 onClick={() => setIsCategoryModalOpen(true)}

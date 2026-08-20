@@ -94,6 +94,26 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     };
   }, []);
 
+  const tabsBarRef = useRef<HTMLDivElement>(null);
+
+  // Enable mouse wheel horizontal scrolling on categories
+  useEffect(() => {
+    const el = tabsBarRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0 && el.scrollWidth > el.clientWidth) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   const cleanActiveCat = activeCategory.toLowerCase().replace(/[-\s]/g, '');
 
   const sortedPosts = React.useMemo(() => {
@@ -161,11 +181,22 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
                 padding: 0 0 0.85rem 0 !important;
                 border-bottom: 1px solid var(--lavender-blue, #E2E8F0) !important;
                 -webkit-overflow-scrolling: touch !important;
-                scrollbar-width: none !important;
-                -ms-overflow-style: none !important;
+                scrollbar-width: thin !important;
+                scrollbar-color: #CBD5E1 transparent !important;
+                scroll-behavior: smooth !important;
               }
               .custom-blog-tabs-bar::-webkit-scrollbar {
-                display: none !important;
+                height: 4px !important;
+              }
+              .custom-blog-tabs-bar::-webkit-scrollbar-track {
+                background: transparent !important;
+              }
+              .custom-blog-tabs-bar::-webkit-scrollbar-thumb {
+                background: #CBD5E1 !important;
+                border-radius: 4px !important;
+              }
+              .custom-blog-tabs-bar::-webkit-scrollbar-thumb:hover {
+                background: #94A3B8 !important;
               }
               .custom-blog-tabs-inner {
                 display: flex !important;
@@ -194,6 +225,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
               }
             `}</style>
             <div
+              ref={tabsBarRef}
               className="custom-blog-tabs-bar"
               role="tablist"
             >

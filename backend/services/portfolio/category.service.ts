@@ -219,6 +219,23 @@ export const portfolioCategoryService = {
     }
 
     const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
+
+    // 1. Pre-check if category already exists for this type (case-insensitive)
+    try {
+      const existing = await db.$queryRaw<any[]>`
+        SELECT * FROM "PortfolioCategory" 
+        WHERE LOWER("name") = ${cleanName.toLowerCase()} AND "type" = ${normalizedType}
+        LIMIT 1
+      `;
+      if (existing && Array.isArray(existing) && existing.length > 0) {
+        throw new Error(`Category "${cleanName}" already exists.`);
+      }
+    } catch (err: any) {
+      if (err.message && err.message.includes('already exists')) {
+        throw err;
+      }
+    }
+
     const slug = generateSlug(cleanName);
     const id = `cat_${normalizedType.toLowerCase()}_${Date.now()}_${slug}`;
 
@@ -234,10 +251,18 @@ export const portfolioCategoryService = {
         VALUES (${id}, ${cleanName}, ${slug}, ${normalizedType}, ${nextOrder}, NOW(), NOW())
       `;
     } catch (err: any) {
-      if (err?.code === 'P2002' || err?.message?.includes('unique') || err?.message?.includes('duplicate')) {
-        throw new Error(`Category "${cleanName}" already exists for ${normalizedType}.`);
+      const errMsg = String(err?.message || '');
+      if (
+        err?.code === 'P2002' ||
+        err?.code === '23505' ||
+        errMsg.includes('23505') ||
+        errMsg.includes('already exists') ||
+        errMsg.includes('unique') ||
+        errMsg.includes('duplicate')
+      ) {
+        throw new Error(`Category "${cleanName}" already exists.`);
       }
-      throw err;
+      throw new Error(`Failed to create category "${cleanName}".`);
     }
 
     categoryCache.clear();

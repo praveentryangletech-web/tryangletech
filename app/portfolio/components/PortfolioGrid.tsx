@@ -29,6 +29,7 @@ const clientMemoryCache = new Map<string, { items: Project[]; total: number; has
 export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initialProjects, initialCategories }: PortfolioGridProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const filterWrapRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
   const [categoriesList, setCategoriesList] = useState<string[]>(() => {
     if (initialCategories && initialCategories.length > 0) return initialCategories;
@@ -204,6 +205,24 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
     };
   }, [isLoadingMore, isInitialLoading, hasNextPage, page, activeFilter, fetchProjects, limit]);
 
+  // Enable mouse wheel horizontal scrolling on categories
+  useEffect(() => {
+    const el = filterWrapRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0 && el.scrollWidth > el.clientWidth) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   return (
     <div ref={sectionRef}>
       <style>{`
@@ -217,12 +236,24 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
           overflow-y: hidden;
           -webkit-overflow-scrolling: touch;
           gap: 10px;
-          padding-bottom: 2.5rem;
+          padding-bottom: 2rem;
           max-width: 100%;
-          scrollbar-width: none;
+          scrollbar-width: thin;
+          scrollbar-color: #CBD5E1 transparent;
+          scroll-behavior: smooth;
         }
         .pf-filter-wrap::-webkit-scrollbar {
-          display: none;
+          height: 4px;
+        }
+        .pf-filter-wrap::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .pf-filter-wrap::-webkit-scrollbar-thumb {
+          background: #CBD5E1;
+          border-radius: 4px;
+        }
+        .pf-filter-wrap::-webkit-scrollbar-thumb:hover {
+          background: #94A3B8;
         }
         .pf-filter-btn {
           flex-shrink: 0;
@@ -331,7 +362,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
 
         {/* Category Filter Chips */}
         {!hideFilter && (
-          <div className="pf-filter-wrap">
+          <div ref={filterWrapRef} className="pf-filter-wrap">
             {categoriesList.map((cat, idx) => (
               <button
                 key={`${cat}-${idx}`}

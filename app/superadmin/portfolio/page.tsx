@@ -4,12 +4,13 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import PortfolioTable from './components/PortfolioTable';
 import PortfolioDeleteModal from './components/PortfolioDeleteModal';
+import CategoryManageModal from './components/CategoryManageModal';
 import { PortfolioProvider, usePortfolio } from '../context/PortfolioContext';
 
 /**
  * PortfolioContentView Component
  * 
- * Houses the portfolio data table, preview modals, full-page edit/create navigation,
+ * Houses the portfolio data table, preview modals, category management, full-page edit/create navigation,
  * and delete confirmation dialogs connected to PortfolioContext.
  */
 function PortfolioContentView() {
@@ -18,6 +19,12 @@ function PortfolioContentView() {
     deletingProject,
     setDeletingProject,
     deleteProject,
+    categoriesData,
+    isLoadingCategories,
+    isCategoryModalOpen,
+    setIsCategoryModalOpen,
+    addCategory,
+    deleteCategory,
   } = usePortfolio();
 
   /**
@@ -61,6 +68,16 @@ function PortfolioContentView() {
         project={deletingProject}
         onClose={() => setDeletingProject(null)}
         onConfirm={deleteProject}
+      />
+
+      {/* 3. Category Management Modal */}
+      <CategoryManageModal
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+        categories={categoriesData}
+        isLoading={isLoadingCategories}
+        onAddCategory={addCategory}
+        onDeleteCategory={deleteCategory}
       />
     </>
   );

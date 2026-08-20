@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
-import { Project, projects as staticProjects } from '../../data/portfolioData';
+import { Project, projects as staticProjects, PORTFOLIO_CATEGORIES } from '../../data/portfolioData';
+import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
 
 /**
  * Portfolio Context Interface defining the global state and API mutation functions
@@ -28,6 +29,15 @@ interface PortfolioContextType {
   setIsEditModalOpen: (open: boolean) => void;
   deletingProject: Project | null;
   setDeletingProject: (project: Project | null) => void;
+  // Dynamic categories
+  categories: string[];
+  categoriesData: PortfolioCategoryItem[];
+  isLoadingCategories: boolean;
+  isCategoryModalOpen: boolean;
+  setIsCategoryModalOpen: (open: boolean) => void;
+  fetchCategories: () => Promise<void>;
+  addCategory: (name: string) => Promise<void>;
+  deleteCategory: (idOrName: string) => Promise<void>;
   fetchPortfolio: () => Promise<void>;
   saveProject: (projectData: Partial<Project>) => Promise<void>;
   deleteProject: (projectIdOrSlug: string) => Promise<void>;
@@ -39,13 +49,31 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(undefin
  * PortfolioProvider Component
  * 
  * Manages server-side portfolio querying, pagination metadata, search debouncing,
- * category filtering, and CRUD operations (Create, Read, Update, Delete) against PostgreSQL.
+ * category filtering, dynamic category management, and CRUD operations against PostgreSQL.
  * 
  * @param {ReactNode} children - Child components wrapped within this provider context
  */
 export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [projectsList, setProjectsList] = useState<Project[]>(staticProjects.slice(0, 8));
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // Dynamic Categories state
+  const defaultList = [...PORTFOLIO_CATEGORIES, DEFAULT_PORTFOLIO_CATEGORY];
+  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>(
+    defaultList.map((c, i) => ({
+      id: `cat_${i + 1}`,
+      name: c,
+      slug: c.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      order: i,
+      projectCount: 0,
+      isDefault: c.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }))
+  );
+  const [categories, setCategories] = useState<string[]>(defaultList);
+  const [isLoadingCategories, setIsLoadingCategories] = useState<boolean>(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState<boolean>(false);
 
   // Server-side Pagination & Filter states
   const [page, setPage] = useState<number>(1);
@@ -71,9 +99,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Search Query Debounce Effect
-   * 
-   * Delays executing the backend search query by 300ms to prevent spamming
-   * the database API on every single keystroke.
    */
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -83,11 +108,57 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   }, [searchQuery]);
 
   /**
+   * Fetch live dynamic categories from /api/portfolio/categories
+   */
+  const fetchCategories = useCallback(async () => {
+    setIsLoadingCategories(true);
+    try {
+      const res = await apiClient.get<PortfolioCategoryItem[]>('/api/portfolio/categories');
+      if (res.success && Array.isArray(res.data) && res.data.length > 0) {
+        setCategoriesData(res.data);
+        setCategories(res.data.map((c) => c.name));
+      }
+    } catch (err) {
+      console.warn('Failed to load dynamic categories, using default fallback:', err);
+    } finally {
+      setIsLoadingCategories(false);
+    }
+  }, []);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  /**
+   * Add a new category
+   */
+  const addCategory = async (name: string) => {
+    const res = await apiClient.post<PortfolioCategoryItem>('/api/portfolio/categories', { name });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to add category.');
+    }
+    await fetchCategories();
+  };
+
+  /**
+   * Delete category by ID or Name
+   */
+  const deleteCategory = async (idOrName: string) => {
+    const res = await apiClient.delete('/api/portfolio/categories', { params: { id: idOrName } });
+    if (!res.success) {
+      throw new Error(res.error || 'Failed to delete category.');
+    }
+    // If the currently filtered category was deleted, reset filter to 'ALL'
+    if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
+      setCategoryFilter('ALL');
+    }
+    await fetchCategories();
+    await fetchPortfolio();
+  };
+
+  /**
    * Category Filter Handler
-   * 
-   * Updates the selected category filter and automatically resets pagination to page 1.
-   * 
-   * @param {string} cat - The category name (e.g. 'Business Website', 'E-Commerce', or 'ALL')
    */
   const handleSetCategoryFilter = useCallback((cat: string) => {
     setCategoryFilter(cat);
@@ -96,10 +167,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Search Query Handler
-   * 
-   * Updates the current search term and automatically resets pagination to page 1.
-   * 
-   * @param {string} q - The search query string
    */
   const handleSetSearchQuery = useCallback((q: string) => {
     setSearchQuery(q);
@@ -108,10 +175,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Page Size / Rows-per-Page Handler
-   * 
-   * Sets how many items to return per page (e.g. 5, 8, 10, 20) and resets to page 1.
-   * 
-   * @param {number} l - Limit number of items per page
    */
   const handleSetLimit = useCallback((l: number) => {
     setLimit(l);
@@ -120,9 +183,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Fetch Live Paginated Portfolio API
-   * 
-   * Sends a GET request to `/api/portfolio?page=...&limit=...&category=...&search=...`
-   * with current filter parameters and updates the project list & pagination state.
    */
   const fetchPortfolio = useCallback(async () => {
     setIsLoading(true);
@@ -165,8 +225,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Auto-Fetch Effect
-   * 
-   * Automatically executes `fetchPortfolio` whenever page, limit, category, or search changes.
    */
   useEffect(() => {
     fetchPortfolio();
@@ -174,11 +232,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   /**
    * Save (Create or Update) Project Handler
-   * 
-   * Submits a POST request (for new projects) or PATCH request with ID (for existing projects)
-   * to `/api/portfolio` and refreshes the live data table.
-   * 
-   * @param {Partial<Project>} projectData - The form fields and media URLs to persist
    */
   const saveProject = async (projectData: Partial<Project>) => {
     if (editingProject) {
@@ -198,17 +251,13 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    // Refresh current page & total count from database
+    // Refresh current page, total count, and category counts
     await fetchPortfolio();
+    await fetchCategories();
   };
 
   /**
    * Delete Project Handler
-   * 
-   * Submits a DELETE request to `/api/portfolio?id=...` by project ID
-   * to remove the record permanently from PostgreSQL.
-   * 
-   * @param {string} projectId - Primary Key ID of the project to remove
    */
   const deleteProject = async (projectId: string) => {
     if (!projectId) {
@@ -230,6 +279,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
     setDeletingProject(null);
     await fetchPortfolio();
+    await fetchCategories();
   };
 
   return (
@@ -254,6 +304,14 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         setIsEditModalOpen,
         deletingProject,
         setDeletingProject,
+        categories,
+        categoriesData,
+        isLoadingCategories,
+        isCategoryModalOpen,
+        setIsCategoryModalOpen,
+        fetchCategories,
+        addCategory,
+        deleteCategory,
         fetchPortfolio,
         saveProject,
         deleteProject,
@@ -266,10 +324,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
 /**
  * usePortfolio Custom Hook
- * 
- * Access the Portfolio Context state and action handlers from any child component.
- * 
- * @returns {PortfolioContextType} The portfolio state, active query filters, and mutation handlers
  */
 export function usePortfolio() {
   const context = useContext(PortfolioContext);

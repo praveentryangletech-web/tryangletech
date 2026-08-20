@@ -7,7 +7,7 @@ export const PORTFOLIO_CATEGORIES = [
   'Landing Website',
 ] as const;
 
-export type PortfolioCategory = (typeof PORTFOLIO_CATEGORIES)[number];
+export type PortfolioCategory = (typeof PORTFOLIO_CATEGORIES)[number] | (string & {});
 
 export interface Project {
   id?: string;

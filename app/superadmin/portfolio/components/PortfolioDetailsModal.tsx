@@ -87,12 +87,14 @@ export default function PortfolioDetailsModal({ project, onClose }: PortfolioDet
               justifyContent: 'center',
               cursor: 'pointer',
               color: '#64748B',
-              fontSize: '1rem',
-              fontWeight: 700,
               transition: 'all 0.15s ease',
             }}
+            aria-label="Close modal"
           >
-            ✕
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </button>
         </div>
 
@@ -219,8 +221,13 @@ export default function PortfolioDetailsModal({ project, onClose }: PortfolioDet
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             {project.challenges && project.challenges.length > 0 && (
               <div style={{ padding: '1rem', backgroundColor: '#FFF1F2', borderRadius: '14px', border: '1px solid #FFE4E6' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#BE123C' }}>
-                  ⚠️ Key Challenges
+                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#BE123C', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  <span>Key Challenges</span>
                 </h5>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#881337', fontSize: '0.8rem', lineHeight: 1.6 }}>
                   {project.challenges.map((c, i) => (
@@ -232,8 +239,12 @@ export default function PortfolioDetailsModal({ project, onClose }: PortfolioDet
 
             {project.results && project.results.length > 0 && (
               <div style={{ padding: '1rem', backgroundColor: '#F0FDF4', borderRadius: '14px', border: '1px solid #DCFCE7' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#15803D' }}>
-                  🏆 Measurable Impact
+                <h5 style={{ margin: '0 0 0.5rem 0', fontSize: '0.825rem', fontWeight: 800, color: '#15803D', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="8" r="7" />
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                  </svg>
+                  <span>Measurable Impact</span>
                 </h5>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#14532D', fontSize: '0.8rem', lineHeight: 1.6 }}>
                   {project.results.map((r, i) => (

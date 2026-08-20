@@ -5,7 +5,7 @@ import Image from "next/image";
 import SafeImage from '@/app/common/SafeImage';
 import { Project, projects as staticProjects } from '../../data/portfolioData';
 
-const categories = [
+const DEFAULT_CATEGORIES = [
   "All",
   "Business Website", 
   "E-Commerce",
@@ -28,6 +28,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [categoriesList, setCategoriesList] = useState<string[]>(DEFAULT_CATEGORIES);
   
   // API Data & Pagination States
   const [projectsList, setProjectsList] = useState<Project[]>(staticProjects);
@@ -36,6 +37,23 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(staticProjects.length);
+
+  // Fetch dynamic categories on mount
+  useEffect(() => {
+    async function loadDynamicCategories() {
+      try {
+        const res = await fetch('/api/portfolio/categories');
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          const dynamicCats = ['All', ...json.data.map((c: any) => c.name)];
+          setCategoriesList(dynamicCats);
+        }
+      } catch {
+        // Fallback to DEFAULT_CATEGORIES
+      }
+    }
+    loadDynamicCategories();
+  }, []);
 
   // Fetch projects from public GET /api/portfolio endpoint with instant cache
   const fetchProjects = useCallback(async (pageNum: number, category: string, isAppend = false) => {
@@ -292,9 +310,9 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter }: Por
         {/* Category Filter Chips */}
         {!hideFilter && (
           <div className="pf-filter-wrap">
-            {categories.map((cat, idx) => (
+            {categoriesList.map((cat, idx) => (
               <button
-                key={idx}
+                key={`${cat}-${idx}`}
                 className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
                 onClick={() => handleCategoryChange(cat)}
               >

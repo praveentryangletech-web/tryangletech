@@ -46,9 +46,11 @@ export default function PortfolioTable({
     searchQuery,
     setSearchQuery,
     pagination,
+    categories: dynamicCategories,
+    setIsCategoryModalOpen,
   } = usePortfolio();
 
-  const categories = ['ALL', ...PORTFOLIO_CATEGORIES];
+  const categories = ['ALL', ...(dynamicCategories && dynamicCategories.length > 0 ? dynamicCategories : PORTFOLIO_CATEGORIES)];
 
   // Derive pagination bounds from the API response
   const totalItems = pagination?.total ?? projectsList.length;
@@ -63,7 +65,7 @@ export default function PortfolioTable({
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 75px)', minHeight: 0, backgroundColor: 'transparent' }}>
       {/* 1. FIXED TOP TOOLBAR & CATEGORY FILTER CHIPS */}
       <div style={{ flexShrink: 0 }}>
-        {/* Search Input on Left, "+ Add New Project" Action Button on Right */}
+        {/* Search Input on Left, Action Buttons on Right */}
         <div
           style={{
             display: 'flex',
@@ -74,49 +76,96 @@ export default function PortfolioTable({
             flexWrap: 'wrap',
           }}
         >
-          <input
-            type="text"
-            placeholder="🔍 Search portfolio by title, client, tech stack..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: '0.65rem 1.15rem',
-              borderRadius: '8px',
-              border: '1px solid #CBD5E1',
-              width: '360px',
-              maxWidth: '100%',
-              fontSize: '0.875rem',
-              outline: 'none',
-              backgroundColor: '#FFFFFF',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-            }}
-          />
-
-          {/* "+ Add New Project" Primary Action Button with Tooltip */}
-          <Tooltip text="Create and publish a new portfolio case study" position="left">
-            <button
-              onClick={onAddNewProject}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                backgroundColor: 'var(--brand-blue, #1833fe)',
-                color: '#FFFFFF',
-                padding: '0.65rem 1.35rem',
-                borderRadius: '8px',
-                border: 'none',
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
-                transition: 'all 0.2s ease',
-                whiteSpace: 'nowrap',
-              }}
+          <div style={{ position: 'relative', width: '360px', maxWidth: '100%' }}>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#94A3B8"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
             >
-              <span style={{ fontSize: '1.15rem', lineHeight: 1 }}>+</span>
-              <span>Add New Project</span>
-            </button>
-          </Tooltip>
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search portfolio by title, client, tech stack..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                padding: '0.65rem 1.15rem 0.65rem 2.4rem',
+                borderRadius: '8px',
+                border: '1px solid #CBD5E1',
+                width: '100%',
+                boxSizing: 'border-box',
+                fontSize: '0.875rem',
+                outline: 'none',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+              }}
+            />
+          </div>
+
+          {/* Action Buttons: Manage Categories & Add New Project */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Tooltip text="View, add, or delete dynamic portfolio categories" position="left">
+              <button
+                onClick={() => setIsCategoryModalOpen(true)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  backgroundColor: '#FFFFFF',
+                  color: '#334155',
+                  padding: '0.65rem 1.15rem',
+                  borderRadius: '8px',
+                  border: '1.5px solid #CBD5E1',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  transition: 'all 0.15s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                  <line x1="7" y1="7" x2="7.01" y2="7" />
+                </svg>
+                <span>Manage Categories</span>
+              </button>
+            </Tooltip>
+
+            {/* "+ Add New Project" Primary Action Button with Tooltip */}
+            <Tooltip text="Create and publish a new portfolio case study" position="left">
+              <button
+                onClick={onAddNewProject}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: 'var(--brand-blue, #1833fe)',
+                  color: '#FFFFFF',
+                  padding: '0.65rem 1.35rem',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <span style={{ fontSize: '1.15rem', lineHeight: 1 }}>+</span>
+                <span>Add New Project</span>
+              </button>
+            </Tooltip>
+          </div>
         </div>
 
         {/* Category Filter Chips */}
@@ -124,12 +173,13 @@ export default function PortfolioTable({
           style={{
             display: 'flex',
             flexWrap: 'wrap',
+            alignItems: 'center',
             gap: '8px',
             padding: '0 2rem 1rem 2rem',
           }}
         >
           {categories.map((cat) => (
-            <Tooltip key={cat} text={cat === 'ALL' ? 'Show all 6 core categories' : `Filter by ${cat}`} position="top">
+            <Tooltip key={cat} text={cat === 'ALL' ? 'Show all categories' : `Filter by ${cat}`} position="top">
               <button
                 onClick={() => setCategoryFilter(cat)}
                 style={{
@@ -150,6 +200,31 @@ export default function PortfolioTable({
               </button>
             </Tooltip>
           ))}
+
+          {/* Quick Add/Manage Categories Pill */}
+          <Tooltip text="Add new category or delete existing categories" position="top">
+            <button
+              onClick={() => setIsCategoryModalOpen(true)}
+              style={{
+                padding: '5px 12px',
+                borderRadius: '8px',
+                border: '1.5px dashed #94A3B8',
+                backgroundColor: '#F8FAFC',
+                color: 'var(--brand-blue, #1833fe)',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+                whiteSpace: 'nowrap',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              <span>+</span>
+              <span>Manage Categories</span>
+            </button>
+          </Tooltip>
         </div>
       </div>
 
@@ -284,8 +359,12 @@ export default function PortfolioTable({
                             style={{ objectFit: 'cover' }}
                           />
                         ) : (
-                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>
-                            💻
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8' }}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                              <line x1="8" y1="21" x2="16" y2="21" />
+                              <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
                           </div>
                         )}
                       </div>
@@ -532,6 +611,7 @@ export default function PortfolioTable({
               <span>Prev</span>
             </button>
           </Tooltip>
+
 
           {/* Page Numbers */}
           {Array.from({ length: totalPages }).map((_, idx) => {

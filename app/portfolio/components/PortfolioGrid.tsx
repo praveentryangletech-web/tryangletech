@@ -238,22 +238,14 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
           gap: 10px;
           padding-bottom: 2rem;
           max-width: 100%;
-          scrollbar-width: thin;
-          scrollbar-color: #CBD5E1 transparent;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
           scroll-behavior: smooth;
         }
         .pf-filter-wrap::-webkit-scrollbar {
-          height: 4px;
-        }
-        .pf-filter-wrap::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .pf-filter-wrap::-webkit-scrollbar-thumb {
-          background: #CBD5E1;
-          border-radius: 4px;
-        }
-        .pf-filter-wrap::-webkit-scrollbar-thumb:hover {
-          background: #94A3B8;
+          display: none;
+          width: 0;
+          height: 0;
         }
         .pf-filter-btn {
           flex-shrink: 0;

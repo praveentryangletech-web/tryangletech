@@ -1051,7 +1051,7 @@ function BlogEditorInner() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                       <button
                         type="button"
-                        onClick={() => handleConfirmUploadFile(uploadTarget)}
+                        onClick={handleExecuteUpload}
                         disabled={isUploading}
                         style={{
                           padding: '8px 18px',

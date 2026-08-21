@@ -85,27 +85,27 @@ export default function RootLayout({
       className="w-mod-js"
       data-wf-site="68c3feed3b3e541e7d5c098a"
       suppressHydrationWarning>
-      <head
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: `
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-      .wf-force-outline-none[tabindex="-1"]:focus {
-        outline: none;
-      }
-      
-    </style>
+      <head suppressHydrationWarning>
+        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `.wf-force-outline-none[tabindex="-1"]:focus { outline: none; }`,
+          }}
+        />
     <link
       href="https://cdn.prod.website-files.com/"
       rel="preconnect"
-      crossorigin="anonymous" />
+      crossOrigin="anonymous" />
     <meta content="Webflow" name="generator" />
     <link
       href="/Taskopia_files/taskopia.webflow.shared.f0926b53b.css"
       rel="stylesheet"
       type="text/css" />
-    <style>
+    <style
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{
+        __html: `
       @media (min-width: 992px) {
         html.w-mod-js:not(.w-mod-ix)
           [data-w-id="94e17314-daf6-c72f-7b0e-213605327473"] {
@@ -222,41 +222,60 @@ export default function RootLayout({
           opacity: 0;
         }
       }
-    </style>
+        `,
+      }}
+    />
     <link href="https://fonts.googleapis.com/" rel="preconnect" />
     <link
       href="https://fonts.gstatic.com/"
       rel="preconnect"
-      crossorigin="anonymous" />
-    <script
+      crossOrigin="anonymous" />
+    <Script
       src="/Taskopia_files/webfont.js"
-      type="text/javascript"></script>
+      strategy="beforeInteractive"
+    />
+    <Script
+      src="/Taskopia_files/jquery-3.5.1.min.dc5e7f18c8.js"
+      strategy="beforeInteractive"
+    />
     <link
       rel="stylesheet"
       href="/Taskopia_files/css"
       media="all" />
-    <script type="text/javascript">
-      WebFont.load({
+    <script
+      type="text/javascript"
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{
+        __html: `WebFont.load({
         google: {
           families: [
             "Geist:300,400,500,600,700",
             "Poppins:300,400,500,600,700",
           ],
         },
-      });
-    </script>
-    <script type="text/javascript">
-      !(function (o, c) {
+      });`,
+      }}
+    />
+    <script
+      type="text/javascript"
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{
+        __html: `!(function (o, c) {
         var n = c.documentElement,
           t = " w-mod-";
         ((n.className += t + "js"),
           ("ontouchstart" in o ||
             (o.DocumentTouch && c instanceof DocumentTouch)) &&
             (n.className += t + "touch"));
-      })(window, document);
-    </script>
+      })(window, document);`,
+      }}
+    />
 
-    <style id="rtVaultCss">
+    <style
+      id="rtVaultCss"
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{
+        __html: `
       .rt-vlt-root {
         --ink: #120a0e;
         --paper: #ece7e4;
@@ -870,10 +889,11 @@ export default function RootLayout({
         background-color: #8a95ff;
         color: #fff;
       }
-    </style>
-   ` }}
-      />
-      <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
+        `,
+      }}
+    />
+  </head>
+  <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
         <Script
           id="organization-and-localbusiness-schema"
           type="application/ld+json"
@@ -1006,7 +1026,6 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        <Script src="/Taskopia_files/jquery-3.5.1.min.dc5e7f18c8.js" strategy="beforeInteractive" />
         <Script src="/Taskopia_files/webflow.achunk.d92d62cb0de340ea.js" strategy="afterInteractive" />
         <Script src="/Taskopia_files/webflow.34d39e86.24c5208c8961105d.js" strategy="afterInteractive" />
       </body>

@@ -321,20 +321,16 @@ export function BlogProvider({ children }: { children: ReactNode }) {
    * Save (Create or Update) Post Handler
    */
   const savePost = useCallback(async (postData: Partial<BlogPostItem>) => {
-    if (editingPost) {
-      const postId = editingPost.id;
-      if (!postId) {
-        throw new Error('Article ID is required to update this article.');
-      }
-
+    const targetId = postData.id || (editingPost as any)?.id;
+    if (targetId) {
       // Optimistic update
       setPostsList((prev) =>
         prev.map((item) =>
-          item.id === postId ? { ...item, ...postData } : item
+          item.id === targetId ? { ...item, ...postData } : item
         )
       );
 
-      const res = await apiClient.patch('/api/blog', { id: postId, ...postData });
+      const res = await apiClient.patch('/api/blog', { ...postData, id: String(targetId) });
       if (!res.success) {
         throw new Error(res.error || 'Failed to update article in database.');
       }

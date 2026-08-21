@@ -7,6 +7,7 @@ import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
 import { blogService } from "@/backend/services/blog/blog.service";
+import HomeThreeFaq from "../../home-three/components/Faq";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
           url: image,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: post.coverImageAlt || post.imageAlt || post.title,
         },
       ],
     },
@@ -88,6 +89,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   const coverImage = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
     ? post.coverImage.trim()
     : (post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png');
+  const coverImageAlt = post.coverImageAlt || post.imageAlt || post.title;
   const sliderImages = (post.images && post.images.length > 0 && post.images.some((img: string) => img && img.trim()))
     ? post.images.filter((img: string) => img && typeof img === 'string' && img.trim())
     : [coverImage];
@@ -114,7 +116,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
 
   // Section 4: Mid-Article Images
   const img1 = post.contentImage1 || "/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png";
+  const img1Alt = post.contentImage1Alt || "Section showcase 1";
   const img2 = post.contentImage2 || "/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp";
+  const img2Alt = post.contentImage2Alt || "Section showcase 2";
 
   // Section 5: Conclusion & Takeaways
   const concTitle = post.conclusionTitle || "The future of human-AI collaboration";
@@ -196,7 +200,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   src={coverImage}
                   fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
                   loading="lazy"
-                  alt={post.title}
+                  alt={coverImageAlt}
                   className="rt-image-scale"
                   width={800}
                   height={800}
@@ -333,13 +337,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   style={{
                     width: '100%',
                     height: '360px',
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #d3d3f4',
+                    backgroundColor: 'transparent',
+                    border: 'none',
                     borderRadius: '1.25rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '1.25rem',
+                    padding: '0',
                     boxSizing: 'border-box',
                     overflow: 'hidden',
                   }}
@@ -347,10 +351,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   <SafeImage
                     width={520}
                     height={360}
-                    alt="Section showcase 1"
+                    alt={img1Alt}
                     src={img1}
                     fallbackSrc="/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png"
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', backgroundColor: 'transparent' }}
                     loading="lazy"
                   />
                 </div>
@@ -359,13 +363,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   style={{
                     width: '100%',
                     height: '360px',
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #d3d3f4',
+                    backgroundColor: 'transparent',
+                    border: 'none',
                     borderRadius: '1.25rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '1.25rem',
+                    padding: '0',
                     boxSizing: 'border-box',
                     overflow: 'hidden',
                   }}
@@ -373,10 +377,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                   <SafeImage
                     width={520}
                     height={360}
-                    alt="Section showcase 2"
+                    alt={img2Alt}
                     src={img2}
                     fallbackSrc="/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp"
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', backgroundColor: 'transparent' }}
                     loading="lazy"
                   />
                 </div>
@@ -443,6 +447,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             </div>
           </div>
         </section>
+
+        {/* Dynamic Article FAQs Section */}
+        <div className="animate-section anim-delay-3" style={{ marginTop: '3rem' }}>
+          <HomeThreeFaq items={post.faqs} />
+        </div>
       </main>
     </>
   );

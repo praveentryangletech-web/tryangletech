@@ -55,7 +55,10 @@ model BlogPost {
   excerpt            String?  @db.Text
   content            String   @db.Text
   coverImage         String?
+  coverImageAlt      String?
+  imageAlt           String?
   images             String[] @default([])
+  imageAlts          String[] @default([])
   authorName         String?  @default("TryangleTech Team")
   authorRole         String?  @default("Content Creators")
   authorImage        String?
@@ -76,10 +79,13 @@ model BlogPost {
   step1              String?  @db.Text
   step2              String?  @db.Text
   contentImage1      String?
+  contentImage1Alt   String?
   contentImage2      String?
+  contentImage2Alt   String?
   conclusionTitle    String?
   conclusionBody     String?  @db.Text
   conclusionPoints   String[] @default([])
+  faqs               Json?
 
   // SEO & AEO
   metaTitle          String?

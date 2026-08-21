@@ -505,7 +505,7 @@ function PortfolioEditorInner() {
   };
 
   const handleAddFaq = () => {
-    setFaqs((prev) => [...prev, { question: '', answer: '' }]);
+    setFaqs((prev) => [{ question: '', answer: '' }, ...prev]);
   };
 
   const handleUpdateFaq = (index: number, field: 'question' | 'answer', value: string) => {

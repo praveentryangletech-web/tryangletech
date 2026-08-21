@@ -6,7 +6,10 @@ export interface BlogPostItem {
   excerpt: string;
   content: string;
   coverImage: string;
+  coverImageAlt?: string;
+  imageAlt?: string;
   images?: string[];
+  imageAlts?: string[];
   authorName?: string;
   authorRole?: string;
   authorImage?: string;
@@ -29,7 +32,9 @@ export interface BlogPostItem {
   step2?: string;
   // Section 4: Mid-Article Images
   contentImage1?: string;
+  contentImage1Alt?: string;
   contentImage2?: string;
+  contentImage2Alt?: string;
   // Section 5: Conclusion & Takeaways
   conclusionTitle?: string;
   conclusionBody?: string;
@@ -39,6 +44,7 @@ export interface BlogPostItem {
   metaDescription?: string;
   canonicalUrl?: string;
   keywords?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
   viewsCount?: number;
   createdAt: string;
   updatedAt: string;

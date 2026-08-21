@@ -134,7 +134,7 @@ export default function PortfolioEditModal({
   };
 
   const handleAddFaq = () => {
-    setFaqs([...faqs, { question: '', answer: '' }]);
+    setFaqs([{ question: '', answer: '' }, ...faqs]);
   };
 
   const handleUpdateFaq = (index: number, field: 'question' | 'answer', value: string) => {

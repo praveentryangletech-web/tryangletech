@@ -312,7 +312,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
                               <div className="rt-blog-v3-card-top-part rt-border-radius-l rt-overflow-hidden">
                                 <SafeImage
                                   loading="lazy"
-                                  alt={post.title}
+                                  alt={post.coverImageAlt || post.imageAlt || post.title}
                                   src={resolvedCover}
                                   fallbackSrc={postFallback}
                                   className="rt-image-scale"

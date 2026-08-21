@@ -23,7 +23,7 @@ function BlogEditorInner() {
 
   const { categories: dynamicCategories, savePost } = useBlog();
 
-  const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo' | 'faqs'>('general');
   const [isLoading, setIsLoading] = useState(isEditMode);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -57,8 +57,11 @@ function BlogEditorInner() {
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');
+  const [coverImageAlt, setCoverImageAlt] = useState('');
   const [sliderImages, setSliderImages] = useState<string[]>([]);
+  const [sliderImageAlts, setSliderImageAlts] = useState<string[]>([]);
   const [newSliderUrl, setNewSliderUrl] = useState('');
+  const [newSliderAlt, setNewSliderAlt] = useState('');
 
   // Media Library Management State
   const [mediaList, setMediaList] = useState<MediaAssetItem[]>([]);
@@ -71,6 +74,7 @@ function BlogEditorInner() {
   const [selectedUploadFile, setSelectedUploadFile] = useState<File | null>(null);
   const [uploadFilePreview, setUploadFilePreview] = useState<string | null>(null);
   const [customFilenameInput, setCustomFilenameInput] = useState('');
+  const [customAltInput, setCustomAltInput] = useState('');
   const [blobPreviewMap, setBlobPreviewMap] = useState<Record<string, string>>({});
 
   // Asset Picker Modal State
@@ -94,7 +98,9 @@ function BlogEditorInner() {
   const [step2, setStep2] = useState('');
   // Section 4: Mid-Article Images
   const [contentImage1, setContentImage1] = useState('');
+  const [contentImage1Alt, setContentImage1Alt] = useState('');
   const [contentImage2, setContentImage2] = useState('');
+  const [contentImage2Alt, setContentImage2Alt] = useState('');
   // Section 5: Conclusion & Takeaways
   const [conclusionTitle, setConclusionTitle] = useState('The future of human-AI collaboration');
   const [conclusionBody, setConclusionBody] = useState('');
@@ -114,6 +120,91 @@ function BlogEditorInner() {
   const [canonicalUrl, setCanonicalUrl] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
   const [keywords, setKeywords] = useState<string[]>([]);
+
+  // 5. Dynamic FAQs
+  const [faqs, setFaqs] = useState<Array<{ question: string; answer: string }>>([]);
+  const [isLoadingDefaults, setIsLoadingDefaults] = useState(false);
+
+  const DEFAULT_BLOG_FALLBACK_FAQS = [
+    {
+      question: 'How does TryangleTech approach custom web development?',
+      answer: 'We craft high-performance, modern digital products with Next.js, React, Node.js, and PostgreSQL, focusing on sub-second load times, scalability, and UX design.',
+    },
+    {
+      question: 'How do AI-driven workflows benefit modern business apps?',
+      answer: 'AI integrations streamline mundane operations, optimize search algorithms with AEO/GEO indexing, and provide intelligent personalization for users.',
+    },
+    {
+      question: 'What is the standard delivery timeline for bespoke platforms?',
+      answer: 'Our sprint-driven agile process delivers high-impact web apps in 2 to 6 weeks with transparent weekly milestones and continuous deployment.',
+    },
+    {
+      question: 'Do you provide post-launch maintenance and SEO tracking?',
+      answer: 'Yes, we provide full-lifecycle monitoring, speed optimization, and ongoing Search & AI Engine Optimization (SEO/AEO).',
+    },
+  ];
+
+  const handleAddFaq = () => {
+    setFaqs((prev) => [{ question: '', answer: '' }, ...prev]);
+  };
+
+  const handleUpdateFaq = (index: number, field: 'question' | 'answer', value: string) => {
+    setFaqs((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
+  };
+
+  const handleMoveFaqUp = (index: number) => {
+    if (index === 0) return;
+    setFaqs((prev) => {
+      const updated = [...prev];
+      const temp = updated[index];
+      updated[index] = updated[index - 1];
+      updated[index - 1] = temp;
+      return updated;
+    });
+  };
+
+  const handleMoveFaqDown = (index: number) => {
+    if (index >= faqs.length - 1) return;
+    setFaqs((prev) => {
+      if (index >= prev.length - 1) return prev;
+      const updated = [...prev];
+      const temp = updated[index];
+      updated[index] = updated[index + 1];
+      updated[index + 1] = temp;
+      return updated;
+    });
+  };
+
+  const handleRemoveFaq = (index: number) => {
+    setFaqs((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleLoadDefaultFaqs = async () => {
+    setIsLoadingDefaults(true);
+    try {
+      const res = await fetch('/api/faqs?pageType=BLOG_MAIN&defaults=true');
+      const json = await res.json();
+      const list = json.faqs || json.data;
+      if (json.success && Array.isArray(list) && list.length > 0) {
+        setFaqs(
+          list.map((f: any) => ({
+            question: f.question,
+            answer: f.answer,
+          }))
+        );
+        return;
+      }
+    } catch (err) {
+      console.warn('Failed to fetch default FAQs from API, using static fallbacks:', err);
+    } finally {
+      setIsLoadingDefaults(false);
+    }
+    setFaqs(DEFAULT_BLOG_FALLBACK_FAQS);
+  };
 
   // Fetch Media Assets
   const fetchMediaList = async () => {
@@ -257,7 +348,9 @@ function BlogEditorInner() {
           setOrder(p.order || 0);
 
           setCoverImage(p.coverImage || '');
+          setCoverImageAlt(p.coverImageAlt || p.imageAlt || '');
           setSliderImages(p.images && p.images.length > 0 ? p.images : (p.coverImage ? [p.coverImage] : []));
+          setSliderImageAlts(p.imageAlts || []);
 
           setExcerpt(p.excerpt || '');
           // Section 1
@@ -273,7 +366,9 @@ function BlogEditorInner() {
           setStep2(p.step2 || '');
           // Section 4
           setContentImage1(p.contentImage1 || '');
+          setContentImage1Alt(p.contentImage1Alt || '');
           setContentImage2(p.contentImage2 || '');
+          setContentImage2Alt(p.contentImage2Alt || '');
           // Section 5
           setConclusionTitle(p.conclusionTitle || 'The future of human-AI collaboration');
           setConclusionBody(p.conclusionBody || '');
@@ -291,6 +386,8 @@ function BlogEditorInner() {
           setMetaTitle(p.metaTitle || p.title || '');
           setMetaDescription(p.metaDescription || p.excerpt || '');
           setCanonicalUrl(p.canonicalUrl || '');
+
+          setFaqs(Array.isArray(p.faqs) ? p.faqs : []);
         } else {
           setErrorMessage(res.error || 'Failed to load article details.');
         }
@@ -307,12 +404,15 @@ function BlogEditorInner() {
   const handleAddSliderImage = () => {
     if (newSliderUrl.trim() && !sliderImages.includes(newSliderUrl.trim())) {
       setSliderImages([...sliderImages, newSliderUrl.trim()]);
+      setSliderImageAlts([...sliderImageAlts, newSliderAlt.trim() || title]);
       setNewSliderUrl('');
+      setNewSliderAlt('');
     }
   };
 
   const handleRemoveSliderImage = (index: number) => {
     setSliderImages(sliderImages.filter((_, i) => i !== index));
+    setSliderImageAlts(sliderImageAlts.filter((_, i) => i !== index));
   };
 
   const handleAddPoint = () => {
@@ -379,7 +479,10 @@ function BlogEditorInner() {
         publishedAt: new Date(publishedAt).toISOString(),
         order,
         coverImage: coverImage.trim(),
+        coverImageAlt: coverImageAlt.trim(),
+        imageAlt: coverImageAlt.trim(),
         images: sliderImages,
+        imageAlts: sliderImageAlts,
         excerpt: excerpt.trim(),
         content: section1Paragraph1.trim(),
         section1Heading: section1Heading.trim(),
@@ -391,7 +494,9 @@ function BlogEditorInner() {
         step1: step1.trim(),
         step2: step2.trim(),
         contentImage1: contentImage1.trim(),
+        contentImage1Alt: contentImage1Alt.trim(),
         contentImage2: contentImage2.trim(),
+        contentImage2Alt: contentImage2Alt.trim(),
         conclusionTitle: conclusionTitle.trim(),
         conclusionBody: conclusionBody.trim(),
         conclusionPoints,
@@ -400,6 +505,7 @@ function BlogEditorInner() {
         metaDescription: metaDescription.trim() || excerpt.trim(),
         canonicalUrl: canonicalUrl.trim(),
         keywords,
+        faqs: faqs.filter((f) => f.question.trim().length > 0),
       };
 
       if (isEditMode && postId) {
@@ -424,14 +530,17 @@ function BlogEditorInner() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    padding: '0.75rem 1rem',
-    borderRadius: '10px',
-    border: '1.5px solid #E2E8F0',
-    backgroundColor: '#FFFFFF',
+    padding: '11px 16px',
+    borderRadius: '12px',
+    border: '1.5px solid #CBD5E1',
+    backgroundColor: '#F8FAFC',
     color: '#0F172A',
-    fontSize: '0.875rem',
+    fontSize: '0.9rem',
+    fontWeight: 500,
     outline: 'none',
     boxSizing: 'border-box',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
   };
 
   const labelStyle: React.CSSProperties = {
@@ -518,153 +627,180 @@ function BlogEditorInner() {
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 6rem' }}>
-      {/* 1. Header Toolbar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Link
-            href="/superadmin/blog"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '40px',
-              height: '40px',
-              borderRadius: '10px',
-              backgroundColor: '#FFFFFF',
-              border: '1.5px solid #E2E8F0',
-              color: '#475569',
-              textDecoration: 'none',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.03)',
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-          </Link>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h1 style={{ margin: 0, fontSize: '1.65rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
-                {isEditMode ? 'Edit Blog Article' : 'New Blog Article'}
-              </h1>
-              <span
-                style={{
-                  fontSize: '0.725rem',
-                  fontWeight: 700,
-                  padding: '3px 8px',
-                  borderRadius: '6px',
-                  backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
-                  color: published ? '#047857' : '#B45309',
-                  border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`,
-                }}
-              >
-                {published ? '● Live Published' : '● Draft Mode'}
-              </span>
-            </div>
-            <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#64748B' }}>
-              {isEditMode ? `Editing: ${title || 'Article'}` : 'Configure section-wise content, media showcase, draft status, and SEO.'}
-            </p>
-          </div>
-        </div>
+    <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.75rem 2rem 6rem 2rem' }}>
+      {/* 1. Header Action Toolbar */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          marginBottom: '1.25rem',
+        }}
+      >
+        <Link
+          href="/superadmin/blog"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            height: '42px',
+            padding: '0 18px',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            backgroundColor: '#FFFFFF',
+            color: '#334155',
+            fontSize: '0.875rem',
+            fontWeight: 700,
+            textDecoration: 'none',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+            boxSizing: 'border-box',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          <span>Back to Blog</span>
+        </Link>
 
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+        {/* Top Action Buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {isEditMode && slug && (
-            <Link
+            <a
               href={`/blog/${slug}`}
               target="_blank"
+              rel="noopener noreferrer"
               style={{
-                height: '42px',
-                padding: '0 16px',
-                borderRadius: '10px',
-                backgroundColor: '#EFF6FF',
-                color: '#1833FE',
-                border: '1.5px solid #BFDBFE',
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '7px',
+                height: '42px',
+                padding: '0 18px',
+                borderRadius: '10px',
+                border: '1.5px solid #BFDBFE',
+                backgroundColor: '#EFF6FF',
+                color: '#1833FE',
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                textDecoration: 'none',
                 boxSizing: 'border-box',
                 transition: 'all 0.15s ease',
               }}
             >
-              <span>View Live</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <span>Preview Live</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-            </Link>
+            </a>
           )}
 
-          {/* Option A: Save as Draft */}
-          <button
-            type="button"
-            onClick={() => handleSave(undefined, false)}
-            disabled={isSubmitting}
+          <Link
+            href="/superadmin/blog"
             style={{
               height: '42px',
-              padding: '0 18px',
+              padding: '0 20px',
               borderRadius: '10px',
+              border: '1px solid #CBD5E1',
               backgroundColor: '#FFFFFF',
-              color: '#334155',
-              border: '1.5px solid #CBD5E1',
+              color: '#475569',
               fontSize: '0.875rem',
               fontWeight: 700,
-              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
               boxSizing: 'border-box',
               boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-              transition: 'all 0.15s ease',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-              <polyline points="17 21 17 13 7 13 7 21" />
-              <polyline points="7 3 7 8 15 8" />
-            </svg>
-            <span>{isSubmitting ? 'Saving...' : 'Save Draft'}</span>
-          </button>
+            Discard
+          </Link>
 
-          {/* Option B: Save & Publish Live */}
           <button
             type="button"
-            onClick={() => handleSave(undefined, true)}
             disabled={isSubmitting}
+            onClick={() => handleSave(undefined, true)}
             style={{
-              height: '42px',
-              padding: '0 22px',
-              borderRadius: '10px',
-              backgroundColor: '#1833FE',
-              color: '#FFFFFF',
-              border: 'none',
-              fontSize: '0.875rem',
-              fontWeight: 700,
-              cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              boxSizing: 'border-box',
+              height: '42px',
+              padding: '0 24px',
+              borderRadius: '10px',
+              border: 'none',
+              backgroundColor: '#1833FE',
+              color: '#FFFFFF',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
-              transition: 'all 0.15s ease',
+              boxSizing: 'border-box',
+              transition: 'all 0.2s ease',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-            </svg>
-            <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish' : 'Publish Live'}</span>
+            {isSubmitting ? (
+              <>
+                <span
+                  style={{
+                    width: '14px',
+                    height: '14px',
+                    border: '2px solid #FFFFFF',
+                    borderTopColor: 'transparent',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    animation: 'spin 0.8s linear infinite',
+                  }}
+                />
+                <span>Saving...</span>
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+                <span>{isEditMode ? 'Update Article' : 'Publish Article'}</span>
+              </>
+            )}
           </button>
         </div>
+      </div>
+
+      {/* Title & Metadata Status Bar */}
+      <div style={{ marginBottom: '1.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 900, color: 'var(--dark-indigo, #1a0b54)', letterSpacing: '-0.02em' }}>
+            {isEditMode ? `Edit Article: ${title || 'Untitled'}` : 'Create New Blog Article'}
+          </h1>
+          <span
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              padding: '4px 10px',
+              borderRadius: '6px',
+              backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
+              color: published ? '#047857' : '#B45309',
+              border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`,
+            }}
+          >
+            {published ? '● Live Published' : '● Draft Mode'}
+          </span>
+        </div>
+        <p style={{ margin: '6px 0 0', fontSize: '0.875rem', color: '#64748B' }}>
+          {isEditMode
+            ? `Editing database record: ${title || 'Article'} • Category: ${category}`
+            : 'Configure section-wise content, media showcase, draft status, and SEO.'}
+        </p>
       </div>
 
       {/* Notifications */}
@@ -689,22 +825,23 @@ function BlogEditorInner() {
 
       {/* 2. Modern Segmented Tab Navigation Bar */}
       <div
+        className="no-scrollbar"
         style={{
           display: 'flex',
-          backgroundColor: '#FFFFFF',
-          borderRadius: '16px',
-          padding: '6px',
-          border: '1.5px solid #E2E8F0',
+          backgroundColor: 'transparent',
+          padding: '0 0 1rem 0',
+          borderBottom: '1.5px solid #CBD5E1',
           marginBottom: '2rem',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
           gap: '6px',
           overflowX: 'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
         }}
       >
         {[
           {
             key: 'general',
-            label: '1. General & Author',
+            label: 'General & Author',
             icon: (
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -716,7 +853,7 @@ function BlogEditorInner() {
           },
           {
             key: 'media',
-            label: '2. Media Showcase & Slider',
+            label: 'Media Showcase',
             icon: (
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -728,7 +865,7 @@ function BlogEditorInner() {
           },
           {
             key: 'narrative',
-            label: '3. Story & Sections',
+            label: 'Story & Sections',
             icon: (
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 20h9" />
@@ -739,7 +876,7 @@ function BlogEditorInner() {
           },
           {
             key: 'seo',
-            label: '4. SEO & Search Engine',
+            label: 'SEO & Search Engine',
             icon: (
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -748,6 +885,18 @@ function BlogEditorInner() {
               </svg>
             ),
             badge: 'SERP Live',
+          },
+          {
+            key: 'faqs',
+            label: 'Dynamic FAQs',
+            icon: (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+            ),
+            badge: faqs.length > 0 ? `${faqs.length} FAQs` : undefined,
           },
         ].map((tab) => {
           const isActive = activeTab === tab.key;
@@ -800,7 +949,16 @@ function BlogEditorInner() {
       <form onSubmit={handleSave}>
         {/* TAB 1: GENERAL */}
         {activeTab === 'general' && (
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2.5rem', minHeight: '560px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', minHeight: '560px', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            <div>
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+                Article Identity & Meta Information
+              </h3>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748B' }}>
+                Configure core title, category assignment, author details, read time, and publication metadata.
+              </p>
+            </div>
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>
@@ -858,12 +1016,12 @@ function BlogEditorInner() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span
                   style={{
-                    padding: '0.75rem 1rem',
-                    borderRadius: '10px',
+                    padding: '11px 16px',
+                    borderRadius: '12px',
                     backgroundColor: '#F8FAFC',
-                    border: '1.5px solid #E2E8F0',
+                    border: '1.5px solid #CBD5E1',
                     color: '#64748B',
-                    fontSize: '0.85rem',
+                    fontSize: '0.875rem',
                     fontWeight: 600,
                     fontFamily: 'monospace',
                   }}
@@ -938,11 +1096,11 @@ function BlogEditorInner() {
             {/* 1. Cover Image Card */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
@@ -1088,7 +1246,7 @@ function BlogEditorInner() {
                               <polyline points="17 8 12 3 7 8" />
                               <line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
-                            <span>Save &amp; Set as Cover</span>
+                            <span>Confirm Upload &amp; Set</span>
                           </>
                         )}
                       </button>
@@ -1125,13 +1283,13 @@ function BlogEditorInner() {
                       height: '200px',
                       borderRadius: '16px',
                       overflow: 'hidden',
-                      border: '1.5px solid #E2E8F0',
+                      border: '1.5px solid #CBD5E1',
                       backgroundColor: '#F8FAFC',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       position: 'relative',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                      boxShadow: 'none',
                     }}
                   >
                     {coverImage ? (
@@ -1182,6 +1340,17 @@ function BlogEditorInner() {
                         Remove
                       </button>
                     )}
+                  </div>
+
+                  <div style={{ marginTop: '12px' }}>
+                    <label style={labelStyle}>Cover Image Alt Text (SEO & Accessibility)</label>
+                    <input
+                      type="text"
+                      value={coverImageAlt}
+                      onChange={(e) => setCoverImageAlt(e.target.value)}
+                      placeholder="e.g. AI Workflow Optimization illustration"
+                      style={inputStyle}
+                    />
                   </div>
 
                   <input
@@ -1253,6 +1422,63 @@ function BlogEditorInner() {
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* 2. Slider Showcase Card */}
+            <div
+              style={{
+                backgroundColor: 'transparent',
+                borderRadius: '20px',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
+                marginTop: '1.5rem',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+                  Article Carousel & Slider Showcase ({sliderImages.length} Slides)
+                </h3>
+              </div>
+              <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.85rem', color: '#64748B' }}>
+                Multi-image slides displayed inside the interactive carousel on the live article page.
+              </p>
+
+              {/* Add New Slide row with Alt Text */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '10px', marginBottom: '1.5rem', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  placeholder="Slide Image URL (e.g. /blog-assets/diagram.webp or https://...)"
+                  value={newSliderUrl}
+                  onChange={(e) => setNewSliderUrl(e.target.value)}
+                  style={inputStyle}
+                />
+                <input
+                  type="text"
+                  placeholder="Slide Image Alt Text (e.g. Workflow Diagram)"
+                  value={newSliderAlt}
+                  onChange={(e) => setNewSliderAlt(e.target.value)}
+                  style={inputStyle}
+                />
+                <button
+                  type="button"
+                  onClick={handleAddSliderImage}
+                  style={{
+                    padding: '0 20px',
+                    height: '46px',
+                    borderRadius: '12px',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  + Add Slide
+                </button>
+              </div>
 
               {/* Slider Image List Grid */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
@@ -1273,11 +1499,11 @@ function BlogEditorInner() {
                     <div
                       key={idx}
                       style={{
-                        border: '1.5px solid #E2E8F0',
+                        border: '1.5px solid #CBD5E1',
                         borderRadius: '16px',
-                        padding: '10px',
+                        padding: '12px',
                         backgroundColor: '#FFFFFF',
-                        boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
+                        boxShadow: 'none',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '10px',
@@ -1296,7 +1522,7 @@ function BlogEditorInner() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={blobPreviewMap[imgUrl] || imgUrl}
-                          alt={`Slide ${idx + 1}`}
+                          alt={sliderImageAlts[idx] || `Slide ${idx + 1}`}
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           onError={(e) => {
                             const img = e.target as HTMLImageElement;
@@ -1326,7 +1552,7 @@ function BlogEditorInner() {
                         </span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         <input
                           type="text"
                           value={imgUrl}
@@ -1335,38 +1561,61 @@ function BlogEditorInner() {
                             updated[idx] = e.target.value;
                             setSliderImages(updated);
                           }}
+                          placeholder="Image URL"
                           style={{
-                            flex: 1,
+                            width: '100%',
                             fontSize: '0.775rem',
                             padding: '7px 10px',
                             borderRadius: '8px',
-                            border: '1px solid #CBD5E1',
+                            border: '1.5px solid #CBD5E1',
                             backgroundColor: '#F8FAFC',
                             fontFamily: 'monospace',
                           }}
                         />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveSliderImage(idx)}
+                        <input
+                          type="text"
+                          value={sliderImageAlts[idx] || ''}
+                          onChange={(e) => {
+                            const updated = [...sliderImageAlts];
+                            updated[idx] = e.target.value;
+                            setSliderImageAlts(updated);
+                          }}
+                          placeholder="Slide Alt Text"
                           style={{
+                            width: '100%',
+                            fontSize: '0.775rem',
                             padding: '7px 10px',
                             borderRadius: '8px',
-                            border: '1px solid #FECACA',
-                            backgroundColor: '#FEF2F2',
-                            color: '#DC2626',
-                            cursor: 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            border: '1.5px solid #CBD5E1',
+                            backgroundColor: '#F8FAFC',
                           }}
-                          aria-label="Remove slide"
-                        >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                          </svg>
-                        </button>
+                        />
                       </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSliderImage(idx)}
+                        style={{
+                          padding: '7px 10px',
+                          borderRadius: '8px',
+                          border: '1px solid #FECACA',
+                          backgroundColor: '#FEF2F2',
+                          color: '#DC2626',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '0.775rem',
+                          fontWeight: 700,
+                          gap: '6px',
+                        }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                        <span>Remove Slide</span>
+                      </button>
                     </div>
                   ))
                 )}
@@ -1379,7 +1628,7 @@ function BlogEditorInner() {
         {activeTab === 'narrative' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {/* Article Hook / Excerpt */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1413,7 +1662,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Section 1: Main Story & Intro */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1462,7 +1711,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Section 2: Highlight Quote Box */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB2777" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1500,7 +1749,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Section 3: Key Steps Section */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1554,8 +1803,8 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            {/* Section 4: Mid-Article Image Showcase (2 Images) */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {/* Section 4: Mid-Article Image Showcase (2 Images with Alt) */}
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1572,7 +1821,7 @@ function BlogEditorInner() {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                 {/* Image 1 */}
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+                <div style={{ border: '1.5px solid #CBD5E1', borderRadius: '14px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
                   <label style={labelStyle}>
                     Left Image URL / Path
                     <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginLeft: '6px' }}>
@@ -1586,7 +1835,7 @@ function BlogEditorInner() {
                     placeholder="/blog-post-assets/... or https://..."
                     style={{ ...inputStyle, marginBottom: '8px' }}
                   />
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
                     <button
                       type="button"
                       onClick={() => {
@@ -1608,12 +1857,22 @@ function BlogEditorInner() {
                       </button>
                     )}
                   </div>
+                  <div>
+                    <label style={{ ...labelStyle, fontSize: '0.775rem', marginBottom: '4px' }}>Left Image Alt Text</label>
+                    <input
+                      type="text"
+                      value={contentImage1Alt}
+                      onChange={(e) => setContentImage1Alt(e.target.value)}
+                      placeholder="e.g. Analytics dashboard illustration"
+                      style={inputStyle}
+                    />
+                  </div>
                   {contentImage1 && (
-                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #CBD5E1', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage1}
-                        alt="Preview 1"
+                        alt={contentImage1Alt || 'Preview 1'}
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
@@ -1631,7 +1890,7 @@ function BlogEditorInner() {
                 </div>
 
                 {/* Image 2 */}
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
+                <div style={{ border: '1.5px solid #CBD5E1', borderRadius: '14px', padding: '1.25rem', backgroundColor: '#F8FAFC' }}>
                   <label style={labelStyle}>
                     Right Image URL / Path
                     <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B', marginLeft: '6px' }}>
@@ -1645,7 +1904,7 @@ function BlogEditorInner() {
                     placeholder="/blog-post-assets/... or https://..."
                     style={{ ...inputStyle, marginBottom: '8px' }}
                   />
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
                     <button
                       type="button"
                       onClick={() => {
@@ -1667,12 +1926,22 @@ function BlogEditorInner() {
                       </button>
                     )}
                   </div>
+                  <div>
+                    <label style={{ ...labelStyle, fontSize: '0.775rem', marginBottom: '4px' }}>Right Image Alt Text</label>
+                    <input
+                      type="text"
+                      value={contentImage2Alt}
+                      onChange={(e) => setContentImage2Alt(e.target.value)}
+                      placeholder="e.g. Workflow automation diagram"
+                      style={inputStyle}
+                    />
+                  </div>
                   {contentImage2 && (
-                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #E2E8F0', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
+                    <div style={{ marginTop: '12px', height: '210px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #CBD5E1', backgroundColor: '#FFFFFF', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={contentImage2}
-                        alt="Preview 2"
+                        alt={contentImage2Alt || 'Preview 2'}
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
@@ -1692,7 +1961,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Section 5: Conclusion & Future Outlook */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9333EA" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1756,7 +2025,7 @@ function BlogEditorInner() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   {conclusionPoints.map((pt, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1.5px solid #CBD5E1' }}>
                       <span style={{ color: '#1833FE', fontWeight: 800 }}>•</span>
                       <span style={{ flex: 1, fontSize: '0.85rem', color: '#1E293B' }}>{pt}</span>
                       <button
@@ -1776,7 +2045,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Section 6: Author Bio Footer */}
-            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -1791,7 +2060,7 @@ function BlogEditorInner() {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1.5rem', alignItems: 'start' }}>
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1rem', backgroundColor: '#F8FAFC', textAlign: 'center' }}>
+                <div style={{ border: '1.5px solid #CBD5E1', borderRadius: '12px', padding: '1rem', backgroundColor: '#F8FAFC', textAlign: 'center' }}>
                   <label style={labelStyle}>Author Avatar Image</label>
                   <div style={{ width: '80px', height: '80px', borderRadius: '50%', overflow: 'hidden', margin: '0 auto 10px', backgroundColor: '#E2E8F0' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1845,7 +2114,7 @@ function BlogEditorInner() {
 
         {/* TAB 4: SEO & SERP */}
         {activeTab === 'seo' && (
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', border: '1.5px solid #E2E8F0', padding: '2.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
               <div>
                 <label style={labelStyle}>Meta Title</label>
@@ -1946,7 +2215,7 @@ function BlogEditorInner() {
             </div>
 
             {/* Live Google SERP Snippet Preview Card */}
-            <div style={{ padding: '1.25rem', borderRadius: '14px', border: '1px solid #E2E8F0', backgroundColor: '#F8FAFC' }}>
+            <div style={{ padding: '1.25rem', borderRadius: '14px', border: '1.5px solid #CBD5E1', backgroundColor: '#F8FAFC' }}>
               <span style={{ fontSize: '0.75rem', color: '#1A0DAB', display: 'block' }}>
                 https://tryangletech.com › blog › {slug || 'article-slug'}
               </span>
@@ -1959,6 +2228,286 @@ function BlogEditorInner() {
             </div>
           </div>
         )}
+
+        {/* ============================================================ */}
+        {/* TAB 5: DYNAMIC FAQS                                          */}
+        {/* ============================================================ */}
+        {activeTab === 'faqs' && (
+          <div
+            style={{
+              backgroundColor: 'transparent',
+              borderRadius: '20px',
+              border: 'none',
+              padding: '0.5rem 0',
+              boxShadow: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.75rem',
+            }}
+          >
+            {/* Header & Default loader banner */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '12px',
+                padding: '1.25rem 1.5rem',
+                backgroundColor: '#EFF6FF',
+                borderRadius: '16px',
+                border: '1.5px solid #BFDBFE',
+              }}
+            >
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#1E3A8A' }}>
+                  Dynamic Article FAQs & Knowledge Answers
+                </h3>
+                <p style={{ margin: '4px 0 0', fontSize: '0.825rem', color: '#3B82F6' }}>
+                  Manage bespoke FAQs for this article or load high-converting defaults from the database.
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={handleLoadDefaultFaqs}
+                  disabled={isLoadingDefaults}
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '10px',
+                    backgroundColor: '#FFFFFF',
+                    color: '#1833FE',
+                    border: '1.5px solid #1833FE',
+                    fontSize: '0.825rem',
+                    fontWeight: 700,
+                    cursor: isLoadingDefaults ? 'not-allowed' : 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>{isLoadingDefaults ? 'Loading...' : '⚡ Load Default Blog FAQs'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleAddFaq}
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '10px',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    fontSize: '0.825rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span>Add FAQ Item</span>
+                </button>
+              </div>
+            </div>
+
+            {/* FAQs List */}
+            {faqs.length === 0 ? (
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '3.5rem 1.5rem',
+                  backgroundColor: '#F8FAFC',
+                  borderRadius: '16px',
+                  border: '1.5px dashed #CBD5E1',
+                }}
+              >
+                <div style={{ width: '48px', height: '48px', margin: '0 auto 12px', borderRadius: '12px', backgroundColor: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1833FE' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: '#0F172A' }}>No Dynamic FAQs Added</h4>
+                <p style={{ margin: '6px 0 16px', fontSize: '0.85rem', color: '#64748B' }}>
+                  Click &quot;Load Default Blog FAQs&quot; to auto-populate or manually add questions.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleLoadDefaultFaqs}
+                  style={{
+                    padding: '8px 18px',
+                    borderRadius: '10px',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                >
+                  ⚡ Populate Recommended FAQs
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {faqs.map((faq, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      padding: '1.25rem 1.5rem',
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid #E2E8F0',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '12px',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {/* Card Top Row with Pill, Info & Action Controls */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#1833FE', backgroundColor: '#EFF6FF', padding: '4px 10px', borderRadius: '7px', border: '1px solid #BFDBFE' }}>
+                          Question #{idx + 1}
+                        </span>
+                        <span style={{ fontSize: '0.775rem', color: '#94A3B8', fontWeight: 500 }}>
+                          Item {idx + 1} of {faqs.length}
+                        </span>
+                      </div>
+
+                      {/* Reorder and Remove Buttons */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <button
+                          type="button"
+                          onClick={() => handleMoveFaqUp(idx)}
+                          disabled={idx === 0}
+                          title="Move question up"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '7px',
+                            border: '1px solid #E2E8F0',
+                            backgroundColor: idx === 0 ? '#F8FAFC' : '#FFFFFF',
+                            color: idx === 0 ? '#CBD5E1' : '#475569',
+                            cursor: idx === 0 ? 'not-allowed' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="18 15 12 9 6 15" />
+                          </svg>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleMoveFaqDown(idx)}
+                          disabled={idx === faqs.length - 1}
+                          title="Move question down"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '7px',
+                            border: '1px solid #E2E8F0',
+                            backgroundColor: idx === faqs.length - 1 ? '#F8FAFC' : '#FFFFFF',
+                            color: idx === faqs.length - 1 ? '#CBD5E1' : '#475569',
+                            cursor: idx === faqs.length - 1 ? 'not-allowed' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveFaq(idx)}
+                          title="Remove question"
+                          style={{
+                            border: '1px solid #FCA5A5',
+                            backgroundColor: '#FEF2F2',
+                            color: '#DC2626',
+                            cursor: 'pointer',
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            padding: '4px 10px',
+                            borderRadius: '7px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            marginLeft: '4px',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                          </svg>
+                          <span>Remove</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.785rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                        Question Heading
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. How does TryangleTech approach custom web development?"
+                        value={faq.question}
+                        onChange={(e) => handleUpdateFaq(idx, 'question', e.target.value)}
+                        style={{
+                          ...inputStyle,
+                          backgroundColor: '#F8FAFC',
+                          fontWeight: 600,
+                          fontSize: '0.85rem',
+                          padding: '9px 12px',
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.785rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                        Answer Explanation
+                      </label>
+                      <textarea
+                        rows={3}
+                        placeholder="Detailed answer explaining the topic, strategy, or insights..."
+                        value={faq.answer}
+                        onChange={(e) => handleUpdateFaq(idx, 'answer', e.target.value)}
+                        style={{
+                          ...inputStyle,
+                          backgroundColor: '#F8FAFC',
+                          lineHeight: '1.5',
+                          fontSize: '0.85rem',
+                          padding: '9px 12px',
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </form>
 
       {/* Bottom Action Footer Bar */}
@@ -1966,10 +2515,11 @@ function BlogEditorInner() {
         style={{
           marginTop: '2.5rem',
           padding: '1.25rem 2rem',
-          borderRadius: '16px',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(12px)',
+          borderRadius: '18px',
           border: '1.5px solid #E2E8F0',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -2032,21 +2582,21 @@ function BlogEditorInner() {
             onClick={() => handleSave(undefined, true)}
             disabled={isSubmitting}
             style={{
-              height: '42px',
-              padding: '0 24px',
-              borderRadius: '10px',
-              backgroundColor: '#1833FE',
-              color: '#FFFFFF',
-              border: 'none',
-              fontSize: '0.875rem',
-              fontWeight: 700,
-              cursor: isSubmitting ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              boxSizing: 'border-box',
+              height: '42px',
+              padding: '0 28px',
+              borderRadius: '10px',
+              border: 'none',
+              backgroundColor: '#1833FE',
+              color: '#FFFFFF',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
               boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
+              boxSizing: 'border-box',
               transition: 'all 0.15s ease',
             }}
           >
@@ -2056,7 +2606,7 @@ function BlogEditorInner() {
               <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
               <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
             </svg>
-            <span>{isSubmitting ? 'Publishing...' : isEditMode ? 'Update & Publish Live' : 'Publish Live'}</span>
+            <span>{isSubmitting ? 'Saving...' : isEditMode ? 'Update Article' : 'Publish Article'}</span>
           </button>
         </div>
       </div>

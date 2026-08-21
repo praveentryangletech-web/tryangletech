@@ -41,6 +41,7 @@ export default function BlogEditModal({
   const [published, setPublished] = useState(true);
   const [publishedAt, setPublishedAt] = useState<string>(() => formatForDateTimeInput());
   const [coverImage, setCoverImage] = useState('');
+  const [coverImageAlt, setCoverImageAlt] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
   const [tagInput, setTagInput] = useState('');
@@ -60,6 +61,7 @@ export default function BlogEditModal({
       setPublished(post.published);
       setPublishedAt(formatForDateTimeInput(post.publishedAt || post.createdAt));
       setCoverImage(post.coverImage || '');
+      setCoverImageAlt(post.coverImageAlt || post.imageAlt || '');
       setExcerpt(post.excerpt || '');
       setContent(post.content || post.excerpt || '');
       setTags(post.tags || []);
@@ -74,6 +76,7 @@ export default function BlogEditModal({
       setPublished(true);
       setPublishedAt(formatForDateTimeInput());
       setCoverImage('');
+      setCoverImageAlt('');
       setExcerpt('');
       setContent('');
       setTags([]);
@@ -115,6 +118,8 @@ export default function BlogEditModal({
         published,
         publishedAt: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
         coverImage: coverImage.trim(),
+        coverImageAlt: coverImageAlt.trim(),
+        imageAlt: coverImageAlt.trim(),
         excerpt: excerpt.trim(),
         content: content.trim() || excerpt.trim(),
         tags,
@@ -375,7 +380,28 @@ export default function BlogEditModal({
                     width: '100%',
                     padding: '0.65rem 0.9rem',
                     borderRadius: '8px',
-                    border: '1px solid #CBD5E1',
+                    border: '1.5px solid #CBD5E1',
+                    backgroundColor: '#F8FAFC',
+                    fontSize: '0.9rem',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                    marginBottom: '8px',
+                  }}
+                />
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                  Cover Image Alt Text (SEO)
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. AI Workflow Management illustration"
+                  value={coverImageAlt}
+                  onChange={(e) => setCoverImageAlt(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.65rem 0.9rem',
+                    borderRadius: '8px',
+                    border: '1.5px solid #CBD5E1',
+                    backgroundColor: '#F8FAFC',
                     fontSize: '0.9rem',
                     outline: 'none',
                     boxSizing: 'border-box',

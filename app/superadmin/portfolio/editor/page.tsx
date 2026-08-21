@@ -172,8 +172,45 @@ function PortfolioEditorInner() {
   const searchParams = useSearchParams();
   const projectId = searchParams.get('id');
   const isEditMode = Boolean(projectId);
+  type EditorTab = 'general' | 'media' | 'narrative' | 'seo' | 'faqs';
+  const VALID_TABS: EditorTab[] = ['general', 'media', 'narrative', 'seo', 'faqs'];
 
-  const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo' | 'faqs'>('general');
+  const tabParam = searchParams.get('tab') as EditorTab | null;
+  const initialTab: EditorTab = tabParam && VALID_TABS.includes(tabParam) ? tabParam : 'general';
+
+  const [activeTab, setActiveTabState] = useState<EditorTab>(initialTab);
+
+  const setActiveTab = (tab: EditorTab) => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tab);
+      window.history.replaceState(null, '', url.toString());
+      try {
+        sessionStorage.setItem(`portfolio_editor_tab_${projectId || 'new'}`, tab);
+      } catch (_) {}
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlTab = searchParams.get('tab') as EditorTab | null;
+      if (urlTab && VALID_TABS.includes(urlTab)) {
+        setActiveTabState(urlTab);
+      } else {
+        try {
+          const savedTab = sessionStorage.getItem(`portfolio_editor_tab_${projectId || 'new'}`) as EditorTab | null;
+          if (savedTab && VALID_TABS.includes(savedTab)) {
+            setActiveTabState(savedTab);
+            const url = new URL(window.location.href);
+            url.searchParams.set('tab', savedTab);
+            window.history.replaceState(null, '', url.toString());
+          }
+        } catch (_) {}
+      }
+    }
+  }, [searchParams, projectId]);
+
   const [isLoading, setIsLoading] = useState(isEditMode);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');

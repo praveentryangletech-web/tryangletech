@@ -64,6 +64,7 @@ function BlogEditorInner() {
 
   const [isLoading, setIsLoading] = useState(isEditMode);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittingAction, setSubmittingAction] = useState<'draft' | 'publish' | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -500,6 +501,7 @@ function BlogEditorInner() {
       setPublished(overridePublished);
     }
 
+    setSubmittingAction(finalPublished ? 'publish' : 'draft');
     setIsSubmitting(true);
     setErrorMessage('');
     setSuccessMessage('');
@@ -564,6 +566,7 @@ function BlogEditorInner() {
       setErrorMessage(err?.message || 'Failed to save article.');
     } finally {
       setIsSubmitting(false);
+      setSubmittingAction(null);
     }
   };
 
@@ -797,7 +800,7 @@ function BlogEditorInner() {
               transition: 'all 0.2s ease',
             }}
           >
-            {isSubmitting ? (
+            {submittingAction === 'publish' ? (
               <>
                 <span
                   style={{
@@ -810,7 +813,7 @@ function BlogEditorInner() {
                     animation: 'spin 0.8s linear infinite',
                   }}
                 />
-                <span>Saving...</span>
+                <span>{isEditMode ? 'Updating Article...' : 'Publishing Article...'}</span>
               </>
             ) : (
               <>
@@ -1090,10 +1093,27 @@ function BlogEditorInner() {
               </div>
             </div>
 
-            {/* 2-Column Metadata */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            {/* 3-Column Metadata: Status, Published Date, and Read Time */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
               <div>
-                <label style={labelStyle}>Published Date & Time</label>
+                <label style={labelStyle}>
+                  Publication Status <span style={{ color: '#EF4444' }}>*</span>
+                </label>
+                <CustomDropdown
+                  value={published ? 'published' : 'draft'}
+                  options={[
+                    { value: 'published', label: '● Live Published (Visible on /blog)' },
+                    { value: 'draft', label: '● Draft Mode (Hidden from /blog)' },
+                  ]}
+                  onChange={(val) => setPublished(val === 'published')}
+                  direction="down"
+                  size="form"
+                  fullWidth
+                />
+              </div>
+
+              <div>
+                <label style={labelStyle}>Published Date &amp; Time</label>
                 <input
                   type="datetime-local"
                   value={publishedAt}
@@ -2688,12 +2708,31 @@ function BlogEditorInner() {
               transition: 'all 0.15s ease',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-              <polyline points="17 21 17 13 7 13 7 21" />
-              <polyline points="7 3 7 8 15 8" />
-            </svg>
-            <span>{isSubmitting ? 'Saving...' : 'Save as Draft'}</span>
+            {submittingAction === 'draft' ? (
+              <>
+                <span
+                  style={{
+                    width: '14px',
+                    height: '14px',
+                    border: '2px solid #64748B',
+                    borderTopColor: 'transparent',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    animation: 'spin 0.8s linear infinite',
+                  }}
+                />
+                <span>Saving Draft...</span>
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                <span>Save as Draft</span>
+              </>
+            )}
           </button>
 
           <button
@@ -2719,13 +2758,32 @@ function BlogEditorInner() {
               transition: 'all 0.15s ease',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-            </svg>
-            <span>{isSubmitting ? 'Saving...' : isEditMode ? 'Update Article' : 'Publish Article'}</span>
+            {submittingAction === 'publish' ? (
+              <>
+                <span
+                  style={{
+                    width: '14px',
+                    height: '14px',
+                    border: '2px solid #FFFFFF',
+                    borderTopColor: 'transparent',
+                    borderRadius: '50%',
+                    display: 'inline-block',
+                    animation: 'spin 0.8s linear infinite',
+                  }}
+                />
+                <span>{isEditMode ? 'Updating Article...' : 'Publishing Article...'}</span>
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+                <span>{isEditMode ? 'Update Article' : 'Publish Article'}</span>
+              </>
+            )}
           </button>
         </div>
       </div>
@@ -2967,10 +3025,15 @@ function BlogEditorInner() {
                     onClick={() => {
                       if (selectedAssetUrls.length > 0) {
                         const newImages = [...sliderImages];
+                        const newAlts = [...sliderImageAlts];
                         selectedAssetUrls.forEach((u) => {
-                          if (!newImages.includes(u)) newImages.push(u);
+                          if (!newImages.includes(u)) {
+                            newImages.push(u);
+                            newAlts.push(title.trim() ? `${title.trim()} slide preview` : 'Article slide showcase');
+                          }
                         });
                         setSliderImages(newImages);
+                        setSliderImageAlts(newAlts);
                         setSelectedAssetUrls([]);
                         setIsAssetPickerOpen(false);
                       }

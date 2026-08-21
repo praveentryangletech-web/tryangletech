@@ -93,6 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   const sliderImages = (post.images && post.images.length > 0 && post.images.some((img: string) => img && img.trim()))
     ? post.images.filter((img: string) => img && typeof img === 'string' && img.trim())
     : [coverImage];
+  const sliderImageAlts = post.imageAlts || [];
   const authorName = post.authorName || 'TryangleTech Team';
   const authorRole = post.authorRole || 'Content Creators';
   const authorImage = (post.authorImage && !post.authorImage.includes('/portfolio/')) ? post.authorImage : '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';
@@ -194,7 +195,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
               style={{ position: 'relative', backgroundColor: 'transparent', boxShadow: 'none' }}
             >
               {sliderImages.length > 1 ? (
-                <PortfolioImageSlider images={sliderImages} title={post.title} coverImage={coverImage} />
+                <PortfolioImageSlider
+                  images={sliderImages}
+                  title={post.title}
+                  coverImage={coverImage}
+                  coverAlt={coverImageAlt}
+                  imageAlts={sliderImageAlts}
+                />
               ) : (
                 <SafeImage
                   src={coverImage}

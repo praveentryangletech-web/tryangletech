@@ -137,6 +137,9 @@ export class BlogService {
       await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`;
     } catch (_) {}
     try {
+      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "images" TEXT[] DEFAULT ARRAY[]::TEXT[];`;
+    } catch (_) {}
+    try {
       await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];`;
     } catch (_) {}
     try {
@@ -163,8 +166,8 @@ export class BlogService {
       coverImage: row.coverImage || '',
       coverImageAlt: row.coverImageAlt || row.imageAlt || '',
       imageAlt: row.imageAlt || row.coverImageAlt || '',
-      images: row.images || [],
-      imageAlts: row.imageAlts || [],
+      images: Array.isArray(row.images) && row.images.length > 0 ? row.images : (row.coverImage ? [row.coverImage] : []),
+      imageAlts: Array.isArray(row.imageAlts) ? row.imageAlts : [],
       authorName: row.authorName || 'TryangleTech Team',
       authorRole: row.authorRole || 'Editorial Team',
       authorImage: row.authorImage || '',
@@ -440,7 +443,7 @@ export class BlogService {
         "createdAt", "updatedAt"
       ) VALUES (
         ${id}, ${slug}, ${title}, ${category}, ${excerpt}, ${content},
-        ${coverImage}, ${coverImageAlt}, ${imageAlt}, ${images}, ${imageAlts}, ${authorName}, ${authorRole}, ${authorImage}, ${authorBio}, ${readTime},
+        ${coverImage}, ${coverImageAlt}, ${imageAlt}, ${images}::text[], ${imageAlts}::text[], ${authorName}, ${authorRole}, ${authorImage}, ${authorBio}, ${readTime},
         ${published}, ${publishedAt}, ${order}, ${tags},
         ${section1Heading}, ${section1Paragraph1}, ${section1Paragraph2},
         ${quoteText}, ${quoteAuthor}, ${stepsTitle}, ${step1}, ${step2},
@@ -511,8 +514,8 @@ export class BlogService {
     if (input.coverImage !== undefined) updates.push(Prisma.sql`"coverImage" = ${input.coverImage.trim()}`);
     if (input.coverImageAlt !== undefined) updates.push(Prisma.sql`"coverImageAlt" = ${input.coverImageAlt.trim()}`);
     if (input.imageAlt !== undefined) updates.push(Prisma.sql`"imageAlt" = ${input.imageAlt.trim()}`);
-    if (Array.isArray(input.images)) updates.push(Prisma.sql`"images" = ${input.images}`);
-    if (Array.isArray(input.imageAlts)) updates.push(Prisma.sql`"imageAlts" = ${input.imageAlts}`);
+    if (Array.isArray(input.images)) updates.push(Prisma.sql`"images" = ${input.images}::text[]`);
+    if (Array.isArray(input.imageAlts)) updates.push(Prisma.sql`"imageAlts" = ${input.imageAlts}::text[]`);
     if (input.authorName !== undefined) updates.push(Prisma.sql`"authorName" = ${input.authorName.trim()}`);
     if (input.authorRole !== undefined) updates.push(Prisma.sql`"authorRole" = ${input.authorRole.trim()}`);
     if (input.authorImage !== undefined) updates.push(Prisma.sql`"authorImage" = ${input.authorImage.trim()}`);

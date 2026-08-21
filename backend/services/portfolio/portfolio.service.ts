@@ -634,21 +634,28 @@ export const portfolioService = {
     const faqs = Array.isArray(data.faqs) ? data.faqs : [];
     const faqsJson = JSON.stringify(faqs);
 
-    await db.$executeRaw`
-      INSERT INTO "PortfolioProject" (
-        "id", "slug", "title", "category", "image", "images", "description",
-        "client", "duration", "role", "liveUrl", "content",
-        "challenges", "solutions", "results", "technologies",
-        "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl", "faqs",
-        "order", "createdAt", "updatedAt"
-      ) VALUES (
-        ${id}, ${slug}, ${title}, ${category}, ${image}, ${images}, ${description},
-        ${client}, ${duration}, ${role}, ${liveUrl}, ${content},
-        ${challenges}, ${solutions}, ${results}, ${technologies},
-        ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl}, ${faqsJson}::jsonb,
-        ${order}, NOW(), NOW()
-      )
-    `;
+    try {
+      await db.$executeRaw`
+        INSERT INTO "PortfolioProject" (
+          "id", "slug", "title", "category", "image", "images", "description",
+          "client", "duration", "role", "liveUrl", "content",
+          "challenges", "solutions", "results", "technologies",
+          "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl", "faqs",
+          "order", "createdAt", "updatedAt"
+        ) VALUES (
+          ${id}, ${slug}, ${title}, ${category}, ${image}, ${images}, ${description},
+          ${client}, ${duration}, ${role}, ${liveUrl}, ${content},
+          ${challenges}, ${solutions}, ${results}, ${technologies},
+          ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl}, ${faqsJson}::jsonb,
+          ${order}, NOW(), NOW()
+        )
+      `;
+    } catch (err: any) {
+      if (err?.code === '23505' || String(err).includes('23505') || String(err).includes('unique constraint')) {
+        throw new Error(`A portfolio project with URL slug "${slug}" already exists. Please choose a unique slug.`);
+      }
+      throw err;
+    }
 
     return {
       id,
@@ -733,11 +740,18 @@ export const portfolioService = {
     updates.push(Prisma.sql`"updatedAt" = NOW()`);
 
     if (updates.length > 0) {
-      await db.$executeRaw`
-        UPDATE "PortfolioProject"
-        SET ${Prisma.join(updates, ', ')}
-        WHERE "id" = ${id}
-      `;
+      try {
+        await db.$executeRaw`
+          UPDATE "PortfolioProject"
+          SET ${Prisma.join(updates, ', ')}
+          WHERE "id" = ${id}
+        `;
+      } catch (err: any) {
+        if (err?.code === '23505' || String(err).includes('23505') || String(err).includes('unique constraint')) {
+          throw new Error(`Another portfolio project with URL slug "${data.slug || ''}" already exists. Please choose a unique slug.`);
+        }
+        throw err;
+      }
     }
 
     const rows = await db.$queryRaw<any[]>`

@@ -257,14 +257,10 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   /**
    * Save (Create or Update) Project Handler
    */
-  const saveProject = useCallback(async (projectData: Partial<Project>) => {
-    if (editingProject) {
-      const projectId = (editingProject as any).id;
-      if (!projectId) {
-        throw new Error('Project ID is required to update this project.');
-      }
-
-      const res = await apiClient.patch('/api/portfolio', { id: projectId, ...projectData });
+  const saveProject = useCallback(async (projectData: Partial<Project> & { id?: string }) => {
+    const targetId = projectData.id || (editingProject as any)?.id;
+    if (targetId) {
+      const res = await apiClient.patch('/api/portfolio', { ...projectData, id: String(targetId) });
       if (!res.success) {
         throw new Error(res.error || 'Failed to update project in database.');
       }

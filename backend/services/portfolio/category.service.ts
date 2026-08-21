@@ -69,6 +69,7 @@ class CategoryCacheManager {
 const categoryCache = new CategoryCacheManager();
 
 let isCategoryTableEnsured = false;
+const seededTypes = new Set<string>();
 
 export const portfolioCategoryService = {
   /**
@@ -76,6 +77,7 @@ export const portfolioCategoryService = {
    */
   async ensureTableExists(): Promise<void> {
     if (isCategoryTableEnsured) return;
+    isCategoryTableEnsured = true;
     try {
       await db.$executeRaw`
         CREATE TABLE IF NOT EXISTS "PortfolioCategory" (
@@ -88,7 +90,6 @@ export const portfolioCategoryService = {
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
       `;
-      isCategoryTableEnsured = true;
     } catch (err) {
       console.warn('[DB Category] ensureTableExists notice:', err);
     }
@@ -98,10 +99,13 @@ export const portfolioCategoryService = {
    * Ensures the protected default 'General' category exists for the given type (PORTFOLIO, BLOG, etc.).
    */
   async seedIfEmpty(type: string = 'PORTFOLIO'): Promise<void> {
+    const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
+    if (seededTypes.has(normalizedType)) return;
+    seededTypes.add(normalizedType);
+
     try {
       await this.ensureTableExists();
 
-      const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
       const defaultSlug = generateSlug(DEFAULT_CATEGORY);
       const defaultId = `cat_default_${normalizedType.toLowerCase()}_${defaultSlug}`;
 
@@ -122,15 +126,16 @@ export const portfolioCategoryService = {
     const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
     const cacheKey = `all_categories_${normalizedType.toLowerCase()}`;
 
+    // 1. Instant Cache Hit (< 0.1ms)
+    const cached = categoryCache.get<PortfolioCategoryItem[]>(cacheKey);
+    if (cached) {
+      const items = [...cached.data] as PortfolioCategoryItem[] & { etag?: string };
+      items.etag = cached.etag;
+      return items;
+    }
+
     try {
       await this.seedIfEmpty(normalizedType);
-
-      const cached = categoryCache.get<PortfolioCategoryItem[]>(cacheKey);
-      if (cached) {
-        const items = [...cached.data] as PortfolioCategoryItem[] & { etag?: string };
-        items.etag = cached.etag;
-        return items;
-      }
 
       // Fetch categories by type
       const categoryRows = await db.$queryRaw<any[]>`

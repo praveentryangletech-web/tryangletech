@@ -718,13 +718,12 @@ function BlogEditorInner() {
             height: '42px',
             padding: '0 18px',
             borderRadius: '10px',
-            border: '1px solid #E2E8F0',
-            backgroundColor: '#FFFFFF',
-            color: '#334155',
+            border: '1.5px solid #BFDBFE',
+            backgroundColor: '#EFF6FF',
+            color: '#1833FE',
             fontSize: '0.875rem',
             fontWeight: 700,
             textDecoration: 'none',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
             boxSizing: 'border-box',
             transition: 'all 0.15s ease',
           }}
@@ -776,9 +775,9 @@ function BlogEditorInner() {
               height: '42px',
               padding: '0 20px',
               borderRadius: '10px',
-              border: '1px solid #CBD5E1',
-              backgroundColor: '#FFFFFF',
-              color: '#475569',
+              border: '1.5px solid #CBD5E1',
+              backgroundColor: '#F8FAFC',
+              color: '#334155',
               fontSize: '0.875rem',
               fontWeight: 700,
               textDecoration: 'none',
@@ -786,7 +785,7 @@ function BlogEditorInner() {
               alignItems: 'center',
               justifyContent: 'center',
               boxSizing: 'border-box',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+              transition: 'all 0.15s ease',
             }}
           >
             Discard

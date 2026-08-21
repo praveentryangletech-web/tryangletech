@@ -776,8 +776,8 @@ function BlogEditorInner() {
               padding: '0 20px',
               borderRadius: '10px',
               border: '1.5px solid #CBD5E1',
-              backgroundColor: '#F8FAFC',
-              color: '#334155',
+              backgroundColor: '#FFFFFF',
+              color: '#475569',
               fontSize: '0.875rem',
               fontWeight: 700,
               textDecoration: 'none',
@@ -785,6 +785,7 @@ function BlogEditorInner() {
               alignItems: 'center',
               justifyContent: 'center',
               boxSizing: 'border-box',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               transition: 'all 0.15s ease',
             }}
           >
@@ -803,15 +804,14 @@ function BlogEditorInner() {
               height: '42px',
               padding: '0 24px',
               borderRadius: '10px',
-              border: 'none',
-              backgroundColor: '#1833FE',
-              color: '#FFFFFF',
+              border: '1.5px solid #BFDBFE',
+              backgroundColor: '#EFF6FF',
+              color: '#1833FE',
               fontSize: '0.875rem',
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              boxShadow: '0 4px 14px rgba(24, 51, 254, 0.3)',
               boxSizing: 'border-box',
-              transition: 'all 0.2s ease',
+              transition: 'all 0.15s ease',
             }}
           >
             {submittingAction === 'publish' ? (
@@ -820,7 +820,7 @@ function BlogEditorInner() {
                   style={{
                     width: '14px',
                     height: '14px',
-                    border: '2px solid #FFFFFF',
+                    border: '2px solid #1833FE',
                     borderTopColor: 'transparent',
                     borderRadius: '50%',
                     display: 'inline-block',
@@ -977,13 +977,12 @@ function BlogEditorInner() {
                 flex: '1 1 auto',
                 padding: '11px 20px',
                 borderRadius: '10px',
-                border: 'none',
-                backgroundColor: isActive ? '#1833FE' : 'transparent',
-                color: isActive ? '#FFFFFF' : '#64748B',
+                border: isActive ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
+                backgroundColor: isActive ? '#EFF6FF' : 'transparent',
+                color: isActive ? '#1833FE' : '#64748B',
                 fontWeight: isActive ? 700 : 600,
                 fontSize: '0.875rem',
                 cursor: 'pointer',
-                boxShadow: isActive ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -998,8 +997,8 @@ function BlogEditorInner() {
                 <span
                   style={{
                     fontSize: '0.725rem',
-                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : '#F1F5F9',
-                    color: isActive ? '#FFFFFF' : '#64748B',
+                    backgroundColor: isActive ? '#DBEAFE' : '#F1F5F9',
+                    color: isActive ? '#1833FE' : '#64748B',
                     padding: '2px 8px',
                     borderRadius: '10px',
                     fontWeight: 700,
@@ -1298,15 +1297,16 @@ function BlogEditorInner() {
                         style={{
                           padding: '8px 18px',
                           borderRadius: '8px',
-                          border: 'none',
-                          backgroundColor: '#1833FE',
-                          color: '#FFFFFF',
+                          border: '1.5px solid #BFDBFE',
+                          backgroundColor: '#EFF6FF',
+                          color: '#1833FE',
                           fontSize: '0.825rem',
                           fontWeight: 700,
                           cursor: isUploading ? 'not-allowed' : 'pointer',
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '6px',
+                          transition: 'all 0.15s ease',
                         }}
                       >
                         {isUploading ? (
@@ -1315,7 +1315,7 @@ function BlogEditorInner() {
                               style={{
                                 width: '12px',
                                 height: '12px',
-                                border: '2px solid #FFFFFF',
+                                border: '2px solid #1833FE',
                                 borderTopColor: 'transparent',
                                 borderRadius: '50%',
                                 display: 'inline-block',
@@ -1486,16 +1486,18 @@ function BlogEditorInner() {
                       padding: '10px 14px',
                       marginTop: '8px',
                       borderRadius: '10px',
-                      border: '1.5px solid #CBD5E1',
-                      backgroundColor: '#FFFFFF',
-                      color: '#1E293B',
+                      border: '1.5px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
                       fontSize: '0.85rem',
                       fontWeight: 700,
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '6px',
                       whiteSpace: 'nowrap',
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1554,6 +1556,7 @@ function BlogEditorInner() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1575,9 +1578,9 @@ function BlogEditorInner() {
                     style={{
                       padding: '9px 16px',
                       borderRadius: '10px',
-                      border: '1.5px solid #CBD5E1',
-                      backgroundColor: '#FFFFFF',
-                      color: '#1E293B',
+                      border: '1.5px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
                       fontSize: '0.85rem',
                       fontWeight: 700,
                       cursor: 'pointer',
@@ -1585,6 +1588,7 @@ function BlogEditorInner() {
                       alignItems: 'center',
                       gap: '6px',
                       whiteSpace: 'nowrap',
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1620,13 +1624,14 @@ function BlogEditorInner() {
                     padding: '0 20px',
                     height: '46px',
                     borderRadius: '12px',
-                    backgroundColor: '#1833FE',
-                    color: '#FFFFFF',
-                    border: 'none',
+                    border: '1.5px solid #BFDBFE',
+                    backgroundColor: '#EFF6FF',
+                    color: '#1833FE',
                     fontSize: '0.85rem',
                     fontWeight: 700,
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   + Add Slide
@@ -1793,9 +1798,9 @@ function BlogEditorInner() {
                           style={{
                             padding: '6px 8px',
                             borderRadius: '8px',
-                            border: '1px solid #CBD5E1',
-                            backgroundColor: '#FFFFFF',
-                            color: '#1E293B',
+                            border: '1px solid #BFDBFE',
+                            backgroundColor: '#EFF6FF',
+                            color: '#1833FE',
                             cursor: 'pointer',
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -2313,7 +2318,7 @@ function BlogEditorInner() {
                       setAssetPickerTarget('authorImage');
                       setIsAssetPickerOpen(true);
                     }}
-                    style={{ padding: '6px 12px', borderRadius: '8px', backgroundColor: '#1833FE', color: '#FFF', border: 'none', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+                    style={{ padding: '7px 14px', borderRadius: '8px', border: '1.5px solid #BFDBFE', backgroundColor: '#EFF6FF', color: '#1833FE', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s ease' }}
                   >
                     Pick Photo
                   </button>
@@ -2392,7 +2397,7 @@ function BlogEditorInner() {
                 <button
                   type="button"
                   onClick={handleAddKeyword}
-                  style={{ padding: '0 18px', borderRadius: '10px', backgroundColor: '#1833FE', color: '#FFF', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                  style={{ padding: '0 18px', borderRadius: '10px', border: '1.5px solid #BFDBFE', backgroundColor: '#EFF6FF', color: '#1833FE', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.15s ease' }}
                 >
                   + Add Keyword
                 </button>
@@ -2404,8 +2409,9 @@ function BlogEditorInner() {
                     <span
                       key={kw}
                       style={{
-                        backgroundColor: '#F1F5F9',
-                        color: '#334155',
+                        backgroundColor: '#EFF6FF',
+                        border: '1px solid #BFDBFE',
+                        color: '#1833FE',
                         padding: '4px 10px',
                         borderRadius: '6px',
                         fontSize: '0.775rem',
@@ -2415,7 +2421,7 @@ function BlogEditorInner() {
                         gap: '6px',
                       }}
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
                         <line x1="7" y1="7" x2="7.01" y2="7" />
                       </svg>
@@ -2497,16 +2503,16 @@ function BlogEditorInner() {
                   style={{
                     padding: '8px 16px',
                     borderRadius: '10px',
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: '#EFF6FF',
                     color: '#1833FE',
-                    border: '1.5px solid #1833FE',
+                    border: '1.5px solid #BFDBFE',
                     fontSize: '0.825rem',
                     fontWeight: 700,
                     cursor: isLoadingDefaults ? 'not-allowed' : 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -2520,16 +2526,16 @@ function BlogEditorInner() {
                   style={{
                     padding: '8px 16px',
                     borderRadius: '10px',
-                    backgroundColor: '#1833FE',
-                    color: '#FFFFFF',
-                    border: 'none',
+                    backgroundColor: '#EFF6FF',
+                    color: '#1833FE',
+                    border: '1.5px solid #BFDBFE',
                     fontSize: '0.825rem',
                     fontWeight: 700,
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -2569,12 +2575,13 @@ function BlogEditorInner() {
                   style={{
                     padding: '8px 18px',
                     borderRadius: '10px',
-                    backgroundColor: '#1833FE',
-                    color: '#FFFFFF',
-                    border: 'none',
+                    backgroundColor: '#EFF6FF',
+                    color: '#1833FE',
+                    border: '1.5px solid #BFDBFE',
                     fontSize: '0.85rem',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   ⚡ Populate Recommended FAQs

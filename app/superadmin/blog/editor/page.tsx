@@ -106,7 +106,8 @@ function BlogEditorInner() {
   const [mediaList, setMediaList] = useState<MediaAssetItem[]>([]);
   const [isLoadingMedia, setIsLoadingMedia] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadTarget, setUploadTarget] = useState<'cover' | 'slider' | 'contentImage1' | 'contentImage2' | 'authorImage'>('cover');
+  const [uploadTarget, setUploadTarget] = useState<'cover' | 'slider' | 'replaceSlide' | 'contentImage1' | 'contentImage2' | 'authorImage'>('cover');
+  const [replacingSlideIndex, setReplacingSlideIndex] = useState<number | null>(null);
   const [uploadFeedback, setUploadFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Pre-upload rename states
@@ -118,7 +119,7 @@ function BlogEditorInner() {
 
   // Asset Picker Modal State
   const [isAssetPickerOpen, setIsAssetPickerOpen] = useState(false);
-  const [assetPickerTarget, setAssetPickerTarget] = useState<'cover' | 'slider' | 'contentImage1' | 'contentImage2' | 'authorImage'>('cover');
+  const [assetPickerTarget, setAssetPickerTarget] = useState<'cover' | 'slider' | 'replaceSlide' | 'contentImage1' | 'contentImage2' | 'authorImage'>('cover');
   const [assetPickerSearch, setAssetPickerSearch] = useState('');
   const [selectedAssetUrls, setSelectedAssetUrls] = useState<string[]>([]);
 
@@ -269,7 +270,7 @@ function BlogEditorInner() {
     }
   }, [activeTab]);
 
-  const handleSelectFileToUpload = (files: FileList | null, target: 'cover' | 'slider' | 'contentImage1' | 'contentImage2' | 'authorImage' = 'cover') => {
+  const handleSelectFileToUpload = (files: FileList | null, target: 'cover' | 'slider' | 'replaceSlide' | 'contentImage1' | 'contentImage2' | 'authorImage' = 'cover') => {
     if (!files || files.length === 0) return;
     const file = files[0];
     setUploadTarget(target);
@@ -323,6 +324,11 @@ function BlogEditorInner() {
           setSliderImages((prev) => [...prev, data.url]);
           setSliderImageAlts((prev) => [...prev, title.trim() ? `${title.trim()} slide preview` : 'Article slide showcase']);
         }
+      } else if (uploadTarget === 'replaceSlide' && replacingSlideIndex !== null) {
+        const updated = [...sliderImages];
+        updated[replacingSlideIndex] = data.url;
+        setSliderImages(updated);
+        setReplacingSlideIndex(null);
       } else if (uploadTarget === 'contentImage1') {
         setContentImage1(data.url);
       } else if (uploadTarget === 'contentImage2') {
@@ -1731,6 +1737,75 @@ function BlogEditorInner() {
                         />
                       </div>
 
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginTop: '2px' }}>
+                        <input
+                          id={`replace-slide-file-${idx}`}
+                          type="file"
+                          accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
+                          style={{ display: 'none' }}
+                          onChange={(e) => {
+                            setReplacingSlideIndex(idx);
+                            handleSelectFileToUpload(e.target.files, 'replaceSlide');
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => document.getElementById(`replace-slide-file-${idx}`)?.click()}
+                          style={{
+                            padding: '6px 8px',
+                            borderRadius: '8px',
+                            border: '1px solid #BFDBFE',
+                            backgroundColor: '#EFF6FF',
+                            color: '#1833FE',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.725rem',
+                            fontWeight: 700,
+                            gap: '4px',
+                          }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                          </svg>
+                          <span>Upload New</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            fetchMediaList();
+                            setReplacingSlideIndex(idx);
+                            setAssetPickerTarget('replaceSlide');
+                            setIsAssetPickerOpen(true);
+                          }}
+                          style={{
+                            padding: '6px 8px',
+                            borderRadius: '8px',
+                            border: '1px solid #CBD5E1',
+                            backgroundColor: '#FFFFFF',
+                            color: '#1E293B',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.725rem',
+                            fontWeight: 700,
+                            gap: '4px',
+                          }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </svg>
+                          <span>Pick Asset</span>
+                        </button>
+                      </div>
+
                       <button
                         type="button"
                         onClick={() => handleRemoveSliderImage(idx)}
@@ -2901,6 +2976,12 @@ function BlogEditorInner() {
                   const handleSelectAsset = () => {
                     if (assetPickerTarget === 'cover') {
                       setCoverImage(asset.url);
+                      setIsAssetPickerOpen(false);
+                    } else if (assetPickerTarget === 'replaceSlide' && replacingSlideIndex !== null) {
+                      const updated = [...sliderImages];
+                      updated[replacingSlideIndex] = asset.url;
+                      setSliderImages(updated);
+                      setReplacingSlideIndex(null);
                       setIsAssetPickerOpen(false);
                     } else if (assetPickerTarget === 'contentImage1') {
                       setContentImage1(asset.url);

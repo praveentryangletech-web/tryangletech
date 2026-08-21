@@ -38,7 +38,8 @@ export async function GET(req: NextRequest) {
       const duration = (performance.now() - startTime).toFixed(1);
       const res = successResponse(post, 'Article retrieved successfully.');
       res.headers.set('Server-Timing', `total;dur=${duration}`);
-      res.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
+      res.headers.set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+      res.headers.set('Pragma', 'no-cache');
       return res;
     }
 
@@ -51,7 +52,8 @@ export async function GET(req: NextRequest) {
       const duration = (performance.now() - startTime).toFixed(1);
       const res = successResponse(post, 'Article retrieved successfully.');
       res.headers.set('Server-Timing', `total;dur=${duration}`);
-      res.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
+      res.headers.set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+      res.headers.set('Pragma', 'no-cache');
       return res;
     }
 

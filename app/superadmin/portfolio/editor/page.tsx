@@ -454,7 +454,7 @@ function PortfolioEditorInner() {
       setIsLoading(true);
       setErrorMessage('');
       try {
-        const res = await apiClient.get<Project>(`/api/portfolio?id=${projectId}`);
+        const res = await apiClient.get<Project>(`/api/portfolio?id=${projectId}`, { useCache: false });
         if (res.success && res.data) {
           const p = res.data;
           setTitle(p.title || '');

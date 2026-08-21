@@ -377,7 +377,7 @@ function BlogEditorInner() {
       setIsLoading(true);
       setErrorMessage('');
       try {
-        const res = await apiClient.get<BlogPostItem>(`/api/blog?id=${encodeURIComponent(postId!)}`);
+        const res = await apiClient.get<BlogPostItem>(`/api/blog?id=${encodeURIComponent(postId!)}`, { useCache: false });
         if (res.success && res.data) {
           const p = res.data;
           setTitle(p.title || '');

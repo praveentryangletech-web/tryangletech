@@ -194,7 +194,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                 {project.title}
               </h1>
             </div>
-            <div className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+            <div className="rt-hero-13-main-image rt-overflow-hidden" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0px' }}>
               {project.images && project.images.length > 1 ? (
                 <PortfolioImageSlider
                   images={project.images}

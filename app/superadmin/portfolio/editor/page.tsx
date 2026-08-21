@@ -714,13 +714,13 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
     width: '100%',
     padding: '11px 16px',
     borderRadius: '12px',
-    border: '1.5px solid #E2E8F0',
+    border: '1.5px solid #CBD5E1',
     fontSize: '0.9rem',
     outline: 'none',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F8FAFC',
     color: '#0F172A',
     fontWeight: 500,
-    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
   };
 
@@ -994,13 +994,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         className="no-scrollbar"
         style={{
           display: 'flex',
-          backgroundColor: '#FFFFFF',
-          borderRadius: '16px',
-          padding: '5px',
-          border: '1px solid #E2E8F0',
-          marginBottom: '1.75rem',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
-          gap: '4px',
+          backgroundColor: 'transparent',
+          padding: '0 0 1rem 0',
+          borderBottom: '1.5px solid #CBD5E1',
+          marginBottom: '2rem',
+          gap: '6px',
           overflowX: 'auto',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -1206,11 +1204,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         {activeTab === 'general' && (
           <div
             style={{
-              backgroundColor: '#FFFFFF',
+              backgroundColor: 'transparent',
               borderRadius: '20px',
-              border: '1.5px solid #E2E8F0',
-              padding: '2.5rem',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+              border: 'none',
+              padding: '0.5rem 0',
+              boxShadow: 'none',
               display: 'flex',
               flexDirection: 'column',
               gap: '1.75rem',
@@ -1364,11 +1362,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             {/* 1. Main Listing Cover Image Card */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
@@ -1398,14 +1396,27 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    gap: '10px',
                   }}
                 >
-                  <span>{uploadFeedback.text}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {uploadFeedback.type === 'success' ? (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                      </svg>
+                    )}
+                    <span>{uploadFeedback.text}</span>
+                  </div>
                   <button
                     type="button"
                     onClick={() => setUploadFeedback(null)}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', display: 'inline-flex', alignItems: 'center' }}
-                    aria-label="Dismiss feedback"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', padding: 0 }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="18" y1="6" x2="6" y2="18" />
@@ -1445,7 +1456,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={uploadFilePreview}
-                        alt="Selected File Preview"
+                        alt="Upload Preview"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                       />
                     )}
@@ -1753,11 +1764,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             {/* 2. Slider Showcase Card */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '10px' }}>
@@ -2227,11 +2238,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         {activeTab === 'narrative' && (
           <div
             style={{
-              backgroundColor: '#FFFFFF',
+              backgroundColor: 'transparent',
               borderRadius: '20px',
-              border: '1.5px solid #E2E8F0',
-              padding: '2.5rem',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+              border: 'none',
+              padding: '0.5rem 0',
+              boxShadow: 'none',
               display: 'flex',
               flexDirection: 'column',
               gap: '2.25rem',
@@ -2638,11 +2649,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             {/* SEO */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.75rem',
@@ -2736,11 +2747,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             {/* AEO (AI Engine Optimization) */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
@@ -2791,11 +2802,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             {/* GEO & Keywords */}
             <div
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: 'transparent',
                 borderRadius: '20px',
-                border: '1.5px solid #E2E8F0',
-                padding: '2.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                border: 'none',
+                padding: '0.5rem 0',
+                boxShadow: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
@@ -2915,11 +2926,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         {activeTab === 'faqs' && (
           <div
             style={{
-              backgroundColor: '#FFFFFF',
+              backgroundColor: 'transparent',
               borderRadius: '20px',
-              border: '1.5px solid #E2E8F0',
-              padding: '2.5rem',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+              border: 'none',
+              padding: '0.5rem 0',
+              boxShadow: 'none',
               display: 'flex',
               flexDirection: 'column',
               gap: '1.75rem',

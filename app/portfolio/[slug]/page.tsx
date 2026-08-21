@@ -200,7 +200,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   images={project.images}
                   title={project.title}
                   coverImage={project.image}
-                  coverAlt={project.imageAlt || project.title}
+                  coverAlt={project.imageAlt || (Array.isArray(project.imageAlts) && project.imageAlts[0]) || project.title}
                   imageAlts={project.imageAlts}
                 />
               ) : (
@@ -208,7 +208,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   src={project.image}
                   fallbackSrc="/portfolio/vh-accounting.webp"
                   loading="lazy"
-                  alt={project.imageAlt || project.title}
+                  alt={project.imageAlt || (Array.isArray(project.imageAlts) && project.imageAlts[0]) || project.title}
                   className="rt-image-scale"
                   style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
                   width={800}

@@ -451,3 +451,42 @@ body {
   scrollbar-width: none !important;    /* Firefox */
 }
 
+/* ── Universal Shimmer Skeleton Loading Tokens ── */
+@keyframes rtShimmerPulse {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.rt-skeleton-box {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 0%,
+    #e2e8f0 30%,
+    #f8fafc 50%,
+    #e2e8f0 70%,
+    #f1f5f9 100%
+  );
+  background-size: 300% 100%;
+  animation: rtShimmerPulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  display: block;
+}
+
+/* ── Route Navigation Progress Bar ── */
+.rt-route-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1833fe, #f85936, #1833fe);
+  background-size: 200% 100%;
+  animation: rtShimmerPulse 1.2s linear infinite;
+  z-index: 999999;
+  transition: width 0.25s ease-out, opacity 0.3s ease-in-out;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(24, 51, 254, 0.5);
+}
+

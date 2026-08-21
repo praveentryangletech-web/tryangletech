@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Script from 'next/script';
 import Navbar from './common/Navbar';
 import Footer from './common/Footer';
+import RouteProgressBar from './common/RouteProgressBar';
 import './globals.css';
 
 import type { Metadata, Viewport } from 'next';
@@ -1023,6 +1024,9 @@ export default function RootLayout({
             })
           }}
         />
+        <Suspense fallback={null}>
+          <RouteProgressBar />
+        </Suspense>
         <Navbar />
         {children}
         <Footer />

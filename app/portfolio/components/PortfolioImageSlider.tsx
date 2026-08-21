@@ -45,7 +45,10 @@ export default function PortfolioImageSlider({ images, title, coverImage, coverA
   }, [currentIndex, displayImages.length]);
 
   const currentSrc = displayImages[currentIndex] || fallback;
-  const currentAlt = (imageAlts && imageAlts[currentIndex]) || coverAlt || `${title} - slide ${currentIndex + 1}`;
+  const currentAlt = (imageAlts && imageAlts[currentIndex] && imageAlts[currentIndex].trim())
+    || (currentIndex === 0 && coverAlt && coverAlt.trim())
+    || (coverAlt && coverAlt.trim())
+    || `${title} - slide ${currentIndex + 1}`;
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>

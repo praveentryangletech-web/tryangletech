@@ -111,11 +111,11 @@ export default async function BlogPostPage({
   const coverImage = (post.coverImage && typeof post.coverImage === 'string' && post.coverImage.trim())
     ? post.coverImage.trim()
     : (post.image || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png');
-  const coverImageAlt = post.coverImageAlt || post.imageAlt || post.title;
+  const coverImageAlt = post.coverImageAlt || post.imageAlt || (Array.isArray(post.imageAlts) && post.imageAlts[0]) || post.title;
   const sliderImages = (post.images && post.images.length > 0 && post.images.some((img: string) => img && img.trim()))
     ? post.images.filter((img: string) => img && typeof img === 'string' && img.trim())
     : [coverImage];
-  const sliderImageAlts = post.imageAlts || [];
+  const sliderImageAlts = (Array.isArray(post.imageAlts) && post.imageAlts.length > 0) ? post.imageAlts : [coverImageAlt];
   const authorName = post.authorName || 'TryangleTech Team';
   const authorRole = post.authorRole || 'Content Creators';
   const authorImage = (post.authorImage && !post.authorImage.includes('/portfolio/')) ? post.authorImage : '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';
@@ -139,9 +139,9 @@ export default async function BlogPostPage({
 
   // Section 4: Mid-Article Images
   const img1 = post.contentImage1 || "/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png";
-  const img1Alt = post.contentImage1Alt || "Section showcase 1";
+  const img1Alt = post.contentImage1Alt || `${post.title} - Showcase illustration 1`;
   const img2 = post.contentImage2 || "/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp";
-  const img2Alt = post.contentImage2Alt || "Section showcase 2";
+  const img2Alt = post.contentImage2Alt || `${post.title} - Showcase illustration 2`;
 
   // Section 5: Conclusion & Takeaways
   const concTitle = post.conclusionTitle || "The future of human-AI collaboration";

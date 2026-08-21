@@ -731,7 +731,7 @@ function BlogEditorInner() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {isEditMode && slug && (
             <a
-              href={`/blog/${slug}`}
+              href={published ? `/blog/${slug}` : `/blog/${slug}?preview=true`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -742,9 +742,9 @@ function BlogEditorInner() {
                 height: '42px',
                 padding: '0 18px',
                 borderRadius: '10px',
-                border: '1.5px solid #BFDBFE',
-                backgroundColor: '#EFF6FF',
-                color: '#1833FE',
+                border: published ? '1.5px solid #BFDBFE' : '1.5px solid #FCD34D',
+                backgroundColor: published ? '#EFF6FF' : '#FEF3C7',
+                color: published ? '#1833FE' : '#92400E',
                 fontSize: '0.875rem',
                 fontWeight: 700,
                 textDecoration: 'none',
@@ -752,7 +752,7 @@ function BlogEditorInner() {
                 transition: 'all 0.15s ease',
               }}
             >
-              <span>Preview Live</span>
+              <span>{published ? 'View Live' : 'Preview Draft'}</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />

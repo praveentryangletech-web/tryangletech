@@ -12,8 +12,17 @@ import HomeThreeFaq from "../../home-three/components/Faq";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ preview?: string }>;
+}): Promise<Metadata> {
   const resolvedParams = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const isPreview = resolvedSearchParams?.preview === 'true';
+
   let post: any = null;
   try {
     post = await blogService.getPostBySlug(resolvedParams.id);
@@ -23,10 +32,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
   }
 
-  if (!post) {
+  if (!post || (!post.published && !isPreview)) {
     return {
       title: "Article Not Found | TryangleTech Blog",
       description: "Explore tech insights and software development articles on TryangleTech.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -68,8 +81,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function BlogPostPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ preview?: string }>;
+}) {
   const resolvedParams = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const isPreview = resolvedSearchParams?.preview === 'true';
   
   // 1. Try fetching from dynamic database first
   let post: any = null;
@@ -82,7 +103,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
     post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
   }
 
-  if (!post) {
+  // 3. Block draft posts from public route (404 Not Found) unless preview=true
+  if (!post || (!post.published && !isPreview)) {
     return notFound();
   }
 
@@ -173,6 +195,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
       />
 
       <main>
+        {!post.published && (
+          <div
+            style={{
+              backgroundColor: '#FEF3C7',
+              borderBottom: '1px solid #FCD34D',
+              color: '#92400E',
+              padding: '12px 20px',
+              textAlign: 'center',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              position: 'sticky',
+              top: 0,
+              zIndex: 9999,
+            }}
+          >
+            <span>⚠️ <strong>Draft Preview Mode:</strong> This article is in Draft status and is hidden from public view.</span>
+          </div>
+        )}
         <section className="rt-hero-13">
           <div className="w-layout-blockcontainer rt-container w-container">
             <div className="rt-hero-10-heading rt-desktop-text-center">

@@ -451,15 +451,15 @@ export default function BlogTable({
                   <td style={{ padding: '0.75rem 2rem 0.75rem 0.5rem', textAlign: 'right', whiteSpace: 'nowrap' }}>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                       {/* Direct Link to Public Blog Post */}
-                      <Tooltip text="View live public article page" position="top">
+                      <Tooltip text={item.published ? "View live public article page" : "Preview draft article"} position="top">
                         <a
-                          href={`/blog/${item.slug}`}
+                          href={item.published ? `/blog/${item.slug}` : `/blog/${item.slug}?preview=true`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
-                            backgroundColor: '#EFF6FF',
-                            color: 'var(--brand-blue, #1833fe)',
-                            border: '1px solid #BFDBFE',
+                            backgroundColor: item.published ? '#EFF6FF' : '#FEF3C7',
+                            color: item.published ? 'var(--brand-blue, #1833fe)' : '#92400E',
+                            border: item.published ? '1px solid #BFDBFE' : '1px solid #FCD34D',
                             height: '30px',
                             padding: '0 10px',
                             borderRadius: '7px',
@@ -480,7 +480,7 @@ export default function BlogTable({
                             <polyline points="15 3 21 3 21 9" />
                             <line x1="10" y1="14" x2="21" y2="3" />
                           </svg>
-                          <span>View Live</span>
+                          <span>{item.published ? 'View Live' : 'Preview'}</span>
                         </a>
                       </Tooltip>
 

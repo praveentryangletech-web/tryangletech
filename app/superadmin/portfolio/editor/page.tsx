@@ -762,53 +762,85 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
   if (isLoading) {
     return (
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.75rem 2rem 6rem 2rem' }}>
-        {/* Header Toolbar Skeleton */}
+        {/* 1. Header Toolbar Skeleton */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <div className="agy-skeleton" style={{ width: '160px', height: '42px', borderRadius: '12px' }} />
+          <div className="rt-skeleton-box" style={{ width: '165px', height: '42px', borderRadius: '10px' }} />
           <div style={{ display: 'flex', gap: '10px' }}>
-            <div className="agy-skeleton" style={{ width: '110px', height: '42px', borderRadius: '12px' }} />
-            <div className="agy-skeleton" style={{ width: '150px', height: '42px', borderRadius: '12px' }} />
+            <div className="rt-skeleton-box" style={{ width: '125px', height: '42px', borderRadius: '10px' }} />
+            <div className="rt-skeleton-box" style={{ width: '90px', height: '42px', borderRadius: '10px' }} />
+            <div className="rt-skeleton-box" style={{ width: '145px', height: '42px', borderRadius: '10px' }} />
           </div>
         </div>
 
-        {/* Tabs Bar Skeleton */}
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '1.5px solid #CBD5E1', paddingBottom: '1rem', marginBottom: '2rem' }}>
-          <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
-          <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
-          <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
-          <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
+        {/* 2. Tabs Bar Skeleton (5 Tabs with divider line) */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            borderBottom: '1.5px solid #CBD5E1',
+            paddingBottom: '0.75rem',
+            marginBottom: '2rem',
+            overflowX: 'auto',
+          }}
+        >
+          <div className="rt-skeleton-box" style={{ width: '150px', height: '40px', borderRadius: '10px', flexShrink: 0 }} />
+          <div className="rt-skeleton-box" style={{ width: '165px', height: '40px', borderRadius: '10px', flexShrink: 0 }} />
+          <div className="rt-skeleton-box" style={{ width: '145px', height: '40px', borderRadius: '10px', flexShrink: 0 }} />
+          <div className="rt-skeleton-box" style={{ width: '170px', height: '40px', borderRadius: '10px', flexShrink: 0 }} />
+          <div className="rt-skeleton-box" style={{ width: '155px', height: '40px', borderRadius: '10px', flexShrink: 0 }} />
         </div>
 
-        {/* Main Form Skeleton */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', padding: '0.5rem 0' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
+        {/* 3. Section Title & Subtitle */}
+        <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div className="rt-skeleton-box" style={{ width: '320px', height: '24px', borderRadius: '6px' }} />
+          <div className="rt-skeleton-box" style={{ width: '480px', height: '16px', borderRadius: '4px' }} />
+        </div>
+
+        {/* 4. Form Fields Skeleton */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          {/* Row 1: Title & Category */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <div>
-              <div className="agy-skeleton" style={{ width: '100px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+              <div className="rt-skeleton-box" style={{ width: '110px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
             <div>
-              <div className="agy-skeleton" style={{ width: '90px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+              <div className="rt-skeleton-box" style={{ width: '90px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
           </div>
 
+          {/* Row 2: Slug */}
           <div>
-            <div className="agy-skeleton" style={{ width: '120px', height: '14px', marginBottom: '8px' }} />
-            <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+            <div className="rt-skeleton-box" style={{ width: '85px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+          {/* Row 3: Client, Role, Duration */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
             <div>
-              <div className="agy-skeleton" style={{ width: '90px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+              <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
             <div>
-              <div className="agy-skeleton" style={{ width: '90px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
             <div>
-              <div className="agy-skeleton" style={{ width: '90px', height: '14px', marginBottom: '8px' }} />
-              <div className="agy-skeleton" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+              <div className="rt-skeleton-box" style={{ width: '80px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+            </div>
+          </div>
+
+          {/* Row 4: Live URL & Order */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px', gap: '1.5rem' }}>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '160px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+            </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '80px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
           </div>
         </div>

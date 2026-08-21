@@ -186,9 +186,6 @@ function PortfolioEditorInner() {
       const url = new URL(window.location.href);
       url.searchParams.set('tab', tab);
       window.history.replaceState(null, '', url.toString());
-      try {
-        sessionStorage.setItem(`portfolio_editor_tab_${projectId || 'new'}`, tab);
-      } catch (_) {}
     }
   };
 
@@ -198,15 +195,7 @@ function PortfolioEditorInner() {
       if (urlTab && VALID_TABS.includes(urlTab)) {
         setActiveTabState(urlTab);
       } else {
-        try {
-          const savedTab = sessionStorage.getItem(`portfolio_editor_tab_${projectId || 'new'}`) as EditorTab | null;
-          if (savedTab && VALID_TABS.includes(savedTab)) {
-            setActiveTabState(savedTab);
-            const url = new URL(window.location.href);
-            url.searchParams.set('tab', savedTab);
-            window.history.replaceState(null, '', url.toString());
-          }
-        } catch (_) {}
+        setActiveTabState('general');
       }
     }
   }, [searchParams, projectId]);

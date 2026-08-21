@@ -37,9 +37,6 @@ function BlogEditorInner() {
       const url = new URL(window.location.href);
       url.searchParams.set('tab', tab);
       window.history.replaceState(null, '', url.toString());
-      try {
-        sessionStorage.setItem(`blog_editor_tab_${postId || 'new'}`, tab);
-      } catch (_) {}
     }
   };
 
@@ -49,15 +46,7 @@ function BlogEditorInner() {
       if (urlTab && VALID_TABS.includes(urlTab)) {
         setActiveTabState(urlTab);
       } else {
-        try {
-          const savedTab = sessionStorage.getItem(`blog_editor_tab_${postId || 'new'}`) as EditorTab | null;
-          if (savedTab && VALID_TABS.includes(savedTab)) {
-            setActiveTabState(savedTab);
-            const url = new URL(window.location.href);
-            url.searchParams.set('tab', savedTab);
-            window.history.replaceState(null, '', url.toString());
-          }
-        } catch (_) {}
+        setActiveTabState('general');
       }
     }
   }, [searchParams, postId]);
@@ -473,8 +462,17 @@ function BlogEditorInner() {
   };
 
   const handleAddTag = () => {
-    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
-      setTags([...tags, tagInput.trim()]);
+    const raw = tagInput.trim();
+    if (!raw) return;
+    const parts = raw.split(',').map((s) => s.trim()).filter((s) => s.length > 0);
+    if (parts.length > 0) {
+      setTags((prev) => {
+        const next = [...prev];
+        for (const p of parts) {
+          if (!next.includes(p)) next.push(p);
+        }
+        return next;
+      });
       setTagInput('');
     }
   };
@@ -484,8 +482,17 @@ function BlogEditorInner() {
   };
 
   const handleAddKeyword = () => {
-    if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
-      setKeywords([...keywords, keywordInput.trim()]);
+    const raw = keywordInput.trim();
+    if (!raw) return;
+    const parts = raw.split(',').map((s) => s.trim()).filter((s) => s.length > 0);
+    if (parts.length > 0) {
+      setKeywords((prev) => {
+        const next = [...prev];
+        for (const p of parts) {
+          if (!next.includes(p)) next.push(p);
+        }
+        return next;
+      });
       setKeywordInput('');
     }
   };

@@ -663,18 +663,30 @@ function BlogEditorInner() {
             <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
           </div>
 
-          {/* Row 3: Author Info */}
+          {/* Row 3: Publication Status, Published Date & Read Time */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
             <div>
-              <div className="rt-skeleton-box" style={{ width: '110px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
               <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '150px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+            </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
+            </div>
+          </div>
+
+          {/* Row 4: Author Name & Author Role */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <div>
               <div className="rt-skeleton-box" style={{ width: '100px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
               <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
             <div>
-              <div className="rt-skeleton-box" style={{ width: '90px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
               <div className="rt-skeleton-box" style={{ width: '100%', height: '48px', borderRadius: '12px' }} />
             </div>
           </div>

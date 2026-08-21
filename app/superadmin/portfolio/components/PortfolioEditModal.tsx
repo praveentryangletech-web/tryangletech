@@ -35,6 +35,13 @@ export default function PortfolioEditModal({
   const [challenges, setChallenges] = useState<string[]>(['']);
   const [solutions, setSolutions] = useState<string[]>(['']);
   const [results, setResults] = useState<string[]>(['']);
+  const [metaTitle, setMetaTitle] = useState('');
+  const [metaDescription, setMetaDescription] = useState('');
+  const [canonicalUrl, setCanonicalUrl] = useState('');
+  const [aeoSummary, setAeoSummary] = useState('');
+  const [geoRegion, setGeoRegion] = useState('');
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [keywordInput, setKeywordInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -55,6 +62,12 @@ export default function PortfolioEditModal({
       setChallenges(project.challenges && project.challenges.length > 0 ? project.challenges : ['']);
       setSolutions(project.solutions && project.solutions.length > 0 ? project.solutions : ['']);
       setResults(project.results && project.results.length > 0 ? project.results : ['']);
+      setMetaTitle(project.metaTitle || '');
+      setMetaDescription(project.metaDescription || '');
+      setCanonicalUrl(project.canonicalUrl || '');
+      setAeoSummary(project.aeoSummary || '');
+      setGeoRegion(project.geoRegion || '');
+      setKeywords(project.keywords || []);
     } else {
       // Add mode defaults
       setTitle('');
@@ -71,7 +84,14 @@ export default function PortfolioEditModal({
       setChallenges(['']);
       setSolutions(['']);
       setResults(['']);
+      setMetaTitle('');
+      setMetaDescription('');
+      setCanonicalUrl('');
+      setAeoSummary('');
+      setGeoRegion('');
+      setKeywords([]);
     }
+    setKeywordInput('');
     setErrorMessage('');
   }, [project, isOpen]);
 
@@ -86,6 +106,17 @@ export default function PortfolioEditModal({
 
   const handleRemoveTech = (tech: string) => {
     setTechnologies(technologies.filter((t) => t !== tech));
+  };
+
+  const handleAddKeyword = () => {
+    if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
+      setKeywords([...keywords, keywordInput.trim()]);
+      setKeywordInput('');
+    }
+  };
+
+  const handleRemoveKeyword = (kw: string) => {
+    setKeywords(keywords.filter((k) => k !== kw));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -114,6 +145,12 @@ export default function PortfolioEditModal({
         challenges: challenges.filter((c) => c.trim().length > 0),
         solutions: solutions.filter((s) => s.trim().length > 0),
         results: results.filter((r) => r.trim().length > 0),
+        metaTitle: metaTitle.trim(),
+        metaDescription: metaDescription.trim(),
+        canonicalUrl: canonicalUrl.trim(),
+        aeoSummary: aeoSummary.trim(),
+        geoRegion: geoRegion.trim(),
+        keywords,
       };
 
       await onSave(payload);
@@ -519,6 +556,199 @@ export default function PortfolioEditModal({
                     </button>
                   </span>
                 ))}
+              </div>
+            </div>
+
+            {/* ── SECTION: SEO, AEO & GEO SUITE ── */}
+            <div style={{ marginTop: '0.5rem', paddingTop: '1.5rem', borderTop: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
+                  </svg>
+                  <span>Dynamic SEO, AEO & GEO Optimization</span>
+                </h3>
+                <span style={{ fontSize: '0.725rem', backgroundColor: '#ECFDF5', color: '#059669', padding: '2px 8px', borderRadius: '10px', fontWeight: 700 }}>
+                  AI Ready
+                </span>
+              </div>
+
+              {/* 2-Col Meta Title & Canonical */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                    Custom Meta Title
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={title ? `${title} | TryangleTech Case Study` : 'e.g. VH Accounting - Enterprise Software Platform'}
+                    value={metaTitle}
+                    onChange={(e) => setMetaTitle(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.6rem 0.9rem',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '0.875rem',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                    Target GEO Region
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Ahmedabad, India, United States"
+                    value={geoRegion}
+                    onChange={(e) => setGeoRegion(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.6rem 0.9rem',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '0.875rem',
+                      outline: 'none',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Meta Description */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                  Meta Description (SERP Snippet)
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Compelling 160-character description for Google search..."
+                  value={metaDescription}
+                  onChange={(e) => setMetaDescription(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.6rem 0.9rem',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                    lineHeight: '1.4',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              {/* AEO Summary */}
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#334155', margin: 0 }}>
+                    AEO Direct Answer (For ChatGPT, Gemini & Perplexity)
+                  </label>
+                  <span style={{ fontSize: '0.7rem', color: '#7C3AED', fontWeight: 700 }}>LLM Citation Ready</span>
+                </div>
+                <textarea
+                  rows={2}
+                  placeholder="Direct concise answer summary explaining how TryangleTech solved the client's problem..."
+                  value={aeoSummary}
+                  onChange={(e) => setAeoSummary(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.6rem 0.9rem',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                    lineHeight: '1.4',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              {/* Semantic Keywords */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                  Target Keywords
+                </label>
+                <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                  <input
+                    type="text"
+                    placeholder="Type keyword and press Enter"
+                    value={keywordInput}
+                    onChange={(e) => setKeywordInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddKeyword();
+                      }
+                    }}
+                    style={{
+                      flex: 1,
+                      padding: '0.6rem 0.9rem',
+                      borderRadius: '8px',
+                      border: '1px solid #CBD5E1',
+                      fontSize: '0.875rem',
+                      outline: 'none',
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddKeyword}
+                    style={{
+                      padding: '0.6rem 1.25rem',
+                      backgroundColor: '#1833FE',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontSize: '0.875rem',
+                      fontWeight: 700,
+                      color: '#FFFFFF',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    + Add
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {keywords.map((kw) => (
+                    <span
+                      key={kw}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        backgroundColor: '#EFF6FF',
+                        color: '#1833FE',
+                        padding: '4px 10px',
+                        borderRadius: '100px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        border: '1px solid #BFDBFE',
+                      }}
+                    >
+                      {kw}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveKeyword(kw)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#1833FE',
+                          cursor: 'pointer',
+                          padding: 0,
+                          fontWeight: 800,
+                          fontSize: '0.9rem',
+                        }}
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

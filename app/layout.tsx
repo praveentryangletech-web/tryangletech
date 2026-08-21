@@ -8,13 +8,64 @@ import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tryangletech.com'),
-  title: 'TryangleTech | Web, App & Custom Software Development in Ahmedabad',
-  description: "We're an Ahmedabad-based IT company building websites, mobile apps, and custom software for businesses. 350+ projects delivered with zero technical jargon.",
+  title: {
+    default: 'TryangleTech | Web, App & Custom Software Development in Ahmedabad',
+    template: '%s | TryangleTech',
+  },
+  description: "TryangleTech is a leading Ahmedabad-based IT company building high-performance websites, mobile apps, and custom software for businesses. 350+ projects delivered with zero technical jargon.",
+  keywords: [
+    'Web Development Ahmedabad',
+    'Mobile App Development Company',
+    'Custom Software Development India',
+    'Next.js Development Agency',
+    'React Native Apps',
+    'UI UX Design Agency',
+    'Digital Marketing Agency Ahmedabad',
+    'TryangleTech',
+    'Full Stack Engineering'
+  ],
+  authors: [{ name: 'TryangleTech Team', url: 'https://tryangletech.com' }],
+  creator: 'TryangleTech',
+  publisher: 'TryangleTech',
   icons: {
     icon: '/favicon.png',
+    apple: '/icon.png',
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://tryangletech.com',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://tryangletech.com',
+    siteName: 'TryangleTech',
+    title: 'TryangleTech | Modern Web, App & Software Development Agency',
+    description: 'Empowering businesses with custom web applications, mobile apps, enterprise software, and growth marketing. 350+ projects delivered.',
+    images: [
+      {
+        url: '/portfolio/vh-accounting.webp',
+        width: 1200,
+        height: 630,
+        alt: 'TryangleTech - Tech Agency Ahmedabad',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TryangleTech | Web, App & Custom Software Development',
+    description: 'Ahmedabad IT company delivering high-impact websites, apps, and custom software.',
+    images: ['/portfolio/vh-accounting.webp'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -824,31 +875,131 @@ export default function RootLayout({
       />
       <body className="w-mod-js w-mod-ix" suppressHydrationWarning>
         <Script
-          id="local-business-schema"
+          id="organization-and-localbusiness-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Tryangle Tech",
-              "image": "https://tryangletech.com/logo.png",
-              "url": "https://tryangletech.com",
-              "telephone": "+91-90338-78806",
-              "email": "info.tryangletech@gmail.com",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "1st Floor-29/Vitthal Plaza, Opp. GEB, Nava Naroda",
-                "addressLocality": "Ahmedabad",
-                "addressRegion": "Gujarat",
-                "postalCode": "382330",
-                "addressCountry": "IN"
-              },
-              "sameAs": [
-                "https://www.instagram.com/tryangle24_7/",
-                "https://www.linkedin.com/company/tryangle-tech",
-                "https://www.facebook.com/tryangletech/"
-              ],
-              "priceRange": "$$"
+              "@graph": [
+                {
+                  "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
+                  "@id": "https://tryangletech.com/#organization",
+                  "name": "TryangleTech",
+                  "legalName": "TryangleTech Solutions",
+                  "alternateName": "Tryangle Tech",
+                  "url": "https://tryangletech.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://tryangletech.com/icon.png",
+                    "width": 512,
+                    "height": 512
+                  },
+                  "image": "https://tryangletech.com/portfolio/vh-accounting.webp",
+                  "description": "TryangleTech is a premier digital technology agency based in Ahmedabad, providing Web Development, Custom Software, Mobile Apps, Graphics Design, and Performance Marketing.",
+                  "telephone": "+91-90338-78806",
+                  "email": "info.tryangletech@gmail.com",
+                  "priceRange": "$$",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "1st Floor-29/Vitthal Plaza, Opp. GEB, Nava Naroda",
+                    "addressLocality": "Ahmedabad",
+                    "addressRegion": "Gujarat",
+                    "postalCode": "382330",
+                    "addressCountry": "IN"
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 23.0754,
+                    "longitude": 72.656
+                  },
+                  "areaServed": [
+                    { "@type": "Country", "name": "India" },
+                    { "@type": "City", "name": "Ahmedabad" },
+                    { "@type": "AdministrativeArea", "name": "Gujarat" },
+                    { "@type": "Country", "name": "United States" },
+                    { "@type": "Country", "name": "United Kingdom" },
+                    { "@type": "Country", "name": "United Arab Emirates" }
+                  ],
+                  "openingHoursSpecification": [
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                      "opens": "09:30",
+                      "closes": "19:30"
+                    }
+                  ],
+                  "sameAs": [
+                    "https://www.instagram.com/tryangle24_7/",
+                    "https://www.linkedin.com/company/tryangle-tech",
+                    "https://www.facebook.com/tryangletech/"
+                  ],
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "TryangleTech Digital Services",
+                    "itemListElement": [
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Web Development",
+                          "url": "https://tryangletech.com/service/web-development",
+                          "description": "Custom Next.js, React, and e-commerce web applications built for speed and high conversions."
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Custom Software Engineering",
+                          "url": "https://tryangletech.com/service/custom-software",
+                          "description": "Enterprise software, cloud backend systems, workflow automations, and AI agents."
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Mobile Application Development",
+                          "url": "https://tryangletech.com/service/mobile-application",
+                          "description": "Native and cross-platform iOS & Android mobile apps built with React Native and Flutter."
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Graphics & UI/UX Design",
+                          "url": "https://tryangletech.com/service/graphics-designing",
+                          "description": "Premium brand identity, 3D visual assets, and high-converting UI/UX interface design."
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Digital Marketing & SEO",
+                          "url": "https://tryangletech.com/service/digital-marketing",
+                          "description": "Performance marketing, SEO engineering, and paid ad campaign management for scalable business growth."
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://tryangletech.com/#website",
+                  "url": "https://tryangletech.com",
+                  "name": "TryangleTech",
+                  "publisher": {
+                    "@id": "https://tryangletech.com/#organization"
+                  },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://tryangletech.com/blog?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ]
             })
           }}
         />

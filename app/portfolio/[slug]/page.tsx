@@ -42,27 +42,44 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const title = project.metaTitle || `${project.title} - ${project.category} | TryangleTech Case Study`;
-  const description = project.metaDescription || project.description || 'Custom software design and development case study by TryangleTech.';
-  const keywords = project.keywords && project.keywords.length > 0 ? project.keywords : [project.category, 'Web Development', 'TryangleTech'];
+  const description = project.metaDescription || project.aeoSummary || project.description || 'Custom software design and development case study by TryangleTech.';
+  const keywords = project.keywords && project.keywords.length > 0
+    ? (project.geoRegion ? [...project.keywords, project.geoRegion] : project.keywords)
+    : [project.category, 'Web Development', 'Custom Software', 'TryangleTech'];
+  const canonicalUrl = project.canonicalUrl || `https://tryangletech.com/portfolio/${project.slug}`;
+  const image = project.image || '/portfolio/vh-accounting.webp';
 
   return {
     title,
     description,
     keywords,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title,
       description,
+      url: canonicalUrl,
+      type: 'article',
+      siteName: 'TryangleTech',
       images: [
         {
-          url: project.image || '/portfolio/vh-accounting.webp',
+          url: image,
           width: 1200,
           height: 630,
           alt: project.title,
         },
       ],
     },
-    alternates: {
-      canonical: project.canonicalUrl || `https://tryangletech.com/portfolio/${project.slug}`,
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+    other: {
+      ...(project.geoRegion ? { 'geo.region': project.geoRegion } : {}),
+      ...(project.aeoSummary ? { 'ai-summary': project.aeoSummary } : {}),
     },
   };
 }
@@ -93,6 +110,62 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://tryangletech.com/portfolio/${project.slug}`
+            },
+            "name": project.title,
+            "headline": project.metaTitle || project.title,
+            "description": project.metaDescription || project.description || `Case study on ${project.title} by TryangleTech.`,
+            "abstract": project.aeoSummary || project.description,
+            "image": project.images && project.images.length > 0 ? project.images : [project.image || "https://tryangletech.com/portfolio/vh-accounting.webp"],
+            "creator": {
+              "@type": "Organization",
+              "name": "TryangleTech",
+              "url": "https://tryangletech.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://tryangletech.com/icon.png"
+              }
+            },
+            "provider": {
+              "@type": "Organization",
+              "name": "TryangleTech",
+              "url": "https://tryangletech.com"
+            },
+            ...(project.client ? {
+              "sponsor": {
+                "@type": "Organization",
+                "name": project.client
+              }
+            } : {}),
+            ...(project.geoRegion ? {
+              "spatialCoverage": {
+                "@type": "Place",
+                "name": project.geoRegion
+              }
+            } : {}),
+            "genre": project.category,
+            "keywords": project.keywords && project.keywords.length > 0 ? project.keywords.join(", ") : project.category,
+            "about": [
+              {
+                "@type": "Thing",
+                "name": project.category
+              },
+              ...(project.technologies || []).map((t) => ({
+                "@type": "SoftwareApplication",
+                "name": t
+              }))
+            ]
+          })
+        }}
+      />
       <style>{`
         @keyframes fadeUpAnim {
           from { opacity: 0; transform: translateY(40px); }

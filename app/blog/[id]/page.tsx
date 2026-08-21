@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import WebflowInit from "../../common/WebflowInit";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,62 @@ import { blogService } from "@/backend/services/blog/blog.service";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  let post: any = null;
+  try {
+    post = await blogService.getPostBySlug(resolvedParams.id);
+  } catch {}
+
+  if (!post) {
+    post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
+  }
+
+  if (!post) {
+    return {
+      title: "Article Not Found | TryangleTech Blog",
+      description: "Explore tech insights and software development articles on TryangleTech.",
+    };
+  }
+
+  const title = post.metaTitle || `${post.title} | TryangleTech Blog`;
+  const description = post.metaDescription || post.excerpt || post.section1Paragraph1 || "Read this article on TryangleTech Blog.";
+  const canonicalUrl = post.canonicalUrl || `https://tryangletech.com/blog/${post.slug}`;
+  const keywords = post.keywords && post.keywords.length > 0 ? post.keywords : [post.category, "Software Development", "Web Development", "Tech Agency"];
+  const image = post.coverImage || post.image || "/portfolio/vh-accounting.webp";
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "article",
+      publishedTime: post.publishedAt || post.createdAt,
+      authors: [post.authorName || "TryangleTech Team"],
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
@@ -75,6 +132,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   return (
     <>
       <WebflowInit pageId="68edde422825b6d5b8990f59" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://tryangletech.com/blog/${post.slug}`
+            },
+            "headline": post.title,
+            "description": post.metaDescription || post.excerpt || s1P1,
+            "image": [coverImage, ...sliderImages.filter((img: string) => img !== coverImage)],
+            "datePublished": post.publishedAt || post.createdAt || "2025-10-29T00:00:00.000Z",
+            "dateModified": post.updatedAt || post.publishedAt || post.createdAt || "2025-10-29T00:00:00.000Z",
+            "author": {
+              "@type": "Person",
+              "name": authorName,
+              "jobTitle": authorRole
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "TryangleTech",
+              "url": "https://tryangletech.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://tryangletech.com/icon.png"
+              }
+            },
+            "articleSection": post.category,
+            "keywords": post.keywords && post.keywords.length > 0 ? post.keywords.join(", ") : post.category
+          })
+        }}
+      />
 
       <main>
         <section className="rt-hero-13">

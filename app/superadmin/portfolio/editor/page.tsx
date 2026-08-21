@@ -173,7 +173,7 @@ function PortfolioEditorInner() {
   const projectId = searchParams.get('id');
   const isEditMode = Boolean(projectId);
 
-  const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo'>('general');
+  const [activeTab, setActiveTab] = useState<'general' | 'media' | 'narrative' | 'seo' | 'faqs'>('general');
   const [isLoading, setIsLoading] = useState(isEditMode);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -215,7 +215,11 @@ function PortfolioEditorInner() {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState('');
 
-  // 5. Media Library Management State
+  // 5. Dynamic FAQs
+  const [faqs, setFaqs] = useState<Array<{ question: string; answer: string }>>([]);
+  const [isLoadingDefaults, setIsLoadingDefaults] = useState(false);
+
+  // 6. Media Library Management State
   interface MediaAssetItem {
     filename: string;
     url: string;
@@ -431,6 +435,15 @@ function PortfolioEditorInner() {
           setGeoRegion(p.geoRegion || 'Global');
           setKeywords(p.keywords || []);
           setCanonicalUrl(p.canonicalUrl || '');
+          const rawFaqs = (p as any).faqs || [];
+          setFaqs(
+            Array.isArray(rawFaqs)
+              ? rawFaqs.map((f: any) => ({
+                  question: f.question || f.q || '',
+                  answer: f.answer || f.a || '',
+                }))
+              : []
+          );
         } else {
           setErrorMessage(res.error || 'Failed to load project details.');
         }
@@ -465,6 +478,89 @@ function PortfolioEditorInner() {
 
   const handleRemoveTech = (tech: string) => {
     setTechnologies(technologies.filter((t) => t !== tech));
+  };
+
+  const handleAddFaq = () => {
+    setFaqs((prev) => [...prev, { question: '', answer: '' }]);
+  };
+
+  const handleUpdateFaq = (index: number, field: 'question' | 'answer', value: string) => {
+    setFaqs((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
+  };
+
+  const handleMoveFaqUp = (index: number) => {
+    if (index === 0) return;
+    setFaqs((prev) => {
+      const updated = [...prev];
+      const temp = updated[index];
+      updated[index] = updated[index - 1];
+      updated[index - 1] = temp;
+      return updated;
+    });
+  };
+
+  const handleMoveFaqDown = (index: number) => {
+    setFaqs((prev) => {
+      if (index >= prev.length - 1) return prev;
+      const updated = [...prev];
+      const temp = updated[index];
+      updated[index] = updated[index + 1];
+      updated[index + 1] = temp;
+      return updated;
+    });
+  };
+
+const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
+  {
+    question: 'What services does Tryangletech offer?',
+    answer: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development — all under one roof.',
+  },
+  {
+    question: 'Which industries do you serve?',
+    answer: 'We serve businesses across healthcare, finance, e-commerce, education, retail, real estate, and more — both in India and internationally.',
+  },
+  {
+    question: 'Do you provide support after project completion?',
+    answer: 'Yes, we provide dedicated ongoing maintenance, security updates, and technical support after every project launch to ensure optimal performance.',
+  },
+  {
+    question: "What's a typical project timeline?",
+    answer: "Timelines vary by scope: responsive websites typically take 2–4 weeks, while complex web applications, mobile apps, and custom software take 4–8 weeks with clear milestone deliverables.",
+  },
+  {
+    question: 'What technologies do you build with?',
+    answer: 'We engineer with high-performance modern tech stacks including React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, and cloud infrastructure tailored to your scale.',
+  },
+];
+
+  const handleRemoveFaq = (index: number) => {
+    setFaqs((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleLoadDefaultFaqs = async () => {
+    setIsLoadingDefaults(true);
+    try {
+      const res = await fetch('/api/faqs?defaults=true&pageType=PORTFOLIO_MAIN');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.faqs) && data.faqs.length > 0) {
+        setFaqs(
+          data.faqs.map((f: any) => ({
+            question: f.question || f.q || '',
+            answer: f.answer || f.a || '',
+          }))
+        );
+        setIsLoadingDefaults(false);
+        return;
+      }
+    } catch (err) {
+      console.warn('API default load warning:', err);
+    }
+    setFaqs(DEFAULT_PORTFOLIO_FALLBACK_FAQS);
+    setIsLoadingDefaults(false);
   };
 
   const handleAddKeyword = (kw: string) => {
@@ -565,6 +661,7 @@ function PortfolioEditorInner() {
         keywords: keywords.filter((k) => k.trim().length > 0),
         geoRegion: geoRegion.trim() || 'Global',
         canonicalUrl: canonicalUrl.trim(),
+        faqs: faqs.filter((f) => f.question.trim().length > 0 && f.answer.trim().length > 0),
         order,
       };
 
@@ -868,16 +965,19 @@ function PortfolioEditorInner() {
 
       {/* 2. Modern Segmented Tab Navigation Bar */}
       <div
+        className="no-scrollbar"
         style={{
           display: 'flex',
           backgroundColor: '#FFFFFF',
           borderRadius: '16px',
-          padding: '6px',
+          padding: '5px',
           border: '1px solid #E2E8F0',
           marginBottom: '1.75rem',
           boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
-          gap: '6px',
+          gap: '4px',
           overflowX: 'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
         }}
       >
         {/* Tab 1 */}
@@ -886,24 +986,24 @@ function PortfolioEditorInner() {
           onClick={() => setActiveTab('general')}
           style={{
             flex: '1 1 auto',
-            padding: '10px 20px',
+            padding: '9px 14px',
             borderRadius: '10px',
             border: 'none',
             backgroundColor: activeTab === 'general' ? '#1833FE' : 'transparent',
             color: activeTab === 'general' ? '#FFFFFF' : '#64748B',
             fontWeight: activeTab === 'general' ? 700 : 600,
-            fontSize: '0.875rem',
+            fontSize: '0.815rem',
             cursor: 'pointer',
             boxShadow: activeTab === 'general' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
             <polyline points="14 2 14 8 20 8" />
             <line x1="16" y1="13" x2="8" y2="13" />
@@ -918,35 +1018,35 @@ function PortfolioEditorInner() {
           onClick={() => setActiveTab('media')}
           style={{
             flex: '1 1 auto',
-            padding: '10px 20px',
+            padding: '9px 14px',
             borderRadius: '10px',
             border: 'none',
             backgroundColor: activeTab === 'media' ? '#1833FE' : 'transparent',
             color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
             fontWeight: activeTab === 'media' ? 700 : 600,
-            fontSize: '0.875rem',
+            fontSize: '0.815rem',
             cursor: 'pointer',
             boxShadow: activeTab === 'media' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
             <circle cx="8.5" cy="8.5" r="1.5" />
             <polyline points="21 15 16 10 5 21" />
           </svg>
-          <span>Media & Showcase Slider</span>
+          <span>Media & Showcase</span>
           <span
             style={{
-              fontSize: '0.725rem',
+              fontSize: '0.7rem',
               backgroundColor: activeTab === 'media' ? 'rgba(255, 255, 255, 0.25)' : '#F1F5F9',
               color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
-              padding: '2px 8px',
+              padding: '1px 7px',
               borderRadius: '10px',
               fontWeight: 700,
             }}
@@ -961,28 +1061,28 @@ function PortfolioEditorInner() {
           onClick={() => setActiveTab('narrative')}
           style={{
             flex: '1 1 auto',
-            padding: '10px 20px',
+            padding: '9px 14px',
             borderRadius: '10px',
             border: 'none',
             backgroundColor: activeTab === 'narrative' ? '#1833FE' : 'transparent',
             color: activeTab === 'narrative' ? '#FFFFFF' : '#64748B',
             fontWeight: activeTab === 'narrative' ? 700 : 600,
-            fontSize: '0.875rem',
+            fontSize: '0.815rem',
             cursor: 'pointer',
             boxShadow: activeTab === 'narrative' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 20h9" />
             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
           </svg>
-          <span>Case Study Story & Metrics</span>
+          <span>Story & Metrics</span>
         </button>
 
         {/* Tab 4 */}
@@ -991,40 +1091,83 @@ function PortfolioEditorInner() {
           onClick={() => setActiveTab('seo')}
           style={{
             flex: '1 1 auto',
-            padding: '10px 20px',
+            padding: '9px 14px',
             borderRadius: '10px',
             border: 'none',
             backgroundColor: activeTab === 'seo' ? '#1833FE' : 'transparent',
             color: activeTab === 'seo' ? '#FFFFFF' : '#64748B',
             fontWeight: activeTab === 'seo' ? 700 : 600,
-            fontSize: '0.875rem',
+            fontSize: '0.815rem',
             cursor: 'pointer',
             boxShadow: activeTab === 'seo' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <line x1="2" y1="12" x2="22" y2="12" />
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
           </svg>
-          <span>SEO, AEO & GEO Suite</span>
+          <span>SEO, AEO & GEO</span>
           <span
             style={{
-              fontSize: '0.725rem',
+              fontSize: '0.7rem',
               backgroundColor: activeTab === 'seo' ? 'rgba(255, 255, 255, 0.25)' : '#ECFDF5',
               color: activeTab === 'seo' ? '#FFFFFF' : '#059669',
-              padding: '2px 8px',
+              padding: '1px 7px',
               borderRadius: '10px',
               fontWeight: 700,
             }}
           >
             AI Ready
+          </span>
+        </button>
+
+        {/* Tab 5: Dynamic FAQs */}
+        <button
+          type="button"
+          onClick={() => setActiveTab('faqs')}
+          style={{
+            flex: '1 1 auto',
+            padding: '9px 14px',
+            borderRadius: '10px',
+            border: 'none',
+            backgroundColor: activeTab === 'faqs' ? '#1833FE' : 'transparent',
+            color: activeTab === 'faqs' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'faqs' ? 700 : 600,
+            fontSize: '0.815rem',
+            cursor: 'pointer',
+            boxShadow: activeTab === 'faqs' ? '0 2px 8px rgba(24, 51, 254, 0.25)' : 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            transition: 'all 0.15s ease',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <span>Dynamic FAQs</span>
+          <span
+            style={{
+              fontSize: '0.7rem',
+              backgroundColor: activeTab === 'faqs' ? 'rgba(255, 255, 255, 0.25)' : '#EFF6FF',
+              color: activeTab === 'faqs' ? '#FFFFFF' : '#1833FE',
+              padding: '1px 7px',
+              borderRadius: '10px',
+              fontWeight: 700,
+            }}
+          >
+            {faqs.length} FAQs
           </span>
         </button>
       </div>
@@ -2031,9 +2174,16 @@ function PortfolioEditorInner() {
                       color: '#DC2626',
                       fontWeight: 700,
                       cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                     }}
                   >
-                    + Add Point
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add Point</span>
                   </button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -2099,9 +2249,16 @@ function PortfolioEditorInner() {
                       color: '#1833FE',
                       fontWeight: 700,
                       cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                     }}
                   >
-                    + Add Point
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add Point</span>
                   </button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -2166,9 +2323,16 @@ function PortfolioEditorInner() {
                       color: '#059669',
                       fontWeight: 700,
                       cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                     }}
                   >
-                    + Add Metric
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add Metric</span>
                   </button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -2554,18 +2718,24 @@ function PortfolioEditorInner() {
                     <button
                       type="button"
                       onClick={() => handleAddKeyword(keywordInput)}
+                      aria-label="Add keyword"
                       style={{
-                        padding: '11px 18px',
+                        padding: '0 18px',
                         borderRadius: '12px',
                         border: 'none',
                         backgroundColor: '#1833FE',
                         color: '#FFFFFF',
-                        fontWeight: 700,
-                        fontSize: '0.875rem',
                         cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'all 0.15s ease',
                       }}
                     >
-                      +
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -2617,6 +2787,314 @@ function PortfolioEditorInner() {
           </div>
         )}
 
+        {/* ============================================================ */}
+        {/* TAB 5: DYNAMIC FAQS                                          */}
+        {/* ============================================================ */}
+        {activeTab === 'faqs' && (
+          <div
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '20px',
+              border: '1.5px solid #E2E8F0',
+              padding: '2.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.75rem',
+            }}
+          >
+            {/* Header & Quick Action Bar */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingBottom: '1.25rem', borderBottom: '1px solid #E2E8F0' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '10px', backgroundColor: '#EFF6FF', color: '#1833FE', border: '1px solid #BFDBFE' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                  </span>
+                  <span>Dynamic Case Study FAQs</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, backgroundColor: '#EFF6FF', color: '#1833FE', padding: '2px 10px', borderRadius: '10px', border: '1px solid #BFDBFE' }}>
+                    {faqs.length} FAQs
+                  </span>
+                </h3>
+                <p style={{ margin: '4px 0 0 0', fontSize: '0.825rem', color: '#64748B' }}>
+                  Add project-specific questions and answers to highlight custom deliverables, or load default FAQs from the database.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  onClick={handleLoadDefaultFaqs}
+                  disabled={isLoadingDefaults}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '7px',
+                    padding: '8px 14px',
+                    borderRadius: '9px',
+                    border: '1.5px solid #BFDBFE',
+                    backgroundColor: '#EFF6FF',
+                    color: '#1833FE',
+                    fontSize: '0.815rem',
+                    fontWeight: 700,
+                    cursor: isLoadingDefaults ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.15s ease',
+                    opacity: isLoadingDefaults ? 0.7 : 1,
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#1833FE">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                  </svg>
+                  <span>{isLoadingDefaults ? 'Loading...' : 'Load Default FAQs'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleAddFaq}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '8px 16px',
+                    borderRadius: '9px',
+                    border: 'none',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    fontSize: '0.815rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(24, 51, 254, 0.25)',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span>Add Question</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Empty State */}
+            {faqs.length === 0 ? (
+              <div style={{ padding: '3.5rem 2rem', textAlign: 'center', backgroundColor: '#F8FAFC', borderRadius: '16px', border: '1.5px dashed #CBD5E1' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '16px', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <h4 style={{ margin: '0 0 6px 0', fontSize: '1.05rem', fontWeight: 800, color: '#0F172A' }}>
+                  No Custom FAQs Added Yet
+                </h4>
+                <p style={{ margin: '0 auto 20px auto', maxWidth: '480px', fontSize: '0.85rem', color: '#64748B', lineHeight: 1.6 }}>
+                  This project currently falls back to the main portfolio default FAQs stored in the database. You can load and modify them, or write customized questions.
+                </p>
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={handleLoadDefaultFaqs}
+                    disabled={isLoadingDefaults}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '7px',
+                      padding: '9px 18px',
+                      borderRadius: '10px',
+                      border: '1.5px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#1833FE">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    <span>Load Default FAQs</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleAddFaq}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '9px 18px',
+                      borderRadius: '10px',
+                      border: 'none',
+                      backgroundColor: '#0F172A',
+                      color: '#FFFFFF',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Write Custom FAQ</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {faqs.map((faq, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      padding: '1.25rem 1.5rem',
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '14px',
+                      border: '1px solid #E2E8F0',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '12px',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {/* Card Top Row with Pill, Info & Action Controls */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#1833FE', backgroundColor: '#EFF6FF', padding: '4px 10px', borderRadius: '7px', border: '1px solid #BFDBFE' }}>
+                          Question #{idx + 1}
+                        </span>
+                        <span style={{ fontSize: '0.775rem', color: '#94A3B8', fontWeight: 500 }}>
+                          Item {idx + 1} of {faqs.length}
+                        </span>
+                      </div>
+
+                      {/* Reorder and Remove Buttons */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <button
+                          type="button"
+                          onClick={() => handleMoveFaqUp(idx)}
+                          disabled={idx === 0}
+                          title="Move question up"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '7px',
+                            border: '1px solid #E2E8F0',
+                            backgroundColor: idx === 0 ? '#F8FAFC' : '#FFFFFF',
+                            color: idx === 0 ? '#CBD5E1' : '#475569',
+                            cursor: idx === 0 ? 'not-allowed' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="18 15 12 9 6 15" />
+                          </svg>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleMoveFaqDown(idx)}
+                          disabled={idx === faqs.length - 1}
+                          title="Move question down"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '7px',
+                            border: '1px solid #E2E8F0',
+                            backgroundColor: idx === faqs.length - 1 ? '#F8FAFC' : '#FFFFFF',
+                            color: idx === faqs.length - 1 ? '#CBD5E1' : '#475569',
+                            cursor: idx === faqs.length - 1 ? 'not-allowed' : 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveFaq(idx)}
+                          title="Remove question"
+                          style={{
+                            border: '1px solid #FCA5A5',
+                            backgroundColor: '#FEF2F2',
+                            color: '#DC2626',
+                            cursor: 'pointer',
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            padding: '4px 10px',
+                            borderRadius: '7px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            marginLeft: '4px',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                          </svg>
+                          <span>Remove</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.785rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                        Question Heading
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. What were the specific engineering challenges in this project?"
+                        value={faq.question}
+                        onChange={(e) => handleUpdateFaq(idx, 'question', e.target.value)}
+                        style={{
+                          ...inputStyle,
+                          backgroundColor: '#F8FAFC',
+                          fontWeight: 600,
+                          fontSize: '0.85rem',
+                          padding: '9px 12px',
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.785rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                        Answer Explanation
+                      </label>
+                      <textarea
+                        rows={3}
+                        placeholder="Detailed answer explaining the solution, architecture, and deliverables..."
+                        value={faq.answer}
+                        onChange={(e) => handleUpdateFaq(idx, 'answer', e.target.value)}
+                        style={{
+                          ...inputStyle,
+                          backgroundColor: '#F8FAFC',
+                          lineHeight: '1.5',
+                          fontSize: '0.85rem',
+                          padding: '9px 12px',
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Sticky Bottom Save Bar */}
         <div
           style={{
@@ -2635,8 +3113,7 @@ function PortfolioEditorInner() {
           }}
         >
           <div style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: 500 }}>
-            <span>Changes will be saved to Supabase PostgreSQL and synced across Edge CDNs.</span>
-          </div>
+                   </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>
             <Link

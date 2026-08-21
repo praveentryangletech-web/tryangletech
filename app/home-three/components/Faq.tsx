@@ -1,14 +1,30 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function Faq() {
+export interface FaqItem {
+  wid?: string;
+  q?: string;
+  a?: string;
+  question?: string;
+  answer?: string;
+  isTop?: boolean;
+}
+
+interface FaqProps {
+  items?: FaqItem[];
+  title?: string;
+  subtitle?: string;
+  hideJsonLd?: boolean;
+}
+
+export default function Faq({ items, title, subtitle, hideJsonLd = false }: FaqProps = {}) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  const faqs = [
+  const defaultFaqs: FaqItem[] = [
     {
       wid: '4dd3e22b-253f-3566-2cec-7767aa6cde34',
       q: 'What services does Tryangletech offer?',
@@ -40,6 +56,14 @@ export default function Faq() {
       isTop: false,
     },
   ];
+
+  const rawList = items && items.length > 0 ? items : defaultFaqs;
+  const faqs = rawList.map((item, idx) => ({
+    wid: item.wid || `faq-item-${idx}`,
+    q: item.q || item.question || '',
+    a: item.a || item.answer || '',
+    isTop: idx === 0,
+  }));
 
   return (
     <>

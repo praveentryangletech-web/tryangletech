@@ -23,6 +23,7 @@ export interface PortfolioItem {
   keywords?: string[];
   geoRegion?: string;
   canonicalUrl?: string;
+  faqs?: Array<{ question: string; answer: string; q?: string; a?: string }>;
   order: number;
   createdAt: string;
   updatedAt: string;

@@ -138,6 +138,7 @@ model PortfolioProject {
   keywords        String[] @default([])
   geoRegion       String?
   canonicalUrl    String?
+  faqs            Json?
   order           Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -182,4 +183,22 @@ model PortfolioCategory {
   @@unique([slug, type])
   @@index([type, order, name])
   @@index([type, slug])
+}
+
+// ----------------------------------------------------
+// 8. DYNAMIC PAGE-WISE FAQS (PORTFOLIO, BLOG, SERVICES)
+// ----------------------------------------------------
+model PageFAQ {
+  id          String   @id @default(cuid())
+  pageType    String   // e.g. "PORTFOLIO_MAIN", "PORTFOLIO_DETAIL", "BLOG_MAIN", "BLOG_DETAIL", "SERVICE_WEB", etc.
+  pageId      String?  // project slug or blog slug (null for main page defaults)
+  question    String
+  answer      String   @db.Text
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([pageType, pageId, order])
+  @@index([pageType, isPublished])
 }

@@ -631,7 +631,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
           {/* <Cta /> */}
         </div>
         <div className="animate-section anim-delay-3">
-          <HomeThreeFaq />
+          <HomeThreeFaq items={project.faqs} />
         </div>
       </main>
     </>

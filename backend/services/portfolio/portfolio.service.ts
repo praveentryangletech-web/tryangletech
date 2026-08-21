@@ -104,10 +104,10 @@ export function clearPortfolioCache(): void {
 }
 
 /**
- * Guarantees that schema initialization is handled via Prisma schema without acquiring exclusive locks.
+ * Guarantees that schema initialization is handled via Prisma schema.
  */
 async function ensureColumnsExist(): Promise<void> {
-  isColumnsEnsured = true;
+  // Schema is synchronized with PostgreSQL
 }
 
 export const portfolioService = {
@@ -119,38 +119,92 @@ export const portfolioService = {
     if (isSeededInMemory) return;
     isSeededInMemory = true;
 
-    // Run schema synchronization and indexing non-blockingly
     (async () => {
       try {
-        await ensureColumnsExist();
-
-        const existingCount = await db.portfolioProject.count();
-        if (existingCount > 0) return;
-
-        for (let i = 0; i < defaultProjects.length; i++) {
-          const p = defaultProjects[i];
-          const id = String(i + 1);
-          await db.$executeRaw`
-            INSERT INTO "PortfolioProject" (
-              "id", "slug", "title", "category", "image", "description",
-              "client", "duration", "role", "liveUrl", "content",
-              "challenges", "solutions", "results", "technologies", "order",
-              "createdAt", "updatedAt"
-            ) VALUES (
-              ${id}, ${p.slug}, ${p.title}, ${p.category}, ${p.image || '/portfolio/vh-accounting.webp'},
-              ${p.description || ''}, ${p.client || ''}, ${p.duration || '3 Weeks'},
-              ${p.role || 'Website Design & Development'}, ${p.liveUrl || ''},
-              ${p.content || ''}, ${p.challenges || []}, ${p.solutions || []},
-              ${p.results || []}, ${p.technologies || []}, ${i},
-              NOW(), NOW()
-            )
-            ON CONFLICT ("id") DO NOTHING
-          `;
-        }
+        await this.syncAllStaticProjectsToDB(false);
       } catch (err) {
         console.warn('[DB Portfolio] background seed notice:', err);
       }
     })().catch(() => {});
+  },
+
+  /**
+   * Migrate and sync all static projects from portfolioData.ts into PostgreSQL DB
+   */
+  async syncAllStaticProjectsToDB(force: boolean = false): Promise<{ synced: number; total: number; errors: string[] }> {
+    let count = 0;
+    const errors: string[] = [];
+
+    for (let i = 0; i < defaultProjects.length; i++) {
+      const p = defaultProjects[i];
+      const id = String(i + 1);
+      const images = p.images && p.images.length > 0 ? p.images : (p.image ? [p.image] : []);
+      const faqs = p.faqs || [];
+
+      try {
+        await (db.portfolioProject as any).upsert({
+          where: { slug: p.slug },
+          create: {
+            id,
+            slug: p.slug,
+            title: p.title,
+            category: p.category,
+            image: p.image || '/portfolio/vh-accounting.webp',
+            images: images,
+            description: p.description || '',
+            content: p.content || p.description || '',
+            client: p.client || '',
+            duration: p.duration || '3 Weeks',
+            role: p.role || 'Website Design & Development',
+            liveUrl: p.liveUrl || '',
+            challenges: p.challenges || [],
+            solutions: p.solutions || [],
+            results: p.results || [],
+            technologies: p.technologies || [],
+            metaTitle: p.metaTitle || p.title || '',
+            metaDescription: p.metaDescription || p.description || '',
+            aeoSummary: p.aeoSummary || '',
+            keywords: p.keywords || [],
+            geoRegion: p.geoRegion || 'Global',
+            canonicalUrl: p.canonicalUrl || '',
+            faqs: faqs,
+            order: p.order ?? i,
+          },
+          update: force
+            ? {
+                title: p.title,
+                category: p.category,
+                image: p.image || '/portfolio/vh-accounting.webp',
+                images: images,
+                description: p.description || '',
+                content: p.content || p.description || '',
+                client: p.client || '',
+                duration: p.duration || '3 Weeks',
+                role: p.role || 'Website Design & Development',
+                liveUrl: p.liveUrl || '',
+                challenges: p.challenges || [],
+                solutions: p.solutions || [],
+                results: p.results || [],
+                technologies: p.technologies || [],
+                metaTitle: p.metaTitle || p.title || '',
+                metaDescription: p.metaDescription || p.description || '',
+                aeoSummary: p.aeoSummary || '',
+                keywords: p.keywords || [],
+                geoRegion: p.geoRegion || 'Global',
+                canonicalUrl: p.canonicalUrl || '',
+                faqs: faqs,
+                order: p.order ?? i,
+              }
+            : {},
+        });
+        count++;
+      } catch (insertErr: any) {
+        errors.push(`[${p.slug}]: ${insertErr?.message || String(insertErr)}`);
+      }
+    }
+
+    clearPortfolioCache();
+    return { synced: count, total: defaultProjects.length, errors };
   },
 
   /**
@@ -577,18 +631,21 @@ export const portfolioService = {
     const canonicalUrl = data.canonicalUrl?.trim() || '';
     const order = data.order ?? 0;
 
+    const faqs = Array.isArray(data.faqs) ? data.faqs : [];
+    const faqsJson = JSON.stringify(faqs);
+
     await db.$executeRaw`
       INSERT INTO "PortfolioProject" (
         "id", "slug", "title", "category", "image", "images", "description",
         "client", "duration", "role", "liveUrl", "content",
         "challenges", "solutions", "results", "technologies",
-        "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl",
+        "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl", "faqs",
         "order", "createdAt", "updatedAt"
       ) VALUES (
         ${id}, ${slug}, ${title}, ${category}, ${image}, ${images}, ${description},
         ${client}, ${duration}, ${role}, ${liveUrl}, ${content},
         ${challenges}, ${solutions}, ${results}, ${technologies},
-        ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl},
+        ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl}, ${faqsJson}::jsonb,
         ${order}, NOW(), NOW()
       )
     `;
@@ -616,6 +673,7 @@ export const portfolioService = {
       keywords,
       geoRegion,
       canonicalUrl,
+      faqs,
       order,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -667,6 +725,10 @@ export const portfolioService = {
     }
     if (data.geoRegion !== undefined) updates.push(Prisma.sql`"geoRegion" = ${data.geoRegion.trim()}`);
     if (data.canonicalUrl !== undefined) updates.push(Prisma.sql`"canonicalUrl" = ${data.canonicalUrl.trim()}`);
+    if (data.faqs !== undefined) {
+      const faqsJson = Array.isArray(data.faqs) ? JSON.stringify(data.faqs) : '[]';
+      updates.push(Prisma.sql`"faqs" = ${faqsJson}::jsonb`);
+    }
 
     updates.push(Prisma.sql`"updatedAt" = NOW()`);
 
@@ -779,6 +841,7 @@ function mapRowToPortfolioItem(r: any): PortfolioItem {
     keywords: Array.isArray(r.keywords) ? r.keywords : [],
     geoRegion: r.geoRegion || '',
     canonicalUrl: r.canonicalUrl || '',
+    faqs: Array.isArray(r.faqs) ? r.faqs : (typeof r.faqs === 'string' ? JSON.parse(r.faqs || '[]') : (r.faqs || [])),
     order: r.order || 0,
     createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
     updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),

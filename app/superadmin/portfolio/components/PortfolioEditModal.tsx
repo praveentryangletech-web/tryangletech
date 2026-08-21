@@ -42,6 +42,7 @@ export default function PortfolioEditModal({
   const [geoRegion, setGeoRegion] = useState('');
   const [keywords, setKeywords] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState('');
+  const [faqs, setFaqs] = useState<Array<{ question: string; answer: string }>>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -68,6 +69,15 @@ export default function PortfolioEditModal({
       setAeoSummary(project.aeoSummary || '');
       setGeoRegion(project.geoRegion || '');
       setKeywords(project.keywords || []);
+      const rawFaqs = (project as any).faqs || [];
+      setFaqs(
+        Array.isArray(rawFaqs)
+          ? rawFaqs.map((f: any) => ({
+              question: f.question || f.q || '',
+              answer: f.answer || f.a || '',
+            }))
+          : []
+      );
     } else {
       // Add mode defaults
       setTitle('');
@@ -90,6 +100,7 @@ export default function PortfolioEditModal({
       setAeoSummary('');
       setGeoRegion('');
       setKeywords([]);
+      setFaqs([]);
     }
     setKeywordInput('');
     setErrorMessage('');
@@ -117,6 +128,80 @@ export default function PortfolioEditModal({
 
   const handleRemoveKeyword = (kw: string) => {
     setKeywords(keywords.filter((k) => k !== kw));
+  };
+
+  const handleAddFaq = () => {
+    setFaqs([...faqs, { question: '', answer: '' }]);
+  };
+
+  const handleUpdateFaq = (index: number, field: 'question' | 'answer', value: string) => {
+    const updated = [...faqs];
+    updated[index] = { ...updated[index], [field]: value };
+    setFaqs(updated);
+  };
+
+  const handleMoveFaqUp = (index: number) => {
+    if (index === 0) return;
+    const updated = [...faqs];
+    const temp = updated[index];
+    updated[index] = updated[index - 1];
+    updated[index - 1] = temp;
+    setFaqs(updated);
+  };
+
+  const handleMoveFaqDown = (index: number) => {
+    if (index >= faqs.length - 1) return;
+    const updated = [...faqs];
+    const temp = updated[index];
+    updated[index] = updated[index + 1];
+    updated[index + 1] = temp;
+    setFaqs(updated);
+  };
+
+  const handleRemoveFaq = (index: number) => {
+    setFaqs(faqs.filter((_, idx) => idx !== index));
+  };
+
+  const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
+    {
+      question: 'What services does Tryangletech offer?',
+      answer: 'We offer web design & development, digital marketing, SEO, graphics designing, mobile app development, and custom software development — all under one roof.',
+    },
+    {
+      question: 'Which industries do you serve?',
+      answer: 'We serve businesses across healthcare, finance, e-commerce, education, retail, real estate, and more — both in India and internationally.',
+    },
+    {
+      question: 'Do you provide support after project completion?',
+      answer: 'Yes, we provide dedicated ongoing maintenance, security updates, and technical support after every project launch to ensure optimal performance.',
+    },
+    {
+      question: "What's a typical project timeline?",
+      answer: "Timelines vary by scope: responsive websites typically take 2–4 weeks, while complex web applications, mobile apps, and custom software take 4–8 weeks with clear milestone deliverables.",
+    },
+    {
+      question: 'What technologies do you build with?',
+      answer: 'We engineer with high-performance modern tech stacks including React, Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, and cloud infrastructure tailored to your scale.',
+    },
+  ];
+
+  const handleLoadDefaultFaqs = async () => {
+    try {
+      const res = await fetch('/api/faqs?defaults=true&pageType=PORTFOLIO_MAIN');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.faqs) && data.faqs.length > 0) {
+        setFaqs(
+          data.faqs.map((f: any) => ({
+            question: f.question || f.q || '',
+            answer: f.answer || f.a || '',
+          }))
+        );
+        return;
+      }
+    } catch (err) {
+      console.warn('Failed to load default FAQs from API:', err);
+    }
+    setFaqs(DEFAULT_PORTFOLIO_FALLBACK_FAQS);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -151,6 +236,7 @@ export default function PortfolioEditModal({
         aeoSummary: aeoSummary.trim(),
         geoRegion: geoRegion.trim(),
         keywords,
+        faqs: faqs.filter((f) => f.question.trim().length > 0 && f.answer.trim().length > 0),
       };
 
       await onSave(payload);
@@ -542,17 +628,21 @@ export default function PortfolioEditModal({
                     <button
                       type="button"
                       onClick={() => handleRemoveTech(t)}
+                      aria-label={`Remove ${t}`}
                       style={{
                         background: 'none',
                         border: 'none',
                         color: '#6366F1',
                         cursor: 'pointer',
                         padding: 0,
-                        fontWeight: 800,
-                        fontSize: '0.9rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
                       }}
                     >
-                      ×
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
                     </button>
                   </span>
                 ))}
@@ -699,17 +789,24 @@ export default function PortfolioEditModal({
                     type="button"
                     onClick={handleAddKeyword}
                     style={{
-                      padding: '0.6rem 1.25rem',
+                      padding: '0.6rem 1.1rem',
                       backgroundColor: '#1833FE',
                       border: 'none',
                       borderRadius: '8px',
-                      fontSize: '0.875rem',
+                      fontSize: '0.825rem',
                       fontWeight: 700,
                       color: '#FFFFFF',
                       cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                     }}
                   >
-                    + Add
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add</span>
                   </button>
                 </div>
 
@@ -734,22 +831,263 @@ export default function PortfolioEditModal({
                       <button
                         type="button"
                         onClick={() => handleRemoveKeyword(kw)}
+                        aria-label={`Remove ${kw}`}
                         style={{
                           background: 'none',
                           border: 'none',
                           color: '#1833FE',
                           cursor: 'pointer',
                           padding: 0,
-                          fontWeight: 800,
-                          fontSize: '0.9rem',
+                          display: 'inline-flex',
+                          alignItems: 'center',
                         }}
                       >
-                        ×
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
                       </button>
                     </span>
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* ── SECTION: DYNAMIC PAGE FAQS ── */}
+            <div style={{ marginTop: '0.5rem', paddingTop: '1.5rem', borderTop: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1833FE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    <span>Dynamic Case Study FAQs ({faqs.length})</span>
+                  </h3>
+                  <p style={{ margin: '3px 0 0 0', fontSize: '0.78rem', color: '#64748B' }}>
+                    Manage specific Q&A for this project or load default FAQs from the main portfolio page.
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={handleLoadDefaultFaqs}
+                    style={{
+                      padding: '6px 12px',
+                      borderRadius: '8px',
+                      border: '1px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
+                      fontSize: '0.775rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#1833FE">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    <span>Load Default FAQs</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleAddFaq}
+                    style={{
+                      padding: '6px 12px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      backgroundColor: '#1833FE',
+                      color: '#FFFFFF',
+                      fontSize: '0.775rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    <span>Add Question</span>
+                  </button>
+                </div>
+              </div>
+
+              {faqs.length === 0 ? (
+                <div style={{ padding: '1.5rem', textAlign: 'center', backgroundColor: '#F8FAFC', borderRadius: '12px', border: '1px dashed #CBD5E1' }}>
+                  <p style={{ margin: '0 0 8px 0', fontSize: '0.85rem', color: '#64748B' }}>
+                    No custom FAQs added for this project yet. It will use the standard main portfolio FAQs.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleLoadDefaultFaqs}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #BFDBFE',
+                      backgroundColor: '#EFF6FF',
+                      color: '#1833FE',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#1833FE">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    <span>Load Default FAQs to Customize</span>
+                  </button>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  {faqs.map((faq, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        padding: '1rem 1.25rem',
+                        backgroundColor: '#FFFFFF',
+                        borderRadius: '12px',
+                        border: '1px solid #E2E8F0',
+                        boxShadow: '0 1px 4px rgba(0, 0, 0, 0.02)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '8px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#1833FE', backgroundColor: '#EFF6FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #BFDBFE' }}>
+                            Question #{idx + 1}
+                          </span>
+                          <span style={{ fontSize: '0.725rem', color: '#94A3B8' }}>
+                            Item {idx + 1} of {faqs.length}
+                          </span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <button
+                            type="button"
+                            onClick={() => handleMoveFaqUp(idx)}
+                            disabled={idx === 0}
+                            title="Move question up"
+                            style={{
+                              width: '24px',
+                              height: '24px',
+                              borderRadius: '6px',
+                              border: '1px solid #E2E8F0',
+                              backgroundColor: idx === 0 ? '#F8FAFC' : '#FFFFFF',
+                              color: idx === 0 ? '#CBD5E1' : '#475569',
+                              cursor: idx === 0 ? 'not-allowed' : 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="18 15 12 9 6 15" />
+                            </svg>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleMoveFaqDown(idx)}
+                            disabled={idx === faqs.length - 1}
+                            title="Move question down"
+                            style={{
+                              width: '24px',
+                              height: '24px',
+                              borderRadius: '6px',
+                              border: '1px solid #E2E8F0',
+                              backgroundColor: idx === faqs.length - 1 ? '#F8FAFC' : '#FFFFFF',
+                              color: idx === faqs.length - 1 ? '#CBD5E1' : '#475569',
+                              cursor: idx === faqs.length - 1 ? 'not-allowed' : 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFaq(idx)}
+                            title="Remove question"
+                            style={{
+                              border: '1px solid #FCA5A5',
+                              backgroundColor: '#FEF2F2',
+                              color: '#DC2626',
+                              cursor: 'pointer',
+                              fontSize: '0.725rem',
+                              fontWeight: 700,
+                              padding: '3px 8px',
+                              borderRadius: '6px',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              marginLeft: '4px',
+                            }}
+                          >
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="3 6 5 6 21 6" />
+                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                            </svg>
+                            <span>Remove</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <input
+                        type="text"
+                        placeholder="e.g. What were the specific deliverables for this project?"
+                        value={faq.question}
+                        onChange={(e) => handleUpdateFaq(idx, 'question', e.target.value)}
+                        style={{
+                          width: '100%',
+                          padding: '0.5rem 0.75rem',
+                          borderRadius: '8px',
+                          border: '1px solid #CBD5E1',
+                          fontSize: '0.825rem',
+                          outline: 'none',
+                          fontWeight: 600,
+                          backgroundColor: '#F8FAFC',
+                          boxSizing: 'border-box',
+                        }}
+                      />
+
+                      <textarea
+                        rows={2}
+                        placeholder="Detailed answer for this question..."
+                        value={faq.answer}
+                        onChange={(e) => handleUpdateFaq(idx, 'answer', e.target.value)}
+                        style={{
+                          width: '100%',
+                          padding: '0.5rem 0.75rem',
+                          borderRadius: '8px',
+                          border: '1px solid #CBD5E1',
+                          fontSize: '0.825rem',
+                          outline: 'none',
+                          lineHeight: '1.4',
+                          backgroundColor: '#F8FAFC',
+                          boxSizing: 'border-box',
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

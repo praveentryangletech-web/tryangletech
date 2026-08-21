@@ -573,20 +573,24 @@ export default function AssetManagementPage() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             {/* Live Count & Storage Chip */}
-            <span
-              style={{
-                fontSize: '0.775rem',
-                fontWeight: 700,
-                color: '#64748B',
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #E2E8F0',
-                padding: '6px 12px',
-                borderRadius: '8px',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-              }}
-            >
-              Showing {paginatedAssets.length} of {filteredAssets.length} assets ({totalMB} MB)
-            </span>
+            {isLoading ? (
+              <div className="rt-skeleton-box" style={{ width: '180px', height: '32px', borderRadius: '8px' }} />
+            ) : (
+              <span
+                style={{
+                  fontSize: '0.775rem',
+                  fontWeight: 700,
+                  color: '#64748B',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
+                }}
+              >
+                Showing {paginatedAssets.length} of {filteredAssets.length} assets ({totalMB} MB)
+              </span>
+            )}
 
             {/* Sort By */}
             <select
@@ -671,8 +675,76 @@ export default function AssetManagementPage() {
           </div>
         </div>
 
-        {/* Empty State */}
-        {filteredAssets.length === 0 ? (
+        {/* Loading State & Asset Gallery */}
+        {isLoading ? (
+          viewMode === 'grid' ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1.25rem' }}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((sk) => (
+                <div
+                  key={sk}
+                  style={{
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '14px',
+                    padding: '10px',
+                    backgroundColor: '#FFFFFF',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                  }}
+                >
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '145px', borderRadius: '10px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '70%', height: '16px', borderRadius: '4px', marginTop: '4px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '45%', height: '12px', borderRadius: '4px' }} />
+                  <div style={{ display: 'flex', gap: '6px', marginTop: '4px' }}>
+                    <div className="rt-skeleton-box" style={{ flex: 1, height: '32px', borderRadius: '8px' }} />
+                    <div className="rt-skeleton-box" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+                    <div className="rt-skeleton-box" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+                    <div className="rt-skeleton-box" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ overflowX: 'auto', backgroundColor: 'transparent' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', backgroundColor: 'transparent' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1.5px solid #CBD5E1', backgroundColor: '#F1F5F9' }}>
+                    <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Preview</th>
+                    <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Filename</th>
+                    <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Public Path</th>
+                    <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>Size</th>
+                    <th style={{ padding: '0.75rem 1rem', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', textAlign: 'right' }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[1, 2, 3, 4, 5, 6].map((sk) => (
+                    <tr key={sk} style={{ borderBottom: '1px solid #E2E8F0', backgroundColor: 'transparent' }}>
+                      <td style={{ padding: '0.75rem 1rem' }}>
+                        <div className="rt-skeleton-box" style={{ width: '44px', height: '44px', borderRadius: '8px' }} />
+                      </td>
+                      <td style={{ padding: '0.75rem 1rem' }}>
+                        <div className="rt-skeleton-box" style={{ width: '160px', height: '16px', borderRadius: '4px' }} />
+                      </td>
+                      <td style={{ padding: '0.75rem 1rem' }}>
+                        <div className="rt-skeleton-box" style={{ width: '240px', height: '14px', borderRadius: '4px' }} />
+                      </td>
+                      <td style={{ padding: '0.75rem 1rem' }}>
+                        <div className="rt-skeleton-box" style={{ width: '60px', height: '14px', borderRadius: '4px' }} />
+                      </td>
+                      <td style={{ padding: '0.75rem 1rem', textAlign: 'right' }}>
+                        <div style={{ display: 'inline-flex', gap: '6px' }}>
+                          <div className="rt-skeleton-box" style={{ width: '56px', height: '28px', borderRadius: '6px' }} />
+                          <div className="rt-skeleton-box" style={{ width: '28px', height: '28px', borderRadius: '6px' }} />
+                          <div className="rt-skeleton-box" style={{ width: '28px', height: '28px', borderRadius: '6px' }} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        ) : filteredAssets.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: '#64748B' }}>
             <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', color: '#94A3B8' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

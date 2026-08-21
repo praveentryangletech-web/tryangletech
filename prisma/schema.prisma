@@ -121,6 +121,7 @@ model PortfolioProject {
   title        String
   category     String   // e.g. "Business Website", "E-Commerce", "Mobile Application", "Custom Software", "Graphic Design", "Landing Website"
   image        String   @default("/portfolio/vh-accounting.webp")
+  imageAlt     String?
   description  String   @db.Text
   client       String?
   duration     String?
@@ -132,6 +133,7 @@ model PortfolioProject {
   results         String[] @default([])
   technologies    String[] @default([])
   images          String[] @default([])
+  imageAlts       String[] @default([])
   metaTitle       String?
   metaDescription String?
   aeoSummary      String?

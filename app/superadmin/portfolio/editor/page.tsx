@@ -194,8 +194,11 @@ function PortfolioEditorInner() {
 
   // 2. Media
   const [coverImage, setCoverImage] = useState('');
+  const [imageAlt, setImageAlt] = useState('');
   const [sliderImages, setSliderImages] = useState<string[]>([]);
+  const [imageAlts, setImageAlts] = useState<string[]>([]);
   const [newSliderUrl, setNewSliderUrl] = useState('');
+  const [newSliderAlt, setNewSliderAlt] = useState('');
 
   // 3. Narrative
   const [description, setDescription] = useState('');
@@ -223,6 +226,7 @@ function PortfolioEditorInner() {
   interface MediaAssetItem {
     filename: string;
     url: string;
+    altText?: string;
     size: number;
     updatedAt: string;
   }
@@ -233,10 +237,11 @@ function PortfolioEditorInner() {
   const [uploadFeedback, setUploadFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [mediaSearchQuery, setMediaSearchQuery] = useState('');
 
-  // Pre-upload rename states
+  // Pre-upload rename & alt states
   const [selectedUploadFile, setSelectedUploadFile] = useState<File | null>(null);
   const [uploadFilePreview, setUploadFilePreview] = useState<string | null>(null);
   const [customFilenameInput, setCustomFilenameInput] = useState('');
+  const [customAltInput, setCustomAltInput] = useState('');
   const [blobPreviewMap, setBlobPreviewMap] = useState<Record<string, string>>({});
 
   // 6. Asset Picker Modal State
@@ -286,6 +291,7 @@ function PortfolioEditorInner() {
       .replace(/^-|-$/g, '');
 
     setCustomFilenameInput(cleanBase || (target === 'cover' ? 'cover-image' : 'slide-image'));
+    setCustomAltInput(title.trim() ? `${title.trim()} ${target === 'cover' ? 'cover showcase' : 'slide preview'}` : cleanBase.replace(/-/g, ' '));
 
     const objectUrl = URL.createObjectURL(file);
     setUploadFilePreview(objectUrl);
@@ -301,6 +307,9 @@ function PortfolioEditorInner() {
     formData.append('file', selectedUploadFile);
     if (customFilenameInput.trim()) {
       formData.append('customName', customFilenameInput.trim());
+    }
+    if (customAltInput.trim()) {
+      formData.append('altText', customAltInput.trim());
     }
 
     try {
@@ -320,9 +329,13 @@ function PortfolioEditorInner() {
 
       if (uploadTarget === 'cover') {
         setCoverImage(data.url);
+        if (customAltInput.trim()) {
+          setImageAlt(customAltInput.trim());
+        }
       } else {
         if (!sliderImages.includes(data.url)) {
           setSliderImages((prev) => [...prev, data.url]);
+          setImageAlts((prev) => [...prev, customAltInput.trim() || `${title || 'Project'} screenshot ${sliderImages.length + 1}`]);
         }
       }
 
@@ -334,6 +347,7 @@ function PortfolioEditorInner() {
       // Cleanup pre-upload state
       setSelectedUploadFile(null);
       setCustomFilenameInput('');
+      setCustomAltInput('');
       setUploadFilePreview(null);
       fetchMediaList();
     } catch (err: any) {
@@ -346,6 +360,7 @@ function PortfolioEditorInner() {
   const handleCancelSelectedFile = () => {
     setSelectedUploadFile(null);
     setCustomFilenameInput('');
+    setCustomAltInput('');
     setUploadFilePreview(null);
   };
 
@@ -416,10 +431,16 @@ function PortfolioEditorInner() {
           setOrder((p as any).order || 0);
 
           setCoverImage(p.image || '');
+          setImageAlt(p.imageAlt || p.title || '');
           setSliderImages(
             p.images && p.images.length > 0
               ? p.images
               : (p.image ? [p.image] : [])
+          );
+          setImageAlts(
+            Array.isArray(p.imageAlts) && p.imageAlts.length > 0
+              ? p.imageAlts
+              : (p.images || []).map((_, i) => `${p.title || 'Project'} screenshot ${i + 1}`)
           );
 
           setDescription(p.description || '');
@@ -460,12 +481,15 @@ function PortfolioEditorInner() {
   const handleAddSliderImage = () => {
     if (newSliderUrl.trim() && !sliderImages.includes(newSliderUrl.trim())) {
       setSliderImages([...sliderImages, newSliderUrl.trim()]);
+      setImageAlts([...imageAlts, newSliderAlt.trim() || `${title || 'Project'} slide ${sliderImages.length + 1}`]);
       setNewSliderUrl('');
+      setNewSliderAlt('');
     }
   };
 
   const handleRemoveSliderImage = (index: number) => {
     setSliderImages(sliderImages.filter((_, i) => i !== index));
+    setImageAlts(imageAlts.filter((_, i) => i !== index));
   };
 
   const handleAddTech = (tech: string) => {
@@ -648,7 +672,9 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         role: role.trim(),
         liveUrl: liveUrl.trim(),
         image: coverImage.trim(),
+        imageAlt: imageAlt.trim() || title.trim(),
         images: sliderImages.filter((img) => img.trim().length > 0),
+        imageAlts: imageAlts.slice(0, sliderImages.length),
         description: description.trim(),
         content: content.trim() || description.trim(),
         challenges: challenges.filter((c) => c.trim().length > 0),
@@ -1479,6 +1505,30 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       </div>
                     </div>
 
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                        Cover Image Alt Text (SEO &amp; Screen Readers):
+                      </label>
+                      <input
+                        type="text"
+                        value={customAltInput}
+                        onChange={(e) => setCustomAltInput(e.target.value)}
+                        placeholder="e.g. VH Accounting corporate business website dashboard mockup"
+                        style={{
+                          width: '100%',
+                          padding: '8px 12px',
+                          borderRadius: '8px',
+                          border: '1.5px solid #CBD5E1',
+                          backgroundColor: '#FFFFFF',
+                          fontSize: '0.875rem',
+                          fontWeight: 500,
+                          color: '#0F172A',
+                          outline: 'none',
+                          boxSizing: 'border-box',
+                        }}
+                      />
+                    </div>
+
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                       <button
                         type="button"
@@ -1505,7 +1555,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                               <polyline points="17 8 12 3 7 8" />
                               <line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
-                            <span>Save & Set as Cover</span>
+                            <span>Save &amp; Set as Cover</span>
                           </>
                         )}
                       </button>
@@ -1561,7 +1611,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={blobPreviewMap[coverImage] || coverImage}
-                        alt="Cover Preview"
+                        alt={imageAlt || "Cover Preview"}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
@@ -1651,7 +1701,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                   </button>
                 </div>
 
-                {/* Right: Dropdown & Direct URL Field */}
+                {/* Right: Dropdown, Direct URL Field, & Alt Text Field */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div>
                     <label style={labelStyle}>Select from Public Assets Library</label>
@@ -1680,6 +1730,19 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       placeholder="/portfolio/7d-design-studios.webp"
                       value={coverImage}
                       onChange={(e) => setCoverImage(e.target.value)}
+                      style={inputStyle}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>
+                      Cover Image Alt Text <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#64748B' }}>(Descriptive text for SEO &amp; Accessibility)</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={`e.g. ${title || 'Project'} corporate website mockup`}
+                      value={imageAlt}
+                      onChange={(e) => setImageAlt(e.target.value)}
                       style={inputStyle}
                     />
                   </div>
@@ -1799,6 +1862,30 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       </div>
                     </div>
 
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#1E293B', marginBottom: '4px' }}>
+                        Slide Image Alt Text (SEO &amp; Accessibility):
+                      </label>
+                      <input
+                        type="text"
+                        value={customAltInput}
+                        onChange={(e) => setCustomAltInput(e.target.value)}
+                        placeholder="e.g. VH Accounting analytics reports screen"
+                        style={{
+                          width: '100%',
+                          padding: '8px 12px',
+                          borderRadius: '8px',
+                          border: '1.5px solid #CBD5E1',
+                          backgroundColor: '#FFFFFF',
+                          fontSize: '0.875rem',
+                          fontWeight: 500,
+                          color: '#0F172A',
+                          outline: 'none',
+                          boxSizing: 'border-box',
+                        }}
+                      />
+                    </div>
+
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                       <button
                         type="button"
@@ -1867,111 +1954,122 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
               )}
 
               {/* Add Slide Controls */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '10px', marginBottom: '1.5rem', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <input
-                    type="text"
-                    placeholder="Enter image URL or path (e.g. /portfolio/7d-design-studios.webp)"
-                    value={newSliderUrl}
-                    onChange={(e) => setNewSliderUrl(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleAddSliderImage();
-                      }
-                    }}
-                    style={{ ...inputStyle, flex: 1 }}
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddSliderImage}
-                    style={{
-                      padding: '11px 20px',
-                      borderRadius: '12px',
-                      border: 'none',
-                      backgroundColor: '#1833FE',
-                      color: '#FFFFFF',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    + Add URL Slide
-                  </button>
-                </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '10px', marginBottom: '1.5rem', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  placeholder="Image URL (e.g. /portfolio/vh-accounting.webp)"
+                  value={newSliderUrl}
+                  onChange={(e) => setNewSliderUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleAddSliderImage();
+                    }
+                  }}
+                  style={inputStyle}
+                />
+                <input
+                  type="text"
+                  placeholder="Image Alt Text (e.g. VH Accounting Features)"
+                  value={newSliderAlt}
+                  onChange={(e) => setNewSliderAlt(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleAddSliderImage();
+                    }
+                  }}
+                  style={inputStyle}
+                />
+                <button
+                  type="button"
+                  onClick={handleAddSliderImage}
+                  style={{
+                    padding: '11px 20px',
+                    borderRadius: '12px',
+                    border: 'none',
+                    backgroundColor: '#1833FE',
+                    color: '#FFFFFF',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  + Add URL Slide
+                </button>
+              </div>
 
-                {/* Upload Slide Button & Select Existing Button */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input
-                    id="slider-file-input"
-                    type="file"
-                    accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
-                    style={{ display: 'none' }}
-                    onChange={(e) => handleSelectFileToUpload(e.target.files, 'slider')}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => document.getElementById('slider-file-input')?.click()}
-                    style={{
-                      padding: '11px 18px',
-                      borderRadius: '12px',
-                      border: '1.5px solid #BFDBFE',
-                      backgroundColor: '#EFF6FF',
-                      color: '#1833FE',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="17 8 12 3 7 8" />
-                      <line x1="12" y1="3" x2="12" y2="15" />
-                    </svg>
-                    <span>Upload Slide File</span>
-                  </button>
+              {/* Upload Slide Button & Select Existing Button */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem' }}>
+                <input
+                  id="slider-file-input"
+                  type="file"
+                  accept="image/webp,image/png,image/jpeg,image/svg+xml,image/gif,image/avif"
+                  style={{ display: 'none' }}
+                  onChange={(e) => handleSelectFileToUpload(e.target.files, 'slider')}
+                />
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('slider-file-input')?.click()}
+                  style={{
+                    padding: '11px 18px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #BFDBFE',
+                    backgroundColor: '#EFF6FF',
+                    color: '#1833FE',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                  <span>Upload Slide File</span>
+                </button>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      fetchMediaList();
-                      setAssetPickerTarget('slider');
-                      setSelectedAssetUrls([]);
-                      setIsAssetPickerOpen(true);
-                    }}
-                    style={{
-                      padding: '11px 18px',
-                      borderRadius: '12px',
-                      border: '1.5px solid #CBD5E1',
-                      backgroundColor: '#FFFFFF',
-                      color: '#1E293B',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      whiteSpace: 'nowrap',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-                    }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21 15 16 10 5 21" />
-                    </svg>
-                    <span>Select from Existing</span>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    fetchMediaList();
+                    setAssetPickerTarget('slider');
+                    setSelectedAssetUrls([]);
+                    setIsAssetPickerOpen(true);
+                  }}
+                  style={{
+                    padding: '11px 18px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    color: '#1E293B',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
+                  <span>Select from Existing</span>
+                </button>
               </div>
 
               {/* Slider Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
                 {sliderImages.length === 0 ? (
                   <div
                     style={{
@@ -2001,7 +2099,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                     style={{
                       border: '1.5px solid #E2E8F0',
                       borderRadius: '16px',
-                      padding: '10px',
+                      padding: '12px',
                       backgroundColor: '#FFFFFF',
                       boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
                       display: 'flex',
@@ -2022,7 +2120,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={blobPreviewMap[imgUrl] || imgUrl}
-                        alt={`Slide ${idx + 1}`}
+                        alt={imageAlts[idx] || `Slide ${idx + 1}`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
@@ -2050,46 +2148,70 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                       </span>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       <input
                         type="text"
                         value={imgUrl}
+                        placeholder="Image URL..."
                         onChange={(e) => {
                           const updated = [...sliderImages];
                           updated[idx] = e.target.value;
                           setSliderImages(updated);
                         }}
                         style={{
-                          flex: 1,
+                          width: '100%',
                           fontSize: '0.775rem',
                           padding: '7px 10px',
                           borderRadius: '8px',
                           border: '1px solid #CBD5E1',
                           backgroundColor: '#F8FAFC',
                           fontFamily: 'monospace',
+                          boxSizing: 'border-box',
                         }}
                       />
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveSliderImage(idx)}
-                        style={{
-                          padding: '7px 10px',
-                          borderRadius: '8px',
-                          border: '1px solid #FECACA',
-                          backgroundColor: '#FEF2F2',
-                          color: '#DC2626',
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                        aria-label="Remove slide"
-                      >
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="18" y1="6" x2="6" y2="18" />
-                          <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                      </button>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <input
+                          type="text"
+                          placeholder={`Alt text for slide #${idx + 1}...`}
+                          value={imageAlts[idx] || ''}
+                          onChange={(e) => {
+                            const updated = [...imageAlts];
+                            updated[idx] = e.target.value;
+                            setImageAlts(updated);
+                          }}
+                          style={{
+                            flex: 1,
+                            fontSize: '0.8rem',
+                            padding: '7px 10px',
+                            borderRadius: '8px',
+                            border: '1.5px solid #E2E8F0',
+                            backgroundColor: '#FFFFFF',
+                            color: '#0F172A',
+                            boxSizing: 'border-box',
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveSliderImage(idx)}
+                          style={{
+                            padding: '7px 10px',
+                            borderRadius: '8px',
+                            border: '1px solid #FECACA',
+                            backgroundColor: '#FEF2F2',
+                            color: '#DC2626',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                          aria-label="Remove slide"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))

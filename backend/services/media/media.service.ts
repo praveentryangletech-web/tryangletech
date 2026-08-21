@@ -14,6 +14,7 @@ export type StorageDriver = 'cloudinary' | 'local' | 'database' | 'hybrid';
 export interface MediaItem {
   filename: string;
   url: string;
+  altText?: string;
   size: number;
   updatedAt: string;
   source: 'cloudinary' | 'disk' | 'database';
@@ -72,12 +73,14 @@ class MediaService {
         CREATE TABLE IF NOT EXISTS "MediaAsset" (
           "id" TEXT PRIMARY KEY,
           "filename" TEXT UNIQUE NOT NULL,
+          "altText" TEXT DEFAULT '',
           "mimeType" TEXT NOT NULL,
           "size" INTEGER NOT NULL,
           "data" TEXT NOT NULL,
           "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-        )
+        );
+        ALTER TABLE "MediaAsset" ADD COLUMN IF NOT EXISTS "altText" TEXT DEFAULT '';
       `);
 
       try {
@@ -300,7 +303,7 @@ class MediaService {
       await this.ensureTable();
       try {
         const dbAssets: any[] = await db.$queryRawUnsafe(`
-          SELECT "filename", "size", "updatedAt" FROM "MediaAsset" ORDER BY "updatedAt" DESC
+          SELECT "filename", "size", "altText", "updatedAt" FROM "MediaAsset" ORDER BY "updatedAt" DESC
         `);
 
         for (const item of dbAssets) {
@@ -308,10 +311,16 @@ class MediaService {
             assetMap.set(item.filename, {
               filename: item.filename,
               url: `/portfolio/${item.filename}`,
+              altText: item.altText || '',
               size: item.size,
               updatedAt: new Date(item.updatedAt).toISOString(),
               source: 'database',
             });
+          } else {
+            const existing = assetMap.get(item.filename);
+            if (existing && item.altText) {
+              existing.altText = item.altText;
+            }
           }
         }
       } catch (err) {
@@ -330,8 +339,9 @@ class MediaService {
   public async saveAsset(
     file: File,
     customName?: string,
-    overwrite: boolean = false
-  ): Promise<{ filename: string; url: string; size: number }> {
+    overwrite: boolean = false,
+    altText: string = ''
+  ): Promise<{ filename: string; url: string; altText?: string; size: number }> {
     if (file.size > MAX_FILE_SIZE) {
       throw new Error(`File exceeds maximum allowed size of 10MB (${(file.size / 1024 / 1024).toFixed(2)}MB).`);
     }
@@ -383,6 +393,7 @@ class MediaService {
       return {
         filename: targetFilename,
         url: cloudResult.secure_url,
+        altText: altText.trim(),
         size: file.size,
       };
     }
@@ -403,6 +414,7 @@ class MediaService {
         return {
           filename: targetFilename,
           url: `/portfolio/${targetFilename}`,
+          altText: altText.trim(),
           size: file.size,
         };
       } catch (err: any) {
@@ -418,9 +430,10 @@ class MediaService {
       const id = `media_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
       await db.$executeRawUnsafe(
         `
-        INSERT INTO "MediaAsset" ("id", "filename", "mimeType", "size", "data", "updatedAt")
-        VALUES ($1, $2, $3, $4, $5, NOW())
+        INSERT INTO "MediaAsset" ("id", "filename", "altText", "mimeType", "size", "data", "updatedAt")
+        VALUES ($1, $2, $3, $4, $5, $6, NOW())
         ON CONFLICT ("filename") DO UPDATE SET
+          "altText" = EXCLUDED."altText",
           "size" = EXCLUDED."size",
           "mimeType" = EXCLUDED."mimeType",
           "data" = EXCLUDED."data",
@@ -428,6 +441,7 @@ class MediaService {
       `,
         id,
         targetFilename,
+        altText.trim(),
         mimeType,
         file.size,
         base64Data
@@ -436,6 +450,7 @@ class MediaService {
       return {
         filename: targetFilename,
         url: `/portfolio/${targetFilename}`,
+        altText: altText.trim(),
         size: file.size,
       };
     }
@@ -476,9 +491,10 @@ class MediaService {
       const id = `media_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
       await db.$executeRawUnsafe(
         `
-        INSERT INTO "MediaAsset" ("id", "filename", "mimeType", "size", "data", "updatedAt")
-        VALUES ($1, $2, $3, $4, $5, NOW())
+        INSERT INTO "MediaAsset" ("id", "filename", "altText", "mimeType", "size", "data", "updatedAt")
+        VALUES ($1, $2, $3, $4, $5, $6, NOW())
         ON CONFLICT ("filename") DO UPDATE SET
+          "altText" = EXCLUDED."altText",
           "size" = EXCLUDED."size",
           "mimeType" = EXCLUDED."mimeType",
           "data" = EXCLUDED."data",
@@ -486,6 +502,7 @@ class MediaService {
       `,
         id,
         targetFilename,
+        altText.trim(),
         mimeType,
         file.size,
         base64Data
@@ -497,6 +514,7 @@ class MediaService {
     return {
       filename: targetFilename,
       url: finalUrl,
+      altText: altText.trim(),
       size: file.size,
     };
   }

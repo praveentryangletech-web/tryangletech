@@ -196,13 +196,19 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
             </div>
             <div className="rt-hero-13-main-image rt-overflow-hidden rt-shadow" style={{ maxWidth: '1000px', margin: '0 auto', maxHeight: '550px', borderRadius: '24px', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
               {project.images && project.images.length > 1 ? (
-                <PortfolioImageSlider images={project.images} title={project.title} coverImage={project.image} />
+                <PortfolioImageSlider
+                  images={project.images}
+                  title={project.title}
+                  coverImage={project.image}
+                  coverAlt={project.imageAlt || project.title}
+                  imageAlts={project.imageAlts}
+                />
               ) : (
                 <SafeImage
                   src={project.image}
                   fallbackSrc="/portfolio/vh-accounting.webp"
                   loading="lazy"
-                  alt={project.title}
+                  alt={project.imageAlt || project.title}
                   className="rt-image-scale"
                   style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px' }}
                   width={800}

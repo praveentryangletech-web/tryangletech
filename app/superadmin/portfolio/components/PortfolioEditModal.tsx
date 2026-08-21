@@ -28,6 +28,7 @@ export default function PortfolioEditModal({
   const [role, setRole] = useState('Website Design & Development');
   const [liveUrl, setLiveUrl] = useState('');
   const [image, setImage] = useState('');
+  const [imageAlt, setImageAlt] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
   const [techInput, setTechInput] = useState('');
@@ -57,6 +58,7 @@ export default function PortfolioEditModal({
       setRole(project.role || 'Website Design & Development');
       setLiveUrl(project.liveUrl || '');
       setImage(project.image || '');
+      setImageAlt(project.imageAlt || project.title || '');
       setDescription(project.description || '');
       setContent(project.content || project.description || '');
       setTechnologies(project.technologies || []);
@@ -88,6 +90,7 @@ export default function PortfolioEditModal({
       setRole('Website Design & Development');
       setLiveUrl('');
       setImage('');
+      setImageAlt('');
       setDescription('');
       setContent('');
       setTechnologies(['React', 'Next.js', 'Tailwind CSS']);
@@ -224,6 +227,7 @@ export default function PortfolioEditModal({
         role: role.trim(),
         liveUrl: liveUrl.trim(),
         image: image.trim(),
+        imageAlt: imageAlt.trim() || title.trim(),
         description: description.trim(),
         content: content.trim() || description.trim(),
         technologies,
@@ -505,6 +509,27 @@ export default function PortfolioEditModal({
                   placeholder="/portfolio/vh-accounting.webp"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.65rem 0.9rem',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    fontSize: '0.9rem',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              <div style={{ gridColumn: '1 / -1' }}>
+                <label style={{ display: 'block', fontSize: '0.825rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                  Cover Image Alt Text (SEO &amp; Accessibility)
+                </label>
+                <input
+                  type="text"
+                  placeholder={`e.g. ${title || 'Project'} user interface showcase`}
+                  value={imageAlt}
+                  onChange={(e) => setImageAlt(e.target.value)}
                   style={{
                     width: '100%',
                     padding: '0.65rem 0.9rem',

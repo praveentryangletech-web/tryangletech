@@ -7,9 +7,11 @@ interface PortfolioImageSliderProps {
   images: string[];
   title: string;
   coverImage?: string;
+  coverAlt?: string;
+  imageAlts?: string[];
 }
 
-export default function PortfolioImageSlider({ images, title, coverImage }: PortfolioImageSliderProps) {
+export default function PortfolioImageSlider({ images, title, coverImage, coverAlt, imageAlts }: PortfolioImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const fallback = (coverImage && coverImage.trim()) || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
@@ -43,6 +45,7 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
   }, [currentIndex, displayImages.length]);
 
   const currentSrc = displayImages[currentIndex] || fallback;
+  const currentAlt = (imageAlts && imageAlts[currentIndex]) || coverAlt || `${title} - slide ${currentIndex + 1}`;
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
@@ -51,7 +54,7 @@ export default function PortfolioImageSlider({ images, title, coverImage }: Port
         src={currentSrc}
         fallbackSrc="/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png"
         loading="lazy"
-        alt={`${title} - image ${currentIndex + 1}`}
+        alt={currentAlt}
         className="rt-image-scale"
         style={{ width: '100%', height: '100%', maxHeight: '500px', objectFit: 'contain', borderRadius: '16px', animation: 'fadeInSlider 0.5s ease-in-out', backgroundColor: 'transparent' }}
         width={800}

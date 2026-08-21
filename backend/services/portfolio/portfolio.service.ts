@@ -104,10 +104,29 @@ export function clearPortfolioCache(): void {
 }
 
 /**
- * Guarantees that schema initialization is handled via Prisma schema.
+ * Guarantees that schema initialization and column presence are handled.
  */
 async function ensureColumnsExist(): Promise<void> {
-  // Schema is synchronized with PostgreSQL
+  if (isColumnsEnsured) return;
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`);
+  } catch (_) {}
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];`);
+  } catch (_) {}
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS imageAlt TEXT;`);
+  } catch (_) {}
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS imageAlts TEXT[];`);
+  } catch (_) {}
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE portfolioproject ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`);
+  } catch (_) {}
+  try {
+    await db.$executeRawUnsafe(`ALTER TABLE portfolioproject ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[];`);
+  } catch (_) {}
+  isColumnsEnsured = true;
 }
 
 export const portfolioService = {
@@ -121,7 +140,11 @@ export const portfolioService = {
 
     (async () => {
       try {
-        await this.syncAllStaticProjectsToDB(false);
+        await ensureColumnsExist();
+        const count = await (db.portfolioProject as any).count();
+        if (count === 0) {
+          await this.syncAllStaticProjectsToDB(false);
+        }
       } catch (err) {
         console.warn('[DB Portfolio] background seed notice:', err);
       }
@@ -612,7 +635,9 @@ export const portfolioService = {
     const title = data.title?.trim() || 'Untitled Project';
     const category = data.category || 'Business Website';
     const image = data.image?.trim() || '/portfolio/vh-accounting.webp';
+    const imageAlt = data.imageAlt?.trim() || '';
     const images = Array.isArray(data.images) && data.images.length > 0 ? data.images : (image ? [image] : []);
+    const imageAlts = Array.isArray(data.imageAlts) ? data.imageAlts : [];
     const description = data.description?.trim() || '';
     const client = data.client?.trim() || '';
     const duration = data.duration?.trim() || '3 Weeks';
@@ -637,13 +662,13 @@ export const portfolioService = {
     try {
       await db.$executeRaw`
         INSERT INTO "PortfolioProject" (
-          "id", "slug", "title", "category", "image", "images", "description",
+          "id", "slug", "title", "category", "image", "imageAlt", "images", "imageAlts", "description",
           "client", "duration", "role", "liveUrl", "content",
           "challenges", "solutions", "results", "technologies",
           "metaTitle", "metaDescription", "aeoSummary", "keywords", "geoRegion", "canonicalUrl", "faqs",
           "order", "createdAt", "updatedAt"
         ) VALUES (
-          ${id}, ${slug}, ${title}, ${category}, ${image}, ${images}, ${description},
+          ${id}, ${slug}, ${title}, ${category}, ${image}, ${imageAlt}, ${images}, ${imageAlts}, ${description},
           ${client}, ${duration}, ${role}, ${liveUrl}, ${content},
           ${challenges}, ${solutions}, ${results}, ${technologies},
           ${metaTitle}, ${metaDescription}, ${aeoSummary}, ${keywords}, ${geoRegion}, ${canonicalUrl}, ${faqsJson}::jsonb,
@@ -663,7 +688,9 @@ export const portfolioService = {
       title,
       category,
       image,
+      imageAlt,
       images,
+      imageAlts,
       description,
       client,
       duration,
@@ -700,8 +727,12 @@ export const portfolioService = {
     if (data.slug !== undefined) updates.push(Prisma.sql`"slug" = ${data.slug.trim()}`);
     if (data.category !== undefined) updates.push(Prisma.sql`"category" = ${data.category}`);
     if (data.image !== undefined) updates.push(Prisma.sql`"image" = ${data.image.trim()}`);
+    if (data.imageAlt !== undefined) updates.push(Prisma.sql`"imageAlt" = ${data.imageAlt.trim()}`);
     if (Array.isArray(data.images)) {
       updates.push(Prisma.sql`"images" = ${data.images}`);
+    }
+    if (Array.isArray(data.imageAlts)) {
+      updates.push(Prisma.sql`"imageAlts" = ${data.imageAlts}`);
     }
     if (data.description !== undefined) updates.push(Prisma.sql`"description" = ${data.description.trim()}`);
     if (data.client !== undefined) updates.push(Prisma.sql`"client" = ${data.client.trim()}`);
@@ -779,6 +810,30 @@ export const portfolioService = {
   },
 
   /**
+   * Reorder project position in display grid
+   */
+  async reorderProjects(orders: Array<{ id: string; order: number }>): Promise<{ affectedCount: number }> {
+    clearPortfolioCache();
+    await ensureColumnsExist();
+
+    let affectedCount = 0;
+    for (const item of orders) {
+      try {
+        await db.$executeRaw`
+          UPDATE "PortfolioProject"
+          SET "order" = ${item.order}, "updatedAt" = NOW()
+          WHERE "id" = ${item.id}
+        `;
+        affectedCount++;
+      } catch (err) {
+        console.warn(`[DB Portfolio] Failed to reorder project ID ${item.id}:`, err);
+      }
+    }
+
+    return { affectedCount };
+  },
+
+  /**
    * Cascades an image filename rename across all database portfolio items
    * Updates `image` (cover) and `images` (slider array), then clears server cache.
    */
@@ -838,7 +893,9 @@ function mapRowToPortfolioItem(r: any): PortfolioItem {
     title: r.title,
     category: r.category as PortfolioCategory,
     image: r.image,
+    imageAlt: r.imageAlt || r.title || '',
     images: Array.isArray(r.images) && r.images.length > 0 ? r.images : (r.image ? [r.image] : []),
+    imageAlts: Array.isArray(r.imageAlts) ? r.imageAlts : [],
     description: r.description,
     client: r.client || '',
     duration: r.duration || '',

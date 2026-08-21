@@ -406,7 +406,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
                         className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
                         src={project.image}
                         fallbackSrc="/portfolio/vh-accounting.webp"
-                        alt={project.title}
+                        alt={project.imageAlt || project.title}
                         width={410}
                         height={290}
                         loading="lazy"

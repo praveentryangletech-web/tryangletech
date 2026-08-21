@@ -6,7 +6,9 @@ export interface PortfolioItem {
   title: string;
   category: PortfolioCategory;
   image: string;
+  imageAlt?: string;
   images?: string[];
+  imageAlts?: string[];
   description: string;
   client?: string;
   duration?: string;

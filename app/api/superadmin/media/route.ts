@@ -79,15 +79,21 @@ export async function POST(req: NextRequest) {
       (formData.get('filename') as string | null) ||
       undefined;
 
+    const altText =
+      (formData.get('altText') as string | null) ||
+      (formData.get('alt') as string | null) ||
+      '';
+
     const overwrite = formData.get('overwrite') === 'true';
 
-    const savedAsset = await mediaService.saveAsset(file, customName, overwrite);
+    const savedAsset = await mediaService.saveAsset(file, customName, overwrite, altText);
 
     return NextResponse.json({
       success: true,
       message: 'Asset uploaded and stored successfully.',
       url: savedAsset.url,
       filename: savedAsset.filename,
+      altText: savedAsset.altText || altText,
       size: savedAsset.size,
     });
   } catch (err: any) {

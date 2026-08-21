@@ -15,6 +15,7 @@ export interface Project {
   title: string;
   category: PortfolioCategory;
   image: string;
+  imageAlt?: string;
   description: string;
   client?: string;
   duration?: string;
@@ -23,6 +24,7 @@ export interface Project {
   content?: string;
   hasLiveUrl?: boolean;
   images?: string[];
+  imageAlts?: string[];
   challenges?: string[];
   solutions?: string[];
   results?: string[];

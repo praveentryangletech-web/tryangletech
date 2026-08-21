@@ -746,7 +746,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         </div>
 
         {/* Tabs Bar Skeleton */}
-        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', padding: '8px', border: '1px solid #E2E8F0', marginBottom: '1.75rem', display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1.5px solid #CBD5E1', paddingBottom: '1rem', marginBottom: '2rem' }}>
           <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
           <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
           <div className="agy-skeleton" style={{ flex: 1, height: '42px', borderRadius: '10px' }} />
@@ -754,7 +754,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         </div>
 
         {/* Main Form Skeleton */}
-        <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', border: '1.5px solid #E2E8F0', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', padding: '0.5rem 0' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
             <div>
               <div className="agy-skeleton" style={{ width: '100px', height: '14px', marginBottom: '8px' }} />

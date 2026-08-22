@@ -313,7 +313,7 @@ export const portfolioService = {
 
       const totalPages = Math.ceil(total / limit) || 1;
 
-      const items: PortfolioItem[] = rows.map((r) => mapRowToPortfolioItem(r));
+      const items: PortfolioItem[] = (rows || []).map((r: any) => mapRowToPortfolioItem(r));
 
       const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
@@ -458,7 +458,7 @@ export const portfolioService = {
         ORDER BY "order" ASC, "createdAt" DESC
       `;
 
-      const items: PortfolioItem[] = rows.map((r) => mapRowToPortfolioItem(r));
+      const items: PortfolioItem[] = (rows || []).map((r: any) => mapRowToPortfolioItem(r));
 
       const cachedEntry = portfolioCache.set(cacheKey, items);
       const result = items as PortfolioItem[] & { etag?: string };

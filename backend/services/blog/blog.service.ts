@@ -260,11 +260,11 @@ export class BlogService {
           db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
           db.$queryRaw<any[]>`SELECT * FROM "BlogPost" ${whereClause} ORDER BY "publishedAt" DESC, "createdAt" DESC LIMIT ${limit} OFFSET ${offset}`,
         ]),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (2500ms)')), 2500)),
+        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (2500ms)')), 2500)),
       ]);
 
       const total = Number(totalCountRows?.[0]?.count || 0);
-      const items: BlogPostItem[] = (rows || []).map((r) => this.mapRowToPost(r));
+      const items: BlogPostItem[] = (rows || []).map((r: any) => this.mapRowToPost(r));
       const totalPages = Math.ceil(total / limit) || 1;
 
       const result: PaginatedBlogResult = {

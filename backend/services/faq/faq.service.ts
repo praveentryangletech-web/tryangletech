@@ -219,7 +219,7 @@ export const faqService = {
       `;
 
       if (rows && rows.length > 0) {
-        const mapped: FAQItem[] = rows.map((r) => ({
+        const mapped: FAQItem[] = (rows || []).map((r: any) => ({
           id: r.id,
           question: r.question,
           answer: r.answer,
@@ -283,7 +283,7 @@ export const faqService = {
         `;
 
         if (rows && rows.length > 0) {
-          const mapped: FAQItem[] = rows.map((r) => ({
+          const mapped: FAQItem[] = (rows || []).map((r: any) => ({
             id: r.id,
             question: r.question,
             answer: r.answer,

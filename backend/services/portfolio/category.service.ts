@@ -153,7 +153,7 @@ export const portfolioCategoryService = {
                 SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
               `.catch(() => []),
         ]),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
       ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)
@@ -164,7 +164,7 @@ export const portfolioCategoryService = {
         });
       }
 
-      const items: PortfolioCategoryItem[] = categoryRows.map((r) => {
+      const items: PortfolioCategoryItem[] = (categoryRows || []).map((r: any) => {
         const nameClean = (r.name || '').toLowerCase().trim();
         const isDefault = nameClean === DEFAULT_CATEGORY.toLowerCase();
         const count = countsMap[nameClean] || 0;

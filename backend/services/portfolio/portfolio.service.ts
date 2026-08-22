@@ -104,29 +104,24 @@ export function clearPortfolioCache(): void {
 }
 
 /**
- * Guarantees that schema initialization and column presence are handled.
+ * Guarantees that schema initialization, columns, and database indexes are handled in the background.
  */
-async function ensureColumnsExist(): Promise<void> {
+function ensureColumnsExist(): void {
   if (isColumnsEnsured) return;
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`);
-  } catch (_) {}
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];`);
-  } catch (_) {}
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS imageAlt TEXT;`);
-  } catch (_) {}
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE "PortfolioProject" ADD COLUMN IF NOT EXISTS imageAlts TEXT[];`);
-  } catch (_) {}
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE portfolioproject ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`);
-  } catch (_) {}
-  try {
-    await db.$executeRawUnsafe(`ALTER TABLE portfolioproject ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[];`);
-  } catch (_) {}
   isColumnsEnsured = true;
+
+  (async () => {
+    try {
+      await db.$executeRawUnsafe(`
+        ALTER TABLE "PortfolioProject" 
+          ADD COLUMN IF NOT EXISTS "imageAlt" TEXT,
+          ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];
+        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_order_created" ON "PortfolioProject" ("order" ASC, "createdAt" DESC);
+        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_cat" ON "PortfolioProject" ("category");
+        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_slug" ON "PortfolioProject" ("slug");
+      `);
+    } catch (_) {}
+  })().catch(() => {});
 }
 
 export const portfolioService = {
@@ -284,23 +279,26 @@ export const portfolioService = {
         ? (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "createdAt" DESC` : Prisma.sql`ORDER BY "createdAt" ASC`)
         : (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "order" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "order" ASC, "createdAt" DESC`);
 
-      // Single-Roundtrip CTE Execution: Fetches total count and sliced rows together
-      const rows = await db.$queryRaw<any[]>`
-        WITH filtered AS (
-          SELECT * FROM "PortfolioProject"
-          ${whereClause}
-        ),
-        counted AS (
-          SELECT COUNT(*)::int AS full_count FROM filtered
-        )
-        SELECT 
-          f.*,
-          COALESCE(c.full_count, 0) AS full_count
-        FROM filtered f
-        CROSS JOIN counted c
-        ${orderClause}
-        LIMIT ${limit} OFFSET ${offset}
-      `;
+      // Single-Roundtrip CTE Execution with 2.5s fail-fast timeout
+      const rows = await Promise.race([
+        db.$queryRaw<any[]>`
+          WITH filtered AS (
+            SELECT * FROM "PortfolioProject"
+            ${whereClause}
+          ),
+          counted AS (
+            SELECT COUNT(*)::int AS full_count FROM filtered
+          )
+          SELECT 
+            f.*,
+            COALESCE(c.full_count, 0) AS full_count
+          FROM filtered f
+          CROSS JOIN counted c
+          ${orderClause}
+          LIMIT ${limit} OFFSET ${offset}
+        `,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+      ]);
 
       let total = 0;
       if (rows && rows.length > 0) {

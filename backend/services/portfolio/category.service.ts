@@ -135,39 +135,33 @@ export const portfolioCategoryService = {
     }
 
     try {
-      await this.seedIfEmpty(normalizedType);
+      this.seedIfEmpty(normalizedType);
 
-      // Fetch categories by type
-      const categoryRows = await db.$queryRaw<any[]>`
-        SELECT * FROM "PortfolioCategory" 
-        WHERE "type" = ${normalizedType} 
-        ORDER BY "order" ASC, "createdAt" ASC
-      `;
+      // Parallelize categories and counts queries in a single roundtrip with 2.5s timeout
+      const [categoryRows, countRows] = await Promise.race([
+        Promise.all([
+          db.$queryRaw<any[]>`
+            SELECT * FROM "PortfolioCategory" 
+            WHERE "type" = ${normalizedType} 
+            ORDER BY "order" ASC, "createdAt" ASC
+          `,
+          normalizedType === 'BLOG'
+            ? db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
+                SELECT "category", COUNT(*)::int as count FROM "BlogPost" GROUP BY "category"
+              `.catch(() => [])
+            : db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
+                SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
+              `.catch(() => []),
+        ]),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+      ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)
       let countsMap: Record<string, number> = {};
-      try {
-        if (normalizedType === 'BLOG') {
-          const countRows = await db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
-            SELECT "category", COUNT(*)::int as count FROM "BlogPost" GROUP BY "category"
-          `;
-          if (countRows && Array.isArray(countRows)) {
-            countRows.forEach((r) => {
-              if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
-            });
-          }
-        } else {
-          const countRows = await db.$queryRaw<Array<{ category: string; count: bigint | number }>>`
-            SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
-          `;
-          if (countRows && Array.isArray(countRows)) {
-            countRows.forEach((r) => {
-              if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
-            });
-          }
-        }
-      } catch (err) {
-        console.warn('[DB Category] count query notice:', err);
+      if (countRows && Array.isArray(countRows)) {
+        countRows.forEach((r: any) => {
+          if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
+        });
       }
 
       const items: PortfolioCategoryItem[] = categoryRows.map((r) => {

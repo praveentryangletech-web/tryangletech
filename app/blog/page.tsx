@@ -2,8 +2,6 @@ import { Metadata } from 'next';
 import WebflowInit from "../common/WebflowInit";
 import BlogContent from './components/BlogContent';
 import BlogFAQ from './components/BlogFAQ';
-import { blogService, BlogPostItem } from '@/backend/services/blog';
-import { portfolioCategoryService } from '@/backend/services/portfolio/category.service';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -22,34 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
-  let initialPosts: BlogPostItem[] = [];
-  let initialCategories: string[] = ['All'];
-
-  try {
-    const [postsResult, catsResult] = await Promise.allSettled([
-      blogService.getPaginatedPosts({
-        limit: 100,
-        status: 'published',
-        sortBy: 'publishedAt',
-        sortOrder: 'desc',
-      }),
-      portfolioCategoryService.getAllCategories('BLOG'),
-    ]);
-
-    if (postsResult.status === 'fulfilled' && postsResult.value && Array.isArray(postsResult.value.items)) {
-      initialPosts = postsResult.value.items;
-    }
-
-    if (catsResult.status === 'fulfilled' && catsResult.value && Array.isArray(catsResult.value) && catsResult.value.length > 0) {
-      initialCategories = ['All', ...catsResult.value.map((c) => c.name)];
-    } else if (initialPosts.length > 0) {
-      initialCategories = Array.from(new Set(['All', ...initialPosts.map((p) => p.category)]));
-    }
-  } catch (err) {
-    console.warn('Failed to prefetch SSR blog posts, fallback will be used:', err);
-  }
-
+export default function BlogPage() {
   return (
     <>
       <WebflowInit pageId="68eddbced83339fe88ea9ff6" />
@@ -70,28 +41,15 @@ export default async function BlogPage() {
                 "@type": "ImageObject",
                 "url": "https://tryangletech.com/icon.png"
               }
-            },
-            "blogPost": initialPosts.slice(0, 15).map((post) => ({
-              "@type": "BlogPosting",
-              "headline": post.title,
-              "url": `https://tryangletech.com/blog/${post.slug}`,
-              "datePublished": post.publishedAt || post.createdAt,
-              "articleSection": post.category,
-              "image": post.coverImage || "https://tryangletech.com/portfolio/vh-accounting.webp",
-              "author": {
-                "@type": "Person",
-                "name": post.authorName || "TryangleTech Team"
-              }
-            }))
+            }
           })
         }}
       />
 
       <main>
-        <BlogContent initialPosts={initialPosts} initialCategories={initialCategories} />
+        <BlogContent />
         <BlogFAQ />
       </main>
     </>
   );
 }
-

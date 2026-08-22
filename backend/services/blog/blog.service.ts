@@ -126,33 +126,30 @@ export class BlogService {
   }
 
   /**
-   * Ensure BlogPost schema columns exist in PostgreSQL
+   * Ensure BlogPost schema columns and high-performance indexes exist in PostgreSQL in the background
    */
-  private async ensureBlogSchema(): Promise<void> {
+  private ensureBlogSchema(): void {
     if (isBlogTableEnsured) return;
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "coverImageAlt" TEXT;`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "imageAlt" TEXT;`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "images" TEXT[] DEFAULT ARRAY[]::TEXT[];`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage1Alt" TEXT;`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "contentImage2Alt" TEXT;`;
-    } catch (_) {}
-    try {
-      await db.$executeRaw`ALTER TABLE "BlogPost" ADD COLUMN IF NOT EXISTS "faqs" JSONB;`;
-    } catch (_) {}
-
     isBlogTableEnsured = true;
+
+    (async () => {
+      try {
+        await db.$executeRaw`
+          ALTER TABLE "BlogPost" 
+            ADD COLUMN IF NOT EXISTS "coverImageAlt" TEXT,
+            ADD COLUMN IF NOT EXISTS "imageAlt" TEXT,
+            ADD COLUMN IF NOT EXISTS "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[],
+            ADD COLUMN IF NOT EXISTS "contentImage1Alt" TEXT,
+            ADD COLUMN IF NOT EXISTS "contentImage2Alt" TEXT,
+            ADD COLUMN IF NOT EXISTS "faqs" JSONB;
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_slug_lower" ON "BlogPost" (LOWER("slug"));
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub_date" ON "BlogPost" ("category", "published", "publishedAt" DESC);
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);
+          CREATE INDEX IF NOT EXISTS "idx_blogpost_created_at" ON "BlogPost" ("createdAt" DESC);
+        `;
+      } catch (_) {}
+    })().catch(() => {});
   }
 
   private mapRowToPost(row: any): BlogPostItem {
@@ -230,7 +227,7 @@ export class BlogService {
       return cached.data;
     }
 
-    await this.ensureBlogSchema();
+    this.ensureBlogSchema();
 
     try {
       const conditions: Prisma.Sql[] = [];
@@ -258,9 +255,12 @@ export class BlogService {
       const whereClause = conditions.length > 0 ? Prisma.sql`WHERE ${Prisma.join(conditions, ' AND ')}` : Prisma.empty;
       const offset = (page - 1) * limit;
 
-      const [totalCountRows, rows] = await Promise.all([
-        db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
-        db.$queryRaw<any[]>`SELECT * FROM "BlogPost" ${whereClause} ORDER BY "publishedAt" DESC, "createdAt" DESC LIMIT ${limit} OFFSET ${offset}`,
+      const [totalCountRows, rows] = await Promise.race([
+        Promise.all([
+          db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
+          db.$queryRaw<any[]>`SELECT * FROM "BlogPost" ${whereClause} ORDER BY "publishedAt" DESC, "createdAt" DESC LIMIT ${limit} OFFSET ${offset}`,
+        ]),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (2500ms)')), 2500)),
       ]);
 
       const total = Number(totalCountRows?.[0]?.count || 0);
@@ -331,12 +331,15 @@ export class BlogService {
     const cached = blogCache.get<BlogPostItem>(cacheKey);
     if (cached) return cached.data;
 
-    await this.ensureBlogSchema();
+    this.ensureBlogSchema();
 
     try {
-      const rows = await db.$queryRaw<any[]>`
-        SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
-      `;
+      const rows = await Promise.race([
+        db.$queryRaw<any[]>`
+          SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
+        `,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+      ]);
 
       if (rows && rows.length > 0) {
         const post = this.mapRowToPost(rows[0]);
@@ -359,12 +362,15 @@ export class BlogService {
     const cached = blogCache.get<BlogPostItem>(cacheKey);
     if (cached) return cached.data;
 
-    await this.ensureBlogSchema();
+    this.ensureBlogSchema();
 
     try {
-      const rows = await db.$queryRaw<any[]>`
-        SELECT * FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
-      `;
+      const rows = await Promise.race([
+        db.$queryRaw<any[]>`
+          SELECT * FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
+        `,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+      ]);
 
       if (rows && rows.length > 0) {
         const post = this.mapRowToPost(rows[0]);

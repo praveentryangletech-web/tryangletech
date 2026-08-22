@@ -44,6 +44,10 @@ const getInitialDefaultPosts = (): BlogPostItem[] => {
   });
 };
 
+// Global in-memory cache for instantaneous client-side navigation
+let clientCachedPosts: BlogPostItem[] | null = null;
+let clientCachedCategories: string[] | null = null;
+
 interface BlogContentProps {
   initialPosts?: BlogPostItem[];
   initialCategories?: string[];
@@ -51,43 +55,57 @@ interface BlogContentProps {
 
 export default function BlogContent({ initialPosts, initialCategories }: BlogContentProps = {}) {
   const [activeCategory, setActiveCategory] = useState("All");
+  
   const [posts, setPosts] = useState<BlogPostItem[]>(() => {
+    if (clientCachedPosts && clientCachedPosts.length > 0) return clientCachedPosts;
     if (initialPosts && initialPosts.length > 0) return initialPosts;
     return getInitialDefaultPosts();
   });
+
   const [categories, setCategories] = useState<string[]>(() => {
+    if (clientCachedCategories && clientCachedCategories.length > 0) return clientCachedCategories;
     if (initialCategories && initialCategories.length > 0) return initialCategories;
     return staticCategories;
   });
+
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(() => {
-    return !initialPosts || initialPosts.length === 0;
+    if (clientCachedPosts && clientCachedPosts.length > 0) return false;
+    if (initialPosts && initialPosts.length > 0) return false;
+    return false; // Render fast defaults or skeletons seamlessly
   });
 
-  // Fetch live articles and dynamic categories from API in background
+  // Fast Client-Side background API fetch
   useEffect(() => {
     let isMounted = true;
     const fetchLivePosts = async () => {
       try {
         const [postsRes, catsRes] = await Promise.allSettled([
-          fetch('/api/blog?limit=100&status=published&sortBy=publishedAt&sortOrder=desc'),
-          fetch('/api/blog/categories'),
+          fetch('/api/blog?limit=100&status=published&sortBy=publishedAt&sortOrder=desc', {
+            headers: { 'Accept': 'application/json' },
+          }),
+          fetch('/api/blog/categories', {
+            headers: { 'Accept': 'application/json' },
+          }),
         ]);
 
-        if (postsRes.status === 'fulfilled') {
+        if (postsRes.status === 'fulfilled' && postsRes.value.ok) {
           const data = await postsRes.value.json();
-          if (isMounted && data.success && Array.isArray(data.data)) {
+          if (isMounted && data.success && Array.isArray(data.data) && data.data.length > 0) {
             setPosts(data.data);
+            clientCachedPosts = data.data;
           }
         }
 
-        if (catsRes.status === 'fulfilled') {
+        if (catsRes.status === 'fulfilled' && catsRes.value.ok) {
           const catsData = await catsRes.value.json();
           if (isMounted && catsData.success && Array.isArray(catsData.data) && catsData.data.length > 0) {
-            setCategories(['All', ...catsData.data.map((c: any) => c.name)]);
+            const dynamicCats = ['All', ...catsData.data.map((c: any) => c.name)];
+            setCategories(dynamicCats);
+            clientCachedCategories = dynamicCats;
           }
         }
       } catch (err) {
-        console.warn('Failed to fetch live blog posts in background:', err);
+        console.warn('Client API fetch warning:', err);
       } finally {
         if (isMounted) {
           setIsInitialLoading(false);

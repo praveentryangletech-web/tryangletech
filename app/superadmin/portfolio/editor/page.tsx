@@ -1068,11 +1068,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           style={{
             flex: '1 1 auto',
             padding: '9px 14px',
-            borderRadius: '10px',
-            border: activeTab === 'general' ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-            backgroundColor: activeTab === 'general' ? '#EFF6FF' : 'transparent',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: 'transparent',
             color: activeTab === 'general' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'general' ? 700 : 600,
+            fontWeight: activeTab === 'general' ? 700 : 500,
             fontSize: '0.815rem',
             cursor: 'pointer',
             display: 'flex',
@@ -1099,11 +1099,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           style={{
             flex: '1 1 auto',
             padding: '9px 14px',
-            borderRadius: '10px',
-            border: activeTab === 'media' ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-            backgroundColor: activeTab === 'media' ? '#EFF6FF' : 'transparent',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: 'transparent',
             color: activeTab === 'media' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'media' ? 700 : 600,
+            fontWeight: activeTab === 'media' ? 700 : 500,
             fontSize: '0.815rem',
             cursor: 'pointer',
             display: 'flex',
@@ -1123,11 +1123,13 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'media' ? '#DBEAFE' : '#F1F5F9',
+              backgroundColor: activeTab === 'media' ? '#EFF6FF' : '#F1F5F9',
               color: activeTab === 'media' ? '#1833FE' : '#64748B',
+              border: activeTab === 'media' ? '1px solid #BFDBFE' : '1px solid transparent',
               padding: '1px 7px',
               borderRadius: '10px',
               fontWeight: 700,
+              transition: 'all 0.15s ease',
             }}
           >
             {sliderImages.length}
@@ -1141,11 +1143,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           style={{
             flex: '1 1 auto',
             padding: '9px 14px',
-            borderRadius: '10px',
-            border: activeTab === 'narrative' ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-            backgroundColor: activeTab === 'narrative' ? '#EFF6FF' : 'transparent',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: 'transparent',
             color: activeTab === 'narrative' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'narrative' ? 700 : 600,
+            fontWeight: activeTab === 'narrative' ? 700 : 500,
             fontSize: '0.815rem',
             cursor: 'pointer',
             display: 'flex',
@@ -1170,11 +1172,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           style={{
             flex: '1 1 auto',
             padding: '9px 14px',
-            borderRadius: '10px',
-            border: activeTab === 'seo' ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-            backgroundColor: activeTab === 'seo' ? '#EFF6FF' : 'transparent',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: 'transparent',
             color: activeTab === 'seo' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'seo' ? 700 : 600,
+            fontWeight: activeTab === 'seo' ? 700 : 500,
             fontSize: '0.815rem',
             cursor: 'pointer',
             display: 'flex',
@@ -1194,11 +1196,13 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'seo' ? '#DBEAFE' : '#ECFDF5',
+              backgroundColor: activeTab === 'seo' ? '#EFF6FF' : '#ECFDF5',
               color: activeTab === 'seo' ? '#1833FE' : '#059669',
+              border: activeTab === 'seo' ? '1px solid #BFDBFE' : '1px solid transparent',
               padding: '1px 7px',
               borderRadius: '10px',
               fontWeight: 700,
+              transition: 'all 0.15s ease',
             }}
           >
             AI Ready
@@ -1212,11 +1216,11 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           style={{
             flex: '1 1 auto',
             padding: '9px 14px',
-            borderRadius: '10px',
-            border: activeTab === 'faqs' ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-            backgroundColor: activeTab === 'faqs' ? '#EFF6FF' : 'transparent',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: 'transparent',
             color: activeTab === 'faqs' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'faqs' ? 700 : 600,
+            fontWeight: activeTab === 'faqs' ? 700 : 500,
             fontSize: '0.815rem',
             cursor: 'pointer',
             display: 'flex',
@@ -1236,11 +1240,13 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'faqs' ? '#DBEAFE' : '#EFF6FF',
+              backgroundColor: activeTab === 'faqs' ? '#EFF6FF' : '#EFF6FF',
               color: activeTab === 'faqs' ? '#1833FE' : '#1833FE',
+              border: activeTab === 'faqs' ? '1px solid #BFDBFE' : '1px solid transparent',
               padding: '1px 7px',
               borderRadius: '10px',
               fontWeight: 700,
+              transition: 'all 0.15s ease',
             }}
           >
             {faqs.length} FAQs

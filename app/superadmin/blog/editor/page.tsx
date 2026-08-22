@@ -975,12 +975,12 @@ function BlogEditorInner() {
               onClick={() => setActiveTab(tab.key as any)}
               style={{
                 flex: '1 1 auto',
-                padding: '11px 20px',
-                borderRadius: '10px',
-                border: isActive ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-                backgroundColor: isActive ? '#EFF6FF' : 'transparent',
+                padding: '10px 16px',
+                borderRadius: '8px',
+                border: 'none',
+                backgroundColor: 'transparent',
                 color: isActive ? '#1833FE' : '#64748B',
-                fontWeight: isActive ? 700 : 600,
+                fontWeight: isActive ? 700 : 500,
                 fontSize: '0.875rem',
                 cursor: 'pointer',
                 display: 'flex',
@@ -997,11 +997,13 @@ function BlogEditorInner() {
                 <span
                   style={{
                     fontSize: '0.725rem',
-                    backgroundColor: isActive ? '#DBEAFE' : '#F1F5F9',
+                    backgroundColor: isActive ? '#EFF6FF' : '#F1F5F9',
                     color: isActive ? '#1833FE' : '#64748B',
+                    border: isActive ? '1px solid #BFDBFE' : '1px solid transparent',
                     padding: '2px 8px',
                     borderRadius: '10px',
                     fontWeight: 700,
+                    transition: 'all 0.15s ease',
                   }}
                 >
                   {tab.badge}

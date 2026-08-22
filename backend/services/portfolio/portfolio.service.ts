@@ -513,18 +513,53 @@ export const portfolioService = {
 
     try {
       const rows = await db.$queryRaw<any[]>`
-        SELECT * FROM "PortfolioProject" WHERE "id" = ${id} LIMIT 1
+        SELECT * FROM "PortfolioProject" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
       `;
-      if (!rows || rows.length === 0) return null;
-      const item = mapRowToPortfolioItem(rows[0]);
-      portfolioCache.set(cacheKey, item);
-      return item;
+      if (rows && rows.length > 0) {
+        const item = mapRowToPortfolioItem(rows[0]);
+        portfolioCache.set(cacheKey, item);
+        return item;
+      }
+
+      // Check fallback defaultProjects by id, slug, or 1-based index
+      const found = defaultProjects.find((p, idx) => p.slug === id || (p as any).id === id || String(idx + 1) === id);
+      if (!found) return null;
+
+      const fallbackItem: PortfolioItem = {
+        id: (found as any).id || found.slug,
+        slug: found.slug,
+        title: found.title,
+        category: found.category,
+        image: found.image,
+        images: found.images || (found.image ? [found.image] : []),
+        description: found.description,
+        client: found.client || '',
+        duration: found.duration || '',
+        role: found.role || '',
+        liveUrl: found.liveUrl || '',
+        content: found.content || '',
+        challenges: found.challenges || [],
+        solutions: found.solutions || [],
+        results: found.results || [],
+        technologies: found.technologies || [],
+        metaTitle: found.metaTitle || '',
+        metaDescription: found.metaDescription || '',
+        aeoSummary: found.aeoSummary || '',
+        keywords: found.keywords || [],
+        geoRegion: found.geoRegion || '',
+        canonicalUrl: found.canonicalUrl || '',
+        order: (found as any).order || 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      portfolioCache.set(cacheKey, fallbackItem);
+      return fallbackItem;
     } catch (err) {
       console.error('[DB Portfolio] getProjectById error:', err);
-      const found = defaultProjects.find((p) => p.slug === id || (p as any).id === id);
+      const found = defaultProjects.find((p, idx) => p.slug === id || (p as any).id === id || String(idx + 1) === id);
       if (!found) return null;
       return {
-        id,
+        id: (found as any).id || found.slug,
         slug: found.slug,
         title: found.title,
         category: found.category,
@@ -569,13 +604,47 @@ export const portfolioService = {
       const rows = await db.$queryRaw<any[]>`
         SELECT * FROM "PortfolioProject" WHERE LOWER("slug") = ${safeSlug} LIMIT 1
       `;
-      if (!rows || rows.length === 0) return null;
-      const item = mapRowToPortfolioItem(rows[0]);
-      portfolioCache.set(cacheKey, item);
-      return item;
+      if (rows && rows.length > 0) {
+        const item = mapRowToPortfolioItem(rows[0]);
+        portfolioCache.set(cacheKey, item);
+        return item;
+      }
+
+      const found = defaultProjects.find((p) => p.slug.toLowerCase() === safeSlug);
+      if (!found) return null;
+
+      const fallbackItem: PortfolioItem = {
+        id: (found as any).id || found.slug,
+        slug: found.slug,
+        title: found.title,
+        category: found.category,
+        image: found.image,
+        images: found.images || (found.image ? [found.image] : []),
+        description: found.description,
+        client: found.client || '',
+        duration: found.duration || '',
+        role: found.role || '',
+        liveUrl: found.liveUrl || '',
+        content: found.content || '',
+        challenges: found.challenges || [],
+        solutions: found.solutions || [],
+        results: found.results || [],
+        technologies: found.technologies || [],
+        metaTitle: found.metaTitle || '',
+        metaDescription: found.metaDescription || '',
+        aeoSummary: found.aeoSummary || '',
+        keywords: found.keywords || [],
+        geoRegion: found.geoRegion || '',
+        canonicalUrl: found.canonicalUrl || '',
+        order: (found as any).order || 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      portfolioCache.set(cacheKey, fallbackItem);
+      return fallbackItem;
     } catch (err) {
       console.error('[DB Portfolio] getProjectBySlug error:', err);
-      const found = defaultProjects.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+      const found = defaultProjects.find((p) => p.slug.toLowerCase() === safeSlug);
       if (!found) return null;
       return {
         id: (found as any).id || found.slug,

@@ -451,27 +451,25 @@ body {
   scrollbar-width: none !important;    /* Firefox */
 }
 
-/* ── Universal Shimmer Skeleton Loading Tokens ── */
+/* ── Universal Soft Skeleton Loading Tokens ── */
 @keyframes rtShimmerPulse {
   0% {
-    background-position: -200% 0;
+    background-position: 100% 0;
   }
   100% {
-    background-position: 200% 0;
+    background-position: -100% 0;
   }
 }
 
 .rt-skeleton-box {
   background: linear-gradient(
     90deg,
-    #f1f5f9 0%,
-    #e2e8f0 30%,
-    #f8fafc 50%,
-    #e2e8f0 70%,
-    #f1f5f9 100%
+    #E5EAF0 0%,
+    #F1F4F8 50%,
+    #E5EAF0 100%
   );
-  background-size: 300% 100%;
-  animation: rtShimmerPulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  background-size: 200% 100%;
+  animation: rtShimmerPulse 2.2s ease-in-out infinite;
   display: block;
 }
 

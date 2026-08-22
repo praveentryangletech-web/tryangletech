@@ -1,9 +1,25 @@
 "use client";
 import React from 'react';
+import NextImage, { ImageProps } from "next/image";
 
-import Image from "next/image";
+const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
+  return <NextImage {...props} />;
+};
 
-export default function Benefits() {
+import { HomeServiceItem } from '@/backend/services/home/home.types';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+
+interface BenefitsProps {
+  services?: HomeServiceItem[];
+}
+
+export default function Benefits({ services: servicesProp }: BenefitsProps) {
+  const servicesList = servicesProp && servicesProp.length > 0 ? servicesProp : DEFAULT_HOME_CONTENT.services;
+  const s1 = servicesList[0] || DEFAULT_HOME_CONTENT.services[0];
+  const s2 = servicesList[1] || DEFAULT_HOME_CONTENT.services[1];
+  const s3 = servicesList[2] || DEFAULT_HOME_CONTENT.services[2];
+  const s4 = servicesList[3] || DEFAULT_HOME_CONTENT.services[3];
+
   return (
     <section className="rt-our-benefits">
           <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -19,7 +35,7 @@ export default function Benefits() {
                   <div className="rt-card-top-text">
                     <div className="rt-overflow-hidden">
                       <div className="rt-text-style-h4 rt-text-gradient">
-                        Website Development
+                        {s1.title}
                       </div>
                     </div>
                   </div>

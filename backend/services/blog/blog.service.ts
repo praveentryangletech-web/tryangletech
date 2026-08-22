@@ -134,7 +134,7 @@ export class BlogService {
 
     (async () => {
       try {
-        await db.$executeRaw`
+        await db.$executeRawUnsafe(`
           ALTER TABLE "BlogPost" 
             ADD COLUMN IF NOT EXISTS "coverImageAlt" TEXT,
             ADD COLUMN IF NOT EXISTS "imageAlt" TEXT,
@@ -143,11 +143,11 @@ export class BlogService {
             ADD COLUMN IF NOT EXISTS "contentImage1Alt" TEXT,
             ADD COLUMN IF NOT EXISTS "contentImage2Alt" TEXT,
             ADD COLUMN IF NOT EXISTS "faqs" JSONB;
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_slug_lower" ON "BlogPost" (LOWER("slug"));
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub_date" ON "BlogPost" ("category", "published", "publishedAt" DESC);
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);
-          CREATE INDEX IF NOT EXISTS "idx_blogpost_created_at" ON "BlogPost" ("createdAt" DESC);
-        `;
+        `);
+        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_slug_lower" ON "BlogPost" (LOWER("slug"));`);
+        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub_date" ON "BlogPost" ("category", "published", "publishedAt" DESC);`);
+        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);`);
+        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_created_at" ON "BlogPost" ("createdAt" DESC);`);
       } catch (_) {}
     })().catch(() => {});
   }

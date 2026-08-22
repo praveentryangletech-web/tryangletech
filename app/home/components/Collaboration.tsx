@@ -6,7 +6,19 @@ const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
   return <NextImage {...props} />;
 };
 
-export default function Collaboration() {
+import { HomeHowWeWorkSection } from '@/backend/services/home/home.types';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+
+interface CollaborationProps {
+  howWeWork?: HomeHowWeWorkSection;
+}
+
+export default function Collaboration({ howWeWork: howWeWorkProp }: CollaborationProps) {
+  const howWeWork = howWeWorkProp || DEFAULT_HOME_CONTENT.howWeWork;
+  const items = howWeWork.items && howWeWork.items.length >= 2 ? howWeWork.items : DEFAULT_HOME_CONTENT.howWeWork.items;
+  const item1 = items[0] || DEFAULT_HOME_CONTENT.howWeWork.items[0];
+  const item2 = items[1] || DEFAULT_HOME_CONTENT.howWeWork.items[1];
+
   return (
         <section className="rt-collaboration-v1 rt-overflow-hidden">
           <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -17,7 +29,7 @@ export default function Collaboration() {
                     data-w-id="f68a08f7-0700-c3c7-7ea2-119bf4408740"
                     style={{ "opacity": "0" }}
                     className="rt-sub-text rt-sub-gredient">
-                    How We Work
+                    {howWeWork.subtitle || 'How We Work'}
                   </div>
                 </div>
                 <div className="rt-heading-para-gap">
@@ -25,15 +37,15 @@ export default function Collaboration() {
                     data-w-id="fa389f03-d668-fc21-92b7-625895f0f1cd"
                     style={{ "opacity": "0" }}
                     className="rt-gap-off">
-                    How we work with you from start
-                    <span className="rt-color-periwinkle-gray"> to finish</span>
+                    {howWeWork.heading}{' '}
+                    <span className="rt-color-periwinkle-gray">{howWeWork.headingHighlight || 'to finish'}</span>
                   </h2>
                 </div>
                 <p
                   data-w-id="01cd9f60-c08f-a44e-7306-8a24c776e67e"
                   style={{ "opacity": "0" }}
                   className="rt-gap-off">
-                  We start by listening to what you need. Then we plan, design, build, and launch your project. You are part of the process at every step, so there are never any surprises.
+                  {howWeWork.description}
                 </p>
                 <div className="rt-collaboration-left-inner">
                   <div
@@ -42,16 +54,16 @@ export default function Collaboration() {
                     className="rt-collaboration-left-item">
                     <div className="rt-collaboration-left-icon">
                       <Image
-                        src="/Taskopia_files/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg"
+                        src={item1.icon || "/Taskopia_files/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg"}
                         loading="lazy"
                         alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Clear communication
+                        {item1.title}
                       </div>
                       <p className="rt-gap-off">
-                        You will have a dedicated point of contact who keeps you updated. No chasing for answers or wondering what is happening with your project.
+                        {item1.description}
                       </p>
                     </div>
                   </div>
@@ -65,16 +77,16 @@ export default function Collaboration() {
                     className="rt-collaboration-left-item">
                     <div className="rt-collaboration-left-icon">
                       <Image
-                        src="/Taskopia_files/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"
+                        src={item2.icon || "/Taskopia_files/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"}
                         loading="lazy"
                         alt=""  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-collaboration-left-item-text">
                       <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                        Proven track record
+                        {item2.title}
                       </div>
                       <p>
-                        We have delivered over 350 websites and projects in the last 7 plus years. We know how to plan properly and launch on time.
+                        {item2.description}
                       </p>
                     </div>
                   </div>
@@ -98,18 +110,18 @@ export default function Collaboration() {
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-v1-right-one">
                     <Image
-                      src="/Taskopia_files/68f21b4dc6a06a6abe39c79b_taskopia-Collaboration-one.webp"
+                      src={howWeWork.image1 || "/Taskopia_files/68f21b4dc6a06a6abe39c79b_taskopia-Collaboration-one.webp"}
                       loading="lazy"
-                      alt="taskopia-Collaboration-one"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      alt="Collaboration Feature 1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div
                     data-w-id="6e37c1de-f32a-f8b2-a948-1302911adaed"
                     style={{ "opacity": "0" }}
                     className="rt-collaboration-v1-right-two">
                     <Image
-                      src="/Taskopia_files/68f21b3af8e5e0af23ce678d_taskopia-Collaboration-two.webp"
+                      src={howWeWork.image2 || "/Taskopia_files/68f21b3af8e5e0af23ce678d_taskopia-Collaboration-two.webp"}
                       loading="lazy"
-                      alt="taskopia-Collaboration-two"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      alt="Collaboration Feature 2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div
@@ -117,16 +129,13 @@ export default function Collaboration() {
                   style={{ "opacity": "0" }}
                   className="rt-collaboration-v1-right-bottom">
                   <Image
-                    src="/Taskopia_files/68f21b3a3b734d2430609672_taskopia-Collaboration-three.webp"
+                    src={howWeWork.image3 || "/Taskopia_files/68f21b3a3b734d2430609672_taskopia-Collaboration-three.webp"}
                     loading="lazy"
                     width={466}
-                    sizes="(max-width: 479px) 100vw, 466px"
-                    alt="taskopia-Collaboration-three"
-                    srcSet="
-                    https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three-p-500.webp 500w,
-                    https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three-p-800.webp 800w,
-                    https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/68f21b3a3b734d2430609672_taskopia-Collaboration-three.webp       932w
-                  "  height={800} />
+                    height={800}
+                    alt="Collaboration Overview"
+                    style={{ width: "100%", height: "auto" }}
+                  />
                 </div>
                 <div className="rt-collaboration-v1-right-bg"></div>
               </div>

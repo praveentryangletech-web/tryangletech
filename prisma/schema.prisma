@@ -198,7 +198,7 @@ model PortfolioCategory {
 // ----------------------------------------------------
 model PageFAQ {
   id          String   @id @default(cuid())
-  pageType    String   // e.g. "PORTFOLIO_MAIN", "PORTFOLIO_DETAIL", "BLOG_MAIN", "BLOG_DETAIL", "SERVICE_WEB", etc.
+  pageType    String   // e.g. "PORTFOLIO_MAIN", "PORTFOLIO_DETAIL", "BLOG_MAIN", "BLOG_DETAIL", "SERVICE_WEB", "HOME_MAIN", etc.
   pageId      String?  // project slug or blog slug (null for main page defaults)
   question    String
   answer      String   @db.Text
@@ -210,3 +210,49 @@ model PageFAQ {
   @@index([pageType, pageId, order])
   @@index([pageType, isPublished])
 }
+
+// ----------------------------------------------------
+// 9. UNIFIED PAGE CONTENT & GEO CLONES CMS
+// ----------------------------------------------------
+model PageContent {
+  slug               String   @id // "main" for core homepage, "surat", "dubai", etc. for geo clones
+  pageType           String   @default("LOCATION_CLONE") // "HOME_CORE" | "LOCATION_CLONE"
+  
+  // Location & GEO Meta (Optional for core homepage, required for Geo Clones)
+  city               String?
+  state              String?
+  country            String   @default("India")
+  countryCode        String   @default("IN")
+  region             String   @default("Gujarat") // "Gujarat", "India Metros", "Middle East", etc.
+  regionCode         String   @default("IN-GJ")
+  postalCode         String?
+  latitude           Float?   @default(23.0225)
+  longitude          Float?   @default(72.5714)
+  popular            Boolean  @default(false)
+  
+  // 7 Section JSON Blocks (Complete content for Main, customized/overridden for Clones)
+  hero               Json?    // Headline, subtitle, ctaText, ctaLink, badges, images
+  services           Json?    // Array of 4 service cards with title, description, tags, slug
+  about              Json?    // Heading, description, feature highlights, images
+  whyChooseUs        Json?    // Stats, 4 value pillars, icons
+  howWeWork          Json?    // Process steps, descriptions
+  techStack          Json?    // Tech items array (name, icon, category)
+  testimonials       Json?    // Client reviews array (name, company, text, avatar, rating)
+  ctaBanner          Json?    // Closing CTA title, description, buttonText, buttonLink
+  
+  // SEO, GEO & AEO Meta Tags & Schema
+  metaTitle          String?
+  metaDescription    String?  @db.Text
+  keywords           String[] @default([])
+  faqs               Json?    // Array of { q: string, a: string }
+  
+  isPublished        Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now()) @updatedAt
+
+  @@index([pageType, isPublished])
+  @@index([region, isPublished])
+  @@index([popular])
+}
+
+

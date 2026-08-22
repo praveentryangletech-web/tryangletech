@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import prisma from '@/backend/db/client';
 import { BLOG_POSTS } from './blog/data';
 import { projects as staticProjects } from './data/portfolioData';
+import { geoService } from '@/backend/services/geo';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
@@ -138,6 +139,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   }
 
-  return [...staticRoutes, ...dynamicPortfolioEntries, ...dynamicBlogEntries];
+  // 4. Dynamic Programmatic GEO Location Routes
+  const geoLocations = await geoService.getAllLocations();
+  const dynamicLocationEntries: MetadataRoute.Sitemap = geoLocations.map((loc) => ({
+    url: `${baseUrl}/location/${loc.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: loc.popular ? 0.88 : 0.8,
+  }));
+
+  return [...staticRoutes, ...dynamicLocationEntries, ...dynamicPortfolioEntries, ...dynamicBlogEntries];
 }
 

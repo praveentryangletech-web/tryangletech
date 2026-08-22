@@ -1,10 +1,24 @@
 "use client";
-import Link from "next/link";
 import React from 'react';
+import Link from 'next/link';
+import NextImage, { ImageProps } from "next/image";
 
-import Image from "next/image";
+const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
+  return <NextImage {...props} />;
+};
 
-export default function About() {
+import { HomeAboutSection } from '@/backend/services/home/home.types';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+
+interface AboutProps {
+  about?: HomeAboutSection;
+}
+
+export default function About({ about: aboutProp }: AboutProps) {
+  const about = aboutProp || DEFAULT_HOME_CONTENT.about;
+  const f1 = about.features?.[0] || DEFAULT_HOME_CONTENT.about.features[0];
+  const f2 = about.features?.[1] || DEFAULT_HOME_CONTENT.about.features[1];
+
   return (
     <section className="rt-about-v1">
       <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -17,7 +31,7 @@ export default function About() {
               data-w-id="ff0a139f-98ea-ffdb-dd98-ba887e27c7b1"
               style={{ "opacity": "0" }}>
               <Image
-                src="/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"
+                src={about.image1 || "/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"}
                 loading="lazy"
                 alt=""
                 className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
@@ -26,7 +40,7 @@ export default function About() {
               data-w-id="dde1b63a-3928-b16b-6972-084ad79fec04"
               style={{ "opacity": "0" }}>
               <Image
-                src="/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"
+                src={about.image2 || "/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"}
                 loading="lazy"
                 alt="taskopia-hero-one-dashbord-daily"
                 className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
@@ -37,22 +51,22 @@ export default function About() {
               data-w-id="4edacbd8-6b56-f889-45a6-f171ca5873b4"
               style={{ "opacity": "0" }}
               className="rt-sub-gap">
-              <div className="rt-sub-text rt-sub-gredient">WHO WE ARE</div>
+              <div className="rt-sub-text rt-sub-gredient">{about.subtitle || 'WHO WE ARE'}</div>
             </div>
             <div className="rt-heading-para-gap">
               <h2
                 data-w-id="e56a7671-e1ec-e100-8312-33edf2c12738"
                 style={{ "opacity": "0" }}
                 className="rt-gap-off">
-                We build websites and apps that actually work for
-                <span className="rt-color-periwinkle-gray"> your business</span>
+                {about.heading}{' '}
+                <span className="rt-color-periwinkle-gray">{about.headingHighlight || 'your business'}</span>
               </h2>
             </div>
             <p
               data-w-id="9409f12c-9c7e-cee4-4344-eb53953739fe"
               style={{ "opacity": "0" }}
               className="rt-gap-off">
-              We're a tech team based in Ahmedabad. For over 7 years, we've helped Indian businesses launch websites, build mobile apps, and develop custom software that gets real results. You tell us what you need – we design it, build it, and launch it. No technical jargon, no disappearing acts.
+              {about.description}
             </p>
             <div className="rt-about-v1-right-inner">
               <div

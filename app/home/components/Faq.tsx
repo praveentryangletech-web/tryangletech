@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const faqs = [
+const DEFAULT_HOME_FAQS = [
   {
     q: "What industries do you work with?",
     a: "We have worked with businesses in healthcare, education, real estate, ecommerce, finance, and many other industries. Whatever your field, we know how to build technology that fits."
@@ -24,8 +24,39 @@ const faqs = [
   }
 ];
 
-export default function FAQ() {
+interface FAQProps {
+  initialFaqs?: Array<{ q?: string; a?: string; question?: string; answer?: string }>;
+}
+
+export default function FAQ({ initialFaqs }: FAQProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [faqsList, setFaqsList] = useState(() => {
+    if (initialFaqs && initialFaqs.length > 0) {
+      return initialFaqs.map(f => ({ q: f.q || f.question || '', a: f.a || f.answer || '' }));
+    }
+    return DEFAULT_HOME_FAQS;
+  });
+
+  useEffect(() => {
+    if (initialFaqs && initialFaqs.length > 0) {
+      setFaqsList(initialFaqs.map(f => ({ q: f.q || f.question || '', a: f.a || f.answer || '' })));
+      return;
+    }
+
+    async function loadFaqs() {
+      try {
+        const res = await fetch('/api/faqs?pageType=HOME_MAIN');
+        const json = await res.json();
+        const items = json.faqs || json.data;
+        if (json.success && Array.isArray(items) && items.length > 0) {
+          setFaqsList(items.map((f: any) => ({ q: f.question || f.q || '', a: f.answer || f.a || '' })));
+        }
+      } catch {
+        // Fallback to DEFAULT_HOME_FAQS
+      }
+    }
+    loadFaqs();
+  }, [initialFaqs]);
 
   return (
     <>
@@ -55,7 +86,7 @@ export default function FAQ() {
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
               className="rt-faq-main rt-margin-auto"
             >
-              {faqs.map((faq, idx) => {
+              {faqsList.map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
@@ -110,7 +141,7 @@ export default function FAQ() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqs.map((faq) => ({
+            "mainEntity": faqsList.map((faq) => ({
               "@type": "Question",
               "name": faq.q,
               "acceptedAnswer": {

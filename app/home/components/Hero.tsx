@@ -7,7 +7,16 @@ const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
   return <NextImage {...props} />;
 };
 
-export default function Hero() {
+import { HomeHeroSection } from '@/backend/services/home/home.types';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+
+interface HeroProps {
+  hero?: HomeHeroSection;
+}
+
+export default function Hero({ hero: heroProp }: HeroProps) {
+  const hero = heroProp || DEFAULT_HOME_CONTENT.hero;
+
   return (
     <>  <div
       data-w-id="41edf69b-8081-d913-a5ae-b2e1fc472d6d"
@@ -21,39 +30,35 @@ export default function Hero() {
               className="rt-hero-v1-top-sub">
               <div className="rt-overflow-hidden">
                 <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
-                  <div
-                    data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a6"
-                    style={{ "opacity": "0" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#38bdf8',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
-                  <div
-                    data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3a8"
-                    style={{ "opacity": "0" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#3b82f6',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
-                  <div
-                    data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3aa"
-                    style={{ "opacity": "0" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#a855f7',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
+                  {[0, 1, 2].map((idx) => {
+                    const av = hero.avatars?.[idx] || (idx === 0 ? '#38bdf8' : idx === 1 ? '#3b82f6' : '#a855f7');
+                    const isImg = av.startsWith('http') || av.startsWith('/') || av.startsWith('data:');
+                    return (
+                      <div
+                        key={idx}
+                        className={`rt-hero-v2-client-image rt-overflow-hidden ${idx > 0 ? 'rt-margin-left' : ''} rt-sub-image`}
+                      >
+                        {isImg ? (
+                          <Image
+                            src={av}
+                            alt={`Client ${idx + 1}`}
+                            width={60}
+                            height={60}
+                            style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <div
+                            style={{
+                              width: '60px',
+                              height: '60px',
+                              backgroundColor: av,
+                              borderRadius: '50%',
+                            }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="rt-overflow-hidden">
@@ -61,7 +66,7 @@ export default function Hero() {
                   data-w-id="1bb7f8ea-2102-9ec6-ec01-b82b664fd3ad"
                   style={{ "opacity": "0" }}
                   className="rt-sub-text rt-sub-gredient">
-                  DIGITAL SOLUTIONS
+                  {hero.subBadgeText || 'DIGITAL SOLUTIONS'}
                 </div>
               </div>
             </div>
@@ -71,7 +76,7 @@ export default function Hero() {
                   data-w-id="06744b7e-7ec6-335a-be04-940831b89e5e"
                   style={{ "opacity": "0" }}
                   className="rt-gap-off">
-                  We build websites, apps and software that actually work for your business
+                  {hero.headline}
                 </h1>
               </div>
             </div>
@@ -80,7 +85,7 @@ export default function Hero() {
                 data-w-id="1497d66d-9c00-ed45-6339-d76f8f3ac76c"
                 style={{ "opacity": "0" }}
                 className="rt-hero-v1-top-padding rt-gap-off">
-                Whether you need a new website, a mobile app, or a complete software solution, our team in Ahmedabad has been helping businesses like yours grow online for over 7 years.
+                {hero.subheadline}
               </p>
             </div>
             <div
@@ -89,9 +94,9 @@ export default function Hero() {
               className="rt-button-para-gap rt-overflow-hidden">
               <Link
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                href="/contact"
+                href={hero.ctaLink || '/contact'}
                 className="rt-button-body w-inline-block"
-              ><div className="rt-button-text">Talk to us today</div>
+              ><div className="rt-button-text">{hero.ctaText || 'Talk to us today'}</div>
                 <div
                   className="rt-button-body-overlay"
                   style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
@@ -104,7 +109,7 @@ export default function Hero() {
               <div
                 className="rt-small-btn-main"
                 style={{ "transform": "translate3d(3.888px, 6.5008px, 0px)\n                      scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                      skew(0deg, 0deg)", "transformStyle": "preserve-3d", "willChange": "transform" }}>
-                <div className="rt-small-btn-text">Let's Build</div>
+                <div className="rt-small-btn-text">{hero.floatingBadgeText || "Let's Build"}</div>
                 <div className="rt-btn-arrow-v2 rt-hero-v1-small">
                   <Image
                     src="/Taskopia_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"
@@ -119,9 +124,9 @@ export default function Hero() {
             className="rt-hero-v1-bottom">
             <div className="rt-hero-v1-image rt-overflow-hidden">
               <Image
-                src="/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"
+                src={hero.dashboardImage || "/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"}
                 loading="lazy"
-                alt="taskopia-hero-one-dashbord"
+                alt={hero.dashboardImageAlt || "TryangleTech Digital Dashboard"}
                 height={669} width={800} style={{ width: "100%", height: "auto" }} />
             </div>
             <div className="rt-hero-v1-icon-1 rt-icon-on" style={{ "opacity": "1" }}>
@@ -298,9 +303,10 @@ export default function Hero() {
           <Image
             width={1078}
             height={604}
-            alt="taskopiya-home-two"
-            src="/Taskopia_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"
-            loading="lazy" />
+            alt="Hero Dashboard Overview"
+            src={hero.dashboardImage || "/Taskopia_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"}
+            loading="lazy"
+            style={{ width: "100%", height: "auto", objectFit: "contain" }} />
         </div>
         <div
           className="rt-hero-v1-box-1"

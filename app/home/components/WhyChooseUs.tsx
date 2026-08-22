@@ -1,9 +1,26 @@
 "use client";
 import React from 'react';
+import NextImage, { ImageProps } from "next/image";
 
-import Image from "next/image";
+const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
+  return <NextImage {...props} />;
+};
 
-export default function WhyChooseUs() {
+import { HomeWhyChooseUsSection } from '@/backend/services/home/home.types';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+
+interface WhyChooseUsProps {
+  whyChooseUs?: HomeWhyChooseUsSection;
+}
+
+export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseUsProps) {
+  const whyChooseUs = whyChooseUsProp || DEFAULT_HOME_CONTENT.whyChooseUs;
+  const items = whyChooseUs.items && whyChooseUs.items.length >= 4 ? whyChooseUs.items : DEFAULT_HOME_CONTENT.whyChooseUs.items;
+  const item1 = items[0] || DEFAULT_HOME_CONTENT.whyChooseUs.items[0];
+  const item2 = items[1] || DEFAULT_HOME_CONTENT.whyChooseUs.items[1];
+  const item3 = items[2] || DEFAULT_HOME_CONTENT.whyChooseUs.items[2];
+  const item4 = items[3] || DEFAULT_HOME_CONTENT.whyChooseUs.items[3];
+
   return (
     <section className="rt-why-choose-v1">
       <div
@@ -15,15 +32,15 @@ export default function WhyChooseUs() {
                 data-w-id="657bd2a2-86bd-d868-77e3-fda88540fe8e"
                 style={{ "opacity": "0" }}
                 className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">why choose us</div>
+                <div className="rt-sub-text rt-sub-gredient">{whyChooseUs.subtitle || 'WHY CHOOSE US'}</div>
               </div>
               <div
                 data-w-id="07416d34-f69b-c50c-b2bc-d9952d15faca"
                 style={{ "opacity": "0" }}>
                 <h2 className="rt-gap-off">
-                  Why 350+ businesses
+                  {whyChooseUs.heading}{' '}
                   <span className="rt-color-periwinkle-gray"
-                  > chose us</span
+                  >{whyChooseUs.headingHighlight || 'chose us'}</span
                   >
                 </h2>
               </div>
@@ -36,7 +53,7 @@ export default function WhyChooseUs() {
                   style={{ "opacity": "0" }}>
                   <div className="rt-why-choose-v1-icon">
                     <Image
-                      src="/Taskopia_files/6916ef876682eed2b2fd5911_Vector (34).svg"
+                      src={item1.icon || "/Taskopia_files/6916ef876682eed2b2fd5911_Vector (34).svg"}
                       loading="lazy"
                       width={19}
                       height={100}
@@ -44,10 +61,10 @@ export default function WhyChooseUs() {
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Built for your business
+                    {item1.title}
                   </div>
                   <p className="rt-gap-off">
-                    No templates, no copy-paste designs. Every site or app we build is planned around what your business sells and who your customers are.
+                    {item1.description}
                   </p>
                 </div>
                 <div

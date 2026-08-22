@@ -16,18 +16,28 @@ export const metadata: Metadata = {
   description: "TryangleTech is a leading Ahmedabad-based IT company building high-performance websites, mobile apps, and custom software for businesses. 350+ projects delivered with zero technical jargon.",
   keywords: [
     'Web Development Ahmedabad',
-    'Mobile App Development Company',
-    'Custom Software Development India',
-    'Next.js Development Agency',
-    'React Native Apps',
-    'UI UX Design Agency',
+    'Custom Software Development Company Ahmedabad',
+    'Mobile App Development Company Gujarat',
+    'Next.js Development Agency India',
+    'React Native App Developers',
+    'Flutter Mobile Apps Ahmedabad',
+    'Enterprise Software Engineering India',
+    'UI UX Design Agency Ahmedabad',
     'Digital Marketing Agency Ahmedabad',
+    'IT Solutions Provider Nava Naroda',
+    'SEO Company Ahmedabad',
     'TryangleTech',
-    'Full Stack Engineering'
+    'Top IT Agency Gujarat',
+    'Full Stack Web Development'
   ],
   authors: [{ name: 'TryangleTech Team', url: 'https://tryangletech.com' }],
   creator: 'TryangleTech',
   publisher: 'TryangleTech',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/favicon.png',
     apple: '/icon.png',
@@ -88,6 +98,18 @@ export default function RootLayout({
       suppressHydrationWarning>
       <head suppressHydrationWarning>
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+        {/* GEO & Local Search Optimization (Ahmedabad, Gujarat, India) */}
+        <meta name="geo.region" content="IN-GJ" />
+        <meta name="geo.placename" content="Ahmedabad, Gujarat, India" />
+        <meta name="geo.position" content="23.0754;72.6560" />
+        <meta name="ICBM" content="23.0754, 72.6560" />
+        <meta name="city" content="Ahmedabad" />
+        <meta name="country" content="India" />
+        <meta name="target" content="all" />
+        <meta name="audience" content="all" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="rating" content="General" />
         <style
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
@@ -920,6 +942,33 @@ export default function RootLayout({
                   "telephone": "+91-90338-78806",
                   "email": "info.tryangletech@gmail.com",
                   "priceRange": "$$",
+                  "currenciesAccepted": "INR, USD, EUR, GBP, AED, CAD, AUD",
+                  "paymentAccepted": "Cash, Credit Card, Bank Transfer, UPI, Wire Transfer, PayPal",
+                  "knowsAbout": [
+                    "Web Development",
+                    "Next.js Development",
+                    "React.js",
+                    "Mobile App Development",
+                    "Flutter",
+                    "React Native",
+                    "Custom Software Engineering",
+                    "Enterprise CRM Software",
+                    "ERP Systems",
+                    "UI/UX Design",
+                    "Search Engine Optimization (SEO)",
+                    "Digital Marketing",
+                    "Ahmedabad Software Company",
+                    "Full Stack Cloud Engineering"
+                  ],
+                  "speakable": {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [
+                      ".rt-hero-heading-gap",
+                      ".rt-our-benefits-content",
+                      ".rt-about-v1-right",
+                      ".rt-faq-content-main"
+                    ]
+                  },
                   "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "1st Floor-29/Vitthal Plaza, Opp. GEB, Nava Naroda",

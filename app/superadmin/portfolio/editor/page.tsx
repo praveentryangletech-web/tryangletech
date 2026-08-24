@@ -861,7 +861,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1rem',
+          gap: '10px',
           marginBottom: '1.25rem',
         }}
       >
@@ -871,21 +871,21 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
-            height: '42px',
-            padding: '0 18px',
-            borderRadius: '10px',
-            border: '1.5px solid #BFDBFE',
-            backgroundColor: '#EFF6FF',
-            color: '#1833FE',
-            fontSize: '0.875rem',
+            gap: '6px',
+            height: '38px',
+            padding: '0 14px',
+            borderRadius: '8px',
+            border: '1px solid #CBD5E1',
+            backgroundColor: '#FFFFFF',
+            color: '#334155',
+            fontSize: '0.825rem',
             fontWeight: 700,
             textDecoration: 'none',
             boxSizing: 'border-box',
             transition: 'all 0.15s ease',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
@@ -893,7 +893,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
         </Link>
 
         {/* Top Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           {isEditMode && slug && (
             <a
               href={`/portfolio/${slug}`}
@@ -903,46 +903,45 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '7px',
-                height: '42px',
-                padding: '0 18px',
-                borderRadius: '10px',
-                border: '1.5px solid #BFDBFE',
-                backgroundColor: '#EFF6FF',
-                color: '#1833FE',
-                fontSize: '0.875rem',
+                gap: '6px',
+                height: '38px',
+                padding: '0 14px',
+                borderRadius: '8px',
+                border: '1px solid #CBD5E1',
+                backgroundColor: '#FFFFFF',
+                color: '#334155',
+                fontSize: '0.825rem',
                 fontWeight: 700,
                 textDecoration: 'none',
                 boxSizing: 'border-box',
                 transition: 'all 0.15s ease',
               }}
             >
-              <span>Preview Live</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
+              <span>Preview Live</span>
             </a>
           )}
 
           <Link
             href="/superadmin/portfolio"
             style={{
-              height: '42px',
-              padding: '0 20px',
-              borderRadius: '10px',
-              border: '1.5px solid #CBD5E1',
+              height: '38px',
+              padding: '0 16px',
+              borderRadius: '8px',
+              border: '1px solid #CBD5E1',
               backgroundColor: '#FFFFFF',
-              color: '#475569',
-              fontSize: '0.875rem',
+              color: '#334155',
+              fontSize: '0.825rem',
               fontWeight: 700,
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               boxSizing: 'border-box',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               transition: 'all 0.15s ease',
             }}
           >
@@ -957,17 +956,18 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
-              height: '42px',
-              padding: '0 24px',
-              borderRadius: '10px',
-              border: '1.5px solid #BFDBFE',
-              backgroundColor: '#EFF6FF',
-              color: '#1833FE',
-              fontSize: '0.875rem',
+              gap: '6px',
+              height: '38px',
+              padding: '0 20px',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: 'var(--brand-blue, #1833fe)',
+              color: '#FFFFFF',
+              fontSize: '0.85rem',
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              boxSizing: 'border-box',
+              boxShadow: '0 4px 12px rgba(24, 51, 254, 0.25)',
+              opacity: isSubmitting ? 0.7 : 1,
               transition: 'all 0.15s ease',
             }}
           >
@@ -975,9 +975,9 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
               <>
                 <span
                   style={{
-                    width: '14px',
-                    height: '14px',
-                    border: '2px solid #1833FE',
+                    width: '13px',
+                    height: '13px',
+                    border: '2px solid #FFFFFF',
                     borderTopColor: 'transparent',
                     borderRadius: '50%',
                     display: 'inline-block',
@@ -987,15 +987,7 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
                 <span>Saving...</span>
               </>
             ) : (
-              <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                </svg>
-                <span>{isEditMode ? 'Update Project' : 'Publish Project'}</span>
-              </>
+              <span>{isEditMode ? 'Update Project' : 'Publish Project'}</span>
             )}
           </button>
         </div>
@@ -1005,64 +997,53 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
       {errorMessage && (
         <div
           style={{
-            padding: '1rem 1.25rem',
+            padding: '10px 16px',
             backgroundColor: '#FEF2F2',
-            border: '1px solid #FCA5A5',
-            borderRadius: '14px',
-            color: '#B91C1C',
-            fontSize: '0.875rem',
+            border: '1px solid #F87171',
+            color: '#991B1B',
+            borderRadius: '8px',
+            fontSize: '0.825rem',
             fontWeight: 600,
             marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-            <line x1="12" y1="9" x2="12" y2="13" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
-          <span>{errorMessage}</span>
+          <span>⚠ {errorMessage}</span>
         </div>
       )}
 
       {successMessage && (
         <div
           style={{
-            padding: '1rem 1.25rem',
+            padding: '10px 16px',
             backgroundColor: '#ECFDF5',
-            border: '1px solid #6EE7B7',
-            borderRadius: '14px',
-            color: '#047857',
-            fontSize: '0.875rem',
+            border: '1px solid #34D399',
+            color: '#065F46',
+            borderRadius: '8px',
+            fontSize: '0.825rem',
             fontWeight: 600,
             marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <span>{successMessage}</span>
+          <span>✓ {successMessage}</span>
         </div>
       )}
 
-      {/* 2. Modern Segmented Tab Navigation Bar */}
+      {/* 2. Unified Segmented Pill Tab Navigation Bar */}
       <div
         className="no-scrollbar"
         style={{
           display: 'flex',
-          backgroundColor: 'transparent',
-          padding: '0 0 1rem 0',
-          borderBottom: '1.5px solid #CBD5E1',
-          marginBottom: '2rem',
           gap: '6px',
           overflowX: 'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
+          paddingBottom: '6px',
+          marginBottom: '20px',
+          borderBottom: '1.5px solid #CBD5E1',
         }}
       >
         {/* Tab 1 */}
@@ -1070,30 +1051,22 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           type="button"
           onClick={() => setActiveTab('general')}
           style={{
-            flex: '1 1 auto',
-            padding: '9px 14px',
+            padding: '8px 16px',
             borderRadius: '8px',
             border: 'none',
-            backgroundColor: 'transparent',
-            color: activeTab === 'general' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'general' ? 700 : 500,
-            fontSize: '0.815rem',
+            backgroundColor: activeTab === 'general' ? 'var(--brand-blue, #1833fe)' : 'transparent',
+            color: activeTab === 'general' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'general' ? 800 : 600,
+            fontSize: '0.825rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-            <polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" />
-            <line x1="16" y1="17" x2="8" y2="17" />
-          </svg>
-          <span>General Details</span>
+          <span>1. General Details</span>
         </button>
 
         {/* Tab 2 */}
@@ -1101,39 +1074,30 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           type="button"
           onClick={() => setActiveTab('media')}
           style={{
-            flex: '1 1 auto',
-            padding: '9px 14px',
+            padding: '8px 16px',
             borderRadius: '8px',
             border: 'none',
-            backgroundColor: 'transparent',
-            color: activeTab === 'media' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'media' ? 700 : 500,
-            fontSize: '0.815rem',
+            backgroundColor: activeTab === 'media' ? 'var(--brand-blue, #1833fe)' : 'transparent',
+            color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'media' ? 800 : 600,
+            fontSize: '0.825rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <polyline points="21 15 16 10 5 21" />
-          </svg>
-          <span>Media & Showcase</span>
+          <span>2. Media & Showcase</span>
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'media' ? '#EFF6FF' : '#F1F5F9',
-              color: activeTab === 'media' ? '#1833FE' : '#64748B',
-              border: activeTab === 'media' ? '1px solid #BFDBFE' : '1px solid transparent',
-              padding: '1px 7px',
+              backgroundColor: activeTab === 'media' ? 'rgba(255,255,255,0.25)' : '#F1F5F9',
+              color: activeTab === 'media' ? '#FFFFFF' : '#64748B',
+              padding: '1px 6px',
               borderRadius: '10px',
               fontWeight: 700,
-              transition: 'all 0.15s ease',
             }}
           >
             {sliderImages.length}
@@ -1145,28 +1109,22 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           type="button"
           onClick={() => setActiveTab('narrative')}
           style={{
-            flex: '1 1 auto',
-            padding: '9px 14px',
+            padding: '8px 16px',
             borderRadius: '8px',
             border: 'none',
-            backgroundColor: 'transparent',
-            color: activeTab === 'narrative' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'narrative' ? 700 : 500,
-            fontSize: '0.815rem',
+            backgroundColor: activeTab === 'narrative' ? 'var(--brand-blue, #1833fe)' : 'transparent',
+            color: activeTab === 'narrative' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'narrative' ? 800 : 600,
+            fontSize: '0.825rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-          </svg>
-          <span>Story & Metrics</span>
+          <span>3. Story & Metrics</span>
         </button>
 
         {/* Tab 4 */}
@@ -1174,39 +1132,30 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           type="button"
           onClick={() => setActiveTab('seo')}
           style={{
-            flex: '1 1 auto',
-            padding: '9px 14px',
+            padding: '8px 16px',
             borderRadius: '8px',
             border: 'none',
-            backgroundColor: 'transparent',
-            color: activeTab === 'seo' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'seo' ? 700 : 500,
-            fontSize: '0.815rem',
+            backgroundColor: activeTab === 'seo' ? 'var(--brand-blue, #1833fe)' : 'transparent',
+            color: activeTab === 'seo' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'seo' ? 800 : 600,
+            fontSize: '0.825rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="2" y1="12" x2="22" y2="12" />
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
-          </svg>
-          <span>SEO, AEO & GEO</span>
+          <span>4. SEO, AEO & GEO</span>
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'seo' ? '#EFF6FF' : '#ECFDF5',
-              color: activeTab === 'seo' ? '#1833FE' : '#059669',
-              border: activeTab === 'seo' ? '1px solid #BFDBFE' : '1px solid transparent',
-              padding: '1px 7px',
+              backgroundColor: activeTab === 'seo' ? 'rgba(255,255,255,0.25)' : '#ECFDF5',
+              color: activeTab === 'seo' ? '#FFFFFF' : '#059669',
+              padding: '1px 6px',
               borderRadius: '10px',
               fontWeight: 700,
-              transition: 'all 0.15s ease',
             }}
           >
             AI Ready
@@ -1218,39 +1167,30 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
           type="button"
           onClick={() => setActiveTab('faqs')}
           style={{
-            flex: '1 1 auto',
-            padding: '9px 14px',
+            padding: '8px 16px',
             borderRadius: '8px',
             border: 'none',
-            backgroundColor: 'transparent',
-            color: activeTab === 'faqs' ? '#1833FE' : '#64748B',
-            fontWeight: activeTab === 'faqs' ? 700 : 500,
-            fontSize: '0.815rem',
+            backgroundColor: activeTab === 'faqs' ? 'var(--brand-blue, #1833fe)' : 'transparent',
+            color: activeTab === 'faqs' ? '#FFFFFF' : '#64748B',
+            fontWeight: activeTab === 'faqs' ? 800 : 600,
+            fontSize: '0.825rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '6px',
             transition: 'all 0.15s ease',
             whiteSpace: 'nowrap',
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
-          <span>Dynamic FAQs</span>
+          <span>5. Dynamic FAQs</span>
           <span
             style={{
               fontSize: '0.7rem',
-              backgroundColor: activeTab === 'faqs' ? '#EFF6FF' : '#EFF6FF',
-              color: activeTab === 'faqs' ? '#1833FE' : '#1833FE',
-              border: activeTab === 'faqs' ? '1px solid #BFDBFE' : '1px solid transparent',
-              padding: '1px 7px',
+              backgroundColor: activeTab === 'faqs' ? 'rgba(255,255,255,0.25)' : '#EFF6FF',
+              color: activeTab === 'faqs' ? '#FFFFFF' : '#1833FE',
+              padding: '1px 6px',
               borderRadius: '10px',
               fontWeight: 700,
-              transition: 'all 0.15s ease',
             }}
           >
             {faqs.length} FAQs
@@ -1277,8 +1217,8 @@ const DEFAULT_PORTFOLIO_FALLBACK_FAQS = [
             }}
           >
             <div>
-              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                Project Identity & Meta Information
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
+                Section 1: Project Identity & Meta Information
               </h3>
               <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748B' }}>
                 Configure core identity, category assignment, client name, and duration.

@@ -8,13 +8,17 @@ const ROUTE_TITLES: Record<string, string> = {
   '/superadmin/about': 'About Page CMS',
   '/superadmin/inquiries': 'Contact Form Leads & Inquiries',
   '/superadmin/portfolio': 'Portfolio Projects & Case Studies',
+  '/superadmin/portfolio/editor': 'Portfolio Project Editor',
   '/superadmin/blog': 'Blog & Articles CMS',
+  '/superadmin/blog/editor': 'Blog Article Editor',
   '/superadmin/assets': 'Asset Management',
 };
 
 export default function SuperadminHeader() {
   const pathname = usePathname();
-  const currentTitle = ROUTE_TITLES[pathname] || 'Control Center';
+  const currentTitle = ROUTE_TITLES[pathname] || 
+    (pathname.startsWith('/superadmin/portfolio/editor') ? 'Portfolio Project Editor' :
+     pathname.startsWith('/superadmin/blog/editor') ? 'Blog Article Editor' : 'Control Center');
 
   return (
     <header

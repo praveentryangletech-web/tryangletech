@@ -196,43 +196,52 @@ export default function Hero({ hero: heroProp }: HeroProps) {
               className="rt-hero-v1-top-sub rt-new-v1">
               <div className="rt-overflow-hidden">
                 <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
-                  <div
-                    data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba4"
-                    style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(-15deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#38bdf8',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
-                  <div
-                    data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba6"
-                    style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#3b82f6',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
-                  <div
-                    data-w-id="0acd96ca-bfb3-bd5b-e440-e99d65cefba8"
-                    style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(30deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d", border: "none" }}
-                    className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      backgroundColor: '#a855f7',
-                      borderRadius: '50%'
-                    }} />
-                  </div>
+                  {[0, 1, 2].map((idx) => {
+                    const av = hero.avatars?.[idx] || (idx === 0 ? '#38bdf8' : idx === 1 ? '#3b82f6' : '#a855f7');
+                    const isImg = av.startsWith('http') || av.startsWith('/') || av.startsWith('data:');
+                    return (
+                      <div
+                        key={idx}
+                        data-w-id={idx === 0 ? "0acd96ca-bfb3-bd5b-e440-e99d65cefba4" : idx === 1 ? "0acd96ca-bfb3-bd5b-e440-e99d65cefba6" : "0acd96ca-bfb3-bd5b-e440-e99d65cefba8"}
+                        style={{
+                          "opacity": "1",
+                          "transform": idx === 0
+                            ? "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-15deg) skew(0deg, 0deg)"
+                            : idx === 1
+                            ? "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)"
+                            : "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(30deg) skew(0deg, 0deg)",
+                          "transformStyle": "preserve-3d",
+                          border: "none"
+                        }}
+                        className={`rt-hero-v2-client-image rt-overflow-hidden ${idx > 0 ? 'rt-margin-left' : ''} rt-sub-image`}
+                      >
+                        {isImg ? (
+                          <Image
+                            src={av}
+                            alt={`Client ${idx + 1}`}
+                            width={60}
+                            height={60}
+                            style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <div
+                            style={{
+                              width: '60px',
+                              height: '60px',
+                              backgroundColor: av,
+                              borderRadius: '50%',
+                            }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="rt-overflow-hidden">
-                <div className="rt-sub-text rt-sub-gredient">DIGITAL SOLUTIONS</div>
+                <div className="rt-sub-text rt-sub-gredient">
+                  {hero.subBadgeText || 'DIGITAL SOLUTIONS'}
+                </div>
               </div>
             </div>
             <div className="rt-hero-heading-gap rt-hero-v1-heading">
@@ -240,14 +249,15 @@ export default function Hero({ hero: heroProp }: HeroProps) {
                 data-w-id="ef1f9141-e4bb-a298-b149-76d6978dacc2"
                 style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                 className="rt-gap-off">
-                Transform ideas to accelerate business growth               </h1>
+                {hero.headline}
+              </h1>
             </div>
             <div>
               <p
                 data-w-id="1d876f18-26a3-336f-b6ab-3d690004f57b"
                 style={{ "opacity": "1", "transform": "translate3d(0px, 0px, 0px) scale3d(1, 1, 1)\n                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
                 className="rt-hero-v1-top-padding rt-gap-off">
-                Our IT experts transform bold ideas into powerful digital products, helping your business build stunning websites, launch smarter apps, and grow online revenue.
+                {hero.subheadline}
               </p>
             </div>
             <div className="rt-overflow-hidden">
@@ -257,9 +267,9 @@ export default function Hero({ hero: heroProp }: HeroProps) {
                 className="rt-button-para-gap rt-hero-between">
                 <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href="/contact"
+                  href={hero.ctaLink || "/contact"}
                   className="rt-button-body w-inline-block"
-                ><div className="rt-button-text">Get started today</div>
+                ><div className="rt-button-text">{hero.ctaText || 'Get started today'}</div>
                   <div
                     className="rt-button-body-overlay"
                     style={{ "transform": "translate3d(0px, 100%, 0px) scale3d(1, 1, 1)\n                        rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                        skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}></div
@@ -285,7 +295,7 @@ export default function Hero({ hero: heroProp }: HeroProps) {
               <div
                 className="rt-small-btn-main"
                 style={{ "transform": "translate3d(3.888px, 6.5008px, 0px)\n                    scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)\n                    skew(0deg, 0deg)", "transformStyle": "preserve-3d", "willChange": "transform" }}>
-                <div className="rt-small-btn-text">Development</div>
+                <div className="rt-small-btn-text">{hero.floatingBadgeText || "Development"}</div>
                 <div className="rt-btn-arrow-v2 rt-hero-v1-small">
                   <Image
                     src="/Taskopia_files/6904842a6f63d7e69353dc60_Vector 503 (1).svg"
@@ -303,7 +313,7 @@ export default function Hero({ hero: heroProp }: HeroProps) {
           <Image
             width={1078}
             height={604}
-            alt="Hero Dashboard Overview"
+            alt={hero.dashboardImageAlt || "Hero Dashboard Overview"}
             src={hero.dashboardImage || "/Taskopia_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"}
             loading="lazy"
             style={{ width: "100%", height: "auto", objectFit: "contain" }} />

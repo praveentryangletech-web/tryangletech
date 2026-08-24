@@ -4,10 +4,16 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 import HomeMain from '@/app/home/home-main';
 import { geoService } from '@/backend/services/geo';
+import { homeService } from '@/backend/services/home';
+
+export const dynamic = 'force-dynamic';
 
 interface LocationPageProps {
   params: Promise<{
     slug: string;
+  }>;
+  searchParams?: Promise<{
+    preview?: string;
   }>;
 }
 
@@ -15,7 +21,7 @@ interface LocationPageProps {
  * Pre-render all supported commercial hubs for instant CDN serving
  */
 export async function generateStaticParams() {
-  const locations = await geoService.getAllLocations();
+  const locations = await geoService.getAllLocations(false);
   return locations.map((loc) => ({
     slug: loc.slug,
   }));
@@ -24,9 +30,19 @@ export async function generateStaticParams() {
 /**
  * Generate Location-Specific SEO, GEO, and OpenGraph Metadata
  */
-export async function generateMetadata({ params }: LocationPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const location = await geoService.getLocationBySlug(slug);
+export async function generateMetadata({ params, searchParams }: LocationPageProps): Promise<Metadata> {
+  const resolvedParams = params && typeof (params as any).then === 'function' ? await params : params;
+  const slug = resolvedParams?.slug;
+  if (!slug) {
+    return {
+      title: 'Location Not Found | TryangleTech',
+      description: 'The requested technology service location could not be found.',
+    };
+  }
+
+  const resolvedSearchParams = searchParams && typeof (searchParams as any).then === 'function' ? await searchParams : (searchParams || {});
+  const isPreview = resolvedSearchParams?.preview === 'true';
+  const location = await geoService.getLocationBySlug(slug, isPreview);
 
   if (!location) {
     return {
@@ -41,18 +57,39 @@ export async function generateMetadata({ params }: LocationPageProps): Promise<M
 /**
  * Location-Targeted Programmatic Home Page Clone
  */
-export default async function LocationPage({ params }: LocationPageProps) {
-  const { slug } = await params;
-  const location = await geoService.getLocationBySlug(slug);
+export default async function LocationPage({ params, searchParams }: LocationPageProps) {
+  const resolvedParams = params && typeof (params as any).then === 'function' ? await params : params;
+  const slug = resolvedParams?.slug;
+  if (!slug) {
+    notFound();
+  }
+
+  const resolvedSearchParams = searchParams && typeof (searchParams as any).then === 'function' ? await searchParams : (searchParams || {});
+  const isPreview = resolvedSearchParams?.preview === 'true';
+  const location = await geoService.getLocationBySlug(slug, isPreview);
 
   if (!location) {
     notFound();
+  }
+
+  let homeData;
+  try {
+    homeData = await homeService.getHomeContent();
+  } catch (err) {
+    homeData = undefined;
   }
 
   const jsonLdSchema = geoService.generateGeoSchema(location);
 
   return (
     <>
+      {/* Draft Preview Indicator Banner for Admin */}
+      {location.isPublished === false && (
+        <div style={{ position: 'sticky', top: 0, zIndex: 99999, backgroundColor: '#D97706', color: '#FFFFFF', textAlign: 'center', padding: '10px 16px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.02em', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+          🔒 PREVIEW MODE: This location page is currently a private DRAFT and is not public or indexed by search engines.
+        </div>
+      )}
+
       {/* High-Intent LocalBusiness + FAQPage + Speakable AEO Schema */}
       <Script
         id={`geo-schema-${location.slug}`}
@@ -63,7 +100,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
       />
 
       {/* Identical Interactive Home Layout with Dynamic Geo Text Interactivity */}
-      <HomeMain geo={location} />
+      <HomeMain geo={location} initialContent={homeData} />
     </>
   );
 }

@@ -108,23 +108,28 @@ export const geoService = {
   /**
    * Retrieve all supported locations from unified PageContent (with static registry merge)
    */
-  async getAllLocations(): Promise<LocationItem[]> {
-    const cacheKey = 'geo_all_locations';
+  async getAllLocations(includeDrafts = false): Promise<LocationItem[]> {
+    const cacheKey = `geo_all_locations_${includeDrafts ? 'all' : 'published'}`;
     const cached = geoCache.get<LocationItem[]>(cacheKey);
     if (cached) return cached;
 
-    this.ensureTable();
-
     try {
       const rows = await Promise.race([
-        db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "city" ASC`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        includeDrafts
+          ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' ORDER BY "city" ASC`
+          : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "city" ASC`,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       if (rows && rows.length > 0) {
         const dbLocations: LocationItem[] = rows.map((r) => {
           const heroObj = r.hero ? (typeof r.hero === 'string' ? JSON.parse(r.hero) : r.hero) : null;
           const aboutObj = r.about ? (typeof r.about === 'string' ? JSON.parse(r.about) : r.about) : null;
+          const servicesObj = r.services ? (typeof r.services === 'string' ? JSON.parse(r.services) : r.services) : null;
+          const whyChooseUsObj = r.whyChooseUs ? (typeof r.whyChooseUs === 'string' ? JSON.parse(r.whyChooseUs) : r.whyChooseUs) : null;
+          const howWeWorkObj = r.howWeWork ? (typeof r.howWeWork === 'string' ? JSON.parse(r.howWeWork) : r.howWeWork) : null;
+          const testimonialsObj = r.testimonials ? (typeof r.testimonials === 'string' ? JSON.parse(r.testimonials) : r.testimonials) : null;
+          const ctaBannerObj = r.ctaBanner ? (typeof r.ctaBanner === 'string' ? JSON.parse(r.ctaBanner) : r.ctaBanner) : null;
 
           return {
             slug: r.slug,
@@ -140,6 +145,7 @@ export const geoService = {
               longitude: Number(r.longitude) || 72.5714,
             },
             popular: Boolean(r.popular),
+            isPublished: r.isPublished !== undefined ? Boolean(r.isPublished) : true,
             headlineTitle: heroObj?.headline ? heroObj.headline.replace(new RegExp(r.city || '', 'gi'), '').trim() : 'We build websites, apps and custom software for businesses in',
             headlineHighlight: r.city || r.slug,
             subheadline: heroObj?.subheadline || 'From high-converting web applications to custom ERP software, we build scalable digital systems tailored for modern businesses.',
@@ -148,12 +154,19 @@ export const geoService = {
             metaDescription: r.metaDescription || `Top web development and software company serving ${r.city || r.slug}. 350+ projects delivered.`,
             keywords: Array.isArray(r.keywords) ? r.keywords : [],
             faqs: r.faqs ? (typeof r.faqs === 'string' ? JSON.parse(r.faqs) : r.faqs) : [],
+            hero: heroObj || undefined,
+            services: Array.isArray(servicesObj) ? servicesObj : undefined,
+            about: aboutObj || undefined,
+            whyChooseUs: whyChooseUsObj || undefined,
+            howWeWork: howWeWorkObj || undefined,
+            testimonials: Array.isArray(testimonialsObj) ? testimonialsObj : undefined,
+            ctaBanner: ctaBannerObj || undefined,
           };
         });
 
         // Merge any defaults that aren't yet in DB
         const mergedMap = new Map<string, LocationItem>();
-        LOCATIONS_REGISTRY.forEach((loc) => mergedMap.set(loc.slug.toLowerCase(), loc));
+        LOCATIONS_REGISTRY.forEach((loc) => mergedMap.set(loc.slug.toLowerCase(), { ...loc, isPublished: true }));
         dbLocations.forEach((loc) => mergedMap.set(loc.slug.toLowerCase(), loc));
 
         const result = Array.from(mergedMap.values());
@@ -164,12 +177,13 @@ export const geoService = {
       console.warn('[GeoService] getAllLocations fallback to static registry:', err);
     }
 
-    geoCache.set(cacheKey, LOCATIONS_REGISTRY);
-    return LOCATIONS_REGISTRY;
+    const fallbackList = LOCATIONS_REGISTRY.map((l) => ({ ...l, isPublished: true }));
+    geoCache.set(cacheKey, fallbackList);
+    return fallbackList;
   },
 
   /**
-   * Backend-Side Paginated Location Query with search & region filtering
+   * Backend-Side Paginated Location Query with search, region, and publication status filtering
    */
   async getPaginatedLocations(params: LocationQueryParams = {}): Promise<PaginatedLocationResult> {
     const page = Math.max(1, Number(params.page) || 1);
@@ -177,11 +191,18 @@ export const geoService = {
     const offset = (page - 1) * limit;
     const region = params.region && params.region !== 'All' ? params.region.trim() : undefined;
     const search = params.search ? params.search.trim().toLowerCase() : undefined;
+    const status = params.status || (params.publishedOnly ? 'published' : 'all');
 
-    // Retrieve full merged location dataset
-    const allLocations = await this.getAllLocations();
+    // Retrieve full merged location dataset (including drafts if admin)
+    const allLocations = await this.getAllLocations(true);
 
     let filtered = allLocations;
+    if (status === 'published') {
+      filtered = filtered.filter((l) => l.isPublished !== false);
+    } else if (status === 'draft') {
+      filtered = filtered.filter((l) => l.isPublished === false);
+    }
+
     if (region) {
       filtered = filtered.filter((l) => l.region === region);
     }
@@ -216,32 +237,37 @@ export const geoService = {
    */
   async getPopularLocations(): Promise<LocationItem[]> {
     const all = await this.getAllLocations();
-    return all.filter((loc) => loc.popular);
+    return all.filter((loc) => loc.popular && loc.isPublished !== false);
   },
 
   /**
    * Retrieve location by slug (case-insensitive)
    */
-  async getLocationBySlug(slug: string): Promise<LocationItem | null> {
+  async getLocationBySlug(slug: string, includeDraft = false): Promise<LocationItem | null> {
     if (!slug) return null;
     const cleanSlug = slug.toLowerCase().trim();
 
-    const cacheKey = `geo_loc_${cleanSlug}`;
+    const cacheKey = `geo_loc_${cleanSlug}_${includeDraft ? 'draft' : 'pub'}`;
     const cached = geoCache.get<LocationItem>(cacheKey);
     if (cached) return cached;
 
-    this.ensureTable();
-
     try {
       const rows = await Promise.race([
-        db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        includeDraft
+          ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1`
+          : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       if (rows && rows.length > 0) {
         const r = rows[0];
         const heroObj = r.hero ? (typeof r.hero === 'string' ? JSON.parse(r.hero) : r.hero) : null;
         const aboutObj = r.about ? (typeof r.about === 'string' ? JSON.parse(r.about) : r.about) : null;
+        const servicesObj = r.services ? (typeof r.services === 'string' ? JSON.parse(r.services) : r.services) : null;
+        const whyChooseUsObj = r.whyChooseUs ? (typeof r.whyChooseUs === 'string' ? JSON.parse(r.whyChooseUs) : r.whyChooseUs) : null;
+        const howWeWorkObj = r.howWeWork ? (typeof r.howWeWork === 'string' ? JSON.parse(r.howWeWork) : r.howWeWork) : null;
+        const testimonialsObj = r.testimonials ? (typeof r.testimonials === 'string' ? JSON.parse(r.testimonials) : r.testimonials) : null;
+        const ctaBannerObj = r.ctaBanner ? (typeof r.ctaBanner === 'string' ? JSON.parse(r.ctaBanner) : r.ctaBanner) : null;
 
         const loc: LocationItem = {
           slug: r.slug,
@@ -257,6 +283,7 @@ export const geoService = {
             longitude: Number(r.longitude) || 72.5714,
           },
           popular: Boolean(r.popular),
+          isPublished: r.isPublished !== undefined ? Boolean(r.isPublished) : true,
           headlineTitle: heroObj?.headline ? heroObj.headline.replace(new RegExp(r.city || '', 'gi'), '').trim() : 'We build websites, apps and custom software for businesses in',
           headlineHighlight: r.city || r.slug,
           subheadline: heroObj?.subheadline || 'From high-converting web applications to custom ERP software, we build scalable digital systems tailored for modern businesses.',
@@ -265,6 +292,13 @@ export const geoService = {
           metaDescription: r.metaDescription || `Top web development and software company serving ${r.city || r.slug}. 350+ projects delivered.`,
           keywords: Array.isArray(r.keywords) ? r.keywords : [],
           faqs: r.faqs ? (typeof r.faqs === 'string' ? JSON.parse(r.faqs) : r.faqs) : [],
+          hero: heroObj || undefined,
+          services: Array.isArray(servicesObj) ? servicesObj : undefined,
+          about: aboutObj || undefined,
+          whyChooseUs: whyChooseUsObj || undefined,
+          howWeWork: howWeWorkObj || undefined,
+          testimonials: Array.isArray(testimonialsObj) ? testimonialsObj : undefined,
+          ctaBanner: ctaBannerObj || undefined,
         };
 
         geoCache.set(cacheKey, loc);
@@ -277,9 +311,11 @@ export const geoService = {
     // Static registry fallback
     const fallback = LOCATIONS_REGISTRY.find((l) => l.slug.toLowerCase() === cleanSlug) || null;
     if (fallback) {
-      geoCache.set(cacheKey, fallback);
+      const fallbackItem = { ...fallback, isPublished: true };
+      geoCache.set(cacheKey, fallbackItem);
+      return fallbackItem;
     }
-    return fallback;
+    return null;
   },
 
   /**
@@ -289,7 +325,7 @@ export const geoService = {
     this.ensureTable();
 
     const cleanSlug = location.slug.toLowerCase().trim().replace(/[^a-z0-9-]/g, '-');
-    const existing = await this.getLocationBySlug(cleanSlug);
+    const existing = await this.getLocationBySlug(cleanSlug, true);
 
     const city = location.city.trim();
     const state = location.state?.trim() || existing?.state || null;
@@ -301,6 +337,7 @@ export const geoService = {
     const latitude = location.coordinates?.latitude ?? existing?.coordinates?.latitude ?? 23.0225;
     const longitude = location.coordinates?.longitude ?? existing?.coordinates?.longitude ?? 72.5714;
     const popular = location.popular !== undefined ? location.popular : (existing?.popular || false);
+    const isPublished = location.isPublished !== undefined ? Boolean(location.isPublished) : (existing?.isPublished !== undefined ? Boolean(existing.isPublished) : true);
 
     const headlineTitle = location.headlineTitle?.trim() || existing?.headlineTitle || 'We build websites, apps and custom software for businesses in';
     const headlineHighlight = location.headlineHighlight?.trim() || existing?.headlineHighlight || city;
@@ -313,18 +350,32 @@ export const geoService = {
     const faqs = Array.isArray(location.faqs) ? location.faqs : (existing?.faqs || []);
 
     const heroJson = {
-      headline: `${headlineTitle} ${headlineHighlight}`,
-      subheadline: subheadline,
-      subBadgeText: `SERVING ${city.toUpperCase()}`,
-      ctaText: 'Start Your Project',
-      ctaLink: '/contact',
+      ...(existing?.hero || {}),
+      ...(location.hero || {}),
+      headline: location.hero?.headline || `${headlineTitle} ${headlineHighlight}`,
+      subheadline: location.hero?.subheadline || subheadline,
+      subBadgeText: location.hero?.subBadgeText || `SERVING ${city.toUpperCase()}`,
+      ctaText: location.hero?.ctaText || 'Talk to us today',
+      ctaLink: location.hero?.ctaLink || '/contact',
+      dashboardImage: location.hero?.dashboardImage !== undefined ? location.hero.dashboardImage : (existing?.hero?.dashboardImage || ''),
+      avatars: location.hero?.avatars || existing?.hero?.avatars || ['#38bdf8', '#3b82f6', '#a855f7'],
     };
 
     const aboutJson = {
-      headingText: `Empowering Businesses Across ${city}`,
-      headingHighlight: `${city} & Global Markets`,
-      description: aboutText,
+      ...(existing?.about || {}),
+      ...(location.about || {}),
+      heading: location.about?.heading || `Empowering Businesses Across ${city}`,
+      headingHighlight: location.about?.headingHighlight || `${city} & Global Markets`,
+      description: location.about?.description || aboutText,
+      image1: location.about?.image1 !== undefined ? location.about.image1 : (existing?.about?.image1 || ''),
+      image2: location.about?.image2 !== undefined ? location.about.image2 : (existing?.about?.image2 || ''),
     };
+
+    const servicesJson = location.services || existing?.services || null;
+    const whyChooseUsJson = location.whyChooseUs || existing?.whyChooseUs || null;
+    const howWeWorkJson = location.howWeWork || existing?.howWeWork || null;
+    const testimonialsJson = location.testimonials || existing?.testimonials || null;
+    const ctaBannerJson = location.ctaBanner || existing?.ctaBanner || null;
 
     await db.$executeRawUnsafe(`
       INSERT INTO "PageContent" (
@@ -342,6 +393,11 @@ export const geoService = {
         "popular",
         "hero",
         "about",
+        "services",
+        "whyChooseUs",
+        "howWeWork",
+        "testimonials",
+        "ctaBanner",
         "metaTitle",
         "metaDescription",
         "keywords",
@@ -364,11 +420,16 @@ export const geoService = {
         $11,
         $12::jsonb,
         $13::jsonb,
-        $14,
-        $15,
-        $16::text[],
+        $14::jsonb,
+        $15::jsonb,
+        $16::jsonb,
         $17::jsonb,
-        true,
+        $18::jsonb,
+        $19,
+        $20,
+        $21::text[],
+        $22::jsonb,
+        $23,
         NOW()
       )
       ON CONFLICT ("slug") DO UPDATE SET
@@ -384,11 +445,16 @@ export const geoService = {
         "popular" = EXCLUDED."popular",
         "hero" = EXCLUDED."hero",
         "about" = EXCLUDED."about",
+        "services" = EXCLUDED."services",
+        "whyChooseUs" = EXCLUDED."whyChooseUs",
+        "howWeWork" = EXCLUDED."howWeWork",
+        "testimonials" = EXCLUDED."testimonials",
+        "ctaBanner" = EXCLUDED."ctaBanner",
         "metaTitle" = EXCLUDED."metaTitle",
         "metaDescription" = EXCLUDED."metaDescription",
         "keywords" = EXCLUDED."keywords",
         "faqs" = EXCLUDED."faqs",
-        "isPublished" = true,
+        "isPublished" = EXCLUDED."isPublished",
         "updatedAt" = NOW()
     `,
       cleanSlug,
@@ -404,10 +470,16 @@ export const geoService = {
       popular,
       JSON.stringify(heroJson),
       JSON.stringify(aboutJson),
+      servicesJson ? JSON.stringify(servicesJson) : null,
+      whyChooseUsJson ? JSON.stringify(whyChooseUsJson) : null,
+      howWeWorkJson ? JSON.stringify(howWeWorkJson) : null,
+      testimonialsJson ? JSON.stringify(testimonialsJson) : null,
+      ctaBannerJson ? JSON.stringify(ctaBannerJson) : null,
       metaTitle,
       metaDescription,
       keywords,
-      JSON.stringify(faqs)
+      JSON.stringify(faqs),
+      isPublished
     );
 
     geoCache.clear();
@@ -423,6 +495,7 @@ export const geoService = {
       postalCode: postalCode || undefined,
       coordinates: { latitude, longitude },
       popular,
+      isPublished,
       headlineTitle,
       headlineHighlight,
       subheadline,
@@ -431,6 +504,13 @@ export const geoService = {
       metaDescription,
       keywords,
       faqs,
+      hero: heroJson,
+      services: servicesJson || undefined,
+      about: aboutJson,
+      whyChooseUs: whyChooseUsJson || undefined,
+      howWeWork: howWeWorkJson || undefined,
+      testimonials: testimonialsJson || undefined,
+      ctaBanner: ctaBannerJson || undefined,
     };
   },
 
@@ -489,9 +569,33 @@ export const geoService = {
           a: `We build custom web applications, native & cross-platform mobile apps (Flutter, React Native, Swift), enterprise software, CRM/ERP integrations, and cloud architectures.`,
         },
       ],
+      hero: sourceLoc.hero ? { ...sourceLoc.hero, headline: `We build websites, apps and custom software for businesses in ${targetCity}`, subBadgeText: `SERVING ${targetCity.toUpperCase()}` } : undefined,
+      services: sourceLoc.services,
+      about: sourceLoc.about ? { ...sourceLoc.about, heading: `Empowering Businesses Across ${targetCity}`, headingHighlight: `${targetCity} & Global Markets` } : undefined,
+      whyChooseUs: sourceLoc.whyChooseUs,
+      howWeWork: sourceLoc.howWeWork,
+      testimonials: sourceLoc.testimonials,
+      ctaBanner: sourceLoc.ctaBanner,
     };
 
     return await this.saveLocation(newLocationPayload);
+  },
+
+  /**
+   * Quick toggle between Published and Draft
+   */
+  async toggleLocationStatus(slug: string, isPublished: boolean): Promise<LocationItem | null> {
+    if (!slug) return null;
+    const cleanSlug = slug.toLowerCase().trim();
+    this.ensureTable();
+
+    await db.$executeRawUnsafe(
+      `UPDATE "PageContent" SET "isPublished" = $1, "updatedAt" = NOW() WHERE LOWER("slug") = $2`,
+      isPublished,
+      cleanSlug
+    );
+    geoCache.clear();
+    return this.getLocationBySlug(cleanSlug, true);
   },
 
   /**

@@ -10,10 +10,11 @@ export async function GET(request: Request) {
     const limit = parseInt(searchParams.get('limit') || '8', 10);
     const region = searchParams.get('region') || undefined;
     const search = searchParams.get('search') || undefined;
+    const status = (searchParams.get('status') as 'all' | 'published' | 'draft') || 'all';
 
     // If pagination or filtering query params are present, return backend-paginated result
-    if (searchParams.has('page') || searchParams.has('limit') || searchParams.has('region') || searchParams.has('search')) {
-      const result = await geoService.getPaginatedLocations({ page, limit, region, search });
+    if (searchParams.has('page') || searchParams.has('limit') || searchParams.has('region') || searchParams.has('search') || searchParams.has('status')) {
+      const result = await geoService.getPaginatedLocations({ page, limit, region, search, status, includeDrafts: true });
       return NextResponse.json({
         success: true,
         data: result.items,
@@ -22,7 +23,7 @@ export async function GET(request: Request) {
       });
     }
 
-    const data = await geoService.getAllLocations();
+    const data = await geoService.getAllLocations(true);
     return NextResponse.json({
       success: true,
       data,
@@ -39,6 +40,19 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    if (body.action === 'toggle-status') {
+      if (!body.slug) {
+        return NextResponse.json({ success: false, error: 'Location slug is required.' }, { status: 400 });
+      }
+      const isPublished = Boolean(body.isPublished);
+      const updated = await geoService.toggleLocationStatus(body.slug, isPublished);
+      return NextResponse.json({
+        success: true,
+        message: `Location "${body.slug}" is now ${isPublished ? 'Live / Published' : 'Draft (Not Public)'}.`,
+        data: updated,
+      });
+    }
 
     if (body.action === 'duplicate') {
       if (!body.sourceSlug || !body.target?.city || !body.target?.slug) {
@@ -65,7 +79,7 @@ export async function POST(request: Request) {
     const saved = await geoService.saveLocation(body);
     return NextResponse.json({
       success: true,
-      message: `Location "${saved.city}" saved successfully.`,
+      message: `Location "${saved.city}" saved successfully as ${saved.isPublished ? 'Published' : 'Draft'}.`,
       data: saved,
     });
   } catch (error: any) {
@@ -75,6 +89,10 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+export async function PATCH(request: Request) {
+  return POST(request);
 }
 
 export async function PUT(request: Request) {

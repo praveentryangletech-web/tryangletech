@@ -73,19 +73,33 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
   const localizedHero = geo
     ? {
         ...content.hero,
-        headline: `${geo.headlineTitle} ${geo.headlineHighlight}`,
-        subheadline: geo.subheadline || content.hero.subheadline,
-        subBadgeText: `SERVING ${geo.city.toUpperCase()}`,
+        ...(geo.hero || {}),
+        headline: geo.hero?.headline || `${geo.headlineTitle} ${geo.headlineHighlight}`,
+        subheadline: geo.hero?.subheadline || geo.subheadline || content.hero.subheadline,
+        subBadgeText: geo.hero?.subBadgeText || `SERVING ${geo.city.toUpperCase()}`,
+        dashboardImage: geo.hero?.dashboardImage || content.hero.dashboardImage,
+        avatars: geo.hero?.avatars || content.hero.avatars,
+        ctaText: geo.hero?.ctaText || content.hero.ctaText,
+        ctaLink: geo.hero?.ctaLink || content.hero.ctaLink,
       }
     : content.hero;
 
   const localizedAbout = geo
     ? {
         ...content.about,
-        description: geo.aboutText || content.about.description,
-        headingHighlight: `${geo.city} & Global Markets`,
+        ...(geo.about || {}),
+        description: geo.about?.description || geo.aboutText || content.about.description,
+        headingHighlight: geo.about?.headingHighlight || `${geo.city} & Global Markets`,
+        image1: geo.about?.image1 || content.about.image1,
+        image2: geo.about?.image2 || content.about.image2,
       }
     : content.about;
+
+  const localizedServices = (geo && geo.services && geo.services.length > 0) ? geo.services : content.services;
+  const localizedWhyChooseUs = (geo && geo.whyChooseUs) ? { ...content.whyChooseUs, ...geo.whyChooseUs } : content.whyChooseUs;
+  const localizedHowWeWork = (geo && geo.howWeWork) ? { ...content.howWeWork, ...geo.howWeWork } : content.howWeWork;
+  const localizedTestimonials = (geo && geo.testimonials && geo.testimonials.length > 0) ? geo.testimonials : content.testimonials;
+  const localizedCtaBanner = (geo && geo.ctaBanner) ? { ...content.ctaBanner, ...geo.ctaBanner } : content.ctaBanner;
 
   return (
     <>
@@ -96,16 +110,16 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         <Hero hero={localizedHero} />
 
         {/* Section 2: Services / Benefits */}
-        <Benefits services={content.services} />
+        <Benefits services={localizedServices} />
 
         {/* Section 3: About / Who We Are */}
         <About about={localizedAbout} />
 
         {/* Section 4: Why Choose Us */}
-        <WhyChooseUs whyChooseUs={content.whyChooseUs} />
+        <WhyChooseUs whyChooseUs={localizedWhyChooseUs} />
 
         {/* Section 5: Collaboration / How We Work */}
-        <Collaboration howWeWork={content.howWeWork} />
+        <Collaboration howWeWork={localizedHowWeWork} />
 
         {/* Section 6: Featured Projects (Live PortfolioProject DB) */}
         <ProjectsSection />
@@ -114,7 +128,7 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         <Integrations />
 
         {/* Section 8: Testimonials */}
-        <Testimonials testimonials={content.testimonials} />
+        <Testimonials testimonials={localizedTestimonials} />
 
         {/* Section 9: FAQs (Live PageFAQ & Geo AEO Engine) */}
         <Faq initialFaqs={(geo && geo.faqs && geo.faqs.length > 0) ? geo.faqs : content.faqs} />
@@ -123,7 +137,7 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         <HomeLatestBlog />
 
         {/* Section 11: Call to Action Banner */}
-        <Cta ctaBanner={content.ctaBanner} />
+        <Cta ctaBanner={localizedCtaBanner} />
       </main>
     </>
   );

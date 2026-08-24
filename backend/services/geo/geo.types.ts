@@ -1,3 +1,13 @@
+import {
+  HomeHeroSection,
+  HomeServiceItem,
+  HomeAboutSection,
+  HomeWhyChooseUsSection,
+  HomeHowWeWorkSection,
+  HomeTestimonialItem,
+  HomeCtaBannerSection,
+} from '../home/home.types';
+
 export interface GeoCoordinates {
   latitude: number;
   longitude: number;
@@ -29,6 +39,16 @@ export interface LocationItem {
   keywords: string[];
   faqs: LocationFaq[];
   popular?: boolean;
+  isPublished?: boolean;
+
+  // Dynamic section overrides
+  hero?: Partial<HomeHeroSection>;
+  services?: HomeServiceItem[];
+  about?: Partial<HomeAboutSection>;
+  whyChooseUs?: Partial<HomeWhyChooseUsSection>;
+  howWeWork?: Partial<HomeHowWeWorkSection>;
+  testimonials?: HomeTestimonialItem[];
+  ctaBanner?: Partial<HomeCtaBannerSection>;
 }
 
 export interface LocationQueryParams {
@@ -38,6 +58,8 @@ export interface LocationQueryParams {
   search?: string;
   popular?: boolean;
   publishedOnly?: boolean;
+  status?: 'all' | 'published' | 'draft';
+  includeDrafts?: boolean;
 }
 
 export interface PaginatedLocationResult {

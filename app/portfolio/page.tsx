@@ -2,9 +2,10 @@ import React from "react";
 import { Metadata } from "next";
 import WebflowInit from "../common/WebflowInit";
 import PortfolioHero from "./components/PortfolioHero";
-import PortfolioGrid from "./components/PortfolioGrid";
+import PortfolioGrid, { DEFAULT_CATEGORIES } from "./components/PortfolioGrid";
 import HomeThreeFaq from "../home-three/components/Faq";
 import HomeTwoTestimonial from "../home-two/components/HomeTwoTestimonial";
+import { portfolioCategoryService, portfolioService } from "@/backend/services/portfolio";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -24,7 +25,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  let initialCategories = DEFAULT_CATEGORIES;
+  let initialProjects: any[] = [];
+
+  try {
+    const [cats, projs] = await Promise.all([
+      portfolioCategoryService.getAllCategories('PORTFOLIO').catch(() => []),
+      portfolioService.getPaginatedProjects({ page: 1, limit: 9 }).catch(() => ({ projects: [] } as any)),
+    ]);
+
+    if (cats && Array.isArray(cats) && cats.length > 0) {
+      const fetchedNames = cats.map((c: any) => c.name).filter(Boolean);
+      const defaultNames = DEFAULT_CATEGORIES.filter((c) => c !== 'All');
+      initialCategories = Array.from(new Set(['All', ...defaultNames, ...fetchedNames]));
+    }
+
+    if (projs && Array.isArray(projs.projects) && projs.projects.length > 0) {
+      initialProjects = projs.projects;
+    }
+  } catch (err) {
+    console.warn('[PortfolioPage] SSR category preload notice:', err);
+  }
+
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
@@ -53,7 +76,7 @@ export default function PortfolioPage() {
       <main>
         <section className="rt-hero-12">
           <PortfolioHero />
-          <PortfolioGrid />
+          <PortfolioGrid initialCategories={initialCategories} initialProjects={initialProjects.length > 0 ? initialProjects : undefined} />
         </section>
         <HomeThreeFaq />
         <HomeTwoTestimonial />

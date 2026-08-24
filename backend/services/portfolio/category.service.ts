@@ -7,6 +7,24 @@ export const DEFAULT_PORTFOLIO_CATEGORY = 'General';
 export const DEFAULT_BLOG_CATEGORY = 'General';
 export const DEFAULT_CATEGORY = 'General';
 
+export const DEFAULT_PORTFOLIO_CATEGORIES = [
+  'Business Website',
+  'E-Commerce',
+  'Landing Website',
+  'Mobile Application',
+  'Custom Software',
+  'Graphic Design',
+];
+
+export const DEFAULT_BLOG_CATEGORIES = [
+  'Technology',
+  'Web Development',
+  'Mobile Apps',
+  'UI/UX Design',
+  'Digital Marketing',
+  'Cloud & DevOps',
+];
+
 export interface PortfolioCategoryItem {
   id: string;
   name: string;
@@ -96,7 +114,7 @@ export const portfolioCategoryService = {
   },
 
   /**
-   * Ensures the protected default 'General' category exists for the given type (PORTFOLIO, BLOG, etc.).
+   * Ensures default categories exist in PostgreSQL for the given type (PORTFOLIO, BLOG, etc.).
    */
   async seedIfEmpty(type: string = 'PORTFOLIO'): Promise<void> {
     const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
@@ -106,16 +124,60 @@ export const portfolioCategoryService = {
     try {
       await this.ensureTableExists();
 
-      const defaultSlug = generateSlug(DEFAULT_CATEGORY);
-      const defaultId = `cat_default_${normalizedType.toLowerCase()}_${defaultSlug}`;
+      const defaultsToSeed = normalizedType === 'BLOG' ? DEFAULT_BLOG_CATEGORIES : DEFAULT_PORTFOLIO_CATEGORIES;
 
-      await db.$executeRaw`
-        INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
-        VALUES (${defaultId}, ${DEFAULT_CATEGORY}, ${defaultSlug}, ${normalizedType}, 999, NOW(), NOW())
-        ON CONFLICT DO NOTHING
-      `;
+      for (let i = 0; i < defaultsToSeed.length; i++) {
+        const catName = defaultsToSeed[i];
+        const catSlug = generateSlug(catName);
+        const catId = `cat_default_${normalizedType.toLowerCase()}_${catSlug}`;
+
+        await db.$executeRaw`
+          INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+          VALUES (${catId}, ${catName}, ${catSlug}, ${normalizedType}, ${i + 1}, NOW(), NOW())
+          ON CONFLICT DO NOTHING
+        `;
+      }
+
+      // Auto-discover distinct categories from live database records and seed them
+      if (normalizedType === 'PORTFOLIO') {
+        const projectCats = await db.$queryRaw<Array<{ category: string }>>`
+          SELECT DISTINCT "category" FROM "PortfolioProject" 
+          WHERE "category" IS NOT NULL AND TRIM("category") != ''
+        `.catch(() => []);
+        if (projectCats && Array.isArray(projectCats)) {
+          for (const pc of projectCats) {
+            const rawName = (pc.category || '').trim();
+            if (!rawName) continue;
+            const pSlug = generateSlug(rawName);
+            const pId = `cat_proj_${pSlug}`;
+            await db.$executeRaw`
+              INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+              VALUES (${pId}, ${rawName}, ${pSlug}, 'PORTFOLIO', 50, NOW(), NOW())
+              ON CONFLICT DO NOTHING
+            `.catch(() => {});
+          }
+        }
+      } else if (normalizedType === 'BLOG') {
+        const blogCats = await db.$queryRaw<Array<{ category: string }>>`
+          SELECT DISTINCT "category" FROM "BlogPost" 
+          WHERE "category" IS NOT NULL AND TRIM("category") != ''
+        `.catch(() => []);
+        if (blogCats && Array.isArray(blogCats)) {
+          for (const bc of blogCats) {
+            const rawName = (bc.category || '').trim();
+            if (!rawName) continue;
+            const bSlug = generateSlug(rawName);
+            const bId = `cat_blog_${bSlug}`;
+            await db.$executeRaw`
+              INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+              VALUES (${bId}, ${rawName}, ${bSlug}, 'BLOG', 50, NOW(), NOW())
+              ON CONFLICT DO NOTHING
+            `.catch(() => {});
+          }
+        }
+      }
     } catch (err) {
-      console.warn(`[DB Category] seed default 'General' (${type}) notice:`, err);
+      console.warn(`[DB Category] seed default categories (${type}) notice:`, err);
     }
   },
 
@@ -135,7 +197,7 @@ export const portfolioCategoryService = {
     }
 
     try {
-      this.seedIfEmpty(normalizedType);
+      await this.seedIfEmpty(normalizedType);
 
       // Parallelize categories and counts queries in a single roundtrip with 2.5s timeout
       const [categoryRows, countRows] = await Promise.race([
@@ -164,7 +226,7 @@ export const portfolioCategoryService = {
         });
       }
 
-      const items: PortfolioCategoryItem[] = (categoryRows || []).map((r: any) => {
+      let items: PortfolioCategoryItem[] = (categoryRows || []).map((r: any) => {
         const nameClean = (r.name || '').toLowerCase().trim();
         const isDefault = nameClean === DEFAULT_CATEGORY.toLowerCase();
         const count = countsMap[nameClean] || 0;
@@ -182,27 +244,47 @@ export const portfolioCategoryService = {
         };
       });
 
+      // If DB has no records or only 'General', merge with default category constants
+      const defaultNames = normalizedType === 'BLOG' ? DEFAULT_BLOG_CATEGORIES : DEFAULT_PORTFOLIO_CATEGORIES;
+      if (items.length <= 1) {
+        const existingNames = new Set(items.map((it) => it.name.toLowerCase()));
+        defaultNames.forEach((defName, idx) => {
+          if (!existingNames.has(defName.toLowerCase())) {
+            items.push({
+              id: `cat_default_${normalizedType.toLowerCase()}_${generateSlug(defName)}`,
+              name: defName,
+              slug: generateSlug(defName),
+              type: normalizedType,
+              order: idx + 1,
+              projectCount: countsMap[defName.toLowerCase()] || 0,
+              postCount: countsMap[defName.toLowerCase()] || 0,
+              isDefault: false,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            });
+          }
+        });
+      }
+
       const entry = categoryCache.set(cacheKey, items);
       const result = [...items] as PortfolioCategoryItem[] & { etag?: string };
       result.etag = entry.etag;
       return result;
     } catch (err) {
       console.error(`[DB Category] getAllCategories (${type}) fallback:`, err);
-      // Clean dynamic fallback with protected 'General'
-      return [
-        {
-          id: `cat_default_${normalizedType.toLowerCase()}_general`,
-          name: DEFAULT_CATEGORY,
-          slug: generateSlug(DEFAULT_CATEGORY),
-          type: normalizedType,
-          order: 0,
-          projectCount: 0,
-          postCount: 0,
-          isDefault: true,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
-      ] as PortfolioCategoryItem[] & { etag?: string };
+      const defaultNames = normalizedType === 'BLOG' ? DEFAULT_BLOG_CATEGORIES : DEFAULT_PORTFOLIO_CATEGORIES;
+      return defaultNames.map((name, idx) => ({
+        id: `cat_default_${normalizedType.toLowerCase()}_${generateSlug(name)}`,
+        name,
+        slug: generateSlug(name),
+        type: normalizedType,
+        order: idx + 1,
+        projectCount: 0,
+        postCount: 0,
+        isDefault: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      })) as PortfolioCategoryItem[] & { etag?: string };
     }
   },
 

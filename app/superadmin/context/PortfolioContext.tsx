@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
 import { Project, projects as staticProjects } from '../../data/portfolioData';
-import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
+import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY, DEFAULT_PORTFOLIO_CATEGORIES } from '@/backend/services/portfolio/category.service';
 
 /**
  * Portfolio Context Interface defining the global state and API mutation functions
@@ -58,22 +58,22 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [projectsList, setProjectsList] = useState<Project[]>(staticProjects.slice(0, 8));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Dynamic Categories state initialized with protected 'General' default
-  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>([
-    {
-      id: 'cat_default_general',
-      name: DEFAULT_PORTFOLIO_CATEGORY,
-      slug: 'general',
+  // Dynamic Categories state initialized with default categories
+  const [categoriesData, setCategoriesData] = useState<PortfolioCategoryItem[]>(() =>
+    DEFAULT_PORTFOLIO_CATEGORIES.map((name, idx) => ({
+      id: `cat_init_${idx}`,
+      name,
+      slug: name.toLowerCase().replace(/\s+/g, '-'),
       type: 'PORTFOLIO',
-      order: 0,
+      order: idx + 1,
       projectCount: 0,
       postCount: 0,
-      isDefault: true,
+      isDefault: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-    },
-  ]);
-  const [categories, setCategories] = useState<string[]>([DEFAULT_PORTFOLIO_CATEGORY]);
+    }))
+  );
+  const [categories, setCategories] = useState<string[]>(DEFAULT_PORTFOLIO_CATEGORIES);
   const [isLoadingCategories, setIsLoadingCategories] = useState<boolean>(true);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState<boolean>(false);
 

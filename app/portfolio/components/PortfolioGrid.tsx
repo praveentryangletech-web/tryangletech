@@ -5,7 +5,7 @@ import Image from "next/image";
 import SafeImage from '@/app/common/SafeImage';
 import { Project, projects as staticProjects } from '../../data/portfolioData';
 
-const DEFAULT_CATEGORIES = [
+export const DEFAULT_CATEGORIES = [
   "All",
   "Business Website", 
   "E-Commerce",
@@ -50,15 +50,17 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
     return staticProjects.length;
   });
 
-  // Fetch dynamic categories on mount
+  // Fetch dynamic categories on mount and merge with standard default categories
   useEffect(() => {
     async function loadDynamicCategories() {
       try {
         const res = await fetch('/api/portfolio/categories');
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          const dynamicCats = ['All', ...json.data.map((c: any) => c.name)];
-          setCategoriesList(dynamicCats);
+          const fetchedNames = json.data.map((c: any) => c.name).filter(Boolean);
+          const defaultNames = DEFAULT_CATEGORIES.filter((c) => c !== 'All');
+          const merged = Array.from(new Set(['All', ...defaultNames, ...fetchedNames]));
+          setCategoriesList(merged);
         }
       } catch {
         // Fallback to DEFAULT_CATEGORIES

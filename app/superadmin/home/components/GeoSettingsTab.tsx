@@ -88,8 +88,6 @@ export default function GeoSettingsTab({
   setLocLongitude,
   locPopular,
   setLocPopular,
-  locIsPublished = true,
-  setLocIsPublished,
   locMetaTitle,
   setLocMetaTitle,
   locMetaDescription,
@@ -101,99 +99,6 @@ export default function GeoSettingsTab({
 }: GeoSettingsTabProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'transparent' }}>
-      {/* CARD 0: PUBLICATION STATUS & VISIBILITY (For Location Clones) */}
-      {isEditingLocation && setLocIsPublished && (
-        <div
-          style={{
-            padding: '16px 20px',
-            borderRadius: '12px',
-            backgroundColor: locIsPublished ? '#F0FDF4' : '#FFFBEB',
-            border: `1.5px solid ${locIsPublished ? '#86EFAC' : '#FDE68A'}`,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '12px',
-          }}
-        >
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  padding: '3px 10px',
-                  borderRadius: '12px',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  backgroundColor: locIsPublished ? '#DCFCE7' : '#FEF3C7',
-                  color: locIsPublished ? '#15803D' : '#B45309',
-                  border: `1px solid ${locIsPublished ? '#BBF7D0' : '#FDE68A'}`,
-                }}
-              >
-                ● {locIsPublished ? 'Published & Live (Public)' : 'Draft (Not Public / Hidden)'}
-              </span>
-              <strong style={{ fontSize: '0.9rem', color: '#0F172A' }}>
-                Page Publication State
-              </strong>
-            </div>
-            <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: '#475569' }}>
-              {locIsPublished
-                ? 'This location clone is public, indexed by search engines, and visible on the website.'
-                : 'This location clone is currently a private Draft. It is not publicly accessible or indexed by search engines.'}
-            </p>
-          </div>
-
-          {/* Segmented Toggle */}
-          <div
-            style={{
-              display: 'inline-flex',
-              padding: '3px',
-              borderRadius: '10px',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #CBD5E1',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setLocIsPublished(false)}
-              style={{
-                padding: '6px 14px',
-                borderRadius: '7px',
-                border: 'none',
-                backgroundColor: !locIsPublished ? '#D97706' : 'transparent',
-                color: !locIsPublished ? '#FFFFFF' : '#64748B',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              Draft (Hidden)
-            </button>
-            <button
-              type="button"
-              onClick={() => setLocIsPublished(true)}
-              style={{
-                padding: '6px 14px',
-                borderRadius: '7px',
-                border: 'none',
-                backgroundColor: locIsPublished ? '#16A34A' : 'transparent',
-                color: locIsPublished ? '#FFFFFF' : '#64748B',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              Published (Live)
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Header Banner */}
       <div
         style={{

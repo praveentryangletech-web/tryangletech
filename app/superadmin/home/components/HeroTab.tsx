@@ -143,10 +143,22 @@ export default function HeroTab({ hero, setHero, onOpenAssetPicker }: HeroTabPro
             Enter image URLs (e.g. <code>https://...</code>, <code>/Taskopia_files/...</code>) or hex color codes (e.g. <code>#38bdf8</code>).
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '14px' }}>
             {[0, 1, 2].map((idx) => {
               const avVal = avatars[idx] || (idx === 0 ? '#38bdf8' : idx === 1 ? '#3b82f6' : '#a855f7');
               const isImg = avVal.startsWith('http') || avVal.startsWith('/') || avVal.startsWith('data:');
+              const isHex = /^#([0-9A-F]{3}){1,2}$/i.test(avVal);
+              const hexVal = isHex
+                ? (avVal.length === 4 ? `#${avVal[1]}${avVal[1]}${avVal[2]}${avVal[2]}${avVal[3]}${avVal[3]}` : avVal)
+                : (idx === 0 ? '#38bdf8' : idx === 1 ? '#3b82f6' : '#a855f7');
+
+              const PRESET_COLORS = ['#38bdf8', '#3b82f6', '#6366f1', '#a855f7', '#ec4899', '#10b981', '#f59e0b'];
+
+              const handleColorChange = (newHex: string) => {
+                const copy = [...avatars];
+                copy[idx] = newHex;
+                setHero({ ...hero, avatars: copy });
+              };
 
               return (
                 <div
@@ -154,71 +166,164 @@ export default function HeroTab({ hero, setHero, onOpenAssetPicker }: HeroTabPro
                   style={{
                     border: '1px solid #CBD5E1',
                     borderRadius: '10px',
-                    padding: '10px 12px',
+                    padding: '12px',
                     backgroundColor: '#FFFFFF',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '8px',
+                    gap: '10px',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#334155' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#334155' }}>
                       Avatar #{idx + 1}
                     </span>
-                    <div
-                      style={{
-                        width: '28px',
-                        height: '28px',
-                        borderRadius: '50%',
-                        backgroundColor: !isImg ? avVal : '#F1F5F9',
-                        overflow: 'hidden',
-                        flexShrink: 0,
-                        border: '1.5px solid #CBD5E1',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {isImg && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={avVal} alt={`Avatar ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      )}
+
+                    {/* Interactive Preview Circle (Clicking opens native Color Picker if not image) */}
+                    <div style={{ position: 'relative' }}>
+                      <div
+                        style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          backgroundColor: !isImg ? avVal : '#F1F5F9',
+                          overflow: 'hidden',
+                          flexShrink: 0,
+                          border: '2px solid #CBD5E1',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                          cursor: isImg ? 'default' : 'pointer',
+                        }}
+                        title={isImg ? 'Image Avatar' : 'Click to pick color'}
+                      >
+                        {isImg ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={avVal} alt={`Avatar ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          <input
+                            type="color"
+                            value={hexVal}
+                            onChange={(e) => handleColorChange(e.target.value)}
+                            style={{
+                              position: 'absolute',
+                              inset: 0,
+                              width: '100%',
+                              height: '100%',
+                              opacity: 0,
+                              cursor: 'pointer',
+                            }}
+                            title="Choose Color"
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  <input
-                    type="text"
-                    placeholder={`Avatar #${idx + 1} (URL or Hex)`}
-                    value={avVal}
-                    onChange={(e) => {
-                      const copy = [...avatars];
-                      copy[idx] = e.target.value;
-                      setHero({ ...hero, avatars: copy });
-                    }}
-                    style={{ ...inputStyle, padding: '0.5rem 0.75rem', fontSize: '0.8rem' }}
-                  />
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <input
+                      type="text"
+                      placeholder={`Avatar #${idx + 1} (URL or Hex #)`}
+                      value={avVal}
+                      onChange={(e) => handleColorChange(e.target.value)}
+                      style={{ ...inputStyle, padding: '0.5rem 0.75rem', fontSize: '0.825rem', fontFamily: isHex ? 'monospace' : 'inherit' }}
+                    />
+                  </div>
 
-                  <div style={{ display: 'flex', gap: '6px' }}>
-                    <button
-                      type="button"
-                      onClick={() => onOpenAssetPicker(`hero.avatar.${idx}`)}
+                  {/* Quick Color Swatches Palette */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#64748B' }}>
+                      Presets:
+                    </span>
+                    {PRESET_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => handleColorChange(c)}
+                        title={`Select ${c}`}
+                        style={{
+                          width: '18px',
+                          height: '18px',
+                          borderRadius: '50%',
+                          backgroundColor: c,
+                          border: avVal.toLowerCase() === c.toLowerCase() ? '2px solid #000' : '1px solid rgba(0,0,0,0.15)',
+                          cursor: 'pointer',
+                          padding: 0,
+                          transform: avVal.toLowerCase() === c.toLowerCase() ? 'scale(1.15)' : 'scale(1)',
+                          transition: 'all 0.15s ease',
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Dual Action Buttons: Color Picker & Media Library Asset */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                    <label
                       style={{
-                        flex: 1,
-                        padding: '4px 8px',
+                        padding: '6px 10px',
                         borderRadius: '6px',
-                        border: '1px solid #BFDBFE',
-                        backgroundColor: '#EFF6FF',
-                        color: '#1833FE',
-                        fontSize: '0.725rem',
+                        border: '1px solid #CBD5E1',
+                        backgroundColor: '#F8FAFC',
+                        color: '#334155',
+                        fontSize: '0.75rem',
                         fontWeight: 700,
                         cursor: 'pointer',
                         display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: '4px',
+                        gap: '6px',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        transition: 'all 0.15s ease',
                       }}
                     >
-                      <span>🖼 Pick Asset</span>
+                      <input
+                        type="color"
+                        value={hexVal}
+                        onChange={(e) => handleColorChange(e.target.value)}
+                        style={{
+                          position: 'absolute',
+                          opacity: 0,
+                          inset: 0,
+                          width: '100%',
+                          height: '100%',
+                          cursor: 'pointer',
+                        }}
+                      />
+                      <span
+                        style={{
+                          width: '12px',
+                          height: '12px',
+                          borderRadius: '50%',
+                          backgroundColor: hexVal,
+                          border: '1px solid rgba(0,0,0,0.2)',
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span>Pick Color</span>
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => onOpenAssetPicker(`hero.avatar.${idx}`)}
+                      style={{
+                        padding: '6px 10px',
+                        borderRadius: '6px',
+                        border: '1px solid #BFDBFE',
+                        backgroundColor: '#EFF6FF',
+                        color: '#1833FE',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      <span>🖼 Pick Image</span>
                     </button>
                   </div>
                 </div>

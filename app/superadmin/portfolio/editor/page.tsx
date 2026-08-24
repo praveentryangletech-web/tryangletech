@@ -8,6 +8,7 @@ import { Project, PortfolioCategory } from '@/app/data/portfolioData';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
 import { PortfolioProvider, usePortfolio } from '@/app/superadmin/context/PortfolioContext';
+import { convertFileToWebp } from '@/app/superadmin/utils/imageOptimizer';
 
 /**
  * Clean SVG Tech Stack Definition with Brand Icons
@@ -301,9 +302,12 @@ function PortfolioEditorInner() {
     }
   }, [activeTab]);
 
-  const handleSelectFileToUpload = (files: FileList | null, target: 'cover' | 'slider' = 'cover') => {
+  const handleSelectFileToUpload = async (files: FileList | null, target: 'cover' | 'slider' = 'cover') => {
     if (!files || files.length === 0) return;
-    const file = files[0];
+    const rawFile = files[0];
+
+    // Automatically convert any PNG, JPG, JPEG, BMP to lightweight WebP format
+    const file = await convertFileToWebp(rawFile);
     setUploadTarget(target);
     setSelectedUploadFile(file);
 

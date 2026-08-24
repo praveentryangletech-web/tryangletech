@@ -31,8 +31,7 @@ export async function generateStaticParams() {
  * Generate Location-Specific SEO, GEO, and OpenGraph Metadata
  */
 export async function generateMetadata({ params, searchParams }: LocationPageProps): Promise<Metadata> {
-  const resolvedParams = params && typeof (params as any).then === 'function' ? await params : params;
-  const slug = resolvedParams?.slug;
+  const { slug } = await params;
   if (!slug) {
     return {
       title: 'Location Not Found | TryangleTech',
@@ -40,8 +39,8 @@ export async function generateMetadata({ params, searchParams }: LocationPagePro
     };
   }
 
-  const resolvedSearchParams = searchParams && typeof (searchParams as any).then === 'function' ? await searchParams : (searchParams || {});
-  const isPreview = resolvedSearchParams?.preview === 'true';
+  const sParams = searchParams ? await searchParams : {};
+  const isPreview = sParams?.preview === 'true';
   const location = await geoService.getLocationBySlug(slug, isPreview);
 
   if (!location) {
@@ -58,14 +57,13 @@ export async function generateMetadata({ params, searchParams }: LocationPagePro
  * Location-Targeted Programmatic Home Page Clone
  */
 export default async function LocationPage({ params, searchParams }: LocationPageProps) {
-  const resolvedParams = params && typeof (params as any).then === 'function' ? await params : params;
-  const slug = resolvedParams?.slug;
+  const { slug } = await params;
   if (!slug) {
     notFound();
   }
 
-  const resolvedSearchParams = searchParams && typeof (searchParams as any).then === 'function' ? await searchParams : (searchParams || {});
-  const isPreview = resolvedSearchParams?.preview === 'true';
+  const sParams = searchParams ? await searchParams : {};
+  const isPreview = sParams?.preview === 'true';
   const location = await geoService.getLocationBySlug(slug, isPreview);
 
   if (!location) {

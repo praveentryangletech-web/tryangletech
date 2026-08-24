@@ -189,7 +189,10 @@ export default function AboutProcessTab({ process, setProcess, onOpenAssetPicker
                 value={step.icon}
                 onChange={(val) => handleUpdateStep(idx, 'icon', val)}
                 onOpenAssetPicker={() => onOpenAssetPicker(`aboutProcessIcon_${idx}`)}
-                previewHeight="65px"
+                previewHeight={48}
+                previewWidth={48}
+                shape="square"
+                recommendedDimensions="48 x 48 (SVG/PNG)"
               />
 
               <div>

@@ -80,16 +80,15 @@ class MediaService {
           "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
-        ALTER TABLE "MediaAsset" ADD COLUMN IF NOT EXISTS "altText" TEXT DEFAULT '';
       `);
 
       try {
-        await db.$executeRawUnsafe(`
-          CREATE INDEX IF NOT EXISTS "idx_mediaasset_filename" ON "MediaAsset" ("filename")
-        `);
-      } catch {
-        // Index is non-blocking
-      }
+        await db.$executeRawUnsafe(`ALTER TABLE "MediaAsset" ADD COLUMN IF NOT EXISTS "altText" TEXT DEFAULT '';`);
+      } catch {}
+
+      try {
+        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_mediaasset_filename" ON "MediaAsset" ("filename");`);
+      } catch {}
 
       this.tableInitialized = true;
     } catch (err) {

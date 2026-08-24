@@ -112,13 +112,14 @@ export default function HomeImageUploadField({
   const isImg = Boolean(value && (value.startsWith('/') || value.startsWith('http') || value.startsWith('data:')));
 
   const borderRadius = shape === 'round' ? '50%' : '8px';
-  const parsedHeight = typeof previewHeight === 'number' ? `${previewHeight}px` : (String(previewHeight).match(/(px|%|rem|em)$/) ? String(previewHeight) : `${previewHeight}px`);
-  const parsedWidth = typeof previewWidth === 'number' ? `${previewWidth}px` : (String(previewWidth).match(/(px|%|rem|em)$/) ? String(previewWidth) : `${previewWidth}px`);
+  const defaultDim = shape === 'square' ? 52 : (shape === 'round' ? 52 : 64);
+  const parsedHeight = typeof previewHeight === 'number' ? `${previewHeight}px` : (previewHeight ? String(previewHeight) : `${defaultDim}px`);
+  const parsedWidth = typeof previewWidth === 'number' ? `${previewWidth}px` : (previewWidth ? String(previewWidth) : (shape === 'square' || shape === 'round' ? parsedHeight : '80px'));
   const displayWidth = shape === 'round' ? parsedHeight : parsedWidth;
   const displayHeight = parsedHeight;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155' }}>
           {label}
@@ -156,12 +157,14 @@ export default function HomeImageUploadField({
       )}
 
       {/* Main Image Control Row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', width: '100%' }}>
         {/* Preview Thumbnail */}
         <div
           style={{
             width: displayWidth,
             height: displayHeight,
+            minWidth: displayWidth,
+            minHeight: displayHeight,
             borderRadius: borderRadius,
             border: '1px solid #CBD5E1',
             backgroundColor: '#F8FAFC',
@@ -172,6 +175,8 @@ export default function HomeImageUploadField({
             justifyContent: 'center',
             position: 'relative',
             boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+            padding: '4px',
+            boxSizing: 'border-box',
           }}
         >
           {isImg ? (
@@ -179,7 +184,13 @@ export default function HomeImageUploadField({
             <img
               src={value}
               alt="Preview"
-              style={{ width: '100%', height: '100%', objectFit: shape === 'round' ? 'cover' : 'contain' }}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+              }}
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
                 if (value.includes('/portfolio/') && !img.src.includes('/api/media/')) {
@@ -189,7 +200,7 @@ export default function HomeImageUploadField({
               }}
             />
           ) : (
-            <span style={{ fontSize: '0.675rem', color: '#94A3B8', fontWeight: 600, textAlign: 'center', padding: '2px' }}>
+            <span style={{ fontSize: '0.65rem', color: '#94A3B8', fontWeight: 600, textAlign: 'center', padding: '2px' }}>
               No image
             </span>
           )}
@@ -221,7 +232,7 @@ export default function HomeImageUploadField({
         </div>
 
         {/* Input & Action Buttons */}
-        <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <input
               type="text"

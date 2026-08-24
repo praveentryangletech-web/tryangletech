@@ -708,7 +708,7 @@ function BlogEditorInner() {
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1rem',
+          gap: '10px',
           marginBottom: '1.25rem',
         }}
       >
@@ -718,21 +718,21 @@ function BlogEditorInner() {
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
-            height: '42px',
-            padding: '0 18px',
-            borderRadius: '10px',
-            border: '1.5px solid #BFDBFE',
-            backgroundColor: '#EFF6FF',
-            color: '#1833FE',
-            fontSize: '0.875rem',
+            gap: '6px',
+            height: '38px',
+            padding: '0 14px',
+            borderRadius: '8px',
+            border: '1px solid #CBD5E1',
+            backgroundColor: '#FFFFFF',
+            color: '#334155',
+            fontSize: '0.825rem',
             fontWeight: 700,
             textDecoration: 'none',
             boxSizing: 'border-box',
             transition: 'all 0.15s ease',
           }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
           </svg>
@@ -740,7 +740,7 @@ function BlogEditorInner() {
         </Link>
 
         {/* Top Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           {isEditMode && slug && (
             <a
               href={published ? `/blog/${slug}` : `/blog/${slug}?preview=true`}
@@ -750,46 +750,45 @@ function BlogEditorInner() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '7px',
-                height: '42px',
-                padding: '0 18px',
-                borderRadius: '10px',
-                border: published ? '1.5px solid #BFDBFE' : '1.5px solid #FCD34D',
-                backgroundColor: published ? '#EFF6FF' : '#FEF3C7',
-                color: published ? '#1833FE' : '#92400E',
-                fontSize: '0.875rem',
+                gap: '6px',
+                height: '38px',
+                padding: '0 14px',
+                borderRadius: '8px',
+                border: '1px solid #CBD5E1',
+                backgroundColor: '#FFFFFF',
+                color: '#334155',
+                fontSize: '0.825rem',
                 fontWeight: 700,
                 textDecoration: 'none',
                 boxSizing: 'border-box',
                 transition: 'all 0.15s ease',
               }}
             >
-              <span>{published ? 'View Live' : 'Preview Draft'}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
+              <span>{published ? 'View Live' : 'Preview Draft'}</span>
             </a>
           )}
 
           <Link
             href="/superadmin/blog"
             style={{
-              height: '42px',
-              padding: '0 20px',
-              borderRadius: '10px',
-              border: '1.5px solid #CBD5E1',
+              height: '38px',
+              padding: '0 16px',
+              borderRadius: '8px',
+              border: '1px solid #CBD5E1',
               backgroundColor: '#FFFFFF',
-              color: '#475569',
-              fontSize: '0.875rem',
+              color: '#334155',
+              fontSize: '0.825rem',
               fontWeight: 700,
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               boxSizing: 'border-box',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               transition: 'all 0.15s ease',
             }}
           >
@@ -804,17 +803,18 @@ function BlogEditorInner() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
-              height: '42px',
-              padding: '0 24px',
-              borderRadius: '10px',
-              border: '1.5px solid #BFDBFE',
-              backgroundColor: '#EFF6FF',
-              color: '#1833FE',
-              fontSize: '0.875rem',
+              gap: '6px',
+              height: '38px',
+              padding: '0 20px',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: 'var(--brand-blue, #1833fe)',
+              color: '#FFFFFF',
+              fontSize: '0.85rem',
               fontWeight: 700,
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              boxSizing: 'border-box',
+              boxShadow: '0 4px 12px rgba(24, 51, 254, 0.25)',
+              opacity: isSubmitting ? 0.7 : 1,
               transition: 'all 0.15s ease',
             }}
           >
@@ -822,152 +822,100 @@ function BlogEditorInner() {
               <>
                 <span
                   style={{
-                    width: '14px',
-                    height: '14px',
-                    border: '2px solid #1833FE',
+                    width: '13px',
+                    height: '13px',
+                    border: '2px solid #FFFFFF',
                     borderTopColor: 'transparent',
                     borderRadius: '50%',
                     display: 'inline-block',
                     animation: 'spin 0.8s linear infinite',
                   }}
                 />
-                <span>{isEditMode ? 'Updating Article...' : 'Publishing Article...'}</span>
+                <span>{isEditMode ? 'Updating...' : 'Publishing...'}</span>
               </>
             ) : (
-              <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                </svg>
-                <span>{isEditMode ? 'Update Article' : 'Publish Article'}</span>
-              </>
+              <span>{isEditMode ? 'Update Article' : 'Publish Article'}</span>
             )}
           </button>
         </div>
       </div>
 
-      {/* Title & Metadata Status Bar */}
-      <div style={{ marginBottom: '1.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 900, color: 'var(--dark-indigo, #1a0b54)', letterSpacing: '-0.02em' }}>
-            {isEditMode ? `Edit Article: ${title || 'Untitled'}` : 'Create New Blog Article'}
-          </h1>
-          <span
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              padding: '4px 10px',
-              borderRadius: '6px',
-              backgroundColor: published ? '#ECFDF5' : '#FEF3C7',
-              color: published ? '#047857' : '#B45309',
-              border: `1px solid ${published ? '#A7F3D0' : '#FDE68A'}`,
-            }}
-          >
-            {published ? '● Live Published' : '● Draft Mode'}
-          </span>
-        </div>
-        <p style={{ margin: '6px 0 0', fontSize: '0.875rem', color: '#64748B' }}>
-          {isEditMode
-            ? `Editing database record: ${title || 'Article'} • Category: ${category}`
-            : 'Configure section-wise content, media showcase, draft status, and SEO.'}
-        </p>
-      </div>
-
       {/* Notifications */}
       {errorMessage && (
-        <div style={{ padding: '0.875rem 1.25rem', backgroundColor: '#FEF2F2', border: '1px solid #F87171', color: '#991B1B', borderRadius: '12px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.875rem', fontWeight: 600 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
-          <span>{errorMessage}</span>
-        </div>
-      )}
-      {successMessage && (
-        <div style={{ padding: '0.875rem 1.25rem', backgroundColor: '#ECFDF5', border: '1px solid #34D399', color: '#065F46', borderRadius: '12px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.875rem', fontWeight: 600 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <span>{successMessage}</span>
+        <div
+          style={{
+            padding: '10px 16px',
+            backgroundColor: '#FEF2F2',
+            border: '1px solid #F87171',
+            color: '#991B1B',
+            borderRadius: '8px',
+            fontSize: '0.825rem',
+            fontWeight: 600,
+            marginBottom: '1.25rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span>⚠ {errorMessage}</span>
         </div>
       )}
 
-      {/* 2. Modern Segmented Tab Navigation Bar */}
+      {successMessage && (
+        <div
+          style={{
+            padding: '10px 16px',
+            backgroundColor: '#ECFDF5',
+            border: '1px solid #34D399',
+            color: '#065F46',
+            borderRadius: '8px',
+            fontSize: '0.825rem',
+            fontWeight: 600,
+            marginBottom: '1.25rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span>✓ {successMessage}</span>
+        </div>
+      )}
+
+      {/* 2. Unified Segmented Pill Tab Navigation Bar */}
       <div
         className="no-scrollbar"
         style={{
           display: 'flex',
-          backgroundColor: 'transparent',
-          padding: '0 0 1rem 0',
-          borderBottom: '1.5px solid #CBD5E1',
-          marginBottom: '2rem',
           gap: '6px',
           overflowX: 'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
+          paddingBottom: '6px',
+          marginBottom: '20px',
+          borderBottom: '1.5px solid #CBD5E1',
         }}
       >
         {[
           {
             key: 'general',
-            label: 'General & Author',
-            icon: (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-              </svg>
-            ),
+            label: '1. General & Author',
           },
           {
             key: 'media',
-            label: 'Media Showcase',
-            icon: (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <polyline points="21 15 16 10 5 21" />
-              </svg>
-            ),
+            label: '2. Media Showcase',
             badge: sliderImages.length > 0 ? `${sliderImages.length}` : undefined,
           },
           {
             key: 'narrative',
-            label: 'Story & Sections',
-            icon: (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-              </svg>
-            ),
+            label: '3. Story & Sections',
             badge: '6 Sections',
           },
           {
             key: 'seo',
-            label: 'SEO & Search Engine',
-            icon: (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z" />
-              </svg>
-            ),
+            label: '4. SEO & Search Engine',
             badge: 'SERP Live',
           },
           {
             key: 'faqs',
-            label: 'Dynamic FAQs',
-            icon: (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <line x1="12" y1="17" x2="12.01" y2="17" />
-              </svg>
-            ),
+            label: '5. Dynamic FAQs',
             badge: faqs.length > 0 ? `${faqs.length} FAQs` : undefined,
           },
         ].map((tab) => {
@@ -978,33 +926,29 @@ function BlogEditorInner() {
               type="button"
               onClick={() => setActiveTab(tab.key as any)}
               style={{
-                flex: '1 1 auto',
-                padding: '10px 16px',
+                padding: '8px 16px',
                 borderRadius: '8px',
                 border: 'none',
-                backgroundColor: 'transparent',
-                color: isActive ? '#1833FE' : '#64748B',
-                fontWeight: isActive ? 700 : 500,
-                fontSize: '0.875rem',
+                backgroundColor: isActive ? 'var(--brand-blue, #1833fe)' : 'transparent',
+                color: isActive ? '#FFFFFF' : '#64748B',
+                fontWeight: isActive ? 800 : 600,
+                fontSize: '0.825rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
+                gap: '6px',
                 transition: 'all 0.15s ease',
                 whiteSpace: 'nowrap',
               }}
             >
-              {tab.icon}
               <span>{tab.label}</span>
               {tab.badge && (
                 <span
                   style={{
-                    fontSize: '0.725rem',
-                    backgroundColor: isActive ? '#EFF6FF' : '#F1F5F9',
-                    color: isActive ? '#1833FE' : '#64748B',
-                    border: isActive ? '1px solid #BFDBFE' : '1px solid transparent',
-                    padding: '2px 8px',
+                    fontSize: '0.7rem',
+                    backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : '#F1F5F9',
+                    color: isActive ? '#FFFFFF' : '#64748B',
+                    padding: '1px 6px',
                     borderRadius: '10px',
                     fontWeight: 700,
                     transition: 'all 0.15s ease',
@@ -1024,8 +968,8 @@ function BlogEditorInner() {
         {activeTab === 'general' && (
           <div style={{ backgroundColor: 'transparent', borderRadius: '20px', border: 'none', padding: '0.5rem 0', minHeight: '560px', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
             <div>
-              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
-                Article Identity & Meta Information
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
+                Section 1: Article Identity & Meta Information
               </h3>
               <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748B' }}>
                 Configure core title, category assignment, author details, read time, and publication metadata.

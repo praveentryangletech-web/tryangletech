@@ -176,7 +176,10 @@ export default function AboutWhyChooseUsTab({ whyChooseUs, setWhyChooseUs, onOpe
                 value={item.icon}
                 onChange={(val) => handleUpdateItem(idx, 'icon', val)}
                 onOpenAssetPicker={() => onOpenAssetPicker(`aboutWcuIcon_${idx}`)}
-                previewHeight="65px"
+                previewHeight={48}
+                previewWidth={48}
+                shape="square"
+                recommendedDimensions="48 x 48 (SVG/PNG)"
               />
 
               <div>

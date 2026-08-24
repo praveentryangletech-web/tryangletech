@@ -116,10 +116,10 @@ function ensureColumnsExist(): void {
         ALTER TABLE "PortfolioProject" 
           ADD COLUMN IF NOT EXISTS "imageAlt" TEXT,
           ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];
-        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_order_created" ON "PortfolioProject" ("order" ASC, "createdAt" DESC);
-        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_cat" ON "PortfolioProject" ("category");
-        CREATE INDEX IF NOT EXISTS "idx_portfolioproject_slug" ON "PortfolioProject" ("slug");
       `);
+      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_portfolioproject_order_created" ON "PortfolioProject" ("order" ASC, "createdAt" DESC);`);
+      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_portfolioproject_cat" ON "PortfolioProject" ("category");`);
+      await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_portfolioproject_slug" ON "PortfolioProject" ("slug");`);
     } catch (_) {}
   })().catch(() => {});
 }

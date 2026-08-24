@@ -19,15 +19,43 @@ export default function SuperadminLoginPage() {
   const [touched, setTouched] = useState<{ email?: boolean; password?: boolean }>({});
   const [shakeForm, setShakeForm] = useState(false);
 
+  // Frontend SQL Injection detector
+  const SQL_INJECTION_PATTERNS = [
+    /(\b(SELECT|UNION|INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|EXEC|EXECUTE|TRUNCATE|DECLARE|WAITFOR|BENCHMARK|SLEEP)\b)/i,
+    /(--|\/\*|\*\/|@@|char\s*\(|nchar\s*\(|varchar\s*\(|nvarchar\s*\()/i,
+    /((\bOR\b|\bAND\b)\s+['"\d\w]+\s*=\s*['"\d\w]+)/i,
+    /((\bOR\b|\bAND\b)\s+true\b)/i,
+    /('|\")\s*(OR|AND)\s*('|\")?\d+('|\")?\s*=\s*('|\")?\d+/i,
+    /('|\")\s*--/i,
+    /(;\s*(DROP|SELECT|INSERT|UPDATE|DELETE|ALTER|EXEC))/i,
+    /(['"`]\s*;\s*--)/i,
+    /(\bUNION\s+(ALL\s+)?SELECT\b)/i,
+    /(\b0x[0-9a-fA-F]{4,})/i,
+  ];
+
+  const hasSqlInjection = (val: string): boolean => {
+    if (!val) return false;
+    try {
+      const decoded = decodeURIComponent(val);
+      return SQL_INJECTION_PATTERNS.some((pattern) => pattern.test(decoded) || pattern.test(val));
+    } catch {
+      return SQL_INJECTION_PATTERNS.some((pattern) => pattern.test(val));
+    }
+  };
+
   // Email format validator
   const validateEmailFormat = (val: string): string => {
     const trimmed = val.trim();
     if (!trimmed) {
       return 'Email address is required.';
     }
+    // Check for SQL injection patterns
+    if (hasSqlInjection(trimmed)) {
+      return 'Disallowed characters or SQL commands detected in email.';
+    }
     // Check for stray quotes or illegal characters
-    if (/['"`]/.test(trimmed)) {
-      return 'Email cannot contain quotes or stray punctuation.';
+    if (/['"`;\\]/.test(trimmed)) {
+      return 'Email cannot contain quotes, semicolons, or backslashes.';
     }
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(trimmed)) {
@@ -40,6 +68,10 @@ export default function SuperadminLoginPage() {
   const validatePasswordFormat = (val: string): string => {
     if (!val) {
       return 'Password is required.';
+    }
+    // Check for SQL injection patterns
+    if (hasSqlInjection(val)) {
+      return 'Disallowed characters or SQL commands detected in password.';
     }
     if (val.length < 4) {
       return 'Password must be at least 4 characters.';

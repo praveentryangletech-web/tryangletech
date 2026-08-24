@@ -49,3 +49,5 @@ out
 .cache
 .git
 .antigravity/
+prisma.config.ts
+prisma.config.js

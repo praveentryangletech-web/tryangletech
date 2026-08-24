@@ -2,10 +2,20 @@ import React from "react";
 import { Metadata } from "next";
 import WebflowInit from "../common/WebflowInit";
 import PortfolioHero from "./components/PortfolioHero";
-import PortfolioGrid, { DEFAULT_CATEGORIES } from "./components/PortfolioGrid";
+import PortfolioGrid from "./components/PortfolioGrid";
 import HomeThreeFaq from "../home-three/components/Faq";
 import HomeTwoTestimonial from "../home-two/components/HomeTwoTestimonial";
 import { portfolioCategoryService, portfolioService } from "@/backend/services/portfolio";
+
+const DEFAULT_CATEGORIES = [
+  "All",
+  "Business Website",
+  "E-Commerce",
+  "Landing Website",
+  "Mobile Application",
+  "Custom Software",
+  "Graphic Design",
+];
 
 export const revalidate = 60;
 

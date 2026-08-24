@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Tooltip from '../components/Tooltip';
+import { convertFileToWebp } from '../utils/imageOptimizer';
 
 interface MediaAsset {
   filename: string;
@@ -72,9 +73,12 @@ export default function AssetManagementPage() {
     setVisibleCount(INITIAL_BATCH);
   }, [searchQuery, sortBy]);
 
-  const handleSelectFile = (files: FileList | null) => {
+  const handleSelectFile = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
-    const file = files[0];
+    const rawFile = files[0];
+
+    // Automatically convert any PNG, JPG, JPEG, BMP to lightweight WebP format
+    const file = await convertFileToWebp(rawFile);
     setSelectedFile(file);
 
     const lastDot = file.name.lastIndexOf('.');

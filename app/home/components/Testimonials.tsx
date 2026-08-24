@@ -57,7 +57,7 @@ export default function Testimonials({ testimonials: testimonialsProp }: Testimo
                                 <Image
                                   src={t.image}
                                   loading="lazy"
-                                  alt={t.name} width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                                  alt={t.imageAlt || t.name} width={800} height={800} style={{ width: "100%", height: "auto" }} />
                               </div>
                               <div className="rt-testimonials-v1-item-top-right">
                                 <div>

@@ -33,7 +33,7 @@ export default function About({ about: aboutProp }: AboutProps) {
               <Image
                 src={about.image1 || "/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"}
                 loading="lazy"
-                alt=""
+                alt={about.image1Alt || "TryangleTech Enterprise Development Team"}
                 className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
             <div
@@ -42,7 +42,7 @@ export default function About({ about: aboutProp }: AboutProps) {
               <Image
                 src={about.image2 || "/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"}
                 loading="lazy"
-                alt="taskopia-hero-one-dashbord-daily"
+                alt={about.image2Alt || "TryangleTech Project Workflow Statistics"}
                 className="rt-width-height-full"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
             </div>
           </div>

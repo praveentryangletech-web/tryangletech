@@ -78,6 +78,7 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         subheadline: geo.hero?.subheadline || geo.subheadline || content.hero.subheadline,
         subBadgeText: geo.hero?.subBadgeText || `SERVING ${geo.city.toUpperCase()}`,
         dashboardImage: geo.hero?.dashboardImage || content.hero.dashboardImage,
+        dashboardImageAlt: geo.hero?.dashboardImageAlt || content.hero.dashboardImageAlt,
         avatars: geo.hero?.avatars || content.hero.avatars,
         ctaText: geo.hero?.ctaText || content.hero.ctaText,
         ctaLink: geo.hero?.ctaLink || content.hero.ctaLink,
@@ -91,7 +92,9 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         description: geo.about?.description || geo.aboutText || content.about.description,
         headingHighlight: geo.about?.headingHighlight || `${geo.city} & Global Markets`,
         image1: geo.about?.image1 || content.about.image1,
+        image1Alt: geo.about?.image1Alt || content.about.image1Alt,
         image2: geo.about?.image2 || content.about.image2,
+        image2Alt: geo.about?.image2Alt || content.about.image2Alt,
       }
     : content.about;
 

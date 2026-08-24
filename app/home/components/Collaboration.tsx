@@ -112,7 +112,7 @@ export default function Collaboration({ howWeWork: howWeWorkProp }: Collaboratio
                     <Image
                       src={howWeWork.image1 || "/Taskopia_files/68f21b4dc6a06a6abe39c79b_taskopia-Collaboration-one.webp"}
                       loading="lazy"
-                      alt="Collaboration Feature 1"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      alt={howWeWork.image1Alt || "Collaboration Feature 1"}  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div
                     data-w-id="6e37c1de-f32a-f8b2-a948-1302911adaed"
@@ -121,7 +121,7 @@ export default function Collaboration({ howWeWork: howWeWorkProp }: Collaboratio
                     <Image
                       src={howWeWork.image2 || "/Taskopia_files/68f21b3af8e5e0af23ce678d_taskopia-Collaboration-two.webp"}
                       loading="lazy"
-                      alt="Collaboration Feature 2"  width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                      alt={howWeWork.image2Alt || "Collaboration Feature 2"}  width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div
@@ -133,7 +133,7 @@ export default function Collaboration({ howWeWork: howWeWorkProp }: Collaboratio
                     loading="lazy"
                     width={466}
                     height={800}
-                    alt="Collaboration Overview"
+                    alt={howWeWork.image3Alt || "Collaboration Overview"}
                     style={{ width: "100%", height: "auto" }}
                   />
                 </div>

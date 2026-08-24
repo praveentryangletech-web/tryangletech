@@ -112,6 +112,8 @@ export default function HeroTab({ hero, setHero, onOpenAssetPicker }: HeroTabPro
           value={hero.dashboardImage || ''}
           onChange={(url) => setHero({ ...hero, dashboardImage: url })}
           onOpenAssetPicker={() => onOpenAssetPicker('hero.dashboardImage')}
+          altValue={hero.dashboardImageAlt || ''}
+          onAltChange={(alt) => setHero({ ...hero, dashboardImageAlt: alt })}
           placeholder="/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif or https://..."
           previewWidth={120}
           previewHeight={72}

@@ -57,7 +57,7 @@ export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseU
                       loading="lazy"
                       width={19}
                       height={100}
-                      alt=""
+                      alt={item1.title || "Fair Pricing Icon"}
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
@@ -77,18 +77,18 @@ export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseU
                   style={{ "opacity": "0" }}>
                   <div className="rt-why-choose-v1-icon">
                     <Image
-                      src="/Taskopia_files/6916f00db3051e5aed09bd3f_Group 2085663576.svg"
+                      src={item2.icon || "/Taskopia_files/6916f00db3051e5aed09bd3f_Group 2085663576.svg"}
                       loading="lazy"
                       width={100}
                       height={100}
-                      alt=""
+                      alt={item2.title || "On Time Delivery Icon"}
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    We deliver on time
+                    {item2.title}
                   </div>
                   <p className="rt-gap-off">
-                    When we quote a timeline, we stick to it - 2 to 4 weeks for a website, 4 to 8 for custom software. You'll get regular updates along the way.
+                    {item2.description}
                   </p>
                 </div>
               </div>
@@ -97,9 +97,9 @@ export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseU
                 style={{ "opacity": "0" }}
                 className="rt-why-choose-v1-center">
                 <Image
-                  src="/Taskopia_files/691ecfdec4425f741cb80fc8_tasopiya-home-one-hande.webp"
+                  src={whyChooseUs.centerImage || "/Taskopia_files/691ecfdec4425f741cb80fc8_tasopiya-home-one-hande.webp"}
                   loading="lazy"
-                  alt="" width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  alt={whyChooseUs.centerImageAlt || "Why Choose TryangleTech"} width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div className="rt-why-choose-v1-left">
                 <div
@@ -108,18 +108,18 @@ export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseU
                   style={{ "opacity": "0" }}>
                   <div className="rt-why-choose-v1-icon">
                     <Image
-                      src="/Taskopia_files/6916ec635353353be914aafc_Vector (32).svg"
+                      src={item3.icon || "/Taskopia_files/6916ec635353353be914aafc_Vector (32).svg"}
                       loading="lazy"
                       width={19}
                       height={100}
-                      alt=""
+                      alt={item3.title || "Comprehensive Services Icon"}
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Everything under one roof
+                    {item3.title}
                   </div>
                   <p className="rt-gap-off">
-                    Web development, mobile apps, custom software, marketing, and design - all from one team in Ahmedabad. No juggling five vendors for one project.
+                    {item3.description}
                   </p>
                 </div>
                 <div
@@ -132,18 +132,18 @@ export default function WhyChooseUs({ whyChooseUs: whyChooseUsProp }: WhyChooseU
                   style={{ "opacity": "0" }}>
                   <div className="rt-why-choose-v1-icon">
                     <Image
-                      src="/Taskopia_files/6916ec6339f890a80905a69b_Vector (33).svg"
+                      src={item4.icon || "/Taskopia_files/6916ec6339f890a80905a69b_Vector (33).svg"}
                       loading="lazy"
                       width={100}
                       height={100}
-                      alt=""
+                      alt={item4.title || "Communication Icon"}
                       className="rt-why-choose-icon" />
                   </div>
                   <div className="rt-text-style-h6 rt-small-heading-para-gap">
-                    Easy to work with
+                    {item4.title}
                   </div>
                   <p className="rt-gap-off">
-                    You share feedback, we make the changes - simple as that. No complicated tools, no waiting days for a reply. Just one point of contact.
+                    {item4.description}
                   </p>
                 </div>
               </div>

@@ -36,7 +36,9 @@ export interface HomeAboutSection {
   ctaText: string;
   ctaLink: string;
   image1?: string;
+  image1Alt?: string;
   image2?: string;
+  image2Alt?: string;
 }
 
 export interface HomeWhyChooseUsItem {
@@ -52,6 +54,7 @@ export interface HomeWhyChooseUsSection {
   headingHighlight?: string;
   items: HomeWhyChooseUsItem[];
   centerImage: string;
+  centerImageAlt?: string;
 }
 
 export interface HomeHowWeWorkItem {
@@ -70,8 +73,11 @@ export interface HomeHowWeWorkSection {
   ctaText: string;
   ctaLink: string;
   image1?: string;
+  image1Alt?: string;
   image2?: string;
+  image2Alt?: string;
   image3?: string;
+  image3Alt?: string;
 }
 
 export interface HomeTechItem {
@@ -89,6 +95,7 @@ export interface HomeTestimonialItem {
   company?: string;
   review?: string;
   image: string;
+  imageAlt?: string;
   rating?: number;
 }
 
@@ -100,6 +107,7 @@ export interface HomeCtaBannerSection {
   buttonText: string;
   buttonLink: string;
   image?: string;
+  imageAlt?: string;
   contactEmail?: string;
   contactPhone?: string;
 }

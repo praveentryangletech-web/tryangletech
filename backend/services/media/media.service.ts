@@ -122,7 +122,7 @@ class MediaService {
   }
 
   /**
-   * Clean and sanitize target filename
+   * Clean and sanitize target filename (automatically converts image extensions to .webp)
    */
   public sanitizeFilename(originalName: string, customName?: string): string {
     const ext = path.extname(originalName).toLowerCase();
@@ -136,11 +136,12 @@ class MediaService {
       .replace(/^-|-$/g, '');
 
     const safeBase = cleanName || 'portfolio-asset';
-    return `${safeBase}${ext}`;
+    const targetExt = ext === '.svg' ? '.svg' : '.webp';
+    return `${safeBase}${targetExt}`;
   }
 
   /**
-   * Uploads file buffer directly to Cloudinary via REST API
+   * Uploads file buffer directly to Cloudinary via REST API (automatically converting to WebP)
    */
   private async uploadToCloudinary(
     buffer: Buffer,
@@ -153,18 +154,20 @@ class MediaService {
 
     const timestamp = Math.floor(Date.now() / 1000);
     const baseName = path.basename(filename, path.extname(filename));
+    const isSvg = mimeType === 'image/svg+xml' || filename.toLowerCase().endsWith('.svg');
 
     const signParams: Record<string, any> = {
       folder: CLOUDINARY_FOLDER,
       overwrite: 'true',
       public_id: baseName,
       timestamp: timestamp.toString(),
+      ...(isSvg ? {} : { format: 'webp' }),
     };
 
     const signature = this.generateSignature(signParams);
 
     const formData = new FormData();
-    const blob = new Blob([new Uint8Array(buffer)], { type: mimeType });
+    const blob = new Blob([new Uint8Array(buffer)], { type: isSvg ? mimeType : 'image/webp' });
     formData.append('file', blob, filename);
     formData.append('api_key', this.apiKey);
     formData.append('timestamp', timestamp.toString());
@@ -172,6 +175,9 @@ class MediaService {
     formData.append('folder', CLOUDINARY_FOLDER);
     formData.append('public_id', baseName);
     formData.append('overwrite', 'true');
+    if (!isSvg) {
+      formData.append('format', 'webp');
+    }
 
     const res = await fetch(`https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`, {
       method: 'POST',

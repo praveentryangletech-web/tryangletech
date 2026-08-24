@@ -106,6 +106,8 @@ export default function CtaBannerTab({
           value={ctaBanner.image || ''}
           onChange={(url) => setCtaBanner({ ...ctaBanner, image: url })}
           onOpenAssetPicker={() => onOpenAssetPicker('ctaBanner.image')}
+          altValue={ctaBanner.imageAlt || ''}
+          onAltChange={(alt) => setCtaBanner({ ...ctaBanner, imageAlt: alt })}
           placeholder="Image URL (optional)"
           previewWidth={80}
           previewHeight={60}

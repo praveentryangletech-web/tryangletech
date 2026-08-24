@@ -108,6 +108,12 @@ export default function TestimonialsTab({
                 setTestimonials(copy);
               }}
               onOpenAssetPicker={() => onOpenAssetPicker(`testimonials.${tIdx}.image`)}
+              altValue={t.imageAlt || ''}
+              onAltChange={(alt) => {
+                const copy = [...testimonials];
+                copy[tIdx] = { ...copy[tIdx], imageAlt: alt };
+                setTestimonials(copy);
+              }}
               placeholder="Photo URL (e.g. /Taskopia_files/690db2077e68fa707530663f_test-1.webp)"
               previewWidth={50}
               previewHeight={50}

@@ -1,12 +1,15 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import { convertFileToWebp } from '@/app/superadmin/utils/imageOptimizer';
 
 interface HomeImageUploadFieldProps {
   label: string;
   value: string;
   onChange: (val: string) => void;
   onOpenAssetPicker: () => void;
+  altValue?: string;
+  onAltChange?: (alt: string) => void;
   placeholder?: string;
   previewHeight?: number;
   previewWidth?: number;
@@ -20,6 +23,8 @@ export default function HomeImageUploadField({
   value,
   onChange,
   onOpenAssetPicker,
+  altValue,
+  onAltChange,
   placeholder = '/Taskopia_files/... or https://...',
   previewHeight = 64,
   previewWidth = 96,
@@ -34,10 +39,13 @@ export default function HomeImageUploadField({
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    const file = files[0];
+    const rawFile = files[0];
 
     setIsUploading(true);
     setUploadError(null);
+
+    // Automatically convert any PNG, JPG, JPEG, BMP to lightweight WebP format
+    const file = await convertFileToWebp(rawFile);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -51,6 +59,15 @@ export default function HomeImageUploadField({
       .replace(/^-|-$/g, '');
 
     formData.append('customName', cleanBase || 'home-media');
+
+    // Auto-suggest initial Alt text if currently empty
+    if (onAltChange && !altValue && cleanBase) {
+      const suggestedAlt = cleanBase
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+      onAltChange(suggestedAlt);
+    }
 
     const headers: Record<string, string> = {};
     const adminKey = process.env.NEXT_PUBLIC_ADMIN_API_KEY || '';
@@ -245,6 +262,43 @@ export default function HomeImageUploadField({
               </button>
             )}
           </div>
+
+          {/* SEO Image Alt Text Input Field */}
+          {onAltChange && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  fontSize: '0.74rem',
+                  fontWeight: 700,
+                  color: '#475569',
+                  whiteSpace: 'nowrap',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
+              >
+                🏷️ Alt Text:
+              </span>
+              <input
+                type="text"
+                placeholder="SEO image description (e.g. TryangleTech Cloud Dashboard Overview)"
+                value={altValue || ''}
+                onChange={(e) => onAltChange(e.target.value)}
+                style={{
+                  flex: 1,
+                  padding: '0.45rem 0.75rem',
+                  borderRadius: '6px',
+                  border: '1px solid #CBD5E1',
+                  backgroundColor: '#F8FAFC',
+                  fontSize: '0.78rem',
+                  color: '#1E293B',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                  fontFamily: 'inherit',
+                }}
+              />
+            </div>
+          )}
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             {/* Hidden File Input */}

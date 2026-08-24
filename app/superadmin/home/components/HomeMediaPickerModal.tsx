@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
+import { convertFileToWebp } from '@/app/superadmin/utils/imageOptimizer';
 
 export interface MediaAssetItem {
   filename: string;
@@ -56,10 +57,13 @@ export default function HomeMediaPickerModal({
   const handleModalUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    const file = files[0];
+    const rawFile = files[0];
 
     setIsUploading(true);
     setUploadError(null);
+
+    // Automatically convert any PNG, JPG, JPEG, BMP to lightweight WebP format
+    const file = await convertFileToWebp(rawFile);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -337,7 +341,7 @@ export default function HomeMediaPickerModal({
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={asset.url}
-                      alt={asset.filename}
+                      alt={asset.altText || asset.filename}
                       loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => {

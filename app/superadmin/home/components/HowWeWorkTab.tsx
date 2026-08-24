@@ -174,7 +174,9 @@ export default function HowWeWorkTab({
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           {[1, 2, 3].map((num) => {
             const key = `image${num}` as 'image1' | 'image2' | 'image3';
+            const altKey = `image${num}Alt` as 'image1Alt' | 'image2Alt' | 'image3Alt';
             const val = howWeWork[key] || '';
+            const altVal = howWeWork[altKey] || '';
             return (
               <HomeImageUploadField
                 key={num}
@@ -182,6 +184,8 @@ export default function HowWeWorkTab({
                 value={val}
                 onChange={(url) => setHowWeWork({ ...howWeWork, [key]: url })}
                 onOpenAssetPicker={() => onOpenAssetPicker(`howWeWork.${key}`)}
+                altValue={altVal}
+                onAltChange={(alt) => setHowWeWork({ ...howWeWork, [altKey]: alt })}
                 placeholder="Graphic URL"
                 previewWidth={60}
                 previewHeight={60}

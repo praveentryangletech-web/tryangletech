@@ -100,6 +100,8 @@ export default function AboutTab({ about, setAbout, onOpenAssetPicker }: AboutTa
             value={about.image1 || ''}
             onChange={(url) => setAbout({ ...about, image1: url })}
             onOpenAssetPicker={() => onOpenAssetPicker('about.image1')}
+            altValue={about.image1Alt || ''}
+            onAltChange={(alt) => setAbout({ ...about, image1Alt: alt })}
             placeholder="/Taskopia_files/68ef7bedcf795a787addad8c_Group 2085663562.webp"
             previewWidth={80}
             previewHeight={80}
@@ -112,6 +114,8 @@ export default function AboutTab({ about, setAbout, onOpenAssetPicker }: AboutTa
             value={about.image2 || ''}
             onChange={(url) => setAbout({ ...about, image2: url })}
             onOpenAssetPicker={() => onOpenAssetPicker('about.image2')}
+            altValue={about.image2Alt || ''}
+            onAltChange={(alt) => setAbout({ ...about, image2Alt: alt })}
             placeholder="/Taskopia_files/68ef7bed775c847e27d93569_Group 2085663563.webp"
             previewWidth={80}
             previewHeight={80}

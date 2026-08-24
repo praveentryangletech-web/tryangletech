@@ -7,8 +7,7 @@ import HomeThreeFaq from "../home-three/components/Faq";
 import HomeTwoTestimonial from "../home-two/components/HomeTwoTestimonial";
 import { portfolioCategoryService, portfolioService } from "@/backend/services/portfolio";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Client Case Studies & Software Portfolio | TryangleTech',

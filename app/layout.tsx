@@ -269,14 +269,19 @@ export default function RootLayout({
       type="text/javascript"
       suppressHydrationWarning
       dangerouslySetInnerHTML={{
-        __html: `WebFont.load({
-        google: {
-          families: [
-            "Geist:300,400,500,600,700",
-            "Poppins:300,400,500,600,700",
-          ],
-        },
-      });`,
+        __html: `if (typeof window !== 'undefined') {
+        window.WebFontConfig = {
+          google: {
+            families: [
+              "Geist:300,400,500,600,700",
+              "Poppins:300,400,500,600,700",
+            ],
+          },
+        };
+        if (window.WebFont && window.WebFont.load) {
+          window.WebFont.load(window.WebFontConfig);
+        }
+      }`,
       }}
     />
     <script

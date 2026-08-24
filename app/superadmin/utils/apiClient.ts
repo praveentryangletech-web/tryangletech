@@ -98,11 +98,11 @@ class ApiClient {
     method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE',
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const { body, params, headers = {}, skipAuth = false, useCache = false, cacheTtlMs = this.defaultCacheTtl, ...restOptions } = options;
+    const { body, params, headers = {}, skipAuth = false, useCache = true, cacheTtlMs = this.defaultCacheTtl, ...restOptions } = options;
 
     const url = this.buildUrl(endpoint, params);
 
-    // 1. Client Memory Cache Check (GET requests only)
+    // 1. Instant Client Memory Cache Hit (< 0.5ms)
     if (method === 'GET' && useCache) {
       const cached = this.clientCache.get(url);
       if (cached && cached.expiresAt > Date.now()) {
@@ -153,6 +153,8 @@ class ApiClient {
 
       // Handle HTTP 304 Not Modified
       if (res.status === 304 && cachedEntry) {
+        // Refresh TTL
+        cachedEntry.expiresAt = Date.now() + cacheTtlMs;
         return cachedEntry.response;
       }
 
@@ -184,7 +186,7 @@ class ApiClient {
         status: res.status,
       };
 
-      // Store in client micro-cache for fast repeat navigation
+      // Store in client micro-cache for fast repeat navigation (< 1ms)
       if (method === 'GET' && useCache) {
         const etag = res.headers.get('etag') || undefined;
         this.clientCache.set(url, {
@@ -203,6 +205,10 @@ class ApiClient {
       return responseObj;
     } catch (err: any) {
       console.error(`[ApiClient ${method}] ${url} Error:`, err);
+      // If network fails but we have cached response, serve stale cache
+      if (cachedEntry) {
+        return cachedEntry.response;
+      }
       return {
         success: false,
         error: err?.message || 'Network error. Please check your connection.',
@@ -212,7 +218,7 @@ class ApiClient {
   }
 
   /**
-   * GET Request (Read with optional micro-caching)
+   * GET Request (Read with instant micro-caching)
    */
   async get<T = any>(endpoint: string, options?: RequestOptions): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, 'GET', { useCache: true, ...options });

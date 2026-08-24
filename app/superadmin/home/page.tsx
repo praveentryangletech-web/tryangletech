@@ -141,7 +141,7 @@ export default function SuperadminUnifiedHomeCMS() {
         ...(searchQuery.trim() ? { search: searchQuery.trim() } : {}),
       });
 
-      const locRes = await apiClient.get<any>(`/api/superadmin/locations?${queryParams.toString()}`, { useCache: false });
+      const locRes = await apiClient.get<any>(`/api/superadmin/locations?${queryParams.toString()}`);
       if (locRes.success && Array.isArray(locRes.data)) {
         setLocations(locRes.data);
         if (locRes.pagination) {

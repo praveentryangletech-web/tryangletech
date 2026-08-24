@@ -15,20 +15,36 @@ export async function GET(request: Request) {
     // If pagination or filtering query params are present, return backend-paginated result
     if (searchParams.has('page') || searchParams.has('limit') || searchParams.has('region') || searchParams.has('search') || searchParams.has('status')) {
       const result = await geoService.getPaginatedLocations({ page, limit, region, search, status, includeDrafts: true });
-      return NextResponse.json({
-        success: true,
-        data: result.items,
-        pagination: result.pagination,
-        count: result.pagination.total,
-      });
+      return NextResponse.json(
+        {
+          success: true,
+          data: result.items,
+          pagination: result.pagination,
+          count: result.pagination.total,
+        },
+        {
+          status: 200,
+          headers: {
+            'Cache-Control': 'private, max-age=30, stale-while-revalidate=120',
+          },
+        }
+      );
     }
 
     const data = await geoService.getAllLocations(true);
-    return NextResponse.json({
-      success: true,
-      data,
-      count: data.length,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data,
+        count: data.length,
+      },
+      {
+        status: 200,
+        headers: {
+          'Cache-Control': 'private, max-age=30, stale-while-revalidate=120',
+        },
+      }
+    );
   } catch (error: any) {
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to fetch locations' },

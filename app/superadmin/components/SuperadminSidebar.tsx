@@ -55,6 +55,18 @@ export default function SuperadminSidebar() {
       active: pathname === '/superadmin/home' || pathname.startsWith('/superadmin/home/') || pathname.startsWith('/superadmin/locations'),
     },
     {
+      label: 'About Page CMS',
+      tooltip: 'Manage About Page Story, Mission, Speciality & FAQs',
+      icon: (
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      ),
+      href: '/superadmin/about',
+      active: pathname.startsWith('/superadmin/about'),
+    },
+    {
       label: 'Portfolio',
       tooltip: 'Case Studies CMS & Live Demo Links',
       icon: (

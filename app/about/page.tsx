@@ -1,52 +1,56 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
-
+import React from 'react';
+import Script from 'next/script';
+import { aboutService } from '@/backend/services/about';
+import { DEFAULT_ABOUT_CONTENT } from '@/backend/services/about/about.defaults';
 
 import AboutHero from './components/AboutHero';
 import AboutFeatures from './components/AboutFeatures';
 import WhyChooseUs from './components/WhyChooseUs';
-import OurGoal from './components/OurGoal';
 import OurProcess from './components/OurProcess';
 import AboutFAQ from './components/AboutFAQ';
 import FooterCTA from '../components/FooterCTA';
-import AboutBlog from './components/AboutBlog';
+import WebflowInit from '../common/WebflowInit';
 
-const A = '/about-assets';
+export const dynamic = 'force-dynamic';
 
-import WebflowInit from "../common/WebflowInit";
+export default async function AboutPage() {
+  let content;
+  try {
+    content = await aboutService.getAboutContent();
+  } catch (err) {
+    console.warn('[AboutPage] DB error, using default fallback:', err);
+    content = DEFAULT_ABOUT_CONTENT;
+  }
 
-export default function AboutPage() {
-
+  const jsonLdSchema = aboutService.generateAboutSchema(content);
 
   return (
     <>
       <WebflowInit pageId="68eddb57e406830358a1f29d" />
 
+      {/* Dynamic Schema.org JSON-LD Structured Data for Google & AI Search (AEO) */}
+      <Script
+        id="about-page-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdSchema),
+        }}
+      />
 
       {/* ══════════════════ MAIN ══════════════════ */}
       <main>
+        <AboutHero hero={content.hero} speciality={content.speciality} />
 
-        <AboutHero />
+        <AboutFeatures missionVision={content.missionVision} />
 
-        <AboutFeatures />
+        <WhyChooseUs whyChooseUs={content.whyChooseUs} />
 
-        <WhyChooseUs />
+        <OurProcess process={content.process} />
 
-        {/* <OurGoal /> */}
+        <FooterCTA ctaBanner={content.ctaBanner} />
 
-        <OurProcess />
-
-
-        <FooterCTA />
-        <AboutFAQ />
-
-        {/* <AboutBlog /> */}
-
+        <AboutFAQ faqSection={content.faqSection} />
       </main>
-
-
     </>
   );
 }

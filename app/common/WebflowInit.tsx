@@ -17,7 +17,8 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
 
   useEffect(() => {
 
-    // If a specific page ID is provided, set it on the HTML element
+    // Set site and page attributes on the root HTML element
+    document.documentElement.setAttribute('data-wf-site', '68c3feed3b3e541e7d5c098a');
     if (pageId) {
       document.documentElement.setAttribute('data-wf-page', pageId);
     }
@@ -27,38 +28,36 @@ export default function WebflowInit({ pageId }: { pageId?: string }) {
     const initWebflow = () => {
       const Webflow = (window as any).Webflow;
       if (Webflow && Webflow.require) {
-        // Prevent React 18 Strict Mode from double-firing the initialization and causing a jump
-        if ((window as any).__wf_loaded_pathname === pathname) {
-          return;
-        }
-        (window as any).__wf_loaded_pathname = pathname;
-
-        Webflow.destroy();
-        Webflow.ready();
-        const ix2 = Webflow.require('ix2');
-        if (ix2) {
-          try {
+        try {
+          Webflow.destroy();
+          Webflow.ready();
+          const ix2 = Webflow.require('ix2');
+          if (ix2) {
             ix2.init();
-          } catch (e) {
-            console.warn("Webflow ix2 init error (safe to ignore):", e);
           }
+          document.dispatchEvent(new Event('readystatechange'));
+        } catch (e) {
+          console.warn('Webflow ix2 init error (safe to ignore):', e);
         }
-        document.dispatchEvent(new Event('readystatechange'));
-        // Give Webflow 50ms to fully calculate and apply all initial inline styles.
-        // Then dispatch a scroll event so Webflow 
-        // immediately triggers animations for elements already in the viewport.
-        setTimeout(() => {
+
+        // Staggered triggers to ensure in-viewport elements and scroll-listeners wake up
+        const triggerEvents = () => {
           window.dispatchEvent(new Event('resize'));
           window.dispatchEvent(new Event('scroll'));
-        }, 100);
-      } else if (attempts < 50) { // Try for up to 2.5 seconds
+        };
+
+        triggerEvents();
+        setTimeout(triggerEvents, 100);
+        setTimeout(triggerEvents, 300);
+        setTimeout(triggerEvents, 600);
+      } else if (attempts < 60) {
         attempts++;
         setTimeout(initWebflow, 50);
       }
     };
     
-    // Slight delay to allow DOM to settle
-    const timer = setTimeout(initWebflow, 50);
+    // Slight delay to allow DOM and SSR hydration to settle
+    const timer = setTimeout(initWebflow, 60);
     return () => {
       clearTimeout(timer);
     };

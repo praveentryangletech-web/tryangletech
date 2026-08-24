@@ -11,8 +11,8 @@ interface HomeImageUploadFieldProps {
   altValue?: string;
   onAltChange?: (alt: string) => void;
   placeholder?: string;
-  previewHeight?: number;
-  previewWidth?: number;
+  previewHeight?: number | string;
+  previewWidth?: number | string;
   shape?: 'square' | 'round' | 'rect';
   helperText?: string;
   recommendedDimensions?: string;
@@ -112,8 +112,10 @@ export default function HomeImageUploadField({
   const isImg = Boolean(value && (value.startsWith('/') || value.startsWith('http') || value.startsWith('data:')));
 
   const borderRadius = shape === 'round' ? '50%' : '8px';
-  const displayWidth = shape === 'round' ? `${previewHeight}px` : `${previewWidth}px`;
-  const displayHeight = `${previewHeight}px`;
+  const parsedHeight = typeof previewHeight === 'number' ? `${previewHeight}px` : (String(previewHeight).match(/(px|%|rem|em)$/) ? String(previewHeight) : `${previewHeight}px`);
+  const parsedWidth = typeof previewWidth === 'number' ? `${previewWidth}px` : (String(previewWidth).match(/(px|%|rem|em)$/) ? String(previewWidth) : `${previewWidth}px`);
+  const displayWidth = shape === 'round' ? parsedHeight : parsedWidth;
+  const displayHeight = parsedHeight;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

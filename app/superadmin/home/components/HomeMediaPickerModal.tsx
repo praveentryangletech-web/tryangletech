@@ -15,7 +15,7 @@ export interface MediaAssetItem {
 interface HomeMediaPickerModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelect: (url: string) => void;
+  onSelect: (url: string, filename?: string) => void;
   currentValue?: string;
   title?: string;
 }
@@ -309,7 +309,7 @@ export default function HomeMediaPickerModal({
                 <div
                   key={asset.filename}
                   onClick={() => {
-                    onSelect(asset.url);
+                    onSelect(asset.url, asset.filename);
                     onClose();
                   }}
                   style={{
@@ -394,7 +394,7 @@ export default function HomeMediaPickerModal({
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onSelect(asset.url);
+                      onSelect(asset.url, asset.filename);
                       onClose();
                     }}
                     style={{

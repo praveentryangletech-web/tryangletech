@@ -1,33 +1,60 @@
+'use client';
+
 import React from 'react';
-import Link from "next/link";
+import Link from 'next/link';
+import SafeImage from '@/app/common/SafeImage';
+import { AboutFooterCtaSection } from '@/backend/services/about/about.types';
 
-import Image from "next/image";
+interface FooterCTAProps {
+  ctaBanner?: AboutFooterCtaSection;
+}
 
-const A = '/about-assets';
+export default function FooterCTA({ ctaBanner }: FooterCTAProps) {
+  const subBadgeText = ctaBanner?.subBadgeText || 'GROW YOUR BUSINESS ONLINE';
+  const heading = ctaBanner?.heading || 'Build smarter, launch faster, grow your business online';
+  const description =
+    ctaBanner?.description ||
+    'Partner with Tryangletech for expert website development, digital marketing, and custom software solutions, all under one roof.';
+  const buttonText = ctaBanner?.buttonText || 'Get started today';
+  const buttonLink = ctaBanner?.buttonLink || '/contact';
 
-export default function FooterCTA() {
   return (
     <>
-        {/* ── CTA ── */}
-        <section>
-          <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-            <div className="rt-collaborate-card-main rt-position-relative rt-overflow-hidden">
-              <div className="rt-footer-card-content rt-desktop-text-center">
-                <div className="rt-sub-gap">
-                  <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc12" className="rt-sub-text rt-text-color-white">GROW YOUR BUSINESS ONLINE</div>
-                </div>
-                <div className="rt-heading-para-gap">
-                  <h2 data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc15" className="rt-text-color-white rt-gap-off">Build smarter, launch faster, grow your business online</h2>
-                </div>
-                <p data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc17" className="rt-text-color-white rt-gap-off rt-footer-card-para">Partner with Tryangletech for expert website development, digital marketing, and custom software solutions, all under one roof.</p>
-                <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc19" className="rt-button-para-gap">
-                  <Link data-wf--rt-white-button--variant="color" data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf" href="/contact" className="rt-button-body rt-bg-color w-inline-block">
-                    <div className="rt-button-text rt-btn-color" style={{ color: '#1a0b54' }}>&nbsp;Get started today</div>
-                    <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
-                  </Link>
+      {/* ── CTA ── */}
+      <section>
+        <div className="w-layout-blockcontainer rt-container-extra-large w-container">
+          <div className="rt-collaborate-card-main rt-position-relative rt-overflow-hidden">
+            <div className="rt-footer-card-content rt-desktop-text-center">
+              <div className="rt-sub-gap">
+                <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc12" className="rt-sub-text rt-text-color-white">
+                  {subBadgeText}
                 </div>
               </div>
-              <style dangerouslySetInnerHTML={{ __html: `
+              <div className="rt-heading-para-gap">
+                <h2 data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc15" className="rt-text-color-white rt-gap-off">
+                  {heading}
+                </h2>
+              </div>
+              <p data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc17" className="rt-text-color-white rt-gap-off rt-footer-card-para">
+                {description}
+              </p>
+              <div data-w-id="7e10f033-b0ef-59d7-53ae-aed6bd65fc19" className="rt-button-para-gap">
+                <Link
+                  data-wf--rt-white-button--variant="color"
+                  data-w-id="0405d357-f0f5-aac8-4042-22ceb6fb3cbf"
+                  href={buttonLink}
+                  className="rt-button-body rt-bg-color w-inline-block"
+                >
+                  <div className="rt-button-text rt-btn-color" style={{ color: '#1a0b54' }}>
+                    &nbsp;{buttonText}
+                  </div>
+                  <div className="rt-button-body-overlay rt-color-blue w-variant-172fb5df-db24-987d-98c7-3d35693edb61 rt-color-change"></div>
+                </Link>
+              </div>
+            </div>
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
                 @keyframes spinForward { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                 @keyframes spinBackward { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
                 
@@ -39,32 +66,25 @@ export default function FooterCTA() {
                 
                 .animate-ring-3 { animation: spinForward 60s linear infinite; }
                 .animate-icon-3 { animation: spinBackward 60s linear infinite; }
-              `}} />
-              {[1, 2, 3].map((lineNum) => (
-                <div key={lineNum} className={`rt-collaborate-card-line-${lineNum} animate-ring-${lineNum} rt-tab-display-none`}>
-                  {[1, 2, 3, 4].map((i) => {
-                    const iconIndex = ((lineNum - 1) * 4 + i) % 7 + 1;
-                    const icons = {
-                      1: '/favicon.png',
-                      2: '/favicon.png',
-                      3: '/favicon.png',
-                      4: '/favicon.png',
-                      5: '/favicon.png',
-                      6: '/favicon.png',
-                      7: '/favicon.png'
-                    };
-                    const src = icons[iconIndex as keyof typeof icons];
-                    return (
-                      <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i} animate-icon-${lineNum}`}>
-                        <div><Image src={src} loading="lazy" alt={`Integration Icon`} width={800} height={800} style={{ width: "100%", height: "auto" }} /></div>
+              `,
+              }}
+            />
+            {[1, 2, 3].map((lineNum) => (
+              <div key={lineNum} className={`rt-collaborate-card-line-${lineNum} animate-ring-${lineNum} rt-tab-display-none`}>
+                {[1, 2, 3, 4].map((i) => {
+                  return (
+                    <div key={`line${lineNum}-${i}`} className={`rt-collaborate-icon rt-${i} animate-icon-${lineNum}`}>
+                      <div>
+                        <SafeImage src="/icon.png" fallbackSrc="/favicon.png" loading="lazy" alt="Integration Icon" width={800} height={800} style={{ width: '100%', height: 'auto' }} />
                       </div>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
     </>
   );
 }

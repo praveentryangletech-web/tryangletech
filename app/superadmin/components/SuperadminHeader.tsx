@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 const ROUTE_TITLES: Record<string, string> = {
   '/superadmin': 'Executive Analytics Overview',
   '/superadmin/home': 'Home & Locations CMS',
+  '/superadmin/about': 'About Page CMS',
   '/superadmin/inquiries': 'Contact Form Leads & Inquiries',
   '/superadmin/portfolio': 'Portfolio Projects & Case Studies',
   '/superadmin/blog': 'Blog & Articles CMS',

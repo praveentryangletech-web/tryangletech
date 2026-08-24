@@ -31,7 +31,8 @@ export async function generateStaticParams() {
  * Generate Location-Specific SEO, GEO, and OpenGraph Metadata
  */
 export async function generateMetadata({ params, searchParams }: LocationPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const slug = resolvedParams?.slug;
   if (!slug) {
     return {
       title: 'Location Not Found | TryangleTech',
@@ -57,7 +58,8 @@ export async function generateMetadata({ params, searchParams }: LocationPagePro
  * Location-Targeted Programmatic Home Page Clone
  */
 export default async function LocationPage({ params, searchParams }: LocationPageProps) {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const slug = resolvedParams?.slug;
   if (!slug) {
     notFound();
   }

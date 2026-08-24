@@ -655,6 +655,49 @@ export default function SuperadminUnifiedHomeCMS() {
     { id: 'geoSettings', label: isEditingLocation ? '📍 8. Location & SEO/AEO' : '🔍 8. SEO, GEO & AEO' },
   ];
 
+  if (isLoading) {
+    return (
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
+        {/* Editor Header Toolbar Skeleton */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className="rt-skeleton-box" style={{ width: '140px', height: '36px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '220px', height: '32px', borderRadius: '6px' }} />
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <div className="rt-skeleton-box" style={{ width: '120px', height: '38px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '135px', height: '38px', borderRadius: '8px' }} />
+          </div>
+        </div>
+
+        {/* 8 Tabs Skeleton */}
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '2rem', borderBottom: '1px solid #E2E8F0' }}>
+          {['130px', '160px', '140px', '150px', '145px', '140px', '135px', '165px'].map((w, idx) => (
+            <div key={idx} className="rt-skeleton-box" style={{ width: w, height: '38px', borderRadius: '8px', flexShrink: 0 }} />
+          ))}
+        </div>
+
+        {/* Form Fields Skeleton */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+            </div>
+          </div>
+          <div>
+            <div className="rt-skeleton-box" style={{ width: '150px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
       {/* Editor Header Toolbar */}

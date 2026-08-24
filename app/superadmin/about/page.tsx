@@ -65,6 +65,115 @@ function SuperadminAboutContent() {
     { id: 'seo', label: '8. SEO & Social' },
   ];
 
+  if (isLoading) {
+    return (
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
+        {/* 1. Header Toolbar Skeleton */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px', marginBottom: '1.25rem' }}>
+          <div className="rt-skeleton-box" style={{ width: '120px', height: '38px', borderRadius: '8px' }} />
+          <div className="rt-skeleton-box" style={{ width: '135px', height: '38px', borderRadius: '8px' }} />
+        </div>
+
+        {/* 2. Navigation Tabs Skeleton (8 Tabs) */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            overflowX: 'auto',
+            paddingBottom: '8px',
+            marginBottom: '2rem',
+            borderBottom: '1px solid #E2E8F0',
+          }}
+        >
+          {['130px', '170px', '150px', '145px', '155px', '130px', '125px', '120px'].map((w, idx) => (
+            <div
+              key={idx}
+              className="rt-skeleton-box"
+              style={{
+                width: w,
+                height: '38px',
+                borderRadius: '8px',
+                flexShrink: 0,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* 3. Section Title & Badge Skeleton */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
+          <div className="rt-skeleton-box" style={{ width: '280px', height: '26px', borderRadius: '6px' }} />
+          <div className="rt-skeleton-box" style={{ width: '105px', height: '24px', borderRadius: '6px' }} />
+        </div>
+
+        {/* 4. Form Fields Skeleton */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* Row 1: Overtitle & Main Headline */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+            </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+            </div>
+          </div>
+
+          {/* Row 2: Intro Paragraph 1 */}
+          <div>
+            <div className="rt-skeleton-box" style={{ width: '120px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+          </div>
+
+          {/* Row 3: Intro Paragraph 2 */}
+          <div>
+            <div className="rt-skeleton-box" style={{ width: '180px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+          </div>
+
+          {/* Row 4: Company Statistics Card Skeleton */}
+          <div
+            style={{
+              padding: '1.5rem',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1px solid #E2E8F0',
+              marginTop: '0.5rem',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div>
+                <div className="rt-skeleton-box" style={{ width: '160px', height: '18px', borderRadius: '4px', marginBottom: '6px' }} />
+                <div className="rt-skeleton-box" style={{ width: '260px', height: '12px', borderRadius: '4px' }} />
+              </div>
+              <div className="rt-skeleton-box" style={{ width: '90px', height: '34px', borderRadius: '8px' }} />
+            </div>
+
+            {/* 3 Stat Cards Skeleton */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: '1.25rem',
+                    backgroundColor: '#F8FAFC',
+                    borderRadius: '12px',
+                    border: '1px solid #E2E8F0',
+                  }}
+                >
+                  <div className="rt-skeleton-box" style={{ width: '60px', height: '12px', borderRadius: '4px', marginBottom: '8px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '38px', borderRadius: '8px', marginBottom: '10px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '70px', height: '12px', borderRadius: '4px', marginBottom: '8px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '38px', borderRadius: '8px' }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
       {/* Editor Action Toolbar */}

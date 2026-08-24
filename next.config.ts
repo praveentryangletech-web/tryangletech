@@ -43,6 +43,15 @@ const nextConfig: NextConfig = {
       },
 
       {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
         source: '/api/media/:filename*',
         headers: [
           {
@@ -52,11 +61,20 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/(images|fonts|icons)/:path*',
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico|woff|woff2|ttf|eot|css|js)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=604800',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/(Taskopia_files|about-assets|service-2-assets|service3-assets|portfolio|images|fonts|icons)/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

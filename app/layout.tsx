@@ -116,10 +116,10 @@ export default function RootLayout({
             __html: `.wf-force-outline-none[tabindex="-1"]:focus { outline: none; }`,
           }}
         />
-    <link
-      href="https://cdn.prod.website-files.com/"
-      rel="preconnect"
-      crossOrigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossOrigin="anonymous" />
     <meta content="Webflow" name="generator" />
     <link
       href="/Taskopia_files/taskopia.webflow.shared.f0926b53b.css"

@@ -72,7 +72,7 @@ export default function CategoryManageModal({
       await onDeleteCategory(cat.id || cat.name);
       setSuccessMessage(
         cat.projectCount > 0
-          ? `Category "${cat.name}" deleted. ${cat.projectCount} project(s) reassigned to "${DEFAULT_PORTFOLIO_CATEGORY}".`
+          ? `Category "${cat.name}" deleted. Any assigned projects reassigned to "${DEFAULT_PORTFOLIO_CATEGORY}".`
           : `Category "${cat.name}" deleted successfully.`
       );
       setPendingDeleteCat(null);
@@ -103,7 +103,7 @@ export default function CategoryManageModal({
         animation: 'fadeIn 0.2s ease-out',
       }}
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget && !isSubmitting && !isDeleting) onClose();
       }}
     >
       <style>{`
@@ -137,7 +137,6 @@ export default function CategoryManageModal({
           background-color: #FEE2E2 !important;
           color: #DC2626 !important;
           border-color: #FECACA !important;
-          transform: scale(1.05);
         }
       `}</style>
 
@@ -146,7 +145,7 @@ export default function CategoryManageModal({
           backgroundColor: '#FFFFFF',
           borderRadius: '16px',
           width: '100%',
-          maxWidth: '620px',
+          maxWidth: '560px',
           maxHeight: '88vh',
           display: 'flex',
           flexDirection: 'column',
@@ -168,44 +167,66 @@ export default function CategoryManageModal({
             flexShrink: 0,
           }}
         >
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h2
-                style={{
-                  fontSize: '1.15rem',
-                  fontWeight: 800,
-                  color: 'var(--dark-indigo, #1a0b54)',
-                  margin: 0,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                Manage Portfolio Categories
-              </h2>
-              <span
-                style={{
-                  backgroundColor: '#EFF6FF',
-                  color: 'var(--brand-blue, #1833fe)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  padding: '2px 8px',
-                  borderRadius: '20px',
-                  border: '1px solid #DBEAFE',
-                }}
-              >
-                {categories.length} {categories.length === 1 ? 'Category' : 'Categories'}
-              </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, #EFF6FF, #DBEAFE)',
+                color: 'var(--brand-blue, #1833fe)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                <line x1="7" y1="7" x2="7.01" y2="7" />
+              </svg>
             </div>
-            <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: '#64748B' }}>
-              Add new categories or delete custom categories. Protected default category handles unassigned projects.
-            </p>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h2
+                  style={{
+                    fontSize: '1.1rem',
+                    fontWeight: 800,
+                    color: 'var(--dark-indigo, #1a0b54)',
+                    margin: 0,
+                    letterSpacing: '-0.01em',
+                  }}
+                >
+                  Manage Portfolio Categories
+                </h2>
+                <span
+                  style={{
+                    backgroundColor: '#EFF6FF',
+                    color: 'var(--brand-blue, #1833fe)',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    padding: '2px 8px',
+                    borderRadius: '20px',
+                    border: '1px solid #DBEAFE',
+                  }}
+                >
+                  {categories.length} {categories.length === 1 ? 'Category' : 'Categories'}
+                </span>
+              </div>
+              <p style={{ margin: '3px 0 0 0', fontSize: '0.775rem', color: '#64748B' }}>
+                Add new categories or delete custom categories. Protected default category handles unassigned items.
+              </p>
+            </div>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
+            disabled={isSubmitting || isDeleting}
             style={{
               backgroundColor: 'transparent',
               border: 'none',
-              cursor: 'pointer',
+              cursor: isSubmitting || isDeleting ? 'not-allowed' : 'pointer',
               color: '#94A3B8',
               padding: '6px',
               borderRadius: '8px',
@@ -223,7 +244,7 @@ export default function CategoryManageModal({
           </button>
         </div>
 
-        {/* 2. BODY CONTENT (FIXED TOP CONTROLS + SINGLE SCROLLABLE LIST) */}
+        {/* 2. BODY CONTENT */}
         <div
           style={{
             padding: '1.25rem 1.5rem',
@@ -307,6 +328,7 @@ export default function CategoryManageModal({
                 placeholder="e.g. AI & Machine Learning, SaaS Solutions..."
                 value={newCategoryName}
                 onChange={(e) => setNewCategoryName(e.target.value)}
+                disabled={isSubmitting || isDeleting}
                 style={{
                   flex: 1,
                   minWidth: '200px',
@@ -322,7 +344,7 @@ export default function CategoryManageModal({
               />
               <button
                 type="submit"
-                disabled={isSubmitting || !newCategoryName.trim()}
+                disabled={isSubmitting || isDeleting || !newCategoryName.trim()}
                 style={{
                   backgroundColor: 'var(--brand-blue, #1833fe)',
                   color: '#FFFFFF',
@@ -331,8 +353,8 @@ export default function CategoryManageModal({
                   padding: '8px 16px',
                   fontSize: '0.85rem',
                   fontWeight: 700,
-                  cursor: isSubmitting || !newCategoryName.trim() ? 'not-allowed' : 'pointer',
-                  opacity: isSubmitting || !newCategoryName.trim() ? 0.6 : 1,
+                  cursor: isSubmitting || isDeleting || !newCategoryName.trim() ? 'not-allowed' : 'pointer',
+                  opacity: isSubmitting || isDeleting || !newCategoryName.trim() ? 0.6 : 1,
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
@@ -400,7 +422,7 @@ export default function CategoryManageModal({
             )}
           </div>
 
-          {/* SINGLE SCROLLABLE CATEGORIES LIST */}
+          {/* SCROLLABLE CATEGORIES LIST */}
           <div
             className="modal-cat-scroll"
             style={{
@@ -436,7 +458,6 @@ export default function CategoryManageModal({
                 const isProtected = cat.isDefault || cat.name.toLowerCase() === DEFAULT_PORTFOLIO_CATEGORY.toLowerCase();
                 const isPendingDelete = pendingDeleteCat?.id === cat.id || pendingDeleteCat?.name === cat.name;
 
-                // INLINE DELETE CONFIRMATION ROW
                 if (isPendingDelete) {
                   return (
                     <div
@@ -449,22 +470,13 @@ export default function CategoryManageModal({
                         backgroundColor: '#FEF2F2',
                         border: '1.5px solid #FCA5A5',
                         borderRadius: '10px',
-                        gap: '8px',
-                        animation: 'slideUp 0.15s ease',
+                        gap: '10px',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, overflow: 'hidden' }}>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                          <line x1="12" y1="9" x2="12" y2="13" />
-                          <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#991B1B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          Delete &quot;{cat.name}&quot;? {cat.projectCount > 0 ? `(${cat.projectCount} project${cat.projectCount > 1 ? 's' : ''} → General)` : ''}
-                        </span>
+                      <div style={{ fontSize: '0.825rem', color: '#991B1B', fontWeight: 600 }}>
+                        Delete &quot;{cat.name}&quot;?
                       </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                      <div style={{ display: 'flex', gap: '6px' }}>
                         <button
                           type="button"
                           onClick={() => setPendingDeleteCat(null)}
@@ -474,10 +486,9 @@ export default function CategoryManageModal({
                             borderRadius: '6px',
                             border: '1px solid #CBD5E1',
                             backgroundColor: '#FFFFFF',
-                            color: '#475569',
                             fontSize: '0.75rem',
                             fontWeight: 700,
-                            cursor: isDeleting ? 'not-allowed' : 'pointer',
+                            cursor: 'pointer',
                           }}
                         >
                           Cancel
@@ -495,19 +506,15 @@ export default function CategoryManageModal({
                             fontSize: '0.75rem',
                             fontWeight: 700,
                             cursor: isDeleting ? 'not-allowed' : 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px',
                           }}
                         >
-                          {isDeleting ? 'Deleting...' : 'Delete'}
+                          {isDeleting ? 'Deleting...' : 'Confirm'}
                         </button>
                       </div>
                     </div>
                   );
                 }
 
-                // STANDARD CATEGORY ROW
                 return (
                   <div
                     key={cat.id || cat.name}
@@ -516,96 +523,60 @@ export default function CategoryManageModal({
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: '9px 12px',
+                      padding: '10px 14px',
                       backgroundColor: '#FFFFFF',
                       border: '1px solid #E2E8F0',
                       borderRadius: '10px',
                       transition: 'all 0.15s ease',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, overflow: 'hidden' }}>
-                      <span
-                        style={{
-                          fontWeight: 700,
-                          fontSize: '0.875rem',
-                          color: 'var(--dark-indigo, #1a0b54)',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0F172A' }}>
                         {cat.name}
                       </span>
-
-                      {isProtected && (
+                      {cat.projectCount !== undefined && (
                         <span
                           style={{
-                            backgroundColor: '#EEF2FF',
-                            color: '#4F46E5',
-                            fontSize: '0.675rem',
+                            backgroundColor: '#F1F5F9',
+                            color: '#475569',
+                            fontSize: '0.75rem',
                             fontWeight: 700,
-                            padding: '2px 7px',
+                            padding: '2px 8px',
                             borderRadius: '12px',
-                            border: '1px solid #C7D2FE',
-                            whiteSpace: 'nowrap',
                           }}
                         >
-                          Default Fallback
+                          {cat.projectCount} {cat.projectCount === 1 ? 'project' : 'projects'}
                         </span>
                       )}
-
-                      <span
-                        style={{
-                          backgroundColor: '#F1F5F9',
-                          color: '#475569',
-                          fontSize: '0.7rem',
-                          fontWeight: 700,
-                          padding: '2px 7px',
-                          borderRadius: '12px',
-                          border: '1px solid #E2E8F0',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {cat.projectCount} {cat.projectCount === 1 ? 'project' : 'projects'}
-                      </span>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {isProtected ? (
                         <span
-                          title="Default category is protected and cannot be deleted"
                           style={{
                             fontSize: '0.725rem',
-                            color: '#64748B',
-                            padding: '4px 8px',
-                            borderRadius: '6px',
-                            backgroundColor: '#F8FAFC',
-                            border: '1px solid #E2E8F0',
-                            cursor: 'help',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            fontWeight: 600,
+                            fontWeight: 700,
+                            color: '#059669',
+                            backgroundColor: '#ECFDF5',
+                            padding: '2px 8px',
+                            borderRadius: '12px',
+                            border: '1px solid #A7F3D0',
                           }}
                         >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                          </svg>
-                          <span>Locked</span>
+                          Default
                         </span>
                       ) : (
                         <button
                           type="button"
                           onClick={() => handlePromptDelete(cat)}
                           className="cat-del-btn"
-                          title={`Delete ${cat.name}`}
+                          title="Delete category"
                           style={{
-                            backgroundColor: '#FFFFFF',
-                            border: '1px solid #CBD5E1',
-                            color: '#64748B',
                             padding: '6px 8px',
                             borderRadius: '6px',
+                            border: '1px solid #E2E8F0',
+                            backgroundColor: '#F8FAFC',
+                            color: '#64748B',
                             cursor: 'pointer',
                             display: 'inline-flex',
                             alignItems: 'center',

@@ -125,6 +125,65 @@ function ensureColumnsExist(): void {
   })().catch(() => {});
 }
 
+/**
+ * Universal Mapper from PostgreSQL Raw Row to PortfolioItem (Full Record)
+ */
+function mapRowToPortfolioItem(r: any): PortfolioItem {
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    category: r.category as PortfolioCategory,
+    image: r.image,
+    imageAlt: r.imageAlt || r.title || '',
+    images: Array.isArray(r.images) && r.images.length > 0 ? r.images : (r.image ? [r.image] : []),
+    imageAlts: Array.isArray(r.imageAlts) ? r.imageAlts : [],
+    description: r.description,
+    client: r.client || '',
+    duration: r.duration || '',
+    role: r.role || '',
+    liveUrl: r.liveUrl || '',
+    content: r.content || '',
+    challenges: Array.isArray(r.challenges) ? r.challenges : [],
+    solutions: Array.isArray(r.solutions) ? r.solutions : [],
+    results: Array.isArray(r.results) ? r.results : [],
+    technologies: Array.isArray(r.technologies) ? r.technologies : [],
+    metaTitle: r.metaTitle || '',
+    metaDescription: r.metaDescription || '',
+    aeoSummary: r.aeoSummary || '',
+    keywords: Array.isArray(r.keywords) ? r.keywords : [],
+    geoRegion: r.geoRegion || '',
+    canonicalUrl: r.canonicalUrl || '',
+    faqs: Array.isArray(r.faqs) ? r.faqs : (typeof r.faqs === 'string' ? JSON.parse(r.faqs || '[]') : (r.faqs || [])),
+    order: r.order || 0,
+    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
+  };
+}
+
+/**
+ * Lightweight Mapper from PostgreSQL Raw Row to PortfolioSummaryItem (List/Table/Grid View)
+ */
+function mapRowToPortfolioSummary(r: any): PortfolioSummaryItem {
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    category: r.category as PortfolioCategory,
+    image: r.image,
+    imageAlt: r.imageAlt || r.title || '',
+    description: r.description || '',
+    client: r.client || '',
+    duration: r.duration || '',
+    role: r.role || '',
+    liveUrl: r.liveUrl || '',
+    technologies: Array.isArray(r.technologies) ? r.technologies : [],
+    order: r.order || 0,
+    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
+  };
+}
+
 export const portfolioService = {
   /**
    * Fast Seed Check & Database Indexing Initialization
@@ -954,64 +1013,5 @@ export const portfolioService = {
     return { affectedCount };
   },
 };
-
-/**
- * Universal Mapper from PostgreSQL Raw Row to PortfolioItem (Full Record)
- */
-function mapRowToPortfolioItem(r: any): PortfolioItem {
-  return {
-    id: r.id,
-    slug: r.slug,
-    title: r.title,
-    category: r.category as PortfolioCategory,
-    image: r.image,
-    imageAlt: r.imageAlt || r.title || '',
-    images: Array.isArray(r.images) && r.images.length > 0 ? r.images : (r.image ? [r.image] : []),
-    imageAlts: Array.isArray(r.imageAlts) ? r.imageAlts : [],
-    description: r.description,
-    client: r.client || '',
-    duration: r.duration || '',
-    role: r.role || '',
-    liveUrl: r.liveUrl || '',
-    content: r.content || '',
-    challenges: Array.isArray(r.challenges) ? r.challenges : [],
-    solutions: Array.isArray(r.solutions) ? r.solutions : [],
-    results: Array.isArray(r.results) ? r.results : [],
-    technologies: Array.isArray(r.technologies) ? r.technologies : [],
-    metaTitle: r.metaTitle || '',
-    metaDescription: r.metaDescription || '',
-    aeoSummary: r.aeoSummary || '',
-    keywords: Array.isArray(r.keywords) ? r.keywords : [],
-    geoRegion: r.geoRegion || '',
-    canonicalUrl: r.canonicalUrl || '',
-    faqs: Array.isArray(r.faqs) ? r.faqs : (typeof r.faqs === 'string' ? JSON.parse(r.faqs || '[]') : (r.faqs || [])),
-    order: r.order || 0,
-    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
-    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
-  };
-}
-
-/**
- * Lightweight Mapper from PostgreSQL Raw Row to PortfolioSummaryItem (List/Table/Grid View)
- */
-function mapRowToPortfolioSummary(r: any): PortfolioSummaryItem {
-  return {
-    id: r.id,
-    slug: r.slug,
-    title: r.title,
-    category: r.category as PortfolioCategory,
-    image: r.image,
-    imageAlt: r.imageAlt || r.title || '',
-    description: r.description || '',
-    client: r.client || '',
-    duration: r.duration || '',
-    role: r.role || '',
-    liveUrl: r.liveUrl || '',
-    technologies: Array.isArray(r.technologies) ? r.technologies : [],
-    order: r.order || 0,
-    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
-    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
-  };
-}
 
 export default portfolioService;

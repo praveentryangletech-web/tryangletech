@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { AboutFaqSection, AboutFaqItem } from '@/backend/services/about/about.types';
 
 interface AboutFaqsTabProps {
@@ -32,7 +32,6 @@ const labelStyle: React.CSSProperties = {
 
 export default function AboutFaqsTab({ faqSection, setFaqSection }: AboutFaqsTabProps) {
   const faqs = faqSection.faqs || [];
-  const [previewOpenIdx, setPreviewOpenIdx] = useState<number | null>(0);
 
   const handleUpdateFaq = (idx: number, field: 'q' | 'a', val: string) => {
     const updated = [...faqs];
@@ -43,10 +42,10 @@ export default function AboutFaqsTab({ faqSection, setFaqSection }: AboutFaqsTab
   const handleAddFaq = () => {
     const newFaq: AboutFaqItem = {
       id: `faq-${Date.now()}`,
-      q: 'New Frequently Asked Question?',
-      a: 'Provide a clear, direct, and transparent answer.',
+      q: '',
+      a: '',
     };
-    setFaqSection({ ...faqSection, faqs: [newFaq, ...faqs] });
+    setFaqSection({ ...faqSection, faqs: [...faqs, newFaq] });
   };
 
   const handleRemoveFaq = (idx: number) => {
@@ -73,19 +72,91 @@ export default function AboutFaqsTab({ faqSection, setFaqSection }: AboutFaqsTab
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '22px', backgroundColor: 'transparent' }}>
-      {/* Header Info */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
-          Section 7: Frequently Asked Questions & AEO Schema
-        </h3>
-        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #BFDBFE' }}>
-          Interactive Accordion
-        </span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'transparent' }}>
+      {/* Header Banner */}
+      <div
+        style={{
+          padding: '16px 20px',
+          borderRadius: '12px',
+          backgroundColor: '#F8FAFC',
+          border: '1px solid #E2E8F0',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '12px',
+        }}
+      >
+        <div>
+          <h3
+            style={{
+              margin: '0 0 4px 0',
+              fontSize: '1.15rem',
+              fontWeight: 800,
+              color: 'var(--dark-indigo, #1a0b54)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}
+          >
+            <span>❓ Dynamic Frequently Asked Questions</span>
+            <span
+              style={{
+                fontSize: '0.72rem',
+                padding: '2px 8px',
+                borderRadius: '6px',
+                backgroundColor: '#EFF6FF',
+                color: 'var(--brand-blue, #1833fe)',
+                fontWeight: 800,
+                border: '1px solid #BFDBFE',
+              }}
+            >
+              {faqs.length} FAQs
+            </span>
+          </h3>
+          <p style={{ margin: 0, fontSize: '0.825rem', color: '#64748B' }}>
+            Add and manage frequently asked questions for the About page, automatically generating structured JSON-LD FAQPage Schema for AI search engines.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleAddFaq}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: '1px solid #BFDBFE',
+            backgroundColor: '#EFF6FF',
+            color: 'var(--brand-blue, #1833fe)',
+            fontSize: '0.825rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <span>+ Add Question</span>
+        </button>
       </div>
 
-      {/* Main Section Header */}
-      <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+      {/* Section Sub-Badge & Heading Controls */}
+      <div
+        style={{
+          padding: '18px 20px',
+          borderRadius: '12px',
+          backgroundColor: '#F8FAFC',
+          border: '1px solid #E2E8F0',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+        }}
+      >
+        <span style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748B' }}>
+          🏷️ Section Heading & Call-to-Action
+        </span>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
           <div>
             <label style={labelStyle}>Section Badge / Subtitle</label>
@@ -119,7 +190,7 @@ export default function AboutFaqsTab({ faqSection, setFaqSection }: AboutFaqsTab
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginTop: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
           <div>
             <label style={labelStyle}>FAQ CTA Button Text</label>
             <input
@@ -143,102 +214,130 @@ export default function AboutFaqsTab({ faqSection, setFaqSection }: AboutFaqsTab
         </div>
       </div>
 
-      {/* FAQ Item List */}
-      <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <div>
-            <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>❓ Questions & Answers ({faqs.length})</strong>
-            <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: '#64748B' }}>
-              These FAQs automatically generate structured JSON-LD FAQPage Schema for Google & AI search bots.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={handleAddFaq}
+      {/* FAQ Cards Accordion List */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        {faqs.map((faq, idx) => (
+          <div
+            key={faq.id || idx}
             style={{
-              padding: '6px 14px',
-              borderRadius: '6px',
-              border: 'none',
-              backgroundColor: 'var(--brand-blue, #1833fe)',
-              color: '#FFFFFF',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              cursor: 'pointer',
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #E2E8F0',
+              borderRadius: '12px',
+              padding: '18px 20px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
             }}
           >
-            + Add FAQ
-          </button>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {faqs.map((faq, idx) => (
-            <div
-              key={faq.id || idx}
-              style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #CBD5E1',
-                borderRadius: '10px',
-                padding: '16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--brand-blue, #1833fe)' }}>
-                  QUESTION #{idx + 1}
+            {/* Card Top Action Bar */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '3px 10px',
+                    borderRadius: '6px',
+                    backgroundColor: '#EFF6FF',
+                    color: 'var(--brand-blue, #1833fe)',
+                    fontSize: '0.75rem',
+                    fontWeight: 800,
+                    border: '1px solid #BFDBFE',
+                  }}
+                >
+                  Question #{idx + 1}
                 </span>
-                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                  <button
-                    type="button"
-                    disabled={idx === 0}
-                    onClick={() => handleMoveUp(idx)}
-                    style={{ padding: '2px 6px', borderRadius: '4px', border: '1px solid #CBD5E1', background: '#F8FAFC', cursor: idx === 0 ? 'not-allowed' : 'pointer', fontSize: '0.75rem' }}
-                  >
-                    ▲
-                  </button>
-                  <button
-                    type="button"
-                    disabled={idx === faqs.length - 1}
-                    onClick={() => handleMoveDown(idx)}
-                    style={{ padding: '2px 6px', borderRadius: '4px', border: '1px solid #CBD5E1', background: '#F8FAFC', cursor: idx === faqs.length - 1 ? 'not-allowed' : 'pointer', fontSize: '0.75rem' }}
-                  >
-                    ▼
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveFaq(idx)}
-                    style={{ border: 'none', background: 'transparent', color: '#EF4444', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 700, marginLeft: '6px' }}
-                  >
-                    ✕ Delete
-                  </button>
-                </div>
+                <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>
+                  Item {idx + 1} of {faqs.length}
+                </span>
               </div>
 
-              <div>
-                <label style={labelStyle}>Question Title *</label>
-                <input
-                  type="text"
-                  value={faq.q}
-                  onChange={(e) => handleUpdateFaq(idx, 'q', e.target.value)}
-                  style={{ ...inputStyle, fontWeight: 700 }}
-                  placeholder="e.g. What services does Tryangletech offer?"
-                />
-              </div>
-
-              <div>
-                <label style={labelStyle}>Answer Body *</label>
-                <textarea
-                  rows={2}
-                  value={faq.a}
-                  onChange={(e) => handleUpdateFaq(idx, 'a', e.target.value)}
-                  style={{ ...inputStyle, resize: 'vertical' }}
-                  placeholder="Provide an informative, direct explanation..."
-                />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <button
+                  type="button"
+                  disabled={idx === 0}
+                  onClick={() => handleMoveUp(idx)}
+                  title="Move Up"
+                  style={{
+                    padding: '4px 8px',
+                    borderRadius: '6px',
+                    border: '1px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    color: idx === 0 ? '#CBD5E1' : '#475569',
+                    cursor: idx === 0 ? 'not-allowed' : 'pointer',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                  }}
+                >
+                  ▲
+                </button>
+                <button
+                  type="button"
+                  disabled={idx === faqs.length - 1}
+                  onClick={() => handleMoveDown(idx)}
+                  title="Move Down"
+                  style={{
+                    padding: '4px 8px',
+                    borderRadius: '6px',
+                    border: '1px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    color: idx === faqs.length - 1 ? '#CBD5E1' : '#475569',
+                    cursor: idx === faqs.length - 1 ? 'not-allowed' : 'pointer',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                  }}
+                >
+                  ▼
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFaq(idx)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    border: '1px solid #FECDD3',
+                    backgroundColor: '#FFF1F2',
+                    color: '#E11D48',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    marginLeft: '4px',
+                  }}
+                >
+                  <span>🗑️ Remove</span>
+                </button>
               </div>
             </div>
-          ))}
-        </div>
+
+            {/* Question Heading Input */}
+            <div>
+              <label style={labelStyle}>Question Heading</label>
+              <input
+                type="text"
+                value={faq.q}
+                onChange={(e) => handleUpdateFaq(idx, 'q', e.target.value)}
+                style={{ ...inputStyle, fontWeight: 700 }}
+                placeholder="e.g. Which industries do you serve?"
+              />
+            </div>
+
+            {/* Answer Explanation Textarea */}
+            <div>
+              <label style={labelStyle}>Answer Explanation</label>
+              <textarea
+                rows={3}
+                value={faq.a}
+                onChange={(e) => handleUpdateFaq(idx, 'a', e.target.value)}
+                style={{ ...inputStyle, resize: 'vertical' }}
+                placeholder="e.g. We serve businesses across healthcare, finance, e-commerce, education, retail, real estate, and more..."
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

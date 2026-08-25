@@ -6,6 +6,7 @@ export interface BlogPostItem {
   excerpt: string;
   content: string;
   coverImage: string;
+  image?: string;
   coverImageAlt?: string;
   imageAlt?: string;
   images?: string[];
@@ -17,6 +18,7 @@ export interface BlogPostItem {
   readTime?: string;
   published: boolean;
   publishedAt?: string;
+  date?: string;
   order?: number;
   tags?: string[];
   // Section 1: Intro Story

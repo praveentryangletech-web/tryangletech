@@ -1,3 +1,4 @@
+import React, { cache } from "react";
 import { Metadata } from "next";
 import WebflowInit from "../../common/WebflowInit";
 import Image from "next/image";
@@ -7,9 +8,38 @@ import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
 import { blogService } from "@/backend/services/blog/blog.service";
+import { BlogPostItem } from "@/backend/services/blog/blog.types";
 import HomeThreeFaq from "../../home-three/components/Faq";
 
 export const revalidate = 60;
+
+const getCachedPost = cache(async (slug: string): Promise<BlogPostItem | null> => {
+  try {
+    const post = await blogService.getPostBySlug(slug);
+    if (post) return post;
+  } catch {}
+
+  const fallback = BLOG_POSTS.find((p) => p.slug === slug);
+  if (!fallback) return null;
+
+  return {
+    id: fallback.id,
+    slug: fallback.slug,
+    title: fallback.title,
+    category: fallback.category,
+    excerpt: fallback.title,
+    content: '',
+    coverImage: fallback.image,
+    images: fallback.images || (fallback.image ? [fallback.image] : []),
+    authorName: 'TryangleTech Team',
+    authorRole: 'Editorial Team',
+    readTime: '5 min read',
+    published: true,
+    publishedAt: fallback.date || new Date().toISOString(),
+    createdAt: fallback.date || new Date().toISOString(),
+    updatedAt: fallback.date || new Date().toISOString(),
+  } as BlogPostItem;
+});
 
 export async function generateMetadata({
   params,
@@ -22,14 +52,7 @@ export async function generateMetadata({
   const resolvedSearchParams = searchParams ? await searchParams : {};
   const isPreview = resolvedSearchParams?.preview === 'true';
 
-  let post: any = null;
-  try {
-    post = await blogService.getPostBySlug(resolvedParams.id);
-  } catch {}
-
-  if (!post) {
-    post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
-  }
+  const post = await getCachedPost(resolvedParams.id);
 
   if (!post || (!post.published && !isPreview)) {
     return {
@@ -91,16 +114,7 @@ export default async function BlogPostPage({
   const resolvedSearchParams = searchParams ? await searchParams : {};
   const isPreview = resolvedSearchParams?.preview === 'true';
   
-  // 1. Try fetching from dynamic database first
-  let post: any = null;
-  try {
-    post = await blogService.getPostBySlug(resolvedParams.id);
-  } catch {}
-
-  // 2. Fallback to static data
-  if (!post) {
-    post = BLOG_POSTS.find((p) => p.slug === resolvedParams.id);
-  }
+  const post = await getCachedPost(resolvedParams.id);
 
   // 3. Block draft posts from public route (404 Not Found) unless preview=true
   if (!post || (!post.published && !isPreview)) {
@@ -120,7 +134,7 @@ export default async function BlogPostPage({
   const authorImage = (post.authorImage && !post.authorImage.includes('/portfolio/')) ? post.authorImage : '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';
   const publishDate = post.publishedAt
     ? (post.publishedAt.includes('T') ? new Date(post.publishedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) : post.publishedAt)
-    : (post.date || '29 Oct 2025');
+    : (post.date || '----');
 
   // Section 1: Intro Story
   const s1Heading = post.section1Heading || "Blending human creativity with machine Intelligence";

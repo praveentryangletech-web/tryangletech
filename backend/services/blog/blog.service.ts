@@ -367,7 +367,7 @@ export class BlogService {
         db.$queryRaw<any[]>`
           SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -376,10 +376,13 @@ export class BlogService {
         return post;
       }
     } catch (err) {
-      console.warn('Database error in getPostBySlug:', err);
+      console.warn('Database notice in getPostBySlug fallback:', err);
     }
 
     const match = this.getFallbackPosts().find((p) => p.slug.toLowerCase() === cleanSlug);
+    if (match) {
+      blogCache.set(cacheKey, match);
+    }
     return match || null;
   }
 
@@ -398,7 +401,7 @@ export class BlogService {
         db.$queryRaw<any[]>`
           SELECT * FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -407,7 +410,7 @@ export class BlogService {
         return post;
       }
     } catch (err) {
-      console.warn('Database error in getPostById:', err);
+      console.warn('Database notice in getPostById fallback:', err);
     }
 
     const fallback = this.getFallbackPosts().find((p) => p.id === id || p.slug === id) || null;

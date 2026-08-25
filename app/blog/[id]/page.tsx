@@ -9,8 +9,7 @@ import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlide
 import { blogService } from "@/backend/services/blog/blog.service";
 import HomeThreeFaq from "../../home-three/components/Faq";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,

@@ -3,8 +3,7 @@ import WebflowInit from "../common/WebflowInit";
 import BlogContent from './components/BlogContent';
 import BlogFAQ from './components/BlogFAQ';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Tech Insights & Software Engineering Blog | TryangleTech',

@@ -20,14 +20,7 @@ export async function GET() {
       subheadline: loc.subheadline,
     }));
   } catch (err) {
-    locations = [
-      {
-        city: 'Dubai',
-        country: 'United Arab Emirates',
-        slug: 'dubai',
-        subheadline: 'From high-converting web applications to custom ERP software, we build scalable digital systems tailored for modern businesses.',
-      },
-    ];
+    locations = [];
   }
 
   // 2. Fetch live published portfolio case studies

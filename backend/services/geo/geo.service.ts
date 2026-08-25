@@ -80,28 +80,8 @@ export const geoService = {
         await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_type_pub" ON "PageContent" ("pageType", "isPublished");`);
         await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_reg_pub" ON "PageContent" ("region", "isPublished");`);
 
-        // Migrate legacy GeoLocation table if exists
-        await db.$executeRawUnsafe(`
-          DO $$
-          BEGIN
-            IF EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'GeoLocation') THEN
-              INSERT INTO "PageContent" (
-                "slug", "pageType", "city", "state", "country", "countryCode", "region", "regionCode",
-                "postalCode", "latitude", "longitude", "popular", "metaTitle", "metaDescription",
-                "keywords", "faqs", "isPublished", "createdAt", "updatedAt"
-              )
-              SELECT
-                "slug", 'LOCATION_CLONE', "city", "state", "country", "countryCode", "region", "regionCode",
-                "postalCode", "latitude", "longitude", "popular", "metaTitle", "metaDescription",
-                "keywords", "faqs", "isPublished", "createdAt", "updatedAt"
-              FROM "GeoLocation"
-              ON CONFLICT ("slug") DO NOTHING;
-            END IF;
-          END $$;
-        `);
-        // Ensure previously deleted locations are purged
-        await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") IN ('rajkot', 'varanasi')`);
-        geoCache.clear();
+        // Drop legacy GeoLocation table if it still exists so it never re-inserts stale deleted items
+        await db.$executeRawUnsafe(`DROP TABLE IF EXISTS "GeoLocation" CASCADE;`);
       } catch (err) {
         console.warn('[GeoService] ensureTable notice:', err);
       }
@@ -647,20 +627,54 @@ export const geoService = {
     if (!slug) return false;
     const cleanSlug = slug.toLowerCase().trim();
 
-    this.ensureTable();
-
     try {
-      await db.$executeRaw`DELETE FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug}`;
+      // 1. Delete matching row from PageContent via Prisma ORM delegate if present
+      try {
+        if ((db as any).pageContent) {
+          await (db as any).pageContent.deleteMany({
+            where: {
+              OR: [
+                { slug: cleanSlug },
+                { slug: { equals: cleanSlug, mode: 'insensitive' } },
+                { slug: slug },
+              ],
+            },
+          });
+        }
+      } catch (ormErr) {
+        console.warn(`[GeoService] ORM deleteMany fallback for '${cleanSlug}'`);
+      }
+
+      // 2. Direct SQL deletion to ensure 100% database cleanup
+      await db.$executeRawUnsafe(
+        `DELETE FROM "PageContent" WHERE LOWER("slug") = $1 OR "slug" = $2`,
+        cleanSlug,
+        slug
+      );
+
+      // 3. Delete any orphaned PageFAQs
+      try {
+        if ((db as any).pageFAQ) {
+          await (db as any).pageFAQ.deleteMany({
+            where: {
+              pageId: { equals: cleanSlug, mode: 'insensitive' },
+            },
+          });
+        }
+      } catch {
+        // ignore
+      }
+
+      // 4. Purge in-memory geo cache completely
       geoCache.clear();
       return true;
     } catch (err) {
-      console.warn(`[GeoService] deleteLocation('${cleanSlug}') executeRaw error, attempting fallback:`, err);
+      console.error(`[GeoService] deleteLocation critical error for '${cleanSlug}':`, err);
       try {
         await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") = $1`, cleanSlug);
         geoCache.clear();
         return true;
       } catch (err2) {
-        console.error(`[GeoService] deleteLocation critical error:`, err2);
         return false;
       }
     }

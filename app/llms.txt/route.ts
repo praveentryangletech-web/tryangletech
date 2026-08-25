@@ -19,9 +19,7 @@ export async function GET() {
       slug: loc.slug,
     }));
   } catch (err) {
-    locations = [
-      { city: 'Dubai', country: 'United Arab Emirates', slug: 'dubai' },
-    ];
+    locations = [];
   }
 
   // 2. Fetch live published portfolio case studies

@@ -7,6 +7,8 @@ import { geoService } from '@/backend/services/geo';
 import { homeService } from '@/backend/services/home';
 
 export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
 
 interface LocationPageProps {
   params: Promise<{
@@ -15,16 +17,6 @@ interface LocationPageProps {
   searchParams?: Promise<{
     preview?: string;
   }>;
-}
-
-/**
- * Pre-render all supported commercial hubs for instant CDN serving
- */
-export async function generateStaticParams() {
-  const locations = await geoService.getAllLocations(false);
-  return locations.map((loc) => ({
-    slug: loc.slug,
-  }));
 }
 
 /**

@@ -703,37 +703,41 @@ export default function SuperadminUnifiedHomeCMS() {
         {/* Editor Header Toolbar Skeleton */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div className="rt-skeleton-box" style={{ width: '140px', height: '36px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '140px', height: '38px', borderRadius: '8px' }} />
             <div className="rt-skeleton-box" style={{ width: '220px', height: '32px', borderRadius: '6px' }} />
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>
             <div className="rt-skeleton-box" style={{ width: '120px', height: '38px', borderRadius: '8px' }} />
-            <div className="rt-skeleton-box" style={{ width: '135px', height: '38px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '150px', height: '38px', borderRadius: '8px' }} />
           </div>
         </div>
 
         {/* 8 Tabs Skeleton */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '2rem', borderBottom: '1px solid #E2E8F0' }}>
-          {['130px', '160px', '140px', '150px', '145px', '140px', '135px', '165px'].map((w, idx) => (
-            <div key={idx} className="rt-skeleton-box" style={{ width: w, height: '38px', borderRadius: '8px', flexShrink: 0 }} />
+        <div className="no-scrollbar" style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '6px', marginBottom: '20px', borderBottom: '1.5px solid #CBD5E1' }}>
+          {['125px', '145px', '135px', '145px', '135px', '135px', '130px', '155px'].map((w, idx) => (
+            <div key={idx} className="rt-skeleton-box" style={{ width: w, height: '36px', borderRadius: '8px', flexShrink: 0 }} />
           ))}
         </div>
 
-        {/* Form Fields Skeleton */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        {/* Form Fields Card Skeleton */}
+        <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F1F5F9', paddingBottom: '0.85rem' }}>
+            <div className="rt-skeleton-box" style={{ width: '180px', height: '22px', borderRadius: '6px' }} />
+            <div className="rt-skeleton-box" style={{ width: '120px', height: '14px', borderRadius: '4px' }} />
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
             <div>
-              <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+              <div className="rt-skeleton-box" style={{ width: '120px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
             </div>
             <div>
               <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
             </div>
           </div>
           <div>
             <div className="rt-skeleton-box" style={{ width: '150px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-            <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '8px' }} />
           </div>
         </div>
       </div>

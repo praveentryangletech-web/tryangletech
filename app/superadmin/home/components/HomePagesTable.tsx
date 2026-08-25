@@ -523,25 +523,31 @@ export default function HomePagesTable({
 
             {/* 2. PROGRAMMATIC GEO CLONE ROWS */}
             {isLoading ? (
-              Array.from({ length: 6 }).map((_, idx) => (
+              Array.from({ length: itemsPerPage || 6 }).map((_, idx) => (
                 <tr key={`skeleton-${idx}`} style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
                   <td style={{ padding: '0.55rem 0.4rem 0.55rem 1.25rem' }}>
-                    <div className="skeleton-shimmer" style={{ height: '18px', width: '120px', borderRadius: '6px' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <div className="rt-skeleton-box" style={{ height: '16px', width: `${90 + (idx % 3) * 25}px`, borderRadius: '4px' }} />
+                      <div className="rt-skeleton-box" style={{ height: '12px', width: '70px', borderRadius: '3px' }} />
+                    </div>
                   </td>
                   <td style={{ padding: '0.55rem 0.4rem' }}>
-                    <div className="skeleton-shimmer" style={{ height: '18px', width: '100px', borderRadius: '6px' }} />
+                    <div className="rt-skeleton-box" style={{ height: '22px', width: '130px', borderRadius: '6px' }} />
                   </td>
                   <td style={{ padding: '0.55rem 0.4rem' }}>
-                    <div className="skeleton-shimmer" style={{ height: '18px', width: '90px', borderRadius: '6px' }} />
+                    <div className="rt-skeleton-box" style={{ height: '16px', width: '85px', borderRadius: '4px' }} />
                   </td>
                   <td style={{ padding: '0.55rem 0.4rem' }}>
-                    <div className="skeleton-shimmer" style={{ height: '18px', width: '60px', borderRadius: '12px' }} />
+                    <div className="rt-skeleton-box" style={{ height: '24px', width: '75px', borderRadius: '12px' }} />
                   </td>
                   <td style={{ padding: '0.55rem 0.4rem' }}>
-                    <div className="skeleton-shimmer" style={{ height: '18px', width: '80px', borderRadius: '6px' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <div className="rt-skeleton-box" style={{ height: '14px', width: '80px', borderRadius: '3px' }} />
+                      <div className="rt-skeleton-box" style={{ height: '11px', width: '55px', borderRadius: '3px' }} />
+                    </div>
                   </td>
                   <td style={{ padding: '0.55rem 1.25rem 0.55rem 0.4rem', textAlign: 'center' }}>
-                    <div className="skeleton-shimmer" style={{ height: '28px', width: '140px', borderRadius: '6px', margin: '0 auto' }} />
+                    <div className="rt-skeleton-box" style={{ height: '30px', width: '140px', borderRadius: '7px', margin: '0 auto' }} />
                   </td>
                 </tr>
               ))

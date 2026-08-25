@@ -1,31 +1,13 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import SafeImage from '@/app/common/SafeImage';
-import { BlogPostItem } from '@/backend/services/blog';
+import { BlogProvider, useBlog } from '@/app/context/BlogContext';
 
-export default function HomeLatestBlog() {
-  const [posts, setPosts] = useState<BlogPostItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+function HomeLatestBlogContent() {
+  const { latestPosts, isLoading } = useBlog();
 
-  useEffect(() => {
-    async function loadLatestPosts() {
-      try {
-        const res = await fetch('/api/blog?limit=4&status=published&sortBy=publishedAt&sortOrder=desc');
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          setPosts(json.data.slice(0, 4));
-        }
-      } catch (err) {
-        console.warn('Failed to load home latest blogs:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    loadLatestPosts();
-  }, []);
-
-  if (!isLoading && posts.length === 0) {
+  if (!isLoading && latestPosts.length === 0) {
     return null;
   }
 
@@ -76,7 +58,7 @@ export default function HomeLatestBlog() {
                   </div>
                 </div>
               ))
-            : posts.map((post) => {
+            : latestPosts.map((post) => {
                 const coverImage = post.coverImage || post.images?.[0] || '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
                 const formattedDate = post.publishedAt
                   ? new Date(post.publishedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -250,5 +232,13 @@ export default function HomeLatestBlog() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function HomeLatestBlog() {
+  return (
+    <BlogProvider initialLimit={4}>
+      <HomeLatestBlogContent />
+    </BlogProvider>
   );
 }

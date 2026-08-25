@@ -2347,7 +2347,7 @@ function BlogEditorInner() {
                 <button
                   type="button"
                   onClick={handleAddKeyword}
-                  style={{ padding: '0 18px', borderRadius: '10px', border: '1.5px solid #BFDBFE', backgroundColor: '#EFF6FF', color: '#1833FE', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.15s ease' }}
+                  style={{ height: '42px', padding: '0 18px', borderRadius: '10px', border: '1.5px solid #BFDBFE', backgroundColor: '#EFF6FF', color: '#1833FE', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.15s ease' }}
                 >
                   + Add Keyword
                 </button>

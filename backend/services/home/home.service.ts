@@ -57,9 +57,10 @@ export const homeService = {
     }
 
     try {
+      const queryTimeoutMs = process.env.NODE_ENV === 'production' ? 5000 : 8000;
       const rows = await Promise.race([
         db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "slug" = 'main' LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error(`DB Timeout (${queryTimeoutMs}ms)`)), queryTimeoutMs)),
       ]);
 
       if (rows && rows.length > 0) {

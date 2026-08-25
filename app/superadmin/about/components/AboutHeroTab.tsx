@@ -317,7 +317,8 @@ export default function AboutHeroTab({ hero, setHero, onOpenAssetPicker }: About
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                   <label
                     style={{
-                      padding: '6px 10px',
+                      height: '34px',
+                      padding: '0 10px',
                       borderRadius: '6px',
                       border: '1px solid #CBD5E1',
                       backgroundColor: '#F8FAFC',
@@ -357,7 +358,8 @@ export default function AboutHeroTab({ hero, setHero, onOpenAssetPicker }: About
                     type="button"
                     onClick={() => onOpenAssetPicker(`aboutHeroAvatar_${idx}`)}
                     style={{
-                      padding: '6px 10px',
+                      height: '34px',
+                      padding: '0 10px',
                       borderRadius: '6px',
                       border: '1px solid #CBD5E1',
                       backgroundColor: '#F8FAFC',

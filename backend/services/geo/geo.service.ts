@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { db } from '@/backend/db/client';
 import { LocationItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
+import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
 
 interface CachedGeoEntry<T> {
   data: T;
@@ -556,6 +557,14 @@ export const geoService = {
     const coordinates = target.coordinates || sourceLoc?.coordinates || { latitude: 23.0225, longitude: 72.5714 };
     const postalCode = target.postalCode || sourceLoc?.postalCode || undefined;
 
+    const baseHero = sourceLoc?.hero || DEFAULT_HOME_CONTENT.hero;
+    const baseServices = sourceLoc?.services || DEFAULT_HOME_CONTENT.services;
+    const baseAbout = sourceLoc?.about || DEFAULT_HOME_CONTENT.about;
+    const baseWhyChooseUs = sourceLoc?.whyChooseUs || DEFAULT_HOME_CONTENT.whyChooseUs;
+    const baseHowWeWork = sourceLoc?.howWeWork || DEFAULT_HOME_CONTENT.howWeWork;
+    const baseTestimonials = sourceLoc?.testimonials || DEFAULT_HOME_CONTENT.testimonials;
+    const baseCtaBanner = sourceLoc?.ctaBanner || DEFAULT_HOME_CONTENT.ctaBanner;
+
     // 2. Generate customized parameters for new location
     const newLocationPayload: Partial<LocationItem> & { slug: string; city: string } = {
       slug: cleanTargetSlug,
@@ -591,13 +600,23 @@ export const geoService = {
           a: `We build custom web applications, native & cross-platform mobile apps (Flutter, React Native, Swift), enterprise software, CRM/ERP integrations, and cloud architectures.`,
         },
       ],
-      hero: sourceLoc.hero ? { ...sourceLoc.hero, headline: `We build websites, apps and custom software for businesses in ${targetCity}`, subBadgeText: `SERVING ${targetCity.toUpperCase()}` } : undefined,
-      services: sourceLoc.services,
-      about: sourceLoc.about ? { ...sourceLoc.about, heading: `Empowering Businesses Across ${targetCity}`, headingHighlight: `${targetCity} & Global Markets` } : undefined,
-      whyChooseUs: sourceLoc.whyChooseUs,
-      howWeWork: sourceLoc.howWeWork,
-      testimonials: sourceLoc.testimonials,
-      ctaBanner: sourceLoc.ctaBanner,
+      hero: {
+        ...baseHero,
+        headline: `We build websites, apps and custom software for businesses in ${targetCity}`,
+        subBadgeText: `SERVING ${targetCity.toUpperCase()}`,
+        subheadline: `From high-converting web applications to custom ERP software, we build scalable digital systems for businesses in ${targetCity}.`,
+      },
+      services: baseServices,
+      about: {
+        ...baseAbout,
+        heading: `Empowering Businesses Across ${targetCity}`,
+        headingHighlight: `${targetCity} & Global Markets`,
+        description: `Serving clients in ${targetCity} with cutting-edge engineering, enterprise-grade architectures, and bespoke software solutions designed to accelerate growth.`,
+      },
+      whyChooseUs: baseWhyChooseUs,
+      howWeWork: baseHowWeWork,
+      testimonials: baseTestimonials,
+      ctaBanner: baseCtaBanner,
     };
 
     return await this.saveLocation(newLocationPayload);

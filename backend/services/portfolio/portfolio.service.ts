@@ -3,6 +3,7 @@ import db from '@/backend/db/client';
 import { projects as defaultProjects, PortfolioCategory } from '@/app/data/portfolioData';
 import {
   PortfolioItem,
+  PortfolioSummaryItem,
   CreatePortfolioInput,
   UpdatePortfolioInput,
   PortfolioQueryParams,
@@ -280,14 +281,18 @@ export const portfolioService = {
         : (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "order" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "order" ASC, "createdAt" DESC`);
 
       // Single-Roundtrip CTE Execution with 8.0s resilient timeout
+      const selectColumns = params.full
+        ? Prisma.sql`*`
+        : Prisma.sql`"id", "slug", "title", "category", "image", "imageAlt", "description", "client", "duration", "role", "liveUrl", "technologies", "order", "createdAt", "updatedAt"`;
+
       const rows = await Promise.race([
         db.$queryRaw<any[]>`
           WITH filtered AS (
-            SELECT * FROM "PortfolioProject"
+            SELECT ${selectColumns} FROM "PortfolioProject"
             ${whereClause}
           ),
           counted AS (
-            SELECT COUNT(*)::int AS full_count FROM filtered
+            SELECT COUNT(*)::int AS full_count FROM "PortfolioProject" ${whereClause}
           )
           SELECT 
             f.*,
@@ -313,7 +318,7 @@ export const portfolioService = {
 
       const totalPages = Math.ceil(total / limit) || 1;
 
-      const items: PortfolioItem[] = (rows || []).map((r: any) => mapRowToPortfolioItem(r));
+      const items = (rows || []).map((r: any) => (params.full ? mapRowToPortfolioItem(r) : mapRowToPortfolioSummary(r)));
 
       const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
@@ -951,7 +956,7 @@ export const portfolioService = {
 };
 
 /**
- * Universal Mapper from PostgreSQL Raw Row to PortfolioItem
+ * Universal Mapper from PostgreSQL Raw Row to PortfolioItem (Full Record)
  */
 function mapRowToPortfolioItem(r: any): PortfolioItem {
   return {
@@ -980,6 +985,29 @@ function mapRowToPortfolioItem(r: any): PortfolioItem {
     geoRegion: r.geoRegion || '',
     canonicalUrl: r.canonicalUrl || '',
     faqs: Array.isArray(r.faqs) ? r.faqs : (typeof r.faqs === 'string' ? JSON.parse(r.faqs || '[]') : (r.faqs || [])),
+    order: r.order || 0,
+    createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
+    updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),
+  };
+}
+
+/**
+ * Lightweight Mapper from PostgreSQL Raw Row to PortfolioSummaryItem (List/Table/Grid View)
+ */
+function mapRowToPortfolioSummary(r: any): PortfolioSummaryItem {
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    category: r.category as PortfolioCategory,
+    image: r.image,
+    imageAlt: r.imageAlt || r.title || '',
+    description: r.description || '',
+    client: r.client || '',
+    duration: r.duration || '',
+    role: r.role || '',
+    liveUrl: r.liveUrl || '',
+    technologies: Array.isArray(r.technologies) ? r.technologies : [],
     order: r.order || 0,
     createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : new Date().toISOString(),
     updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : new Date().toISOString(),

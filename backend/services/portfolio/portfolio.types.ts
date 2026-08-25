@@ -1,24 +1,30 @@
 import { PortfolioCategory } from '@/app/data/portfolioData';
 
-export interface PortfolioItem {
+export interface PortfolioSummaryItem {
   id: string;
   slug: string;
   title: string;
   category: PortfolioCategory;
   image: string;
   imageAlt?: string;
-  images?: string[];
-  imageAlts?: string[];
-  description: string;
+  description?: string;
   client?: string;
   duration?: string;
   role?: string;
   liveUrl?: string;
+  technologies?: string[];
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PortfolioItem extends PortfolioSummaryItem {
+  images?: string[];
+  imageAlts?: string[];
   content?: string;
   challenges: string[];
   solutions: string[];
   results: string[];
-  technologies: string[];
   metaTitle?: string;
   metaDescription?: string;
   aeoSummary?: string;
@@ -26,9 +32,6 @@ export interface PortfolioItem {
   geoRegion?: string;
   canonicalUrl?: string;
   faqs?: Array<{ question: string; answer: string; q?: string; a?: string }>;
-  order: number;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export type CreatePortfolioInput = Partial<Omit<PortfolioItem, 'id' | 'createdAt' | 'updatedAt'>>;
@@ -42,6 +45,7 @@ export interface PortfolioQueryParams {
   sortBy?: 'order' | 'createdAt' | 'title';
   sortOrder?: 'asc' | 'desc';
   slug?: string;
+  full?: boolean;
 }
 
 export interface PaginationMeta {
@@ -54,7 +58,7 @@ export interface PaginationMeta {
 }
 
 export interface PaginatedPortfolioResult {
-  items: PortfolioItem[];
+  items: (PortfolioItem | PortfolioSummaryItem)[];
   pagination: PaginationMeta;
   filters: {
     category?: string;

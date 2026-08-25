@@ -1,11 +1,28 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { geoService } from '@/backend/services/geo';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     const { searchParams } = new URL(request.url);
+
+    // If slug or id query param is present, fetch the single full detailed record for editing
+    const slug = searchParams.get('slug') || searchParams.get('id');
+    if (slug) {
+      const location = await geoService.getLocationBySlug(slug, true);
+      if (!location) {
+        return NextResponse.json({ success: false, error: 'Location not found' }, { status: 404 });
+      }
+      return NextResponse.json({
+        success: true,
+        data: location,
+      });
+    }
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = parseInt(searchParams.get('limit') || '8', 10);
     const region = searchParams.get('region') || undefined;
@@ -53,7 +70,10 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
 
@@ -107,15 +127,18 @@ export async function POST(request: Request) {
   }
 }
 
-export async function PATCH(request: Request) {
+export async function PATCH(request: NextRequest) {
   return POST(request);
 }
 
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
   return POST(request);
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get('slug');

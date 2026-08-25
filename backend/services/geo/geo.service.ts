@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { db } from '@/backend/db/client';
-import { LocationItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
+import { LocationItem, LocationSummaryItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
 
@@ -196,6 +196,62 @@ export const geoService = {
   },
 
   /**
+   * Retrieve lightweight location summaries for Superadmin tables & listings (excludes heavy JSON sections)
+   */
+  async getLocationSummaries(includeDrafts = true): Promise<LocationSummaryItem[]> {
+    const cacheKey = `geo_summaries_${includeDrafts ? 'all' : 'published'}`;
+    const cached = geoCache.get<LocationSummaryItem[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const rows = await Promise.race([
+        includeDrafts
+          ? db.$queryRaw<any[]>`
+              SELECT "slug", "city", "state", "country", "countryCode", "region", "regionCode", "postalCode", "latitude", "longitude", "popular", "isPublished", "metaTitle", "createdAt", "updatedAt"
+              FROM "PageContent"
+              WHERE "pageType" = 'LOCATION_CLONE'
+              ORDER BY "city" ASC
+            `
+          : db.$queryRaw<any[]>`
+              SELECT "slug", "city", "state", "country", "countryCode", "region", "regionCode", "postalCode", "latitude", "longitude", "popular", "isPublished", "metaTitle", "createdAt", "updatedAt"
+              FROM "PageContent"
+              WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true
+              ORDER BY "city" ASC
+            `,
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+      ]);
+
+      if (rows && Array.isArray(rows)) {
+        const summaries: LocationSummaryItem[] = rows.map((r) => ({
+          slug: r.slug,
+          city: r.city || r.slug,
+          state: r.state || undefined,
+          country: r.country || 'India',
+          countryCode: r.countryCode || 'IN',
+          region: (r.region as any) || 'Gujarat',
+          regionCode: r.regionCode || 'IN-GJ',
+          postalCode: r.postalCode || undefined,
+          coordinates: {
+            latitude: Number(r.latitude) || 23.0225,
+            longitude: Number(r.longitude) || 72.5714,
+          },
+          popular: Boolean(r.popular),
+          isPublished: r.isPublished !== undefined ? Boolean(r.isPublished) : true,
+          metaTitle: r.metaTitle || undefined,
+          createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : undefined,
+          updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : undefined,
+        }));
+
+        geoCache.set(cacheKey, summaries);
+        return summaries;
+      }
+    } catch (err) {
+      console.warn('[GeoService] getLocationSummaries DB error:', err);
+    }
+    return [];
+  },
+
+  /**
    * Backend-Side Paginated Location Query with search, region, and publication status filtering
    */
   async getPaginatedLocations(params: LocationQueryParams = {}): Promise<PaginatedLocationResult> {
@@ -205,11 +261,12 @@ export const geoService = {
     const region = params.region && params.region !== 'All' ? params.region.trim() : undefined;
     const search = params.search ? params.search.trim().toLowerCase() : undefined;
     const status = params.status || (params.publishedOnly ? 'published' : 'all');
+    const includeDrafts = params.includeDrafts !== undefined ? params.includeDrafts : true;
 
-    // Retrieve location dataset from PostgreSQL
-    const allLocations = await this.getAllLocations(true);
+    // Retrieve lightweight summary dataset from PostgreSQL
+    const allSummaries = await this.getLocationSummaries(includeDrafts);
 
-    let filtered = allLocations;
+    let filtered = allSummaries;
     if (status === 'published') {
       filtered = filtered.filter((l) => l.isPublished !== false);
     } else if (status === 'draft') {

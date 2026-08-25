@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { LocationItem } from '@/backend/services/geo/geo.types';
+import { LocationItem, LocationSummaryItem } from '@/backend/services/geo/geo.types';
 
 interface DeleteLocationModalProps {
-  deletingLocation: LocationItem | null;
+  deletingLocation: LocationItem | LocationSummaryItem | null;
   onClose: () => void;
   onConfirmDelete: () => void;
   isDeleting: boolean;

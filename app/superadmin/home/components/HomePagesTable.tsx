@@ -3,7 +3,7 @@
 import React from 'react';
 import Tooltip from '@/app/superadmin/components/Tooltip';
 import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
-import { LocationItem, LocationRegion, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
+import { LocationItem, LocationSummaryItem, LocationRegion, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
 
 function formatPublishDateTime(dateVal?: string | Date): { dateStr: string; timeStr: string } {
   if (!dateVal) {
@@ -36,7 +36,7 @@ interface HomePagesTableProps {
   selectedStatusFilter?: 'all' | 'published' | 'draft';
   setSelectedStatusFilter?: (val: 'all' | 'published' | 'draft') => void;
   onToggleStatus?: (slug: string, isPublished: boolean) => void;
-  locations: LocationItem[];
+  locations: (LocationItem | LocationSummaryItem)[];
   isLoading: boolean;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
@@ -51,9 +51,9 @@ interface HomePagesTableProps {
     hasPrevPage: boolean;
   };
   onOpenEditMain: () => void;
-  onOpenEditLocation: (loc: LocationItem) => void;
+  onOpenEditLocation: (loc: LocationItem | LocationSummaryItem) => void;
   onOpenDuplicateModal: (source: { name: string; slug: string; region?: LocationRegion; country?: string }) => void;
-  onSetDeletingLocation: (loc: LocationItem) => void;
+  onSetDeletingLocation: (loc: LocationItem | LocationSummaryItem) => void;
   successMessage?: string;
   errorMessage?: string;
 }

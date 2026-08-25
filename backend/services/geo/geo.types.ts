@@ -62,6 +62,23 @@ export interface LocationItem {
   ctaBanner?: Partial<HomeCtaBannerSection>;
 }
 
+export interface LocationSummaryItem {
+  slug: string;
+  city: string;
+  state?: string;
+  country: string;
+  countryCode: string;
+  region: LocationRegion;
+  regionCode: string;
+  postalCode?: string;
+  coordinates: GeoCoordinates;
+  popular: boolean;
+  isPublished: boolean;
+  metaTitle?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+}
+
 export interface LocationQueryParams {
   page?: number;
   limit?: number;
@@ -74,7 +91,7 @@ export interface LocationQueryParams {
 }
 
 export interface PaginatedLocationResult {
-  items: LocationItem[];
+  items: LocationSummaryItem[];
   pagination: {
     page: number;
     limit: number;

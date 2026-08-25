@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { HomeContentDTO, HomeHeroSection, HomeServiceItem, HomeAboutSection, HomeWhyChooseUsSection, HomeHowWeWorkSection, HomeTestimonialItem, HomeCtaBannerSection } from '@/backend/services/home/home.types';
 import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
-import { LocationItem, LocationRegion, LocationFaq, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
+import { LocationItem, LocationSummaryItem, LocationRegion, LocationFaq, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 
 import {
@@ -40,8 +40,8 @@ export default function SuperadminUnifiedHomeCMS() {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState<string>('All');
 
   // All location pages
-  const [locations, setLocations] = useState<LocationItem[]>([]);
-  const [selectedLocation, setSelectedLocation] = useState<LocationItem | null>(null);
+  const [locations, setLocations] = useState<(LocationItem | LocationSummaryItem)[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<LocationItem | LocationSummaryItem | null>(null);
 
   // Home Content Editor states
   const [hero, setHero] = useState<HomeHeroSection>(DEFAULT_HOME_CONTENT.hero);
@@ -95,7 +95,7 @@ export default function SuperadminUnifiedHomeCMS() {
   const [isDuplicating, setIsDuplicating] = useState(false);
 
   // Delete Modal State
-  const [deletingLocation, setDeletingLocation] = useState<LocationItem | null>(null);
+  const [deletingLocation, setDeletingLocation] = useState<LocationItem | LocationSummaryItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   // Media Picker Modal State
@@ -239,8 +239,8 @@ export default function SuperadminUnifiedHomeCMS() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Open Edit Mode for a specific Location Clone
-  const openEditLocation = (loc: LocationItem) => {
+  // Open Edit Mode for a specific Location Clone (fetches full detailed record on demand)
+  const openEditLocation = async (loc: LocationItem | LocationSummaryItem) => {
     setSelectedLocation(loc);
     setLocSlug(loc.slug);
     setLocCity(loc.city);
@@ -255,76 +255,117 @@ export default function SuperadminUnifiedHomeCMS() {
     setLocPopular(Boolean(loc.popular));
     setLocIsPublished(loc.isPublished !== undefined ? Boolean(loc.isPublished) : true);
     setLocMetaTitle(loc.metaTitle || `Web Development & Custom Software in ${loc.city} | TryangleTech`);
-    setLocMetaDescription(loc.metaDescription || `Top web development and software company serving ${loc.city}. 350+ projects delivered.`);
-    setLocKeywords(Array.isArray(loc.keywords) ? loc.keywords.join(', ') : `${loc.city.toLowerCase()} web development, software company in ${loc.city.toLowerCase()}`);
-    setLocFaqs(Array.isArray(loc.faqs) && loc.faqs.length > 0 ? loc.faqs : [
-      {
-        q: `Do you provide on-site consultations for businesses in ${loc.city}?`,
-        a: `Yes! We work with enterprise clients and startups across ${loc.city} providing strategic software consulting, high-touch communication, and milestone-driven delivery.`,
-      },
-      {
-        q: `What software services does TryangleTech offer in ${loc.city}?`,
-        a: `We build custom web applications, native & cross-platform mobile apps (Flutter, React Native, Swift), enterprise software, CRM/ERP integrations, and cloud architectures.`,
-      },
-    ]);
+    setLocMetaDescription(`Top web development and software company serving ${loc.city}. 350+ projects delivered.`);
+    setLocKeywords(`${loc.city.toLowerCase()} web development, software company in ${loc.city.toLowerCase()}`);
 
-    // Set localized section states for editing this location clone
+    // Set initial fallback section states
     setHero({
       ...DEFAULT_HOME_CONTENT.hero,
       ...(mainHomeData?.hero || {}),
-      ...(loc.hero || {}),
-      headline: loc.hero?.headline || `${loc.headlineTitle} ${loc.headlineHighlight}`,
-      subheadline: loc.hero?.subheadline || loc.subheadline || DEFAULT_HOME_CONTENT.hero.subheadline,
-      subBadgeText: loc.hero?.subBadgeText || `SERVING ${loc.city.toUpperCase()}`,
-      dashboardImage: loc.hero?.dashboardImage !== undefined ? loc.hero.dashboardImage : (mainHomeData?.hero?.dashboardImage || DEFAULT_HOME_CONTENT.hero.dashboardImage),
-      avatars: loc.hero?.avatars || mainHomeData?.hero?.avatars || DEFAULT_HOME_CONTENT.hero.avatars,
-      ctaText: loc.hero?.ctaText || mainHomeData?.hero?.ctaText || DEFAULT_HOME_CONTENT.hero.ctaText,
-      ctaLink: loc.hero?.ctaLink || mainHomeData?.hero?.ctaLink || DEFAULT_HOME_CONTENT.hero.ctaLink,
+      headline: `We build websites, apps and custom software for businesses in ${loc.city}`,
+      subheadline: `From high-converting web applications to custom ERP software, we build scalable digital systems for businesses in ${loc.city}.`,
+      subBadgeText: `SERVING ${loc.city.toUpperCase()}`,
     });
-
-    setServices(
-      Array.isArray(loc.services) && loc.services.length > 0
-        ? loc.services
-        : (mainHomeData?.services || DEFAULT_HOME_CONTENT.services)
-    );
-
+    setServices(mainHomeData?.services || DEFAULT_HOME_CONTENT.services);
     setAbout({
       ...DEFAULT_HOME_CONTENT.about,
       ...(mainHomeData?.about || {}),
-      ...(loc.about || {}),
-      description: loc.about?.description || loc.aboutText || DEFAULT_HOME_CONTENT.about.description,
-      headingHighlight: loc.about?.headingHighlight || `${loc.city} & Global Markets`,
-      image1: loc.about?.image1 !== undefined ? loc.about.image1 : (mainHomeData?.about?.image1 || DEFAULT_HOME_CONTENT.about.image1),
-      image2: loc.about?.image2 !== undefined ? loc.about.image2 : (mainHomeData?.about?.image2 || DEFAULT_HOME_CONTENT.about.image2),
+      heading: `Empowering Businesses Across ${loc.city}`,
+      headingHighlight: `${loc.city} & Global Markets`,
+      description: `Serving clients in ${loc.city} with cutting-edge engineering, enterprise-grade architectures, and bespoke software solutions designed to accelerate growth.`,
     });
-
-    setWhyChooseUs(
-      loc.whyChooseUs
-        ? { ...DEFAULT_HOME_CONTENT.whyChooseUs, ...(mainHomeData?.whyChooseUs || {}), ...loc.whyChooseUs }
-        : (mainHomeData?.whyChooseUs || DEFAULT_HOME_CONTENT.whyChooseUs)
-    );
-
-    setHowWeWork(
-      loc.howWeWork
-        ? { ...DEFAULT_HOME_CONTENT.howWeWork, ...(mainHomeData?.howWeWork || {}), ...loc.howWeWork }
-        : (mainHomeData?.howWeWork || DEFAULT_HOME_CONTENT.howWeWork)
-    );
-
-    setTestimonials(
-      Array.isArray(loc.testimonials) && loc.testimonials.length > 0
-        ? loc.testimonials
-        : (mainHomeData?.testimonials || DEFAULT_HOME_CONTENT.testimonials)
-    );
-
-    setCtaBanner(
-      loc.ctaBanner
-        ? { ...DEFAULT_HOME_CONTENT.ctaBanner, ...(mainHomeData?.ctaBanner || {}), ...loc.ctaBanner }
-        : (mainHomeData?.ctaBanner || DEFAULT_HOME_CONTENT.ctaBanner)
-    );
+    setWhyChooseUs(mainHomeData?.whyChooseUs || DEFAULT_HOME_CONTENT.whyChooseUs);
+    setHowWeWork(mainHomeData?.howWeWork || DEFAULT_HOME_CONTENT.howWeWork);
+    setTestimonials(mainHomeData?.testimonials || DEFAULT_HOME_CONTENT.testimonials);
+    setCtaBanner(mainHomeData?.ctaBanner || DEFAULT_HOME_CONTENT.ctaBanner);
 
     setActiveTab('hero');
     setViewMode('edit-location');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Fetch full complete record from API on-demand
+    try {
+      const res = await apiClient.get<LocationItem>('/api/superadmin/locations', {
+        params: { slug: loc.slug },
+        useCache: false,
+      });
+      if (res.success && res.data) {
+        const fullLoc = res.data;
+        setSelectedLocation(fullLoc);
+        setLocMetaTitle(fullLoc.metaTitle || `Web Development & Custom Software in ${fullLoc.city} | TryangleTech`);
+        setLocMetaDescription(fullLoc.metaDescription || `Top web development and software company serving ${fullLoc.city}. 350+ projects delivered.`);
+        setLocKeywords(Array.isArray(fullLoc.keywords) ? fullLoc.keywords.join(', ') : `${fullLoc.city.toLowerCase()} web development, software company in ${fullLoc.city.toLowerCase()}`);
+        setLocFaqs(Array.isArray(fullLoc.faqs) && fullLoc.faqs.length > 0 ? fullLoc.faqs : [
+          {
+            q: `Do you provide on-site consultations for businesses in ${fullLoc.city}?`,
+            a: `Yes! We work with enterprise clients and startups across ${fullLoc.city} providing strategic software consulting, high-touch communication, and milestone-driven delivery.`,
+          },
+          {
+            q: `What software services does TryangleTech offer in ${fullLoc.city}?`,
+            a: `We build custom web applications, native & cross-platform mobile apps (Flutter, React Native, Swift), enterprise software, CRM/ERP integrations, and cloud architectures.`,
+          },
+        ]);
+
+        const defaultHeadline = `We build websites, apps and custom software for businesses in ${fullLoc.city}`;
+        const computedHeadline = fullLoc.hero?.headline || (fullLoc.headlineTitle && fullLoc.headlineHighlight ? `${fullLoc.headlineTitle} ${fullLoc.headlineHighlight}` : defaultHeadline);
+
+        // Set localized section states for editing this location clone
+        setHero({
+          ...DEFAULT_HOME_CONTENT.hero,
+          ...(mainHomeData?.hero || {}),
+          ...(fullLoc.hero || {}),
+          headline: computedHeadline,
+          subheadline: fullLoc.hero?.subheadline || fullLoc.subheadline || `From high-converting web applications to custom ERP software, we build scalable digital systems for businesses in ${fullLoc.city}.`,
+          subBadgeText: fullLoc.hero?.subBadgeText || `SERVING ${fullLoc.city.toUpperCase()}`,
+          dashboardImage: fullLoc.hero?.dashboardImage !== undefined ? fullLoc.hero.dashboardImage : (mainHomeData?.hero?.dashboardImage || DEFAULT_HOME_CONTENT.hero.dashboardImage),
+          avatars: fullLoc.hero?.avatars || mainHomeData?.hero?.avatars || DEFAULT_HOME_CONTENT.hero.avatars,
+          ctaText: fullLoc.hero?.ctaText || mainHomeData?.hero?.ctaText || DEFAULT_HOME_CONTENT.hero.ctaText,
+          ctaLink: fullLoc.hero?.ctaLink || mainHomeData?.hero?.ctaLink || DEFAULT_HOME_CONTENT.hero.ctaLink,
+        });
+
+        setServices(
+          Array.isArray(fullLoc.services) && fullLoc.services.length > 0
+            ? fullLoc.services
+            : (mainHomeData?.services || DEFAULT_HOME_CONTENT.services)
+        );
+
+        setAbout({
+          ...DEFAULT_HOME_CONTENT.about,
+          ...(mainHomeData?.about || {}),
+          ...(fullLoc.about || {}),
+          description: fullLoc.about?.description || fullLoc.aboutText || DEFAULT_HOME_CONTENT.about.description,
+          headingHighlight: fullLoc.about?.headingHighlight || `${fullLoc.city} & Global Markets`,
+          image1: fullLoc.about?.image1 !== undefined ? fullLoc.about.image1 : (mainHomeData?.about?.image1 || DEFAULT_HOME_CONTENT.about.image1),
+          image2: fullLoc.about?.image2 !== undefined ? fullLoc.about.image2 : (mainHomeData?.about?.image2 || DEFAULT_HOME_CONTENT.about.image2),
+        });
+
+        setWhyChooseUs(
+          fullLoc.whyChooseUs
+            ? { ...DEFAULT_HOME_CONTENT.whyChooseUs, ...(mainHomeData?.whyChooseUs || {}), ...fullLoc.whyChooseUs }
+            : (mainHomeData?.whyChooseUs || DEFAULT_HOME_CONTENT.whyChooseUs)
+        );
+
+        setHowWeWork(
+          fullLoc.howWeWork
+            ? { ...DEFAULT_HOME_CONTENT.howWeWork, ...(mainHomeData?.howWeWork || {}), ...fullLoc.howWeWork }
+            : (mainHomeData?.howWeWork || DEFAULT_HOME_CONTENT.howWeWork)
+        );
+
+        setTestimonials(
+          Array.isArray(fullLoc.testimonials) && fullLoc.testimonials.length > 0
+            ? fullLoc.testimonials
+            : (mainHomeData?.testimonials || DEFAULT_HOME_CONTENT.testimonials)
+        );
+
+        setCtaBanner(
+          fullLoc.ctaBanner
+            ? { ...DEFAULT_HOME_CONTENT.ctaBanner, ...(mainHomeData?.ctaBanner || {}), ...fullLoc.ctaBanner }
+            : (mainHomeData?.ctaBanner || DEFAULT_HOME_CONTENT.ctaBanner)
+        );
+      }
+    } catch (err) {
+      console.warn('[HomeCMS] Could not load detailed location content:', err);
+    }
   };
 
   // Save Main Home Page

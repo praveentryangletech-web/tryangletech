@@ -102,7 +102,7 @@ export const geoService = {
         includeDrafts
           ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' ORDER BY "city" ASC`
           : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "city" ASC`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && Array.isArray(rows)) {
@@ -157,6 +157,7 @@ export const geoService = {
       console.warn('[GeoService] getAllLocations DB query error:', err);
     }
 
+    geoCache.set(cacheKey, []);
     return [];
   },
 
@@ -178,7 +179,7 @@ export const geoService = {
       `;
 
       const set = new Set<string>(['Gujarat', 'India Metros', 'Middle East', 'USA & Canada', 'Europe & UK', 'Global Hubs']);
-      if (rows && Array.isArray(rows)) {
+      if (rows && Array.isArray(rows) && rows.length > 0) {
         rows.forEach((r) => {
           if (r.region && r.region.trim()) {
             set.add(r.region.trim());
@@ -218,7 +219,7 @@ export const geoService = {
               WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true
               ORDER BY "city" ASC
             `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && Array.isArray(rows)) {
@@ -246,8 +247,10 @@ export const geoService = {
         return summaries;
       }
     } catch (err) {
-      console.warn('[GeoService] getLocationSummaries DB error:', err);
+      console.warn('[GeoService] getLocationSummaries DB notice:', err);
     }
+
+    geoCache.set(cacheKey, []);
     return [];
   },
 
@@ -326,7 +329,7 @@ export const geoService = {
         includeDraft
           ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1`
           : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -376,11 +379,11 @@ export const geoService = {
         geoCache.set(cacheKey, loc);
         return loc;
       }
-      return null;
     } catch (err) {
-      console.warn(`[GeoService] getLocationBySlug('${cleanSlug}') DB error:`, err);
-      return null;
+      console.warn(`[GeoService] getLocationBySlug('${cleanSlug}') DB notice:`, err);
     }
+
+    return null;
   },
 
   /**

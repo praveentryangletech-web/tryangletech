@@ -1,51 +1,44 @@
 import React from 'react';
 
 /**
- * Blog Listing Page Shimmer Skeleton Loading Screen
+ * Blog Listing Page Loading Screen
+ * 
+ * Header and Category filter tabs are static and rendered immediately.
+ * ONLY the dynamic blog cards grid renders the skeleton shimmer.
  */
 export default function BlogLoading() {
+  const staticCategories = ['All', 'Web Development', 'Mobile Apps', 'Cloud & DevOps', 'UI/UX Design', 'Custom Software'];
+
   return (
     <main style={{ minHeight: '85vh', backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
       <section className="rt-hero-11" style={{ paddingTop: '5rem', paddingBottom: '4rem' }}>
         <div className="w-layout-blockcontainer rt-container w-container">
           
-          {/* Hero Heading Shimmer */}
+          {/* Static Hero Heading */}
           <div
             className="rt-hero-11-heading rt-desktop-text-center rt-heading-bottom-gap"
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '1.25rem',
+              gap: '0.75rem',
               marginBottom: '3rem',
             }}
           >
-            {/* Sub-text Badge */}
-            <div
-              className="rt-skeleton-box"
-              style={{ width: '130px', height: '26px', borderRadius: '999px' }}
-            />
-
-            {/* Main Headline */}
-            <div
-              className="rt-skeleton-box"
-              style={{ width: '85%', maxWidth: '680px', height: '52px', borderRadius: '14px' }}
-            />
-
-            {/* Small Blog Pill */}
-            <div
-              className="rt-skeleton-box"
-              style={{ width: '170px', height: '34px', borderRadius: '999px' }}
-            />
+            <div className="rt-sub-gap">
+              <div className="rt-sub-text rt-sub-gredient">LATEST INSIGHTS</div>
+            </div>
+            <h1 className="rt-gap-off" style={{ fontSize: '2.75rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
+              Explore our latest thoughts on <span className="rt-color-periwinkle-gray">tech & design</span>
+            </h1>
           </div>
 
-          {/* Category Tabs Bar Shimmer */}
+          {/* Static Category Tabs Bar */}
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
               alignItems: 'center',
-              gap: '2rem',
+              gap: '1.5rem',
               width: '100%',
               paddingBottom: '0.85rem',
               borderBottom: '1px solid #E2E8F0',
@@ -53,102 +46,83 @@ export default function BlogLoading() {
               marginBottom: '3rem',
             }}
           >
-            {[
-              { w: '50px' },
-              { w: '140px' },
-              { w: '160px' },
-              { w: '130px' },
-              { w: '150px' },
-              { w: '110px' },
-            ].map((tab, i) => (
+            {staticCategories.map((cat, i) => (
               <div
-                key={i}
-                className="rt-skeleton-box"
+                key={cat}
                 style={{
-                  width: tab.w,
-                  height: '24px',
-                  borderRadius: '6px',
-                  flexShrink: 0,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Blog Cards Grid Shimmer */}
-          <div
-            className="rt-blog-two-wrapper"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-              gap: '2.5rem 1.875rem',
-            }}
-          >
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div
-                key={item}
-                className="rt-blog-v1-card-wrap"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.25rem',
+                  fontSize: '0.9rem',
+                  fontWeight: i === 0 ? 800 : 600,
+                  color: i === 0 ? 'var(--brand-blue, #1833fe)' : '#64748B',
+                  borderBottom: i === 0 ? '2px solid var(--brand-blue, #1833fe)' : 'none',
+                  paddingBottom: '0.75rem',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                {/* Card Top Image Cover */}
-                <div
-                  className="rt-blog-v3-card-top-part rt-skeleton-box"
-                  style={{
-                    height: '245px',
-                    width: '100%',
-                    borderRadius: '1.5625rem',
-                    border: '1px solid #E2E8F0',
-                  }}
-                />
-
-                {/* Card Metadata & Title */}
-                <div
-                  className="rt-blog-card-v1-top-part"
-                  style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}
-                >
-                  {/* Category & Date Row */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div
-                      className="rt-skeleton-box"
-                      style={{ width: '100px', height: '18px', borderRadius: '4px' }}
-                    />
-                    <div
-                      className="rt-skeleton-box"
-                      style={{ width: '90px', height: '16px', borderRadius: '4px' }}
-                    />
-                  </div>
-
-                  {/* Horizontal Line Shimmer */}
-                  <div
-                    className="rt-skeleton-box"
-                    style={{ width: '100%', height: '1px', borderRadius: '1px' }}
-                  />
-
-                  {/* Article Title Lines */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <div
-                      className="rt-skeleton-box"
-                      style={{ width: '95%', height: '22px', borderRadius: '6px' }}
-                    />
-                    <div
-                      className="rt-skeleton-box"
-                      style={{ width: '65%', height: '22px', borderRadius: '6px' }}
-                    />
-                  </div>
-                </div>
+                {cat}
               </div>
             ))}
           </div>
 
+          {/* Dynamic Blog Cards Grid Shimmer */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: '2rem',
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6].map((idx) => (
+              <div
+                key={`skeleton-blog-${idx}`}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '1.75rem',
+                  padding: '1.25rem',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div
+                  className="rt-skeleton-box"
+                  style={{
+                    width: '100%',
+                    height: '240px',
+                    borderRadius: '1.25rem',
+                  }}
+                />
+                <div style={{ paddingTop: '1.25rem', paddingBottom: '0.5rem' }}>
+                  <div
+                    className="rt-skeleton-box"
+                    style={{
+                      width: '35%',
+                      height: '16px',
+                      borderRadius: '9999px',
+                      marginBottom: '0.85rem',
+                    }}
+                  />
+                  <div
+                    className="rt-skeleton-box"
+                    style={{
+                      width: '85%',
+                      height: '20px',
+                      borderRadius: '9999px',
+                      marginBottom: '0.85rem',
+                    }}
+                  />
+                  <div
+                    className="rt-skeleton-box"
+                    style={{
+                      width: '60%',
+                      height: '14px',
+                      borderRadius: '9999px',
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>

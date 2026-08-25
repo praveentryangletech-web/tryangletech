@@ -88,7 +88,7 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
     <div ref={sectionRef} className="rt-portfolio-section" style={{ position: 'relative', width: '100%' }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         
-        {/* Category Filter Pills (Hidden if hideFilter is true) */}
+        {/* Category Filter Pills (Static - Stays rendered) */}
         {!hideFilter && (
           <div 
             ref={filterWrapRef}
@@ -131,8 +131,8 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
           </div>
         )}
 
-        {/* Loading Skeletons */}
-        {isInitialLoading && (
+        {/* Dynamic Cards Grid Area (ONLY THIS PART LOADS) */}
+        {isInitialLoading ? (
           <div style={{ width: '100%' }}>
             <div 
               style={{
@@ -141,31 +141,62 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
                 gap: '2rem',
               }}
             >
-              {Array.from({ length: limit || 6 }).map((_, idx) => (
+              {Array.from({ length: limit || 3 }).map((_, idx) => (
                 <div 
-                  key={idx}
+                  key={`skeleton-${idx}`}
                   style={{
                     backgroundColor: '#FFFFFF',
-                    borderRadius: '1.25rem',
-                    overflow: 'hidden',
+                    borderRadius: '1.75rem',
+                    padding: '1.25rem',
                     border: '1px solid #E2E8F0',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                 >
-                  <div className="rt-skeleton-box" style={{ width: '100%', height: '240px' }} />
-                  <div style={{ padding: '1.5rem' }}>
-                    <div className="rt-skeleton-box" style={{ width: '30%', height: '14px', marginBottom: '1rem' }} />
-                    <div className="rt-skeleton-box" style={{ width: '80%', height: '22px', marginBottom: '0.75rem' }} />
-                    <div className="rt-skeleton-box" style={{ width: '100%', height: '16px' }} />
+                  {/* Large Rounded Image Skeleton */}
+                  <div 
+                    className="rt-skeleton-box" 
+                    style={{ 
+                      width: '100%', 
+                      height: '240px', 
+                      borderRadius: '1.25rem',
+                    }} 
+                  />
+                  {/* Rounded Text Skeleton Pills */}
+                  <div style={{ paddingTop: '1.25rem', paddingBottom: '0.5rem' }}>
+                    <div 
+                      className="rt-skeleton-box" 
+                      style={{ 
+                        width: '35%', 
+                        height: '16px', 
+                        borderRadius: '9999px', 
+                        marginBottom: '0.85rem' 
+                      }} 
+                    />
+                    <div 
+                      className="rt-skeleton-box" 
+                      style={{ 
+                        width: '85%', 
+                        height: '20px', 
+                        borderRadius: '9999px', 
+                        marginBottom: '0.85rem' 
+                      }} 
+                    />
+                    <div 
+                      className="rt-skeleton-box" 
+                      style={{ 
+                        width: '60%', 
+                        height: '14px', 
+                        borderRadius: '9999px' 
+                      }} 
+                    />
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        )}
-
-        {/* Projects Cards Grid */}
-        {!isInitialLoading && displayedProjects.length > 0 && (
+        ) : displayedProjects.length > 0 ? (
           <div style={{ width: '100%' }}>
             <div 
               style={{
@@ -180,8 +211,8 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
                   className="rt-portfolio-card-wrap"
                   style={{
                     backgroundColor: '#FFFFFF',
-                    borderRadius: '1.25rem',
-                    overflow: 'hidden',
+                    borderRadius: '1.75rem',
+                    padding: '1.25rem',
                     border: '1px solid #E2E8F0',
                     boxShadow: '0 4px 14px rgba(0,0,0,0.04)',
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -193,12 +224,13 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
                     href={`/portfolio/${project.slug}`}
                     style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
                   >
-                    {/* Fixed Image Wrapper */}
+                    {/* Fixed Image Wrapper matching Skeleton Proportions */}
                     <div 
                       style={{
                         position: 'relative',
                         width: '100%',
                         height: '240px',
+                        borderRadius: '1.25rem',
                         overflow: 'hidden',
                         backgroundColor: '#F8FAFC',
                       }}
@@ -217,7 +249,7 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
                     {/* Card Content Area */}
                     <div 
                       style={{
-                        padding: '1.5rem',
+                        paddingTop: '1.25rem',
                         display: 'flex',
                         flexDirection: 'column',
                         flex: 1,
@@ -323,10 +355,8 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
               ))}
             </div>
           </div>
-        )}
-
-        {/* Empty State */}
-        {!isInitialLoading && displayedProjects.length === 0 && (
+        ) : (
+          /* Empty State */
           <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#64748B' }}>
             <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📁</div>
             <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--dark-indigo, #1a0b54)' }}>No projects found</div>

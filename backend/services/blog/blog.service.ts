@@ -283,7 +283,7 @@ export class BlogService {
           db.$queryRaw<any[]>`
             SELECT "id", "slug", "title", "category", "excerpt", "coverImage", "coverImageAlt",
                    "authorName", "authorRole", "authorImage", "readTime", "published", "publishedAt",
-                   "order", "tags", "viewsCount", "createdAt", "updatedAt"
+                   "order", "tags", "createdAt", "updatedAt"
             FROM "BlogPost" ${whereClause} 
             ORDER BY "publishedAt" DESC, "createdAt" DESC 
             LIMIT ${limit} OFFSET ${offset}

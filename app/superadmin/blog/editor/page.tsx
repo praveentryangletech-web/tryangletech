@@ -1335,11 +1335,10 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (coverImage && !img.src.includes('/api/media/')) {
+                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
+                          if (coverImage && !img.src.includes('/api/media/') && !coverImage.startsWith('http')) {
                             const filename = coverImage.split('?')[0].split('/').pop();
-                            if (filename) {
-                              img.src = `/api/media/${encodeURIComponent(filename)}`;
-                            }
+                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                           }
                         }}
                       />
@@ -2053,7 +2052,8 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (contentImage1 && !img.src.includes('/api/media/')) {
+                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
+                          if (contentImage1 && !img.src.includes('/api/media/') && !contentImage1.startsWith('http')) {
                             const filename = contentImage1.split('?')[0].split('/').pop();
                             if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                           }
@@ -2122,7 +2122,8 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          if (contentImage2 && !img.src.includes('/api/media/')) {
+                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
+                          if (contentImage2 && !img.src.includes('/api/media/') && !contentImage2.startsWith('http')) {
                             const filename = contentImage2.split('?')[0].split('/').pop();
                             if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                           }
@@ -2247,7 +2248,8 @@ function BlogEditorInner() {
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => {
                         const img = e.target as HTMLImageElement;
-                        if (authorImage && !img.src.includes('/api/media/')) {
+                        // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
+                        if (authorImage && !img.src.includes('/api/media/') && !authorImage.startsWith('http')) {
                           const filename = authorImage.split('?')[0].split('/').pop();
                           if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
                         }

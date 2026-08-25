@@ -1,18 +1,10 @@
 'use client';
 
-import React from 'react';
-import { LocationRegion, LocationFaq } from '@/backend/services/geo/geo.types';
+import React, { useState, useMemo } from 'react';
+import { LocationRegion, LocationFaq, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
+import CustomDropdown from '@/app/superadmin/components/CustomDropdown';
 import CitySearchSelect from './CitySearchSelect';
 import { CitySearchResult } from '@/app/api/geo/cities/route';
-
-const REGION_OPTIONS: LocationRegion[] = [
-  'Gujarat',
-  'India Metros',
-  'Middle East',
-  'USA & Canada',
-  'Europe & UK',
-  'Global Hubs',
-];
 
 interface GeoSettingsTabProps {
   isEditingLocation: boolean;
@@ -28,6 +20,7 @@ interface GeoSettingsTabProps {
   setLocCountryCode: (val: string) => void;
   locRegion: LocationRegion;
   setLocRegion: (val: LocationRegion) => void;
+  availableRegions?: string[];
   locRegionCode: string;
   setLocRegionCode: (val: string) => void;
   locPostalCode: string;
@@ -78,10 +71,16 @@ export default function GeoSettingsTab({
   setLocSlug,
   locCity,
   setLocCity,
+  locState,
+  setLocState,
   locCountry,
   setLocCountry,
+  locCountryCode,
+  setLocCountryCode,
   locRegion,
   setLocRegion,
+  locRegionCode,
+  setLocRegionCode,
   locPostalCode,
   setLocPostalCode,
   locLatitude,
@@ -90,6 +89,8 @@ export default function GeoSettingsTab({
   setLocLongitude,
   locPopular,
   setLocPopular,
+  locIsPublished,
+  setLocIsPublished,
   locMetaTitle,
   setLocMetaTitle,
   locMetaDescription,
@@ -98,7 +99,21 @@ export default function GeoSettingsTab({
   setLocKeywords,
   locFaqs,
   setLocFaqs,
+  availableRegions = [],
 }: GeoSettingsTabProps) {
+  const [isCustomRegion, setIsCustomRegion] = useState(false);
+
+  const regionList = useMemo(() => {
+    const set = new Set<string>(DEFAULT_LOCATION_REGIONS);
+    availableRegions.forEach((r) => {
+      if (r && r.trim()) set.add(r.trim());
+    });
+    if (locRegion && locRegion.trim()) {
+      set.add(locRegion.trim());
+    }
+    return Array.from(set);
+  }, [availableRegions, locRegion]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'transparent' }}>
       {/* Header Banner */}
@@ -416,8 +431,11 @@ export default function GeoSettingsTab({
                 onChange={(val) => setLocCity(val)}
                 onSelectCity={(cityData: CitySearchResult) => {
                   setLocCity(cityData.city);
+                  if (cityData.state && setLocState) setLocState(cityData.state);
                   if (cityData.country) setLocCountry(cityData.country);
+                  if (cityData.countryCode && setLocCountryCode) setLocCountryCode(cityData.countryCode);
                   if (cityData.region) setLocRegion(cityData.region);
+                  if (cityData.regionCode && setLocRegionCode) setLocRegionCode(cityData.regionCode);
                   if (cityData.latitude) setLocLatitude(String(cityData.latitude));
                   if (cityData.longitude) setLocLongitude(String(cityData.longitude));
                   if (cityData.postalCode) setLocPostalCode(cityData.postalCode);
@@ -435,12 +453,62 @@ export default function GeoSettingsTab({
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
             <div>
-              <label style={labelStyle}>Region</label>
-              <select value={locRegion} onChange={(e) => setLocRegion(e.target.value as any)} style={{ ...inputStyle, backgroundColor: '#FFFFFF' }}>
-                {REGION_OPTIONS.map((r) => (
-                  <option key={r} value={r}>{r}</option>
-                ))}
-              </select>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
+                <label style={{ ...labelStyle, marginBottom: 0 }}>Region</label>
+                <button
+                  type="button"
+                  onClick={() => setIsCustomRegion(!isCustomRegion)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'var(--brand-blue, #1833fe)',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    padding: 0,
+                  }}
+                >
+                  {isCustomRegion ? '← Choose existing' : '+ Custom Region'}
+                </button>
+              </div>
+
+              {isCustomRegion ? (
+                <input
+                  type="text"
+                  placeholder="e.g. Southeast Asia"
+                  value={locRegion}
+                  onChange={(e) => setLocRegion(e.target.value)}
+                  style={inputStyle}
+                />
+              ) : (
+                <CustomDropdown
+                  value={locRegion || 'Gujarat'}
+                  options={[
+                    ...regionList.map((r) => ({ value: r, label: r })),
+                    { value: '__custom__', label: '+ Add New Custom Region...' },
+                  ]}
+                  onChange={(val) => {
+                    if (val === '__custom__') {
+                      setIsCustomRegion(true);
+                      setLocRegion('');
+                    } else {
+                      setLocRegion(val);
+                    }
+                  }}
+                  direction="down"
+                  fullWidth
+                  size="form"
+                  buttonStyle={{
+                    height: '42px',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    backgroundColor: '#FFFFFF',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    padding: '0.65rem 0.85rem',
+                  }}
+                />
+              )}
             </div>
             <div>
               <label style={labelStyle}>Country</label>

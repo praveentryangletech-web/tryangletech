@@ -257,6 +257,70 @@ async function fetchPhotonCities(query: string): Promise<CitySearchResult[]> {
   }
 }
 
+/**
+ * Fetch results from OpenStreetMap Nominatim as fallback
+ */
+async function fetchNominatimCities(query: string): Promise<CitySearchResult[]> {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=8`, {
+      signal: controller.signal,
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': 'TryangleTechCitySearch/1.0',
+      },
+    });
+
+    clearTimeout(timeoutId);
+    if (!res.ok) return [];
+
+    const list = await res.json();
+    if (!Array.isArray(list)) return [];
+
+    const results: CitySearchResult[] = [];
+
+    for (const item of list) {
+      const addr = item?.address || {};
+      const rawCity = addr.city || addr.town || addr.municipality || addr.village || addr.suburb || addr.state_district || item.name || '';
+      if (!rawCity) continue;
+
+      const state = addr.state || addr.region || '';
+      const country = addr.country || 'India';
+      const countryCode = (addr.country_code || 'in').toUpperCase();
+      const lat = parseFloat(item.lat) || 23.0225;
+      const lon = parseFloat(item.lon) || 72.5714;
+      const postcode = addr.postcode || undefined;
+
+      const region = inferRegion(country, state, rawCity);
+      const regionCode = countryCode === 'IN' ? (state ? `IN-${state.slice(0, 2).toUpperCase()}` : 'IN-GJ') : `${countryCode}-01`;
+
+      const displayParts = [rawCity];
+      if (state && state !== rawCity) displayParts.push(state);
+      if (country) displayParts.push(country);
+
+      results.push({
+        city: rawCity,
+        state: state || rawCity,
+        country,
+        countryCode,
+        region,
+        regionCode,
+        slug: cleanSlug(rawCity),
+        latitude: lat,
+        longitude: lon,
+        postalCode: postcode,
+        displayName: displayParts.join(', '),
+      });
+    }
+
+    return results;
+  } catch {
+    return [];
+  }
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -292,8 +356,13 @@ export async function GET(request: Request) {
         c.displayName.toLowerCase().includes(queryLower)
     );
 
-    // 2. Fetch live results from OpenStreetMap Geocoder in parallel
-    const liveResults = await fetchPhotonCities(query);
+    // 2. Fetch live results from OpenStreetMap Photon Geocoder in parallel
+    let liveResults = await fetchPhotonCities(query);
+
+    // If Photon returned 0 results, query Nominatim Geocoder
+    if (liveResults.length === 0 && localMatches.length === 0) {
+      liveResults = await fetchNominatimCities(query);
+    }
 
     // 3. Merge and deduplicate by city + country
     const seen = new Set<string>();
@@ -317,26 +386,10 @@ export async function GET(request: Request) {
       }
     }
 
-    // Fallback if zero results: create a structured synthetic guess
-    if (merged.length === 0) {
-      const inferredReg = inferRegion('India', undefined, query);
-      const fallbackItem: CitySearchResult = {
-        city: query,
-        state: query,
-        country: 'India',
-        countryCode: 'IN',
-        region: inferredReg,
-        regionCode: 'IN-01',
-        slug: cleanSlug(query),
-        latitude: 23.0225,
-        longitude: 72.5714,
-        displayName: `${query}, India`,
-      };
-      merged.push(fallbackItem);
-    }
-
     const finalResults = merged.slice(0, 10);
-    searchCache.set(cacheKey, { data: finalResults, timestamp: Date.now() });
+    if (finalResults.length > 0) {
+      searchCache.set(cacheKey, { data: finalResults, timestamp: Date.now() });
+    }
 
     return NextResponse.json({
       success: true,
@@ -348,7 +401,7 @@ export async function GET(request: Request) {
       {
         success: false,
         error: err?.message || 'Error searching cities',
-        data: POPULAR_GLOBAL_CITIES.slice(0, 10),
+        data: [],
       },
       { status: 500 }
     );

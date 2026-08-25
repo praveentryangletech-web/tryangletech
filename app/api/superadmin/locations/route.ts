@@ -25,7 +25,7 @@ export async function GET(request: Request) {
         {
           status: 200,
           headers: {
-            'Cache-Control': 'private, max-age=30, stale-while-revalidate=120',
+            'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
           },
         }
       );
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
       {
         status: 200,
         headers: {
-          'Cache-Control': 'private, max-age=30, stale-while-revalidate=120',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
       }
     );

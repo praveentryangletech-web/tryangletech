@@ -15,16 +15,33 @@ interface CitySearchSelectProps {
   disabled?: boolean;
 }
 
-const REGION_COLORS: Record<LocationRegion, { bg: string; text: string; border: string }> = {
-  Gujarat: { bg: '#ECFDF5', text: '#047857', border: '#A7F3D0' },
-  'India Metros': { bg: '#EFF6FF', text: '#1D4ED8', border: '#BFDBFE' },
-  'Middle East': { bg: '#FFFBEB', text: '#B45309', border: '#FDE68A' },
-  'USA & Canada': { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF' },
-  'Europe & UK': { bg: '#EEF2FF', text: '#4338CA', border: '#C7D2FE' },
-  'Global Hubs': { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4' },
-};
+export function getRegionBadgeStyle(region: string = ''): { bg: string; text: string; border: string } {
+  const PRESET_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+    'Gujarat': { bg: '#ECFDF5', text: '#047857', border: '#A7F3D0' },
+    'India Metros': { bg: '#EFF6FF', text: '#1D4ED8', border: '#BFDBFE' },
+    'Middle East': { bg: '#FFFBEB', text: '#B45309', border: '#FDE68A' },
+    'USA & Canada': { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF' },
+    'Europe & UK': { bg: '#EEF2FF', text: '#4338CA', border: '#C7D2FE' },
+    'Global Hubs': { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4' },
+  };
 
-const POPULAR_CHIPS = ['Ahmedabad', 'Surat', 'Mumbai', 'Delhi', 'Bengaluru', 'Pune', 'Varanasi', 'Dubai', 'London', 'New York'];
+  if (region && PRESET_COLORS[region]) {
+    return PRESET_COLORS[region];
+  }
+
+  // Deterministic palette hash for any custom dynamic region
+  let hash = 0;
+  const str = region || 'Default';
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash) % 360;
+  return {
+    bg: `hsl(${hue}, 85%, 96%)`,
+    text: `hsl(${hue}, 80%, 30%)`,
+    border: `hsl(${hue}, 70%, 85%)`,
+  };
+}
 
 export default function CitySearchSelect({
   value,
@@ -143,14 +160,6 @@ export default function CitySearchSelect({
     setResults([]);
     setIsOpen(false);
     inputRef.current?.focus();
-  };
-
-  const handleQuickChipClick = (cityName: string) => {
-    setInputValue(cityName);
-    onChange(cityName);
-    fetchCities(cityName).then(() => {
-      setIsOpen(true);
-    });
   };
 
   return (
@@ -279,41 +288,6 @@ export default function CitySearchSelect({
         </span>
       )}
 
-      {/* Quick Suggestion Chips */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          gap: '4px',
-          marginTop: '6px',
-        }}
-      >
-        <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#94A3B8', marginRight: '2px' }}>
-          Quick:
-        </span>
-        {POPULAR_CHIPS.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => handleQuickChipClick(c)}
-            style={{
-              padding: '2px 7px',
-              borderRadius: '5px',
-              fontSize: '0.7rem',
-              fontWeight: 600,
-              backgroundColor: inputValue.toLowerCase() === c.toLowerCase() ? '#EFF6FF' : '#F1F5F9',
-              color: inputValue.toLowerCase() === c.toLowerCase() ? '#1833FE' : '#475569',
-              border: inputValue.toLowerCase() === c.toLowerCase() ? '1px solid #BFDBFE' : '1px solid #E2E8F0',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
       {/* Suggestions Dropdown */}
       {isOpen && (
         <div
@@ -339,7 +313,7 @@ export default function CitySearchSelect({
           ) : (
             results.map((item, index) => {
               const isHighlighted = index === highlightedIndex;
-              const regionStyle = REGION_COLORS[item.region] || REGION_COLORS['Global Hubs'];
+              const regionStyle = getRegionBadgeStyle(item.region);
 
               return (
                 <div

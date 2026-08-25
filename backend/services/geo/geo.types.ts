@@ -18,7 +18,16 @@ export interface LocationFaq {
   a: string;
 }
 
-export type LocationRegion = 'Gujarat' | 'India Metros' | 'Middle East' | 'USA & Canada' | 'Europe & UK' | 'Global Hubs';
+export const DEFAULT_LOCATION_REGIONS: string[] = [
+  'Gujarat',
+  'India Metros',
+  'Middle East',
+  'USA & Canada',
+  'Europe & UK',
+  'Global Hubs',
+];
+
+export type LocationRegion = string;
 
 export interface LocationItem {
   slug: string;
@@ -40,6 +49,8 @@ export interface LocationItem {
   faqs: LocationFaq[];
   popular?: boolean;
   isPublished?: boolean;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
 
   // Dynamic section overrides
   hero?: Partial<HomeHeroSection>;

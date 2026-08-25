@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { HomeContentDTO, HomeHeroSection, HomeServiceItem, HomeAboutSection, HomeWhyChooseUsSection, HomeHowWeWorkSection, HomeTestimonialItem, HomeCtaBannerSection } from '@/backend/services/home/home.types';
 import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
-import { LocationItem, LocationRegion, LocationFaq } from '@/backend/services/geo/geo.types';
+import { LocationItem, LocationRegion, LocationFaq, DEFAULT_LOCATION_REGIONS } from '@/backend/services/geo/geo.types';
 import { apiClient } from '@/app/superadmin/utils/apiClient';
 
 import {
@@ -83,6 +83,15 @@ export default function SuperadminUnifiedHomeCMS() {
   const [duplicateTargetPostalCode, setDuplicateTargetPostalCode] = useState('');
   const [duplicateTargetRegionCode, setDuplicateTargetRegionCode] = useState('');
   const [duplicateTargetCountryCode, setDuplicateTargetCountryCode] = useState('');
+
+  // Dynamically compute all unique regions available across records + default presets
+  const availableRegions = useMemo(() => {
+    const set = new Set<string>(DEFAULT_LOCATION_REGIONS);
+    locations.forEach((l) => {
+      if (l.region && l.region.trim()) set.add(l.region.trim());
+    });
+    return Array.from(set);
+  }, [locations]);
   const [isDuplicating, setIsDuplicating] = useState(false);
 
   // Delete Modal State
@@ -146,7 +155,7 @@ export default function SuperadminUnifiedHomeCMS() {
         ...(searchQuery.trim() ? { search: searchQuery.trim() } : {}),
       });
 
-      const locRes = await apiClient.get<any>(`/api/superadmin/locations?${queryParams.toString()}`);
+      const locRes = await apiClient.get<any>(`/api/superadmin/locations?${queryParams.toString()}`, { useCache: false });
       if (locRes.success && Array.isArray(locRes.data)) {
         setLocations(locRes.data);
         if (locRes.pagination) {
@@ -527,6 +536,7 @@ export default function SuperadminUnifiedHomeCMS() {
       const res = await apiClient.delete(`/api/superadmin/locations?slug=${deletingLocation.slug}`);
       if (res.success) {
         setSuccessMessage(`Location "${deletingLocation.city}" deleted.`);
+        setLocations((prev) => prev.filter((l) => l.slug.toLowerCase() !== deletingLocation.slug.toLowerCase()));
         setDeletingLocation(null);
         fetchData();
         setTimeout(() => setSuccessMessage(''), 4000);
@@ -652,6 +662,7 @@ export default function SuperadminUnifiedHomeCMS() {
           setDuplicateTargetRegion={setDuplicateTargetRegion}
           duplicateTargetCountry={duplicateTargetCountry}
           setDuplicateTargetCountry={setDuplicateTargetCountry}
+          availableRegions={availableRegions}
           onSelectCity={handleDuplicateCitySelect}
           isDuplicating={isDuplicating}
           onExecuteDuplicate={handleExecuteDuplicate}
@@ -964,6 +975,7 @@ export default function SuperadminUnifiedHomeCMS() {
             setLocCountryCode={setLocCountryCode}
             locRegion={locRegion}
             setLocRegion={setLocRegion}
+            availableRegions={availableRegions}
             locRegionCode={locRegionCode}
             setLocRegionCode={setLocRegionCode}
             locPostalCode={locPostalCode}

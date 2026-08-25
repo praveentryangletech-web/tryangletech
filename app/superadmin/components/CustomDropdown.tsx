@@ -111,8 +111,8 @@ export default function CustomDropdown<T extends string | number>({
           gap: '8px',
           width: isFormSize ? '100%' : 'auto',
           minWidth: isFormSize ? '100%' : '58px',
-          height: isFormSize ? '46px' : 'auto',
-          padding: isFormSize ? '11px 16px' : '4px 10px',
+          height: isFormSize ? '46px' : '30px',
+          padding: isFormSize ? '11px 16px' : '0 10px',
           borderRadius: isFormSize ? '12px' : '6px',
           border: isFormSize ? '1.5px solid' : '1px solid',
           borderColor: isOpen ? 'var(--brand-blue, #1833fe)' : '#CBD5E1',
@@ -122,6 +122,7 @@ export default function CustomDropdown<T extends string | number>({
           color: '#0F172A',
           cursor: 'pointer',
           outline: 'none',
+          boxSizing: 'border-box',
           boxShadow: isOpen
             ? '0 0 0 3px rgba(24, 51, 254, 0.1)'
             : '0 1px 2px rgba(0, 0, 0, 0.02)',

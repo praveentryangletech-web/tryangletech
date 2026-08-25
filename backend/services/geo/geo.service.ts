@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { db } from '@/backend/db/client';
 import { LocationItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
-import { LOCATIONS_REGISTRY } from './geo.data';
 
 interface CachedGeoEntry<T> {
   data: T;
@@ -99,6 +98,9 @@ export const geoService = {
             END IF;
           END $$;
         `);
+        // Ensure previously deleted locations are purged
+        await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") IN ('rajkot', 'varanasi')`);
+        geoCache.clear();
       } catch (err) {
         console.warn('[GeoService] ensureTable notice:', err);
       }
@@ -106,7 +108,7 @@ export const geoService = {
   },
 
   /**
-   * Retrieve all supported locations from unified PageContent (with static registry merge)
+   * Retrieve all supported locations from unified PageContent (DB is the source of truth)
    */
   async getAllLocations(includeDrafts = false): Promise<LocationItem[]> {
     const cacheKey = `geo_all_locations_${includeDrafts ? 'all' : 'published'}`;
@@ -121,7 +123,7 @@ export const geoService = {
         new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
-      if (rows && rows.length > 0) {
+      if (rows && Array.isArray(rows)) {
         const dbLocations: LocationItem[] = rows.map((r) => {
           const heroObj = r.hero ? (typeof r.hero === 'string' ? JSON.parse(r.hero) : r.hero) : null;
           const aboutObj = r.about ? (typeof r.about === 'string' ? JSON.parse(r.about) : r.about) : null;
@@ -161,25 +163,54 @@ export const geoService = {
             howWeWork: howWeWorkObj || undefined,
             testimonials: Array.isArray(testimonialsObj) ? testimonialsObj : undefined,
             ctaBanner: ctaBannerObj || undefined,
+            createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : undefined,
+            updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : undefined,
           };
         });
 
-        // Merge any defaults that aren't yet in DB
-        const mergedMap = new Map<string, LocationItem>();
-        LOCATIONS_REGISTRY.forEach((loc) => mergedMap.set(loc.slug.toLowerCase(), { ...loc, isPublished: true }));
-        dbLocations.forEach((loc) => mergedMap.set(loc.slug.toLowerCase(), loc));
-
-        const result = Array.from(mergedMap.values());
-        geoCache.set(cacheKey, result);
-        return result;
+        geoCache.set(cacheKey, dbLocations);
+        return dbLocations;
       }
     } catch (err) {
-      console.warn('[GeoService] getAllLocations fallback to static registry:', err);
+      console.warn('[GeoService] getAllLocations DB query error:', err);
     }
 
-    const fallbackList = LOCATIONS_REGISTRY.map((l) => ({ ...l, isPublished: true }));
-    geoCache.set(cacheKey, fallbackList);
-    return fallbackList;
+    return [];
+  },
+
+  /**
+   * Fetch all distinct active regions across PageContent
+   */
+  async getAllRegions(): Promise<string[]> {
+    const cacheKey = 'geo_all_regions';
+    const cached = geoCache.get<string[]>(cacheKey);
+    if (cached) return cached;
+
+    this.ensureTable();
+
+    try {
+      const rows = await db.$queryRaw<Array<{ region: string }>>`
+        SELECT DISTINCT "region" FROM "PageContent" 
+        WHERE "region" IS NOT NULL AND "region" != '' AND "pageType" = 'LOCATION_CLONE'
+        ORDER BY "region" ASC
+      `;
+
+      const set = new Set<string>(['Gujarat', 'India Metros', 'Middle East', 'USA & Canada', 'Europe & UK', 'Global Hubs']);
+      if (rows && Array.isArray(rows)) {
+        rows.forEach((r) => {
+          if (r.region && r.region.trim()) {
+            set.add(r.region.trim());
+          }
+        });
+      }
+
+      const list = Array.from(set);
+      geoCache.set(cacheKey, list, 5 * 60 * 1000);
+      return list;
+    } catch (err) {
+      console.warn('[GeoService] getAllRegions DB fallback:', err);
+      return ['Gujarat', 'India Metros', 'Middle East', 'USA & Canada', 'Europe & UK', 'Global Hubs'];
+    }
   },
 
   /**
@@ -193,7 +224,7 @@ export const geoService = {
     const search = params.search ? params.search.trim().toLowerCase() : undefined;
     const status = params.status || (params.publishedOnly ? 'published' : 'all');
 
-    // Retrieve full merged location dataset (including drafts if admin)
+    // Retrieve location dataset from PostgreSQL
     const allLocations = await this.getAllLocations(true);
 
     let filtered = allLocations;
@@ -299,23 +330,18 @@ export const geoService = {
           howWeWork: howWeWorkObj || undefined,
           testimonials: Array.isArray(testimonialsObj) ? testimonialsObj : undefined,
           ctaBanner: ctaBannerObj || undefined,
+          createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : undefined,
+          updatedAt: r.updatedAt ? new Date(r.updatedAt).toISOString() : undefined,
         };
 
         geoCache.set(cacheKey, loc);
         return loc;
       }
+      return null;
     } catch (err) {
-      console.warn(`[GeoService] getLocationBySlug('${cleanSlug}') DB fallback:`, err);
+      console.warn(`[GeoService] getLocationBySlug('${cleanSlug}') DB error:`, err);
+      return null;
     }
-
-    // Static registry fallback
-    const fallback = LOCATIONS_REGISTRY.find((l) => l.slug.toLowerCase() === cleanSlug) || null;
-    if (fallback) {
-      const fallbackItem = { ...fallback, isPublished: true };
-      geoCache.set(cacheKey, fallbackItem);
-      return fallbackItem;
-    }
-    return null;
   },
 
   /**
@@ -535,18 +561,19 @@ export const geoService = {
     const targetCity = target.city.trim();
 
     // 1. Fetch Source
-    let sourceLoc = await this.getLocationBySlug(sourceSlug);
+    let sourceLoc = await this.getLocationBySlug(sourceSlug, true);
     if (!sourceLoc) {
-      sourceLoc = LOCATIONS_REGISTRY[0];
+      const all = await this.getAllLocations(true);
+      sourceLoc = all[0] || null;
     }
 
-    const region = target.region || sourceLoc.region || 'Gujarat';
-    const country = target.country || sourceLoc.country || 'India';
-    const countryCode = target.countryCode || (country.toLowerCase() === 'india' ? 'IN' : sourceLoc.countryCode || 'IN');
+    const region = target.region || sourceLoc?.region || 'Gujarat';
+    const country = target.country || sourceLoc?.country || 'India';
+    const countryCode = target.countryCode || (country.toLowerCase() === 'india' ? 'IN' : sourceLoc?.countryCode || 'IN');
     const state = target.state || targetCity;
-    const regionCode = target.regionCode || (countryCode === 'IN' ? (state ? `IN-${state.slice(0, 2).toUpperCase()}` : `IN-${targetCity.slice(0, 2).toUpperCase()}`) : sourceLoc.regionCode);
-    const coordinates = target.coordinates || sourceLoc.coordinates || { latitude: 23.0225, longitude: 72.5714 };
-    const postalCode = target.postalCode || sourceLoc.postalCode || undefined;
+    const regionCode = target.regionCode || (countryCode === 'IN' ? (state ? `IN-${state.slice(0, 2).toUpperCase()}` : `IN-${targetCity.slice(0, 2).toUpperCase()}`) : sourceLoc?.regionCode || 'IN-GJ');
+    const coordinates = target.coordinates || sourceLoc?.coordinates || { latitude: 23.0225, longitude: 72.5714 };
+    const postalCode = target.postalCode || sourceLoc?.postalCode || undefined;
 
     // 2. Generate customized parameters for new location
     const newLocationPayload: Partial<LocationItem> & { slug: string; city: string } = {
@@ -622,12 +649,19 @@ export const geoService = {
     this.ensureTable();
 
     try {
-      await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") = $1`, cleanSlug);
+      await db.$executeRaw`DELETE FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug}`;
       geoCache.clear();
       return true;
     } catch (err) {
-      console.warn(`[GeoService] deleteLocation('${cleanSlug}') error:`, err);
-      return false;
+      console.warn(`[GeoService] deleteLocation('${cleanSlug}') executeRaw error, attempting fallback:`, err);
+      try {
+        await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") = $1`, cleanSlug);
+        geoCache.clear();
+        return true;
+      } catch (err2) {
+        console.error(`[GeoService] deleteLocation critical error:`, err2);
+        return false;
+      }
     }
   },
 

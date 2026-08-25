@@ -256,9 +256,11 @@ export default function SuperadminSidebar() {
               target="_blank"
               style={{
                 flex: 1,
-                padding: '8px 10px',
+                height: '36px',
+                padding: '0 10px',
                 borderRadius: '8px',
                 backgroundColor: '#F1F5F9',
+                border: '1px solid #E2E8F0',
                 color: '#334155',
                 fontSize: '0.775rem',
                 fontWeight: 700,
@@ -268,6 +270,7 @@ export default function SuperadminSidebar() {
                 justifyContent: 'center',
                 gap: '6px',
                 whiteSpace: 'nowrap',
+                boxSizing: 'border-box',
               }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -283,7 +286,8 @@ export default function SuperadminSidebar() {
               onClick={handleLogout}
               style={{
                 flex: 1,
-                padding: '8px 10px',
+                height: '36px',
+                padding: '0 10px',
                 borderRadius: '8px',
                 backgroundColor: '#FEF2F2',
                 border: '1px solid #FECACA',
@@ -296,6 +300,7 @@ export default function SuperadminSidebar() {
                 justifyContent: 'center',
                 gap: '6px',
                 whiteSpace: 'nowrap',
+                boxSizing: 'border-box',
               }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

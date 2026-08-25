@@ -40,9 +40,9 @@ export async function ensureAllDatabaseIndexes(): Promise<void> {
   isIndexingCompleted = true;
 
   try {
-    await Promise.allSettled(
-      INDEX_COMMANDS.map((cmd) => db.$executeRawUnsafe(cmd).catch(() => {}))
-    );
+    for (const cmd of INDEX_COMMANDS) {
+      await db.$executeRawUnsafe(cmd).catch(() => {});
+    }
   } catch (err) {
     console.warn('[DB Indexing] Background index notice:', err);
   }

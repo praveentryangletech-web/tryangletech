@@ -12,7 +12,7 @@ interface CachedEntry<T> {
 
 class AboutCacheManager {
   private cache: Map<string, CachedEntry<any>> = new Map();
-  private defaultTTL: number = 60 * 1000; // 1 minute SWR cache
+  private defaultTTL: number = process.env.NODE_ENV === 'production' ? 2000 : 5000; // 2s in live production, 5s in local development
 
   set<T>(key: string, data: T, ttl: number = this.defaultTTL): CachedEntry<T> {
     const etag = `W/"about-${Date.now()}-${Math.random().toString(36).substring(2, 9)}"`;

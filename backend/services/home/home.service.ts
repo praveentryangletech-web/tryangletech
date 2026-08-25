@@ -10,7 +10,7 @@ interface CachedEntry<T> {
 
 class HomeCacheManager {
   private cache = new Map<string, CachedEntry<any>>();
-  private readonly defaultTTL = 10 * 60 * 1000; // 10 minutes in-memory cache
+  private readonly defaultTTL = process.env.NODE_ENV === 'production' ? 2000 : 5000; // 2s in live production, 5s in local development
 
   set<T>(key: string, data: T, ttlMs: number = this.defaultTTL): CachedEntry<T> {
     const etag = `W/"home-${Date.now()}-${Math.random().toString(36).slice(2, 7)}"`;

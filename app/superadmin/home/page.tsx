@@ -472,26 +472,6 @@ export default function SuperadminUnifiedHomeCMS() {
     }
   };
 
-  // Quick Toggle Published / Draft from Table
-  const handleQuickToggleStatus = async (slug: string, isPublished: boolean) => {
-    try {
-      const res = await apiClient.post('/api/superadmin/locations', {
-        action: 'toggle-status',
-        slug,
-        isPublished,
-      });
-      if (res.success) {
-        setSuccessMessage(res.message || `Status updated to ${isPublished ? 'Published' : 'Draft'}.`);
-        fetchData();
-        setTimeout(() => setSuccessMessage(''), 3000);
-      } else {
-        setErrorMessage(res.error || 'Failed to update status.');
-      }
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Error updating status.');
-    }
-  };
-
   // Open Duplicate Modal
   const openDuplicateModal = (source: { name: string; slug: string; region?: LocationRegion; country?: string }) => {
     setDuplicateSource({ name: source.name, slug: source.slug, region: source.region, country: source.country });
@@ -591,6 +571,56 @@ export default function SuperadminUnifiedHomeCMS() {
     }
   };
 
+  // Quick Toggle Publication Status (Published vs Draft)
+  const [togglingSlug, setTogglingSlug] = useState<string | null>(null);
+
+  const handleQuickToggleStatus = async (slug: string, newStatus: boolean) => {
+    if (!slug) return;
+    setTogglingSlug(slug);
+
+    // Optimistic UI state update
+    setLocations((prev) =>
+      prev.map((loc) =>
+        loc.slug.toLowerCase() === slug.toLowerCase() ? { ...loc, isPublished: newStatus } : loc
+      )
+    );
+
+    try {
+      const res = await apiClient.post('/api/superadmin/locations', {
+        action: 'toggle-status',
+        slug,
+        isPublished: newStatus,
+      });
+
+      if (res.success) {
+        const found = locations.find((l) => l.slug.toLowerCase() === slug.toLowerCase());
+        const cityName = found?.city || slug;
+        setSuccessMessage(`✓ "${cityName}" is now ${newStatus ? 'Live / Published' : 'saved as Draft (Private)'}.`);
+        setTimeout(() => setSuccessMessage(''), 3000);
+      } else {
+        // Revert on error
+        setLocations((prev) =>
+          prev.map((loc) =>
+            loc.slug.toLowerCase() === slug.toLowerCase() ? { ...loc, isPublished: !newStatus } : loc
+          )
+        );
+        setErrorMessage(res.error || 'Failed to update publication status.');
+        setTimeout(() => setErrorMessage(''), 4000);
+      }
+    } catch (err: any) {
+      // Revert on error
+      setLocations((prev) =>
+        prev.map((loc) =>
+          loc.slug.toLowerCase() === slug.toLowerCase() ? { ...loc, isPublished: !newStatus } : loc
+        )
+      );
+      setErrorMessage(err?.message || 'Error updating status.');
+      setTimeout(() => setErrorMessage(''), 4000);
+    } finally {
+      setTogglingSlug(null);
+    }
+  };
+
   // Media Picker Open Trigger
   const handleOpenAssetPicker = (target: string) => {
     setMediaPickerTarget(target);
@@ -675,6 +705,7 @@ export default function SuperadminUnifiedHomeCMS() {
           selectedStatusFilter={selectedStatusFilter}
           setSelectedStatusFilter={setSelectedStatusFilter}
           onToggleStatus={handleQuickToggleStatus}
+          togglingSlug={togglingSlug}
           locations={locations}
           isLoading={isLoading}
           currentPage={currentPage}

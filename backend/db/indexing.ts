@@ -41,7 +41,11 @@ export async function ensureAllDatabaseIndexes(): Promise<void> {
 
   try {
     for (const cmd of INDEX_COMMANDS) {
-      await db.$executeRawUnsafe(cmd).catch(() => {});
+      try {
+        await db.$executeRawUnsafe(cmd);
+      } catch {
+        // Safe to ignore statement timeouts or index exists notices
+      }
     }
   } catch (err) {
     console.warn('[DB Indexing] Background index notice:', err);

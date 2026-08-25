@@ -36,6 +36,7 @@ interface HomePagesTableProps {
   selectedStatusFilter?: 'all' | 'published' | 'draft';
   setSelectedStatusFilter?: (val: 'all' | 'published' | 'draft') => void;
   onToggleStatus?: (slug: string, isPublished: boolean) => void;
+  togglingSlug?: string | null;
   locations: (LocationItem | LocationSummaryItem)[];
   isLoading: boolean;
   currentPage: number;
@@ -66,6 +67,7 @@ export default function HomePagesTable({
   selectedStatusFilter = 'all',
   setSelectedStatusFilter,
   onToggleStatus,
+  togglingSlug,
   locations,
   isLoading,
   currentPage,
@@ -595,27 +597,54 @@ export default function HomePagesTable({
 
                     <td style={{ padding: '0.55rem 0.4rem' }}>
                       {onToggleStatus ? (
-                        <Tooltip text={isPub ? 'Click to make this page a Draft (Hidden)' : 'Click to Publish this page Live'} position="top">
+                        <Tooltip text={isPub ? 'Click to make this page a Draft (Hidden from public)' : 'Click to Publish this page Live'} position="top">
                           <button
                             type="button"
+                            disabled={togglingSlug === loc.slug}
                             onClick={() => onToggleStatus(loc.slug, !isPub)}
+                            className="admin-status-toggle-btn"
                             style={{
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '4px',
-                              padding: '2px 8px',
+                              gap: '5px',
+                              padding: '3px 10px',
                               borderRadius: '12px',
                               fontSize: '0.725rem',
-                              fontWeight: 700,
+                              fontWeight: 800,
                               backgroundColor: isPub ? '#DCFCE7' : '#FEF3C7',
                               color: isPub ? '#15803D' : '#B45309',
-                              border: `1px solid ${isPub ? '#BBF7D0' : '#FDE68A'}`,
-                              cursor: 'pointer',
-                              transition: 'all 0.15s ease',
+                              border: `1.5px solid ${isPub ? '#86EFAC' : '#FCD34D'}`,
+                              cursor: togglingSlug === loc.slug ? 'wait' : 'pointer',
+                              boxShadow: isPub ? '0 1px 3px rgba(22, 163, 74, 0.12)' : '0 1px 3px rgba(217, 119, 6, 0.12)',
+                              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                              transform: togglingSlug === loc.slug ? 'scale(0.96)' : 'scale(1)',
+                              opacity: togglingSlug === loc.slug ? 0.7 : 1,
+                            }}
+                            onMouseDown={(e) => {
+                              (e.currentTarget as HTMLButtonElement).style.transform = 'scale(0.90)';
+                            }}
+                            onMouseUp={(e) => {
+                              (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)';
+                            }}
+                            onMouseEnter={(e) => {
+                              const el = e.currentTarget as HTMLButtonElement;
+                              el.style.transform = 'scale(1.05)';
+                              el.style.boxShadow = isPub ? '0 3px 10px rgba(22, 163, 74, 0.25)' : '0 3px 10px rgba(217, 119, 6, 0.25)';
+                            }}
+                            onMouseLeave={(e) => {
+                              const el = e.currentTarget as HTMLButtonElement;
+                              el.style.transform = 'scale(1)';
+                              el.style.boxShadow = isPub ? '0 1px 3px rgba(22, 163, 74, 0.12)' : '0 1px 3px rgba(217, 119, 6, 0.12)';
                             }}
                           >
-                            <span>●</span>
-                            <span>{isPub ? 'Published' : 'Draft'}</span>
+                            {togglingSlug === loc.slug ? (
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-spin">
+                                <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
+                              </svg>
+                            ) : (
+                              <span style={{ fontSize: '0.65rem', animation: isPub ? 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none' }}>●</span>
+                            )}
+                            <span>{togglingSlug === loc.slug ? 'Updating...' : isPub ? 'Published' : 'Draft'}</span>
                           </button>
                         </Tooltip>
                       ) : (

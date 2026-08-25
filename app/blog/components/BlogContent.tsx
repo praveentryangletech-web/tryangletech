@@ -80,7 +80,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     const fetchLivePosts = async () => {
       try {
         const [postsRes, catsRes] = await Promise.allSettled([
-          fetch('/api/blog?limit=100&status=published&sortBy=publishedAt&sortOrder=desc', {
+          fetch('/api/blog?limit=30&status=published&sortBy=publishedAt&sortOrder=desc', {
             headers: { 'Accept': 'application/json' },
           }),
           fetch('/api/blog/categories', {

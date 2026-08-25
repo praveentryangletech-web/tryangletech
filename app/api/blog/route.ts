@@ -103,9 +103,9 @@ export async function GET(req: NextRequest) {
         status: 200,
         headers: {
           'ETag': etag,
-          'Cache-Control': 'public, max-age=30, s-maxage=60, stale-while-revalidate=300',
-          'CDN-Cache-Control': 'public, s-maxage=60',
-          'Vercel-CDN-Cache-Control': 'public, s-maxage=60',
+          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+          'CDN-Cache-Control': 'public, s-maxage=300',
+          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
           'Server-Timing': `total;dur=${duration}`,
         },
       }

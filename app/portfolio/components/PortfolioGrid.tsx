@@ -1,19 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from "next/image";
 import SafeImage from '@/app/common/SafeImage';
-import { Project, projects as staticProjects } from '../../data/portfolioData';
+import { Project } from '../../data/portfolioData';
+import { PortfolioProvider, usePortfolio, DEFAULT_PORTFOLIO_CATEGORIES } from '@/app/context/PortfolioContext';
 
-export const DEFAULT_CATEGORIES = [
-  "All",
-  "Business Website", 
-  "E-Commerce",
-  "Landing Website",
-  "Mobile Application",
-  "Custom Software",
-  "Graphic Design"
-];
+export const DEFAULT_CATEGORIES = DEFAULT_PORTFOLIO_CATEGORIES;
 
 interface PortfolioGridProps {
   limit?: number;
@@ -23,430 +15,300 @@ interface PortfolioGridProps {
   initialCategories?: string[];
 }
 
-// Client-side in-memory SWR cache for 0ms instantaneous UI feedback
-const clientMemoryCache = new Map<string, { items: Project[]; total: number; hasNextPage: boolean }>();
-
-export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initialProjects, initialCategories }: PortfolioGridProps) {
+function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: number; hideFilter?: boolean; categoryFilter?: string[] }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const filterWrapRef = useRef<HTMLDivElement>(null);
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [categoriesList, setCategoriesList] = useState<string[]>(() => {
-    if (initialCategories && initialCategories.length > 0) return initialCategories;
-    return DEFAULT_CATEGORIES;
-  });
-  
-  // API Data & Pagination States
-  const [projectsList, setProjectsList] = useState<Project[]>(() => {
-    if (initialProjects && initialProjects.length > 0) return initialProjects;
-    return staticProjects;
-  });
-  const [page, setPage] = useState<number>(1);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
-  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false);
-  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
-  const [totalCount, setTotalCount] = useState<number>(() => {
-    if (initialProjects && initialProjects.length > 0) return initialProjects.length;
-    return staticProjects.length;
-  });
 
-  // Fetch dynamic categories on mount and merge with standard default categories
-  useEffect(() => {
-    async function loadDynamicCategories() {
-      try {
-        const res = await fetch('/api/portfolio/categories');
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          const fetchedNames = json.data.map((c: any) => c.name).filter(Boolean);
-          const defaultNames = DEFAULT_CATEGORIES.filter((c) => c !== 'All');
-          const merged = Array.from(new Set(['All', ...defaultNames, ...fetchedNames]));
-          setCategoriesList(merged);
-        }
-      } catch {
-        // Fallback to DEFAULT_CATEGORIES
-      }
-    }
-    loadDynamicCategories();
-  }, []);
+  const {
+    projectsList,
+    categoriesList,
+    activeFilter,
+    setActiveFilter,
+    page,
+    setPage,
+    hasNextPage,
+    isInitialLoading,
+    isLoadingMore,
+    totalCount,
+    fetchProjects,
+  } = usePortfolio();
 
-  // Fetch projects from public GET /api/portfolio endpoint with instant cache
-  const fetchProjects = useCallback(async (pageNum: number, category: string, isAppend = false) => {
-    const cacheKey = `${category}:${pageNum}:${limit || 9}`;
-    
-    // 1. Instant Cache Hit (0ms transition)
-    if (!isAppend && clientMemoryCache.has(cacheKey)) {
-      const cached = clientMemoryCache.get(cacheKey)!;
-      setProjectsList(cached.items);
-      setHasNextPage(cached.hasNextPage);
-      setTotalCount(cached.total);
-      setIsInitialLoading(false);
-      return;
-    }
-
-    if (isAppend) {
-      setIsLoadingMore(true);
-    } else {
-      setIsInitialLoading(true);
-    }
-
-    try {
-      const params = new URLSearchParams();
-      params.set('page', pageNum.toString());
-      params.set('limit', (limit || 9).toString());
-      
-      if (category && category !== 'All') {
-        params.set('category', category);
-      }
-
-      const res = await fetch(`/api/portfolio?${params.toString()}`, {
-        // Use browser cache + edge caching for fast millisecond delivery
-        headers: { 'Accept': 'application/json' },
-      });
-
-      if (!res.ok) throw new Error(`API error: ${res.status}`);
-      
-      const json = await res.json();
-      if (json.success && Array.isArray(json.data)) {
-        const nextHasPage = json.pagination ? Boolean(json.pagination.hasNextPage) : false;
-        const total = json.pagination?.total || json.data.length;
-
-        if (isAppend) {
-          setProjectsList(prev => [...prev, ...json.data]);
-        } else {
-          setProjectsList(json.data);
-          // Store in client cache for 0ms switching
-          clientMemoryCache.set(cacheKey, { items: json.data, total, hasNextPage: nextHasPage });
-        }
-
-        setHasNextPage(nextHasPage);
-        setTotalCount(total);
-      }
-    } catch (err) {
-      console.warn('API fetch warning, using static fallback:', err);
-      let filtered = staticProjects;
-      if (category && category !== 'All') {
-        const cleanCat = category.toLowerCase().replace(/[-\s]/g, '');
-        filtered = filtered.filter(p => p.category.toLowerCase().replace(/[-\s]/g, '') === cleanCat);
-      }
-      setProjectsList(filtered.slice(0, (limit || 9) * pageNum));
-      setHasNextPage(filtered.length > (limit || 9) * pageNum);
-    } finally {
-      setIsInitialLoading(false);
-      setIsLoadingMore(false);
-    }
-  }, [limit]);
-
-  // Handle Category Filter changes -> Reset to Page 1 and fetch
-  const handleCategoryChange = (category: string) => {
-    if (activeFilter === category) return;
-    setActiveFilter(category);
+  // Handle category tab change
+  const handleFilterClick = (cat: string) => {
+    setActiveFilter(cat);
     setPage(1);
-    setHasNextPage(true);
-    fetchProjects(1, category, false);
+    fetchProjects(1, cat, limit || 9, false);
   };
 
-  // Initial mount fetch
+  // Filter projects by categoryFilter prop if provided
+  const displayedProjects = React.useMemo(() => {
+    if (!categoryFilter || categoryFilter.length === 0) {
+      return projectsList;
+    }
+    return projectsList.filter((p) => {
+      const pCat = (p.category || '').toLowerCase();
+      return categoryFilter.some((cf) => cf.toLowerCase() === pCat || pCat.includes(cf.toLowerCase()));
+    });
+  }, [projectsList, categoryFilter]);
+
+  // Infinite Scroll IntersectionObserver (only on full portfolio page when limit is not constrained)
   useEffect(() => {
-    fetchProjects(1, activeFilter, false);
-  }, [fetchProjects, activeFilter]);
+    if (limit || !hasNextPage || isLoadingMore || isInitialLoading) return;
 
-  // Scroll reveal animation trigger
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".reveal-on-scroll:not(.animate-fade-in-up)");
-
-    const timer = setTimeout(() => {
-      elements?.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add("animate-fade-in-up");
-        } else {
-          observer.observe(el);
-        }
-      });
-    }, 50);
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, [projectsList, activeFilter]);
-
-  // Infinite Scroll Trigger using IntersectionObserver
-  useEffect(() => {
-    if (limit) return;
+    const currentSentinel = sentinelRef.current;
+    if (!currentSentinel) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isLoadingMore && !isInitialLoading && hasNextPage) {
+        if (entries[0].isIntersecting && hasNextPage && !isLoadingMore && !isInitialLoading) {
           const nextPage = page + 1;
           setPage(nextPage);
-          fetchProjects(nextPage, activeFilter, true);
+          fetchProjects(nextPage, activeFilter, 9, true);
         }
       },
-      { threshold: 0.1 }
+      { rootMargin: '300px' }
     );
 
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
-
+    observer.observe(currentSentinel);
     return () => {
       observer.disconnect();
     };
-  }, [isLoadingMore, isInitialLoading, hasNextPage, page, activeFilter, fetchProjects, limit]);
+  }, [limit, hasNextPage, isLoadingMore, isInitialLoading, page, activeFilter, fetchProjects, setPage]);
 
-  // Enable mouse wheel horizontal scrolling on categories
-  useEffect(() => {
-    const el = filterWrapRef.current;
-    if (!el) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY !== 0 && el.scrollWidth > el.clientWidth) {
-        e.preventDefault();
-        el.scrollLeft += e.deltaY;
-      }
-    };
-
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      el.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
+  // Display categories (respecting categoryFilter prop if specified)
+  const displayCategories = React.useMemo(() => {
+    if (categoryFilter && categoryFilter.length > 0) {
+      return ['All', ...categoryFilter];
+    }
+    return categoriesList;
+  }, [categoriesList, categoryFilter]);
 
   return (
-    <div ref={sectionRef}>
-      <style>{`
-        /* ── Filter Buttons ── */
-        .pf-filter-wrap {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          overflow-y: hidden;
-          -webkit-overflow-scrolling: touch;
-          gap: 10px;
-          padding-bottom: 2rem;
-          max-width: 100%;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-          scroll-behavior: smooth;
-        }
-        .pf-filter-wrap::-webkit-scrollbar {
-          display: none;
-          width: 0;
-          height: 0;
-        }
-        .pf-filter-btn {
-          flex-shrink: 0;
-          white-space: nowrap;
-          padding: 9px 22px;
-          border-radius: 100px;
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
-          border: 1px solid #e1e6f4;
-          background: #fff;
-          color: #6b7280;
-          transition: all 0.25s ease;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .pf-filter-btn.active {
-          background: var(--dark-indigo, #1a0b54);
-          color: #fff;
-          border-color: transparent;
-          box-shadow: 0 4px 14px rgba(26,11,84,0.25);
-        }
-        .pf-filter-btn:hover:not(.active) {
-          background: #f1f5f9;
-          color: var(--dark-indigo, #1a0b54);
-          border-color: #d3d3f4;
-          transform: translateY(-2px);
-        }
-
-        /* ── Image zoom on hover ── */
-        .rt-blog-v3-card .rt-blog-image {
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-          display: block;
-          width: 100%;
-          object-fit: cover;
-        }
-        .rt-blog-v3-card:hover .rt-blog-image {
-          transform: scale(1.08);
-        }
-
-        /* ── Card lift on hover ── */
-        .rt-blog-v3-card {
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .rt-blog-v3-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 28px 50px rgba(24, 72, 212, 0.14) !important;
-        }
-
-        /* ── Force left align on card bottom ── */
-        .rt-blog-v3-card .rt-blog-v3-card-bottom-part {
-          text-align: left !important;
-          align-items: flex-start !important;
-          width: 100% !important;
-        }
-        .rt-blog-v3-card .rt-blog-v2-author-details {
-          justify-content: flex-start !important;
-          align-items: center !important;
-          width: 100% !important;
-        }
-        .rt-blog-v3-card:hover .pf-arrow-icon {
-          transform: translateX(4px);
-        }
-        .pf-grid {
-          grid-template-columns: 1fr 1fr !important;
-        }
-        @media (min-width: 992px) {
-          .pf-grid {
-            grid-template-columns: 1fr 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 767px) {
-          .pf-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-
-        /* ── Shimmer Animation for Skeletons ── */
-        @keyframes pfShimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        .pf-skeleton-box {
-          background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
-          background-size: 200% 100%;
-          animation: pfShimmer 1.5s infinite;
-          border-radius: 12px;
-        }
-
-        /* ── Loading Spinner ── */
-        @keyframes spin { 
-          to { transform: rotate(360deg); } 
-        }
-        .pf-spinner {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          border: 3px solid #e5e7eb;
-          border-top-color: var(--brand-blue, #1833fe);
-          animation: spin 0.7s linear infinite;
-          margin: 0 auto;
-        }
-      `}</style>
-
+    <div ref={sectionRef} className="rt-portfolio-section" style={{ position: 'relative', width: '100%' }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
-
-        {/* Category Filter Chips */}
+        
+        {/* Category Filter Pills (Hidden if hideFilter is true) */}
         {!hideFilter && (
-          <div ref={filterWrapRef} className="pf-filter-wrap">
-            {categoriesList.map((cat, idx) => (
-              <button
-                key={`${cat}-${idx}`}
-                className={`pf-filter-btn${activeFilter === cat ? " active" : ""}`}
-                onClick={() => handleCategoryChange(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Initial Loading Skeleton State */}
-        {isInitialLoading && (
-          <div className="rt-blog-v3-card-main w-dyn-items pf-grid" style={{ display: 'grid', gap: '2rem' }}>
-            {[1, 2, 3, 4, 5, 6].map((sk) => (
-              <div key={sk} style={{ borderRadius: '20px', border: '1px solid #E2E8F0', padding: '16px', backgroundColor: '#FFFFFF' }}>
-                <div className="pf-skeleton-box" style={{ height: '220px', width: '100%', marginBottom: '16px' }} />
-                <div className="pf-skeleton-box" style={{ height: '18px', width: '35%', marginBottom: '12px' }} />
-                <div className="pf-skeleton-box" style={{ height: '24px', width: '80%', marginBottom: '16px' }} />
-                <div className="pf-skeleton-box" style={{ height: '14px', width: '45%' }} />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Dynamic Card Grid */}
-        {!isInitialLoading && (
-          <div style={{ display: 'block' }} className="rt-blog-three-all w-dyn-list">
-            <div
-              role="list"
-              className="rt-blog-v3-card-main w-dyn-items pf-grid"
-              key={activeFilter}
-            >
-              {projectsList.map((project, idx) => (
-                <div
-                  key={`${activeFilter}-${project.slug}-${idx}`}
-                  role="listitem"
-                  className="w-dyn-item reveal-on-scroll"
-                  style={{ transitionDelay: `${(idx % 6) * 0.08}s` }}
+          <div 
+            ref={filterWrapRef}
+            className="rt-portfolio-filters-wrapper"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.75rem',
+              flexWrap: 'wrap',
+              marginBottom: '3rem',
+            }}
+          >
+            {displayCategories.map((cat) => {
+              const isActive = activeFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => handleFilterClick(cat)}
+                  style={{
+                    padding: '0.6rem 1.4rem',
+                    borderRadius: '2rem',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    border: '1px solid',
+                    borderColor: isActive ? 'var(--brand-blue, #1833fe)' : '#E2E8F0',
+                    backgroundColor: isActive ? 'var(--brand-blue, #1833fe)' : '#FFFFFF',
+                    color: isActive ? '#FFFFFF' : '#475569',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: isActive ? '0 4px 12px rgba(24, 51, 254, 0.25)' : 'none',
+                  }}
+                  className="rt-filter-btn"
                 >
-                  <Link
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Loading Skeletons */}
+        {isInitialLoading && (
+          <div style={{ width: '100%' }}>
+            <div 
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                gap: '2rem',
+              }}
+            >
+              {Array.from({ length: limit || 6 }).map((_, idx) => (
+                <div 
+                  key={idx}
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '1.25rem',
+                    overflow: 'hidden',
+                    border: '1px solid #E2E8F0',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '240px' }} />
+                  <div style={{ padding: '1.5rem' }}>
+                    <div className="rt-skeleton-box" style={{ width: '30%', height: '14px', marginBottom: '1rem' }} />
+                    <div className="rt-skeleton-box" style={{ width: '80%', height: '22px', marginBottom: '0.75rem' }} />
+                    <div className="rt-skeleton-box" style={{ width: '100%', height: '16px' }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Projects Cards Grid */}
+        {!isInitialLoading && displayedProjects.length > 0 && (
+          <div style={{ width: '100%' }}>
+            <div 
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                gap: '2rem',
+              }}
+            >
+              {displayedProjects.slice(0, limit || displayedProjects.length).map((project, idx) => (
+                <div 
+                  key={project.id || idx}
+                  className="rt-portfolio-card-wrap"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '1.25rem',
+                    overflow: 'hidden',
+                    border: '1px solid #E2E8F0',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.04)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Link 
                     href={`/portfolio/${project.slug}`}
-                    className="rt-blog-v3-card rt-border-radius-medium w-inline-block"
+                    style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}
                   >
-                    {/* Top Image */}
-                    <div className="rt-blog-v3-card-top-part rt-border-radius-medium rt-overflow-hidden">
+                    {/* Fixed Image Wrapper */}
+                    <div 
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '240px',
+                        overflow: 'hidden',
+                        backgroundColor: '#F8FAFC',
+                      }}
+                    >
                       <SafeImage
-                        className="rt-auto-fit rt-desktop-image-full-width rt-blog-image"
-                        src={project.image}
-                        fallbackSrc="/portfolio/vh-accounting.webp"
-                        alt={project.imageAlt || project.title}
-                        width={410}
-                        height={290}
-                        loading="lazy"
-                        style={{ height: '220px' }}
+                        src={project.image || '/portfolio/placeholder.webp'}
+                        alt={project.title}
+                        fill
+                        style={{
+                          objectFit: 'cover',
+                          transition: 'transform 0.5s ease',
+                        }}
                       />
                     </div>
 
-                    {/* Bottom Content */}
-                    <div className="rt-blog-v3-card-bottom-part">
-                      {/* Category Label */}
-                      <div className="w-layout-hflex rt-blog-v3-publish-date">
-                        <div className="w-layout-vflex">
-                          <Image
-                            width={15}
-                            height={16}
-                            alt=""
-                            src="/blog-assets/691702072672e09d875c245f_calendar-check.svg"
-                            loading="lazy"
-                          />
+                    {/* Card Content Area */}
+                    <div 
+                      style={{
+                        padding: '1.5rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1,
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div>
+                        {/* Category & Year */}
+                        <div 
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            marginBottom: '0.75rem',
+                          }}
+                        >
+                          <span 
+                            style={{
+                              fontSize: '0.75rem',
+                              fontWeight: 800,
+                              color: '#1833FE',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              backgroundColor: '#EFF6FF',
+                              padding: '3px 9px',
+                              borderRadius: '6px',
+                              border: '1px solid #DBEAFE',
+                            }}
+                          >
+                            {project.category}
+                          </span>
+                          {(project.duration || project.year) && (
+                            <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>
+                              {project.duration || project.year}
+                            </span>
+                          )}
                         </div>
-                        <div>{project.category}</div>
+
+                        {/* Title */}
+                        <h3 
+                          style={{
+                            fontSize: '1.15rem',
+                            fontWeight: 700,
+                            lineHeight: '1.4',
+                            color: '#0F172A',
+                            marginBottom: '0.5rem',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          {project.title}
+                        </h3>
+
+                        {/* Description */}
+                        {project.description && (
+                          <p 
+                            style={{
+                              fontSize: '0.875rem',
+                              color: '#64748B',
+                              lineHeight: '1.5',
+                              margin: 0,
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                            }}
+                          >
+                            {project.description}
+                          </p>
+                        )}
                       </div>
 
-                      {/* Title */}
-                      <div className="rt-text-style-h6">{project.title}</div>
-
-                      {/* View Case Study Link */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', paddingTop: '0.9375rem' }}>
-                        <span className="rt-button-text rt-color-vivid-blue" style={{ margin: 0 }}>
-                          View Case Study
-                        </span>
-                        <span
+                      {/* View Case Study Action Link */}
+                      <div 
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          paddingTop: '1.25rem',
+                          marginTop: 'auto',
+                          fontSize: '0.825rem',
+                          fontWeight: 700,
+                          color: '#1833FE',
+                        }}
+                      >
+                        <span>View Case Study</span>
+                        <span 
                           style={{
-                            display: 'inline-flex',
-                            alignItems: 'start',
-                            color: 'var(--vivid-blue, #1833fe)',
-                            fontSize: '16px',
-                            fontWeight: 600,
+                            fontSize: '1.1rem',
                             lineHeight: 1,
                             transition: 'transform 0.3s ease',
                           }}
@@ -464,7 +326,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
         )}
 
         {/* Empty State */}
-        {!isInitialLoading && projectsList.length === 0 && (
+        {!isInitialLoading && displayedProjects.length === 0 && (
           <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#64748B' }}>
             <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📁</div>
             <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--dark-indigo, #1a0b54)' }}>No projects found</div>
@@ -479,7 +341,7 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
               {isLoadingMore && <div className="pf-spinner" />}
             </div>
           ) : (
-            projectsList.length > 0 && (
+            displayedProjects.length > 0 && (
               <div style={{ textAlign: 'center', fontSize: '13px', color: '#94A3B8', padding: '2.5rem 0', fontWeight: 600 }}>
                 ✓ All {totalCount} case studies loaded
               </div>
@@ -489,5 +351,27 @@ export default function PortfolioGrid({ limit, hideFilter, categoryFilter, initi
 
       </div>
     </div>
+  );
+}
+
+export default function PortfolioGrid({
+  limit,
+  hideFilter,
+  categoryFilter,
+  initialProjects,
+  initialCategories,
+}: PortfolioGridProps) {
+  return (
+    <PortfolioProvider
+      initialProjects={initialProjects}
+      initialCategories={initialCategories}
+      initialLimit={limit || 9}
+    >
+      <PortfolioGridContent
+        limit={limit}
+        hideFilter={hideFilter}
+        categoryFilter={categoryFilter}
+      />
+    </PortfolioProvider>
   );
 }

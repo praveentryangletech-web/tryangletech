@@ -19,6 +19,7 @@ export interface Project {
   description: string;
   client?: string;
   duration?: string;
+  year?: string;
   role?: string;
   liveUrl?: string;
   content?: string;

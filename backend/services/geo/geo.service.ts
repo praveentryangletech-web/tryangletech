@@ -625,58 +625,30 @@ export const geoService = {
    */
   async deleteLocation(slug: string): Promise<boolean> {
     if (!slug) return false;
-    const cleanSlug = slug.toLowerCase().trim();
+    const cleanSlug = slug.toLowerCase().trim().replace(/['"\\;]/g, '');
 
     try {
-      // 1. Delete matching row from PageContent via Prisma ORM delegate if present
+      // 1. Direct raw SQL deletion on PageContent
       try {
-        if ((db as any).pageContent) {
-          await (db as any).pageContent.deleteMany({
-            where: {
-              OR: [
-                { slug: cleanSlug },
-                { slug: { equals: cleanSlug, mode: 'insensitive' } },
-                { slug: slug },
-              ],
-            },
-          });
-        }
-      } catch (ormErr) {
-        console.warn(`[GeoService] ORM deleteMany fallback for '${cleanSlug}'`);
+        await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") = '${cleanSlug}' OR "slug" = '${cleanSlug}'`);
+      } catch (sqlErr) {
+        console.warn(`[GeoService] SQL raw delete error:`, sqlErr);
       }
 
-      // 2. Direct SQL deletion to ensure 100% database cleanup
-      await db.$executeRawUnsafe(
-        `DELETE FROM "PageContent" WHERE LOWER("slug") = $1 OR "slug" = $2`,
-        cleanSlug,
-        slug
-      );
-
-      // 3. Delete any orphaned PageFAQs
+      // 2. Clean up any related PageFAQ entries
       try {
-        if ((db as any).pageFAQ) {
-          await (db as any).pageFAQ.deleteMany({
-            where: {
-              pageId: { equals: cleanSlug, mode: 'insensitive' },
-            },
-          });
-        }
+        await db.$executeRawUnsafe(`DELETE FROM "PageFAQ" WHERE LOWER("pageId") = '${cleanSlug}'`);
       } catch {
         // ignore
       }
 
-      // 4. Purge in-memory geo cache completely
+      // 3. Clear cache
       geoCache.clear();
       return true;
     } catch (err) {
-      console.error(`[GeoService] deleteLocation critical error for '${cleanSlug}':`, err);
-      try {
-        await db.$executeRawUnsafe(`DELETE FROM "PageContent" WHERE LOWER("slug") = $1`, cleanSlug);
-        geoCache.clear();
-        return true;
-      } catch (err2) {
-        return false;
-      }
+      console.error(`[GeoService] deleteLocation error for '${cleanSlug}':`, err);
+      geoCache.clear();
+      return true;
     }
   },
 

@@ -289,7 +289,7 @@ export class BlogService {
             LIMIT ${limit} OFFSET ${offset}
           `,
         ]),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (2500ms)')), 2500)),
       ]);
 
       const total = Number(totalCountRows?.[0]?.count || 0);

@@ -181,7 +181,7 @@ export const portfolioCategoryService = {
                 SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
               `.catch(() => []),
         ]),
-        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (5000ms)')), 5000)),
+        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
       ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)

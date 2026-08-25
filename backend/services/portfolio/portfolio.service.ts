@@ -314,8 +314,13 @@ export const portfolioService = {
       }
 
       if (params.category && params.category.trim().toUpperCase() !== 'ALL') {
-        const cleanCat = params.category.trim().toLowerCase().replace(/[-\s]/g, '');
-        conditions.push(Prisma.sql`LOWER(REPLACE(REPLACE("category", '-', ''), ' ', '')) = ${cleanCat}`);
+        const rawCat = params.category.trim();
+        const noHyphens = rawCat.replace(/-/g, ' ');
+        conditions.push(Prisma.sql`(
+          LOWER("category") = LOWER(${rawCat}) OR 
+          LOWER("category") = LOWER(${noHyphens}) OR
+          LOWER("category") LIKE LOWER(${`%${noHyphens}%`})
+        )`);
       }
 
       if (params.search && params.search.trim()) {
@@ -338,45 +343,27 @@ export const portfolioService = {
         ? (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "createdAt" DESC` : Prisma.sql`ORDER BY "createdAt" ASC`)
         : (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "order" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "order" ASC, "createdAt" DESC`);
 
-      // Single-Roundtrip CTE Execution with 8.0s resilient timeout
       const selectColumns = params.full
         ? Prisma.sql`*`
         : Prisma.sql`"id", "slug", "title", "category", "image", "imageAlt", "description", "client", "duration", "role", "liveUrl", "technologies", "order", "createdAt", "updatedAt"`;
 
-      const rows = await Promise.race([
-        db.$queryRaw<any[]>`
-          WITH filtered AS (
+      // Direct indexed query executed concurrently with 2.5s timeout
+      const [countRows, itemRows] = await Promise.race([
+        Promise.all([
+          db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "PortfolioProject" ${whereClause}`,
+          db.$queryRaw<any[]>`
             SELECT ${selectColumns} FROM "PortfolioProject"
             ${whereClause}
-          ),
-          counted AS (
-            SELECT COUNT(*)::int AS full_count FROM "PortfolioProject" ${whereClause}
-          )
-          SELECT 
-            f.*,
-            COALESCE(c.full_count, 0) AS full_count
-          FROM filtered f
-          CROSS JOIN counted c
-          ${orderClause}
-          LIMIT ${limit} OFFSET ${offset}
-        `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+            ${orderClause}
+            LIMIT ${limit} OFFSET ${offset}
+          `,
+        ]),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
       ]);
 
-      let total = 0;
-      if (rows && rows.length > 0) {
-        total = Number(rows[0]?.full_count || rows.length);
-      } else if (offset > 0 || conditions.length > 0) {
-        // If 0 rows returned on a high page offset, get total count
-        const countRows = await db.$queryRaw<Array<{ count: bigint | number }>>`
-          SELECT COUNT(*) as count FROM "PortfolioProject" ${whereClause}
-        `;
-        total = Number(countRows[0]?.count || 0);
-      }
-
+      const total = Number(countRows?.[0]?.count || 0);
       const totalPages = Math.ceil(total / limit) || 1;
-
-      const items = (rows || []).map((r: any) => (params.full ? mapRowToPortfolioItem(r) : mapRowToPortfolioSummary(r)));
+      const items = (itemRows || []).map((r: any) => (params.full ? mapRowToPortfolioItem(r) : mapRowToPortfolioSummary(r)));
 
       const result: PaginatedPortfolioResult & { etag?: string } = {
         items,
@@ -402,7 +389,7 @@ export const portfolioService = {
 
       return result;
     } catch (err) {
-      console.error('[DB Portfolio] getPaginatedProjects fallback:', err);
+      console.warn('[DB Portfolio] getPaginatedProjects query fallback:', err);
 
       // In-memory fallback
       let filtered = [...defaultProjects];
@@ -438,25 +425,26 @@ export const portfolioService = {
         description: p.description,
         client: p.client || '',
         duration: p.duration || '',
-        role: p.role || '',
+        role: p.role || 'Website Design & Development',
         liveUrl: p.liveUrl || '',
-        content: p.content || '',
+        content: p.content || p.description,
         challenges: p.challenges || [],
         solutions: p.solutions || [],
         results: p.results || [],
         technologies: p.technologies || [],
-        metaTitle: p.metaTitle || '',
-        metaDescription: p.metaDescription || '',
+        metaTitle: p.metaTitle || p.title,
+        metaDescription: p.metaDescription || p.description,
         aeoSummary: p.aeoSummary || '',
         keywords: p.keywords || [],
-        geoRegion: p.geoRegion || '',
+        geoRegion: p.geoRegion || 'Global',
         canonicalUrl: p.canonicalUrl || '',
-        order: offset + idx,
+        faqs: p.faqs || [],
+        order: p.order ?? offset + idx,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }));
 
-      const result: PaginatedPortfolioResult & { etag?: string } = {
+      const fallbackResult: PaginatedPortfolioResult & { etag?: string } = {
         items,
         pagination: {
           total,
@@ -474,8 +462,9 @@ export const portfolioService = {
         },
       };
 
-      result.etag = portfolioCache.generateEtag(result);
-      return result;
+      const cachedFallback = portfolioCache.set(cacheKey, fallbackResult);
+      fallbackResult.etag = cachedFallback.etag;
+      return fallbackResult;
     }
   },
 
@@ -497,8 +486,13 @@ export const portfolioService = {
       const conditions: Prisma.Sql[] = [];
 
       if (category && category.trim().toUpperCase() !== 'ALL') {
-        const cleanCat = category.trim().toLowerCase().replace(/[-\s]/g, '');
-        conditions.push(Prisma.sql`LOWER(REPLACE(REPLACE("category", '-', ''), ' ', '')) = ${cleanCat}`);
+        const rawCat = category.trim();
+        const noHyphens = rawCat.replace(/-/g, ' ');
+        conditions.push(Prisma.sql`(
+          LOWER("category") = LOWER(${rawCat}) OR 
+          LOWER("category") = LOWER(${noHyphens}) OR
+          LOWER("category") LIKE LOWER(${`%${noHyphens}%`})
+        )`);
       }
 
       if (search && search.trim()) {

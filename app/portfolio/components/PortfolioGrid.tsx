@@ -23,6 +23,7 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
   const {
     projectsList,
     categoriesList,
+    isCategoriesLoading,
     activeFilter,
     setActiveFilter,
     page,
@@ -88,7 +89,7 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
     <div ref={sectionRef} className="rt-portfolio-section" style={{ position: 'relative', width: '100%' }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         
-        {/* Category Filter Pills (Static - Stays rendered) */}
+        {/* Category Filter Pills (with skeleton loading support) */}
         {!hideFilter && (
           <div 
             ref={filterWrapRef}
@@ -102,32 +103,46 @@ function PortfolioGridContent({ limit, hideFilter, categoryFilter }: { limit?: n
               marginBottom: '3rem',
             }}
           >
-            {displayCategories.map((cat) => {
-              const isActive = activeFilter === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => handleFilterClick(cat)}
+            {isCategoriesLoading && (!categoriesList || categoriesList.length === 0) ? (
+              ['All', 'Business Website', 'E-Commerce', 'Landing Website', 'Mobile Application', 'Custom Software', 'Graphic Design'].map((cat, i) => (
+                <div
+                  key={`cat-skel-${cat}`}
+                  className="rt-skeleton-box"
                   style={{
-                    padding: '0.6rem 1.4rem',
+                    width: i === 0 ? '70px' : `${110 + (i % 3) * 20}px`,
+                    height: '42px',
                     borderRadius: '2rem',
-                    fontSize: '0.875rem',
-                    fontWeight: 600,
-                    border: '1px solid',
-                    borderColor: isActive ? 'var(--brand-blue, #1833fe)' : '#E2E8F0',
-                    backgroundColor: isActive ? 'var(--brand-blue, #1833fe)' : '#FFFFFF',
-                    color: isActive ? '#FFFFFF' : '#475569',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                    boxShadow: isActive ? '0 4px 12px rgba(24, 51, 254, 0.25)' : 'none',
                   }}
-                  className="rt-filter-btn"
-                >
-                  {cat}
-                </button>
-              );
-            })}
+                />
+              ))
+            ) : (
+              displayCategories.map((cat) => {
+                const isActive = activeFilter === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => handleFilterClick(cat)}
+                    style={{
+                      padding: '0.6rem 1.4rem',
+                      borderRadius: '2rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      border: '1px solid',
+                      borderColor: isActive ? 'var(--brand-blue, #1833fe)' : '#E2E8F0',
+                      backgroundColor: isActive ? 'var(--brand-blue, #1833fe)' : '#FFFFFF',
+                      color: isActive ? '#FFFFFF' : '#475569',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                      boxShadow: isActive ? '0 4px 12px rgba(24, 51, 254, 0.25)' : 'none',
+                    }}
+                    className="rt-filter-btn"
+                  >
+                    {cat}
+                  </button>
+                );
+              })
+            )}
           </div>
         )}
 

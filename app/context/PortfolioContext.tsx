@@ -16,6 +16,7 @@ export const DEFAULT_PORTFOLIO_CATEGORIES = [
 export interface PortfolioContextType {
   projectsList: Project[];
   categoriesList: string[];
+  isCategoriesLoading: boolean;
   activeFilter: string;
   setActiveFilter: (filter: string) => void;
   page: number;
@@ -50,6 +51,7 @@ export function PortfolioProvider({
     if (initialCategories && initialCategories.length > 0) return initialCategories;
     return DEFAULT_PORTFOLIO_CATEGORIES;
   });
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState<boolean>(!initialCategories || initialCategories.length === 0);
 
   const [projectsList, setProjectsList] = useState<Project[]>(() => {
     if (initialProjects && initialProjects.length > 0) return initialProjects;
@@ -81,6 +83,8 @@ export function PortfolioProvider({
         }
       } catch {
         // Fallback to defaults
+      } finally {
+        setIsCategoriesLoading(false);
       }
     }
     loadDynamicCategories();
@@ -171,6 +175,7 @@ export function PortfolioProvider({
     () => ({
       projectsList,
       categoriesList,
+      isCategoriesLoading,
       activeFilter,
       setActiveFilter,
       page,
@@ -186,6 +191,7 @@ export function PortfolioProvider({
     [
       projectsList,
       categoriesList,
+      isCategoriesLoading,
       activeFilter,
       page,
       hasNextPage,

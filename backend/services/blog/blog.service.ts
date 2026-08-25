@@ -367,7 +367,7 @@ export class BlogService {
         db.$queryRaw<any[]>`
           SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -401,7 +401,7 @@ export class BlogService {
         db.$queryRaw<any[]>`
           SELECT * FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
       if (rows && rows.length > 0) {

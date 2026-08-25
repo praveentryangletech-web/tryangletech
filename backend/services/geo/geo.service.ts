@@ -58,7 +58,7 @@ export const geoService = {
         includeDrafts
           ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' ORDER BY "city" ASC`
           : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "city" ASC`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
       if (rows && Array.isArray(rows)) {
@@ -175,7 +175,7 @@ export const geoService = {
               WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true
               ORDER BY "city" ASC
             `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
       if (rows && Array.isArray(rows)) {
@@ -285,7 +285,7 @@ export const geoService = {
         includeDraft
           ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1`
           : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
       if (rows && rows.length > 0) {

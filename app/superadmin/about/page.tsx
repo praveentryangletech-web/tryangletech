@@ -176,46 +176,96 @@ function SuperadminAboutContent() {
               boxShadow: '0 4px 16px rgba(0,0,0,0.02)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.75rem',
+              gap: '22px',
             }}
           >
-            {/* Section Header Skeleton */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid #F1F5F9' }}>
-              <div>
-                <div className="rt-skeleton-box" style={{ width: '220px', height: '24px', borderRadius: '6px', marginBottom: '6px' }} />
-                <div className="rt-skeleton-box" style={{ width: '320px', height: '14px', borderRadius: '4px' }} />
-              </div>
-              <div className="rt-skeleton-box" style={{ width: '90px', height: '28px', borderRadius: '6px' }} />
+            {/* Header Info */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #BFDBFE' }}>
+                Above the Fold
+              </span>
             </div>
 
-            {/* Form Field Rows Skeleton */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+            {/* Sub Badge & Headline (2-Column Inputs) */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
               <div>
-                <div className="rt-skeleton-box" style={{ width: '120px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Overtitle / Sub-Badge Text
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
               </div>
               <div>
-                <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '44px', borderRadius: '10px' }} />
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Main Hero Headline *
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
               </div>
             </div>
 
+            {/* Intro Paragraph 1 */}
             <div>
-              <div className="rt-skeleton-box" style={{ width: '160px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                Intro Paragraph 1 *
+              </label>
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
             </div>
 
+            {/* Intro Paragraph 2 */}
             <div>
-              <div className="rt-skeleton-box" style={{ width: '180px', height: '14px', marginBottom: '8px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '88px', borderRadius: '10px' }} />
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                Intro Paragraph 2 (Value Proposition)
+              </label>
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
             </div>
 
-            {/* Statistics / Repeater Box Skeleton */}
-            <div style={{ padding: '1.25rem', backgroundColor: '#F8FAFC', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
-              <div className="rt-skeleton-box" style={{ width: '150px', height: '16px', borderRadius: '4px', marginBottom: '12px' }} />
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="rt-skeleton-box" style={{ width: '100%', height: '70px', borderRadius: '10px' }} />
+            {/* Key Company Statistics Box */}
+            <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div>
+                  <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>📊 Live Company Statistics</strong>
+                  <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: '#64748B' }}>
+                    Displayed directly below the hero intro text on the About page.
+                  </p>
+                </div>
+                <div
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '6px',
+                    border: '1px solid #C7D2FE',
+                    backgroundColor: '#EEF2FF',
+                    color: '#4338CA',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                  }}
+                >
+                  + Add Stat
+                </div>
+              </div>
+
+              {/* 3 Stat Item Cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                {[1, 2, 3].map((statIdx) => (
+                  <div key={statIdx} style={{ backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div className="rt-skeleton-box" style={{ width: '50px', height: '12px', borderRadius: '4px' }} />
+                      <div className="rt-skeleton-box" style={{ width: '16px', height: '16px', borderRadius: '4px' }} />
+                    </div>
+                    <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
+                    <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Client Avatar Faces & Colors Box */}
+            <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+              <strong style={{ fontSize: '0.875rem', color: '#0F172A', display: 'block', marginBottom: '12px' }}>
+                👥 Client Avatar Circles (Top Left Stack)
+              </strong>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+                {[1, 2, 3].map((idx) => (
+                  <div key={idx} className="rt-skeleton-box" style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
                 ))}
               </div>
             </div>

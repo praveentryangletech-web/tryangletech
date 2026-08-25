@@ -2,6 +2,7 @@ import React from 'react';
 import Script from 'next/script';
 import { aboutService } from '@/backend/services/about';
 import { DEFAULT_ABOUT_CONTENT } from '@/backend/services/about/about.defaults';
+import { AboutProvider } from '../context/AboutContext';
 
 import AboutHero from './components/AboutHero';
 import AboutFeatures from './components/AboutFeatures';
@@ -25,7 +26,7 @@ export default async function AboutPage() {
   const jsonLdSchema = aboutService.generateAboutSchema(content);
 
   return (
-    <>
+    <AboutProvider initialContent={content}>
       <WebflowInit pageId="68eddb57e406830358a1f29d" />
 
       {/* Dynamic Schema.org JSON-LD Structured Data for Google & AI Search (AEO) */}
@@ -51,6 +52,6 @@ export default async function AboutPage() {
 
         <AboutFAQ faqSection={content.faqSection} />
       </main>
-    </>
+    </AboutProvider>
   );
 }

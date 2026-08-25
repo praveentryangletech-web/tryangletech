@@ -281,15 +281,10 @@ export const geoService = {
     if (cached) return cached;
 
     try {
-      const isAhmedabadOrMain = cleanSlug === 'ahmedabad' || cleanSlug === 'main';
       const rows = await Promise.race([
         includeDraft
-          ? isAhmedabadOrMain
-            ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} OR LOWER("slug") = 'main' LIMIT 1`
-            : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1`
-          : isAhmedabadOrMain
-            ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} OR (LOWER("slug") = 'main' AND "isPublished" = true) LIMIT 1`
-            : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
+          ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1`
+          : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE LOWER("slug") = ${cleanSlug} AND "isPublished" = true LIMIT 1`,
         new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 

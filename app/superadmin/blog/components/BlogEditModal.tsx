@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { BlogPostItem } from '@/backend/services/blog';
 import { useBlog } from '../../context/BlogContext';
+import { apiClient } from '@/app/superadmin/utils/apiClient';
 
 interface BlogEditModalProps {
   isOpen: boolean;
@@ -49,7 +50,7 @@ export default function BlogEditModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Populate form when modal opens or post changes
+  // Populate form when modal opens or post changes (with on-demand complete data fetch)
   useEffect(() => {
     if (post) {
       setTitle(post.title || '');
@@ -65,6 +66,31 @@ export default function BlogEditModal({
       setExcerpt(post.excerpt || '');
       setContent(post.content || post.excerpt || '');
       setTags(post.tags || []);
+
+      // If opening an existing article, fetch full detailed record by ID on-demand
+      if (post.id) {
+        apiClient
+          .get<BlogPostItem>(`/api/blog?id=${encodeURIComponent(post.id)}`, { useCache: false })
+          .then((res) => {
+            if (res.success && res.data) {
+              const full = res.data;
+              setTitle(full.title || '');
+              setSlug(full.slug || '');
+              setCategory(full.category || 'Web Development');
+              setAuthorName(full.authorName || 'TryangleTech Team');
+              setAuthorRole(full.authorRole || 'Editorial Team');
+              setReadTime(full.readTime || '5 min read');
+              setPublished(full.published);
+              setPublishedAt(formatForDateTimeInput(full.publishedAt || full.createdAt));
+              setCoverImage(full.coverImage || '');
+              setCoverImageAlt(full.coverImageAlt || full.imageAlt || '');
+              setExcerpt(full.excerpt || '');
+              setContent(full.content || full.excerpt || '');
+              setTags(full.tags || []);
+            }
+          })
+          .catch(() => {});
+      }
     } else {
       // Add mode defaults
       setTitle('');

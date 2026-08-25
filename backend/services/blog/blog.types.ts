@@ -50,6 +50,27 @@ export interface BlogPostItem {
   updatedAt: string;
 }
 
+export interface BlogSummaryItem {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  coverImage: string;
+  coverImageAlt?: string;
+  authorName?: string;
+  authorRole?: string;
+  authorImage?: string;
+  readTime?: string;
+  published: boolean;
+  publishedAt?: string;
+  order?: number;
+  tags?: string[];
+  viewsCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type CreateBlogPostInput = Partial<Omit<BlogPostItem, 'id' | 'createdAt' | 'updatedAt'>>;
 export type UpdateBlogPostInput = Partial<BlogPostItem>;
 
@@ -74,7 +95,7 @@ export interface PaginationMeta {
 }
 
 export interface PaginatedBlogResult {
-  items: BlogPostItem[];
+  items: (BlogPostItem | BlogSummaryItem)[];
   pagination: PaginationMeta;
   filters: {
     category?: string;

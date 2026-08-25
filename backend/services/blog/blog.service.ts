@@ -3,6 +3,7 @@ import db from '@/backend/db/client';
 import { BLOG_POSTS as staticBlogPosts } from '@/app/blog/data';
 import {
   BlogPostItem,
+  BlogSummaryItem,
   CreateBlogPostInput,
   UpdateBlogPostInput,
   BlogQueryParams,
@@ -150,6 +151,29 @@ export class BlogService {
     })().catch(() => {});
   }
 
+  private mapRowToSummary(row: any): BlogSummaryItem {
+    return {
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      category: row.category,
+      excerpt: row.excerpt || '',
+      coverImage: row.coverImage || '',
+      coverImageAlt: row.coverImageAlt || row.imageAlt || '',
+      authorName: row.authorName || 'TryangleTech Team',
+      authorRole: row.authorRole || 'Editorial Team',
+      authorImage: row.authorImage || '',
+      readTime: row.readTime || '5 min read',
+      published: Boolean(row.published),
+      publishedAt: row.publishedAt ? new Date(row.publishedAt).toISOString() : undefined,
+      order: Number(row.order || 0),
+      tags: row.tags || [],
+      viewsCount: Number(row.viewsCount || 0),
+      createdAt: row.createdAt ? new Date(row.createdAt).toISOString() : new Date().toISOString(),
+      updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+    };
+  }
+
   private mapRowToPost(row: any): BlogPostItem {
     return {
       id: row.id,
@@ -199,7 +223,7 @@ export class BlogService {
   }
 
   /**
-   * Get paginated articles with filtering, searching, and caching
+   * Get paginated articles with filtering, searching, and caching (Lightweight summary payload)
    */
   public async getPaginatedPosts(params: BlogQueryParams = {}): Promise<PaginatedBlogResult> {
     const page = Math.max(Number(params.page) || 1, 1);
@@ -256,13 +280,20 @@ export class BlogService {
       const [totalCountRows, rows] = await Promise.race([
         Promise.all([
           db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
-          db.$queryRaw<any[]>`SELECT * FROM "BlogPost" ${whereClause} ORDER BY "publishedAt" DESC, "createdAt" DESC LIMIT ${limit} OFFSET ${offset}`,
+          db.$queryRaw<any[]>`
+            SELECT "id", "slug", "title", "category", "excerpt", "coverImage", "coverImageAlt",
+                   "authorName", "authorRole", "authorImage", "readTime", "published", "publishedAt",
+                   "order", "tags", "viewsCount", "createdAt", "updatedAt"
+            FROM "BlogPost" ${whereClause} 
+            ORDER BY "publishedAt" DESC, "createdAt" DESC 
+            LIMIT ${limit} OFFSET ${offset}
+          `,
         ]),
         new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (8000ms)')), 8000)),
       ]);
 
       const total = Number(totalCountRows?.[0]?.count || 0);
-      const items: BlogPostItem[] = (rows || []).map((r: any) => this.mapRowToPost(r));
+      const items: BlogSummaryItem[] = (rows || []).map((r: any) => this.mapRowToSummary(r));
       const totalPages = Math.ceil(total / limit) || 1;
 
       const result: PaginatedBlogResult = {
@@ -577,8 +608,15 @@ export class BlogService {
   public async deletePost(id: string): Promise<boolean> {
     await this.ensureBlogSchema();
 
+    const trimmed = (id || '').trim();
+    if (!trimmed) return false;
+
     await db.$executeRaw`
-      DELETE FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id}
+      DELETE FROM "BlogPost" 
+      WHERE "id" = ${trimmed} 
+         OR LOWER("id") = LOWER(${trimmed}) 
+         OR "slug" = ${trimmed} 
+         OR LOWER("slug") = LOWER(${trimmed})
     `;
 
     blogCache.clear();

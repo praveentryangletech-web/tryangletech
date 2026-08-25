@@ -390,16 +390,32 @@ export function BlogProvider({ children }: { children: ReactNode }) {
    */
   const deletePost = useCallback(async (postIdOrSlug: string) => {
     // Optimistic removal
-    setPostsList((prev) => prev.filter((item) => item.id !== postIdOrSlug && item.slug !== postIdOrSlug));
+    setPostsList((prev) =>
+      prev.filter(
+        (item) =>
+          item.id !== postIdOrSlug &&
+          item.slug !== postIdOrSlug &&
+          item.id.toLowerCase() !== postIdOrSlug.toLowerCase() &&
+          item.slug.toLowerCase() !== postIdOrSlug.toLowerCase()
+      )
+    );
+    setPagination((prev) => ({
+      ...prev,
+      total: Math.max(prev.total - 1, 0),
+      totalPages: Math.ceil(Math.max(prev.total - 1, 0) / limit) || 1,
+    }));
+
+    apiClient.clearCache('/api/blog');
 
     const res = await apiClient.delete(`/api/blog?id=${encodeURIComponent(postIdOrSlug)}`);
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete article.');
     }
 
+    apiClient.clearCache('/api/blog');
     await fetchBlog();
     setDeletingPost(null);
-  }, [fetchBlog]);
+  }, [limit, fetchBlog]);
 
   const contextValue = useMemo(
     () => ({

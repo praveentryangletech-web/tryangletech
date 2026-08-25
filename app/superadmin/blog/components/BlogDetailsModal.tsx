@@ -1,17 +1,35 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import SafeImage from '@/app/common/SafeImage';
 import { BlogPostItem } from '@/backend/services/blog';
+import { apiClient } from '@/app/superadmin/utils/apiClient';
 
 interface BlogDetailsModalProps {
   post: BlogPostItem | null;
   onClose: () => void;
 }
 
-export default function BlogDetailsModal({ post, onClose }: BlogDetailsModalProps) {
-  if (!post) return null;
+export default function BlogDetailsModal({ post: initialPost, onClose }: BlogDetailsModalProps) {
+  const [fullPost, setFullPost] = useState<BlogPostItem | null>(initialPost);
+
+  useEffect(() => {
+    setFullPost(initialPost);
+    if (initialPost?.id) {
+      apiClient
+        .get<BlogPostItem>(`/api/blog?id=${encodeURIComponent(initialPost.id)}`, { useCache: false })
+        .then((res) => {
+          if (res.success && res.data) {
+            setFullPost(res.data);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [initialPost]);
+
+  if (!fullPost) return null;
+  const post = fullPost;
 
   return (
     <div

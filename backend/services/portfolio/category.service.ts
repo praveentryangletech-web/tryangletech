@@ -199,7 +199,7 @@ export const portfolioCategoryService = {
     try {
       await this.seedIfEmpty(normalizedType);
 
-      // Parallelize categories and counts queries in a single roundtrip with 2.5s timeout
+      // Parallelize categories and counts queries in a single roundtrip with 8.0s timeout
       const [categoryRows, countRows] = await Promise.race([
         Promise.all([
           db.$queryRaw<any[]>`
@@ -215,7 +215,7 @@ export const portfolioCategoryService = {
                 SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
               `.catch(() => []),
         ]),
-        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)

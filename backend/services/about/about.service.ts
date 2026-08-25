@@ -107,7 +107,7 @@ export const aboutService = {
           WHERE "slug" = 'about_main' OR "pageType" = 'ABOUT_PAGE'
           LIMIT 1
         `),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -146,7 +146,8 @@ export const aboutService = {
       console.warn('[AboutService] getAboutContent DB fallback:', err);
     }
 
-    const fallbackEntry = aboutCache.set(cacheKey, DEFAULT_ABOUT_CONTENT);
+    // Use a short 5-second transient fallback TTL so next request retries live DB
+    const fallbackEntry = aboutCache.set(cacheKey, DEFAULT_ABOUT_CONTENT, 5000);
     return { ...DEFAULT_ABOUT_CONTENT, etag: fallbackEntry.etag };
   },
 

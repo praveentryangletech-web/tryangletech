@@ -102,7 +102,7 @@ export const homeService = {
   },
 
   /**
-   * Fetch full dynamic Home page content from unified PageContent with fail-fast 2.5s timeout
+   * Fetch full dynamic Home page content from unified PageContent with resilient 8.0s timeout
    */
   async getHomeContent(): Promise<HomeContentDTO & { etag?: string }> {
     const cacheKey = 'home_content_main';
@@ -111,12 +111,10 @@ export const homeService = {
       return { ...cached.data, etag: cached.etag };
     }
 
-    this.ensureTable();
-
     try {
       const rows = await Promise.race([
         db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "slug" = 'main' LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -154,7 +152,8 @@ export const homeService = {
       console.warn('[HomeService] getHomeContent DB fallback:', err);
     }
 
-    const fallbackEntry = homeCache.set(cacheKey, DEFAULT_HOME_CONTENT);
+    // Use a short 5-second transient fallback TTL so next request retries live DB
+    const fallbackEntry = homeCache.set(cacheKey, DEFAULT_HOME_CONTENT, 5000);
     return { ...DEFAULT_HOME_CONTENT, etag: fallbackEntry.etag };
   },
 

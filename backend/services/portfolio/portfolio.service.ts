@@ -279,7 +279,7 @@ export const portfolioService = {
         ? (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "createdAt" DESC` : Prisma.sql`ORDER BY "createdAt" ASC`)
         : (sortOrder === 'DESC' ? Prisma.sql`ORDER BY "order" DESC, "createdAt" DESC` : Prisma.sql`ORDER BY "order" ASC, "createdAt" DESC`);
 
-      // Single-Roundtrip CTE Execution with 2.5s fail-fast timeout
+      // Single-Roundtrip CTE Execution with 8.0s resilient timeout
       const rows = await Promise.race([
         db.$queryRaw<any[]>`
           WITH filtered AS (
@@ -297,7 +297,7 @@ export const portfolioService = {
           ${orderClause}
           LIMIT ${limit} OFFSET ${offset}
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2500ms)')), 2500)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
       ]);
 
       let total = 0;

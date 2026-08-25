@@ -14,6 +14,15 @@ import WebflowInit from '../common/WebflowInit';
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata() {
+  try {
+    const content = await aboutService.getAboutContent();
+    return aboutService.generateAboutMetadata(content);
+  } catch (err) {
+    return aboutService.generateAboutMetadata(DEFAULT_ABOUT_CONTENT);
+  }
+}
+
 export default async function AboutPage() {
   let content;
   try {

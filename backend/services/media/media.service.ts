@@ -63,37 +63,8 @@ class MediaService {
     return crypto.createHash('sha1').update(stringToSign).digest('hex');
   }
 
-  /**
-   * Automatically ensure MediaAsset table exists in Supabase PostgreSQL
-   */
   private async ensureTable(): Promise<void> {
-    if (this.tableInitialized) return;
-    try {
-      await db.$executeRawUnsafe(`
-        CREATE TABLE IF NOT EXISTS "MediaAsset" (
-          "id" TEXT PRIMARY KEY,
-          "filename" TEXT UNIQUE NOT NULL,
-          "altText" TEXT DEFAULT '',
-          "mimeType" TEXT NOT NULL,
-          "size" INTEGER NOT NULL,
-          "data" TEXT NOT NULL,
-          "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-        );
-      `);
-
-      try {
-        await db.$executeRawUnsafe(`ALTER TABLE "MediaAsset" ADD COLUMN IF NOT EXISTS "altText" TEXT DEFAULT '';`);
-      } catch {}
-
-      try {
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_mediaasset_filename" ON "MediaAsset" ("filename");`);
-      } catch {}
-
-      this.tableInitialized = true;
-    } catch (err) {
-      console.warn('[MediaService] DB ensureTable warning:', err);
-    }
+    this.tableInitialized = true;
   }
 
   /**

@@ -43,66 +43,11 @@ export const homeService = {
    * Non-blocking background table initialization for unified PageContent
    */
   ensureTable(): void {
-    if (isPageContentTableEnsured) return;
-    isPageContentTableEnsured = true;
-
-    (async () => {
-      try {
-        await db.$executeRawUnsafe(`
-          CREATE TABLE IF NOT EXISTS "PageContent" (
-            "slug" TEXT PRIMARY KEY,
-            "pageType" TEXT NOT NULL DEFAULT 'LOCATION_CLONE',
-            "city" TEXT,
-            "state" TEXT,
-            "country" TEXT NOT NULL DEFAULT 'India',
-            "countryCode" TEXT NOT NULL DEFAULT 'IN',
-            "region" TEXT NOT NULL DEFAULT 'Gujarat',
-            "regionCode" TEXT NOT NULL DEFAULT 'IN-GJ',
-            "postalCode" TEXT,
-            "latitude" DOUBLE PRECISION DEFAULT 23.0225,
-            "longitude" DOUBLE PRECISION DEFAULT 72.5714,
-            "popular" BOOLEAN NOT NULL DEFAULT false,
-            "hero" JSONB,
-            "services" JSONB,
-            "about" JSONB,
-            "whyChooseUs" JSONB,
-            "howWeWork" JSONB,
-            "techStack" JSONB,
-            "testimonials" JSONB,
-            "ctaBanner" JSONB,
-            "metaTitle" TEXT,
-            "metaDescription" TEXT,
-            "keywords" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "faqs" JSONB,
-            "isPublished" BOOLEAN NOT NULL DEFAULT true,
-            "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_type_pub" ON "PageContent" ("pageType", "isPublished");`);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_reg_pub" ON "PageContent" ("region", "isPublished");`);
-
-        // Migrate legacy HomeContent if exists
-        await db.$executeRawUnsafe(`
-          DO $$
-          BEGIN
-            IF EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'HomeContent') THEN
-              INSERT INTO "PageContent" ("slug", "pageType", "hero", "services", "about", "whyChooseUs", "howWeWork", "techStack", "testimonials", "ctaBanner", "updatedAt")
-              SELECT 'main', 'HOME_CORE', "hero", "services", "about", "whyChooseUs", "howWeWork", "techStack", "testimonials", "ctaBanner", "updatedAt"
-              FROM "HomeContent" WHERE "id" = 'home_main_v1'
-              ON CONFLICT ("slug") DO NOTHING;
-            END IF;
-          END $$;
-        `);
-      } catch (err) {
-        console.warn('[HomeService] ensureTable notice:', err);
-      }
-    })().catch(() => {});
+    // Table and indexes are pre-configured in PostgreSQL
   },
 
   /**
-   * Fetch full dynamic Home page content from unified PageContent with resilient 8.0s timeout
+   * Fetch full dynamic Home page content from unified PageContent with resilient 2.0s timeout
    */
   async getHomeContent(): Promise<HomeContentDTO & { etag?: string }> {
     const cacheKey = 'home_content_main';
@@ -114,7 +59,7 @@ export const homeService = {
     try {
       const rows = await Promise.race([
         db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "slug" = 'main' LIMIT 1`,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (2000ms)')), 2000)),
       ]);
 
       if (rows && rows.length > 0) {

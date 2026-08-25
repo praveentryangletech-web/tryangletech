@@ -109,19 +109,7 @@ export function clearPortfolioCache(): void {
  * Guarantees that schema initialization, columns, and database indexes are handled in the background.
  */
 function ensureColumnsExist(): void {
-  if (isColumnsEnsured) return;
-  isColumnsEnsured = true;
-
-  (async () => {
-    try {
-      await db.$executeRawUnsafe(`
-        ALTER TABLE "PortfolioProject" 
-          ADD COLUMN IF NOT EXISTS "imageAlt" TEXT,
-          ADD COLUMN IF NOT EXISTS "imageAlts" TEXT[] DEFAULT ARRAY[]::TEXT[];
-      `);
-      await ensureAllDatabaseIndexes();
-    } catch (_) {}
-  })().catch(() => {});
+  // Schema columns and indexes are pre-configured in PostgreSQL
 }
 
 /**

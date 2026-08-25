@@ -42,51 +42,7 @@ export const geoService = {
    * Non-blocking background table initialization and legacy migration for PageContent
    */
   ensureTable(): void {
-    if (isPageContentTableEnsured) return;
-    isPageContentTableEnsured = true;
-
-    (async () => {
-      try {
-        await db.$executeRawUnsafe(`
-          CREATE TABLE IF NOT EXISTS "PageContent" (
-            "slug" TEXT PRIMARY KEY,
-            "pageType" TEXT NOT NULL DEFAULT 'LOCATION_CLONE',
-            "city" TEXT,
-            "state" TEXT,
-            "country" TEXT NOT NULL DEFAULT 'India',
-            "countryCode" TEXT NOT NULL DEFAULT 'IN',
-            "region" TEXT NOT NULL DEFAULT 'Gujarat',
-            "regionCode" TEXT NOT NULL DEFAULT 'IN-GJ',
-            "postalCode" TEXT,
-            "latitude" DOUBLE PRECISION DEFAULT 23.0225,
-            "longitude" DOUBLE PRECISION DEFAULT 72.5714,
-            "popular" BOOLEAN NOT NULL DEFAULT false,
-            "hero" JSONB,
-            "services" JSONB,
-            "about" JSONB,
-            "whyChooseUs" JSONB,
-            "howWeWork" JSONB,
-            "techStack" JSONB,
-            "testimonials" JSONB,
-            "ctaBanner" JSONB,
-            "metaTitle" TEXT,
-            "metaDescription" TEXT,
-            "keywords" TEXT[] DEFAULT ARRAY[]::TEXT[],
-            "faqs" JSONB,
-            "isPublished" BOOLEAN NOT NULL DEFAULT true,
-            "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-
-        await ensureAllDatabaseIndexes();
-
-        // Drop legacy GeoLocation table if it still exists so it never re-inserts stale deleted items
-        await db.$executeRawUnsafe(`DROP TABLE IF EXISTS "GeoLocation" CASCADE;`);
-      } catch (err) {
-        console.warn('[GeoService] ensureTable notice:', err);
-      }
-    })().catch(() => {});
+    // Schema and indexes are pre-configured in PostgreSQL
   },
 
   /**

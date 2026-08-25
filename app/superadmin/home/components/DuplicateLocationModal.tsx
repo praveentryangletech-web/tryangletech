@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { LocationRegion } from '@/backend/services/geo/geo.types';
+import CitySearchSelect from './CitySearchSelect';
+import { CitySearchResult } from '@/app/api/geo/cities/route';
 
 const REGION_OPTIONS: LocationRegion[] = [
   'Gujarat',
@@ -24,6 +26,7 @@ interface DuplicateLocationModalProps {
   setDuplicateTargetRegion: (val: LocationRegion) => void;
   duplicateTargetCountry: string;
   setDuplicateTargetCountry: (val: string) => void;
+  onSelectCity?: (cityData: CitySearchResult) => void;
   isDuplicating: boolean;
   onExecuteDuplicate: (e: React.FormEvent) => void;
 }
@@ -62,10 +65,21 @@ export default function DuplicateLocationModal({
   setDuplicateTargetRegion,
   duplicateTargetCountry,
   setDuplicateTargetCountry,
+  onSelectCity,
   isDuplicating,
   onExecuteDuplicate,
 }: DuplicateLocationModalProps) {
   if (!isOpen) return null;
+
+  const handleCitySelected = (cityData: CitySearchResult) => {
+    setDuplicateTargetCity(cityData.city);
+    setDuplicateTargetSlug(cityData.slug);
+    setDuplicateTargetRegion(cityData.region);
+    setDuplicateTargetCountry(cityData.country);
+    if (onSelectCity) {
+      onSelectCity(cityData);
+    }
+  };
 
   return (
     <div
@@ -87,7 +101,7 @@ export default function DuplicateLocationModal({
         style={{
           backgroundColor: '#FFFFFF',
           borderRadius: '16px',
-          maxWidth: '480px',
+          maxWidth: '520px',
           width: '100%',
           padding: '24px',
           boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
@@ -111,31 +125,49 @@ export default function DuplicateLocationModal({
         </div>
 
         <form onSubmit={onExecuteDuplicate} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {/* Real City Search Autocomplete */}
           <div>
-            <label style={labelStyle}>Target City Name *</label>
-            <input
-              type="text"
-              placeholder="e.g. Pune, Jaipur, Berlin"
+            <CitySearchSelect
+              label="Target City Name *"
               value={duplicateTargetCity}
-              onChange={(e) => {
-                setDuplicateTargetCity(e.target.value);
-                setDuplicateTargetSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+              onChange={(val) => {
+                setDuplicateTargetCity(val);
+                if (!val.trim()) {
+                  setDuplicateTargetSlug('');
+                } else {
+                  setDuplicateTargetSlug(val.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+                }
               }}
-              style={inputStyle}
+              onSelectCity={handleCitySelected}
+              placeholder="Type city (e.g. Varanasi, Mumbai, Dubai, London)..."
               required
             />
           </div>
 
           <div>
             <label style={labelStyle}>Target URL Slug *</label>
-            <input
-              type="text"
-              placeholder="e.g. pune"
-              value={duplicateTargetSlug}
-              onChange={(e) => setDuplicateTargetSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
-              style={inputStyle}
-              required
-            />
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <span
+                style={{
+                  position: 'absolute',
+                  left: '12px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: '#94A3B8',
+                  pointerEvents: 'none',
+                }}
+              >
+                /location/
+              </span>
+              <input
+                type="text"
+                placeholder="e.g. varanasi"
+                value={duplicateTargetSlug}
+                onChange={(e) => setDuplicateTargetSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
+                style={{ ...inputStyle, paddingLeft: '4.75rem' }}
+                required
+              />
+            </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>

@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { LocationRegion, LocationFaq } from '@/backend/services/geo/geo.types';
+import CitySearchSelect from './CitySearchSelect';
+import { CitySearchResult } from '@/app/api/geo/cities/route';
 
 const REGION_OPTIONS: LocationRegion[] = [
   'Gujarat',
@@ -408,8 +410,22 @@ export default function GeoSettingsTab({
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
             <div>
-              <label style={labelStyle}>City Name *</label>
-              <input type="text" value={locCity} onChange={(e) => setLocCity(e.target.value)} style={inputStyle} required />
+              <CitySearchSelect
+                label="City Name *"
+                value={locCity}
+                onChange={(val) => setLocCity(val)}
+                onSelectCity={(cityData: CitySearchResult) => {
+                  setLocCity(cityData.city);
+                  if (cityData.country) setLocCountry(cityData.country);
+                  if (cityData.region) setLocRegion(cityData.region);
+                  if (cityData.latitude) setLocLatitude(String(cityData.latitude));
+                  if (cityData.longitude) setLocLongitude(String(cityData.longitude));
+                  if (cityData.postalCode) setLocPostalCode(cityData.postalCode);
+                  if (!locSlug || locSlug === 'main') setLocSlug(cityData.slug);
+                }}
+                placeholder="Search city (e.g. Varanasi, Mumbai, Dubai, London)..."
+                required
+              />
             </div>
             <div>
               <label style={labelStyle}>URL Slug (/location/[slug]) *</label>

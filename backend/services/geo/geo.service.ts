@@ -519,7 +519,17 @@ export const geoService = {
    */
   async duplicateLocation(
     sourceSlug: string,
-    target: { city: string; slug: string; region?: any; country?: string }
+    target: {
+      city: string;
+      slug: string;
+      region?: any;
+      country?: string;
+      state?: string;
+      postalCode?: string;
+      coordinates?: { latitude: number; longitude: number };
+      countryCode?: string;
+      regionCode?: string;
+    }
   ): Promise<LocationItem> {
     const cleanTargetSlug = target.slug.toLowerCase().trim().replace(/[^a-z0-9-]/g, '-');
     const targetCity = target.city.trim();
@@ -532,19 +542,23 @@ export const geoService = {
 
     const region = target.region || sourceLoc.region || 'Gujarat';
     const country = target.country || sourceLoc.country || 'India';
-    const countryCode = country.toLowerCase() === 'india' ? 'IN' : sourceLoc.countryCode || 'IN';
-    const regionCode = countryCode === 'IN' ? `IN-${targetCity.slice(0, 2).toUpperCase()}` : sourceLoc.regionCode;
+    const countryCode = target.countryCode || (country.toLowerCase() === 'india' ? 'IN' : sourceLoc.countryCode || 'IN');
+    const state = target.state || targetCity;
+    const regionCode = target.regionCode || (countryCode === 'IN' ? (state ? `IN-${state.slice(0, 2).toUpperCase()}` : `IN-${targetCity.slice(0, 2).toUpperCase()}`) : sourceLoc.regionCode);
+    const coordinates = target.coordinates || sourceLoc.coordinates || { latitude: 23.0225, longitude: 72.5714 };
+    const postalCode = target.postalCode || sourceLoc.postalCode || undefined;
 
     // 2. Generate customized parameters for new location
     const newLocationPayload: Partial<LocationItem> & { slug: string; city: string } = {
       slug: cleanTargetSlug,
       city: targetCity,
-      state: targetCity,
+      state: state,
       country: country,
       countryCode: countryCode,
       region: region,
       regionCode: regionCode,
-      coordinates: sourceLoc.coordinates || { latitude: 23.0225, longitude: 72.5714 },
+      postalCode: postalCode,
+      coordinates: coordinates,
       popular: false,
       headlineTitle: 'We build websites, apps and custom software for businesses in',
       headlineHighlight: targetCity,

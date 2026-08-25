@@ -78,6 +78,11 @@ export default function SuperadminUnifiedHomeCMS() {
   const [duplicateTargetSlug, setDuplicateTargetSlug] = useState('');
   const [duplicateTargetRegion, setDuplicateTargetRegion] = useState<LocationRegion>('Gujarat');
   const [duplicateTargetCountry, setDuplicateTargetCountry] = useState('India');
+  const [duplicateTargetState, setDuplicateTargetState] = useState('');
+  const [duplicateTargetCoords, setDuplicateTargetCoords] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [duplicateTargetPostalCode, setDuplicateTargetPostalCode] = useState('');
+  const [duplicateTargetRegionCode, setDuplicateTargetRegionCode] = useState('');
+  const [duplicateTargetCountryCode, setDuplicateTargetCountryCode] = useState('');
   const [isDuplicating, setIsDuplicating] = useState(false);
 
   // Delete Modal State
@@ -444,7 +449,27 @@ export default function SuperadminUnifiedHomeCMS() {
     setDuplicateTargetSlug('');
     setDuplicateTargetRegion(source.region || 'Gujarat');
     setDuplicateTargetCountry(source.country || 'India');
+    setDuplicateTargetState('');
+    setDuplicateTargetCoords(null);
+    setDuplicateTargetPostalCode('');
+    setDuplicateTargetRegionCode('');
+    setDuplicateTargetCountryCode('');
     setIsDuplicateModalOpen(true);
+  };
+
+  // City Search Select callback for Duplicate Modal
+  const handleDuplicateCitySelect = (cityItem: any) => {
+    setDuplicateTargetCity(cityItem.city);
+    setDuplicateTargetSlug(cityItem.slug);
+    setDuplicateTargetRegion(cityItem.region);
+    setDuplicateTargetCountry(cityItem.country);
+    setDuplicateTargetState(cityItem.state || cityItem.city);
+    if (cityItem.latitude && cityItem.longitude) {
+      setDuplicateTargetCoords({ latitude: cityItem.latitude, longitude: cityItem.longitude });
+    }
+    setDuplicateTargetPostalCode(cityItem.postalCode || '');
+    setDuplicateTargetRegionCode(cityItem.regionCode || '');
+    setDuplicateTargetCountryCode(cityItem.countryCode || '');
   };
 
   // Execute Duplicate / Clone
@@ -468,6 +493,11 @@ export default function SuperadminUnifiedHomeCMS() {
           slug: duplicateTargetSlug.toLowerCase().trim().replace(/[^a-z0-9-]/g, '-'),
           region: duplicateTargetRegion,
           country: duplicateTargetCountry.trim(),
+          state: duplicateTargetState || duplicateTargetCity.trim(),
+          coordinates: duplicateTargetCoords || undefined,
+          postalCode: duplicateTargetPostalCode || undefined,
+          regionCode: duplicateTargetRegionCode || undefined,
+          countryCode: duplicateTargetCountryCode || undefined,
         },
       };
 
@@ -622,6 +652,7 @@ export default function SuperadminUnifiedHomeCMS() {
           setDuplicateTargetRegion={setDuplicateTargetRegion}
           duplicateTargetCountry={duplicateTargetCountry}
           setDuplicateTargetCountry={setDuplicateTargetCountry}
+          onSelectCity={handleDuplicateCitySelect}
           isDuplicating={isDuplicating}
           onExecuteDuplicate={handleExecuteDuplicate}
         />

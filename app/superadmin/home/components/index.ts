@@ -11,3 +11,4 @@ export { default as GeoSettingsTab } from './GeoSettingsTab';
 export { default as HomePagesTable } from './HomePagesTable';
 export { default as DuplicateLocationModal } from './DuplicateLocationModal';
 export { default as DeleteLocationModal } from './DeleteLocationModal';
+export { default as CitySearchSelect } from './CitySearchSelect';

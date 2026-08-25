@@ -266,19 +266,58 @@ export function BlogProvider({ children }: { children: ReactNode }) {
    * Delete a category (removes from UI once API responds successfully)
    */
   const deleteCategory = useCallback(async (idOrName: string) => {
+    // 1. Resolve matching category object
+    const targetCat = categoriesData.find(
+      (c) => c.id === idOrName || c.name.toLowerCase() === idOrName.toLowerCase() || c.slug === idOrName
+    );
+    const catName = targetCat?.name || idOrName;
+    const catId = targetCat?.id || idOrName;
+
+    // 2. Perform backend delete
     const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
-      `/api/blog/categories?id=${encodeURIComponent(idOrName)}&name=${encodeURIComponent(idOrName)}`
+      `/api/blog/categories?id=${encodeURIComponent(catId)}&name=${encodeURIComponent(catName)}`
     );
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete category.');
     }
 
-    // Remove from in-memory state after successful API response
-    setCategories((prev) => prev.filter((c) => c !== idOrName && c.toLowerCase() !== idOrName.toLowerCase()));
-    setCategoriesData((prev) => prev.filter((c) => c.id !== idOrName && c.name.toLowerCase() !== idOrName.toLowerCase()));
+    const finalDeletedName = res.data?.deletedName || catName;
+
+    // 3. Immediately purge from in-memory categories state
+    setCategories((prev) =>
+      prev.filter(
+        (c) =>
+          c !== idOrName &&
+          c !== catName &&
+          c !== finalDeletedName &&
+          c.toLowerCase() !== finalDeletedName.toLowerCase() &&
+          c.toLowerCase() !== idOrName.toLowerCase()
+      )
+    );
+    setCategoriesData((prev) =>
+      prev.filter(
+        (c) =>
+          c.id !== idOrName &&
+          c.id !== catId &&
+          c.name.toLowerCase() !== finalDeletedName.toLowerCase() &&
+          c.name.toLowerCase() !== idOrName.toLowerCase()
+      )
+    );
+
+    // 4. Reset category filter if active filter was deleted
+    setCategoryFilter((prev) =>
+      prev.toLowerCase() === finalDeletedName.toLowerCase() || prev.toLowerCase() === idOrName.toLowerCase()
+        ? 'ALL'
+        : prev
+    );
+
+    // 5. Invalidate ApiClient caches and re-fetch blog list
+    apiClient.clearCache('/api/blog/categories');
+    apiClient.clearCache('/api/portfolio/categories');
+    apiClient.clearCache('/api/blog');
 
     await fetchBlog();
-  }, [fetchBlog]);
+  }, [categoriesData, fetchBlog]);
 
   /**
    * Toggle Published Status Handler (with instant optimistic UI update)

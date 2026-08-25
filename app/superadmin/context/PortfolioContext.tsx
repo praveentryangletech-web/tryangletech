@@ -228,31 +228,59 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
    * Delete category by ID or Name (removes from UI once API responds successfully)
    */
   const deleteCategory = useCallback(async (idOrName: string) => {
-    const res = await apiClient.delete('/api/portfolio/categories', {
-      params: { id: idOrName, name: idOrName },
-    });
+    // 1. Resolve matching category object
+    const targetCat = categoriesData.find(
+      (c) => c.id === idOrName || c.name.toLowerCase() === idOrName.toLowerCase() || c.slug === idOrName
+    );
+    const catName = targetCat?.name || idOrName;
+    const catId = targetCat?.id || idOrName;
+
+    // 2. Perform backend delete
+    const res = await apiClient.delete<{ success: boolean; deletedName: string }>(
+      `/api/portfolio/categories?id=${encodeURIComponent(catId)}&name=${encodeURIComponent(catName)}`
+    );
     if (!res.success) {
       throw new Error(res.error || 'Failed to delete category.');
     }
 
-    // Remove from in-memory state after successful API response
+    const finalDeletedName = res.data?.deletedName || catName;
+
+    // 3. Immediately purge from in-memory categories state
+    setCategories((prev) =>
+      prev.filter(
+        (c) =>
+          c !== idOrName &&
+          c !== catName &&
+          c !== finalDeletedName &&
+          c.toLowerCase() !== finalDeletedName.toLowerCase() &&
+          c.toLowerCase() !== idOrName.toLowerCase()
+      )
+    );
     setCategoriesData((prev) =>
       prev.filter(
         (c) =>
           c.id !== idOrName &&
+          c.id !== catId &&
+          c.name.toLowerCase() !== finalDeletedName.toLowerCase() &&
           c.name.toLowerCase() !== idOrName.toLowerCase()
       )
     );
-    setCategories((prev) =>
-      prev.filter((c) => c.toLowerCase() !== idOrName.toLowerCase())
-    );
 
-    // If the currently filtered category was deleted, reset filter to 'ALL'
-    if (categoryFilter.toLowerCase() === idOrName.toLowerCase()) {
+    // 4. Reset category filter if active filter was deleted
+    if (
+      categoryFilter.toLowerCase() === finalDeletedName.toLowerCase() ||
+      categoryFilter.toLowerCase() === idOrName.toLowerCase()
+    ) {
       setCategoryFilter('ALL');
     }
+
+    // 5. Invalidate ApiClient caches
+    apiClient.clearCache('/api/portfolio/categories');
+    apiClient.clearCache('/api/blog/categories');
+    apiClient.clearCache('/api/portfolio');
+
     await fetchPortfolio();
-  }, [categoryFilter, fetchPortfolio]);
+  }, [categoriesData, categoryFilter, fetchPortfolio]);
 
   /**
    * Save (Create or Update) Project Handler

@@ -11,10 +11,10 @@ export default function HomeLatestBlog() {
   useEffect(() => {
     async function loadLatestPosts() {
       try {
-        const res = await fetch('/api/blog?limit=3&status=published&sortBy=publishedAt&sortOrder=desc');
+        const res = await fetch('/api/blog?limit=4&status=published&sortBy=publishedAt&sortOrder=desc');
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          setPosts(json.data.slice(0, 3));
+          setPosts(json.data.slice(0, 4));
         }
       } catch (err) {
         console.warn('Failed to load home latest blogs:', err);
@@ -42,15 +42,36 @@ export default function HomeLatestBlog() {
           </h2>
         </div>
 
-        {/* 3-Card Grid */}
-        <div className="w-layout-grid rt-blog-v1-grid">
+        {/* Fixed 4-Card Equalized Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '24px',
+            width: '100%',
+            alignItems: 'stretch',
+          }}
+        >
           {isLoading
-            ? Array.from({ length: 3 }).map((_, idx) => (
-                <div key={idx} className="rt-blog-v1-card-wrap" style={{ borderRadius: '1.5625rem', overflow: 'hidden' }}>
-                  <div className="rt-skeleton-box" style={{ width: '100%', height: '240px', borderRadius: '1.5625rem' }} />
-                  <div style={{ padding: '20px 10px' }}>
+            ? Array.from({ length: 4 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: '1.25rem',
+                    border: '1px solid #E2E8F0',
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '190px' }} />
+                  <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <div className="rt-skeleton-box" style={{ width: '40%', height: '14px', marginBottom: '12px' }} />
                     <div className="rt-skeleton-box" style={{ width: '90%', height: '22px', marginBottom: '10px' }} />
+                    <div className="rt-skeleton-box" style={{ width: '100%', height: '16px', marginBottom: '6px' }} />
                     <div className="rt-skeleton-box" style={{ width: '70%', height: '16px' }} />
                   </div>
                 </div>
@@ -62,39 +83,154 @@ export default function HomeLatestBlog() {
                   : 'Recent';
 
                 return (
-                  <div key={post.id} className="rt-blog-v1-card-wrap" style={{ borderRadius: '1.5625rem', transition: 'transform 0.3s ease' }}>
-                    <div className="rt-blog-v3-card" style={{ borderRadius: '1.5625rem' }}>
-                      <Link href={`/blog/${post.slug}`} className="rt-blog-v3-card-top-part w-inline-block" style={{ borderRadius: '1.5625rem', overflow: 'hidden' }}>
-                        <div className="rt-blog-v3-card-image-wrap" style={{ position: 'relative', width: '100%', height: '230px', overflow: 'hidden' }}>
-                          <SafeImage
-                            src={coverImage}
-                            alt={post.coverImageAlt || post.imageAlt || post.title}
-                            fill
-                            className="rt-blog-v3-card-image"
-                            style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                          />
-                        </div>
-                      </Link>
+                  <div
+                    key={post.id}
+                    className="rt-home-blog-card"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      height: '100%',
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '1.25rem',
+                      border: '1px solid #E2E8F0',
+                      overflow: 'hidden',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.04)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    }}
+                  >
+                    {/* Fixed Image Container (Uniform 190px height across all cards) */}
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '190px',
+                        display: 'block',
+                        overflow: 'hidden',
+                        backgroundColor: '#F1F5F9',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <SafeImage
+                        src={coverImage}
+                        alt={post.coverImageAlt || post.imageAlt || post.title}
+                        fill
+                        style={{
+                          objectFit: 'cover',
+                          transition: 'transform 0.5s ease',
+                        }}
+                      />
+                    </Link>
 
-                      <div className="rt-blog-v1-card-bottom-part" style={{ paddingTop: '18px' }}>
-                        <div className="rt-blog-meta-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1833FE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    {/* Fixed Body Content with Equalized Heights */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1,
+                        padding: '1.25rem',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div>
+                        {/* Category & Date Row */}
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            marginBottom: '0.75rem',
+                            gap: '8px',
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: '0.75rem',
+                              fontWeight: 800,
+                              color: '#1833FE',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              backgroundColor: '#EFF6FF',
+                              padding: '3px 9px',
+                              borderRadius: '6px',
+                              border: '1px solid #DBEAFE',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
                             {post.category || 'Tech'}
                           </span>
-                          <span style={{ fontSize: '0.82rem', color: '#64748B' }}>
-                            📅 {formattedDate}
+                          <span
+                            style={{
+                              fontSize: '0.75rem',
+                              color: '#64748B',
+                              fontWeight: 600,
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            {formattedDate}
                           </span>
                         </div>
-                        <Link href={`/blog/${post.slug}`} className="w-inline-block">
-                          <h3 className="rt-text-style-h5" style={{ fontSize: '1.25rem', lineHeight: '1.4', marginBottom: '10px', color: '#0F172A' }}>
+
+                        {/* Title Clamped to 2 lines with fixed minHeight */}
+                        <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <h3
+                            style={{
+                              fontSize: '1.05rem',
+                              fontWeight: 700,
+                              lineHeight: '1.4',
+                              color: '#0F172A',
+                              marginBottom: '0.6rem',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                              minHeight: '2.9rem',
+                            }}
+                          >
                             {post.title}
                           </h3>
                         </Link>
-                        {post.excerpt && (
-                          <p style={{ fontSize: '0.92rem', color: '#64748B', lineHeight: '1.5', margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                            {post.excerpt}
-                          </p>
-                        )}
+
+                        {/* Excerpt Clamped to 2 lines with fixed minHeight */}
+                        <p
+                          style={{
+                            fontSize: '0.875rem',
+                            color: '#64748B',
+                            lineHeight: '1.5',
+                            margin: 0,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                            minHeight: '2.625rem',
+                          }}
+                        >
+                          {post.excerpt || 'Explore key technical insights, modern design patterns, and engineering strategies.'}
+                        </p>
+                      </div>
+
+                      {/* Read Article Action Link */}
+                      <div style={{ paddingTop: '1rem', marginTop: 'auto' }}>
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            fontSize: '0.825rem',
+                            fontWeight: 700,
+                            color: '#1833FE',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          <span>Read Article</span>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="M12 5l7 7-7 7" />
+                          </svg>
+                        </Link>
                       </div>
                     </div>
                   </div>

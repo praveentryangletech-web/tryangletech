@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import db from '@/backend/db/client';
 import { portfolioCache } from './portfolio.service';
 import { generateSlug } from './portfolio.utils';
+import { ensureAllDatabaseIndexes } from '@/backend/db/indexing';
 
 export const DEFAULT_PORTFOLIO_CATEGORY = 'General';
 export const DEFAULT_BLOG_CATEGORY = 'General';
@@ -108,77 +109,41 @@ export const portfolioCategoryService = {
           "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
       `;
+      await ensureAllDatabaseIndexes();
     } catch (err) {
       console.warn('[DB Category] ensureTableExists notice:', err);
     }
   },
 
   /**
-   * Ensures default categories exist in PostgreSQL for the given type (PORTFOLIO, BLOG, etc.).
+   * Ensures default categories exist in PostgreSQL for the given type in the background.
    */
-  async seedIfEmpty(type: string = 'PORTFOLIO'): Promise<void> {
+  seedIfEmpty(type: string = 'PORTFOLIO'): void {
     const normalizedType = (type || 'PORTFOLIO').toUpperCase().trim();
     if (seededTypes.has(normalizedType)) return;
     seededTypes.add(normalizedType);
 
-    try {
-      await this.ensureTableExists();
+    (async () => {
+      try {
+        await this.ensureTableExists();
 
-      const defaultsToSeed = normalizedType === 'BLOG' ? DEFAULT_BLOG_CATEGORIES : DEFAULT_PORTFOLIO_CATEGORIES;
+        const defaultsToSeed = normalizedType === 'BLOG' ? DEFAULT_BLOG_CATEGORIES : DEFAULT_PORTFOLIO_CATEGORIES;
 
-      for (let i = 0; i < defaultsToSeed.length; i++) {
-        const catName = defaultsToSeed[i];
-        const catSlug = generateSlug(catName);
-        const catId = `cat_default_${normalizedType.toLowerCase()}_${catSlug}`;
+        for (let i = 0; i < defaultsToSeed.length; i++) {
+          const catName = defaultsToSeed[i];
+          const catSlug = generateSlug(catName);
+          const catId = `cat_default_${normalizedType.toLowerCase()}_${catSlug}`;
 
-        await db.$executeRaw`
-          INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
-          VALUES (${catId}, ${catName}, ${catSlug}, ${normalizedType}, ${i + 1}, NOW(), NOW())
-          ON CONFLICT DO NOTHING
-        `;
-      }
-
-      // Auto-discover distinct categories from live database records and seed them
-      if (normalizedType === 'PORTFOLIO') {
-        const projectCats = await db.$queryRaw<Array<{ category: string }>>`
-          SELECT DISTINCT "category" FROM "PortfolioProject" 
-          WHERE "category" IS NOT NULL AND TRIM("category") != ''
-        `.catch(() => []);
-        if (projectCats && Array.isArray(projectCats)) {
-          for (const pc of projectCats) {
-            const rawName = (pc.category || '').trim();
-            if (!rawName) continue;
-            const pSlug = generateSlug(rawName);
-            const pId = `cat_proj_${pSlug}`;
-            await db.$executeRaw`
-              INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
-              VALUES (${pId}, ${rawName}, ${pSlug}, 'PORTFOLIO', 50, NOW(), NOW())
-              ON CONFLICT DO NOTHING
-            `.catch(() => {});
-          }
+          await db.$executeRaw`
+            INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
+            VALUES (${catId}, ${catName}, ${catSlug}, ${normalizedType}, ${i + 1}, NOW(), NOW())
+            ON CONFLICT DO NOTHING
+          `.catch(() => {});
         }
-      } else if (normalizedType === 'BLOG') {
-        const blogCats = await db.$queryRaw<Array<{ category: string }>>`
-          SELECT DISTINCT "category" FROM "BlogPost" 
-          WHERE "category" IS NOT NULL AND TRIM("category") != ''
-        `.catch(() => []);
-        if (blogCats && Array.isArray(blogCats)) {
-          for (const bc of blogCats) {
-            const rawName = (bc.category || '').trim();
-            if (!rawName) continue;
-            const bSlug = generateSlug(rawName);
-            const bId = `cat_blog_${bSlug}`;
-            await db.$executeRaw`
-              INSERT INTO "PortfolioCategory" ("id", "name", "slug", "type", "order", "createdAt", "updatedAt")
-              VALUES (${bId}, ${rawName}, ${bSlug}, 'BLOG', 50, NOW(), NOW())
-              ON CONFLICT DO NOTHING
-            `.catch(() => {});
-          }
-        }
+      } catch (err) {
+        console.warn(`[DB Category] seed default categories (${type}) notice:`, err);
       }
-    } catch (err) {
-      console.warn(`[DB Category] seed default categories (${type}) notice:`, err);
-    }
+    })().catch(() => {});
   },
 
   /**
@@ -196,10 +161,11 @@ export const portfolioCategoryService = {
       return items;
     }
 
-    try {
-      await this.seedIfEmpty(normalizedType);
+    // Trigger background seed non-blockingly
+    this.seedIfEmpty(normalizedType);
 
-      // Parallelize categories and counts queries in a single roundtrip with 8.0s timeout
+    try {
+      // Parallelize categories and counts queries in a single roundtrip with 5.0s timeout
       const [categoryRows, countRows] = await Promise.race([
         Promise.all([
           db.$queryRaw<any[]>`
@@ -215,7 +181,7 @@ export const portfolioCategoryService = {
                 SELECT "category", COUNT(*)::int as count FROM "PortfolioProject" GROUP BY "category"
               `.catch(() => []),
         ]),
-        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (8000ms)')), 8000)),
+        new Promise<[any[], any[]]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout (5000ms)')), 5000)),
       ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)

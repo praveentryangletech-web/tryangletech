@@ -3,6 +3,7 @@ import { db } from '@/backend/db/client';
 import { LocationItem, LocationSummaryItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
+import { ensureAllDatabaseIndexes } from '@/backend/db/indexing';
 
 interface CachedGeoEntry<T> {
   data: T;
@@ -78,8 +79,7 @@ export const geoService = {
           );
         `);
 
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_type_pub" ON "PageContent" ("pageType", "isPublished");`);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_pagecontent_reg_pub" ON "PageContent" ("region", "isPublished");`);
+        await ensureAllDatabaseIndexes();
 
         // Drop legacy GeoLocation table if it still exists so it never re-inserts stale deleted items
         await db.$executeRawUnsafe(`DROP TABLE IF EXISTS "GeoLocation" CASCADE;`);

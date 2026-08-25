@@ -10,6 +10,7 @@ import {
   BlogStats,
 } from './blog.types';
 import { generateBlogSlug } from './blog.validator';
+import { ensureAllDatabaseIndexes } from '@/backend/db/indexing';
 
 interface CacheEntry<T> {
   data: T;
@@ -144,10 +145,7 @@ export class BlogService {
             ADD COLUMN IF NOT EXISTS "contentImage2Alt" TEXT,
             ADD COLUMN IF NOT EXISTS "faqs" JSONB;
         `);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_slug_lower" ON "BlogPost" (LOWER("slug"));`);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_cat_pub_date" ON "BlogPost" ("category", "published", "publishedAt" DESC);`);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_pub_date" ON "BlogPost" ("published", "publishedAt" DESC);`);
-        await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "idx_blogpost_created_at" ON "BlogPost" ("createdAt" DESC);`);
+        await ensureAllDatabaseIndexes();
       } catch (_) {}
     })().catch(() => {});
   }

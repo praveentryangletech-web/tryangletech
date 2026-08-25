@@ -2,6 +2,7 @@ import { db } from '@/backend/db/client';
 import { Metadata } from 'next';
 import { AboutContentDTO } from './about.types';
 import { DEFAULT_ABOUT_CONTENT } from './about.defaults';
+import { ensureAllDatabaseIndexes } from '@/backend/db/indexing';
 
 interface CachedEntry<T> {
   data: T;
@@ -84,6 +85,7 @@ export const aboutService = {
             "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
           );
         `);
+        await ensureAllDatabaseIndexes();
       } catch (e) {
         console.warn('[AboutService] Background PageContent table verification notice:', e);
       }

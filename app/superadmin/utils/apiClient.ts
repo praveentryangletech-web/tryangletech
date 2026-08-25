@@ -47,6 +47,7 @@ interface ClientCacheEntry<T> {
 
 class ApiClient {
   private clientCache = new Map<string, ClientCacheEntry<any>>();
+  private inFlightRequests = new Map<string, Promise<ApiResponse<any>>>();
   private defaultCacheTtl = 30 * 1000; // 30 seconds
 
   private getAuthToken(): string | null {
@@ -108,6 +109,11 @@ class ApiClient {
       if (cached && cached.expiresAt > Date.now()) {
         return cached.response;
       }
+
+      // 2. In-flight request deduplication: if identical request is pending, reuse same promise
+      if (this.inFlightRequests.has(url)) {
+        return this.inFlightRequests.get(url) as Promise<ApiResponse<T>>;
+      }
     }
 
     const defaultHeaders: Record<string, string> = {
@@ -148,73 +154,85 @@ class ApiClient {
       config.body = typeof body === 'string' ? body : JSON.stringify(body);
     }
 
-    try {
-      const res = await fetch(url, config);
+    const executeRequest = async (): Promise<ApiResponse<T>> => {
+      try {
+        const res = await fetch(url, config);
 
-      // Handle HTTP 304 Not Modified
-      if (res.status === 304 && cachedEntry) {
-        // Refresh TTL
-        cachedEntry.expiresAt = Date.now() + cacheTtlMs;
-        return cachedEntry.response;
-      }
+        // Handle HTTP 304 Not Modified
+        if (res.status === 304 && cachedEntry) {
+          // Refresh TTL
+          cachedEntry.expiresAt = Date.now() + cacheTtlMs;
+          return cachedEntry.response;
+        }
 
-      let data: any = null;
+        let data: any = null;
 
-      const contentType = res.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        data = await res.json();
-      } else {
-        const text = await res.text();
-        data = text ? { message: text } : {};
-      }
+        const contentType = res.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          data = await res.json();
+        } else {
+          const text = await res.text();
+          data = text ? { message: text } : {};
+        }
 
-      if (!res.ok) {
+        if (!res.ok) {
+          return {
+            success: false,
+            error: data?.error || data?.message || `Request failed with status ${res.status}`,
+            status: res.status,
+            data: data?.data,
+          };
+        }
+
+        const responseObj: ApiResponse<T> = {
+          success: data?.success ?? true,
+          data: data?.data ?? data,
+          pagination: data?.pagination,
+          count: data?.count,
+          message: data?.message,
+          status: res.status,
+        };
+
+        // Store in client micro-cache for fast repeat navigation (< 1ms)
+        if (method === 'GET' && useCache) {
+          const etag = res.headers.get('etag') || undefined;
+          this.clientCache.set(url, {
+            response: responseObj,
+            expiresAt: Date.now() + cacheTtlMs,
+            etag,
+          });
+        }
+
+        // Auto-purge cache on mutation
+        if (method !== 'GET') {
+          const baseEndpoint = endpoint.split('?')[0];
+          this.clearCache(baseEndpoint);
+        }
+
+        return responseObj;
+      } catch (err: any) {
+        console.error(`[ApiClient ${method}] ${url} Error:`, err);
+        // If network fails but we have cached response, serve stale cache
+        if (cachedEntry) {
+          return cachedEntry.response;
+        }
         return {
           success: false,
-          error: data?.error || data?.message || `Request failed with status ${res.status}`,
-          status: res.status,
-          data: data?.data,
+          error: err?.message || 'Network error. Please check your connection.',
+          status: 0,
         };
       }
+    };
 
-      const responseObj: ApiResponse<T> = {
-        success: data?.success ?? true,
-        data: data?.data ?? data,
-        pagination: data?.pagination,
-        count: data?.count,
-        message: data?.message,
-        status: res.status,
-      };
-
-      // Store in client micro-cache for fast repeat navigation (< 1ms)
-      if (method === 'GET' && useCache) {
-        const etag = res.headers.get('etag') || undefined;
-        this.clientCache.set(url, {
-          response: responseObj,
-          expiresAt: Date.now() + cacheTtlMs,
-          etag,
-        });
-      }
-
-      // Auto-purge cache on mutation
-      if (method !== 'GET') {
-        const baseEndpoint = endpoint.split('?')[0];
-        this.clearCache(baseEndpoint);
-      }
-
-      return responseObj;
-    } catch (err: any) {
-      console.error(`[ApiClient ${method}] ${url} Error:`, err);
-      // If network fails but we have cached response, serve stale cache
-      if (cachedEntry) {
-        return cachedEntry.response;
-      }
-      return {
-        success: false,
-        error: err?.message || 'Network error. Please check your connection.',
-        status: 0,
-      };
+    if (method === 'GET' && useCache) {
+      const promise = executeRequest().finally(() => {
+        this.inFlightRequests.delete(url);
+      });
+      this.inFlightRequests.set(url, promise);
+      return promise;
     }
+
+    return executeRequest();
   }
 
   /**

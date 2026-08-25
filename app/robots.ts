@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next';
+import { getBaseUrl } from '@/backend/utils/siteUrl';
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = getBaseUrl();
+
   return {
     rules: [
       {
@@ -19,11 +22,11 @@ export default function robots(): MetadataRoute.Robots {
           'Applebot',
           'Bingbot',
         ],
-        allow: ['/', '/blog', '/blog/*', '/portfolio', '/portfolio/*', '/service/*', '/about', '/contact', '/location/*', '/location/**'],
+        allow: ['/', '/llms.txt', '/llms-full.txt', '/blog', '/blog/*', '/portfolio', '/portfolio/*', '/service/*', '/about', '/contact', '/location/*', '/location/**'],
         disallow: ['/superadmin', '/superadmin/*', '/api', '/api/*'],
       },
     ],
-    sitemap: 'https://tryangletech.com/sitemap.xml',
-    host: 'https://tryangletech.com',
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

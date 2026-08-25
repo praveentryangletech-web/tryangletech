@@ -943,7 +943,7 @@ export default function RootLayout({
                     "height": 512
                   },
                   "image": "https://tryangletech.com/portfolio/vh-accounting.webp",
-                  "description": "TryangleTech is a premier digital technology agency based in Ahmedabad, providing Web Development, Custom Software, Mobile Apps, Graphics Design, and Performance Marketing.",
+                  "description": "TryangleTech is a premier digital technology and custom software engineering agency providing Web Development, Custom Software, Mobile Apps, and Digital Solutions for clients globally, including Dubai (UAE), USA, UK, and India.",
                   "telephone": "+91-90338-78806",
                   "email": "info.tryangletech@gmail.com",
                   "priceRange": "$$",
@@ -963,7 +963,10 @@ export default function RootLayout({
                     "Search Engine Optimization (SEO)",
                     "Digital Marketing",
                     "Ahmedabad Software Company",
-                    "Full Stack Cloud Engineering"
+                    "Full Stack Cloud Engineering",
+                    "Dedicated Remote Engineering",
+                    "Gulf Standard Time (GST) Software Engineering",
+                    "Dubai Web Development & IT Solutions"
                   ],
                   "speakable": {
                     "@type": "SpeakableSpecification",
@@ -993,7 +996,9 @@ export default function RootLayout({
                     { "@type": "AdministrativeArea", "name": "Gujarat" },
                     { "@type": "Country", "name": "United States" },
                     { "@type": "Country", "name": "United Kingdom" },
-                    { "@type": "Country", "name": "United Arab Emirates" }
+                    { "@type": "Country", "name": "United Arab Emirates" },
+                    { "@type": "City", "name": "Dubai" },
+                    { "@type": "City", "name": "Abu Dhabi" }
                   ],
                   "openingHoursSpecification": [
                     {

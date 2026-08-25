@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { db } from '@/backend/db/client';
 import { LocationItem, LocationQueryParams, PaginatedLocationResult } from './geo.types';
+import { getBaseUrl } from '@/backend/utils/siteUrl';
 
 interface CachedGeoEntry<T> {
   data: T;
@@ -669,8 +670,9 @@ export const geoService = {
    * Generate Next.js Dynamic Metadata for location page
    */
   generateGeoMetadata(location: LocationItem): Metadata {
+    const baseUrl = getBaseUrl();
     const locationName = `${location.city}, ${location.state ? location.state + ', ' : ''}${location.country}`;
-    const pageUrl = `https://tryangletech.com/location/${location.slug}`;
+    const pageUrl = `${baseUrl}/location/${location.slug}`;
     const lat = location.coordinates?.latitude || 23.0225;
     const lng = location.coordinates?.longitude || 72.5714;
 
@@ -718,9 +720,11 @@ export const geoService = {
    * Generate combined JSON-LD Schema (LocalBusiness + FAQPage + Speakable + Breadcrumbs)
    */
   generateGeoSchema(location: LocationItem) {
-    const pageUrl = `https://tryangletech.com/location/${location.slug}`;
+    const baseUrl = getBaseUrl();
+    const pageUrl = `${baseUrl}/location/${location.slug}`;
     const lat = location.coordinates?.latitude || 23.0225;
     const lng = location.coordinates?.longitude || 72.5714;
+    const isUae = location.slug === 'dubai' || location.countryCode === 'AE';
 
     return {
       '@context': 'https://schema.org',
@@ -730,21 +734,46 @@ export const geoService = {
           '@id': `${pageUrl}/#localbusiness`,
           name: `TryangleTech - ${location.city}`,
           legalName: 'TryangleTech Solutions',
+          alternateName: [`Tryangle Tech`, `TryangleTech ${location.city}`, `TryangleTech Software ${location.city}`],
           url: pageUrl,
-          logo: 'https://tryangletech.com/icon.png',
-          image: 'https://tryangletech.com/portfolio/vh-accounting.webp',
-          description: location.metaDescription,
+          logo: `${baseUrl}/icon.png`,
+          image: `${baseUrl}/portfolio/vh-accounting.webp`,
+          description: location.metaDescription || `Premier web design, custom software, and mobile app development agency serving businesses in ${location.city}, ${location.country}.`,
           telephone: '+91-90338-78806',
           email: 'info.tryangletech@gmail.com',
           priceRange: '$$',
           currenciesAccepted: 'INR, USD, EUR, GBP, AED, CAD, AUD',
           paymentAccepted: 'Cash, Credit Card, Bank Transfer, UPI, Wire Transfer, PayPal',
+          availableLanguage: isUae ? ['English', 'Arabic'] : ['English', 'Hindi', 'Gujarati'],
+          knowsAbout: [
+            'Web Development',
+            'Next.js Development',
+            'Mobile App Development',
+            'Flutter',
+            'React Native',
+            'Custom Software Engineering',
+            'Enterprise CRM Software',
+            'ERP Systems',
+            'Gulf Standard Time (GST) Software Engineering',
+            `${location.city} Web Development`,
+            `${location.city} Software Company`,
+          ],
+          parentOrganization: {
+            '@type': 'Organization',
+            'name': 'TryangleTech Solutions',
+            'url': baseUrl,
+          },
+          sameAs: [
+            'https://www.instagram.com/tryangle24_7/',
+            'https://www.linkedin.com/company/tryangle-tech',
+            'https://www.facebook.com/tryangletech/',
+          ],
           address: {
             '@type': 'PostalAddress',
             addressLocality: location.city,
-            addressRegion: location.state || location.region,
+            addressRegion: location.state || location.region || location.city,
             addressCountry: location.countryCode || 'IN',
-            postalCode: location.postalCode || '380015',
+            ...(location.postalCode ? { postalCode: location.postalCode } : (location.countryCode === 'IN' ? { postalCode: '380015' } : {})),
           },
           geo: {
             '@type': 'GeoCoordinates',
@@ -812,7 +841,7 @@ export const geoService = {
               '@type': 'ListItem',
               position: 1,
               name: 'Home',
-              item: 'https://tryangletech.com',
+              item: baseUrl,
             },
             {
               '@type': 'ListItem',

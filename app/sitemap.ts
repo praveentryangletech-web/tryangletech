@@ -3,12 +3,13 @@ import prisma from '@/backend/db/client';
 import { BLOG_POSTS } from './blog/data';
 import { projects as staticProjects } from './data/portfolioData';
 import { geoService } from '@/backend/services/geo';
+import { getBaseUrl } from '@/backend/utils/siteUrl';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://tryangletech.com';
+  const baseUrl = getBaseUrl();
 
   // 1. Core static routes with priorities
   const staticRoutes: MetadataRoute.Sitemap = [

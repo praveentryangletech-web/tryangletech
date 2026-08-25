@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import mediaService from '@/backend/services/media/media.service';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +13,10 @@ const ALLOWED_EXTENSIONS = new Set(['.webp', '.png', '.jpg', '.jpeg', '.svg', '.
  * POST /api/superadmin/media/migrate
  * Migrates all local public/portfolio files into Cloudinary
  */
-export async function POST() {
+export async function POST(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     if (!mediaService.isCloudinaryConfigured) {
       return NextResponse.json(

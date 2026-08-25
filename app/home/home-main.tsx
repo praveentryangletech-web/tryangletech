@@ -129,18 +129,13 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         
         {/* Section 7: Tech Stack & Integrations */}
         <Integrations />
-
+ {/* Section 10: Latest Blog Articles (Live BlogPost DB) */}
+        <HomeLatestBlog />
         {/* Section 8: Testimonials */}
         <Testimonials testimonials={localizedTestimonials} />
 
         {/* Section 9: FAQs (Live PageFAQ & Geo AEO Engine) */}
         <Faq initialFaqs={(geo && geo.faqs && geo.faqs.length > 0) ? geo.faqs : content.faqs} />
-
-        {/* Section 10: Latest Blog Articles (Live BlogPost DB) */}
-        <HomeLatestBlog />
-
-        {/* Section 11: Call to Action Banner */}
-        <Cta ctaBanner={localizedCtaBanner} />
       </main>
     </>
   );

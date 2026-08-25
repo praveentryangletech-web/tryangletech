@@ -1,5 +1,7 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 import faqService from '@/backend/services/faq/faq.service';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export async function GET(req: NextRequest) {
   try {
@@ -25,6 +27,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json();
     const { pageType = 'PORTFOLIO_DETAIL', pageId = null, faqs = [] } = body;

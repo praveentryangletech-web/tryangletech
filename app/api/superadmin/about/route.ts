@@ -1,10 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { aboutService } from '@/backend/services/about';
 import { DEFAULT_ABOUT_CONTENT } from '@/backend/services/about/about.defaults';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     const clientEtag = request.headers.get('if-none-match');
     let data;
@@ -47,7 +51,10 @@ export async function GET(request: Request) {
   }
 }
 
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
+  const authError = requireSuperadmin(request);
+  if (authError) return authError;
+
   try {
     const body = await request.json();
     const updated = await aboutService.updateAboutContent(body);
@@ -66,6 +73,6 @@ export async function PUT(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   return PUT(request);
 }

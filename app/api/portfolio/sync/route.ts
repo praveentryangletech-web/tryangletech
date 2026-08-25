@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import portfolioService from '@/backend/services/portfolio/portfolio.service';
+import { requireSuperadmin } from '@/backend/utils/authGuard';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const { searchParams } = new URL(req.url);
     const force = searchParams.get('force') === 'true';
@@ -26,6 +30,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const authError = requireSuperadmin(req);
+  if (authError) return authError;
+
   try {
     const body = await req.json().catch(() => ({}));
     const force = Boolean(body.force);

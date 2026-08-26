@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
-import { Project, projects as staticProjects } from '../../data/portfolioData';
+import { Project } from '../../data/portfolioData';
 import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY, DEFAULT_PORTFOLIO_CATEGORIES } from '@/backend/services/portfolio/category.service';
 
 /**
@@ -79,7 +79,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   // Server-side Pagination & Filter states
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(8);
+  const [limit, setLimit] = useState<number>(20);
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
@@ -87,7 +87,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [pagination, setPagination] = useState<PaginationMeta>({
     total: 0,
     page: 1,
-    limit: 8,
+    limit: 20,
     totalPages: 1,
     hasNextPage: false,
     hasPrevPage: false,

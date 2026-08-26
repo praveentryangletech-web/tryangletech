@@ -1,6 +1,5 @@
 import { geoService } from '@/backend/services/geo';
 import prisma from '@/backend/db/client';
-import { projects as staticProjects } from '@/app/data/portfolioData';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 
 export const dynamic = 'force-dynamic';

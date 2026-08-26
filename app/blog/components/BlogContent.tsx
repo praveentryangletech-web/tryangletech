@@ -50,8 +50,13 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     return true;
   });
 
-  // Fast Client-Side background API fetch
+  // Only fetch client-side if initialPosts were not preloaded via SSR
   useEffect(() => {
+    if (initialPosts && initialPosts.length > 0) {
+      setIsInitialLoading(false);
+      return;
+    }
+
     let isMounted = true;
     const fetchLivePosts = async () => {
       try {
@@ -93,7 +98,7 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [initialPosts]);
 
   const tabsBarRef = useRef<HTMLDivElement>(null);
 

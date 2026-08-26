@@ -67,8 +67,13 @@ export function PortfolioProvider({
     return 0;
   });
 
-  // Fetch dynamic categories on mount
+  // Fetch dynamic categories on mount only if not preloaded via SSR
   useEffect(() => {
+    if (initialCategories && initialCategories.length > 1) {
+      setIsCategoriesLoading(false);
+      return;
+    }
+
     async function loadDynamicCategories() {
       try {
         const res = await fetch('/api/portfolio/categories', {
@@ -88,7 +93,7 @@ export function PortfolioProvider({
       }
     }
     loadDynamicCategories();
-  }, []);
+  }, [initialCategories]);
 
   const fetchProjects = useCallback(
     async (pageNum: number, category: string, limit: number = initialLimit, isAppend = false) => {

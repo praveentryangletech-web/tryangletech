@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Project, projects, projects as staticProjects } from '../../data/portfolioData';
+import { Project } from '../../data/portfolioData';
 import { portfolioService } from '@/backend/services/portfolio';
 import { BLOG_POSTS } from '../../blog/data'; 
 import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
@@ -15,7 +15,8 @@ import SafeImage from '@/app/common/SafeImage';
 import type { Metadata } from 'next';
 import Image from "next/image";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -26,11 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       project = item as Project;
     }
   } catch (err) {
-    // fallback
-  }
-
-  if (!project) {
-    project = staticProjects.find((p) => p.slug === resolvedParams.slug) || null;
+    // Database query error
   }
 
   if (!project) {
@@ -86,7 +83,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function PortfolioDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
 
-  // 1. Fetch live case study from Database
+  // 1. Fetch live case study strictly from Database
   let project: Project | null = null;
   try {
     const item = await portfolioService.getProjectBySlug(resolvedParams.slug);
@@ -94,16 +91,25 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
       project = item as Project;
     }
   } catch (err) {
-    console.warn('DB slug lookup warning, using static fallback:', err);
+    console.warn('DB slug lookup warning:', err);
   }
 
-  // 2. Fallback to static project dataset
-  if (!project) {
-    project = staticProjects.find((p) => p.slug === resolvedParams.slug) || null;
-  }
-
+  // 2. If project was deleted or does not exist in DB, strictly return 404
   if (!project) {
     notFound();
+  }
+
+  // 3. Fetch live related projects from DB for "Explore similar projects" section
+  let similarProjects: any[] = [];
+  try {
+    const allLive = await portfolioService.getAllProjects();
+    similarProjects = allLive.filter((p) => p.category === project.category && p.slug !== project.slug).slice(0, 3);
+    if (similarProjects.length < 3) {
+      const more = allLive.filter((p) => p.category !== project.category && p.slug !== project.slug).slice(0, 3 - similarProjects.length);
+      similarProjects.push(...more);
+    }
+  } catch (err) {
+    similarProjects = [];
   }
 
   return (
@@ -556,13 +562,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                   </div>
                   <div className="rt-blog-three-all w-dyn-list">
                     <div role="list" className="rt-blog-v3-card-main w-dyn-items pf-grid animate-section anim-delay-2">
-                      {(() => {
-                        let relevant = staticProjects.filter(p => p.category === project.category && p.slug !== project.slug).slice(0, 3);
-                        if (relevant.length < 3) {
-                          const more = staticProjects.filter(p => p.category !== project.category && p.slug !== project.slug).slice(0, 3 - relevant.length);
-                          relevant.push(...more);
-                        }
-                        return relevant.map((p, idx) => (
+                      {similarProjects.map((p, idx) => (
                           <div key={idx} role="listitem" className="w-dyn-item" style={{ height: '100%' }}>
                             <Link
                               href={`/portfolio/${p.slug}`}
@@ -611,8 +611,7 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
                               </div>
                             </Link>
                           </div>
-                        ));
-                      })()}
+                        ))}
                     </div>
                   </div>
 

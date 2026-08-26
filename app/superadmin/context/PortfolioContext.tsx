@@ -55,7 +55,7 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(undefin
  * @param {ReactNode} children - Child components wrapped within this provider context
  */
 export function PortfolioProvider({ children }: { children: ReactNode }) {
-  const [projectsList, setProjectsList] = useState<Project[]>(staticProjects.slice(0, 8));
+  const [projectsList, setProjectsList] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Dynamic Categories state initialized with default categories
@@ -85,11 +85,11 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
 
   const [pagination, setPagination] = useState<PaginationMeta>({
-    total: staticProjects.length,
+    total: 0,
     page: 1,
     limit: 8,
-    totalPages: Math.ceil(staticProjects.length / 8) || 1,
-    hasNextPage: staticProjects.length > 8,
+    totalPages: 1,
+    hasNextPage: false,
     hasPrevPage: false,
   });
 

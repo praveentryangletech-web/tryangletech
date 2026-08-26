@@ -1335,11 +1335,16 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
-                          if (coverImage && !img.src.includes('/api/media/') && !coverImage.startsWith('http')) {
+                          if (!img.dataset.hasFailedFirst && coverImage && !coverImage.startsWith('http')) {
+                            img.dataset.hasFailedFirst = 'true';
                             const filename = coverImage.split('?')[0].split('/').pop();
-                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            if (filename) {
+                              img.src = `/api/media/${encodeURIComponent(filename)}`;
+                              return;
+                            }
                           }
+                          // Safe fallback so no broken image box is shown
+                          img.src = '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
                         }}
                       />
                     ) : (
@@ -1633,12 +1638,15 @@ function BlogEditorInner() {
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           onError={(e) => {
                             const img = e.target as HTMLImageElement;
-                            if (imgUrl && !img.src.includes('/api/media/')) {
+                            if (!img.dataset.hasFailedFirst && imgUrl && !imgUrl.startsWith('http')) {
+                              img.dataset.hasFailedFirst = 'true';
                               const filename = imgUrl.split('?')[0].split('/').pop();
                               if (filename) {
                                 img.src = `/api/media/${encodeURIComponent(filename)}`;
+                                return;
                               }
                             }
+                            img.src = '/blog-assets/69033374f7bdbaecce80e7c9_blog-two-I.png';
                           }}
                         />
                         <span
@@ -2052,11 +2060,15 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
-                          if (contentImage1 && !img.src.includes('/api/media/') && !contentImage1.startsWith('http')) {
+                          if (!img.dataset.hasFailedFirst && contentImage1 && !contentImage1.startsWith('http')) {
+                            img.dataset.hasFailedFirst = 'true';
                             const filename = contentImage1.split('?')[0].split('/').pop();
-                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            if (filename) {
+                              img.src = `/api/media/${encodeURIComponent(filename)}`;
+                              return;
+                            }
                           }
+                          img.src = '/blog-assets/6903348b628bea456749d51f_blog-two-F.png';
                         }}
                       />
                       <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
@@ -2122,11 +2134,15 @@ function BlogEditorInner() {
                         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
-                          if (contentImage2 && !img.src.includes('/api/media/') && !contentImage2.startsWith('http')) {
+                          if (!img.dataset.hasFailedFirst && contentImage2 && !contentImage2.startsWith('http')) {
+                            img.dataset.hasFailedFirst = 'true';
                             const filename = contentImage2.split('?')[0].split('/').pop();
-                            if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            if (filename) {
+                              img.src = `/api/media/${encodeURIComponent(filename)}`;
+                              return;
+                            }
                           }
+                          img.src = '/blog-assets/690335125e318fe0479213b7_blog-two-D.png';
                         }}
                       />
                       <span style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '6px' }}>
@@ -2248,14 +2264,19 @@ function BlogEditorInner() {
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => {
                         const img = e.target as HTMLImageElement;
-                        // Only fall back to /api/media/ for local /portfolio/ paths, NOT for Cloudinary/external URLs
-                        if (authorImage && !img.src.includes('/api/media/') && !authorImage.startsWith('http')) {
+                        if (!img.dataset.hasFailedFirst && authorImage && !authorImage.startsWith('http')) {
+                          img.dataset.hasFailedFirst = 'true';
                           const filename = authorImage.split('?')[0].split('/').pop();
-                          if (filename) img.src = `/api/media/${encodeURIComponent(filename)}`;
+                          if (filename) {
+                            img.src = `/api/media/${encodeURIComponent(filename)}`;
+                            return;
+                          }
                         }
+                        img.src = '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp';
                       }}
                     />
                   </div>
+
                   <input
                     type="text"
                     value={authorImage}

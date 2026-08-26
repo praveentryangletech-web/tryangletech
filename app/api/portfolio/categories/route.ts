@@ -16,16 +16,35 @@ export async function GET(req: NextRequest) {
     const categories = await portfolioCategoryService.getAllCategories();
     const etag = categories.etag || '';
 
-    // HTTP 304 Not Modified support
-    if (clientEtag && clientEtag === etag) {
+    const isAdminOrNoCache =
+      Boolean(req.headers.get('x-admin-key')) ||
+      Boolean(req.headers.get('authorization')) ||
+      req.headers.get('cache-control')?.includes('no-cache') ||
+      req.headers.get('pragma')?.includes('no-cache');
+
+    // HTTP 304 Not Modified support (only for public requests)
+    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
       return new NextResponse(null, {
         status: 304,
         headers: {
           'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
         },
       });
     }
+
+    const headers: Record<string, string> = isAdminOrNoCache
+      ? {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        }
+      : {
+          'ETag': etag,
+          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
+          'CDN-Cache-Control': 'public, s-maxage=10',
+          'Vercel-CDN-Cache-Control': 'public, s-maxage=10',
+        };
 
     return NextResponse.json(
       {
@@ -35,12 +54,7 @@ export async function GET(req: NextRequest) {
       },
       {
         status: 200,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-          'CDN-Cache-Control': 'public, s-maxage=300',
-          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
-        },
+        headers,
       }
     );
   } catch (error: any) {

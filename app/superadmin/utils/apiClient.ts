@@ -121,8 +121,10 @@ class ApiClient {
       'Accept': 'application/json',
     };
 
-    // Auto-attach security token & admin key
+    // Auto-attach security token & admin key + no-cache headers for Superadmin
     if (!skipAuth) {
+      defaultHeaders['Cache-Control'] = 'no-cache';
+      defaultHeaders['Pragma'] = 'no-cache';
       if (ADMIN_API_KEY) {
         defaultHeaders['x-admin-key'] = ADMIN_API_KEY;
       }

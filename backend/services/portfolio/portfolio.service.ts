@@ -24,7 +24,7 @@ interface CacheEntry<T> {
 class PortfolioCacheManager {
   private cache = new Map<string, CacheEntry<any>>();
   private maxEntries = 500;
-  private defaultTtlMs = 120 * 1000; // 2 minutes
+  private defaultTtlMs = 5000; // 5-second transient TTL for instant DB synchronization
 
   /**
    * Generates a normalized, deterministic cache key
@@ -906,14 +906,16 @@ export const portfolioService = {
   },
 
   /**
-   * Delete project by Primary Key ID (immediately invalidates all server caches)
+   * Delete project by Primary Key ID or Slug (immediately invalidates all server caches)
    */
-  async deleteProject(id: string): Promise<boolean> {
+  async deleteProject(idOrSlug: string): Promise<boolean> {
     clearPortfolioCache();
     try {
+      const cleanTarget = idOrSlug.trim();
       await db.$executeRaw`
-        DELETE FROM "PortfolioProject" WHERE "id" = ${id}
+        DELETE FROM "PortfolioProject" WHERE "id" = ${cleanTarget} OR LOWER("slug") = LOWER(${cleanTarget})
       `;
+      clearPortfolioCache();
       return true;
     } catch (err) {
       console.error('[DB Portfolio] deleteProject error:', err);

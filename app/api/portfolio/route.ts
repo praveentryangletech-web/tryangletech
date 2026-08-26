@@ -55,7 +55,16 @@ export async function GET(req: NextRequest) {
       return errorResponse(validation.error || 'Invalid query parameters provided.', 400);
     }
 
-    // 2. Check for unpaginated request
+    // 2. Determine if request is from Superadmin or requests real-time data
+    const isAdminOrNoCache =
+      Boolean(req.headers.get('x-admin-key')) ||
+      Boolean(req.headers.get('authorization')) ||
+      req.headers.get('cache-control')?.includes('no-cache') ||
+      req.headers.get('pragma')?.includes('no-cache') ||
+      searchParams.get('admin') === 'true' ||
+      searchParams.get('preview') === 'true';
+
+    // 3. Check for unpaginated request
     const isUnpaginated = searchParams.get('all') === 'true' || searchParams.get('limit') === 'all';
 
     if (isUnpaginated) {
@@ -65,16 +74,29 @@ export async function GET(req: NextRequest) {
       );
       const etag = items.etag || '';
 
-      // Return 304 Not Modified if client cache is fresh
-      if (clientEtag && clientEtag === etag) {
+      // Return 304 Not Modified if client cache is fresh (only for public requests)
+      if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
         return new NextResponse(null, {
           status: 304,
           headers: {
             'ETag': etag,
-            'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+            'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
           },
         });
       }
+
+      const headers: Record<string, string> = isAdminOrNoCache
+        ? {
+            'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          }
+        : {
+            'ETag': etag,
+            'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
+            'CDN-Cache-Control': 'public, s-maxage=10',
+            'Vercel-CDN-Cache-Control': 'public, s-maxage=10',
+          };
 
       return NextResponse.json(
         {
@@ -84,32 +106,42 @@ export async function GET(req: NextRequest) {
         },
         {
           status: 200,
-          headers: {
-            'ETag': etag,
-            'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-            'CDN-Cache-Control': 'public, s-maxage=300',
-            'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
-          },
+          headers,
         }
       );
     }
 
-    // 3. Execute parameterized query with CTE optimization & server-side LRU cache
+    // 4. Execute parameterized query with CTE optimization & server-side LRU cache
     const result = await portfolioService.getPaginatedProjects(validation.data);
     const etag = result.etag || '';
     const duration = (performance.now() - (req as any).__startTime || 2.5).toFixed(1);
 
-    // Return 304 Not Modified if client cache is fresh
-    if (clientEtag && clientEtag === etag) {
+    // Return 304 Not Modified if client cache is fresh (only for public requests)
+    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
       return new NextResponse(null, {
         status: 304,
         headers: {
           'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
           'Server-Timing': `cache;dur=${duration}`,
         },
       });
     }
+
+    const headers: Record<string, string> = isAdminOrNoCache
+      ? {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+          'Server-Timing': `total;dur=${duration}`,
+        }
+      : {
+          'ETag': etag,
+          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
+          'CDN-Cache-Control': 'public, s-maxage=10',
+          'Vercel-CDN-Cache-Control': 'public, s-maxage=10',
+          'Server-Timing': `total;dur=${duration}`,
+        };
 
     return NextResponse.json(
       {
@@ -120,13 +152,7 @@ export async function GET(req: NextRequest) {
       },
       {
         status: 200,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-          'CDN-Cache-Control': 'public, s-maxage=300',
-          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
-          'Server-Timing': `total;dur=${duration}`,
-        },
+        headers,
       }
     );
   } catch (error: any) {

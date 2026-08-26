@@ -159,7 +159,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   /**
    * Fetch Live Paginated Portfolio API
    */
-  const fetchPortfolio = useCallback(async () => {
+  const fetchPortfolio = useCallback(async (useCache: boolean = true) => {
     setIsLoading(true);
     try {
       const params: Record<string, string | number> = {
@@ -175,7 +175,11 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         params.search = debouncedSearch.trim();
       }
 
-      const res = await apiClient.get<Project[]>('/api/portfolio', { params });
+      const res = await apiClient.get<Project[]>('/api/portfolio', { 
+        params, 
+        useCache,
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      });
       if (res.success && Array.isArray(res.data)) {
         setProjectsList(res.data);
         if (res.pagination) {
@@ -279,7 +283,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     apiClient.clearCache('/api/blog/categories');
     apiClient.clearCache('/api/portfolio');
 
-    await fetchPortfolio();
+    await fetchPortfolio(false);
   }, [categoriesData, categoryFilter, fetchPortfolio]);
 
   /**
@@ -299,8 +303,11 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    // Refresh current page, total count, and category counts
-    await fetchPortfolio();
+    apiClient.clearCache('/api/portfolio');
+    apiClient.clearCache('/api/portfolio/categories');
+
+    // Refresh current page, total count, and category counts without cache
+    await fetchPortfolio(false);
     await fetchCategories();
   }, [editingProject, fetchPortfolio, fetchCategories]);
 
@@ -325,8 +332,12 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       throw new Error(res.error || 'Failed to delete project from database.');
     }
 
+    // Invalidate client caches
+    apiClient.clearCache('/api/portfolio');
+    apiClient.clearCache('/api/portfolio/categories');
+
     setDeletingProject(null);
-    await fetchPortfolio();
+    await fetchPortfolio(false);
     await fetchCategories();
   }, [limit, fetchPortfolio, fetchCategories]);
 

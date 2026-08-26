@@ -33,21 +33,9 @@ export async function GET() {
     });
     if (dbProjects && dbProjects.length > 0) {
       caseStudies = dbProjects;
-    } else {
-      caseStudies = staticProjects.slice(0, 12).map((p) => ({
-        title: p.title,
-        slug: p.slug,
-        category: p.category,
-        description: p.description,
-      }));
     }
   } catch (err) {
-    caseStudies = staticProjects.slice(0, 12).map((p) => ({
-      title: p.title,
-      slug: p.slug,
-      category: p.category,
-      description: p.description,
-    }));
+    caseStudies = [];
   }
 
   // 3. Format Dynamic Location Section

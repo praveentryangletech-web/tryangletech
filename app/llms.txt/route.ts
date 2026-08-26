@@ -1,6 +1,5 @@
 import { geoService } from '@/backend/services/geo';
 import prisma from '@/backend/db/client';
-import { projects as staticProjects } from '@/app/data/portfolioData';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 
 export const dynamic = 'force-dynamic';
@@ -32,19 +31,9 @@ export async function GET() {
     });
     if (dbProjects && dbProjects.length > 0) {
       caseStudies = dbProjects;
-    } else {
-      caseStudies = staticProjects.slice(0, 8).map((p) => ({
-        title: p.title,
-        slug: p.slug,
-        category: p.category,
-      }));
     }
   } catch (err) {
-    caseStudies = staticProjects.slice(0, 8).map((p) => ({
-      title: p.title,
-      slug: p.slug,
-      category: p.category,
-    }));
+    caseStudies = [];
   }
 
   // 3. Format Dynamic Markdown Output

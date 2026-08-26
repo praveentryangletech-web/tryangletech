@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
-import { Project, projects as staticProjects } from '@/app/data/portfolioData';
+import { Project } from '@/app/data/portfolioData';
 
 export const DEFAULT_PORTFOLIO_CATEGORIES = [
   "All",
@@ -55,16 +55,16 @@ export function PortfolioProvider({
 
   const [projectsList, setProjectsList] = useState<Project[]>(() => {
     if (initialProjects && initialProjects.length > 0) return initialProjects;
-    return staticProjects;
+    return [];
   });
 
   const [page, setPage] = useState<number>(1);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
-  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(false);
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(!initialProjects || initialProjects.length === 0);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(() => {
     if (initialProjects && initialProjects.length > 0) return initialProjects.length;
-    return staticProjects.length;
+    return 0;
   });
 
   // Fetch dynamic categories on mount

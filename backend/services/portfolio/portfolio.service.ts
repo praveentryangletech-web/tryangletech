@@ -377,70 +377,16 @@ export const portfolioService = {
 
       return result;
     } catch (err) {
-      console.warn('[DB Portfolio] getPaginatedProjects query fallback:', err);
-
-      // In-memory fallback
-      let filtered = [...defaultProjects];
-      if (params.slug) {
-        filtered = filtered.filter((p) => p.slug === params.slug);
-      }
-      if (params.category && params.category.trim().toUpperCase() !== 'ALL') {
-        const cleanCat = params.category.trim().toLowerCase().replace(/[-\s]/g, '');
-        filtered = filtered.filter((p) => p.category.toLowerCase().replace(/[-\s]/g, '') === cleanCat);
-      }
-      if (params.search && params.search.trim()) {
-        const s = params.search.toLowerCase();
-        filtered = filtered.filter(
-          (p) =>
-            p.title.toLowerCase().includes(s) ||
-            p.category.toLowerCase().includes(s) ||
-            (p.client && p.client.toLowerCase().includes(s)) ||
-            p.description.toLowerCase().includes(s)
-        );
-      }
-
-      const total = filtered.length;
-      const totalPages = Math.ceil(total / limit) || 1;
-      const paginated = filtered.slice(offset, offset + limit);
-
-      const items: PortfolioItem[] = paginated.map((p, idx) => ({
-        id: String(offset + idx + 1),
-        slug: p.slug,
-        title: p.title,
-        category: p.category,
-        image: p.image,
-        images: p.images || (p.image ? [p.image] : []),
-        description: p.description,
-        client: p.client || '',
-        duration: p.duration || '',
-        role: p.role || 'Website Design & Development',
-        liveUrl: p.liveUrl || '',
-        content: p.content || p.description,
-        challenges: p.challenges || [],
-        solutions: p.solutions || [],
-        results: p.results || [],
-        technologies: p.technologies || [],
-        metaTitle: p.metaTitle || p.title,
-        metaDescription: p.metaDescription || p.description,
-        aeoSummary: p.aeoSummary || '',
-        keywords: p.keywords || [],
-        geoRegion: p.geoRegion || 'Global',
-        canonicalUrl: p.canonicalUrl || '',
-        faqs: p.faqs || [],
-        order: p.order ?? offset + idx,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }));
-
-      const fallbackResult: PaginatedPortfolioResult & { etag?: string } = {
-        items,
+      console.warn('[DB Portfolio] getPaginatedProjects query error:', err);
+      return {
+        items: [],
         pagination: {
-          total,
+          total: 0,
           page,
           limit,
-          totalPages,
-          hasNextPage: page < totalPages,
-          hasPrevPage: page > 1,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPrevPage: false,
         },
         filters: {
           category: params.category,
@@ -449,10 +395,6 @@ export const portfolioService = {
           sortOrder: sortOrder.toLowerCase(),
         },
       };
-
-      const cachedFallback = portfolioCache.set(cacheKey, fallbackResult);
-      fallbackResult.etag = cachedFallback.etag;
-      return fallbackResult;
     }
   },
 
@@ -511,35 +453,9 @@ export const portfolioService = {
       return result;
     } catch (err) {
       console.error('[DB Portfolio] getAllProjects error:', err);
-      const items = defaultProjects.map((p, idx) => ({
-        id: String(idx + 1),
-        slug: p.slug,
-        title: p.title,
-        category: p.category,
-        image: p.image,
-        images: p.images || (p.image ? [p.image] : []),
-        description: p.description,
-        client: p.client || '',
-        duration: p.duration || '',
-        role: p.role || '',
-        liveUrl: p.liveUrl || '',
-        content: p.content || '',
-        challenges: p.challenges || [],
-        solutions: p.solutions || [],
-        results: p.results || [],
-        technologies: p.technologies || [],
-        metaTitle: p.metaTitle || '',
-        metaDescription: p.metaDescription || '',
-        aeoSummary: p.aeoSummary || '',
-        keywords: p.keywords || [],
-        geoRegion: p.geoRegion || '',
-        canonicalUrl: p.canonicalUrl || '',
-        order: idx,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      })) as PortfolioItem[] & { etag?: string };
-      items.etag = portfolioCache.generateEtag(items);
-      return items;
+      const emptyList = [] as PortfolioItem[] & { etag?: string };
+      emptyList.etag = '';
+      return emptyList;
     }
   },
 
@@ -548,7 +464,8 @@ export const portfolioService = {
    * Response Time: < 0.5ms on Cache Hit, < 15ms on PostgreSQL Query Execution
    */
   async getProjectById(id: string): Promise<PortfolioItem | null> {
-    const cacheKey = `item:id:${id}`;
+    const cleanId = id.trim();
+    const cacheKey = `item:id:${cleanId}`;
     const cached = portfolioCache.get<PortfolioItem>(cacheKey);
     if (cached) {
       return cached.data;
@@ -556,78 +473,17 @@ export const portfolioService = {
 
     try {
       const rows = await db.$queryRaw<any[]>`
-        SELECT * FROM "PortfolioProject" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
+        SELECT * FROM "PortfolioProject" WHERE "id" = ${cleanId} OR LOWER("slug") = LOWER(${cleanId}) LIMIT 1
       `;
       if (rows && rows.length > 0) {
         const item = mapRowToPortfolioItem(rows[0]);
         portfolioCache.set(cacheKey, item);
         return item;
       }
-
-      // Check fallback defaultProjects by id, slug, or 1-based index
-      const found = defaultProjects.find((p, idx) => p.slug === id || (p as any).id === id || String(idx + 1) === id);
-      if (!found) return null;
-
-      const fallbackItem: PortfolioItem = {
-        id: (found as any).id || found.slug,
-        slug: found.slug,
-        title: found.title,
-        category: found.category,
-        image: found.image,
-        images: found.images || (found.image ? [found.image] : []),
-        description: found.description,
-        client: found.client || '',
-        duration: found.duration || '',
-        role: found.role || '',
-        liveUrl: found.liveUrl || '',
-        content: found.content || '',
-        challenges: found.challenges || [],
-        solutions: found.solutions || [],
-        results: found.results || [],
-        technologies: found.technologies || [],
-        metaTitle: found.metaTitle || '',
-        metaDescription: found.metaDescription || '',
-        aeoSummary: found.aeoSummary || '',
-        keywords: found.keywords || [],
-        geoRegion: found.geoRegion || '',
-        canonicalUrl: found.canonicalUrl || '',
-        order: (found as any).order || 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      portfolioCache.set(cacheKey, fallbackItem);
-      return fallbackItem;
+      return null;
     } catch (err) {
       console.error('[DB Portfolio] getProjectById error:', err);
-      const found = defaultProjects.find((p, idx) => p.slug === id || (p as any).id === id || String(idx + 1) === id);
-      if (!found) return null;
-      return {
-        id: (found as any).id || found.slug,
-        slug: found.slug,
-        title: found.title,
-        category: found.category,
-        image: found.image,
-        images: found.images || (found.image ? [found.image] : []),
-        description: found.description,
-        client: found.client || '',
-        duration: found.duration || '',
-        role: found.role || '',
-        liveUrl: found.liveUrl || '',
-        content: found.content || '',
-        challenges: found.challenges || [],
-        solutions: found.solutions || [],
-        results: found.results || [],
-        technologies: found.technologies || [],
-        metaTitle: found.metaTitle || '',
-        metaDescription: found.metaDescription || '',
-        aeoSummary: found.aeoSummary || '',
-        keywords: found.keywords || [],
-        geoRegion: found.geoRegion || '',
-        canonicalUrl: found.canonicalUrl || '',
-        order: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      return null;
     }
   },
 
@@ -652,70 +508,10 @@ export const portfolioService = {
         portfolioCache.set(cacheKey, item);
         return item;
       }
-
-      const found = defaultProjects.find((p) => p.slug.toLowerCase() === safeSlug);
-      if (!found) return null;
-
-      const fallbackItem: PortfolioItem = {
-        id: (found as any).id || found.slug,
-        slug: found.slug,
-        title: found.title,
-        category: found.category,
-        image: found.image,
-        images: found.images || (found.image ? [found.image] : []),
-        description: found.description,
-        client: found.client || '',
-        duration: found.duration || '',
-        role: found.role || '',
-        liveUrl: found.liveUrl || '',
-        content: found.content || '',
-        challenges: found.challenges || [],
-        solutions: found.solutions || [],
-        results: found.results || [],
-        technologies: found.technologies || [],
-        metaTitle: found.metaTitle || '',
-        metaDescription: found.metaDescription || '',
-        aeoSummary: found.aeoSummary || '',
-        keywords: found.keywords || [],
-        geoRegion: found.geoRegion || '',
-        canonicalUrl: found.canonicalUrl || '',
-        order: (found as any).order || 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      portfolioCache.set(cacheKey, fallbackItem);
-      return fallbackItem;
+      return null;
     } catch (err) {
       console.error('[DB Portfolio] getProjectBySlug error:', err);
-      const found = defaultProjects.find((p) => p.slug.toLowerCase() === safeSlug);
-      if (!found) return null;
-      return {
-        id: (found as any).id || found.slug,
-        slug: found.slug,
-        title: found.title,
-        category: found.category,
-        image: found.image,
-        images: found.images || (found.image ? [found.image] : []),
-        description: found.description,
-        client: found.client || '',
-        duration: found.duration || '',
-        role: found.role || '',
-        liveUrl: found.liveUrl || '',
-        content: found.content || '',
-        challenges: found.challenges || [],
-        solutions: found.solutions || [],
-        results: found.results || [],
-        technologies: found.technologies || [],
-        metaTitle: found.metaTitle || '',
-        metaDescription: found.metaDescription || '',
-        aeoSummary: found.aeoSummary || '',
-        keywords: found.keywords || [],
-        geoRegion: found.geoRegion || '',
-        canonicalUrl: found.canonicalUrl || '',
-        order: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      return null;
     }
   },
 

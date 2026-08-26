@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 import prisma from '@/backend/db/client';
 import { BLOG_POSTS } from './blog/data';
-import { projects as staticProjects } from './data/portfolioData';
 import { geoService } from '@/backend/services/geo';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 
@@ -124,20 +123,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
     } else {
-      dynamicPortfolioEntries = staticProjects.map((p) => ({
-        url: `${baseUrl}/portfolio/${p.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      }));
+      dynamicPortfolioEntries = [];
     }
   } catch (err) {
-    dynamicPortfolioEntries = staticProjects.map((p) => ({
-      url: `${baseUrl}/portfolio/${p.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+    dynamicPortfolioEntries = [];
   }
 
   // 4. Dynamic Programmatic GEO Location Routes

@@ -17,7 +17,8 @@ const DEFAULT_CATEGORIES = [
   "Graphic Design",
 ];
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Client Case Studies & Software Portfolio | TryangleTech',
@@ -41,7 +42,7 @@ export default async function PortfolioPage() {
   try {
     const [cats, projs] = await Promise.all([
       portfolioCategoryService.getAllCategories('PORTFOLIO').catch(() => []),
-      portfolioService.getPaginatedProjects({ page: 1, limit: 9 }).catch(() => ({ projects: [] } as any)),
+      portfolioService.getPaginatedProjects({ page: 1, limit: 9 }).catch(() => ({ items: [] } as any)),
     ]);
 
     if (cats && Array.isArray(cats) && cats.length > 0) {
@@ -50,11 +51,11 @@ export default async function PortfolioPage() {
       initialCategories = Array.from(new Set(['All', ...defaultNames, ...fetchedNames]));
     }
 
-    if (projs && Array.isArray(projs.projects) && projs.projects.length > 0) {
-      initialProjects = projs.projects;
+    if (projs && Array.isArray(projs.items) && projs.items.length > 0) {
+      initialProjects = projs.items;
     }
   } catch (err) {
-    console.warn('[PortfolioPage] SSR category preload notice:', err);
+    console.warn('[PortfolioPage] SSR preload notice:', err);
   }
 
   return (

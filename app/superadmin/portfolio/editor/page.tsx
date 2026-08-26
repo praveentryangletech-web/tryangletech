@@ -437,8 +437,39 @@ function PortfolioEditorInner() {
     }
   };
 
+  const resetForm = () => {
+    setTitle('');
+    setSlug('');
+    setIsSlugManual(false);
+    setCategory('Business Website');
+    setClient('');
+    setDuration('3 Weeks');
+    setRole('Website Design & Development');
+    setLiveUrl('');
+    setOrder(0);
+    setCoverImage('');
+    setImageAlt('');
+    setSliderImages([]);
+    setImageAlts([]);
+    setNewSliderUrl('');
+    setNewSliderAlt('');
+    setDescription('');
+    setContent('');
+    setChallenges(['']);
+    setSolutions(['']);
+    setResults(['']);
+    setTechInput('');
+    setTechnologies([]);
+    setKeywordInput('');
+    setKeywords([]);
+    setFaqs([]);
+    setErrorMessage('');
+    setSuccessMessage('');
+  };
+
   useEffect(() => {
     if (!projectId) {
+      resetForm();
       setIsLoading(false);
       return;
     }

@@ -359,9 +359,63 @@ function BlogEditorInner() {
     }
   };
 
-  // Load existing article if edit mode
+  const resetForm = () => {
+    setTitle('');
+    setSlug('');
+    setIsSlugManual(false);
+    setCategory('General');
+    setAuthorName('TryangleTech Team');
+    setAuthorRole('Content Creators');
+    setAuthorImage('/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp');
+    setAuthorBio('');
+    setReadTime('5 min read');
+    setPublished(true);
+    setPublishedAt(formatForDateTimeInput());
+    setOrder(0);
+    setCoverImage('');
+    setCoverImageAlt('');
+    setSliderImages([]);
+    setSliderImageAlts([]);
+    setNewSliderUrl('');
+    setNewSliderAlt('');
+    setExcerpt('');
+    setSection1Heading('Blending human creativity with machine Intelligence');
+    setSection1Paragraph1('');
+    setSection1Paragraph2('');
+    setQuoteText('');
+    setQuoteAuthor('Tanya Erin');
+    setStepsTitle('Steps to integrate AI with creative workflows');
+    setStep1('');
+    setStep2('');
+    setContentImage1('');
+    setContentImage1Alt('');
+    setContentImage2('');
+    setContentImage2Alt('');
+    setConclusionTitle('The future of human-AI collaboration');
+    setConclusionBody('');
+    setConclusionPoints([
+      'AI-powered tools enhance creative workflows.',
+      'Data-driven insights inform better decisions.',
+      'Collaboration between humans and AI accelerates innovation.',
+      'Future solutions will be smarter, faster, and more imaginative.',
+    ]);
+    setNewPointInput('');
+    setTagInput('');
+    setTags([]);
+    setMetaTitle('');
+    setMetaDescription('');
+    setCanonicalUrl('');
+    setKeywordInput('');
+    setKeywords([]);
+    setFaqs([]);
+    setErrorMessage('');
+    setSuccessMessage('');
+  };
+
+  // Load existing article if edit mode, or reset form if create mode
   useEffect(() => {
     if (!postId) {
+      resetForm();
       setIsLoading(false);
       return;
     }

@@ -1,6 +1,5 @@
 import { Prisma } from '@prisma/client';
 import db from '@/backend/db/client';
-import { BLOG_POSTS as staticBlogPosts } from '@/app/blog/data';
 import {
   BlogPostItem,
   BlogSummaryItem,
@@ -22,7 +21,7 @@ interface CacheEntry<T> {
 class BlogCacheManager {
   private cache = new Map<string, CacheEntry<any>>();
   private maxEntries = 500;
-  private defaultTtlMs = 120 * 1000; // 2 minutes
+  private defaultTtlMs = 5000; // 5 seconds transient cache
 
   public generateKey(prefix: string, params: Record<string, any>): string {
     const sortedKeys = Object.keys(params).sort();
@@ -82,51 +81,6 @@ export const blogCache = new BlogCacheManager();
 let isBlogTableEnsured = false;
 
 export class BlogService {
-  /**
-   * Fallback static posts converted to BlogPostItem format
-   */
-  private getFallbackPosts(): BlogPostItem[] {
-    return staticBlogPosts.map((p, idx) => ({
-      id: p.id || String(idx + 1),
-      slug: p.slug,
-      title: p.title,
-      category: p.category,
-      excerpt: p.title,
-      content: '',
-      coverImage: p.image,
-      images: p.images || (p.image ? [p.image] : []),
-      authorName: 'TryangleTech Team',
-      authorRole: 'Editorial Team',
-      authorImage: '/blog-post-assets/692578de4ba3fb26b16f1dd7_blog-nine.webp',
-      authorBio: 'By combining human ingenuity with AI capabilities, organizations can unlock new forms of creative expression. Intelligent systems support ideation, experimentation, and execution, while humans provide vision, empathy, and imagination. Together, they form a powerful partnership for innovation and growth.',
-      readTime: '5 min read',
-      published: true,
-      publishedAt: p.date || '29 Oct 2025',
-      order: idx,
-      tags: [],
-      section1Heading: 'Blending human creativity with machine Intelligence',
-      section1Paragraph1: 'The combination of human creativity and AI intelligence unlocks new possibilities for innovation and efficiency. AI tools augment human ideas, automate repetitive tasks, and provide data-driven insights that inspire creative solutions.',
-      section1Paragraph2: 'By leveraging AI-powered analytics, generative models, and intelligent workflows, teams can focus on conceptual thinking while leaving mundane tasks to machines. This collaboration ensures that human imagination and computational precision work together to produce remarkable outcomes.',
-      quoteText: 'Using this task management system has transformed how we work. Tasks are organized, deadlines are clear, and team collaboration is seamless. Productivity has improved, and projects are delivered on time. Highly recommended for teams looking to streamline workflows and boost efficiency.',
-      quoteAuthor: 'Tanya Erin',
-      stepsTitle: 'Steps to integrate AI with creative workflows',
-      step1: 'Successful integration requires identifying areas where AI can assist, selecting the right tools, and fostering a culture of experimentation. Encourage teams to explore AI-generated suggestions, iterate quickly, and combine them with human intuition.',
-      step2: 'Develop a step-by-step plan, including testing, monitoring, and continuous optimization. Train teams to adapt to AI-augmented workflows while maintaining governance, security, and compliance. Regularly evaluate outcomes and refine processes for maximum creative impact.',
-      contentImage1: '/blog-post-assets/69030925158024507ce308ad_taskopia-bolog-botom-image-1.png',
-      contentImage2: '/blog-post-assets/6903092536e793c51e1b23ab_taskopia-bolog-botom-image-2.webp',
-      conclusionTitle: 'The future of human-AI collaboration',
-      conclusionBody: 'The collaboration of humans and AI will transform industries, combining artistic expression, strategic thinking, and technical execution. Organizations embracing this partnership will create richer experiences, solve complex problems efficiently, and drive innovation in ways previously unimaginable.',
-      conclusionPoints: [
-        'AI-powered tools enhance creative workflows.',
-        'Data-driven insights inform better decisions.',
-        'Collaboration between humans and AI accelerates innovation.',
-        'Future solutions will be smarter, faster, and more imaginative.',
-      ],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    }));
-  }
-
   /**
    * Ensure BlogPost schema columns and high-performance indexes exist in PostgreSQL in the background
    */
@@ -318,27 +272,16 @@ export class BlogService {
       blogCache.set(cacheKey, result);
       return result;
     } catch (err) {
-      console.warn('Database error in getPaginatedPosts, falling back to static posts:', err);
-      const fallbacks = this.getFallbackPosts();
-      const filtered = fallbacks.filter((p) => {
-        if (category && category !== 'ALL' && p.category.toLowerCase() !== category.toLowerCase()) return false;
-        if (search && !p.title.toLowerCase().includes(search.toLowerCase())) return false;
-        return true;
-      });
-
-      const total = filtered.length;
-      const totalPages = Math.ceil(total / limit) || 1;
-      const paged = filtered.slice((page - 1) * limit, page * limit);
-
+      console.warn('Database error in getPaginatedPosts:', err);
       return {
-        items: paged,
+        items: [],
         pagination: {
-          total,
+          total: 0,
           page,
           limit,
-          totalPages,
-          hasNextPage: page < totalPages,
-          hasPrevPage: page > 1,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPrevPage: false,
         },
         filters: {
           category,
@@ -367,7 +310,7 @@ export class BlogService {
         db.$queryRaw<any[]>`
           SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), 3000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -375,22 +318,19 @@ export class BlogService {
         blogCache.set(cacheKey, post);
         return post;
       }
+      return null;
     } catch (err) {
-      console.warn('Database notice in getPostBySlug fallback:', err);
+      console.warn('Database error in getPostBySlug:', err);
+      return null;
     }
-
-    const match = this.getFallbackPosts().find((p) => p.slug.toLowerCase() === cleanSlug);
-    if (match) {
-      blogCache.set(cacheKey, match);
-    }
-    return match || null;
   }
 
   /**
    * Get single post by ID
    */
   public async getPostById(id: string): Promise<BlogPostItem | null> {
-    const cacheKey = `blog:id:${id}`;
+    const cleanId = (id || '').trim();
+    const cacheKey = `blog:id:${cleanId}`;
     const cached = blogCache.get<BlogPostItem>(cacheKey);
     if (cached) return cached.data;
 
@@ -399,9 +339,9 @@ export class BlogService {
     try {
       const rows = await Promise.race([
         db.$queryRaw<any[]>`
-          SELECT * FROM "BlogPost" WHERE "id" = ${id} OR "slug" = ${id} LIMIT 1
+          SELECT * FROM "BlogPost" WHERE "id" = ${cleanId} OR "slug" = ${cleanId} LIMIT 1
         `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
+        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), 3000)),
       ]);
 
       if (rows && rows.length > 0) {
@@ -409,13 +349,11 @@ export class BlogService {
         blogCache.set(cacheKey, post);
         return post;
       }
+      return null;
     } catch (err) {
-      console.warn('Database notice in getPostById fallback:', err);
+      console.warn('Database error in getPostById:', err);
+      return null;
     }
-
-    const fallback = this.getFallbackPosts().find((p) => p.id === id || p.slug === id) || null;
-    if (fallback) blogCache.set(cacheKey, fallback);
-    return fallback;
   }
 
   /**
@@ -654,16 +592,14 @@ export class BlogService {
       };
     } catch (err) {
       console.warn('Database error in getBlogStats:', err);
+      return {
+        totalPosts: 0,
+        publishedPosts: 0,
+        draftPosts: 0,
+        totalViews: 0,
+        categoriesCount: 0,
+      };
     }
-
-    const fallbacks = this.getFallbackPosts();
-    return {
-      totalPosts: fallbacks.length,
-      publishedPosts: fallbacks.length,
-      draftPosts: 0,
-      totalViews: 1250,
-      categoriesCount: 6,
-    };
   }
 }
 

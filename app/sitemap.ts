@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
 import prisma from '@/backend/db/client';
-import { BLOG_POSTS } from './blog/data';
 import { geoService } from '@/backend/services/geo';
 import { getBaseUrl } from '@/backend/utils/siteUrl';
 
@@ -40,30 +39,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/service/graphics-designing`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/service/digital-marketing`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/portfolio`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.85,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
@@ -72,9 +65,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
   ];
 
-  // 2. Dynamic Blog Slugs from DB (with fallback)
+  // 2. Dynamic Blog Slugs from DB
   let dynamicBlogEntries: MetadataRoute.Sitemap = [];
   try {
     const dbPosts = await prisma.blogPost.findMany({
@@ -91,20 +90,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
     } else {
-      dynamicBlogEntries = BLOG_POSTS.map((p) => ({
-        url: `${baseUrl}/blog/${p.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      }));
+      dynamicBlogEntries = [];
     }
   } catch (err) {
-    dynamicBlogEntries = BLOG_POSTS.map((p) => ({
-      url: `${baseUrl}/blog/${p.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
+    dynamicBlogEntries = [];
   }
 
   // 3. Dynamic Portfolio Slugs from DB (with fallback)

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import SafeImage from "@/app/common/SafeImage";
-import { CATEGORIES as staticCategories, BLOG_POSTS as staticBlogPosts } from "../data";
 import { BlogPostItem } from "@/backend/services/blog";
 
 const BLOG_FALLBACK_IMAGES = [
@@ -21,29 +20,6 @@ const getBlogFallbackImage = (index: number = 0) => {
   return BLOG_FALLBACK_IMAGES[index % BLOG_FALLBACK_IMAGES.length];
 };
 
-const getInitialDefaultPosts = (): BlogPostItem[] => {
-  return staticBlogPosts.map((p, idx) => {
-    const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
-    return {
-      id: p.id || String(idx + 1),
-      slug: p.slug,
-      title: p.title,
-      category: p.category,
-      excerpt: p.title,
-      content: '',
-      coverImage: p.image,
-      images: p.images || (p.image ? [p.image] : []),
-      authorName: 'TryangleTech Team',
-      authorRole: 'Editorial Team',
-      readTime: '5 min read',
-      published: true,
-      publishedAt: parsedDate,
-      createdAt: parsedDate,
-      updatedAt: parsedDate,
-    };
-  });
-};
-
 // Global in-memory cache for instantaneous client-side navigation
 let clientCachedPosts: BlogPostItem[] | null = null;
 let clientCachedCategories: string[] | null = null;
@@ -59,19 +35,19 @@ export default function BlogContent({ initialPosts, initialCategories }: BlogCon
   const [posts, setPosts] = useState<BlogPostItem[]>(() => {
     if (clientCachedPosts && clientCachedPosts.length > 0) return clientCachedPosts;
     if (initialPosts && initialPosts.length > 0) return initialPosts;
-    return getInitialDefaultPosts();
+    return [];
   });
 
   const [categories, setCategories] = useState<string[]>(() => {
     if (clientCachedCategories && clientCachedCategories.length > 0) return clientCachedCategories;
     if (initialCategories && initialCategories.length > 0) return initialCategories;
-    return staticCategories;
+    return ['All'];
   });
 
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(() => {
     if (clientCachedPosts && clientCachedPosts.length > 0) return false;
     if (initialPosts && initialPosts.length > 0) return false;
-    return false; // Render fast defaults or skeletons seamlessly
+    return true;
   });
 
   // Fast Client-Side background API fetch

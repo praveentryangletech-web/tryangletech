@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import apiClient, { PaginationMeta } from '../utils/apiClient';
 import { BlogPostItem } from '@/backend/services/blog';
-import { BLOG_POSTS as staticBlogPosts } from '@/app/blog/data';
 import { PortfolioCategoryItem, DEFAULT_PORTFOLIO_CATEGORY } from '@/backend/services/portfolio/category.service';
 
 /**
@@ -50,27 +49,6 @@ interface BlogContextType {
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
-const initialStaticPosts: BlogPostItem[] = staticBlogPosts.map((p, idx) => {
-  const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
-  return {
-    id: p.id || String(idx + 1),
-    slug: p.slug,
-    title: p.title,
-    category: p.category,
-    excerpt: p.title,
-    content: '',
-    coverImage: p.image,
-    images: p.images || (p.image ? [p.image] : []),
-    authorName: 'TryangleTech Team',
-    authorRole: 'Editorial Team',
-    readTime: '5 min read',
-    published: true,
-    publishedAt: parsedDate,
-    createdAt: parsedDate,
-    updatedAt: parsedDate,
-  };
-});
-
 /**
  * BlogProvider Component
  * 
@@ -78,7 +56,7 @@ const initialStaticPosts: BlogPostItem[] = staticBlogPosts.map((p, idx) => {
  * category filtering, dynamic category management, and CRUD operations against PostgreSQL.
  */
 export function BlogProvider({ children }: { children: ReactNode }) {
-  const [postsList, setPostsList] = useState<BlogPostItem[]>(initialStaticPosts.slice(0, 8));
+  const [postsList, setPostsList] = useState<BlogPostItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Dynamic Categories state initialized with protected 'General' default
@@ -102,18 +80,18 @@ export function BlogProvider({ children }: { children: ReactNode }) {
 
   // Server-side Pagination & Filter states
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(8);
+  const [limit, setLimit] = useState<number>(20);
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
 
   const [pagination, setPagination] = useState<PaginationMeta>({
-    total: initialStaticPosts.length,
+    total: 0,
     page: 1,
-    limit: 8,
-    totalPages: Math.ceil(initialStaticPosts.length / 8) || 1,
-    hasNextPage: initialStaticPosts.length > 8,
+    limit: 20,
+    totalPages: 1,
+    hasNextPage: false,
     hasPrevPage: false,
   });
 

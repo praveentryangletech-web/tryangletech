@@ -2,8 +2,11 @@ import { Metadata } from 'next';
 import WebflowInit from "../common/WebflowInit";
 import BlogContent from './components/BlogContent';
 import BlogFAQ from './components/BlogFAQ';
+import { blogService } from '@/backend/services/blog';
+import { portfolioCategoryService } from '@/backend/services/portfolio';
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Tech Insights & Software Engineering Blog | TryangleTech',
@@ -19,7 +22,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  let initialPosts: any[] = [];
+  let initialCategories: string[] = ['All'];
+
+  try {
+    const [postsRes, catsRes] = await Promise.all([
+      blogService.getPaginatedPosts({ page: 1, limit: 30, status: 'published' }).catch(() => ({ items: [] })),
+      portfolioCategoryService.getAllCategories('BLOG').catch(() => []),
+    ]);
+
+    if (postsRes && Array.isArray(postsRes.items)) {
+      initialPosts = postsRes.items;
+    }
+
+    if (catsRes && Array.isArray(catsRes) && catsRes.length > 0) {
+      const names = catsRes.map((c: any) => c.name).filter(Boolean);
+      initialCategories = Array.from(new Set(['All', ...names]));
+    }
+  } catch (err) {
+    console.warn('[BlogPage] SSR preload notice:', err);
+  }
+
   return (
     <>
       <WebflowInit pageId="68eddbced83339fe88ea9ff6" />
@@ -46,7 +70,7 @@ export default function BlogPage() {
       />
 
       <main>
-        <BlogContent />
+        <BlogContent initialPosts={initialPosts} initialCategories={initialCategories} />
         <BlogFAQ />
       </main>
     </>

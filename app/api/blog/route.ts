@@ -57,6 +57,18 @@ export async function GET(req: NextRequest) {
       return res;
     }
 
+    // Check if request is authenticated or requests cache-busting
+    const authHeader = req.headers.get('authorization') || '';
+    const adminKey = req.headers.get('x-admin-key') || '';
+    const cacheControlHeader = req.headers.get('cache-control') || '';
+    const isAdminOrNoCache =
+      authHeader.includes('Bearer ') ||
+      adminKey.length > 0 ||
+      cacheControlHeader.includes('no-cache') ||
+      searchParams.get('noCache') === 'true' ||
+      searchParams.get('status') === 'all' ||
+      searchParams.get('status') === 'draft';
+
     // 1. Validate and sanitize query parameters
     const validation = validateBlogQueryParams({
       page: searchParams.get('page'),
@@ -81,15 +93,33 @@ export async function GET(req: NextRequest) {
     const etag = `"${result.pagination.total}-${result.items.length}-${result.items[0]?.updatedAt || '0'}"`;
     const clientEtag = req.headers.get('if-none-match');
 
-    if (clientEtag && clientEtag === etag) {
+    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
       return new NextResponse(null, {
         status: 304,
         headers: {
           'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
+          'Cache-Control': 'public, max-age=10, s-maxage=30, stale-while-revalidate=60',
           'Server-Timing': `cache;dur=${duration}`,
         },
       });
+    }
+
+    const headers: Record<string, string> = {
+      'ETag': etag,
+      'Server-Timing': `total;dur=${duration}`,
+    };
+
+    if (isAdminOrNoCache) {
+      headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+      headers['Pragma'] = 'no-cache';
+      headers['Expires'] = '0';
+      headers['Surrogate-Control'] = 'no-store';
+      headers['CDN-Cache-Control'] = 'no-store';
+      headers['Vercel-CDN-Cache-Control'] = 'no-store';
+    } else {
+      headers['Cache-Control'] = 'public, max-age=10, s-maxage=30, stale-while-revalidate=60';
+      headers['CDN-Cache-Control'] = 'public, s-maxage=30';
+      headers['Vercel-CDN-Cache-Control'] = 'public, s-maxage=30';
     }
 
     return NextResponse.json(
@@ -101,13 +131,7 @@ export async function GET(req: NextRequest) {
       },
       {
         status: 200,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-          'CDN-Cache-Control': 'public, s-maxage=300',
-          'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
-          'Server-Timing': `total;dur=${duration}`,
-        },
+        headers,
       }
     );
   } catch (err: any) {

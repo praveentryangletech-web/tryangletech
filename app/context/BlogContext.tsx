@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 import { BlogPostItem } from '@/backend/services/blog';
-import { BLOG_POSTS as staticBlogPosts, CATEGORIES as staticCategories } from '@/app/blog/data';
 
 export interface BlogContextType {
   posts: BlogPostItem[];
@@ -15,30 +14,6 @@ export interface BlogContextType {
   fetchLatestPosts: (limit?: number) => Promise<BlogPostItem[]>;
   refreshPosts: () => Promise<void>;
 }
-
-// Transform static fallback posts
-const getInitialFallbackPosts = (): BlogPostItem[] => {
-  return staticBlogPosts.map((p, idx) => {
-    const parsedDate = p.date ? new Date(p.date).toISOString() : new Date(2025, 9, 29 - idx).toISOString();
-    return {
-      id: p.id || String(idx + 1),
-      slug: p.slug,
-      title: p.title,
-      category: p.category,
-      excerpt: p.title,
-      content: '',
-      coverImage: p.image,
-      images: p.images || (p.image ? [p.image] : []),
-      authorName: 'TryangleTech Team',
-      authorRole: 'Editorial Team',
-      readTime: '5 min read',
-      published: true,
-      publishedAt: parsedDate,
-      createdAt: parsedDate,
-      updatedAt: parsedDate,
-    };
-  });
-};
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
@@ -58,15 +33,16 @@ export function BlogProvider({
   const [posts, setPosts] = useState<BlogPostItem[]>(() => {
     if (initialPosts && initialPosts.length > 0) return initialPosts;
     if (cachedBlogPosts && cachedBlogPosts.length > 0) return cachedBlogPosts;
-    return getInitialFallbackPosts();
+    return [];
   });
 
   const [latestPosts, setLatestPosts] = useState<BlogPostItem[]>(() => {
     if (cachedLatestPosts && cachedLatestPosts.length > 0) return cachedLatestPosts;
-    return (initialPosts || getInitialFallbackPosts()).slice(0, initialLimit);
+    if (initialPosts && initialPosts.length > 0) return initialPosts.slice(0, initialLimit);
+    return [];
   });
 
-  const [categories, setCategories] = useState<string[]>(staticCategories);
+  const [categories, setCategories] = useState<string[]>(['All']);
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [isLoading, setIsLoading] = useState<boolean>(!initialPosts || initialPosts.length === 0);
   const [error, setError] = useState<string | null>(null);

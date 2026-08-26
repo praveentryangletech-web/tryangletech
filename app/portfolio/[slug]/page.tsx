@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Project } from '../../data/portfolioData';
 import { portfolioService } from '@/backend/services/portfolio';
-import { BLOG_POSTS } from '../../blog/data'; 
 import HomeTwoTestimonial from '../../home-two/components/HomeTwoTestimonial';
 import HomeThreeFaq from '../../home-three/components/Faq';
 import Cta from '../../home/components/Cta';

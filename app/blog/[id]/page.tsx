@@ -4,41 +4,22 @@ import WebflowInit from "../../common/WebflowInit";
 import Image from "next/image";
 import Link from "next/link";
 import SafeImage from "@/app/common/SafeImage";
-import { BLOG_POSTS } from "../data";
 import { notFound } from "next/navigation";
 import PortfolioImageSlider from "../../portfolio/components/PortfolioImageSlider";
 import { blogService } from "@/backend/services/blog/blog.service";
 import { BlogPostItem } from "@/backend/services/blog/blog.types";
 import HomeThreeFaq from "../../home-three/components/Faq";
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const getCachedPost = cache(async (slug: string): Promise<BlogPostItem | null> => {
   try {
-    const post = await blogService.getPostBySlug(slug);
-    if (post) return post;
-  } catch {}
-
-  const fallback = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!fallback) return null;
-
-  return {
-    id: fallback.id,
-    slug: fallback.slug,
-    title: fallback.title,
-    category: fallback.category,
-    excerpt: fallback.title,
-    content: '',
-    coverImage: fallback.image,
-    images: fallback.images || (fallback.image ? [fallback.image] : []),
-    authorName: 'TryangleTech Team',
-    authorRole: 'Editorial Team',
-    readTime: '5 min read',
-    published: true,
-    publishedAt: fallback.date || new Date().toISOString(),
-    createdAt: fallback.date || new Date().toISOString(),
-    updatedAt: fallback.date || new Date().toISOString(),
-  } as BlogPostItem;
+    const post = (await blogService.getPostBySlug(slug)) || (await blogService.getPostById(slug));
+    return post || null;
+  } catch {
+    return null;
+  }
 });
 
 export async function generateMetadata({

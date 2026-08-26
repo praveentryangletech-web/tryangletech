@@ -231,19 +231,16 @@ export class BlogService {
       const whereClause = conditions.length > 0 ? Prisma.sql`WHERE ${Prisma.join(conditions, ' AND ')}` : Prisma.empty;
       const offset = (page - 1) * limit;
 
-      const [totalCountRows, rows] = await Promise.race([
-        Promise.all([
-          db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
-          db.$queryRaw<any[]>`
-            SELECT "id", "slug", "title", "category", "excerpt", "coverImage", "coverImageAlt",
-                   "authorName", "authorRole", "authorImage", "readTime", "published", "publishedAt",
-                   "order", "tags", "createdAt", "updatedAt"
-            FROM "BlogPost" ${whereClause} 
-            ORDER BY "publishedAt" DESC, "createdAt" DESC 
-            LIMIT ${limit} OFFSET ${offset}
-          `,
-        ]),
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Query Timeout (2500ms)')), 2500)),
+      const [totalCountRows, rows] = await Promise.all([
+        db.$queryRaw<any[]>`SELECT COUNT(*)::int as count FROM "BlogPost" ${whereClause}`,
+        db.$queryRaw<any[]>`
+          SELECT "id", "slug", "title", "category", "excerpt", "coverImage", "coverImageAlt",
+                 "authorName", "authorRole", "authorImage", "readTime", "published", "publishedAt",
+                 "order", "tags", "createdAt", "updatedAt"
+          FROM "BlogPost" ${whereClause} 
+          ORDER BY "publishedAt" DESC, "createdAt" DESC 
+          LIMIT ${limit} OFFSET ${offset}
+        `,
       ]);
 
       const total = Number(totalCountRows?.[0]?.count || 0);
@@ -306,12 +303,9 @@ export class BlogService {
     this.ensureBlogSchema();
 
     try {
-      const rows = await Promise.race([
-        db.$queryRaw<any[]>`
-          SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
-        `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), 3000)),
-      ]);
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "BlogPost" WHERE LOWER("slug") = ${cleanSlug} LIMIT 1
+      `;
 
       if (rows && rows.length > 0) {
         const post = this.mapRowToPost(rows[0]);
@@ -337,12 +331,9 @@ export class BlogService {
     this.ensureBlogSchema();
 
     try {
-      const rows = await Promise.race([
-        db.$queryRaw<any[]>`
-          SELECT * FROM "BlogPost" WHERE "id" = ${cleanId} OR "slug" = ${cleanId} LIMIT 1
-        `,
-        new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), 3000)),
-      ]);
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "BlogPost" WHERE "id" = ${cleanId} OR "slug" = ${cleanId} LIMIT 1
+      `;
 
       if (rows && rows.length > 0) {
         const post = this.mapRowToPost(rows[0]);

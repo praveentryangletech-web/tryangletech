@@ -191,7 +191,11 @@ export function BlogProvider({ children }: { children: ReactNode }) {
         params.search = debouncedSearch.trim();
       }
 
-      const res = await apiClient.get<BlogPostItem[]>('/api/blog', { params });
+      const res = await apiClient.get<BlogPostItem[]>('/api/blog', { 
+        params,
+        useCache: false,
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      });
       if (res.success && Array.isArray(res.data)) {
         setPostsList(res.data);
         if (res.pagination) {

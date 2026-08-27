@@ -263,7 +263,8 @@ export default function RootLayout({
     />
     <link
       rel="stylesheet"
-      href="/Taskopia_files/css"
+      href="/Taskopia_files/fonts.css"
+      type="text/css"
       media="all" />
     <script
       type="text/javascript"

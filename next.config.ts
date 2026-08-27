@@ -86,11 +86,37 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/:path*/css',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/css; charset=utf-8',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
   async rewrites() {
     return {
-      beforeFiles: [],
+      beforeFiles: [
+        {
+          source: '/Taskopia_files/css',
+          destination: '/Taskopia_files/fonts.css',
+        },
+        {
+          source: '/service3-assets/css',
+          destination: '/service3-assets/fonts.css',
+        },
+        {
+          source: '/Home3_files/css',
+          destination: '/Home3_files/fonts.css',
+        },
+      ],
       afterFiles: [],
       fallback: [
         {

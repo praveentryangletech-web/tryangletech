@@ -267,39 +267,116 @@ function SuperadminServicesContent() {
 
       {/* Tab Panels */}
       <div style={{ minHeight: '400px', backgroundColor: 'transparent' }}>
-        {activeTab === 'hero' && (
-          <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={openAssetPicker} />
-        )}
-        {activeTab === 'cards' && (
-          <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={openAssetPicker} />
-        )}
-        {activeTab === 'highlights' && (
-          <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={openAssetPicker} />
-        )}
-        {activeTab === 'tools' && (
-          <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={openAssetPicker} />
-        )}
-        {activeTab === 'faqs' && (
-          <ServiceFaqsTab faqs={faqs} setFaqs={setFaqs} />
-        )}
-        {activeTab === 'testimonials' && (
-          <ServiceTestimonialsTab
-            testimonials={testimonials}
-            setTestimonials={setTestimonials}
-            onOpenAssetPicker={openAssetPicker}
-          />
-        )}
-        {activeTab === 'seo' && (
-          <ServiceSeoTab
-            metaTitle={metaTitle}
-            setMetaTitle={setMetaTitle}
-            metaDescription={metaDescription}
-            setMetaDescription={setMetaDescription}
-            keywords={keywords}
-            setKeywords={setKeywords}
-            isPublished={isPublished}
-            setIsPublished={setIsPublished}
-          />
+        {isLoading ? (
+          <div
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1px solid #E2E8F0',
+              padding: '2rem',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.02)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '22px',
+            }}
+          >
+            {/* Header Info */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #BFDBFE' }}>
+                Above the Fold
+              </span>
+            </div>
+
+            {/* Sub Badge & Headline */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Overtitle / Sub-Badge Text
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Main Hero Headline *
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+              </div>
+            </div>
+
+            {/* Subheadline & Textarea */}
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                Intro Paragraph / Subheadline
+              </label>
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+            </div>
+
+            {/* Button Links Row */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Primary CTA Button Text
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
+                  Secondary CTA Button Text
+                </label>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+              </div>
+            </div>
+
+            {/* Trust Badges Skeleton Box */}
+            <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+              <strong style={{ fontSize: '0.875rem', color: '#0F172A', display: 'block', marginBottom: '12px' }}>
+                🏷️ Trust Indicator Badges
+              </strong>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                {[1, 2, 3].map((bIdx) => (
+                  <div key={bIdx} className="rt-skeleton-box" style={{ width: '150px', height: '36px', borderRadius: '8px' }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            {activeTab === 'hero' && (
+              <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {activeTab === 'cards' && (
+              <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {activeTab === 'highlights' && (
+              <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {activeTab === 'tools' && (
+              <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {activeTab === 'faqs' && (
+              <ServiceFaqsTab faqs={faqs} setFaqs={setFaqs} />
+            )}
+            {activeTab === 'testimonials' && (
+              <ServiceTestimonialsTab
+                testimonials={testimonials}
+                setTestimonials={setTestimonials}
+                onOpenAssetPicker={openAssetPicker}
+              />
+            )}
+            {activeTab === 'seo' && (
+              <ServiceSeoTab
+                metaTitle={metaTitle}
+                setMetaTitle={setMetaTitle}
+                metaDescription={metaDescription}
+                setMetaDescription={setMetaDescription}
+                keywords={keywords}
+                setKeywords={setKeywords}
+                isPublished={isPublished}
+                setIsPublished={setIsPublished}
+              />
+            )}
+          </>
         )}
       </div>
 

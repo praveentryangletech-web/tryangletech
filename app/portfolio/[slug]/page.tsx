@@ -51,6 +51,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: canonicalUrl,
     },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -111,63 +123,110 @@ export default async function PortfolioDetailsPage({ params }: { params: Promise
     similarProjects = [];
   }
 
+  const projectUrl = project.canonicalUrl || `https://tryangletech.com/portfolio/${project.slug}`;
+  const siteUrl = 'https://tryangletech.com';
+
+  const portfolioDetailJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${projectUrl}#casestudy`,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': projectUrl,
+        },
+        name: project.title,
+        headline: project.metaTitle || project.title,
+        description:
+          project.metaDescription ||
+          project.description ||
+          `Case study on ${project.title} by TryangleTech.`,
+        abstract: project.aeoSummary || project.description,
+        image:
+          project.images && project.images.length > 0
+            ? project.images
+            : [project.image || `${siteUrl}/portfolio/vh-accounting.webp`],
+        creator: {
+          '@type': 'Organization',
+          '@id': `${siteUrl}/#organization`,
+          name: 'TryangleTech',
+          url: siteUrl,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${siteUrl}/logo.png`,
+          },
+        },
+        provider: {
+          '@type': 'Organization',
+          name: 'TryangleTech',
+          url: siteUrl,
+        },
+        ...(project.client
+          ? {
+              sponsor: {
+                '@type': 'Organization',
+                name: project.client,
+              },
+            }
+          : {}),
+        ...(project.geoRegion
+          ? {
+              spatialCoverage: {
+                '@type': 'Place',
+                name: project.geoRegion,
+              },
+            }
+          : {}),
+        genre: project.category,
+        keywords:
+          project.keywords && project.keywords.length > 0
+            ? project.keywords.join(', ')
+            : `${project.category}, Custom Software, Web Development`,
+        about: [
+          {
+            '@type': 'Thing',
+            name: project.category,
+          },
+          ...(project.technologies || []).map((t) => ({
+            '@type': 'SoftwareApplication',
+            name: t,
+          })),
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: siteUrl,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Portfolio',
+            item: `${siteUrl}/portfolio`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: project.title,
+            item: projectUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CreativeWork",
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `https://tryangletech.com/portfolio/${project.slug}`
-            },
-            "name": project.title,
-            "headline": project.metaTitle || project.title,
-            "description": project.metaDescription || project.description || `Case study on ${project.title} by TryangleTech.`,
-            "abstract": project.aeoSummary || project.description,
-            "image": project.images && project.images.length > 0 ? project.images : [project.image || "https://tryangletech.com/portfolio/vh-accounting.webp"],
-            "creator": {
-              "@type": "Organization",
-              "name": "TryangleTech",
-              "url": "https://tryangletech.com",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://tryangletech.com/icon.png"
-              }
-            },
-            "provider": {
-              "@type": "Organization",
-              "name": "TryangleTech",
-              "url": "https://tryangletech.com"
-            },
-            ...(project.client ? {
-              "sponsor": {
-                "@type": "Organization",
-                "name": project.client
-              }
-            } : {}),
-            ...(project.geoRegion ? {
-              "spatialCoverage": {
-                "@type": "Place",
-                "name": project.geoRegion
-              }
-            } : {}),
-            "genre": project.category,
-            "keywords": project.keywords && project.keywords.length > 0 ? project.keywords.join(", ") : project.category,
-            "about": [
-              {
-                "@type": "Thing",
-                "name": project.category
-              },
-              ...(project.technologies || []).map((t) => ({
-                "@type": "SoftwareApplication",
-                "name": t
-              }))
-            ]
-          })
+          __html: JSON.stringify(portfolioDetailJsonLd),
         }}
       />
       <style>{`

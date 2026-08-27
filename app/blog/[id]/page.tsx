@@ -59,11 +59,24 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
     },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title,
       description,
       url: canonicalUrl,
       type: "article",
+      siteName: "TryangleTech",
       publishedTime: post.publishedAt || post.createdAt,
       authors: [post.authorName || "TryangleTech Team"],
       images: [
@@ -150,41 +163,80 @@ export default async function BlogPostPage({
   // Section 6: Author Bio
   const authorBio = post.authorBio || "By combining human ingenuity with AI capabilities, organizations can unlock new forms of creative expression. Intelligent systems support ideation, experimentation, and execution, while humans provide vision, empathy, and imagination. Together, they form a powerful partnership for innovation and growth.";
 
+  const postUrl = post.canonicalUrl || `https://tryangletech.com/blog/${post.slug || post.id}`;
+  const siteUrl = 'https://tryangletech.com';
+
+  const blogPostJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${postUrl}#article`,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': postUrl,
+        },
+        headline: post.title,
+        description: post.metaDescription || post.excerpt || s1P1,
+        articleBody: [s1P1, s1P2, quoteText, step1, step2, concBody].filter(Boolean).join(' '),
+        image: [coverImage, ...sliderImages.filter((img: string) => img !== coverImage)],
+        datePublished: post.publishedAt || post.createdAt || '2025-10-29T00:00:00.000Z',
+        dateModified: post.updatedAt || post.publishedAt || post.createdAt || '2025-10-29T00:00:00.000Z',
+        author: {
+          '@type': 'Person',
+          name: authorName,
+          jobTitle: authorRole,
+          image: authorImage.startsWith('http') ? authorImage : `${siteUrl}${authorImage}`,
+        },
+        publisher: {
+          '@type': 'Organization',
+          '@id': `${siteUrl}/#organization`,
+          name: 'TryangleTech',
+          url: siteUrl,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${siteUrl}/logo.png`,
+          },
+        },
+        articleSection: post.category || 'Technology',
+        keywords:
+          post.keywords && post.keywords.length > 0
+            ? post.keywords.join(', ')
+            : `${post.category || 'Tech'}, Software Development, Web Development`,
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: siteUrl,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Blog',
+            item: `${siteUrl}/blog`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: postUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <WebflowInit pageId="68edde422825b6d5b8990f59" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `https://tryangletech.com/blog/${post.slug}`
-            },
-            "headline": post.title,
-            "description": post.metaDescription || post.excerpt || s1P1,
-            "image": [coverImage, ...sliderImages.filter((img: string) => img !== coverImage)],
-            "datePublished": post.publishedAt || post.createdAt || "2025-10-29T00:00:00.000Z",
-            "dateModified": post.updatedAt || post.publishedAt || post.createdAt || "2025-10-29T00:00:00.000Z",
-            "author": {
-              "@type": "Person",
-              "name": authorName,
-              "jobTitle": authorRole
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "TryangleTech",
-              "url": "https://tryangletech.com",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://tryangletech.com/icon.png"
-              }
-            },
-            "articleSection": post.category,
-            "keywords": post.keywords && post.keywords.length > 0 ? post.keywords.join(", ") : post.category
-          })
+          __html: JSON.stringify(blogPostJsonLd),
         }}
       />
 

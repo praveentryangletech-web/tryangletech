@@ -26,12 +26,31 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://tryangletech.com/portfolio',
   },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'Client Case Studies & Software Portfolio | TryangleTech',
     description: 'Explore verified client case studies, custom web applications, and digital solutions delivered by TryangleTech.',
     url: 'https://tryangletech.com/portfolio',
+    siteName: 'TryangleTech',
     type: 'website',
     images: [{ url: '/portfolio/vh-accounting.webp', width: 1200, height: 630, alt: 'TryangleTech Portfolio' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Client Case Studies & Software Portfolio | TryangleTech',
+    description: 'Explore verified client case studies, custom web applications, and digital solutions delivered by TryangleTech.',
+    images: ['/portfolio/vh-accounting.webp'],
   },
 };
 
@@ -58,28 +77,62 @@ export default async function PortfolioPage() {
     console.warn('[PortfolioPage] SSR preload notice:', err);
   }
 
+  const portfolioJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': 'https://tryangletech.com/portfolio#collection',
+        url: 'https://tryangletech.com/portfolio',
+        name: 'TryangleTech Client Case Studies & Software Portfolio',
+        description:
+          'Showcase of web development, mobile applications, and custom enterprise software delivered by TryangleTech.',
+        publisher: {
+          '@type': 'Organization',
+          name: 'TryangleTech',
+          url: 'https://tryangletech.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://tryangletech.com/logo.png',
+          },
+        },
+        hasPart: initialProjects.slice(0, 12).map((proj) => ({
+          '@type': 'CreativeWork',
+          name: proj.title,
+          headline: proj.title,
+          url: `https://tryangletech.com/portfolio/${proj.slug}`,
+          description: proj.description || proj.metaDescription || proj.title,
+          genre: proj.category,
+          image: proj.image || 'https://tryangletech.com/portfolio/vh-accounting.webp',
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://tryangletech.com',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Portfolio',
+            item: 'https://tryangletech.com/portfolio',
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <WebflowInit pageId="68eddb21f14a8338ce862110" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "name": "TryangleTech Client Case Studies & Software Portfolio",
-            "url": "https://tryangletech.com/portfolio",
-            "description": "Showcase of web development, mobile applications, and custom enterprise software delivered by TryangleTech.",
-            "publisher": {
-              "@type": "Organization",
-              "name": "TryangleTech",
-              "url": "https://tryangletech.com",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://tryangletech.com/icon.png"
-              }
-            }
-          })
+          __html: JSON.stringify(portfolioJsonLd),
         }}
       />
 

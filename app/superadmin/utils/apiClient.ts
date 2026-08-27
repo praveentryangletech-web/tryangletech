@@ -25,10 +25,12 @@ export interface ApiResponse<T = any> {
   success: boolean;
   data?: T;
   pagination?: PaginationMeta;
+  categories?: string[];
   count?: number;
   message?: string;
   error?: string;
   status: number;
+  [key: string]: any;
 }
 
 export interface RequestOptions extends Omit<RequestInit, 'body'> {
@@ -190,6 +192,7 @@ class ApiClient {
           success: data?.success ?? true,
           data: data?.data ?? data,
           pagination: data?.pagination,
+          categories: data?.categories,
           count: data?.count,
           message: data?.message,
           status: res.status,

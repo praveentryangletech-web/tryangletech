@@ -6,6 +6,7 @@ const ROUTE_TITLES: Record<string, string> = {
   '/superadmin': 'Executive Analytics Overview',
   '/superadmin/home': 'Home & Locations CMS',
   '/superadmin/about': 'About Page CMS',
+  '/superadmin/services': 'Services CMS',
   '/superadmin/inquiries': 'Contact Form Leads & Inquiries',
   '/superadmin/portfolio': 'Portfolio Projects & Case Studies',
   '/superadmin/portfolio/editor': 'Portfolio Project Editor',

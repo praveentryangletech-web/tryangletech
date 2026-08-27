@@ -1,38 +1,10 @@
-'use client';
+﻿'use client';
+import Link from "next/link";
+import Image from "next/image";
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ServiceHeroSection, ServiceCardItem } from '@/backend/services/services/services.types';
-import { DEFAULT_SERVICE_MAIN_CONTENT } from '@/backend/services/services/services.defaults';
 
-interface ServiceMarqueeProps {
-  hero?: ServiceHeroSection;
-  servicesList?: ServiceCardItem[];
-}
-
-export default function ServiceMarquee({ hero: propHero, servicesList: propServices }: ServiceMarqueeProps) {
-  const hero = propHero || DEFAULT_SERVICE_MAIN_CONTENT.hero;
-  const servicesList = propServices && propServices.length > 0 ? propServices : DEFAULT_SERVICE_MAIN_CONTENT.servicesList;
-
-  const card1 = servicesList[0] || DEFAULT_SERVICE_MAIN_CONTENT.servicesList[0];
-  const card2 = servicesList[1] || DEFAULT_SERVICE_MAIN_CONTENT.servicesList[1];
-  const card3 = servicesList[2] || DEFAULT_SERVICE_MAIN_CONTENT.servicesList[2];
-  const card4 = servicesList[3] || DEFAULT_SERVICE_MAIN_CONTENT.servicesList[3];
-  const card5 = servicesList[4] || DEFAULT_SERVICE_MAIN_CONTENT.servicesList[4];
-  const card6 = servicesList[5] || {
-    id: 'card-seo',
-    slug: 'seo',
-    title: 'Search Engine Optimization',
-    description: 'Help more people find you on Google and stay ahead of the competition. We use proven strategies to get your website ranking higher so you can see real growth over time.',
-    link: '/service/seo',
-    images: [
-      '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp',
-      '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp',
-      '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp',
-    ],
-  };
-
+export default function ServiceMarquee() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -57,7 +29,6 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
 
   return (
     <div ref={sectionRef}>
-      {/* 1. TOP HERO SECTION */}
       <div className="rt-hero-v2-wrapper">
         <section
           data-w-id="d3f5d731-f45f-6040-b304-e8f46b7cbf87"
@@ -85,18 +56,36 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                   <div className="w-layout-hflex rt-hero-v2-client-img-wrap">
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403eb"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image" style={{ border: 'none', outline: 'none' }}>
-                      <div style={{ width: '60px', height: '60px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image">
+                      <Image
+                        width={62}
+                        height={47}
+                        alt="Kloudera-home-two-hero-image"
+                        src="/Home2_files/690499e17ce0c344a20ecda1_kloudera-home-two-hero-image.webp"
+                        loading="lazy"
+                      />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ed"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image" style={{ border: 'none', outline: 'none' }}>
-                      <div style={{ width: '60px', height: '60px', backgroundColor: '#3b82f6', borderRadius: '50%' }} />
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
+                      <Image
+                        width={60}
+                        height={79}
+                        alt="Kloudera-home-two-hero-image"
+                        src="/Home2_files/690499e17ce0c344a20ecda2_kloudera-home-two-hero-image.webp"
+                        loading="lazy"
+                      />
                     </div>
                     <div
                       data-w-id="5b8f464a-495c-fe16-e18c-e31f826403ef"
-                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image" style={{ border: 'none', outline: 'none' }}>
-                      <div style={{ width: '60px', height: '60px', backgroundColor: '#a855f7', borderRadius: '50%' }} />
+                      className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image">
+                      <Image
+                        width={60}
+                        height={79}
+                        alt="Kloudera-home-two-hero-image"
+                        src="/Home2_files/690499e17ce0c344a20ecda3_kloudera-home-two-hero-image.webp"
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 </div>
@@ -104,7 +93,7 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                   <div
                     data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f2"
                     className="rt-sub-text rt-sub-gredient">
-                    {hero.subBadgeText || 'Our Services'}
+                    Task management
                   </div>
                 </div>
               </div>
@@ -112,31 +101,32 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                 <h1
                   data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f5"
                   className="rt-gap-off">
-                  {hero.headline || 'Comprehensive Digital Solutions for Your Business Growth'}
+                  Boost productivity with smarter task tools for teams
                 </h1>
               </div>
               <p
                 data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f7"
                 className="rt-padding-hero-v2 rt-gap-off">
-                {hero.subheadline || 'From custom software to data-driven marketing, we provide end-to-end services designed to scale your business and drive innovation.'}
+                Achieve more with intelligent task tools that streamline
+                workflows and maximize team productivity every day.
               </p>
               <div
                 data-w-id="5b8f464a-495c-fe16-e18c-e31f826403f9"
                 className="w-layout-hflex rt-hero-v7-button-wrap">
                 <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href={hero.primaryBtnLink || '/contact'}
+                  href="/contact"
                   className="rt-button-body w-inline-block">
-                  <div className="rt-button-text">{hero.primaryBtnText || 'Get started today'}</div>
+                  <div className="rt-button-text">Get started today</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
                 <Link
                   data-wf--rt-border-button--variant="base"
                   data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-                  href={hero.secondaryBtnLink || '/portfolio'}
+                  href="/pricing"
                   className="rt-button-body rt-nav-btn w-inline-block">
                   <div className="rt-button-text rt-btn-color-nav">
-                    {hero.secondaryBtnText || 'View portfolio'}
+                    View pricing
                   </div>
                   <div className="rt-button-body-overlay rt-nav-overlay"></div>
                 </Link>
@@ -144,55 +134,78 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
               <div
                 data-w-id="e614267b-345c-6f68-39fe-7fe900653232"
                 className="rt-pricing-itop-samll-text rt-hero-v2-top-gap">
-                {(hero.trustBadges || ['Innovative Solutions', 'Expert Engineering', 'Client-Centric']).map((badge, bIdx) => (
-                  <div key={bIdx} className="rt-pricing-samll-text">
-                    <div>
-                      <Image
-                        src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
-                        loading="lazy"
-                        alt=""
-                        width={800} height={800} style={{ width: "100%", height: "auto" }} />
-                    </div>
-                    <div className="rt-color-dark-indigo">
-                      {badge}
-                    </div>
+                <div className="rt-pricing-samll-text">
+                  <div>
+                    <Image
+                      src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
-                ))}
+                  <div className="rt-color-dark-indigo">
+                    Streamlined workflows
+                  </div>
+                </div>
+                <div className="rt-pricing-samll-text">
+                  <div>
+                    <Image
+                      src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-color-dark-indigo">
+                    Enhance collaboration
+                  </div>
+                </div>
+                <div className="rt-pricing-samll-text">
+                  <div>
+                    <Image
+                      src="/Home2_files/6916f191d4b3b4e4b2cee5b2_Vector (35).svg"
+                      loading="lazy"
+                      alt=""
+                      width={800} height={800} style={{ width: "100%", height: "auto" }} />
+                  </div>
+                  <div className="rt-color-dark-indigo">
+                    Achieve goals faster
+                  </div>
+                </div>
               </div>
             </div>
             <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap' }}>
-              {/* Card 1: Custom Software Development */}
               <div className="rt-hero-v2-card-1 rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
-                      src={card1.images?.[0] || '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp'}
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
-                      alt={card1.imagesAlt?.[0] || `${card1.title} layer 1`}
+                      alt="Taskopia-features-home-v3-1"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
-                      src={card1.images?.[1] || '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp'}
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
-                      alt={card1.imagesAlt?.[1] || `${card1.title} layer 2`}
+                      alt="Taskopia-features-home-v3-2"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
-                      src={card1.images?.[2] || '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp'}
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
-                      alt={card1.imagesAlt?.[2] || `${card1.title} layer 3`}
+                      alt="Taskopia-features-home-v3-3"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">{card1.title}</div>
+                  <div className="rt-text-style-h5">Smart task assignment</div>
                   <p className="rt-gap-off">
-                    {card1.description}
+                    Easily assign tasks to the right people with clear priorities
+                    and timelines, improving accountability and ensuring a smoother
+                    project flow.
                   </p>
-                  <Link
-                    href={card1.link || '/service/custom-software'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -202,14 +215,12 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
-
-              {/* Card 2: Website Development */}
               <div className="rt-hero-v2-card-2 rt-features-v2-left rt-2 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '680px' }}>
                 <div className="rt-features-v2-right-image">
                   <div className="rt-position-relative rt-features-inner-image">
@@ -229,17 +240,19 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                     </div>
                     <div className="rt-features-v2-image-four rt-position-relative reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                       <Image
-                        src={card2.images?.[0] || '/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp'}
+                        src="/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp"
                         loading="lazy"
-                        alt={card2.imagesAlt?.[0] || `${card2.title} layer 1`}
+                        alt="
+            Taskopia-features-home-v3-right
+            "
                         className="rt-shadow"
                         width={800} height={900} style={{ width: "100%", height: "auto" }} />
                     </div>
                     <div className="rt-features-v2-image-five rt-position-relative reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                       <Image
-                        src={card2.images?.[1] || '/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp'}
+                        src="/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp"
                         loading="lazy"
-                        alt={card2.imagesAlt?.[1] || `${card2.title} layer 2`}
+                        alt="Taskopia-features-home-v3-5"
                         className="rt-shadow"
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
@@ -247,13 +260,15 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
                   <div className="rt-text-style-h5">
-                    {card2.title}
+                    Smart workflows and automation
                   </div>
                   <p className="rt-gap-off">
-                    {card2.description}
+                    Automate key workflows to reduce manual effort, cut errors, and
+                    keep your team aligned, helping every project move faster and
+                    more smoothly.
                   </p>
-                  <Link
-                    href={card2.link || '/service/web-development'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -263,45 +278,45 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
-
-              {/* Card 3: Mobile Application */}
               <div className="rt-hero-v2-card-3 rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
-                      src={card3.images?.[0] || '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp'}
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
-                      alt={card3.imagesAlt?.[0] || `${card3.title} layer 1`}
+                      alt="Taskopia-features-home-v3-1"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
-                      src={card3.images?.[1] || '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp'}
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
-                      alt={card3.imagesAlt?.[1] || `${card3.title} layer 2`}
+                      alt="Taskopia-features-home-v3-2"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
-                      src={card3.images?.[2] || '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp'}
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
-                      alt={card3.imagesAlt?.[2] || `${card3.title} layer 3`}
+                      alt="Taskopia-features-home-v3-3"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">{card3.title}</div>
+                  <div className="rt-text-style-h5">Smart task assignment</div>
                   <p className="rt-gap-off">
-                    {card3.description}
+                    Easily assign tasks to the right people with clear priorities
+                    and timelines, improving accountability and ensuring a smoother
+                    project flow.
                   </p>
-                  <Link
-                    href={card3.link || '/service/mobile-application'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -311,10 +326,10 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -330,49 +345,49 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
           </div>
         </section>
       </div>
-
       <style>{`
         .no-bg-pseudo::before, .no-bg-pseudo::after {
           display: none !important;
           background: none !important;
         }
       `}</style>
-      <div className="rt-hero-v2-wrapper no-bg-pseudo" style={{ paddingBottom: '0' }}>
-        <section className="rt-hero-v2 rt-position-relative no-bg-pseudo bg-gradient-to-b from-[#f4f7fe] to-white" style={{ paddingTop: '30px', paddingBottom: '50px', backgroundImage: 'none' }}>
+      <div className="rt-hero-v2-wrapper no-bg-pseudo" style={{ backgroundColor: '#ffffff', paddingBottom: '0' }}>
+        <section className="rt-hero-v2 rt-position-relative no-bg-pseudo" style={{ paddingTop: '30px', paddingBottom: '50px', backgroundColor: '#ffffff', backgroundImage: 'none' }}>
           <div className="w-layout-blockcontainer rt-container-extra-large w-container">
-            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'stretch', flexWrap: 'wrap', marginBottom: '0' }}>
-              {/* Card 4: Graphics Designing */}
+            <div className="rt-hero-v2-content rt-features-v2-main" style={{ alignItems: 'flex-end', flexWrap: 'wrap', marginBottom: '0' }}>
               <div className="rt-features-v2-left rt-2 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '380px', flex: '0 0 100%', maxWidth: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div className="rt-features-v2-left-image" style={{ flex: '1' }}>
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
-                      src={card4.images?.[0] || '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp'}
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
-                      alt={card4.imagesAlt?.[0] || `${card4.title} layer 1`}
+                      alt="Taskopia-features-home-v3-1"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
-                      src={card4.images?.[1] || '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp'}
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
-                      alt={card4.imagesAlt?.[1] || `${card4.title} layer 2`}
+                      alt="Taskopia-features-home-v3-2"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
-                      src={card4.images?.[2] || '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp'}
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
-                      alt={card4.imagesAlt?.[2] || `${card4.title} layer 3`}
+                      alt="Taskopia-features-home-v3-3"
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms', flex: '1', paddingLeft: '4rem' }}>
-                  <div className="rt-text-style-h5">{card4.title}</div>
+                  <div className="rt-text-style-h5">Smart task assignment</div>
                   <p className="rt-gap-off">
-                    {card4.description}
+                    Easily assign tasks to the right people with clear priorities
+                    and timelines, improving accountability and ensuring a smoother
+                    project flow.
                   </p>
-                  <Link
-                    href={card4.link || '/service/graphics-designing'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -382,45 +397,43 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
-
-              {/* Card 5: Digital Marketing */}
               <div className="rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
-                      src={card5.images?.[0] || '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp'}
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
-                      alt={card5.imagesAlt?.[0] || `${card5.title} layer 1`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
-                      src={card5.images?.[1] || '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp'}
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
-                      alt={card5.imagesAlt?.[1] || `${card5.title} layer 2`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
-                      src={card5.images?.[2] || '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp'}
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
-                      alt={card5.imagesAlt?.[2] || `${card5.title} layer 3`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">{card5.title}</div>
+                  <div className="rt-text-style-h5">Customizable reporting</div>
                   <p className="rt-gap-off">
-                    {card5.description}
+                    Generate detailed reports tailored to your team's specific KPIs.
                   </p>
-                  <Link
-                    href={card5.link || '/service/digital-marketing'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -430,45 +443,43 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
-
-              {/* Card 6: Search Engine Optimization */}
               <div className="rt-features-v2-left rt-1 rt-border-radius-l transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style={{ minHeight: '500px', flex: 1, maxWidth: '100%' }}>
                 <div className="rt-features-v2-left-image">
                   <div className="rt-features-v2-image-one reveal-on-scroll">
                     <Image
-                      src={card6.images?.[0] || '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp'}
+                      src="/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp"
                       loading="lazy"
-                      alt={card6.imagesAlt?.[0] || `${card6.title} layer 1`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-two rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '100ms' }}>
                     <Image
-                      src={card6.images?.[1] || '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp'}
+                      src="/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp"
                       loading="lazy"
-                      alt={card6.imagesAlt?.[1] || `${card6.title} layer 2`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                   <div className="rt-features-v2-image-three rt-border-radius-medium rt-shadow reveal-on-scroll" style={{ animationDelay: '200ms' }}>
                     <Image
-                      src={card6.images?.[2] || '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp'}
+                      src="/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp"
                       loading="lazy"
-                      alt={card6.imagesAlt?.[2] || `${card6.title} layer 3`}
+                      alt=""
                       width={800} height={800} style={{ width: "100%", height: "auto" }} />
                   </div>
                 </div>
                 <div className="rt-features-v2-left-text-box reveal-on-scroll" style={{ animationDelay: '300ms' }}>
-                  <div className="rt-text-style-h5">{card6.title}</div>
+                  <div className="rt-text-style-h5">Seamless integration</div>
                   <p className="rt-gap-off">
-                    {card6.description}
+                    Connect smoothly with all the tools your team already relies on.
                   </p>
-                  <Link
-                    href={card6.link || '/service/seo'}
+                  <a
+                    href="https://taskopia.webflow.io/about"
                     className="rt-features-v2-small-link w-inline-block"
                   >
                     <div className="rt-button-text rt-color-vivid-blue">
@@ -478,18 +489,16 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                       <Image
                         src="/Home3_files/690d9fbfe8207af12de2d5dd_Vector 1553.svg"
                         loading="lazy"
-                        alt="Arrow icon"
+                        alt=""
                         width={800} height={800} style={{ width: "100%", height: "auto" }} />
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-      {/* Marquee Train */}
       <div className="rt-marquee-v2 rt-hero-v5-marquee">
         <div className="w-layout-blockcontainer rt-container-main w-container">
           <div className="rt-text-marquee-wrapper rt-overflow-hidden">
@@ -501,42 +510,42 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                   width={100}
                   alt=""
                   height={40}
-                  style={{ height: "30px", width: "auto" }} />
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -547,42 +556,42 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                   width={100}
                   alt=""
                   height={40}
-                  style={{ height: "30px", width: "auto" }} />
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
             <div className="rt-text-marquee-train">
@@ -593,48 +602,49 @@ export default function ServiceMarquee({ hero: propHero, servicesList: propServi
                   width={100}
                   alt=""
                   height={40}
-                  style={{ height: "30px", width: "auto" }} />
+                  style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712f0df798d907c8c07_Group 1597884747.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef27122b527a12c7a225a7_Group 1597883493.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
               <div className="rt-text-marquee-iteme">
                 <Image
                   src="/Home2_files/68ef271276a33d103013fa46_Group 1597884750.svg"
                   loading="lazy"
                   alt=""
-                  width={200} height={80} style={{ height: "30px", width: "auto" }} />
+                  width={200} height={80} style={{ height: "40px", width: "auto" }} />
               </div>
             </div>
           </div>
         </div>
         <div className="rt-marquee-bottom-line"></div>
       </div>
+
     </div>
   );
 }

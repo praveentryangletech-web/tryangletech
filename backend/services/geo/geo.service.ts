@@ -56,8 +56,8 @@ export const geoService = {
     try {
       const rows = await Promise.race([
         includeDrafts
-          ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' ORDER BY "city" ASC`
-          : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "city" ASC`,
+          ? db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' ORDER BY "createdAt" DESC, "updatedAt" DESC`
+          : db.$queryRaw<any[]>`SELECT * FROM "PageContent" WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true ORDER BY "createdAt" DESC, "updatedAt" DESC`,
         new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
 
@@ -167,13 +167,13 @@ export const geoService = {
               SELECT "slug", "city", "state", "country", "countryCode", "region", "regionCode", "postalCode", "latitude", "longitude", "popular", "isPublished", "metaTitle", "createdAt", "updatedAt"
               FROM "PageContent"
               WHERE "pageType" = 'LOCATION_CLONE'
-              ORDER BY "city" ASC
+              ORDER BY "createdAt" DESC, "updatedAt" DESC
             `
           : db.$queryRaw<any[]>`
               SELECT "slug", "city", "state", "country", "countryCode", "region", "regionCode", "postalCode", "latitude", "longitude", "popular", "isPublished", "metaTitle", "createdAt", "updatedAt"
               FROM "PageContent"
               WHERE "pageType" = 'LOCATION_CLONE' AND "isPublished" = true
-              ORDER BY "city" ASC
+              ORDER BY "createdAt" DESC, "updatedAt" DESC
             `,
         new Promise<any[]>((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), process.env.NODE_ENV === 'production' ? 5000 : 8000)),
       ]);
@@ -243,6 +243,13 @@ export const geoService = {
         l.slug.toLowerCase().includes(search)
       );
     }
+
+    // Sort latest created / updated first
+    filtered.sort((a, b) => {
+      const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return timeB - timeA;
+    });
 
     const total = filtered.length;
     const totalPages = Math.ceil(total / limit) || 1;

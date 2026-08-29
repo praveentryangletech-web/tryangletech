@@ -53,14 +53,13 @@ export default function TestimonialsTab({
           <div
             key={t.id || tIdx}
             style={{
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
-              padding: '18px',
-              backgroundColor: '#F8FAFC',
+              border: 'none',
+              padding: '0 0 18px 0',
+              borderBottom: tIdx < testimonials.length - 1 ? '1px solid #E2E8F0' : 'none',
+              backgroundColor: 'transparent',
               display: 'flex',
               flexDirection: 'column',
               gap: '14px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
             }}
           >
             <div style={{ fontWeight: 800, color: 'var(--brand-blue, #1833fe)', fontSize: '0.875rem' }}>

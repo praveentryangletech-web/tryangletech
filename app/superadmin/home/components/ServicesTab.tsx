@@ -49,14 +49,13 @@ export default function ServicesTab({ services, setServices, onOpenAssetPicker }
           <div
             key={srv.id || idx}
             style={{
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
-              padding: '18px',
-              backgroundColor: '#F8FAFC',
+              border: 'none',
+              padding: '0 0 18px 0',
+              borderBottom: idx < services.length - 1 ? '1px solid #E2E8F0' : 'none',
+              backgroundColor: 'transparent',
               display: 'flex',
               flexDirection: 'column',
               gap: '14px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

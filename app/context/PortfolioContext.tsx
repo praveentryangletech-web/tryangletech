@@ -127,6 +127,11 @@ export function PortfolioProvider({
         const res = await fetch(`/api/portfolio?${queryParams.toString()}`, {
           headers: { 'Accept': 'application/json' },
         });
+        
+        if (!res.ok) {
+          throw new Error(`Portfolio API responded with status ${res.status}`);
+        }
+
         const json = await res.json();
 
         if (json.success && Array.isArray(json.data)) {

@@ -74,17 +74,6 @@ export async function GET(req: NextRequest) {
       );
       const etag = items.etag || '';
 
-      // Return 304 Not Modified if client cache is fresh (only for public requests)
-      if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
-        return new NextResponse(null, {
-          status: 304,
-          headers: {
-            'ETag': etag,
-            'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
-          },
-        });
-      }
-
       const headers: Record<string, string> = isAdminOrNoCache
         ? {
             'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
@@ -115,18 +104,6 @@ export async function GET(req: NextRequest) {
     const result = await portfolioService.getPaginatedProjects(validation.data);
     const etag = result.etag || '';
     const duration = (performance.now() - (req as any).__startTime || 2.5).toFixed(1);
-
-    // Return 304 Not Modified if client cache is fresh (only for public requests)
-    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
-          'Server-Timing': `cache;dur=${duration}`,
-        },
-      });
-    }
 
     const headers: Record<string, string> = isAdminOrNoCache
       ? {

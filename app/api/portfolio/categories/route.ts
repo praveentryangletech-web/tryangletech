@@ -22,17 +22,6 @@ export async function GET(req: NextRequest) {
       req.headers.get('cache-control')?.includes('no-cache') ||
       req.headers.get('pragma')?.includes('no-cache');
 
-    // HTTP 304 Not Modified support (only for public requests)
-    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=5, s-maxage=10, stale-while-revalidate=30',
-        },
-      });
-    }
-
     const headers: Record<string, string> = isAdminOrNoCache
       ? {
           'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',

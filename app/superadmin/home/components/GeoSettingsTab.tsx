@@ -119,15 +119,13 @@ export default function GeoSettingsTab({
       {/* Header Banner */}
       <div
         style={{
-          padding: '16px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
+          padding: '0 0 12px 0',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '12px',
+          borderBottom: '1px solid #E2E8F0',
         }}
       >
         <div>
@@ -166,11 +164,9 @@ export default function GeoSettingsTab({
       {/* CARD 1: GOOGLE & AI CITATION LIVE PREVIEW */}
       <div
         style={{
-          padding: '18px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -227,10 +223,6 @@ export default function GeoSettingsTab({
       {/* CARD 2: CORE SEO META FIELDS */}
       <div
         style={{
-          padding: '18px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
@@ -289,11 +281,6 @@ export default function GeoSettingsTab({
       {/* CARD 3: AEO & AI ANSWER ENGINE OPTIMIZATION */}
       <div
         style={{
-          padding: '18px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #BFDBFE',
-          boxShadow: '0 2px 10px rgba(24, 51, 254, 0.05)',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
@@ -339,15 +326,27 @@ export default function GeoSettingsTab({
         </div>
 
         {/* FAQ Items List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {locFaqs.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '24px', backgroundColor: '#FFFFFF', borderRadius: '8px', color: '#94A3B8', fontSize: '0.85rem' }}>
+            <div style={{ textAlign: 'center', padding: '24px', backgroundColor: 'transparent', borderRadius: '8px', color: '#94A3B8', fontSize: '0.85rem' }}>
               No AEO FAQs added yet. Click &quot;+ Add AEO FAQ Question&quot; above to generate AI citation targets.
             </div>
           ) : (
             locFaqs.map((faq, fIdx) => (
-              <div key={fIdx} style={{ border: '1px solid #E2E8F0', borderRadius: '10px', padding: '14px', backgroundColor: '#FFFFFF', position: 'relative' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <div
+                key={fIdx}
+                style={{
+                  border: 'none',
+                  padding: '0 0 16px 0',
+                  borderBottom: fIdx < locFaqs.length - 1 ? '1px solid #E2E8F0' : 'none',
+                  backgroundColor: 'transparent',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--brand-blue, #1833fe)' }}>
                     AEO Query #{fIdx + 1} (Direct AI Citation Target)
                   </span>
@@ -371,7 +370,7 @@ export default function GeoSettingsTab({
                   </button>
                 </div>
 
-                <div style={{ marginBottom: '8px' }}>
+                <div>
                   <label style={labelStyle}>User Query / Voice Prompt</label>
                   <input
                     type="text"
@@ -410,10 +409,6 @@ export default function GeoSettingsTab({
       {isEditingLocation && (
         <div
           style={{
-            padding: '18px 20px',
-            borderRadius: '12px',
-            backgroundColor: '#F8FAFC',
-            border: '1px solid #E2E8F0',
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',

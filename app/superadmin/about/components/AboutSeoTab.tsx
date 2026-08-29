@@ -56,15 +56,13 @@ export default function AboutSeoTab({
       {/* Header Banner */}
       <div
         style={{
-          padding: '16px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
+          padding: '0 0 12px 0',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '12px',
+          borderBottom: '1px solid #E2E8F0',
         }}
       >
         <div>
@@ -103,11 +101,9 @@ export default function AboutSeoTab({
       {/* CARD 1: GOOGLE & AI CITATION LIVE PREVIEW */}
       <div
         style={{
-          padding: '18px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -164,10 +160,6 @@ export default function AboutSeoTab({
       {/* CARD 2: CORE SEO META FIELDS */}
       <div
         style={{
-          padding: '18px 20px',
-          borderRadius: '12px',
-          backgroundColor: '#F8FAFC',
-          border: '1px solid #E2E8F0',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',

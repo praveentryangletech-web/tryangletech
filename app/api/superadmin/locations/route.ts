@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { geoService } from '@/backend/services/geo';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
 
@@ -83,6 +84,13 @@ export async function POST(request: NextRequest) {
       }
       const isPublished = Boolean(body.isPublished);
       const updated = await geoService.toggleLocationStatus(body.slug, isPublished);
+
+      try {
+        revalidatePath('/', 'page');
+        revalidatePath('/[slug]', 'page');
+        revalidatePath(`/${body.slug}`, 'page');
+      } catch {}
+
       return NextResponse.json({
         success: true,
         message: `Location "${body.slug}" is now ${isPublished ? 'Live / Published' : 'Draft (Not Public)'}.`,
@@ -98,6 +106,13 @@ export async function POST(request: NextRequest) {
         );
       }
       const cloned = await geoService.duplicateLocation(body.sourceSlug, body.target);
+
+      try {
+        revalidatePath('/', 'page');
+        revalidatePath('/[slug]', 'page');
+        revalidatePath(`/${cloned.slug}`, 'page');
+      } catch {}
+
       return NextResponse.json({
         success: true,
         message: `Successfully duplicated to "${cloned.city}" (${cloned.slug})!`,
@@ -113,6 +128,13 @@ export async function POST(request: NextRequest) {
     }
 
     const saved = await geoService.saveLocation(body);
+
+    try {
+      revalidatePath('/', 'page');
+      revalidatePath('/[slug]', 'page');
+      revalidatePath(`/${saved.slug}`, 'page');
+    } catch {}
+
     return NextResponse.json({
       success: true,
       message: `Location "${saved.city}" saved successfully as ${saved.isPublished ? 'Published' : 'Draft'}.`,

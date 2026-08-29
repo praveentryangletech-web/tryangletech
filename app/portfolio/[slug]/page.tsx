@@ -14,8 +14,7 @@ import SafeImage from '@/app/common/SafeImage';
 import type { Metadata } from 'next';
 import Image from "next/image";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300; // 5-minute Edge ISR Cache
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;

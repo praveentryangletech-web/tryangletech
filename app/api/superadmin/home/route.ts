@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { homeService } from '@/backend/services/home';
 import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
@@ -49,6 +50,12 @@ export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const updated = await homeService.updateHomeContent(body);
+
+    // Instant On-Demand Cache Invalidation (0s delay)
+    try {
+      revalidatePath('/', 'page');
+      revalidatePath('/[slug]', 'page');
+    } catch {}
 
     return NextResponse.json({
       success: true,

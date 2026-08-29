@@ -17,8 +17,7 @@ const DEFAULT_CATEGORIES = [
   "Graphic Design",
 ];
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300; // 5-minute Edge ISR Cache
 
 export const metadata: Metadata = {
   title: 'Client Case Studies & Software Portfolio | TryangleTech',

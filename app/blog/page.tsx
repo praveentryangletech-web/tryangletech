@@ -5,8 +5,7 @@ import BlogFAQ from './components/BlogFAQ';
 import { blogService } from '@/backend/services/blog';
 import { portfolioCategoryService } from '@/backend/services/portfolio';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300; // 5-minute Edge ISR Cache
 
 export const metadata: Metadata = {
   title: 'Tech Insights & Software Engineering Blog | TryangleTech',

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { blogService, validateBlogQueryParams } from '@/backend/services/blog';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
@@ -143,6 +144,14 @@ export async function POST(req: NextRequest) {
     }
 
     const created = await blogService.createPost(body);
+
+    try {
+      revalidatePath('/blog', 'page');
+      revalidatePath('/', 'page');
+      if (created?.slug) revalidatePath(`/blog/${created.slug}`, 'page');
+      if (created?.id) revalidatePath(`/blog/${created.id}`, 'page');
+    } catch {}
+
     return successResponse(created, 'Article published successfully.', 201);
   } catch (err: any) {
     console.error('Error handling POST /api/blog:', err);
@@ -167,6 +176,14 @@ export async function PATCH(req: NextRequest) {
     }
 
     const updated = await blogService.updatePost(id, body);
+
+    try {
+      revalidatePath('/blog', 'page');
+      revalidatePath('/', 'page');
+      if (updated?.slug) revalidatePath(`/blog/${updated.slug}`, 'page');
+      if (updated?.id) revalidatePath(`/blog/${updated.id}`, 'page');
+    } catch {}
+
     return successResponse(updated, 'Article updated successfully.', 200);
   } catch (err: any) {
     console.error('Error handling PATCH /api/blog:', err);
@@ -191,6 +208,12 @@ export async function DELETE(req: NextRequest) {
     }
 
     await blogService.deletePost(id);
+
+    try {
+      revalidatePath('/blog', 'page');
+      revalidatePath('/', 'page');
+    } catch {}
+
     return successResponse({ deletedId: id }, 'Article permanently deleted.', 200);
   } catch (err: any) {
     console.error('Error handling DELETE /api/blog:', err);

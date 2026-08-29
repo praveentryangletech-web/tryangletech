@@ -10,7 +10,7 @@ import ServiceDynamicFaq from './components/ServiceDynamicFaq';
 import ServiceDynamicTestimonials from './components/ServiceDynamicTestimonials';
 import WebflowInit from '../common/WebflowInit';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300; // 5-minute Edge ISR Cache
 
 export async function generateMetadata(): Promise<Metadata> {
   try {

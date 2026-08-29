@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { portfolioService, validatePortfolioQueryParams } from '@/backend/services/portfolio';
 import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
@@ -154,6 +155,13 @@ export async function POST(req: NextRequest) {
     }
 
     const created = await portfolioService.createProject(body);
+
+    try {
+      revalidatePath('/portfolio', 'page');
+      revalidatePath('/', 'page');
+      if (created?.slug) revalidatePath(`/portfolio/${created.slug}`, 'page');
+    } catch {}
+
     return successResponse(created, 'Project created successfully.', 201);
   } catch (error: any) {
     console.error('POST /api/portfolio error:', error);
@@ -182,6 +190,12 @@ export async function PATCH(req: NextRequest) {
       return errorResponse('Project not found.', 404);
     }
 
+    try {
+      revalidatePath('/portfolio', 'page');
+      revalidatePath('/', 'page');
+      if (updated?.slug) revalidatePath(`/portfolio/${updated.slug}`, 'page');
+    } catch {}
+
     return successResponse(updated, 'Project updated successfully.');
   } catch (error: any) {
     console.error('PATCH /api/portfolio error:', error);
@@ -209,6 +223,11 @@ export async function DELETE(req: NextRequest) {
     if (!success) {
       return errorResponse('Failed to delete project.', 500);
     }
+
+    try {
+      revalidatePath('/portfolio', 'page');
+      revalidatePath('/', 'page');
+    } catch {}
 
     return successResponse({ deletedId: id }, 'Project deleted successfully.');
   } catch (error: any) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { servicesService } from '@/backend/services/services';
 import { DEFAULT_SERVICE_MAIN_CONTENT } from '@/backend/services/services/services.defaults';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
@@ -64,6 +65,11 @@ export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const updated = await servicesService.updateServiceMainContent(body);
+
+    try {
+      revalidatePath('/service', 'page');
+      revalidatePath('/', 'page');
+    } catch {}
 
     return NextResponse.json({
       success: true,

@@ -10,8 +10,7 @@ import { blogService } from "@/backend/services/blog/blog.service";
 import { BlogPostItem } from "@/backend/services/blog/blog.types";
 import HomeThreeFaq from "../../home-three/components/Faq";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300; // 5-minute Edge ISR Cache
 
 const getCachedPost = cache(async (slug: string): Promise<BlogPostItem | null> => {
   try {

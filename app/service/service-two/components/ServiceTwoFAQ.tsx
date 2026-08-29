@@ -1,9 +1,5 @@
 'use client';
-import Link from "next/link";
 import React, { useState } from 'react';
-import Image from "next/image";
-
-const SA = '/service3-assets';
 
 export default function ServiceTwoFAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -81,6 +77,9 @@ export default function ServiceTwoFAQ() {
                     className={`w-layout-vflex rt-faq-dropdown-wrap${isTop ? ' rt-faq-pag rt-top-gap-of' : ''}`}
                     style={{ cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0)' }}
                     onClick={() => toggleFaq(idx)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && toggleFaq(idx)}
                   >
                     <div className="w-layout-hflex rt-faq-top-part">
                       <div className="w-layout-hflex r-faq-text-wrap">

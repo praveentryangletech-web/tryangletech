@@ -1,36 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import Image from "next/image";
 
-const SA = '/service3-assets';
-
-const faqs = [
-  {
-    q: "How does the platform help with task management?",
-    a: "Our platform provides intuitive task boards, priority settings, deadline tracking, and team assignments to keep every project organized and on time.",
-  },
-  {
-    q: "Can I use it for remote teams?",
-    a: "Absolutely. The platform is built for remote and distributed teams with real-time collaboration, async updates, and shared workspaces accessible from anywhere.",
-  },
-  {
-    q: "What integrations are available?",
-    a: "We integrate with Slack, GitHub, Google Workspace, Notion, Jira, and 50+ more tools your team already uses daily.",
-  },
-  {
-    q: "Is there a free trial available?",
-    a: "Yes, we offer a 14-day free trial with full access to all features. No credit card required to get started.",
-  },
-  {
-    q: "How secure is my data?",
-    a: "Your data is encrypted at rest and in transit. We are SOC 2 Type II certified and follow industry best practices for data security.",
-  },
-];
-
 export default function ServiceOneFAQ() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <>
       <section className="rt-tools-icon-v1">

@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-
-const SA = '/service3-assets';
+import React from 'react';
 
 export default function ServiceTwoAbout() {
   return (

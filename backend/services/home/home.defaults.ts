@@ -207,4 +207,26 @@ export const DEFAULT_HOME_CONTENT: HomeContentDTO = {
     contactEmail: 'admin@tryangletech.com',
     contactPhone: '+91 99099 00000',
   },
+  faqs: [
+    {
+      q: "What industries do you work with?",
+      a: "We have worked with businesses in healthcare, education, real estate, ecommerce, finance, and many other industries. Whatever your field, we know how to build technology that fits.",
+    },
+    {
+      q: "Do you provide ongoing support after the project is delivered?",
+      a: "Yes, we do. After your website or app goes live, we are still here to help with updates, bug fixes, and any changes you need. We do not just build and disappear.",
+    },
+    {
+      q: "How does the process work from start to finish?",
+      a: "It is pretty simple. First we sit down and understand what you need. Then we create a plan, design the look and feel, build it out, test everything, and launch. You are involved at every stage so nothing catches you off guard.",
+    },
+    {
+      q: "How long does a project usually take?",
+      a: "It depends on the project. A website usually takes about 2 to 4 weeks. Custom software or a mobile app can take 4 to 8 weeks. We will give you a proper timeline once we understand exactly what you are looking for.",
+    },
+    {
+      q: "What technologies do you build with?",
+      a: "We work with PHP, Laravel, WordPress, React, Next.js, and many other modern tools. We pick the right technology based on what makes sense for your project, not just what is trendy.",
+    },
+  ],
 };

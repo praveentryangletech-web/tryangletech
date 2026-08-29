@@ -5,8 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
 
-const SA = '/service3-assets';
-
 export default function MobileApplicationCases() {
   return (
     <>

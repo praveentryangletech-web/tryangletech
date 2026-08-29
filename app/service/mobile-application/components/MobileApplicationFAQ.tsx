@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
-const SA = '/service3-assets';
-
 const faqs = [
   {
     q: "Do you build apps for both iPhone and Android?",

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
 
-const SA = '/service3-assets';
 
 export default function GraphicsDesigningFAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);

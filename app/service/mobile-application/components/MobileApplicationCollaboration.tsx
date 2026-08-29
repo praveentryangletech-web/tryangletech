@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 
-const SA = '/service3-assets';
-
 export default function MobileApplicationCollaboration() {
   return (
     <>

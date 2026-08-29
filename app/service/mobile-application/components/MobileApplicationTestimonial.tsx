@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 
-const SA = '/service3-assets';
-
 
 export default function MobileApplicationTestimonial() {
   return (

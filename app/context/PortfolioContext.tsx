@@ -105,6 +105,7 @@ export function PortfolioProvider({
         setProjectsList(cached.items);
         setHasNextPage(cached.hasNextPage);
         setTotalCount(cached.total);
+        setIsInitialLoading(false);
         return;
       }
 
@@ -175,6 +176,16 @@ export function PortfolioProvider({
     },
     [activeFilter, fetchProjects, initialLimit]
   );
+
+  // Fetch dynamic projects on mount only if not preloaded via SSR
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setIsInitialLoading(false);
+      return;
+    }
+
+    fetchProjects(1, activeFilter, initialLimit, false);
+  }, [initialProjects, activeFilter, initialLimit, fetchProjects]);
 
   const value = useMemo<PortfolioContextType>(
     () => ({

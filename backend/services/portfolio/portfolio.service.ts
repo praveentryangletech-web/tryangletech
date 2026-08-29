@@ -178,19 +178,16 @@ export const portfolioService = {
    */
   async seedIfEmpty() {
     if (isSeededInMemory) return;
-    isSeededInMemory = true;
-
-    (async () => {
-      try {
-        await ensureColumnsExist();
-        const count = await (db.portfolioProject as any).count();
-        if (count === 0) {
-          await this.syncAllStaticProjectsToDB(false);
-        }
-      } catch (err) {
-        console.warn('[DB Portfolio] background seed notice:', err);
+    try {
+      await ensureColumnsExist();
+      const count = await (db.portfolioProject as any).count();
+      if (count === 0) {
+        await this.syncAllStaticProjectsToDB(false);
       }
-    })().catch(() => {});
+      isSeededInMemory = true;
+    } catch (err) {
+      console.warn('[DB Portfolio] background seed notice:', err);
+    }
   },
 
   /**
@@ -350,6 +347,45 @@ export const portfolioService = {
       ]);
 
       const total = Number(countRows?.[0]?.count || 0);
+
+      // If DB is unseeded or empty, fallback to defaultProjects immediately
+      if (total === 0 && !params.search && (!params.category || params.category.toUpperCase() === 'ALL')) {
+        const slice = defaultProjects.slice(offset, offset + limit).map((p, idx) => ({
+          id: p.id || String(idx + 1),
+          slug: p.slug,
+          title: p.title,
+          category: p.category,
+          image: p.image || '/portfolio/vh-accounting.webp',
+          imageAlt: p.imageAlt || p.title,
+          description: p.description || '',
+          client: p.client || '',
+          duration: p.duration || '3 Weeks',
+          role: p.role || 'Website Design & Development',
+          liveUrl: p.liveUrl || '',
+          technologies: p.technologies || [],
+          order: p.order ?? idx,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }));
+        return {
+          items: slice as any,
+          pagination: {
+            total: defaultProjects.length,
+            page,
+            limit,
+            totalPages: Math.ceil(defaultProjects.length / limit),
+            hasNextPage: offset + limit < defaultProjects.length,
+            hasPrevPage: page > 1,
+          },
+          filters: {
+            category: params.category,
+            search: params.search,
+            sortBy,
+            sortOrder: sortOrder.toLowerCase(),
+          },
+        };
+      }
+
       const totalPages = Math.ceil(total / limit) || 1;
       const items = (itemRows || []).map((r: any) => (params.full ? mapRowToPortfolioItem(r) : mapRowToPortfolioSummary(r)));
 
@@ -377,16 +413,33 @@ export const portfolioService = {
 
       return result;
     } catch (err) {
-      console.warn('[DB Portfolio] getPaginatedProjects query error:', err);
+      console.warn('[DB Portfolio] getPaginatedProjects query error, returning fallback:', err);
+      const fallbackSlice = defaultProjects.slice(offset, offset + limit).map((p, idx) => ({
+        id: p.id || String(idx + 1),
+        slug: p.slug,
+        title: p.title,
+        category: p.category,
+        image: p.image || '/portfolio/vh-accounting.webp',
+        imageAlt: p.imageAlt || p.title,
+        description: p.description || '',
+        client: p.client || '',
+        duration: p.duration || '3 Weeks',
+        role: p.role || 'Website Design & Development',
+        liveUrl: p.liveUrl || '',
+        technologies: p.technologies || [],
+        order: p.order ?? idx,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }));
       return {
-        items: [],
+        items: fallbackSlice as any,
         pagination: {
-          total: 0,
+          total: defaultProjects.length,
           page,
           limit,
-          totalPages: 1,
-          hasNextPage: false,
-          hasPrevPage: false,
+          totalPages: Math.ceil(defaultProjects.length / limit),
+          hasNextPage: offset + limit < defaultProjects.length,
+          hasPrevPage: page > 1,
         },
         filters: {
           category: params.category,
@@ -445,18 +498,22 @@ export const portfolioService = {
         ORDER BY "order" ASC, "createdAt" DESC
       `;
 
-      const items: PortfolioItem[] = (rows || []).map((r: any) => mapRowToPortfolioItem(r));
-
-      const cachedEntry = portfolioCache.set(cacheKey, items);
-      const result = items as PortfolioItem[] & { etag?: string };
-      result.etag = cachedEntry.etag;
-      return result;
+      if (rows && rows.length > 0) {
+        const items: PortfolioItem[] = (rows || []).map((r: any) => mapRowToPortfolioItem(r));
+        const cachedEntry = portfolioCache.set(cacheKey, items);
+        const result = items as PortfolioItem[] & { etag?: string };
+        result.etag = cachedEntry.etag;
+        return result;
+      }
     } catch (err) {
       console.error('[DB Portfolio] getAllProjects error:', err);
-      const emptyList = [] as PortfolioItem[] & { etag?: string };
-      emptyList.etag = '';
-      return emptyList;
     }
+
+    const fallbackItems = defaultProjects as any;
+    const cachedEntry = portfolioCache.set(cacheKey, fallbackItems);
+    const result = fallbackItems as PortfolioItem[] & { etag?: string };
+    result.etag = cachedEntry.etag;
+    return result;
   },
 
   /**
@@ -480,11 +537,12 @@ export const portfolioService = {
         portfolioCache.set(cacheKey, item);
         return item;
       }
-      return null;
     } catch (err) {
       console.error('[DB Portfolio] getProjectById error:', err);
-      return null;
     }
+
+    const match = defaultProjects.find((p) => (p.id && p.id === cleanId) || p.slug.toLowerCase() === cleanId.toLowerCase());
+    return (match as any) || null;
   },
 
   /**
@@ -508,11 +566,12 @@ export const portfolioService = {
         portfolioCache.set(cacheKey, item);
         return item;
       }
-      return null;
     } catch (err) {
       console.error('[DB Portfolio] getProjectBySlug error:', err);
-      return null;
     }
+
+    const match = defaultProjects.find((p) => p.slug.toLowerCase() === safeSlug);
+    return (match as any) || null;
   },
 
   /**

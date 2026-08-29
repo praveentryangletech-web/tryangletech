@@ -8,7 +8,7 @@ export interface AuthResult {
   error?: string;
 }
 
-const ADMIN_API_KEY = process.env.ADMIN_API_KEY || process.env.NEXT_PUBLIC_ADMIN_API_KEY || '';
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY || '';
 
 /**
  * Validate Superadmin authentication from HTTP request

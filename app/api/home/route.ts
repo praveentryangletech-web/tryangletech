@@ -16,16 +16,6 @@ export async function GET(request: Request) {
       data = { ...DEFAULT_HOME_CONTENT, etag: 'W/"fallback-home"' };
     }
 
-    if (clientEtag && data.etag && clientEtag === data.etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': data.etag,
-          'Cache-Control': 'public, max-age=30, s-maxage=60, stale-while-revalidate=300',
-        },
-      });
-    }
-
     const response = NextResponse.json({
       success: true,
       data,

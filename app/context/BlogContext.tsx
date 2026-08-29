@@ -54,6 +54,7 @@ export function BlogProvider({
       const res = await fetch(`/api/blog?limit=${limit}&status=published&sortBy=publishedAt&sortOrder=desc`, {
         headers: { 'Accept': 'application/json' },
       });
+      if (!res.ok) throw new Error(`Blog API responded with status ${res.status}`);
       const json = await res.json();
       if (json.success && Array.isArray(json.data) && json.data.length > 0) {
         const topPosts = json.data.slice(0, limit);
@@ -78,6 +79,7 @@ export function BlogProvider({
       const res = await fetch('/api/blog?status=published&sortBy=publishedAt&sortOrder=desc', {
         headers: { 'Accept': 'application/json' },
       });
+      if (!res.ok) throw new Error(`Blog API responded with status ${res.status}`);
       const json = await res.json();
       if (json.success && Array.isArray(json.data) && json.data.length > 0) {
         setPosts(json.data);

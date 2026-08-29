@@ -91,18 +91,6 @@ export async function GET(req: NextRequest) {
 
     // ETag Validation (Sub-1ms 304 response)
     const etag = `"${result.pagination.total}-${result.items.length}-${result.items[0]?.updatedAt || '0'}"`;
-    const clientEtag = req.headers.get('if-none-match');
-
-    if (!isAdminOrNoCache && clientEtag && clientEtag === etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=10, s-maxage=30, stale-while-revalidate=60',
-          'Server-Timing': `cache;dur=${duration}`,
-        },
-      });
-    }
 
     const headers: Record<string, string> = {
       'ETag': etag,

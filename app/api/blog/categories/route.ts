@@ -16,17 +16,6 @@ export async function GET(req: NextRequest) {
     const categories = await portfolioCategoryService.getAllCategories('BLOG');
     const etag = categories.etag || '';
 
-    // HTTP 304 Not Modified support
-    if (clientEtag && clientEtag === etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400',
-        },
-      });
-    }
-
     return NextResponse.json(
       {
         success: true,

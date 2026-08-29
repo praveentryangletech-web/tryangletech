@@ -16,15 +16,6 @@ export async function GET(request: NextRequest) {
     }
 
     const etag = (data as any)?.etag || '';
-    if (clientEtag && clientEtag === etag) {
-      return new NextResponse(null, {
-        status: 304,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
-        },
-      });
-    }
 
     return NextResponse.json(
       {

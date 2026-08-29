@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Hero from './components/Hero';
 import About from './components/about';
@@ -14,60 +14,16 @@ import ProjectsSection from './components/ProjectsSection';
 import HomeLatestBlog from './components/HomeLatestBlog';
 import WebflowInit from '@/app/common/WebflowInit';
 import { HomeContentDTO } from '@/backend/services/home/home.types';
-import { DEFAULT_HOME_CONTENT } from '@/backend/services/home/home.defaults';
 import { LocationItem } from '@/backend/services/geo/geo.types';
-
-// Global client memory cache for 0ms transitions
-let cachedHomeContent: HomeContentDTO | null = null;
+import { HomeProvider, useHomeContent } from '@/app/context/HomeContext';
 
 interface HomeMainProps {
   initialContent?: HomeContentDTO;
   geo?: LocationItem;
 }
 
-export default function HomeMain({ initialContent, geo }: HomeMainProps) {
-  const [content, setContent] = useState<HomeContentDTO>(() => {
-    if (initialContent) {
-      cachedHomeContent = initialContent;
-      return initialContent;
-    }
-    if (cachedHomeContent) return cachedHomeContent;
-    return DEFAULT_HOME_CONTENT;
-  });
-
-  useEffect(() => {
-    let isMounted = true;
-
-    // If initialContent was already pre-rendered by server, avoid redundant network round-trip
-    if (initialContent) {
-      cachedHomeContent = initialContent;
-      return;
-    }
-
-    async function loadDynamicHomeContent() {
-      try {
-        const res = await fetch('/api/home', {
-          headers: { 'Accept': 'application/json' },
-        });
-
-        if (res.ok) {
-          const json = await res.json();
-          if (isMounted && json.success && json.data) {
-            setContent(json.data);
-            cachedHomeContent = json.data;
-          }
-        }
-      } catch (err) {
-        console.warn('Home content API notice:', err);
-      }
-    }
-
-    loadDynamicHomeContent();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [initialContent]);
+function HomeMainContent({ geo }: { geo?: LocationItem }) {
+  const { content } = useHomeContent();
 
   // Compute Geo-localized section overrides
   const localizedHero = geo
@@ -129,7 +85,7 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         
         {/* Section 7: Tech Stack & Integrations */}
         <Integrations />
- {/* Section 10: Latest Blog Articles (Live BlogPost DB) */}
+        {/* Section 10: Latest Blog Articles (Live BlogPost DB) */}
         <HomeLatestBlog />
         {/* Section 8: Testimonials */}
         <Testimonials testimonials={localizedTestimonials} />
@@ -138,5 +94,13 @@ export default function HomeMain({ initialContent, geo }: HomeMainProps) {
         <Faq initialFaqs={(geo && geo.faqs && geo.faqs.length > 0) ? geo.faqs : content.faqs} />
       </main>
     </>
+  );
+}
+
+export default function HomeMain({ initialContent, geo }: HomeMainProps) {
+  return (
+    <HomeProvider initialContent={initialContent}>
+      <HomeMainContent geo={geo} />
+    </HomeProvider>
   );
 }

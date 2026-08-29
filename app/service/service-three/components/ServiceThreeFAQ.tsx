@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 
 import Image from "next/image";
 
-const SA = '/service3-assets';
-
 const faqs = [
   {
     q: "Does it integrate with other tools?",

@@ -2,8 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const SA = '/service3-assets';
-
 export default function ServiceOneHero() {
   return (
     <>

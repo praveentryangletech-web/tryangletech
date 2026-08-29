@@ -187,7 +187,7 @@ export default function GeoSettingsTab({
             <div style={{ fontSize: '0.78rem', color: '#202124', lineHeight: 1.2 }}>
               <div style={{ fontWeight: 600 }}>TryangleTech</div>
               <div style={{ color: '#5f6368', fontSize: '0.72rem' }}>
-                https://tryangletech.com{isEditingLocation ? `/location/${locSlug || 'city'}` : ''}
+                https://tryangletech.com{isEditingLocation ? `/${locSlug || 'city'}` : ''}
               </div>
             </div>
           </div>
@@ -441,7 +441,7 @@ export default function GeoSettingsTab({
               />
             </div>
             <div>
-              <label style={labelStyle}>URL Slug (/location/[slug]) *</label>
+              <label style={labelStyle}>URL Slug (/[slug]) *</label>
               <input type="text" value={locSlug} onChange={(e) => setLocSlug(e.target.value)} style={inputStyle} required />
             </div>
           </div>

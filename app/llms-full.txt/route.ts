@@ -41,7 +41,7 @@ export async function GET() {
   const locationSection = locations.length > 0
     ? locations
         .map((loc) => `### ${loc.city}, ${loc.country}
-- **URL:** ${baseUrl}/location/${loc.slug}
+- **URL:** ${baseUrl}/${loc.slug}
 - **Overview:** ${loc.subheadline || `Dedicated web and custom software development services for businesses in ${loc.city}.`}
 - **Key Capabilities:** Custom Next.js web applications, mobile apps, ERP/CRM engineering, and local business workflow automation.`)
         .join('\n\n')

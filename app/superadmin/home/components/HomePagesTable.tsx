@@ -584,7 +584,7 @@ export default function HomePagesTable({
 
                     <td style={{ padding: '0.55rem 0.4rem' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #DBEAFE', display: 'inline-block' }}>
-                        /location/{loc.slug}
+                        /{loc.slug}
                       </span>
                     </td>
 
@@ -683,7 +683,7 @@ export default function HomePagesTable({
                     <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                       <Tooltip text="View live location page" position="top">
                         <a
-                          href={`/location/${loc.slug}`}
+                          href={`/${loc.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{

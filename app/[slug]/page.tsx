@@ -19,13 +19,33 @@ interface LocationPageProps {
   }>;
 }
 
+const RESERVED_SLUGS = new Set([
+  'about',
+  'portfolio',
+  'service',
+  'services',
+  'blog',
+  'contact',
+  'superadmin',
+  'api',
+  'admin',
+  'location',
+  'locations',
+  'sitemap.xml',
+  'robots.txt',
+  'llms.txt',
+  'llms-full.txt',
+  'favicon.ico',
+  'icon.png',
+]);
+
 /**
  * Generate Location-Specific SEO, GEO, and OpenGraph Metadata dynamically from Database
  */
 export async function generateMetadata({ params, searchParams }: LocationPageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.toLowerCase()?.trim();
-  if (!slug) {
+  if (!slug || RESERVED_SLUGS.has(slug)) {
     return {
       title: 'Page Not Found | TryangleTech',
     };
@@ -45,12 +65,12 @@ export async function generateMetadata({ params, searchParams }: LocationPagePro
 }
 
 /**
- * Location-Targeted Programmatic Home Page Clone (Strictly Database Driven)
+ * Direct Dynamic Root Route (e.g. /dubai, /mumbai, /london, /san-francisco)
  */
-export default async function LocationPage({ params, searchParams }: LocationPageProps) {
+export default async function DirectLocationPage({ params, searchParams }: LocationPageProps) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.toLowerCase()?.trim();
-  if (!slug) {
+  if (!slug || RESERVED_SLUGS.has(slug)) {
     notFound();
   }
 
@@ -76,7 +96,21 @@ export default async function LocationPage({ params, searchParams }: LocationPag
     <>
       {/* Draft Preview Indicator Banner for Admin */}
       {location.isPublished === false && (
-        <div style={{ position: 'sticky', top: 0, zIndex: 99999, backgroundColor: '#D97706', color: '#FFFFFF', textAlign: 'center', padding: '10px 16px', fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.02em', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+        <div
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 99999,
+            backgroundColor: '#D97706',
+            color: '#FFFFFF',
+            textAlign: 'center',
+            padding: '10px 16px',
+            fontSize: '0.85rem',
+            fontWeight: 800,
+            letterSpacing: '0.02em',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+          }}
+        >
           🔒 PREVIEW MODE: This location page is currently a private DRAFT and is not public or indexed by search engines.
         </div>
       )}

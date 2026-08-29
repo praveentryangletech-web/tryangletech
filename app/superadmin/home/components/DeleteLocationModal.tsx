@@ -48,7 +48,7 @@ export default function DeleteLocationModal({
           Delete Location &quot;{deletingLocation.city}&quot;?
         </h3>
         <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.5, margin: '0 0 20px 0' }}>
-          Are you sure you want to delete <strong>/location/{deletingLocation.slug}</strong>? This action cannot be undone.
+          Are you sure you want to delete <strong>/{deletingLocation.slug}</strong>? This action cannot be undone.
         </p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
           <button

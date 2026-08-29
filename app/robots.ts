@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
           'Applebot',
           'Bingbot',
         ],
-        allow: ['/', '/llms.txt', '/llms-full.txt', '/blog', '/blog/*', '/portfolio', '/portfolio/*', '/service/*', '/about', '/contact', '/location/*', '/location/**'],
+        allow: ['/', '/llms.txt', '/llms-full.txt', '/blog', '/blog/*', '/portfolio', '/portfolio/*', '/service/*', '/about', '/contact', '/*'],
         disallow: ['/superadmin', '/superadmin/*', '/api', '/api/*'],
       },
     ],

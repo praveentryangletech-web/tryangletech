@@ -693,7 +693,7 @@ export const geoService = {
   generateGeoMetadata(location: LocationItem): Metadata {
     const baseUrl = getBaseUrl();
     const locationName = `${location.city}, ${location.state ? location.state + ', ' : ''}${location.country}`;
-    const pageUrl = `${baseUrl}/location/${location.slug}`;
+    const pageUrl = `${baseUrl}/${location.slug}`;
     const lat = location.coordinates?.latitude || 23.0225;
     const lng = location.coordinates?.longitude || 72.5714;
 
@@ -742,7 +742,7 @@ export const geoService = {
    */
   generateGeoSchema(location: LocationItem) {
     const baseUrl = getBaseUrl();
-    const pageUrl = `${baseUrl}/location/${location.slug}`;
+    const pageUrl = `${baseUrl}/${location.slug}`;
     const lat = location.coordinates?.latitude || 23.0225;
     const lng = location.coordinates?.longitude || 72.5714;
     const isUae = location.slug === 'dubai' || location.countryCode === 'AE';

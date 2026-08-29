@@ -39,7 +39,7 @@ export async function GET() {
   // 3. Format Dynamic Markdown Output
   const locationList = locations.length > 0
     ? locations
-        .map((loc) => `- [${loc.city}, ${loc.country}](${baseUrl}/location/${loc.slug}): Dedicated web development, mobile apps, and custom software engineering for businesses across ${loc.city}.`)
+        .map((loc) => `- [${loc.city}, ${loc.country}](${baseUrl}/${loc.slug}): Dedicated web development, mobile apps, and custom software engineering for businesses across ${loc.city}.`)
         .join('\n')
     : `- [Global Delivery](${baseUrl}): Dedicated remote software engineering worldwide.`;
 

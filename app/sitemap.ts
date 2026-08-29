@@ -121,7 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 4. Dynamic Programmatic GEO Location Routes
   const geoLocations = await geoService.getAllLocations();
   const dynamicLocationEntries: MetadataRoute.Sitemap = geoLocations.map((loc) => ({
-    url: `${baseUrl}/location/${loc.slug}`,
+    url: `${baseUrl}/${loc.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: loc.popular ? 0.88 : 0.8,

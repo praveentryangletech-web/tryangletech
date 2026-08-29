@@ -756,7 +756,7 @@ export default function SuperadminUnifiedHomeCMS() {
   // ==========================================
   const isEditingLocation = viewMode === 'edit-location';
   const pageTitle = isEditingLocation ? `${selectedLocation?.city} Location Clone` : 'Main Homepage';
-  const liveUrl = isEditingLocation ? `/location/${selectedLocation?.slug}` : '/';
+  const liveUrl = isEditingLocation ? `/${selectedLocation?.slug}` : '/';
 
   const tabList: Array<{ id: HomeTabType; label: string }> = [
     { id: 'hero', label: '1. Hero Banner' },

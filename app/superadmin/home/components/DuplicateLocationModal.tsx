@@ -160,7 +160,7 @@ export default function DuplicateLocationModal({
             <div style={{ fontSize: '0.825rem', color: '#1E40AF' }}>
               Source: <strong style={{ color: '#1E3A8A' }}>{duplicateSource.name}</strong>
               <span style={{ color: '#3B82F6', fontSize: '0.75rem', marginLeft: '4px' }}>
-                ({duplicateSource.slug === 'main' ? '/' : `/location/${duplicateSource.slug}`})
+                ({duplicateSource.slug === 'main' ? '/' : `/${duplicateSource.slug}`})
               </span>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function DuplicateLocationModal({
                   userSelect: 'none',
                 }}
               >
-                /location/
+                /
               </span>
               <input
                 type="text"

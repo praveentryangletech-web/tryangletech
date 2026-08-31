@@ -16,7 +16,7 @@ export default function SubServiceSkeleton({ isMain = false, activeTab }: SubSer
 }
 
 /**
- * 1. Sub-Service (e.g. Web Development / Mobile App) Tab-Aware Skeleton
+ * 1. Sub-Service (e.g. Web Development / Mobile App / Custom Software / Digital Marketing / Graphics Designing) Tab-Aware Skeleton
  */
 function SubServiceTabSkeleton({ tab }: { tab: string }) {
   switch (tab) {
@@ -36,38 +36,38 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
             <div>
               <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '6px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
             </div>
             <div>
               <div className="rt-skeleton-box" style={{ width: '150px', height: '14px', marginBottom: '6px', borderRadius: '4px' }} />
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
             </div>
           </div>
 
           {/* Subheadline Textarea */}
           <div>
             <div className="rt-skeleton-box" style={{ width: '220px', height: '14px', marginBottom: '6px', borderRadius: '4px' }} />
-            <div className="rt-skeleton-box" style={{ width: '100%', height: '80px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '80px', borderRadius: '8px' }} />
           </div>
 
           {/* 3 Key Benefit Cards */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div className="rt-skeleton-box" style={{ width: '180px', height: '16px', borderRadius: '4px' }} />
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
                   style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '12px',
-                    padding: '16px',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    borderRadius: '0',
+                    padding: '0',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '12px',
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <div className="rt-skeleton-box" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
                       <div className="rt-skeleton-box" style={{ width: '60px', height: '16px', borderRadius: '4px' }} />
@@ -92,7 +92,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
             {[1, 2, 3].map((i) => (
               <div key={i}>
                 <div className="rt-skeleton-box" style={{ width: '120px', height: '14px', marginBottom: '6px', borderRadius: '4px' }} />
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
               </div>
             ))}
           </div>
@@ -100,23 +100,23 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
           {/* Hero Visual Assets Card */}
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '12px',
-              border: '1px solid #E2E8F0',
-              padding: '20px',
+              backgroundColor: 'transparent',
+              borderRadius: '0',
+              border: 'none',
+              padding: '0',
               display: 'flex',
               flexDirection: 'column',
               gap: '16px',
             }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
               <div className="rt-skeleton-box" style={{ width: '320px', height: '18px', borderRadius: '4px' }} />
               <div className="rt-skeleton-box" style={{ width: '480px', height: '12px', borderRadius: '4px' }} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} style={{ border: '1px solid #E2E8F0', borderRadius: '10px', padding: '14px', backgroundColor: '#F8FAFC', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div key={i} style={{ border: 'none', borderRadius: '0', padding: '0', backgroundColor: 'transparent', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div className="rt-skeleton-box" style={{ width: '140px', height: '14px', borderRadius: '4px' }} />
                     <div className="rt-skeleton-box" style={{ width: '80px', height: '24px', borderRadius: '6px' }} />
@@ -124,7 +124,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
                   <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '8px' }} />
                   <div className="rt-skeleton-box" style={{ width: '80px', height: '12px', borderRadius: '4px' }} />
                   <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '8px' }} />
-                  <div className="rt-skeleton-box" style={{ width: '100%', height: '80px', borderRadius: '6px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '110px', borderRadius: '8px' }} />
                 </div>
               ))}
             </div>
@@ -134,6 +134,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
 
     case 'speciality':
     case 'process':
+    case 'offerings':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Header */}
@@ -144,26 +145,26 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
 
           {/* Sub-badge & Heading */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
-            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
           </div>
 
           {/* 3 Capability Cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '12px',
-                  padding: '20px',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  borderRadius: '0',
+                  padding: '0',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '16px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
                   <div className="rt-skeleton-box" style={{ width: '220px', height: '18px', borderRadius: '4px' }} />
                   <div className="rt-skeleton-box" style={{ width: '80px', height: '14px', borderRadius: '4px' }} />
                 </div>
@@ -172,12 +173,12 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
                   <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
                 </div>
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '8px' }} />
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px', backgroundColor: '#F8FAFC', padding: '14px', borderRadius: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', backgroundColor: 'transparent', padding: '0', borderRadius: '0' }}>
                   {[1, 2].map((imgIdx) => (
-                    <div key={imgIdx} style={{ backgroundColor: '#FFFFFF', padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div className="rt-skeleton-box" style={{ width: '60px', height: '12px', borderRadius: '4px' }} />
+                    <div key={imgIdx} style={{ backgroundColor: 'transparent', padding: '0', borderRadius: '0', border: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div className="rt-skeleton-box" style={{ width: '100px', height: '12px', borderRadius: '4px' }} />
                       <div className="rt-skeleton-box" style={{ width: '100%', height: '34px', borderRadius: '6px' }} />
-                      <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '4px' }} />
+                      <div className="rt-skeleton-box" style={{ width: '100%', height: '100px', borderRadius: '8px' }} />
                     </div>
                   ))}
                 </div>
@@ -188,6 +189,8 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
       );
 
     case 'types':
+    case 'capabilities':
+    case 'services':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Header */}
@@ -202,22 +205,22 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
             <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
           </div>
 
-          {/* 5 Type Cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Type Cards */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '12px',
-                  padding: '20px',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  borderRadius: '0',
+                  padding: '0',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '16px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
                   <div className="rt-skeleton-box" style={{ width: '240px', height: '18px', borderRadius: '4px' }} />
                   <div className="rt-skeleton-box" style={{ width: '70px', height: '14px', borderRadius: '4px' }} />
                 </div>
@@ -226,12 +229,12 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
                   <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
                 </div>
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '56px', borderRadius: '8px' }} />
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px', backgroundColor: '#F8FAFC', padding: '14px', borderRadius: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', backgroundColor: 'transparent', padding: '0', borderRadius: '0' }}>
                   {[1, 2].map((imgIdx) => (
-                    <div key={imgIdx} style={{ backgroundColor: '#FFFFFF', padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div key={imgIdx} style={{ backgroundColor: 'transparent', padding: '0', borderRadius: '0', border: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       <div className="rt-skeleton-box" style={{ width: '120px', height: '12px', borderRadius: '4px' }} />
                       <div className="rt-skeleton-box" style={{ width: '100%', height: '34px', borderRadius: '6px' }} />
-                      <div className="rt-skeleton-box" style={{ width: '100%', height: '65px', borderRadius: '4px' }} />
+                      <div className="rt-skeleton-box" style={{ width: '100%', height: '100px', borderRadius: '8px' }} />
                     </div>
                   ))}
                 </div>
@@ -244,6 +247,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
     case 'techStack':
     case 'engineering':
     case 'features':
+    case 'stack':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Header */}
@@ -256,27 +260,27 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
           <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
 
           {/* Tech Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
             {[1, 2, 3, 4, 5, 6, 7].map((i) => (
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '12px',
-                  padding: '16px',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  borderRadius: '0',
+                  padding: '0',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '12px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
                   <div className="rt-skeleton-box" style={{ width: '80px', height: '16px', borderRadius: '4px' }} />
                   <div className="rt-skeleton-box" style={{ width: '50px', height: '14px', borderRadius: '4px' }} />
                 </div>
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '8px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '100px', borderRadius: '8px' }} />
               </div>
             ))}
           </div>
@@ -293,21 +297,21 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
           </div>
 
           {/* FAQ Items */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '12px',
-                  padding: '18px',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  borderRadius: '0',
+                  padding: '0',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '12px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
                   <div className="rt-skeleton-box" style={{ width: '80px', height: '16px', borderRadius: '4px' }} />
                   <div className="rt-skeleton-box" style={{ width: '50px', height: '14px', borderRadius: '4px' }} />
                 </div>
@@ -348,7 +352,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
           </div>
 
           {/* Social Share Card Image */}
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: '12px', border: '1px solid #E2E8F0', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ backgroundColor: 'transparent', borderRadius: '0', border: 'none', padding: '0', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div className="rt-skeleton-box" style={{ width: '300px', height: '18px', borderRadius: '4px' }} />
               <div className="rt-skeleton-box" style={{ width: '90px', height: '26px', borderRadius: '6px' }} />
@@ -406,9 +410,9 @@ function MainServiceTabSkeleton({ tab }: { tab: string }) {
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div className="rt-skeleton-box" style={{ width: '280px', height: '22px', borderRadius: '6px' }} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div key={i} style={{ backgroundColor: 'transparent', border: 'none', borderRadius: '0', padding: '0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div className="rt-skeleton-box" style={{ width: '180px', height: '18px', borderRadius: '4px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '8px' }} />
@@ -437,7 +441,7 @@ function MainServiceTabSkeleton({ tab }: { tab: string }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[1, 2, 3].map((i) => (
-              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div key={i} style={{ backgroundColor: 'transparent', border: 'none', borderRadius: '0', padding: '0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div className="rt-skeleton-box" style={{ width: '160px', height: '16px', borderRadius: '4px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '38px', borderRadius: '6px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '50px', borderRadius: '6px' }} />
@@ -457,7 +461,7 @@ function MainServiceTabSkeleton({ tab }: { tab: string }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div key={i} style={{ backgroundColor: 'transparent', border: 'none', borderRadius: '0', padding: '0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
                 <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
               </div>
@@ -475,7 +479,7 @@ function MainServiceTabSkeleton({ tab }: { tab: string }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {[1, 2, 3].map((i) => (
-              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div key={i} style={{ backgroundColor: 'transparent', border: 'none', borderRadius: '0', padding: '0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                   <div className="rt-skeleton-box" style={{ width: '48px', height: '48px', borderRadius: '50%' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>

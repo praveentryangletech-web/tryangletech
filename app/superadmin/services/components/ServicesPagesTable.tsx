@@ -233,22 +233,22 @@ export default function ServicesPagesTable({
             }}
           >
             <tr>
-              <th style={{ width: '27%', padding: '0.65rem 0.4rem 0.65rem 1.25rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '34%', padding: '0.65rem 0.4rem 0.65rem 1.25rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 SERVICE PAGE & IDENTITY
               </th>
-              <th style={{ width: '19%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '20%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 URL ROUTE
               </th>
-              <th style={{ width: '15%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '13%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 CATEGORY
               </th>
-              <th style={{ width: '12%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '10%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 STATUS
               </th>
-              <th style={{ width: '13%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <th style={{ width: '11%', padding: '0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 LAST UPDATED
               </th>
-              <th style={{ width: '14%', padding: '0.65rem 1.25rem 0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'center' }}>
+              <th style={{ width: '12%', padding: '0.65rem 1.25rem 0.65rem 0.4rem', color: '#475569', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', textAlign: 'center' }}>
                 ACTIONS
               </th>
             </tr>
@@ -301,13 +301,13 @@ export default function ServicesPagesTable({
                           </svg>
                         </div>
                         <div style={{ minWidth: 0 }}>
-                          <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
                             <span>Main Services Overview</span>
                             <span style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', backgroundColor: '#DCFCE7', color: '#166534', padding: '1px 6px', borderRadius: '4px' }}>
                               HUB
                             </span>
                           </div>
-                          <div style={{ fontSize: '0.7rem', color: '#166534', fontWeight: 600 }}>
+                          <div style={{ fontSize: '0.7rem', color: '#166534', fontWeight: 600, whiteSpace: 'nowrap' }}>
                             Core Services Landing Page
                           </div>
                         </div>
@@ -481,10 +481,10 @@ export default function ServicesPagesTable({
                             {iconSvg}
                           </div>
                           <div style={{ minWidth: 0 }}>
-                            <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.85rem' }}>
+                            <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
                               {sub.name}
                             </div>
-                            <div style={{ fontSize: '0.7rem', color: '#64748B', fontWeight: 500 }}>
+                            <div style={{ fontSize: '0.7rem', color: '#64748B', fontWeight: 500, whiteSpace: 'nowrap' }}>
                               Service Detail Route
                             </div>
                           </div>
@@ -496,7 +496,7 @@ export default function ServicesPagesTable({
                         </span>
                       </td>
                       <td style={{ padding: '0.55rem 0.4rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#475569', backgroundColor: '#F8FAFC', padding: '2px 8px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#475569', backgroundColor: '#F8FAFC', padding: '2px 8px', borderRadius: '6px', border: '1px solid #E2E8F0', whiteSpace: 'nowrap' }}>
                           {sub.category}
                         </span>
                       </td>

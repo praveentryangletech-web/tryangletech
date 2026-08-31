@@ -13,7 +13,9 @@ interface ImageFieldWithUploadProps {
   altLabel?: string;
   onOpenLibrary?: () => void;
   recommendedDimensions?: string;
-  previewHeight?: number;
+  previewHeight?: number | string;
+  aspectRatio?: string;
+  objectFit?: 'contain' | 'cover';
   uploadPrefix?: string;
   placeholder?: string;
 }
@@ -27,7 +29,9 @@ export default function ImageFieldWithUpload({
   altLabel = 'Alt Text (Accessibility & SEO)',
   onOpenLibrary,
   recommendedDimensions = '800 × 800 px',
-  previewHeight = 130,
+  previewHeight,
+  aspectRatio = '16 / 9',
+  objectFit = 'contain',
   uploadPrefix = 'service-asset',
   placeholder = '/service-1-assets/...webp',
 }: ImageFieldWithUploadProps) {
@@ -243,12 +247,14 @@ export default function ImageFieldWithUpload({
         </>
       )}
 
-      {/* Fixed Dimension Image Preview Box */}
+      {/* Fixed Aspect Ratio Image Preview Box */}
       <div
         style={{
           marginTop: '4px',
-          height: `${previewHeight}px`,
           width: '100%',
+          aspectRatio: aspectRatio || '16 / 9',
+          height: previewHeight ? (typeof previewHeight === 'number' ? `${previewHeight}px` : previewHeight) : 'auto',
+          maxHeight: '260px',
           borderRadius: '8px',
           overflow: 'hidden',
           border: '1px solid #CBD5E1',
@@ -270,8 +276,7 @@ export default function ImageFieldWithUpload({
               style={{
                 width: '100%',
                 height: '100%',
-                maxHeight: `${previewHeight}px`,
-                objectFit: 'contain',
+                objectFit: objectFit || 'contain',
                 display: 'block',
               }}
             />

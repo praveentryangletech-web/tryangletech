@@ -242,84 +242,84 @@ export default function GraphicsDesigningHeroTab({
             label="Col 1 - Top Artwork"
             value={hero.images?.col1Img1 || ''}
             onChange={(val) => updateHeroImage('col1Img1', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col1Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 1 - Bottom Artwork"
             value={hero.images?.col1Img2 || ''}
             onChange={(val) => updateHeroImage('col1Img2', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col1Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 2 - Top Artwork"
             value={hero.images?.col2Img1 || ''}
             onChange={(val) => updateHeroImage('col2Img1', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col2Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 2 - Bottom Artwork"
             value={hero.images?.col2Img2 || ''}
             onChange={(val) => updateHeroImage('col2Img2', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col2Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 3 - Top Artwork"
             value={hero.images?.col3Img1 || ''}
             onChange={(val) => updateHeroImage('col3Img1', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col3Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 3 - Bottom Artwork"
             value={hero.images?.col3Img2 || ''}
             onChange={(val) => updateHeroImage('col3Img2', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col3Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Top Artwork"
             value={hero.images?.col4Img1 || ''}
             onChange={(val) => updateHeroImage('col4Img1', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Bottom Artwork"
             value={hero.images?.col4Img2 || ''}
             onChange={(val) => updateHeroImage('col4Img2', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Floating Round Badge"
             value={hero.images?.col4Badge || ''}
             onChange={(val) => updateHeroImage('col4Badge', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Badge') : undefined}
           />
           <ImageFieldWithUpload
             label="Hero Atmospheric Background"
             value={hero.images?.bgImage || ''}
             onChange={(val) => updateHeroImage('bgImage', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.bgImage') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 5 - Top Artwork"
             value={hero.images?.col5Img1 || ''}
             onChange={(val) => updateHeroImage('col5Img1', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col5Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 5 - Bottom Artwork"
             value={hero.images?.col5Img2 || ''}
             onChange={(val) => updateHeroImage('col5Img2', val)}
-            previewHeight={90}
+            aspectRatio="16 / 10"
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col5Img2') : undefined}
           />
         </div>
@@ -401,7 +401,7 @@ export default function GraphicsDesigningHeroTab({
                 label="Logo SVG / PNG"
                 value={logo.src || ''}
                 onChange={(val) => updateMarqueeLogo(idx, 'src', val)}
-                previewHeight={70}
+                aspectRatio="2 / 1"
                 recommendedDimensions="400 × 200 px"
                 onOpenLibrary={
                   onOpenAssetPicker ? () => onOpenAssetPicker(`graphicsDesigning.hero.marqueeLogos.${idx}`) : undefined

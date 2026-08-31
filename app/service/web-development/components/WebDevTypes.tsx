@@ -3,8 +3,19 @@
 import React from 'react';
 import Image from "next/image";
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { WebDevTypesSection } from '@/backend/services/services/services.types';
+import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.defaults';
 
-export default function WebDevTypes() {
+export default function WebDevTypes({ data }: { data?: WebDevTypesSection }) {
+  const typesData = data || DEFAULT_WEB_DEV_CONTENT.types;
+  const cards = typesData.cards || DEFAULT_WEB_DEV_CONTENT.types.cards;
+
+  const card1 = cards[0] || DEFAULT_WEB_DEV_CONTENT.types.cards[0];
+  const card2 = cards[1] || DEFAULT_WEB_DEV_CONTENT.types.cards[1];
+  const card3 = cards[2] || DEFAULT_WEB_DEV_CONTENT.types.cards[2];
+  const card4 = cards[3] || DEFAULT_WEB_DEV_CONTENT.types.cards[3];
+  const card5 = cards[4] || DEFAULT_WEB_DEV_CONTENT.types.cards[4];
+
   return (
     <section className="rt-benefits rt-overflow-hidden pt-16 pb-16" style={{ overflow: "hidden" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -13,11 +24,11 @@ export default function WebDevTypes() {
           <div
             data-w-id="fdd1b4a0-f1c5-9612-358c-d33a132774a7"
             className="rt-sub-gap">
-            <div className="rt-sub-text rt-sub-gredient">website types</div>
+            <div className="rt-sub-text rt-sub-gredient">{typesData.subBadgeText || 'website types'}</div>
           </div>
           <div className="rt-heading-para-gap" style={{ marginTop: "0.6rem" }}>
             <ScrollTextReveal
-              text="Unveiling the Variety in Website Types We Build"
+              text={typesData.heading || 'Unveiling the Variety in Website Types We Build'}
               align="center"
               className="rt-gap-off rt-desktop-text-center"
             />
@@ -68,9 +79,9 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6 rt-text-gradient">Business &amp; Corporate Websites</div>
+                <div className="rt-text-style-h6 rt-text-gradient">{card1.title}</div>
                 <p>
-                  Comprehensive web presences engineered for companies that establish market authority, showcase capabilities, and capture commercial leads.
+                  {card1.desc}
                 </p>
               </div>
             </div>
@@ -100,9 +111,9 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6 rt-text-gradient">E-Commerce &amp; Online Stores</div>
+                <div className="rt-text-style-h6 rt-text-gradient">{card2.title}</div>
                 <p>
-                  Scalable digital storefronts with frictionless product catalogs, 1-click checkout, automated inventory sync, and multi-currency payments.
+                  {card2.desc}
                 </p>
               </div>
             </div>
@@ -122,9 +133,9 @@ export default function WebDevTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6 rt-text-gradient">Landing Pages &amp; Funnels</div>
+                <div className="rt-text-style-h6 rt-text-gradient">{card3.title}</div>
                 <p>
-                  High-impact, single-purpose web pages engineered to promote specific products or marketing campaigns with maximum conversion rates.
+                  {card3.desc}
                 </p>
               </div>
             </div>
@@ -157,9 +168,9 @@ export default function WebDevTypes() {
                 </div>
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6 rt-text-gradient">SaaS Platforms &amp; Web Applications</div>
+                <div className="rt-text-style-h6 rt-text-gradient">{card4.title}</div>
                 <p>
-                  Feature-rich cloud applications with real-time user authentication, interactive dashboards, database synchronization, and scalable API workflows.
+                  {card4.desc}
                 </p>
               </div>
             </div>
@@ -177,9 +188,9 @@ export default function WebDevTypes() {
                 />
               </div>
               <div className="rt-benefits-item-text">
-                <div className="rt-text-style-h6 rt-text-gradient">Personal Websites &amp; Blogs</div>
+                <div className="rt-text-style-h6 rt-text-gradient">{card5.title}</div>
                 <p>
-                  Personal branding platforms and content hubs where creators, consultants, and professionals share insights, publish articles, and build an audience.
+                  {card5.desc}
                 </p>
               </div>
             </div>
@@ -189,3 +200,4 @@ export default function WebDevTypes() {
     </section>
   );
 }
+

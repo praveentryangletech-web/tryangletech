@@ -1,4 +1,4 @@
-import { ServiceMainContentDTO, ServicePageSummaryItem } from './services.types';
+import { ServiceMainContentDTO, ServicePageSummaryItem, WebDevContentDTO } from './services.types';
 
 export const DEFAULT_SERVICES_LIST: ServicePageSummaryItem[] = [
   {
@@ -279,3 +279,161 @@ export const DEFAULT_SERVICE_MAIN_CONTENT: ServiceMainContentDTO = {
   isPublished: true,
   updatedAt: new Date().toISOString(),
 };
+
+export const DEFAULT_WEB_DEV_CONTENT: WebDevContentDTO = {
+  id: 'service-web-development',
+  slug: 'web-development',
+  hero: {
+    subBadgeText: 'Web Development',
+    headline: 'Websites that bring in customers, not just look nice',
+    subheadline:
+      'We build custom websites, WordPress sites, e-commerce stores, and business websites for companies across Ahmedabad and beyond. Every site is planned around what you sell, built to load fast, and backed by real support after launch - not just handed over and forgotten.',
+    bullets: [
+      {
+        id: 'bullet-1',
+        iconType: 'performance',
+        title: 'Fast and reliable',
+        desc: "Your website loads quickly on any device, so visitors don't get frustrated and leave.",
+      },
+      {
+        id: 'bullet-2',
+        iconType: 'seo',
+        title: 'Built to rank on Google',
+        desc: 'Every page is structured so search engines understand your content and show it to the right people.',
+      },
+      {
+        id: 'bullet-3',
+        iconType: 'responsive',
+        title: 'Works on every screen',
+        desc: 'Phones, tablets, laptops - your website looks and works right on all of them.',
+      },
+    ],
+    primaryBtnText: 'Get started today',
+    primaryBtnLink: '/contact',
+    smallBadgeText: 'Built for you',
+    imageRightOne: '/service-1-assets/690acfecf91d77770201a6cb_taskopia-service-one-hero-1.webp',
+    imageRightTwo: '/service-1-assets/6916b40c8e7ba2243876a27f_taskopiya-service-one-hero.avif',
+    imageBanner: '/service-1-assets/6915cd620829878f7ea58178_taskopiya-about-banner.webp',
+    imageDot: '/service-1-assets/690ad30ba7100eb0c23fba01_taskopia-service-2-dot.webp',
+  },
+  speciality: {
+    subBadgeText: 'Speciality',
+    heading: 'Simplify workflows, collaborate seamlessly, and manage tasks effectively for better business growth',
+    cards: [
+      {
+        id: 'spec-1',
+        title: 'Centralized task organization',
+        desc: 'Keep all tasks, projects, and deadlines in one place for easy tracking and visibility.',
+        icon: '/service-1-assets/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg',
+        images: [
+          '/service-1-assets/690af46ec3c652eb36481b92_taskopia-service-two-speclality-1.webp',
+          '/service-1-assets/6916ee81d584787f4358140a_taskopiya-service-one-seamless-2.webp',
+        ],
+      },
+      {
+        id: 'spec-2',
+        title: 'Seamless team collaboration',
+        desc: 'Keep all tasks, projects, and deadlines in one place for easy tracking and visibility.',
+        icon: '/service-1-assets/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg',
+        images: [
+          '/service-1-assets/690af46e49d21abec7c4c84e_taskopia-service-two-speclality-4.webp',
+          '/service-1-assets/6916ee3d48e50837b4bef350_taskopiya-service-one-seamless.webp',
+          '/service-1-assets/690af46eda7a2f8b2df0dffa_taskopia-service-two-speclality-6.webp',
+        ],
+      },
+      {
+        id: 'spec-3',
+        title: 'Smart automation & reminders',
+        desc: 'Keep all tasks, projects, and deadlines in one place for easy tracking and visibility.',
+        icon: '/service-1-assets/6916ed30dcc91e4de385f200_specialiti-icon-3 (1).svg',
+        images: [
+          '/service-1-assets/690af46ec3c652eb36481b95_taskopia-service-two-speclality-7.webp',
+          '/service-1-assets/6916edd50bad7d0bc178eb08_Group 2085663575.png',
+        ],
+      },
+    ],
+  },
+  types: {
+    subBadgeText: 'website types',
+    heading: 'Unveiling the Variety in Website Types We Build',
+    cards: [
+      {
+        id: 'type-1',
+        title: 'Business & Corporate Websites',
+        desc: 'Comprehensive web presences engineered for companies that establish market authority, showcase capabilities, and capture commercial leads.',
+        badge: 'Corporate',
+      },
+      {
+        id: 'type-2',
+        title: 'E-Commerce & Online Stores',
+        desc: 'Scalable digital storefronts with frictionless product catalogs, 1-click checkout, automated inventory sync, and multi-currency payments.',
+        badge: 'E-Commerce',
+      },
+      {
+        id: 'type-3',
+        title: 'Landing Pages & Funnels',
+        desc: 'High-impact, single-purpose web pages engineered to promote specific products or marketing campaigns with maximum conversion rates.',
+        badge: 'Landing Page',
+      },
+      {
+        id: 'type-4',
+        title: 'SaaS Platforms & Web Applications',
+        desc: 'Feature-rich cloud applications with real-time user authentication, interactive dashboards, database synchronization, and scalable API workflows.',
+        badge: 'Web App',
+      },
+      {
+        id: 'type-5',
+        title: 'Personal Websites & Blogs',
+        desc: 'Personal branding platforms and content hubs where creators, consultants, and professionals share insights, publish articles, and build an audience.',
+        badge: 'Personal Brand',
+      },
+    ],
+  },
+  techStack: {
+    subBadgeText: 'Tech Stack',
+    heading: 'We build with industry-leading modern technologies',
+    items: [
+      { id: 'tech-1', name: 'React.js', category: 'Frontend', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
+      { id: 'tech-2', name: 'Next.js', category: 'React Framework', icon: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg' },
+      { id: 'tech-3', name: 'PHP', category: 'Backend', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg' },
+      { id: 'tech-4', name: 'Tailwind CSS', category: 'Styling Framework', icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
+      { id: 'tech-5', name: 'PostgreSQL', category: 'Database', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg' },
+      { id: 'tech-6', name: 'AWS', category: 'Cloud', icon: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
+      { id: 'tech-7', name: 'Docker', category: 'Containerization', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg' },
+    ],
+  },
+  faqs: [
+    {
+      id: 'faq-1',
+      question: 'How long does it take to build a website?',
+      answer: 'It depends on what you need. A simple business website usually takes around 3 to 5 weeks. Larger projects with more pages or features take a bit longer. We will always give you a clear timeline before we start.',
+    },
+    {
+      id: 'faq-2',
+      question: 'Do you keep working on the site after it goes live?',
+      answer: 'Yes, we do. We offer support packages to keep your website updated, secure, and working well. You will not be left on your own once the project is done.',
+    },
+    {
+      id: 'faq-3',
+      question: 'Will my website work on phones and tablets?',
+      answer: 'Definitely. Every website we build works well on all screen sizes including phones, tablets, and desktop computers. Your visitors get a good experience no matter what device they use.',
+    },
+    {
+      id: 'faq-4',
+      question: 'Can I make changes to my website myself?',
+      answer: 'Yes. We set up a simple content management system so you can update your text and images on your own without needing to know how to code.',
+    },
+    {
+      id: 'faq-5',
+      question: 'Do you build web applications as well?',
+      answer: 'Yes, we do. We build everything from simple websites to more complex web apps with features like user logins, dashboards, bookings, and more. Just tell us what you need and we will figure out the best way to build it.',
+    },
+  ],
+  metaTitle: 'Website Development Company in Ahmedabad | Tryangle Tech',
+  metaDescription: 'Custom websites, WordPress, and e-commerce development in Ahmedabad. Fast, mobile-friendly sites built to bring in customers, not just look good.',
+  keywords: ['Web Development Ahmedabad', 'Website Design Ahmedabad', 'Next.js Development', 'E-Commerce Website Development', 'Custom Web Application'],
+  canonicalUrl: 'https://tryangletech.com/service/web-development',
+  isPublished: true,
+  updatedAt: new Date().toISOString(),
+};
+

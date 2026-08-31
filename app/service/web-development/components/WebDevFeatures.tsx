@@ -1,22 +1,29 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Image from "next/image";
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { WebDevSpecialitySection } from '@/backend/services/services/services.types';
+import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.defaults';
 
 const SA = '/service3-assets';
 
-export default function WebDevFeatures() {
+export default function WebDevFeatures({ data }: { data?: WebDevSpecialitySection }) {
+  const specialityData = data || DEFAULT_WEB_DEV_CONTENT.speciality;
+  const cards = specialityData.cards || DEFAULT_WEB_DEV_CONTENT.speciality.cards;
+
+  const card1 = cards[0] || DEFAULT_WEB_DEV_CONTENT.speciality.cards[0];
+  const card2 = cards[1] || DEFAULT_WEB_DEV_CONTENT.speciality.cards[1];
+  const card3 = cards[2] || DEFAULT_WEB_DEV_CONTENT.speciality.cards[2];
+
   return (
     <>
       <section className="rt-speciality rt-overflow-hidden" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
         <div className="w-layout-blockcontainer rt-container-main w-container">
           <div className="rt-tools-iconheading rt-speciality-heading rt-heading-bottom-gap">
             <div className="rt-sub-gap">
-              <div className="rt-sub-text rt-sub-gredient">features</div>
+              <div className="rt-sub-text rt-sub-gredient">{specialityData.subBadgeText || 'features'}</div>
             </div>
             <ScrollTextReveal
-              text="Websites that work well on every device and bring real results to your business"
+              text={specialityData.heading || 'Websites that work well on every device and bring real results to your business'}
               align="center"
             />
           </div>
@@ -27,16 +34,16 @@ export default function WebDevFeatures() {
               <div className="rt-speciality-item-top">
                 <div className="rt-benefits-icon">
                   <Image
-                    src="/service-1-assets/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg"
+                    src={card1.icon || "/service-1-assets/6916ed30eddd8192431b095e_specialiti-icon-1 (1).svg"}
                     loading="lazy"
                     alt=""
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">
-                  Responsive Design
+                  {card1.title}
                 </div>
                 <p className="rt-gap-off">
-                  Your website will look good and work properly on any phone, tablet, or computer your visitors use.
+                  {card1.desc}
                 </p>
               </div>
               <div className="rt-speciality-item-bottom rt-1">
@@ -66,16 +73,16 @@ export default function WebDevFeatures() {
               <div className="rt-speciality-item-top">
                 <div className="rt-benefits-icon">
                   <Image
-                    src="/service-1-assets/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"
+                    src={card2.icon || "/service-1-assets/6916ed30605dc4748f8c24c3_specialiti-icon-2 (1).svg"}
                     loading="lazy"
                     alt=""
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">
-                  SEO Optimized
+                  {card2.title}
                 </div>
                 <p className="rt-gap-off">
-                  We write your pages so search engines can find them easily, which means more people discover your business.
+                  {card2.desc}
                 </p>
               </div>
               <div className="rt-speciality-item-bottom rt-2">
@@ -109,16 +116,16 @@ export default function WebDevFeatures() {
               <div className="rt-speciality-item-top">
                 <div className="rt-benefits-icon rt-icon-three">
                   <Image
-                    src="/service-1-assets/6916ed30dcc91e4de385f200_specialiti-icon-3 (1).svg"
+                    src={card3.icon || "/service-1-assets/6916ed30dcc91e4de385f200_specialiti-icon-3 (1).svg"}
                     loading="lazy"
                     alt=""
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-text-style-h6">
-                  High Performance
+                  {card3.title}
                 </div>
                 <p className="rt-gap-off">
-                  Pages that load quickly keep visitors happy and help turn more of them into paying customers.
+                  {card3.desc}
                 </p>
               </div>
               <div

@@ -5,8 +5,13 @@ import {
   ServicePageSummaryItem,
   ServicesListResponse,
   ServicesListFilterOptions,
+  WebDevContentDTO,
 } from './services.types';
-import { DEFAULT_SERVICE_MAIN_CONTENT, DEFAULT_SERVICES_LIST } from './services.defaults';
+import {
+  DEFAULT_SERVICE_MAIN_CONTENT,
+  DEFAULT_SERVICES_LIST,
+  DEFAULT_WEB_DEV_CONTENT,
+} from './services.defaults';
 
 interface CachedEntry<T> {
   data: T;
@@ -552,6 +557,238 @@ export const servicesService = {
             width: 1200,
             height: 630,
             alt: 'TryangleTech Digital Services',
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: ['/logo.png'],
+      },
+    };
+  },
+
+  /**
+   * Retrieve dynamic Web Development Sub-Service Page content with resilient caching
+   */
+  async getWebDevContent(): Promise<WebDevContentDTO> {
+    const cacheKey = 'sub_service_content_web_development';
+    const cached = servicesCache.get<WebDevContentDTO>(cacheKey);
+    if (cached) {
+      return cached.data;
+    }
+
+    this.ensureTable();
+
+    try {
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PageContent"
+        WHERE "slug" = 'service-web-development' OR "slug" = 'web-development'
+        LIMIT 1
+      `;
+
+      if (!rows || rows.length === 0) {
+        // Seed default record in background
+        (async () => {
+          try {
+            await db.$executeRawUnsafe(
+              `
+              INSERT INTO "PageContent" (
+                "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "techStack", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "createdAt", "updatedAt"
+              ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11, $12, $13::text[], $14, NOW(), NOW())
+              ON CONFLICT ("slug") DO NOTHING;
+            `,
+              'service-web-development',
+              'SERVICE_SUB',
+              'Website & Web Application Development',
+              'Engineering & Web',
+              '/service/web-development',
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.hero),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.speciality),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.types),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.techStack),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.faqs),
+              DEFAULT_WEB_DEV_CONTENT.metaTitle,
+              DEFAULT_WEB_DEV_CONTENT.metaDescription,
+              DEFAULT_WEB_DEV_CONTENT.keywords,
+              true
+            );
+          } catch (e) {
+            console.warn('[ServicesService] Notice during initial web-dev seeding:', e);
+          }
+        })();
+
+        servicesCache.set(cacheKey, DEFAULT_WEB_DEV_CONTENT);
+        return DEFAULT_WEB_DEV_CONTENT;
+      }
+
+      const row = rows[0];
+
+      const dto: WebDevContentDTO = {
+        id: row.slug || 'service-web-development',
+        slug: 'web-development',
+        hero: parseJsonSafe(row.hero, DEFAULT_WEB_DEV_CONTENT.hero),
+        speciality: parseJsonSafe(row.about, DEFAULT_WEB_DEV_CONTENT.speciality),
+        types: parseJsonSafe(row.services, DEFAULT_WEB_DEV_CONTENT.types),
+        techStack: parseJsonSafe(row.techStack, DEFAULT_WEB_DEV_CONTENT.techStack),
+        faqs: parseJsonSafe(row.faqs, DEFAULT_WEB_DEV_CONTENT.faqs),
+        metaTitle: row.metaTitle || DEFAULT_WEB_DEV_CONTENT.metaTitle,
+        metaDescription: row.metaDescription || DEFAULT_WEB_DEV_CONTENT.metaDescription,
+        keywords: Array.isArray(row.keywords) && row.keywords.length > 0 ? row.keywords : DEFAULT_WEB_DEV_CONTENT.keywords,
+        canonicalUrl: DEFAULT_WEB_DEV_CONTENT.canonicalUrl,
+        isPublished: row.isPublished ?? true,
+        updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+      };
+
+      servicesCache.set(cacheKey, dto);
+      return dto;
+    } catch (err) {
+      console.warn('[ServicesService] Falling back to default web-dev content:', err);
+      return DEFAULT_WEB_DEV_CONTENT;
+    }
+  },
+
+  /**
+   * Update Web Development Sub-Service Page content in Supabase PostgreSQL
+   */
+  async updateWebDevContent(payload: Partial<WebDevContentDTO>): Promise<WebDevContentDTO> {
+    this.ensureTable();
+
+    const current = await this.getWebDevContent();
+
+    const updatedHero = payload.hero !== undefined ? payload.hero : current.hero;
+    const updatedSpeciality = payload.speciality !== undefined ? payload.speciality : current.speciality;
+    const updatedTypes = payload.types !== undefined ? payload.types : current.types;
+    const updatedTechStack = payload.techStack !== undefined ? payload.techStack : current.techStack;
+    const updatedFaqs = payload.faqs !== undefined ? payload.faqs : current.faqs;
+    const updatedMetaTitle = payload.metaTitle !== undefined ? payload.metaTitle : current.metaTitle;
+    const updatedMetaDescription = payload.metaDescription !== undefined ? payload.metaDescription : current.metaDescription;
+    const updatedKeywords = payload.keywords !== undefined ? payload.keywords : current.keywords;
+    const updatedIsPublished = payload.isPublished !== undefined ? payload.isPublished : current.isPublished;
+
+    try {
+      await db.$executeRawUnsafe(
+        `
+        INSERT INTO "PageContent" (
+          "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "techStack", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11, $12, $13::text[], $14, NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "hero" = EXCLUDED."hero",
+          "about" = EXCLUDED."about",
+          "services" = EXCLUDED."services",
+          "techStack" = EXCLUDED."techStack",
+          "faqs" = EXCLUDED."faqs",
+          "metaTitle" = EXCLUDED."metaTitle",
+          "metaDescription" = EXCLUDED."metaDescription",
+          "keywords" = EXCLUDED."keywords",
+          "isPublished" = EXCLUDED."isPublished",
+          "updatedAt" = NOW();
+      `,
+        'service-web-development',
+        'SERVICE_SUB',
+        'Website & Web Application Development',
+        'Engineering & Web',
+        '/service/web-development',
+        JSON.stringify(updatedHero),
+        JSON.stringify(updatedSpeciality),
+        JSON.stringify(updatedTypes),
+        JSON.stringify(updatedTechStack),
+        JSON.stringify(updatedFaqs),
+        updatedMetaTitle,
+        updatedMetaDescription,
+        updatedKeywords,
+        updatedIsPublished
+      );
+    } catch (e) {
+      console.warn('[ServicesService] Error updating WebDev PageContent in DB:', e);
+    }
+
+    // Invalidate micro-cache
+    servicesCache.clear();
+
+    return {
+      id: 'service-web-development',
+      slug: 'web-development',
+      hero: updatedHero,
+      speciality: updatedSpeciality,
+      types: updatedTypes,
+      techStack: updatedTechStack,
+      faqs: updatedFaqs,
+      metaTitle: updatedMetaTitle,
+      metaDescription: updatedMetaDescription,
+      keywords: updatedKeywords,
+      canonicalUrl: DEFAULT_WEB_DEV_CONTENT.canonicalUrl,
+      isPublished: updatedIsPublished,
+      updatedAt: new Date().toISOString(),
+    };
+  },
+
+  /**
+   * Generic getSubServiceContent router
+   */
+  async getSubServiceContent(slug: string): Promise<WebDevContentDTO> {
+    const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'web-development') {
+      return this.getWebDevContent();
+    }
+    return this.getWebDevContent();
+  },
+
+  /**
+   * Generic updateSubServiceContent router
+   */
+  async updateSubServiceContent(slug: string, payload: Partial<WebDevContentDTO>): Promise<WebDevContentDTO> {
+    const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'web-development') {
+      return this.updateWebDevContent(payload);
+    }
+    return this.updateWebDevContent(payload);
+  },
+
+  /**
+   * Dynamic metadata for Web Development Sub-Service Page
+   */
+  async generateWebDevMetadata(): Promise<Metadata> {
+    const data = await this.getWebDevContent();
+    const title = data.metaTitle || DEFAULT_WEB_DEV_CONTENT.metaTitle;
+    const description = data.metaDescription || DEFAULT_WEB_DEV_CONTENT.metaDescription;
+    const keywords = data.keywords || DEFAULT_WEB_DEV_CONTENT.keywords;
+    const canonical = data.canonicalUrl || 'https://tryangletech.com/service/web-development';
+
+    return {
+      title,
+      description,
+      keywords,
+      alternates: {
+        canonical,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        siteName: 'TryangleTech',
+        type: 'website',
+        images: [
+          {
+            url: '/logo.png',
+            width: 1200,
+            height: 630,
+            alt: 'TryangleTech Web Development',
           },
         ],
       },

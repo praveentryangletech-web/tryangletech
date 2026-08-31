@@ -125,3 +125,94 @@ export interface ServicesListFilterOptions {
   status?: 'all' | 'published' | 'draft';
   category?: string;
 }
+
+// ----------------------------------------------------
+// SUB-SERVICE (WEB DEV, CUSTOM SOFTWARE, ETC.) DTOs
+// ----------------------------------------------------
+
+export interface WebDevHeroBullet {
+  id: string;
+  iconType: 'performance' | 'seo' | 'responsive' | 'custom';
+  title: string;
+  desc: string;
+}
+
+export interface WebDevHeroSection {
+  subBadgeText: string;
+  headline: string;
+  subheadline: string;
+  bullets: WebDevHeroBullet[];
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  smallBadgeText: string;
+  imageRightOne?: string;
+  imageRightTwo?: string;
+  imageBanner?: string;
+  imageDot?: string;
+}
+
+export interface WebDevSpecialityCard {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+  images?: string[];
+}
+
+export interface WebDevSpecialitySection {
+  subBadgeText: string;
+  heading: string;
+  cards: WebDevSpecialityCard[];
+}
+
+export interface WebDevTypeCard {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+  badge?: string;
+  tags?: string[];
+}
+
+export interface WebDevTypesSection {
+  subBadgeText: string;
+  heading: string;
+  cards: WebDevTypeCard[];
+}
+
+export interface WebDevTechStackItem {
+  id: string;
+  name: string;
+  category: string;
+  icon?: string;
+}
+
+export interface WebDevTechStackSection {
+  subBadgeText: string;
+  heading: string;
+  items: WebDevTechStackItem[];
+}
+
+export interface WebDevFaqItem {
+  id?: string;
+  question: string;
+  answer: string;
+}
+
+export interface WebDevContentDTO {
+  id: string;
+  slug: string;
+  hero: WebDevHeroSection;
+  speciality: WebDevSpecialitySection;
+  types: WebDevTypesSection;
+  techStack: WebDevTechStackSection;
+  faqs: WebDevFaqItem[];
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  canonicalUrl?: string;
+  isPublished?: boolean;
+  updatedAt?: string;
+  etag?: string;
+}
+

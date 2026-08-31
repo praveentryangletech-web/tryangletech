@@ -1,30 +1,10 @@
 'use client';
+
 import Link from "next/link";
 import Script from "next/script";
 import React, { useState, useRef } from 'react';
-
-const faqData = [
-  {
-    question: "How long does it take to build a website?",
-    answer: "It depends on what you need. A simple business website usually takes around 3 to 5 weeks. Larger projects with more pages or features take a bit longer. We will always give you a clear timeline before we start."
-  },
-  {
-    question: "Do you keep working on the site after it goes live?",
-    answer: "Yes, we do. We offer support packages to keep your website updated, secure, and working well. You will not be left on your own once the project is done."
-  },
-  {
-    question: "Will my website work on phones and tablets?",
-    answer: "Definitely. Every website we build works well on all screen sizes including phones, tablets, and desktop computers. Your visitors get a good experience no matter what device they use."
-  },
-  {
-    question: "Can I make changes to my website myself?",
-    answer: "Yes. We set up a simple content management system so you can update your text and images on your own without needing to know how to code."
-  },
-  {
-    question: "Do you build web applications as well?",
-    answer: "Yes, we do. We build everything from simple websites to more complex web apps with features like user logins, dashboards, bookings, and more. Just tell us what you need and we will figure out the best way to build it."
-  }
-];
+import { WebDevFaqItem } from '@/backend/services/services/services.types';
+import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.defaults';
 
 function FAQItem({ question, answer }: { question: string, answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +53,9 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
   );
 }
 
-export default function WebDevBottomFAQ() {
+export default function WebDevBottomFAQ({ faqs }: { faqs?: WebDevFaqItem[] }) {
+  const list = faqs && faqs.length > 0 ? faqs : DEFAULT_WEB_DEV_CONTENT.faqs;
+
   return (
     <>
       <section className="rt-faq">
@@ -102,9 +84,9 @@ export default function WebDevBottomFAQ() {
                 </div>
               </div>
             </div>
-          <div className="rt-faq-main rt-margin-auto rt-faq-2-main">
-              {faqData.map((faq, index) => (
-                <FAQItem key={index} question={faq.question} answer={faq.answer} />
+            <div className="rt-faq-main rt-margin-auto rt-faq-2-main">
+              {list.map((faq, index) => (
+                <FAQItem key={faq.id || index} question={faq.question} answer={faq.answer} />
               ))}
             </div>
           </div>
@@ -117,7 +99,7 @@ export default function WebDevBottomFAQ() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqData.map(faq => ({
+            "mainEntity": list.map(faq => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
@@ -131,3 +113,4 @@ export default function WebDevBottomFAQ() {
     </>
   );
 }
+

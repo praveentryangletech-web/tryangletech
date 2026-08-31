@@ -2,7 +2,11 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { apiClient } from '../utils/apiClient';
-import { DEFAULT_SERVICE_MAIN_CONTENT, DEFAULT_SERVICES_LIST } from '@/backend/services/services/services.defaults';
+import {
+  DEFAULT_SERVICE_MAIN_CONTENT,
+  DEFAULT_SERVICES_LIST,
+  DEFAULT_WEB_DEV_CONTENT,
+} from '@/backend/services/services/services.defaults';
 import {
   ServiceMainContentDTO,
   ServicePageSummaryItem,
@@ -13,14 +17,28 @@ import {
   ServiceFaqItem,
   ServiceTestimonialItem,
   ServicesPaginationInfo,
+  WebDevContentDTO,
 } from '@/backend/services/services/services.types';
 
 export interface ServicesContextType {
   // Navigation & View Mode
-  viewMode: 'list' | 'edit-main';
-  setViewMode: (mode: 'list' | 'edit-main') => void;
+  viewMode: 'list' | 'edit-main' | 'edit-sub';
+  setViewMode: (mode: 'list' | 'edit-main' | 'edit-sub') => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  subActiveTab: string;
+  setSubActiveTab: (tab: string) => void;
+
+  // Sub-Service State
+  isSubServiceModalOpen: boolean;
+  setIsSubServiceModalOpen: (open: boolean) => void;
+  selectedSubService: ServicePageSummaryItem | null;
+  subServiceData: WebDevContentDTO | null;
+  setSubServiceData: React.Dispatch<React.SetStateAction<WebDevContentDTO | null>>;
+  isSubServiceLoading: boolean;
+  isSubServiceSaving: boolean;
+  fetchSubServiceData: (slug: string) => Promise<void>;
+  saveSubServiceData: (slug?: string, data?: Partial<WebDevContentDTO>) => Promise<boolean>;
 
   // Search & Filtering
   searchQuery: string;
@@ -91,8 +109,16 @@ const ServicesContext = createContext<ServicesContextType | undefined>(undefined
 
 export function ServicesProvider({ children }: { children: ReactNode }) {
   // Navigation & View Mode
-  const [viewMode, setViewMode] = useState<'list' | 'edit-main'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'edit-main' | 'edit-sub'>('list');
   const [activeTab, setActiveTab] = useState<string>('hero');
+  const [subActiveTab, setSubActiveTab] = useState<string>('hero');
+
+  // Sub-Service State
+  const [isSubServiceModalOpen, setIsSubServiceModalOpen] = useState(false);
+  const [selectedSubService, setSelectedSubService] = useState<ServicePageSummaryItem | null>(null);
+  const [subServiceData, setSubServiceData] = useState<WebDevContentDTO | null>(DEFAULT_WEB_DEV_CONTENT);
+  const [isSubServiceLoading, setIsSubServiceLoading] = useState(false);
+  const [isSubServiceSaving, setIsSubServiceSaving] = useState(false);
 
   // Search & Filtering
   const [searchQuery, setSearchQuery] = useState('');
@@ -376,8 +402,75 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         }
         return copy;
       });
+    } else if (mediaPickerTarget.startsWith('subService.')) {
+      const fieldPath = mediaPickerTarget.replace('subService.', '');
+      setSubServiceData((prev) => {
+        if (!prev) return prev;
+        const copy = JSON.parse(JSON.stringify(prev));
+        if (fieldPath === 'hero.imageRightOne') copy.hero.imageRightOne = url;
+        else if (fieldPath === 'hero.imageRightTwo') copy.hero.imageRightTwo = url;
+        else if (fieldPath === 'hero.imageBanner') copy.hero.imageBanner = url;
+        else if (fieldPath === 'hero.imageDot') copy.hero.imageDot = url;
+        else if (fieldPath.startsWith('speciality.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'icon') {
+            copy.speciality.cards[cardIdx].icon = url;
+          } else if (parts[2] === 'images') {
+            const imgIdx = parseInt(parts[3], 10);
+            if (!copy.speciality.cards[cardIdx].images) copy.speciality.cards[cardIdx].images = [];
+            copy.speciality.cards[cardIdx].images[imgIdx] = url;
+          }
+        }
+        return copy;
+      });
     }
     setIsMediaPickerOpen(false);
+  };
+
+  /**
+   * 6. Sub-Service Data Handlers
+   */
+  const fetchSubServiceData = async (slug: string) => {
+    setIsSubServiceLoading(true);
+    try {
+      const cleanSlug = slug.replace(/^service-/, '');
+      const res = await apiClient.get<WebDevContentDTO>(`/api/superadmin/services/${cleanSlug}`);
+      if (res.success && res.data) {
+        setSubServiceData(res.data);
+      } else {
+        setSubServiceData(DEFAULT_WEB_DEV_CONTENT);
+      }
+    } catch (err: any) {
+      console.warn('[ServicesContext] Error fetching sub-service data, using default:', err);
+      setSubServiceData(DEFAULT_WEB_DEV_CONTENT);
+    } finally {
+      setIsSubServiceLoading(false);
+    }
+  };
+
+  const saveSubServiceData = async (slug?: string, data?: Partial<WebDevContentDTO>): Promise<boolean> => {
+    setIsSubServiceSaving(true);
+    try {
+      const targetSlug = slug || selectedSubService?.slug || 'web-development';
+      const targetData = data || subServiceData || {};
+      const cleanSlug = targetSlug.replace(/^service-/, '');
+      const res = await apiClient.put<WebDevContentDTO>(`/api/superadmin/services/${cleanSlug}`, targetData);
+      if (res.success && res.data) {
+        setSubServiceData(res.data);
+        setSuccessMessage(`✓ ${res.data.hero?.subBadgeText || 'Service'} content saved live to database!`);
+        setTimeout(() => setSuccessMessage(''), 3000);
+        return true;
+      } else {
+        setErrorMessage(res.error || 'Failed to save service content.');
+        return false;
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Error saving service content.');
+      return false;
+    } finally {
+      setIsSubServiceSaving(false);
+    }
   };
 
   const openEditMain = () => {
@@ -390,8 +483,22 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
     if (slug === 'service-main' || slug === 'main') {
       openEditMain();
     } else {
-      const name = typeof serviceOrSlug === 'string' ? serviceOrSlug : serviceOrSlug.name;
-      alert(`Opening editor for ${name}... (Sub-service editor is ready to connect)`);
+      const item = typeof serviceOrSlug === 'string'
+        ? servicesListSummary.find(s => s.slug === slug || s.id === slug) || {
+            id: slug,
+            slug: slug.replace(/^service-/, ''),
+            name: slug === 'service-web-development' || slug === 'web-development' ? 'Website & Web Application Development' : slug,
+            route: `/service/${slug.replace(/^service-/, '')}`,
+            category: 'Engineering & Web',
+            isMainPage: false,
+            isPublished: true,
+            updatedAt: new Date().toISOString(),
+          }
+        : serviceOrSlug;
+      setSelectedSubService(item);
+      setViewMode('edit-sub');
+      setSubActiveTab('hero');
+      fetchSubServiceData(item.slug || item.id);
     }
   };
 
@@ -402,6 +509,17 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         setViewMode,
         activeTab,
         setActiveTab,
+        subActiveTab,
+        setSubActiveTab,
+        isSubServiceModalOpen,
+        setIsSubServiceModalOpen,
+        selectedSubService,
+        subServiceData,
+        setSubServiceData,
+        isSubServiceLoading,
+        isSubServiceSaving,
+        fetchSubServiceData,
+        saveSubServiceData,
         searchQuery,
         setSearchQuery,
         selectedCategoryFilter,

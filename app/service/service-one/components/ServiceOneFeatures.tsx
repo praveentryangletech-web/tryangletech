@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 import Image from "next/image";
 
+const SA = '/service-1-assets';
+
 const features = [
   {
     icon: `${SA}/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg`,

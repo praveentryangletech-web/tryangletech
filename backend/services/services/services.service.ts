@@ -75,6 +75,46 @@ function parseJsonSafe<T>(val: any, fallback: T): T {
   return fallback;
 }
 
+function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
+  if (!dto || !dto.types || !Array.isArray(dto.types.cards)) return dto;
+
+  const sanitizedCards = dto.types.cards.map((c) => {
+    let img = c.image || '';
+    let smallImg = c.smallImage || '';
+
+    // Auto-heal legacy broken image hash paths to verified asset files
+    if (img.includes('6912f62cf1b1aa86d88c42b8')) {
+      img = '/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp';
+    } else if (img.includes('6912f62ce8b4d830b0ad3374')) {
+      img = '/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp';
+    } else if (img.includes('6912f62c1cfeb4f85e4ae225')) {
+      img = '/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp';
+    }
+
+    if (smallImg.includes('6912f62c64b4c79ca33cb2be')) {
+      smallImg = '/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp';
+    } else if (smallImg.includes('6912f62c5b367128f70fa464')) {
+      smallImg = '/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp';
+    } else if (smallImg.includes('6912f62c0bcaadfa08a4f910') || smallImg.includes('6912f62ccbead75494a37233')) {
+      smallImg = '';
+    }
+
+    return {
+      ...c,
+      image: img,
+      smallImage: smallImg,
+    };
+  });
+
+  return {
+    ...dto,
+    types: {
+      ...dto.types,
+      cards: sanitizedCards,
+    },
+  };
+}
+
 // Initial DB seeding records for all 6 service pages
 const SEED_SERVICES_PAGES = [
   {
@@ -681,46 +721,6 @@ export const servicesService = {
         servicesCache.set(cacheKey, DEFAULT_WEB_DEV_CONTENT);
         return DEFAULT_WEB_DEV_CONTENT;
       }
-
-function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
-  if (!dto || !dto.types || !Array.isArray(dto.types.cards)) return dto;
-
-  const sanitizedCards = dto.types.cards.map((c) => {
-    let img = c.image || '';
-    let smallImg = c.smallImage || '';
-
-    // Auto-heal legacy broken image hash paths to verified asset files
-    if (img.includes('6912f62cf1b1aa86d88c42b8')) {
-      img = '/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp';
-    } else if (img.includes('6912f62ce8b4d830b0ad3374')) {
-      img = '/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp';
-    } else if (img.includes('6912f62c1cfeb4f85e4ae225')) {
-      img = '/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp';
-    }
-
-    if (smallImg.includes('6912f62c64b4c79ca33cb2be')) {
-      smallImg = '/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp';
-    } else if (smallImg.includes('6912f62c5b367128f70fa464')) {
-      smallImg = '/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp';
-    } else if (smallImg.includes('6912f62c0bcaadfa08a4f910') || smallImg.includes('6912f62ccbead75494a37233')) {
-      smallImg = '';
-    }
-
-    return {
-      ...c,
-      image: img,
-      smallImage: smallImg,
-    };
-  });
-
-  return {
-    ...dto,
-    types: {
-      ...dto.types,
-      cards: sanitizedCards,
-    },
-  };
-}
 
       const row = rows[0];
 

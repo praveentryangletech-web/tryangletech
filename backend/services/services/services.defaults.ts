@@ -1,4 +1,10 @@
-import { ServiceMainContentDTO, ServicePageSummaryItem, WebDevContentDTO, MobileAppContentDTO } from './services.types';
+import {
+  ServiceMainContentDTO,
+  ServicePageSummaryItem,
+  WebDevContentDTO,
+  MobileAppContentDTO,
+  CustomSoftwareContentDTO,
+} from './services.types';
 
 
 export const DEFAULT_SERVICES_LIST: ServicePageSummaryItem[] = [
@@ -763,5 +769,242 @@ export const DEFAULT_MOBILE_APP_CONTENT: MobileAppContentDTO = {
   isPublished: true,
   updatedAt: new Date().toISOString(),
 };
+
+export const DEFAULT_CUSTOM_SOFTWARE_CONTENT: CustomSoftwareContentDTO = {
+  id: 'service-custom-software',
+  slug: 'custom-software',
+  hero: {
+    subBadgeText: 'Custom Software Development',
+    headline: 'We build software that fits your business exactly the way it is',
+    subheadline:
+      'We write custom software that matches exactly how your business runs. Based in Ahmedabad, we help you save time on repetitive work, build something new from the ground up, or fix problems that have been slowing you down.',
+    primaryBtnText: 'Get started today',
+    primaryBtnLink: '/about',
+    secondaryBtnText: 'View pricing',
+    secondaryBtnLink: '/pricing',
+    images: {
+      hero1: '/service-2-assets/6909cabfdfa42ae4bf355d10_taskopia-service-two-hero-1.webp',
+      hero2: '/service-2-assets/6909cabf5d40fb1770899a00_taskopia-service-two-hero-2.webp',
+      hero6: '/service-2-assets/6909cabfa5a17d34fde1fe7d_taskopia-service-two-hero-6.png',
+      hero7: '/service-2-assets/6909cabfdb82f84467851eea_taskopia-service-two-hero-7.webp',
+      hero8: '/service-2-assets/6909cabfda1a40ef2716a6a3_taskopia-service-two-hero-8.webp',
+      hero9: '/service-2-assets/6909cabf60d8c7cce58ba358_taskopia-service-two-hero-9.webp',
+      heroBannerBottom: '/service-2-assets/69171b49d266be94698645a4_taskopioya-service-two-banner-bottom.png',
+      heroRound: '/service-2-assets/6909cabfeee3a35808ad7eb7_Group 2147225566.webp',
+      bg: '/service-2-assets/69142d3301921d8eace15477_home three hero.webp',
+    },
+    marqueeLogos: [
+      { src: '/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg', alt: 'Partner 1', width: 100, height: 40 },
+      { src: '/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg', alt: 'Partner 2', width: 200, height: 80 },
+      { src: '/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg', alt: 'Partner 3', width: 200, height: 80 },
+      { src: '/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg', alt: 'Partner 4', width: 200, height: 80 },
+      { src: '/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg', alt: 'Partner 5', width: 200, height: 80 },
+      { src: '/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg', alt: 'Partner 6', width: 200, height: 80 },
+    ],
+  },
+  services: {
+    subBadgeText: 'our services',
+    headline: 'Custom software solutions built to fit your business',
+    description:
+      'From enterprise ERP and CRM systems to automated HRMS and scalable SaaS products, we build mission-critical software.',
+    cards: [
+      {
+        id: 'service-erp',
+        title: 'Enterprise ERP Systems',
+        desc: 'Unified management software connecting inventory, supply chain, automated invoicing, departmental accounting, and real-time operational reporting.',
+        icon: '/service-2-assets/69099fe756beabe4238c7528_clipboard (1) 1.svg',
+      },
+      {
+        id: 'service-crm',
+        title: 'CRM & Sales Platforms',
+        desc: 'Custom CRM portals engineered to streamline sales pipelines, automate lead capture, track customer interactions, and provide revenue forecasting.',
+        icon: '/service-2-assets/69099fe7ba9794ca9c0b34c5_database (1) 2.svg',
+      },
+      {
+        id: 'service-hrms',
+        title: 'HRMS & Payroll Software',
+        desc: 'Automated payroll calculation, biometric attendance sync, employee leave tracking, appraisal workflows, and self-service portals.',
+        icon: '/service-2-assets/69099fe7cf95879c6cb6f865_lock (2) 1.svg',
+      },
+      {
+        id: 'service-saas',
+        title: 'SaaS & Custom Web Apps',
+        desc: 'Multi-tenant cloud applications with automated subscription billing, role-based access control, secure REST/GraphQL APIs, and real-time dashboards.',
+        icon: '/service-2-assets/69099fe7e885083e2015cd2c_activity 2.svg',
+      },
+    ],
+    images: [
+      '/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp',
+      '/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp',
+      '/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp',
+      '/service-2-assets/69132a3f107f32facf60e873_service v4.webp',
+    ],
+  },
+  stats: {
+    subBadgeText: 'our numbers',
+    headline: 'Businesses across India trust us to build software that actually works',
+    items: [
+      { id: 'stat-1', value: '500+', label: 'Software projects delivered' },
+      { id: 'stat-2', value: '200+', label: 'Happy clients served' },
+      { id: 'stat-3', value: '7+', label: 'Years of experience' },
+      { id: 'stat-4', value: '99.9%', label: 'Client satisfaction' },
+    ],
+  },
+  about: {
+    subBadgeText: 'Why choose us for software',
+    headline: 'Software that solves real problems and keeps growing with you',
+    description:
+      'We take the time to understand your business properly before we start building anything. Our goal is always to make software that your team enjoys using and that helps your business run smoothly.',
+    image: '/service-2-assets/6908aeda67bc5beddc6c96f6_taskopia-service-two-why-choos.png',
+    imageAlt: 'Why Choose TryangleTech Custom Software Development',
+    features: [
+      {
+        id: 'feat-1',
+        title: 'Fully custom and built for you',
+        desc: 'We build everything from scratch based on how your team works. There are no ready made shortcuts. You get something made specifically for your business.',
+        icon: '/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg',
+      },
+      {
+        id: 'feat-2',
+        title: 'On-time delivery and full transparency',
+        desc: 'We stick to deadlines and keep you in the loop at every stage. You will always know what is being worked on and when things will be ready.',
+        icon: '/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg',
+      },
+    ],
+    buttonText: 'Get started today',
+    buttonLink: '/contact',
+  },
+  process: {
+    subBadgeText: 'our development process',
+    headline: 'Deliver projects on time through streamlined execution',
+    description: 'A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.',
+    steps: [
+      {
+        id: 'step-1',
+        column: 'Discovery',
+        stepNum: '01',
+        title: 'Requirement Gathering & Scoping',
+        desc: 'We analyze your business workflows, user edge cases, and technical prerequisites to establish a solid roadmap.',
+        bg: 'linear-gradient(135deg, #ff5e3a 0%, #ff7a45 100%)',
+        color: '#ffffff',
+        descColor: 'rgba(255, 255, 255, 0.92)',
+        shadow: '0 10px 28px rgba(255, 94, 58, 0.28)',
+      },
+      {
+        id: 'step-2',
+        column: 'Architecture',
+        stepNum: '02',
+        title: 'System Architecture & UI/UX',
+        desc: 'Interactive Figma wireframes, database schema modeling, and robust API microservice architecture designs.',
+        bg: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+        color: '#ffffff',
+        descColor: 'rgba(255, 255, 255, 0.92)',
+        shadow: '0 10px 28px rgba(99, 102, 241, 0.28)',
+      },
+      {
+        id: 'step-3',
+        column: 'Development',
+        stepNum: '03',
+        title: 'Agile Full-Stack Engineering',
+        desc: 'Clean code delivery across frontend and backend using modern stacks with weekly demo sprint milestones.',
+        bg: '#ffffff',
+        color: '#0f172a',
+        descColor: '#64748b',
+        shadow: '0 10px 28px rgba(0, 0, 0, 0.06)',
+      },
+      {
+        id: 'step-4',
+        column: 'Launch & Support',
+        stepNum: '04',
+        title: 'Automated QA & Cloud Launch',
+        desc: 'Automated security audits, zero-downtime CI/CD deployment, performance tuning, and ongoing SLA maintenance.',
+        bg: 'linear-gradient(135deg, #1833fe 0%, #0ea5e9 100%)',
+        color: '#ffffff',
+        descColor: 'rgba(255, 255, 255, 0.92)',
+        shadow: '0 10px 28px rgba(24, 51, 254, 0.28)',
+      },
+    ],
+  },
+  testimonials: {
+    subBadgeText: 'our testimonials',
+    headline: 'Customer experiences that speak for themselves',
+    items: [
+      {
+        id: 'test-1',
+        name: 'Rebecca Lin',
+        role: 'Operations Director',
+        company: 'LogiFlow Solutions',
+        avatar: '/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp',
+        rating: 5,
+        quoteTitle: 'Delivered exactly what we needed',
+        quote: 'Working with Tryangletech changed how we run our operations. They understood us quickly and built exactly what we needed. We could not be happier.',
+      },
+      {
+        id: 'test-2',
+        name: 'Jonathan Keller',
+        role: 'Chief Product Officer',
+        company: 'Veloce Retail',
+        avatar: '/service-2-assets/6900857a13043eba725f30ef_kloudera-home-one-testimonial-client-image.webp',
+        rating: 5,
+        quoteTitle: 'Great experience',
+        quote: 'They were easy to work with at every step. The team communicated clearly, hit every deadline, and gave us software our whole team actually enjoys using.',
+      },
+      {
+        id: 'test-3',
+        name: 'Mark Wilson',
+        role: 'Managing Partner',
+        company: 'Aura Financial',
+        avatar: '/service-2-assets/6900857a13043eba725f30f0_kloudera-home-one-testimonila-client-image.webp',
+        rating: 5,
+        quoteTitle: 'Really happy with the result',
+        quote: 'Simple to deal with and very professional. They listened to what we wanted, kept us updated throughout, and delivered a great product on time.',
+      },
+    ],
+  },
+  faqs: [
+    {
+      id: 'faq-1',
+      q: 'How long does it take to build custom software?',
+      a: 'It really depends on the complexity of what you need. A focused web application might take 6 to 10 weeks, while a larger enterprise system could take several months. We always give you a detailed timeline upfront before any work begins so you know exactly what to expect.',
+    },
+    {
+      id: 'faq-2',
+      q: 'Do I need a technical background to work with your team?',
+      a: 'Not at all. We are experienced at translating business goals into technical requirements. You just share your vision and challenges with us and we handle everything from architecture to deployment. We keep the conversation simple and always in plain language.',
+    },
+    {
+      id: 'faq-3',
+      q: 'Will I own the software and source code after the project?',
+      a: 'Absolutely. Once the project is complete and the final payment is made, full ownership of the code and all related assets transfers to you. There are no licensing fees or ongoing ties to us unless you choose to keep us on for support.',
+    },
+    {
+      id: 'faq-4',
+      q: 'What happens after the software is launched?',
+      a: 'We do not just hand things over and disappear. We offer ongoing maintenance and support packages to keep your software running smoothly, handle any bugs that come up, and help you add new features as your business grows.',
+    },
+    {
+      id: 'faq-5',
+      q: 'Can you work with our existing systems and tools?',
+      a: 'Yes, and this is something we do all the time. Whether you need new software to connect with your CRM, ERP, or any third party platform, we make sure everything integrates cleanly so your team can keep working the way they already do.',
+    },
+  ],
+  metaTitle: 'Custom Software Development Ahmedabad | Tryangle Tech',
+  metaDescription:
+    'We build custom software around how your business actually works, not off-the-shelf templates. Based in Ahmedabad, serving clients across India and globally.',
+  keywords: [
+    'Custom Software Development Ahmedabad',
+    'Enterprise Software Engineering',
+    'Custom ERP Development',
+    'Custom CRM Systems',
+    'SaaS Application Development',
+    'Cloud Software Ahmedabad',
+  ],
+  canonicalUrl: 'https://tryangletech.com/service/custom-software',
+  ogImage: '/service-2-assets/69142d3301921d8eace15477_home three hero.webp',
+  ogImageAlt: 'TryangleTech Custom Software Development preview banner',
+  isPublished: true,
+  updatedAt: new Date().toISOString(),
+};
+
 
 

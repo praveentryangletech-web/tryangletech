@@ -399,4 +399,150 @@ export interface MobileAppContentDTO {
   etag?: string;
 }
 
+// ----------------------------------------------------
+// CUSTOM SOFTWARE SUB-SERVICE DTOs
+// ----------------------------------------------------
+
+export interface CustomSoftwareHeroImages {
+  hero1?: string;
+  hero2?: string;
+  hero6?: string;
+  hero7?: string;
+  hero8?: string;
+  hero9?: string;
+  heroBannerBottom?: string;
+  heroRound?: string;
+  bg?: string;
+}
+
+export interface CustomSoftwareMarqueeLogo {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+export interface CustomSoftwareHeroSection {
+  subBadgeText: string;
+  headline: string;
+  subheadline: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  secondaryBtnText: string;
+  secondaryBtnLink: string;
+  images: CustomSoftwareHeroImages;
+  marqueeLogos: CustomSoftwareMarqueeLogo[];
+}
+
+export interface CustomSoftwareServiceCard {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+  iconAlt?: string;
+}
+
+export interface CustomSoftwareServicesSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  cards: CustomSoftwareServiceCard[];
+  images: string[];
+}
+
+export interface CustomSoftwareStatItem {
+  id: string;
+  value: string;
+  label: string;
+}
+
+export interface CustomSoftwareStatsSection {
+  subBadgeText: string;
+  headline: string;
+  items: CustomSoftwareStatItem[];
+}
+
+export interface CustomSoftwareAboutFeature {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export interface CustomSoftwareAboutSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  features: CustomSoftwareAboutFeature[];
+  buttonText: string;
+  buttonLink: string;
+}
+
+export interface CustomSoftwareProcessStep {
+  id: string;
+  stepNum: string;
+  column: string;
+  title: string;
+  desc: string;
+  bg: string;
+  color: string;
+  descColor: string;
+  shadow: string;
+}
+
+export interface CustomSoftwareProcessSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  steps: CustomSoftwareProcessStep[];
+}
+
+export interface CustomSoftwareTestimonialItem {
+  id: string;
+  name: string;
+  role?: string;
+  company?: string;
+  avatar: string;
+  avatarAlt?: string;
+  rating: number;
+  quoteTitle: string;
+  quote: string;
+}
+
+export interface CustomSoftwareTestimonialsSection {
+  subBadgeText: string;
+  headline: string;
+  items: CustomSoftwareTestimonialItem[];
+}
+
+export interface CustomSoftwareFaqItem {
+  id?: string;
+  q: string;
+  a: string;
+}
+
+export interface CustomSoftwareContentDTO {
+  id: string;
+  slug: string;
+  hero: CustomSoftwareHeroSection;
+  services: CustomSoftwareServicesSection;
+  stats: CustomSoftwareStatsSection;
+  about: CustomSoftwareAboutSection;
+  process: CustomSoftwareProcessSection;
+  testimonials: CustomSoftwareTestimonialsSection;
+  faqs: CustomSoftwareFaqItem[];
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  isPublished?: boolean;
+  updatedAt?: string;
+  etag?: string;
+}
+
+
 

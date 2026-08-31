@@ -7,6 +7,7 @@ import {
   DEFAULT_SERVICES_LIST,
   DEFAULT_WEB_DEV_CONTENT,
   DEFAULT_MOBILE_APP_CONTENT,
+  DEFAULT_CUSTOM_SOFTWARE_CONTENT,
 } from '@/backend/services/services/services.defaults';
 import {
   ServiceMainContentDTO,
@@ -20,6 +21,7 @@ import {
   ServicesPaginationInfo,
   WebDevContentDTO,
   MobileAppContentDTO,
+  CustomSoftwareContentDTO,
 } from '@/backend/services/services/services.types';
 
 export interface ServicesContextType {
@@ -359,8 +361,12 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
   const fetchSubServiceData = useCallback(async (slug: string): Promise<any> => {
     setIsSubServiceLoading(true);
     const cleanSlug = slug.replace(/^service-/, '');
-    const isMobileApp = cleanSlug === 'mobile-application';
-    const defaultData = isMobileApp ? DEFAULT_MOBILE_APP_CONTENT : DEFAULT_WEB_DEV_CONTENT;
+    let defaultData: any = DEFAULT_WEB_DEV_CONTENT;
+    if (cleanSlug === 'custom-software') {
+      defaultData = DEFAULT_CUSTOM_SOFTWARE_CONTENT;
+    } else if (cleanSlug === 'mobile-application') {
+      defaultData = DEFAULT_MOBILE_APP_CONTENT;
+    }
 
     try {
       const res = await apiClient.get<any>(`/api/superadmin/services/${cleanSlug}`, { useCache: false });
@@ -392,7 +398,13 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
       const res = await apiClient.put<any>(`/api/superadmin/services/${cleanSlug}`, targetData);
       if (res.success && res.data) {
         setSubServiceData(res.data);
-        const name = res.data.hero?.subBadgeText || (cleanSlug === 'mobile-application' ? 'Mobile Application' : 'Web Development');
+        const name =
+          res.data.hero?.subBadgeText ||
+          (cleanSlug === 'custom-software'
+            ? 'Custom Software'
+            : cleanSlug === 'mobile-application'
+            ? 'Mobile Application'
+            : 'Web Development');
         setSuccessMessage(`✓ ${name} content saved live to database!`);
         await fetchServicesList();
         setTimeout(() => setSuccessMessage(''), 4000);
@@ -523,6 +535,52 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         }
         return copy;
       });
+    } else if (mediaPickerTarget.startsWith('customSoftware.')) {
+      const fieldPath = mediaPickerTarget.replace('customSoftware.', '');
+      setSubServiceData((prev: any) => {
+        if (!prev) return prev;
+        const copy = JSON.parse(JSON.stringify(prev));
+        if (fieldPath.startsWith('hero.images.')) {
+          const key = fieldPath.replace('hero.images.', '');
+          if (!copy.hero.images) copy.hero.images = {};
+          copy.hero.images[key] = url;
+        } else if (fieldPath.startsWith('hero.marqueeLogos.')) {
+          const parts = fieldPath.split('.');
+          const logoIdx = parseInt(parts[2], 10);
+          if (copy.hero?.marqueeLogos && copy.hero.marqueeLogos[logoIdx]) {
+            copy.hero.marqueeLogos[logoIdx].src = url;
+          }
+        } else if (fieldPath.startsWith('services.cards.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[2], 10);
+          if (copy.services?.cards && copy.services.cards[cardIdx]) {
+            copy.services.cards[cardIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('services.images.')) {
+          const parts = fieldPath.split('.');
+          const imgIdx = parseInt(parts[2], 10);
+          if (!copy.services.images) copy.services.images = [];
+          copy.services.images[imgIdx] = url;
+        } else if (fieldPath === 'about.image') {
+          if (!copy.about) copy.about = {};
+          copy.about.image = url;
+        } else if (fieldPath.startsWith('about.features.')) {
+          const parts = fieldPath.split('.');
+          const featIdx = parseInt(parts[2], 10);
+          if (copy.about?.features && copy.about.features[featIdx]) {
+            copy.about.features[featIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('testimonials.items.')) {
+          const parts = fieldPath.split('.');
+          const testIdx = parseInt(parts[2], 10);
+          if (copy.testimonials?.items && copy.testimonials.items[testIdx]) {
+            copy.testimonials.items[testIdx].avatar = url;
+          }
+        } else if (fieldPath === 'seo.ogImage') {
+          copy.ogImage = url;
+        }
+        return copy;
+      });
     }
     setIsMediaPickerOpen(false);
   };
@@ -542,13 +600,21 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         ? servicesListSummary.find(s => s.slug === cleanSlug || s.id === slug) || {
             id: slug,
             slug: cleanSlug,
-            name: cleanSlug === 'mobile-application'
-              ? 'iOS & Android Mobile App Development'
-              : cleanSlug === 'web-development'
-              ? 'Website & Web Application Development'
-              : cleanSlug,
+            name:
+              cleanSlug === 'custom-software'
+                ? 'Custom Software & Enterprise Solutions'
+                : cleanSlug === 'mobile-application'
+                ? 'iOS & Android Mobile App Development'
+                : cleanSlug === 'web-development'
+                ? 'Website & Web Application Development'
+                : cleanSlug,
             route: `/service/${cleanSlug}`,
-            category: cleanSlug === 'mobile-application' ? 'Mobile & App' : 'Engineering & Web',
+            category:
+              cleanSlug === 'custom-software'
+                ? 'Enterprise Engineering'
+                : cleanSlug === 'mobile-application'
+                ? 'Mobile & App'
+                : 'Engineering & Web',
             isMainPage: false,
             isPublished: true,
             updatedAt: new Date().toISOString(),

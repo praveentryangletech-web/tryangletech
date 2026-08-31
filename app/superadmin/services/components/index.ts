@@ -9,3 +9,7 @@ export * from './web-development';
 
 // Mobile Application Service Page CMS Tabs (/superadmin/services/mobile-application)
 export * from './mobile-application';
+
+// Custom Software Service Page CMS Tabs (/superadmin/services/custom-software)
+export * from './custom-software';
+

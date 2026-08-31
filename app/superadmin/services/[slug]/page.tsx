@@ -28,6 +28,14 @@ import {
   MobileAppTestimonialsTab,
   MobileAppFaqsTab,
   MobileAppSeoTab,
+  CustomSoftwareHeroTab,
+  CustomSoftwareServicesTab,
+  CustomSoftwareStatsTab,
+  CustomSoftwareAboutTab,
+  CustomSoftwareProcessTab,
+  CustomSoftwareTestimonialsTab,
+  CustomSoftwareFaqsTab,
+  CustomSoftwareSeoTab,
   SubServiceSkeleton,
   SaveIcon,
   ExternalLinkIcon,
@@ -48,6 +56,7 @@ function ServiceEditorInner() {
   const slug = rawSlug.replace(/^service-/, '');
   const isMain = slug === 'main';
   const isMobileApp = slug === 'mobile-application';
+  const isCustomSoftware = slug === 'custom-software';
 
   const {
     activeTab,
@@ -140,7 +149,18 @@ function ServiceEditorInner() {
     { id: 'seo', label: '8. SEO & Social Meta' },
   ];
 
-  const tabs = isMain ? mainTabs : isMobileApp ? mobileAppTabs : webDevTabs;
+  const customSoftwareTabs = [
+    { id: 'hero', label: '1. Hero Header & Visuals' },
+    { id: 'services', label: '2. Custom Offerings (Cards)' },
+    { id: 'stats', label: '3. Numbers & Metrics' },
+    { id: 'about', label: '4. Why Choose Us' },
+    { id: 'process', label: '5. Development Process' },
+    { id: 'testimonials', label: '6. Client Testimonials' },
+    { id: 'faqs', label: '7. Dynamic FAQs' },
+    { id: 'seo', label: '8. SEO & Social Meta' },
+  ];
+
+  const tabs = isMain ? mainTabs : isCustomSoftware ? customSoftwareTabs : isMobileApp ? mobileAppTabs : webDevTabs;
   const currentActiveTab = isMain ? activeTab : subActiveTab;
   const isLoading = isMain ? isMainLoading : isSubServiceLoading;
   const isSaving = isMain ? isMainSaving : isSubServiceSaving;
@@ -360,6 +380,33 @@ function ServiceEditorInner() {
                 isPublished={isPublished}
                 setIsPublished={setIsPublished}
               />
+            )}
+          </>
+        ) : isCustomSoftware ? (
+          <>
+            {subActiveTab === 'hero' && (
+              <CustomSoftwareHeroTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'services' && (
+              <CustomSoftwareServicesTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'stats' && (
+              <CustomSoftwareStatsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'about' && (
+              <CustomSoftwareAboutTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'process' && (
+              <CustomSoftwareProcessTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'testimonials' && (
+              <CustomSoftwareTestimonialsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'faqs' && (
+              <CustomSoftwareFaqsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'seo' && (
+              <CustomSoftwareSeoTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
           </>
         ) : isMobileApp ? (

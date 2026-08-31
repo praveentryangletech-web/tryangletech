@@ -7,12 +7,14 @@ import {
   ServicesListFilterOptions,
   WebDevContentDTO,
   MobileAppContentDTO,
+  CustomSoftwareContentDTO,
 } from './services.types';
 import {
   DEFAULT_SERVICE_MAIN_CONTENT,
   DEFAULT_SERVICES_LIST,
   DEFAULT_WEB_DEV_CONTENT,
   DEFAULT_MOBILE_APP_CONTENT,
+  DEFAULT_CUSTOM_SOFTWARE_CONTENT,
 } from './services.defaults';
 
 
@@ -1064,10 +1066,250 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
   },
 
   /**
+   * Retrieve dynamic Custom Software Sub-Service Page content with resilient caching
+   */
+  async getCustomSoftwareContent(): Promise<CustomSoftwareContentDTO> {
+    const cacheKey = 'sub_service_content_custom_software';
+    const cached = servicesCache.get<CustomSoftwareContentDTO>(cacheKey);
+    if (cached) {
+      return cached.data;
+    }
+
+    this.ensureTable();
+
+    try {
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PageContent"
+        WHERE "slug" = 'service-custom-software' OR "slug" = 'custom-software'
+        LIMIT 1
+      `;
+
+      if (!rows || rows.length === 0) {
+        // Seed default record in background
+        (async () => {
+          try {
+            await db.$executeRawUnsafe(
+              `
+              INSERT INTO "PageContent" (
+                "slug", "pageType", "city", "region", "postalCode", "hero", "services", "about", "whyChooseUs", "howWeWork", "testimonials", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "createdAt", "updatedAt"
+              ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13, $14, $15::text[], $16, NOW(), NOW())
+              ON CONFLICT ("slug") DO NOTHING;
+            `,
+              'service-custom-software',
+              'SERVICE_SUB',
+              'Custom Software & Enterprise Solutions',
+              'Enterprise Engineering',
+              '/service/custom-software',
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.hero),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.services),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.stats),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.about),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.process),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.testimonials),
+              JSON.stringify(DEFAULT_CUSTOM_SOFTWARE_CONTENT.faqs),
+              DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaTitle,
+              DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaDescription,
+              DEFAULT_CUSTOM_SOFTWARE_CONTENT.keywords,
+              true
+            );
+          } catch (e) {
+            console.warn('[ServicesService] Notice during initial custom-software seeding:', e);
+          }
+        })();
+
+        servicesCache.set(cacheKey, DEFAULT_CUSTOM_SOFTWARE_CONTENT);
+        return DEFAULT_CUSTOM_SOFTWARE_CONTENT;
+      }
+
+      const row = rows[0];
+
+      const dto: CustomSoftwareContentDTO = {
+        id: row.slug || 'service-custom-software',
+        slug: 'custom-software',
+        hero: parseJsonSafe(row.hero, DEFAULT_CUSTOM_SOFTWARE_CONTENT.hero),
+        services: parseJsonSafe(row.services, DEFAULT_CUSTOM_SOFTWARE_CONTENT.services),
+        stats: parseJsonSafe(row.about, DEFAULT_CUSTOM_SOFTWARE_CONTENT.stats),
+        about: parseJsonSafe(row.whyChooseUs, DEFAULT_CUSTOM_SOFTWARE_CONTENT.about),
+        process: parseJsonSafe(row.howWeWork, DEFAULT_CUSTOM_SOFTWARE_CONTENT.process),
+        testimonials: parseJsonSafe(row.testimonials, DEFAULT_CUSTOM_SOFTWARE_CONTENT.testimonials),
+        faqs: parseJsonSafe(row.faqs, DEFAULT_CUSTOM_SOFTWARE_CONTENT.faqs),
+        metaTitle: row.metaTitle || DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaTitle,
+        metaDescription: row.metaDescription || DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaDescription,
+        keywords: Array.isArray(row.keywords) && row.keywords.length > 0 ? row.keywords : DEFAULT_CUSTOM_SOFTWARE_CONTENT.keywords,
+        canonicalUrl: DEFAULT_CUSTOM_SOFTWARE_CONTENT.canonicalUrl,
+        ogImage: DEFAULT_CUSTOM_SOFTWARE_CONTENT.ogImage,
+        ogImageAlt: DEFAULT_CUSTOM_SOFTWARE_CONTENT.ogImageAlt,
+        isPublished: row.isPublished ?? true,
+        updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+      };
+
+      servicesCache.set(cacheKey, dto);
+      return dto;
+    } catch (err) {
+      console.warn('[ServicesService] Falling back to default custom software content:', err);
+      return DEFAULT_CUSTOM_SOFTWARE_CONTENT;
+    }
+  },
+
+  /**
+   * Update Custom Software Sub-Service Page content in Supabase PostgreSQL
+   */
+  async updateCustomSoftwareContent(payload: Partial<CustomSoftwareContentDTO>): Promise<CustomSoftwareContentDTO> {
+    this.ensureTable();
+
+    const current = await this.getCustomSoftwareContent();
+
+    const updatedHero = payload.hero !== undefined ? payload.hero : current.hero;
+    const updatedServices = payload.services !== undefined ? payload.services : current.services;
+    const updatedStats = payload.stats !== undefined ? payload.stats : current.stats;
+    const updatedAbout = payload.about !== undefined ? payload.about : current.about;
+    const updatedProcess = payload.process !== undefined ? payload.process : current.process;
+    const updatedTestimonials = payload.testimonials !== undefined ? payload.testimonials : current.testimonials;
+    const updatedFaqs = payload.faqs !== undefined ? payload.faqs : current.faqs;
+    const updatedMetaTitle = payload.metaTitle !== undefined ? payload.metaTitle : current.metaTitle;
+    const updatedMetaDescription = payload.metaDescription !== undefined ? payload.metaDescription : current.metaDescription;
+    const updatedKeywords = payload.keywords !== undefined ? payload.keywords : current.keywords;
+    const updatedIsPublished = payload.isPublished !== undefined ? payload.isPublished : current.isPublished;
+
+    try {
+      await db.$executeRawUnsafe(
+        `
+        INSERT INTO "PageContent" (
+          "slug", "pageType", "city", "region", "postalCode", "hero", "services", "about", "whyChooseUs", "howWeWork", "testimonials", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13, $14, $15::text[], $16, NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "hero" = EXCLUDED."hero",
+          "services" = EXCLUDED."services",
+          "about" = EXCLUDED."about",
+          "whyChooseUs" = EXCLUDED."whyChooseUs",
+          "howWeWork" = EXCLUDED."howWeWork",
+          "testimonials" = EXCLUDED."testimonials",
+          "faqs" = EXCLUDED."faqs",
+          "metaTitle" = EXCLUDED."metaTitle",
+          "metaDescription" = EXCLUDED."metaDescription",
+          "keywords" = EXCLUDED."keywords",
+          "isPublished" = EXCLUDED."isPublished",
+          "updatedAt" = NOW();
+      `,
+        'service-custom-software',
+        'SERVICE_SUB',
+        'Custom Software & Enterprise Solutions',
+        'Enterprise Engineering',
+        '/service/custom-software',
+        JSON.stringify(updatedHero),
+        JSON.stringify(updatedServices),
+        JSON.stringify(updatedStats),
+        JSON.stringify(updatedAbout),
+        JSON.stringify(updatedProcess),
+        JSON.stringify(updatedTestimonials),
+        JSON.stringify(updatedFaqs),
+        updatedMetaTitle,
+        updatedMetaDescription,
+        updatedKeywords,
+        updatedIsPublished
+      );
+    } catch (e) {
+      console.warn('[ServicesService] Error updating Custom Software PageContent in DB:', e);
+    }
+
+    // Invalidate micro-cache
+    servicesCache.clear();
+
+    return {
+      id: 'service-custom-software',
+      slug: 'custom-software',
+      hero: updatedHero,
+      services: updatedServices,
+      stats: updatedStats,
+      about: updatedAbout,
+      process: updatedProcess,
+      testimonials: updatedTestimonials,
+      faqs: updatedFaqs,
+      metaTitle: updatedMetaTitle,
+      metaDescription: updatedMetaDescription,
+      keywords: updatedKeywords,
+      canonicalUrl: DEFAULT_CUSTOM_SOFTWARE_CONTENT.canonicalUrl,
+      ogImage: DEFAULT_CUSTOM_SOFTWARE_CONTENT.ogImage,
+      ogImageAlt: DEFAULT_CUSTOM_SOFTWARE_CONTENT.ogImageAlt,
+      isPublished: updatedIsPublished,
+      updatedAt: new Date().toISOString(),
+    };
+  },
+
+  /**
+   * Dynamic metadata for Custom Software Sub-Service Page
+   */
+  async generateCustomSoftwareMetadata(): Promise<Metadata> {
+    const data = await this.getCustomSoftwareContent();
+    const title = data.metaTitle || DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaTitle;
+    const description = data.metaDescription || DEFAULT_CUSTOM_SOFTWARE_CONTENT.metaDescription;
+    const keywords = data.keywords || DEFAULT_CUSTOM_SOFTWARE_CONTENT.keywords;
+    const canonical = data.canonicalUrl || 'https://tryangletech.com/service/custom-software';
+    const ogImgUrl = data.ogImage || '/logo.png';
+    const ogImgAlt = data.ogImageAlt || title;
+
+    return {
+      title,
+      description,
+      keywords,
+      alternates: {
+        canonical,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        siteName: 'TryangleTech',
+        type: 'website',
+        locale: 'en_US',
+        images: [
+          {
+            url: ogImgUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImgAlt,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImgUrl],
+      },
+      other: {
+        'geo.region': 'IN-GJ',
+        'geo.placename': 'Ahmedabad',
+        'geo.position': '23.0225;72.5714',
+        'ICBM': '23.0225, 72.5714',
+        'rating': 'general',
+        'revisit-after': '7 days',
+      },
+    };
+  },
+
+  /**
    * Generic getSubServiceContent router
    */
   async getSubServiceContent(slug: string): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'custom-software') {
+      return this.getCustomSoftwareContent();
+    }
     if (cleanSlug === 'mobile-application') {
       return this.getMobileAppContent();
     }
@@ -1082,6 +1324,9 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
    */
   async updateSubServiceContent(slug: string, payload: any): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'custom-software') {
+      return this.updateCustomSoftwareContent(payload);
+    }
     if (cleanSlug === 'mobile-application') {
       return this.updateMobileAppContent(payload);
     }

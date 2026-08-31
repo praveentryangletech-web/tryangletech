@@ -1,9 +1,19 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { CustomSoftwareProcessSection } from '@/backend/services/services/services.types';
 
-export default function CustomSoftwareFeatures() {
+interface CustomSoftwareFeaturesProps {
+  data?: CustomSoftwareProcessSection;
+}
+
+export default function CustomSoftwareFeatures({ data }: CustomSoftwareFeaturesProps) {
   const sectionRef = useRef<HTMLElement>(null);
+
+  const subBadgeText = data?.subBadgeText || 'our development process';
+  const headline = data?.headline || 'Deliver projects on time through streamlined execution';
+  const description = data?.description || 'A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.';
+  const steps = data?.steps || [];
 
   // Native Scroll Reveal Observer matching About page animation timing
   useEffect(() => {
@@ -26,23 +36,13 @@ export default function CustomSoftwareFeatures() {
     return () => observer.disconnect();
   }, []);
 
-  const steps = [
+  const defaultStepMeta = [
     {
-      id: "step-1",
-      column: "Discovery",
-      stepNum: "01",
-      title: "Requirement Gathering & Scoping",
-      desc: "We analyze your business workflows, user edge cases, and technical prerequisites to establish a solid roadmap.",
-      bg: "linear-gradient(135deg, #ff5e3a 0%, #ff7a45 100%)",
-      color: "#ffffff",
-      descColor: "rgba(255, 255, 255, 0.92)",
-      shadow: "0 10px 28px rgba(255, 94, 58, 0.28)",
       topOffset: "4%",
       leftOffset: "0%",
-      border: "none",
       delay: "0.15s",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="16" x2="12" y2="12" />
           <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -50,21 +50,11 @@ export default function CustomSoftwareFeatures() {
       ),
     },
     {
-      id: "step-2",
-      column: "Architecture",
-      stepNum: "02",
-      title: "System Architecture & UI/UX",
-      desc: "Interactive Figma wireframes, database schema modeling, and robust API microservice architecture designs.",
-      bg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-      color: "#ffffff",
-      descColor: "rgba(255, 255, 255, 0.92)",
-      shadow: "0 10px 28px rgba(99, 102, 241, 0.28)",
       topOffset: "28%",
       leftOffset: "24%",
-      border: "none",
       delay: "0.30s",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" />
           <path d="M3 9h18" />
           <path d="M9 21V9" />
@@ -72,325 +62,190 @@ export default function CustomSoftwareFeatures() {
       ),
     },
     {
-      id: "step-3",
-      column: "Development",
-      stepNum: "03",
-      title: "Agile Full-Stack Engineering",
-      desc: "Clean code delivery across frontend and backend using modern stacks with weekly demo sprint milestones.",
-      bg: "#ffffff",
-      color: "#0f172a",
-      descColor: "#64748b",
-      shadow: "0 10px 28px rgba(0, 0, 0, 0.06)",
       topOffset: "52%",
       leftOffset: "48%",
-      border: "1px solid #d4dcf9",
       delay: "0.45s",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="16 18 22 12 16 6" />
           <polyline points="8 6 2 12 8 18" />
         </svg>
       ),
     },
     {
-      id: "step-4",
-      column: "Launch & Support",
-      stepNum: "04",
-      title: "Automated QA & Cloud Launch",
-      desc: "Automated security audits, zero-downtime CI/CD deployment, performance tuning, and ongoing SLA maintenance.",
-      bg: "linear-gradient(135deg, #1833fe 0%, #0ea5e9 100%)",
-      color: "#ffffff",
-      descColor: "rgba(255, 255, 255, 0.92)",
-      shadow: "0 10px 28px rgba(24, 51, 254, 0.28)",
       topOffset: "76%",
-      leftOffset: "68%",
-      border: "none",
+      leftOffset: "72%",
       delay: "0.60s",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
       ),
     },
   ];
 
   return (
-    <section ref={sectionRef} className="rt-process-section" style={{ position: "relative", padding: "70px 0 80px 0", background: "transparent" }}>
-      <div className="w-layout-blockcontainer rt-container-main w-container">
+    <section
+      ref={sectionRef}
+      className="rt-features-interactive-timeline"
+      style={{
+        position: 'relative',
+        width: '100%',
+        backgroundColor: '#0c0f1d',
+        padding: 'clamp(4rem, 8vw, 7rem) clamp(1.25rem, 3.5vw, 3rem)',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Dynamic Background Mesh Grid */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            radial-gradient(circle at 15% 20%, rgba(24, 51, 254, 0.18) 0%, transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 45%),
+            linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 100%, 100% 100%, 48px 48px, 48px 48px',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         {/* Section Header */}
-        <div className="rt-tools-iconheading rt-features-v1-top rt-heading-entry" style={{ textAlign: "center", margin: "0 auto 28px auto" }}>
-          <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
-            <div className="rt-sub-text rt-sub-gredient">our development process</div>
+        <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto clamp(3rem, 6vw, 5rem)' }}>
+          <div className="rt-sub-gap" style={{ justifyContent: 'center' }}>
+            <div
+              className="rt-sub-text"
+              style={{
+                color: '#60a5fa',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                background: 'linear-gradient(90deg, #60a5fa, #a78bfa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              {subBadgeText}
+            </div>
           </div>
-          <ScrollTextReveal
-            text="Deliver projects on time through streamlined execution"
-            align="center"
-            className="rt-gap-off rt-desktop-text-center"
-            style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}
-          />
-          <p style={{ maxWidth: "660px", margin: "8px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
-            A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+              fontWeight: 800,
+              color: '#ffffff',
+              lineHeight: 1.18,
+              letterSpacing: '-0.02em',
+              margin: '12px 0 16px',
+            }}
+          >
+            {headline}
+          </h2>
+          <p
+            style={{
+              fontSize: 'clamp(1rem, 1.3vw, 1.125rem)',
+              color: '#94a3b8',
+              lineHeight: 1.65,
+              margin: 0,
+            }}
+          >
+            {description}
           </p>
         </div>
 
-        {/* Compact Stepped Process Cascade Canvas */}
-        <div className="rt-compact-process-canvas">
-          {/* Top Column Labels & Continuous Vertical Dashed Grid Lines */}
-          <div className="rt-columns-track">
-            {steps.map((s, idx) => (
-              <div key={s.id} className="rt-column-item">
-                <div className="rt-col-header">
-                  <span className="rt-col-badge">{s.stepNum}</span>
-                  <span className="rt-col-title">{s.column}</span>
-                </div>
-                {/* Full-height continuous dashed line track */}
-                <div className="rt-dashed-line-track">
-                  <div className={`rt-dashed-line line-${idx + 1}`} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Cascading Floating Step Cards */}
-          <div className="rt-cascade-overlay">
-            {steps.map((s) => (
+        {/* 4-Stage Stepped Cascade Cards Container */}
+        <div
+          className="rt-timeline-cascade-container"
+          style={{
+            position: 'relative',
+            width: '100%',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '24px',
+          }}
+        >
+          {steps.map((step, idx) => {
+            const meta = defaultStepMeta[idx % defaultStepMeta.length];
+            const isWhite = step.bg === '#ffffff' || step.bg?.toLowerCase() === 'white';
+            return (
               <div
-                key={s.id}
-                className="rt-custom-process-card"
+                key={step.id || idx}
+                className="rt-cascade-card"
                 style={{
-                  top: s.topOffset,
-                  left: s.leftOffset,
-                  background: s.bg,
-                  boxShadow: s.shadow,
-                  border: s.border,
-                  transitionDelay: s.delay,
+                  background: step.bg,
+                  borderRadius: '20px',
+                  padding: '32px 28px',
+                  boxShadow: step.shadow || '0 10px 28px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '16px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  border: isWhite ? '1px solid rgba(24, 51, 254, 0.12)' : 'none',
                 }}
               >
-                <div className="rt-card-icon-pill">{s.icon}</div>
-                <div className="rt-card-text-group">
-                  <div className="rt-card-title" style={{ color: s.color }}>
-                    {s.title}
-                  </div>
-                  <p className="rt-card-desc" style={{ color: s.descColor }}>
-                    {s.desc}
-                  </p>
+                {/* Header with Step Num and Column Tag */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span
+                    style={{
+                      fontSize: '0.8rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      padding: '4px 12px',
+                      borderRadius: '100px',
+                      backgroundColor: isWhite ? '#eff6ff' : 'rgba(255, 255, 255, 0.18)',
+                      color: isWhite ? '#1833fe' : '#ffffff',
+                    }}
+                  >
+                    {step.column}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '1.75rem',
+                      fontWeight: 900,
+                      color: isWhite ? 'rgba(15, 23, 42, 0.2)' : 'rgba(255, 255, 255, 0.4)',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {step.stepNum}
+                  </span>
                 </div>
+
+                {/* Step Title */}
+                <h3
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 800,
+                    color: step.color,
+                    lineHeight: 1.35,
+                    margin: 0,
+                  }}
+                >
+                  {step.title}
+                </h3>
+
+                {/* Step Description */}
+                <p
+                  style={{
+                    fontSize: '0.925rem',
+                    color: step.descColor || (isWhite ? '#64748b' : 'rgba(255, 255, 255, 0.9)'),
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {step.desc}
+                </p>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
-
-      {/* Embedded Styles with Native Continuous Dashed Line Flow */}
-      <style>{`
-        .rt-compact-process-canvas {
-          position: relative;
-          width: 100%;
-          min-height: 490px;
-          margin-top: 10px;
-        }
-
-        /* Heading Reveal */
-        .rt-heading-entry {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .is-inview .rt-heading-entry {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        /* Horizontal X-Axis Line */
-        .rt-x-axis-line {
-          position: absolute;
-          top: 36px;
-          left: 0;
-          right: 0;
-          height: 1px;
-          border-top: 1.5px dashed rgba(173, 180, 216, 0.85);
-          z-index: 1;
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-        }
-        .is-inview .rt-x-axis-line {
-          transform: scaleX(1);
-        }
-
-        /* 4 Column Grid */
-        .rt-columns-track {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          position: relative;
-          width: 100%;
-          height: 100%;
-        }
-
-        .rt-column-item {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          position: relative;
-          height: 100%;
-        }
-
-        .rt-col-header {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding-bottom: 12px;
-          z-index: 2;
-          opacity: 0;
-          transform: translateY(-8px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .is-inview .rt-col-header {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .rt-col-badge {
-          font-size: 11px;
-          font-weight: 700;
-          color: #1833fe;
-          background: rgba(24, 51, 254, 0.08);
-          padding: 2px 6px;
-          border-radius: 4px;
-        }
-
-        .rt-col-title {
-          font-size: 13.5px;
-          font-weight: 600;
-          color: #475569;
-        }
-
-        /* Continuous Dashed Guidelines matching About page */
-        .rt-dashed-line-track {
-          position: relative;
-          width: 100%;
-          height: 450px;
-          display: flex;
-          align-items: flex-start;
-        }
-
-        .rt-dashed-line {
-          width: 1px;
-          border-left: 1.5px dashed rgba(173, 180, 216, 0.85);
-          border-right: none;
-          height: 100%;
-          margin-left: 12px;
-          transform: scaleY(0);
-          transform-origin: top;
-          transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .is-inview .rt-dashed-line {
-          transform: scaleY(1);
-        }
-
-        .rt-dashed-line.line-1 { transition-delay: 0.10s; }
-        .rt-dashed-line.line-2 { transition-delay: 0.20s; }
-        .rt-dashed-line.line-3 { transition-delay: 0.30s; }
-        .rt-dashed-line.line-4 { transition-delay: 0.40s; }
-
-        /* Floating Cards Overlay */
-        .rt-cascade-overlay {
-          position: absolute;
-          inset: 38px 0 0 0;
-          pointer-events: auto;
-        }
-
-        /* Card Entry Animation matching About Page Flow */
-        .rt-custom-process-card {
-          position: absolute;
-          max-width: 350px;
-          width: 88%;
-          padding: 16px 20px;
-          border-radius: 16px;
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          cursor: pointer;
-          opacity: 0;
-          transform: translateY(30px) scale(0.96);
-          transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1),
-                      box-shadow 0.45s ease,
-                      opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1);
-          will-change: transform, opacity, box-shadow;
-          z-index: 5;
-        }
-
-        .is-inview .rt-custom-process-card {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-
-        .rt-custom-process-card:hover {
-          transform: translateY(-5px) scale(1.02) !important;
-          z-index: 10;
-        }
-
-        .rt-card-icon-pill {
-          width: 36px;
-          height: 36px;
-          min-width: 36px;
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.18);
-          backdrop-filter: blur(4px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 2px;
-          transition: transform 0.4s ease;
-        }
-        .rt-custom-process-card:hover .rt-card-icon-pill {
-          transform: scale(1.1);
-        }
-
-        .rt-custom-process-card:nth-child(3) .rt-card-icon-pill {
-          background: rgba(24, 51, 254, 0.08);
-        }
-
-        .rt-card-text-group {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-
-        .rt-card-title {
-          font-size: 15px;
-          font-weight: 700;
-          line-height: 1.3;
-        }
-
-        .rt-card-desc {
-          font-size: 12.8px;
-          line-height: 1.45;
-          margin: 0;
-        }
-
-        /* ── Mobile / Tablet Responsive Fallback ── */
-        @media (max-width: 991px) {
-          .rt-compact-process-canvas {
-            min-height: auto;
-          }
-          .rt-columns-track {
-            display: none;
-          }
-          .rt-cascade-overlay {
-            position: static;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-          }
-          .rt-custom-process-card {
-            position: static !important;
-            max-width: 100% !important;
-            width: 100% !important;
-            inset: auto !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

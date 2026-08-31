@@ -177,7 +177,7 @@ export default async function CustomSoftwarePage() {
         <CustomSoftwareAbout data={content.about} />
         <CustomSoftwareFeatures data={content.process} />
         <CustomSoftwareCore />
-        <ProjectsSection hideFilter={true} categoryFilter={["Software Development"]} />
+        <ProjectsSection hideFilter={true} categoryFilter={["Custom Software"]} />
         <CustomSoftwareTestimonial data={content.testimonials} />
         <CustomSoftwareFAQ faqs={content.faqs} />
       </main>

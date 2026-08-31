@@ -121,34 +121,25 @@ export default function DigitalMarketingStackTab({
             paddingBottom: '12px',
           }}
         >
-          Stack Section Header
+          Marketing Stack &amp; Tool Integrations Header
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           <div>
-            <label style={labelStyle}>Pill Badge</label>
-            <input
-              style={inputStyle}
-              value={stack.badgePillText || ''}
-              onChange={(e) => handleHeaderChange('badgePillText', e.target.value)}
-              placeholder="e.g. MARKETING ENGINE"
-            />
-          </div>
-          <div>
-            <label style={labelStyle}>Sub Badge</label>
+            <label style={labelStyle}>Sub Badge Text</label>
             <input
               style={inputStyle}
               value={stack.subBadgeText || ''}
               onChange={(e) => handleHeaderChange('subBadgeText', e.target.value)}
-              placeholder="e.g. tools & platforms"
+              placeholder="e.g. marketing stack"
             />
           </div>
-          <div style={{ gridColumn: '1 / -1' }}>
-            <label style={labelStyle}>Headline</label>
+          <div>
+            <label style={labelStyle}>Section Headline</label>
             <input
               style={inputStyle}
               value={stack.headline || ''}
               onChange={(e) => handleHeaderChange('headline', e.target.value)}
-              placeholder="e.g. Powered by Industry-Leading Tech Stack"
+              placeholder="e.g. We work with the tools your business already uses"
             />
           </div>
         </div>

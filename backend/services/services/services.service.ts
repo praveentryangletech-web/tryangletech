@@ -9,6 +9,7 @@ import {
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
   DigitalMarketingContentDTO,
+  GraphicsDesigningContentDTO,
 } from './services.types';
 import {
   DEFAULT_SERVICE_MAIN_CONTENT,
@@ -17,6 +18,7 @@ import {
   DEFAULT_MOBILE_APP_CONTENT,
   DEFAULT_CUSTOM_SOFTWARE_CONTENT,
   DEFAULT_DIGITAL_MARKETING_CONTENT,
+  DEFAULT_GRAPHICS_DESIGNING_CONTENT,
 } from './services.defaults';
 
 
@@ -1309,6 +1311,9 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
    */
   async getSubServiceContent(slug: string): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'graphics-designing') {
+      return this.getGraphicsDesigningContent();
+    }
     if (cleanSlug === 'digital-marketing') {
       return this.getDigitalMarketingContent();
     }
@@ -1329,6 +1334,9 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
    */
   async updateSubServiceContent(slug: string, payload: any): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'graphics-designing') {
+      return this.updateGraphicsDesigningContent(payload);
+    }
     if (cleanSlug === 'digital-marketing') {
       return this.updateDigitalMarketingContent(payload);
     }
@@ -1599,6 +1607,203 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
       },
     };
   },
+
+  /**
+   * 100% Database-Driven Graphics Designing Content
+   */
+  async getGraphicsDesigningContent(): Promise<GraphicsDesigningContentDTO> {
+    this.ensureTable();
+
+    const cacheKey = 'services:sub:graphics-designing';
+    const cached = servicesCache.get<GraphicsDesigningContentDTO>(cacheKey);
+    if (cached) return cached.data;
+
+    try {
+      const rows: any[] = await db.$queryRawUnsafe(
+        `SELECT * FROM "PageContent" WHERE "slug" = $1 LIMIT 1;`,
+        'service-graphics-designing'
+      );
+
+      if (rows && rows.length > 0) {
+        const row = rows[0];
+        const data: GraphicsDesigningContentDTO = {
+          id: row.slug,
+          slug: 'graphics-designing',
+          hero: row.hero ? (typeof row.hero === 'string' ? JSON.parse(row.hero) : row.hero) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.hero,
+          offerings: row.services ? (typeof row.services === 'string' ? JSON.parse(row.services) : row.services) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.offerings,
+          about: row.about ? (typeof row.about === 'string' ? JSON.parse(row.about) : row.about) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.about,
+          capabilities: row.whyChooseUs ? (typeof row.whyChooseUs === 'string' ? JSON.parse(row.whyChooseUs) : row.whyChooseUs) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.capabilities,
+          core: row.howWeWork ? (typeof row.howWeWork === 'string' ? JSON.parse(row.howWeWork) : row.howWeWork) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.core,
+          stats: row.techStack ? (typeof row.techStack === 'string' ? JSON.parse(row.techStack) : row.techStack) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.stats,
+          testimonials: row.testimonials ? (typeof row.testimonials === 'string' ? JSON.parse(row.testimonials) : row.testimonials) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.testimonials,
+          faqs: row.faqs ? (typeof row.faqs === 'string' ? JSON.parse(row.faqs) : row.faqs) : DEFAULT_GRAPHICS_DESIGNING_CONTENT.faqs,
+          metaTitle: row.metaTitle || DEFAULT_GRAPHICS_DESIGNING_CONTENT.metaTitle,
+          metaDescription: row.metaDescription || DEFAULT_GRAPHICS_DESIGNING_CONTENT.metaDescription,
+          keywords: Array.isArray(row.keywords) ? row.keywords : DEFAULT_GRAPHICS_DESIGNING_CONTENT.keywords,
+          canonicalUrl: row.postalCode ? `https://tryangletech.com${row.postalCode}` : DEFAULT_GRAPHICS_DESIGNING_CONTENT.canonicalUrl,
+          ogImage: row.image || DEFAULT_GRAPHICS_DESIGNING_CONTENT.ogImage,
+          ogImageAlt: row.imageAlt || DEFAULT_GRAPHICS_DESIGNING_CONTENT.ogImageAlt,
+          isPublished: row.isPublished ?? true,
+          updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+        };
+
+        const entry = servicesCache.set(cacheKey, data);
+        data.etag = entry.etag;
+        return data;
+      }
+    } catch (err) {
+      console.warn('[ServicesService] DB error reading service-graphics-designing, fallback to defaults:', err);
+    }
+
+    const fallback = { ...DEFAULT_GRAPHICS_DESIGNING_CONTENT };
+    const entry = servicesCache.set(cacheKey, fallback);
+    fallback.etag = entry.etag;
+    return fallback;
+  },
+
+  /**
+   * Atomic Superadmin Mutation for Graphics Designing
+   */
+  async updateGraphicsDesigningContent(payload: Partial<GraphicsDesigningContentDTO>): Promise<GraphicsDesigningContentDTO> {
+    this.ensureTable();
+
+    const current = await this.getGraphicsDesigningContent();
+    const updated: GraphicsDesigningContentDTO = {
+      ...current,
+      hero: payload.hero ? { ...current.hero, ...payload.hero } : current.hero,
+      offerings: payload.offerings ? { ...current.offerings, ...payload.offerings } : current.offerings,
+      about: payload.about ? { ...current.about, ...payload.about } : current.about,
+      capabilities: payload.capabilities ? { ...current.capabilities, ...payload.capabilities } : current.capabilities,
+      core: payload.core ? { ...current.core, ...payload.core } : current.core,
+      stats: payload.stats ? { ...current.stats, ...payload.stats } : current.stats,
+      testimonials: payload.testimonials ? { ...current.testimonials, ...payload.testimonials } : current.testimonials,
+      faqs: Array.isArray(payload.faqs) ? payload.faqs : current.faqs,
+      metaTitle: payload.metaTitle ?? current.metaTitle,
+      metaDescription: payload.metaDescription ?? current.metaDescription,
+      keywords: Array.isArray(payload.keywords) ? payload.keywords : current.keywords,
+      canonicalUrl: payload.canonicalUrl ?? current.canonicalUrl,
+      ogImage: payload.ogImage ?? current.ogImage,
+      ogImageAlt: payload.ogImageAlt ?? current.ogImageAlt,
+      isPublished: payload.isPublished ?? current.isPublished,
+      updatedAt: new Date().toISOString(),
+    };
+
+    try {
+      await db.$executeRawUnsafe(
+        `
+        INSERT INTO "PageContent" (
+          "slug", "pageType", "city", "region", "postalCode",
+          "hero", "about", "services", "whyChooseUs", "howWeWork", "techStack", "testimonials", "faqs",
+          "metaTitle", "metaDescription", "keywords", "isPublished", "updatedAt"
+        ) VALUES (
+          $1, 'SERVICE_SUB', 'Graphics Designing & UI/UX Experience', 'Creative & Design', '/service/graphics-designing',
+          $2::jsonb, $3::jsonb, $4::jsonb, $5::jsonb, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb,
+          $10, $11, $12::text[], $13, NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "hero" = EXCLUDED."hero",
+          "about" = EXCLUDED."about",
+          "services" = EXCLUDED."services",
+          "whyChooseUs" = EXCLUDED."whyChooseUs",
+          "howWeWork" = EXCLUDED."howWeWork",
+          "techStack" = EXCLUDED."techStack",
+          "testimonials" = EXCLUDED."testimonials",
+          "faqs" = EXCLUDED."faqs",
+          "metaTitle" = EXCLUDED."metaTitle",
+          "metaDescription" = EXCLUDED."metaDescription",
+          "keywords" = EXCLUDED."keywords",
+          "isPublished" = EXCLUDED."isPublished",
+          "updatedAt" = NOW();
+      `,
+        'service-graphics-designing',
+        JSON.stringify(updated.hero),
+        JSON.stringify(updated.about),
+        JSON.stringify(updated.offerings),
+        JSON.stringify(updated.capabilities),
+        JSON.stringify(updated.core),
+        JSON.stringify(updated.stats),
+        JSON.stringify(updated.testimonials),
+        JSON.stringify(updated.faqs),
+        updated.metaTitle,
+        updated.metaDescription,
+        updated.keywords,
+        updated.isPublished
+      );
+    } catch (err) {
+      console.error('[ServicesService] DB error saving service-graphics-designing:', err);
+      throw new Error('Failed to save graphics designing service content to database.');
+    }
+
+    servicesCache.clear();
+    const entry = servicesCache.set('services:sub:graphics-designing', updated);
+    updated.etag = entry.etag;
+    return updated;
+  },
+
+  /**
+   * Dynamic metadata for Graphics Designing Sub-Service Page
+   */
+  async generateGraphicsDesigningMetadata(): Promise<Metadata> {
+    const data = await this.getGraphicsDesigningContent();
+    const title = data.metaTitle || DEFAULT_GRAPHICS_DESIGNING_CONTENT.metaTitle;
+    const description = data.metaDescription || DEFAULT_GRAPHICS_DESIGNING_CONTENT.metaDescription;
+    const keywords = data.keywords || DEFAULT_GRAPHICS_DESIGNING_CONTENT.keywords;
+    const canonical = data.canonicalUrl || 'https://tryangletech.com/service/graphics-designing';
+    const ogImgUrl = data.ogImage || '/service-2-assets/69142d3301921d8eace15477_home three hero.webp';
+    const ogImgAlt = data.ogImageAlt || title;
+
+    return {
+      title,
+      description,
+      keywords,
+      alternates: {
+        canonical,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        siteName: 'TryangleTech',
+        type: 'website',
+        locale: 'en_US',
+        images: [
+          {
+            url: ogImgUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImgAlt,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImgUrl],
+      },
+      other: {
+        'geo.region': 'IN-GJ',
+        'geo.placename': 'Ahmedabad',
+        'geo.position': '23.0225;72.5714',
+        'ICBM': '23.0225, 72.5714',
+        'rating': 'general',
+        'revisit-after': '7 days',
+      },
+    };
+  },
 };
+
 
 

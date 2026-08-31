@@ -16,4 +16,8 @@ export * from './custom-software';
 // Digital Marketing Service Page CMS Tabs (/superadmin/services/digital-marketing)
 export * from './digital-marketing';
 
+// Graphics Designing Service Page CMS Tabs (/superadmin/services/graphics-designing)
+export * from './graphics-designing';
+
+
 

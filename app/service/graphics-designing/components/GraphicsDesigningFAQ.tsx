@@ -1,18 +1,20 @@
 'use client';
-import Link from "next/link";
 import React, { useState } from 'react';
-import Image from "next/image";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
+import { GraphicsDesigningFaqItem } from "@/backend/services/services/services.types";
 
+interface GraphicsDesigningFAQProps {
+  faqs?: GraphicsDesigningFaqItem[];
+}
 
-export default function GraphicsDesigningFAQ() {
+export default function GraphicsDesigningFAQ({ faqs: initialFaqs }: GraphicsDesigningFAQProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  const faqs = [
+  const faqs = initialFaqs && initialFaqs.length > 0 ? initialFaqs : [
     {
       q: 'What types of graphic design services do you offer?',
       a: 'We offer a full spectrum of graphic design services, including logo design, brand identity packages, marketing materials (flyers, brochures, banners), social media graphics, UI/UX design, and custom illustrations.',
@@ -106,23 +108,6 @@ export default function GraphicsDesigningFAQ() {
           </div>
         </div>
       </section>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.q,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.a
-              }
-            }))
-          })
-        }}
-      />
     </>
   );
 }

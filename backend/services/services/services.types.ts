@@ -673,6 +673,170 @@ export interface DigitalMarketingContentDTO {
   etag?: string;
 }
 
+// -------------------------------------------------------------
+// GRAPHICS DESIGNING DTOs & SECTION TYPES (/service/graphics-designing)
+// -------------------------------------------------------------
+
+export interface GraphicsDesigningHeroStats {
+  value: string;
+  label: string;
+}
+
+export interface GraphicsDesigningHeroImages {
+  col1Img1: string;
+  col1Img2: string;
+  col2Img1: string;
+  col2Img2: string;
+  col3Img1: string;
+  col3Img2: string;
+  col4Img1: string;
+  col4Img2: string;
+  col4Badge: string;
+  col5Img1: string;
+  col5Img2: string;
+  bgImage: string;
+}
+
+export interface GraphicsDesigningMarqueeLogo {
+  id: string;
+  name: string;
+  src: string;
+}
+
+export interface GraphicsDesigningHeroSection {
+  badgePillText: string;
+  subBadgeText: string;
+  headline: string;
+  headlineHighlight: string;
+  subheadline: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  secondaryBtnText: string;
+  secondaryBtnLink: string;
+  stats: GraphicsDesigningHeroStats[];
+  images: GraphicsDesigningHeroImages;
+  marqueeLogos: GraphicsDesigningMarqueeLogo[];
+}
+
+export interface GraphicsDesigningOfferingCard {
+  id: string;
+  title: string;
+  desc: string;
+  points: string[];
+  iconSvgName?: string;
+}
+
+export interface GraphicsDesigningOfferingsSection {
+  subBadgeText: string;
+  headline: string;
+  cards: GraphicsDesigningOfferingCard[];
+}
+
+export interface GraphicsDesigningAboutFeature {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export interface GraphicsDesigningAboutSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  image: string;
+  features: GraphicsDesigningAboutFeature[];
+  buttonText: string;
+  buttonLink: string;
+}
+
+export interface GraphicsDesigningCapabilityItem {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export interface GraphicsDesigningCapabilitiesSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  items: GraphicsDesigningCapabilityItem[];
+  previewImages: string[];
+}
+
+export interface GraphicsDesigningCorePoint {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export interface GraphicsDesigningCoreSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  points: GraphicsDesigningCorePoint[];
+  buttonText: string;
+  buttonLink: string;
+  rightImage: string;
+}
+
+export interface GraphicsDesigningStatItem {
+  id: string;
+  value: string;
+  label: string;
+}
+
+export interface GraphicsDesigningStatsSection {
+  subBadgeText: string;
+  headline: string;
+  stats: GraphicsDesigningStatItem[];
+}
+
+export interface GraphicsDesigningTestimonialItem {
+  id: string;
+  authorName: string;
+  authorRole: string;
+  clientImage: string;
+  rating: number;
+  comment: string;
+}
+
+export interface GraphicsDesigningTestimonialsSection {
+  subBadgeText: string;
+  headline: string;
+  testimonials: GraphicsDesigningTestimonialItem[];
+}
+
+export interface GraphicsDesigningFaqItem {
+  id?: string;
+  q: string;
+  a: string;
+}
+
+export interface GraphicsDesigningContentDTO {
+  id: string;
+  slug: string;
+  hero: GraphicsDesigningHeroSection;
+  offerings: GraphicsDesigningOfferingsSection;
+  about: GraphicsDesigningAboutSection;
+  capabilities: GraphicsDesigningCapabilitiesSection;
+  core: GraphicsDesigningCoreSection;
+  stats: GraphicsDesigningStatsSection;
+  testimonials: GraphicsDesigningTestimonialsSection;
+  faqs: GraphicsDesigningFaqItem[];
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  isPublished?: boolean;
+  updatedAt?: string;
+  etag?: string;
+}
+
+
 
 
 

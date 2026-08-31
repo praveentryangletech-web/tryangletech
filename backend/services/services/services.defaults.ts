@@ -5,6 +5,7 @@ import {
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
   DigitalMarketingContentDTO,
+  GraphicsDesigningContentDTO,
 } from './services.types';
 
 
@@ -1186,6 +1187,294 @@ export const DEFAULT_DIGITAL_MARKETING_CONTENT: DigitalMarketingContentDTO = {
   isPublished: true,
   updatedAt: new Date().toISOString(),
 };
+
+export const DEFAULT_GRAPHICS_DESIGNING_CONTENT: GraphicsDesigningContentDTO = {
+  id: 'service-graphics-designing',
+  slug: 'graphics-designing',
+  hero: {
+    badgePillText: 'Creative Studio · Ahmedabad',
+    subBadgeText: 'Graphic Design Services',
+    headline: 'Designs that make your brand',
+    headlineHighlight: 'impossible to ignore',
+    subheadline:
+      "Tryangletech's design team crafts stunning logos, brand identities, marketing materials, and digital visuals — helping Ahmedabad businesses stand out, build trust, and convert more customers.",
+    primaryBtnText: 'Start your project',
+    primaryBtnLink: '/contact',
+    secondaryBtnText: 'View our work',
+    secondaryBtnLink: '/portfolio',
+    stats: [
+      { value: '500+', label: 'Projects Delivered' },
+      { value: '200+', label: 'Brands Elevated' },
+      { value: '99.9%', label: 'Client Satisfaction' },
+    ],
+    images: {
+      col1Img1: '/portfolio/tattvam-arts.webp',
+      col1Img2: '/portfolio/graphic-eoffice.webp',
+      col2Img1: '/portfolio/graphic-sasa.webp',
+      col2Img2: '/portfolio/makewell-elevators.webp',
+      col3Img1: '/portfolio/graphic-greenpackwell.gif',
+      col3Img2: '/portfolio/graphic-1.webp',
+      col4Img1: '/portfolio/graphic-uttarayan.gif',
+      col4Img2: '/portfolio/7d-design-studios.webp',
+      col4Badge: '/service-2-assets/6909cabfeee3a35808ad7eb7_Group 2147225566.webp',
+      col5Img1: '/portfolio/graphic-shrahav.webp',
+      col5Img2: '/portfolio/varnet-enterprise.webp',
+      bgImage: '/service-2-assets/69142d3301921d8eace15477_home three hero.webp',
+    },
+    marqueeLogos: [
+      { id: 'gm-1', name: 'Logo 1', src: '/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg' },
+      { id: 'gm-2', name: 'Logo 2', src: '/service-2-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg' },
+      { id: 'gm-3', name: 'Logo 3', src: '/service-2-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg' },
+      { id: 'gm-4', name: 'Logo 4', src: '/service-2-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg' },
+      { id: 'gm-5', name: 'REZOTA', src: '/service-2-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg' },
+      { id: 'gm-6', name: 'Logo 6', src: '/service-2-assets/68ef271276a33d103013fa46_Group 1597884750.svg' },
+    ],
+  },
+  offerings: {
+    subBadgeText: 'our design process',
+    headline: 'A strategic approach to brilliant graphic design',
+    cards: [
+      {
+        id: 'offering-1',
+        title: 'Logo Design',
+        desc: 'A memorable logo is the cornerstone of your brand. We craft distinctive, versatile logos along with complete brand guidelines, color systems, and scalable vector assets for digital and print.',
+        points: [
+          'Scalable Vector Files (AI, SVG, EPS, PDF)',
+          'Comprehensive Brand Color & Typography System',
+          'Full Commercial Ownership & Copyrights',
+        ],
+        iconSvgName: 'logo',
+      },
+      {
+        id: 'offering-2',
+        title: 'Brochure Design',
+        desc: "Communicate your brand's core message and offerings with expertly structured corporate brochures, bi-folds, tri-folds, and product catalogs designed to engage stakeholders and drive conversions.",
+        points: [
+          'Bi-Fold, Tri-Fold & Multi-Page Layouts',
+          'CMYK Print-Ready 300 DPI Deliverables',
+          'Interactive Digital PDFs for Web & Email',
+        ],
+        iconSvgName: 'brochure',
+      },
+      {
+        id: 'offering-3',
+        title: 'Visiting Card Design',
+        desc: 'Make an unforgettable first impression at every networking opportunity with premium business card designs tailored to reflect your executive stature and distinct corporate brand identity.',
+        points: [
+          'Custom Single & Double-Sided Layouts',
+          'Spot UV, Foil Stamping & Emboss Ready',
+          'Standard & Custom Die-Cut Dimensions',
+        ],
+        iconSvgName: 'card',
+      },
+      {
+        id: 'offering-4',
+        title: 'Letterhead Design',
+        desc: 'Ensure your official business correspondence, proposals, invoices, and contracts project authority and trust with polished, cohesive corporate stationery suites and editable templates.',
+        points: [
+          'Editable Microsoft Word & Google Docs Formats',
+          'High-Resolution Print-Ready Vector PDF Bleeds',
+          'Matching Envelopes & Presentation Folders',
+        ],
+        iconSvgName: 'letterhead',
+      },
+      {
+        id: 'offering-5',
+        title: 'Label Design',
+        desc: 'Make your retail products stand out on crowded shelves and online storefronts with striking, regulatory-compliant product labels, pouch packaging, bottle sleeves, and custom box artwork.',
+        points: [
+          'Retail-Ready Packaging & Pouch Graphics',
+          'Barcode, Nutrition & Regulatory Compliance',
+          'Realistic 3D Product Presentation Mockups',
+        ],
+        iconSvgName: 'label',
+      },
+      {
+        id: 'offering-6',
+        title: 'Hoarding Design',
+        desc: 'Capture massive attention across highways, airport transit hubs, and exhibition centers with large-format outdoor billboards, building wraps, and expo backdrops engineered for maximum impact.',
+        points: [
+          'Ultra-High-Resolution Large-Scale Vectors',
+          'Highway Billboards, Unipoles & Bus Wraps',
+          'Trade Show Booths & Expo Backdrop Displays',
+        ],
+        iconSvgName: 'hoarding',
+      },
+    ],
+  },
+  about: {
+    subBadgeText: 'Why choose us for design',
+    headline: 'Design that speaks before your business says a word',
+    description:
+      "At Tryangletech, we pair sharp creative thinking with a deep understanding of your brand. Every pixel we place is intentional — designed to communicate your value and win your audience's trust at first glance.",
+    image: '/service-2-assets/6908aeda67bc5beddc6c96f6_taskopia-service-two-why-choos.png',
+    features: [
+      {
+        id: 'feat-1',
+        title: '100% Custom & Original Designs',
+        desc: 'We never use templates. Every logo, banner, and brand kit is built from scratch, tailored exclusively to your business identity.',
+        icon: '/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg',
+      },
+      {
+        id: 'feat-2',
+        title: 'Timely Delivery & Revisions',
+        desc: "Every design we create is unique, tailored specifically to your brand's personality and designed to stand out in a crowded market.",
+        icon: '/service-2-assets/6916f191d4b3b4e4b2cee5b2_Vector (35).svg',
+      },
+    ],
+    buttonText: 'Get started today',
+    buttonLink: '/contact',
+  },
+  capabilities: {
+    subBadgeText: 'our services',
+    headline: 'Everything you need to build a powerful visual brand',
+    description:
+      'From high-impact social media creatives and video editing to complete brand identities and large-scale exhibition banners, our design team delivers visuals that captivate and convert.',
+    items: [
+      {
+        id: 'cap-1',
+        title: 'Social Media Creation',
+        desc: 'We design high-converting, scroll-stopping social media posts, carousel decks, story templates, and ad creatives tailored to grow your followers and drive engagement.',
+        icon: '/service-2-assets/69099fe756beabe4238c7528_clipboard (1) 1.svg',
+      },
+      {
+        id: 'cap-2',
+        title: 'Video Editing',
+        desc: 'From cinematic brand films and viral short-form reels to corporate explainers and event highlights, our video editors craft polished visual stories that captivate.',
+        icon: '/service-2-assets/69099fe7ba9794ca9c0b34c5_database (1) 2.svg',
+      },
+      {
+        id: 'cap-3',
+        title: 'Branding',
+        desc: 'We build cohesive brand identities from the ground up — including memorable logo design, custom typography palettes, tone-of-voice guidelines, and comprehensive brand books.',
+        icon: '/service-2-assets/69099fe7cf95879c6cb6f865_lock (2) 1.svg',
+      },
+      {
+        id: 'cap-4',
+        title: 'Exhibition Banner',
+        desc: 'High-impact exhibition banners, roll-up standees, trade show backdrop displays, and large-format promotional signage engineered to draw crowds and maximize event visibility.',
+        icon: '/service-2-assets/69099fe7e885083e2015cd2c_activity 2.svg',
+      },
+    ],
+    previewImages: [
+      '/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp',
+      '/service-2-assets/691d87288f25a14bb8d7352e_taskopiya-service-two-task.webp',
+      '/service-2-assets/69132a3fea5303d0e305dc91_service v3.webp',
+      '/service-2-assets/69132a3f107f32facf60e873_service v4.webp',
+    ],
+  },
+  core: {
+    subBadgeText: 'creative excellence',
+    headline: 'Great design is the silent ambassador of your brand',
+    description:
+      'Your visuals are often the first impression a customer has of your business. At Tryangletech, we make sure that first impression counts — every design we produce is crafted to communicate trust, quality, and professionalism.',
+    points: [
+      {
+        id: 'core-1',
+        title: 'Purpose-Driven Design',
+        desc: 'Every design choice — color, font, layout — is intentional and aligned with your brand strategy.',
+        icon: '/service-2-assets/6916f00db3051e5aed09bd3f_Group 2085663576.svg',
+      },
+      {
+        id: 'core-2',
+        title: 'Pixel-Perfect Execution',
+        desc: 'We sweat the small stuff. Clean lines, balanced compositions, and flawless finishes every time.',
+        icon: '/service-2-assets/6916ef876682eed2b2fd5911_Vector (34).svg',
+      },
+    ],
+    buttonText: 'Explore benefits',
+    buttonLink: '/about',
+    rightImage: '/service-2-assets/69097f69015c484147186fc7_taskopia-service-two-core.webp',
+  },
+  stats: {
+    subBadgeText: 'our numbers',
+    headline: 'Trusted by businesses across Ahmedabad for creative design that delivers real results',
+    stats: [
+      { id: 'stat-1', value: '500+', label: 'Design projects delivered' },
+      { id: 'stat-2', value: '200+', label: 'Brands elevated' },
+      { id: 'stat-3', value: '7+', label: 'Years of experience' },
+      { id: 'stat-4', value: '99.9%', label: 'Client satisfaction' },
+    ],
+  },
+  testimonials: {
+    subBadgeText: 'our testimonials',
+    headline: 'Customer experiences that speak for themselves',
+    testimonials: [
+      {
+        id: 'test-1',
+        authorName: 'Rohan Mehta',
+        authorRole: 'Founder, Tattvam Arts',
+        clientImage: '/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp',
+        rating: 5,
+        comment:
+          'Tryangletech completely revitalized our brand identity. From our logo to our luxury product packaging, their attention to detail was exceptional.',
+      },
+      {
+        id: 'test-2',
+        authorName: 'Ananya Patel',
+        authorRole: 'Marketing Director, eOffice Solutions',
+        clientImage: '/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp',
+        rating: 5,
+        comment:
+          'The corporate stationery and marketing brochures designed by Tryangletech gave us the professional edge we needed during investor pitches.',
+      },
+      {
+        id: 'test-3',
+        authorName: 'Vikram Shah',
+        authorRole: 'CEO, Makewell Elevators',
+        clientImage: '/service-2-assets/6900857a13043eba725f30f1_kloudera-home-one-testimonial-client-image.webp',
+        rating: 5,
+        comment:
+          'High-impact exhibition standees and large-format outdoor hoardings delivered ahead of schedule. Truly Ahmedabad’s top design studio.',
+      },
+    ],
+  },
+  faqs: [
+    {
+      id: 'faq-1',
+      q: 'What types of graphic design services do you offer?',
+      a: 'We offer a full spectrum of graphic design services, including logo design, brand identity packages, marketing materials (flyers, brochures, banners), social media graphics, UI/UX design, and custom illustrations.',
+    },
+    {
+      id: 'faq-2',
+      q: 'How long does a typical design project take?',
+      a: 'Timelines vary depending on the complexity of the project. A standard logo design may take 1-2 weeks, while a comprehensive brand identity package could take 3-4 weeks. We always provide a clear timeline before starting.',
+    },
+    {
+      id: 'faq-3',
+      q: 'Do I get the source files for my designs?',
+      a: 'Absolutely! Upon project completion and final payment, we provide all high-resolution files and the original source files (like .AI, .PSD, or .Figma) so you have full ownership of your assets.',
+    },
+    {
+      id: 'faq-4',
+      q: 'What is your revision process?',
+      a: 'We believe in a collaborative approach. Most of our design packages include a set number of revision rounds. We present our concepts, gather your feedback, and make refinements until the design aligns perfectly with your vision.',
+    },
+    {
+      id: 'faq-5',
+      q: 'Do you offer printing services as well?',
+      a: 'While we specialize in the digital creation of print-ready designs, we partner with trusted local and online printers. We can either manage the printing process for you or provide you with the exact files you need to take to a printer of your choice.',
+    },
+  ],
+  metaTitle: 'Graphic Design Studio in Ahmedabad | Branding & UI/UX | Tryangle Tech',
+  metaDescription:
+    'Creative graphic design services in Ahmedabad: Custom logo design, brand identity, marketing collaterals, packaging, and digital visuals tailored to scale your brand.',
+  keywords: [
+    'Graphic Design Agency Ahmedabad',
+    'Logo Design Ahmedabad',
+    'Brand Identity Design Studio',
+    'Brochure Design Gujarat',
+    'Packaging Design Agency',
+    'Corporate Stationery Design',
+    'UI UX Design Studio Ahmedabad',
+  ],
+  canonicalUrl: 'https://tryangletech.com/service/graphics-designing',
+  ogImage: '/service-2-assets/69142d3301921d8eace15477_home three hero.webp',
+  ogImageAlt: 'TryangleTech Graphics Designing preview banner',
+  isPublished: true,
+  updatedAt: new Date().toISOString(),
+};
+
 
 
 

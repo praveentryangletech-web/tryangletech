@@ -44,6 +44,15 @@ import {
   DigitalMarketingStackTab,
   DigitalMarketingFaqsTab,
   DigitalMarketingSeoTab,
+  GraphicsDesigningHeroTab,
+  GraphicsDesigningOfferingsTab,
+  GraphicsDesigningAboutTab,
+  GraphicsDesigningCapabilitiesTab,
+  GraphicsDesigningCoreTab,
+  GraphicsDesigningStatsTab,
+  GraphicsDesigningTestimonialsTab,
+  GraphicsDesigningFaqsTab,
+  GraphicsDesigningSeoTab,
   SubServiceSkeleton,
   SaveIcon,
   ExternalLinkIcon,
@@ -63,6 +72,7 @@ function ServiceEditorInner() {
   const rawSlug = (params?.slug as string) || 'web-development';
   const slug = rawSlug.replace(/^service-/, '');
   const isMain = slug === 'main';
+  const isGraphicsDesigning = slug === 'graphics-designing';
   const isDigitalMarketing = slug === 'digital-marketing';
   const isMobileApp = slug === 'mobile-application';
   const isCustomSoftware = slug === 'custom-software';
@@ -180,8 +190,22 @@ function ServiceEditorInner() {
     { id: 'seo', label: '8. SEO & Social Meta' },
   ];
 
+  const graphicsDesigningTabs = [
+    { id: 'hero', label: '1. Hero & Branding' },
+    { id: 'offerings', label: '2. Specialized Offerings' },
+    { id: 'about', label: '3. Why Choose Us' },
+    { id: 'capabilities', label: '4. Visual Capabilities' },
+    { id: 'core', label: '5. Creative Excellence' },
+    { id: 'stats', label: '6. Impact Metrics' },
+    { id: 'testimonials', label: '7. Client Testimonials' },
+    { id: 'faqs', label: '8. FAQs' },
+    { id: 'seo', label: '9. SEO & Social Meta' },
+  ];
+
   const tabs = isMain
     ? mainTabs
+    : isGraphicsDesigning
+    ? graphicsDesigningTabs
     : isDigitalMarketing
     ? digitalMarketingTabs
     : isCustomSoftware
@@ -408,6 +432,36 @@ function ServiceEditorInner() {
                 isPublished={isPublished}
                 setIsPublished={setIsPublished}
               />
+            )}
+          </>
+        ) : isGraphicsDesigning ? (
+          <>
+            {subActiveTab === 'hero' && (
+              <GraphicsDesigningHeroTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'offerings' && (
+              <GraphicsDesigningOfferingsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'about' && (
+              <GraphicsDesigningAboutTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'capabilities' && (
+              <GraphicsDesigningCapabilitiesTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'core' && (
+              <GraphicsDesigningCoreTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'stats' && (
+              <GraphicsDesigningStatsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'testimonials' && (
+              <GraphicsDesigningTestimonialsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'faqs' && (
+              <GraphicsDesigningFaqsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'seo' && (
+              <GraphicsDesigningSeoTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
           </>
         ) : isDigitalMarketing ? (

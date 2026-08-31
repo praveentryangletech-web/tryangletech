@@ -1,0 +1,9 @@
+export { default as GraphicsDesigningHeroTab } from './GraphicsDesigningHeroTab';
+export { default as GraphicsDesigningOfferingsTab } from './GraphicsDesigningOfferingsTab';
+export { default as GraphicsDesigningAboutTab } from './GraphicsDesigningAboutTab';
+export { default as GraphicsDesigningCapabilitiesTab } from './GraphicsDesigningCapabilitiesTab';
+export { default as GraphicsDesigningCoreTab } from './GraphicsDesigningCoreTab';
+export { default as GraphicsDesigningStatsTab } from './GraphicsDesigningStatsTab';
+export { default as GraphicsDesigningTestimonialsTab } from './GraphicsDesigningTestimonialsTab';
+export { default as GraphicsDesigningFaqsTab } from './GraphicsDesigningFaqsTab';
+export { default as GraphicsDesigningSeoTab } from './GraphicsDesigningSeoTab';

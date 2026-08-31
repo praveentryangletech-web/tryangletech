@@ -9,6 +9,7 @@ import {
   DEFAULT_MOBILE_APP_CONTENT,
   DEFAULT_CUSTOM_SOFTWARE_CONTENT,
   DEFAULT_DIGITAL_MARKETING_CONTENT,
+  DEFAULT_GRAPHICS_DESIGNING_CONTENT,
 } from '@/backend/services/services/services.defaults';
 import {
   ServiceMainContentDTO,
@@ -24,6 +25,7 @@ import {
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
   DigitalMarketingContentDTO,
+  GraphicsDesigningContentDTO,
 } from '@/backend/services/services/services.types';
 
 export interface ServicesContextType {
@@ -364,7 +366,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
     setIsSubServiceLoading(true);
     const cleanSlug = slug.replace(/^service-/, '');
     let defaultData: any = DEFAULT_WEB_DEV_CONTENT;
-    if (cleanSlug === 'digital-marketing') {
+    if (cleanSlug === 'graphics-designing') {
+      defaultData = DEFAULT_GRAPHICS_DESIGNING_CONTENT;
+    } else if (cleanSlug === 'digital-marketing') {
       defaultData = DEFAULT_DIGITAL_MARKETING_CONTENT;
     } else if (cleanSlug === 'custom-software') {
       defaultData = DEFAULT_CUSTOM_SOFTWARE_CONTENT;
@@ -404,7 +408,11 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         setSubServiceData(res.data);
         const name =
           res.data.hero?.subBadgeText ||
-          (cleanSlug === 'custom-software'
+          (cleanSlug === 'graphics-designing'
+            ? 'Graphics Designing'
+            : cleanSlug === 'digital-marketing'
+            ? 'Digital Marketing'
+            : cleanSlug === 'custom-software'
             ? 'Custom Software'
             : cleanSlug === 'mobile-application'
             ? 'Mobile Application'
@@ -632,6 +640,62 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         }
         return copy;
       });
+    } else if (mediaPickerTarget.startsWith('graphicsDesigning.')) {
+      const fieldPath = mediaPickerTarget.replace('graphicsDesigning.', '');
+      setSubServiceData((prev: any) => {
+        const copy = { ...prev };
+        if (fieldPath.startsWith('hero.images.')) {
+          const key = fieldPath.replace('hero.images.', '');
+          if (!copy.hero) copy.hero = {};
+          if (!copy.hero.images) copy.hero.images = {};
+          copy.hero.images[key] = url;
+        } else if (fieldPath.startsWith('hero.marqueeLogos.')) {
+          const parts = fieldPath.split('.');
+          const logoIdx = parseInt(parts[2], 10);
+          if (copy.hero?.marqueeLogos && copy.hero.marqueeLogos[logoIdx]) {
+            copy.hero.marqueeLogos[logoIdx].src = url;
+          }
+        } else if (fieldPath === 'about.image') {
+          if (!copy.about) copy.about = {};
+          copy.about.image = url;
+        } else if (fieldPath.startsWith('about.features.')) {
+          const parts = fieldPath.split('.');
+          const featIdx = parseInt(parts[2], 10);
+          if (copy.about?.features && copy.about.features[featIdx]) {
+            copy.about.features[featIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('capabilities.items.')) {
+          const parts = fieldPath.split('.');
+          const itemIdx = parseInt(parts[2], 10);
+          if (copy.capabilities?.items && copy.capabilities.items[itemIdx]) {
+            copy.capabilities.items[itemIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('capabilities.previewImages.')) {
+          const parts = fieldPath.split('.');
+          const imgIdx = parseInt(parts[2], 10);
+          if (!copy.capabilities) copy.capabilities = {};
+          if (!copy.capabilities.previewImages) copy.capabilities.previewImages = [];
+          copy.capabilities.previewImages[imgIdx] = url;
+        } else if (fieldPath === 'core.rightImage') {
+          if (!copy.core) copy.core = {};
+          copy.core.rightImage = url;
+        } else if (fieldPath.startsWith('core.points.')) {
+          const parts = fieldPath.split('.');
+          const pointIdx = parseInt(parts[2], 10);
+          if (copy.core?.points && copy.core.points[pointIdx]) {
+            copy.core.points[pointIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('testimonials.items.')) {
+          const parts = fieldPath.split('.');
+          const testIdx = parseInt(parts[2], 10);
+          if (copy.testimonials?.testimonials && copy.testimonials.testimonials[testIdx]) {
+            copy.testimonials.testimonials[testIdx].clientImage = url;
+          }
+        } else if (fieldPath === 'seo.ogImage') {
+          copy.ogImage = url;
+        }
+        return copy;
+      });
     }
     setIsMediaPickerOpen(false);
   };
@@ -652,7 +716,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
             id: slug,
             slug: cleanSlug,
             name:
-              cleanSlug === 'digital-marketing'
+              cleanSlug === 'graphics-designing'
+                ? 'Graphics Designing & UI/UX Experience'
+                : cleanSlug === 'digital-marketing'
                 ? 'Digital Marketing & Growth Strategy'
                 : cleanSlug === 'custom-software'
                 ? 'Custom Software & Enterprise Solutions'
@@ -663,7 +729,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
                 : cleanSlug,
             route: `/service/${cleanSlug}`,
             category:
-              cleanSlug === 'digital-marketing'
+              cleanSlug === 'graphics-designing'
+                ? 'Creative & Design'
+                : cleanSlug === 'digital-marketing'
                 ? 'Marketing & SEO'
                 : cleanSlug === 'custom-software'
                 ? 'Enterprise Engineering'

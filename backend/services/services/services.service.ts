@@ -8,6 +8,7 @@ import {
   WebDevContentDTO,
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
+  DigitalMarketingContentDTO,
 } from './services.types';
 import {
   DEFAULT_SERVICE_MAIN_CONTENT,
@@ -15,6 +16,7 @@ import {
   DEFAULT_WEB_DEV_CONTENT,
   DEFAULT_MOBILE_APP_CONTENT,
   DEFAULT_CUSTOM_SOFTWARE_CONTENT,
+  DEFAULT_DIGITAL_MARKETING_CONTENT,
 } from './services.defaults';
 
 
@@ -1307,6 +1309,9 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
    */
   async getSubServiceContent(slug: string): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'digital-marketing') {
+      return this.getDigitalMarketingContent();
+    }
     if (cleanSlug === 'custom-software') {
       return this.getCustomSoftwareContent();
     }
@@ -1324,6 +1329,9 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
    */
   async updateSubServiceContent(slug: string, payload: any): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'digital-marketing') {
+      return this.updateDigitalMarketingContent(payload);
+    }
     if (cleanSlug === 'custom-software') {
       return this.updateCustomSoftwareContent(payload);
     }
@@ -1334,6 +1342,198 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
       return this.updateWebDevContent(payload);
     }
     return this.updateWebDevContent(payload);
+  },
+
+  /**
+   * 100% Database-Driven Digital Marketing Content
+   */
+  async getDigitalMarketingContent(): Promise<DigitalMarketingContentDTO> {
+    this.ensureTable();
+
+    const cacheKey = 'services:sub:digital-marketing';
+    const cached = servicesCache.get<DigitalMarketingContentDTO>(cacheKey);
+    if (cached) return cached.data;
+
+    try {
+      const rows: any[] = await db.$queryRawUnsafe(
+        `SELECT * FROM "PageContent" WHERE "slug" = $1 LIMIT 1;`,
+        'service-digital-marketing'
+      );
+
+      if (rows && rows.length > 0) {
+        const row = rows[0];
+        const data: DigitalMarketingContentDTO = {
+          id: row.slug,
+          slug: 'digital-marketing',
+          hero: row.hero ? (typeof row.hero === 'string' ? JSON.parse(row.hero) : row.hero) : DEFAULT_DIGITAL_MARKETING_CONTENT.hero,
+          statement: row.about ? (typeof row.about === 'string' ? JSON.parse(row.about) : row.about) : DEFAULT_DIGITAL_MARKETING_CONTENT.statement,
+          offerings: row.services ? (typeof row.services === 'string' ? JSON.parse(row.services) : row.services) : DEFAULT_DIGITAL_MARKETING_CONTENT.offerings,
+          approach: row.whyChooseUs ? (typeof row.whyChooseUs === 'string' ? JSON.parse(row.whyChooseUs) : row.whyChooseUs) : DEFAULT_DIGITAL_MARKETING_CONTENT.approach,
+          whyUs: row.howWeWork ? (typeof row.howWeWork === 'string' ? JSON.parse(row.howWeWork) : row.howWeWork) : DEFAULT_DIGITAL_MARKETING_CONTENT.whyUs,
+          stack: row.techStack ? (typeof row.techStack === 'string' ? JSON.parse(row.techStack) : row.techStack) : DEFAULT_DIGITAL_MARKETING_CONTENT.stack,
+          faqs: row.faqs ? (typeof row.faqs === 'string' ? JSON.parse(row.faqs) : row.faqs) : DEFAULT_DIGITAL_MARKETING_CONTENT.faqs,
+          metaTitle: row.metaTitle || DEFAULT_DIGITAL_MARKETING_CONTENT.metaTitle,
+          metaDescription: row.metaDescription || DEFAULT_DIGITAL_MARKETING_CONTENT.metaDescription,
+          keywords: Array.isArray(row.keywords) ? row.keywords : DEFAULT_DIGITAL_MARKETING_CONTENT.keywords,
+          canonicalUrl: row.postalCode ? `https://tryangletech.com${row.postalCode}` : DEFAULT_DIGITAL_MARKETING_CONTENT.canonicalUrl,
+          ogImage: row.image || DEFAULT_DIGITAL_MARKETING_CONTENT.ogImage,
+          ogImageAlt: row.imageAlt || DEFAULT_DIGITAL_MARKETING_CONTENT.ogImageAlt,
+          isPublished: row.isPublished ?? true,
+          updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+        };
+
+        const entry = servicesCache.set(cacheKey, data);
+        data.etag = entry.etag;
+        return data;
+      }
+    } catch (err) {
+      console.warn('[ServicesService] DB error reading service-digital-marketing, fallback to defaults:', err);
+    }
+
+    const fallback = { ...DEFAULT_DIGITAL_MARKETING_CONTENT };
+    const entry = servicesCache.set(cacheKey, fallback);
+    fallback.etag = entry.etag;
+    return fallback;
+  },
+
+  /**
+   * Atomic Superadmin Mutation for Digital Marketing
+   */
+  async updateDigitalMarketingContent(payload: Partial<DigitalMarketingContentDTO>): Promise<DigitalMarketingContentDTO> {
+    this.ensureTable();
+
+    const current = await this.getDigitalMarketingContent();
+    const updated: DigitalMarketingContentDTO = {
+      ...current,
+      hero: payload.hero ? { ...current.hero, ...payload.hero } : current.hero,
+      statement: payload.statement ? { ...current.statement, ...payload.statement } : current.statement,
+      offerings: payload.offerings ? { ...current.offerings, ...payload.offerings } : current.offerings,
+      approach: payload.approach ? { ...current.approach, ...payload.approach } : current.approach,
+      whyUs: payload.whyUs ? { ...current.whyUs, ...payload.whyUs } : current.whyUs,
+      stack: payload.stack ? { ...current.stack, ...payload.stack } : current.stack,
+      faqs: Array.isArray(payload.faqs) ? payload.faqs : current.faqs,
+      metaTitle: payload.metaTitle ?? current.metaTitle,
+      metaDescription: payload.metaDescription ?? current.metaDescription,
+      keywords: Array.isArray(payload.keywords) ? payload.keywords : current.keywords,
+      canonicalUrl: payload.canonicalUrl ?? current.canonicalUrl,
+      ogImage: payload.ogImage ?? current.ogImage,
+      ogImageAlt: payload.ogImageAlt ?? current.ogImageAlt,
+      isPublished: payload.isPublished ?? current.isPublished,
+      updatedAt: new Date().toISOString(),
+    };
+
+    try {
+      await db.$executeRawUnsafe(
+        `
+        INSERT INTO "PageContent" (
+          "slug", "pageType", "city", "region", "postalCode",
+          "hero", "about", "services", "whyChooseUs", "howWeWork", "techStack", "faqs",
+          "metaTitle", "metaDescription", "keywords", "isPublished", "updatedAt"
+        ) VALUES (
+          $1, 'SERVICE_SUB', 'Digital Marketing & Growth Strategy', 'Marketing & SEO', '/service/digital-marketing',
+          $2::jsonb, $3::jsonb, $4::jsonb, $5::jsonb, $6::jsonb, $7::jsonb, $8::jsonb,
+          $9, $10, $11::text[], $12, NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "hero" = EXCLUDED."hero",
+          "about" = EXCLUDED."about",
+          "services" = EXCLUDED."services",
+          "whyChooseUs" = EXCLUDED."whyChooseUs",
+          "howWeWork" = EXCLUDED."howWeWork",
+          "techStack" = EXCLUDED."techStack",
+          "faqs" = EXCLUDED."faqs",
+          "metaTitle" = EXCLUDED."metaTitle",
+          "metaDescription" = EXCLUDED."metaDescription",
+          "keywords" = EXCLUDED."keywords",
+          "isPublished" = EXCLUDED."isPublished",
+          "updatedAt" = NOW();
+      `,
+        'service-digital-marketing',
+        JSON.stringify(updated.hero),
+        JSON.stringify(updated.statement),
+        JSON.stringify(updated.offerings),
+        JSON.stringify(updated.approach),
+        JSON.stringify(updated.whyUs),
+        JSON.stringify(updated.stack),
+        JSON.stringify(updated.faqs),
+        updated.metaTitle,
+        updated.metaDescription,
+        updated.keywords,
+        updated.isPublished
+      );
+    } catch (err) {
+      console.error('[ServicesService] DB error saving service-digital-marketing:', err);
+      throw new Error('Failed to save digital marketing service content to database.');
+    }
+
+    servicesCache.clear();
+    const entry = servicesCache.set('services:sub:digital-marketing', updated);
+    updated.etag = entry.etag;
+    return updated;
+  },
+
+  /**
+   * Dynamic metadata for Digital Marketing Sub-Service Page
+   */
+  async generateDigitalMarketingMetadata(): Promise<Metadata> {
+    const data = await this.getDigitalMarketingContent();
+    const title = data.metaTitle || DEFAULT_DIGITAL_MARKETING_CONTENT.metaTitle;
+    const description = data.metaDescription || DEFAULT_DIGITAL_MARKETING_CONTENT.metaDescription;
+    const keywords = data.keywords || DEFAULT_DIGITAL_MARKETING_CONTENT.keywords;
+    const canonical = data.canonicalUrl || 'https://tryangletech.com/service/digital-marketing';
+    const ogImgUrl = data.ogImage || '/Home3_files/69142d3301921d8eace15477_home three hero.webp';
+    const ogImgAlt = data.ogImageAlt || title;
+
+    return {
+      title,
+      description,
+      keywords,
+      alternates: {
+        canonical,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        siteName: 'TryangleTech',
+        type: 'website',
+        locale: 'en_US',
+        images: [
+          {
+            url: ogImgUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImgAlt,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImgUrl],
+      },
+      other: {
+        'geo.region': 'IN-GJ',
+        'geo.placename': 'Ahmedabad',
+        'geo.position': '23.0225;72.5714',
+        'ICBM': '23.0225, 72.5714',
+        'rating': 'general',
+        'revisit-after': '7 days',
+      },
+    };
   },
 
   /**
@@ -1400,4 +1600,5 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
     };
   },
 };
+
 

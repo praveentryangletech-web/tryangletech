@@ -544,5 +544,135 @@ export interface CustomSoftwareContentDTO {
   etag?: string;
 }
 
+// ==========================================
+// Digital Marketing Sub-Service Types
+// ==========================================
+
+export interface DigitalMarketingHeroImages {
+  heroMain?: string;
+  heroPhone?: string;
+  bg?: string;
+}
+
+export interface DigitalMarketingMarqueeLogo {
+  id: string;
+  name: string;
+  src: string;
+  width?: number;
+  height?: number;
+}
+
+export interface DigitalMarketingHeroSection {
+  subBadgeText: string;
+  headline: string;
+  subheadline: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  secondaryBtnText: string;
+  secondaryBtnLink: string;
+  images?: DigitalMarketingHeroImages;
+  marqueeLogos?: DigitalMarketingMarqueeLogo[];
+}
+
+export interface DigitalMarketingStatementSection {
+  subBadgeText: string;
+  statement: string;
+}
+
+export interface DigitalMarketingOfferingCard {
+  id: string;
+  title: string;
+  desc: string;
+  images: string[];
+}
+
+export interface DigitalMarketingOfferingsSection {
+  subBadgeText: string;
+  headline: string;
+  cards: DigitalMarketingOfferingCard[];
+}
+
+export interface DigitalMarketingApproachFeature {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+}
+
+export interface DigitalMarketingApproachSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  features: DigitalMarketingApproachFeature[];
+  buttonText: string;
+  buttonLink: string;
+}
+
+export interface DigitalMarketingWhyUsPoint {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+}
+
+export interface DigitalMarketingWhyUsImages {
+  main?: string;
+  cardOne?: string;
+  cardTwo?: string;
+}
+
+export interface DigitalMarketingWhyUsSection {
+  subBadgeText: string;
+  headline: string;
+  description: string;
+  points: DigitalMarketingWhyUsPoint[];
+  buttonText: string;
+  buttonLink: string;
+  images?: DigitalMarketingWhyUsImages;
+}
+
+export interface DigitalMarketingToolItem {
+  id: string;
+  name: string;
+  icon: string;
+  category?: string;
+}
+
+export interface DigitalMarketingStackSection {
+  subBadgeText: string;
+  headline: string;
+  tools: DigitalMarketingToolItem[];
+}
+
+export interface DigitalMarketingFaqItem {
+  id?: string;
+  q: string;
+  a: string;
+}
+
+export interface DigitalMarketingContentDTO {
+  id: string;
+  slug: string;
+  hero: DigitalMarketingHeroSection;
+  statement: DigitalMarketingStatementSection;
+  offerings: DigitalMarketingOfferingsSection;
+  approach: DigitalMarketingApproachSection;
+  whyUs: DigitalMarketingWhyUsSection;
+  stack: DigitalMarketingStackSection;
+  faqs: DigitalMarketingFaqItem[];
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  isPublished?: boolean;
+  updatedAt?: string;
+  etag?: string;
+}
+
+
 
 

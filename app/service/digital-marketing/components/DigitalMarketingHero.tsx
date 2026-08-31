@@ -1,11 +1,30 @@
 import React from "react";
 import NextImage, { ImageProps } from "next/image";
+import { DigitalMarketingHeroSection } from "@/backend/services/services/services.types";
 
 const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
   return <NextImage {...props} />;
 };
 
-export default function DigitalMarketingHero() {
+interface DigitalMarketingHeroProps {
+  data?: DigitalMarketingHeroSection;
+}
+
+export default function DigitalMarketingHero({ data }: DigitalMarketingHeroProps) {
+  const subBadgeText = data?.subBadgeText || "Digital Marketing";
+  const headline = data?.headline || "Get found online and turn visitors into customers";
+  const subheadline =
+    data?.subheadline ||
+    "We help Ahmedabad businesses show up on Google, get noticed on social media, and turn that attention into actual sales - not just traffic numbers that look nice in a report.";
+  const primaryBtnText = data?.primaryBtnText || "Get a Free Strategy Call";
+  const primaryBtnLink = data?.primaryBtnLink || "/contact";
+  const secondaryBtnText = data?.secondaryBtnText || "View our work";
+  const secondaryBtnLink = data?.secondaryBtnLink || "/contact";
+
+  const heroMain = data?.images?.heroMain || "/Home3_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif";
+  const heroPhone = data?.images?.heroPhone || "/Home3_files/691446321ac91daae7cf1d82_Mobile (1).png";
+  const bg = data?.images?.bg || "/Home3_files/69142d3301921d8eace15477_home three hero.webp";
+
   return (
     <section className="rt-hero-v3 rt-position-relative">
       <div className="w-layout-blockcontainer rt-container-main rt-position-relative w-container">
@@ -29,16 +48,18 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
-                    border: "none"
+                    border: "none",
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-sub-image"
                 >
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    backgroundColor: '#38bdf8',
-                    borderRadius: '50%'
-                  }} />
+                  <div
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      backgroundColor: "#38bdf8",
+                      borderRadius: "50%",
+                    }}
+                  />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5d"
@@ -47,16 +68,18 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
-                    border: "none"
+                    border: "none",
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    backgroundColor: '#3b82f6',
-                    borderRadius: '50%'
-                  }} />
+                  <div
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      backgroundColor: "#3b82f6",
+                      borderRadius: "50%",
+                    }}
+                  />
                 </div>
                 <div
                   data-w-id="f9f32db2-1d6c-b1f7-46ef-f8f04589ec5f"
@@ -65,16 +88,18 @@ export default function DigitalMarketingHero() {
                     transform:
                       "translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
                     transformStyle: "preserve-3d",
-                    border: "none"
+                    border: "none",
                   }}
                   className="rt-hero-v2-client-image rt-overflow-hidden rt-margin-left rt-sub-image"
                 >
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    backgroundColor: '#a855f7',
-                    borderRadius: '50%'
-                  }} />
+                  <div
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      backgroundColor: "#a855f7",
+                      borderRadius: "50%",
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -89,7 +114,7 @@ export default function DigitalMarketingHero() {
                 }}
                 className="rt-sub-text rt-sub-gredient"
               >
-                Digital Marketing
+                {subBadgeText}
               </div>
             </div>
           </div>
@@ -104,7 +129,7 @@ export default function DigitalMarketingHero() {
               }}
               className="rt-gap-off"
             >
-              Get found online and turn visitors into customers
+              {headline}
             </h1>
           </div>
           <p
@@ -117,7 +142,7 @@ export default function DigitalMarketingHero() {
             }}
             className="rt-padding-hero-v3 rt-gap-off"
           >
-            We help Ahmedabad businesses show up on Google, get noticed on social media, and turn that attention into actual sales - not just traffic numbers that look nice in a report.
+            {subheadline}
           </p>
           <div
             data-w-id="42f17482-8aaf-c560-055d-05b0a411c54a"
@@ -131,10 +156,10 @@ export default function DigitalMarketingHero() {
           >
             <a
               data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-              href="/contact"
+              href={primaryBtnLink}
               className="rt-button-body w-inline-block"
             >
-              <div className="rt-button-text">Get a Free Strategy Call</div>
+              <div className="rt-button-text">{primaryBtnText}</div>
               <div
                 className="rt-button-body-overlay"
                 style={{
@@ -147,14 +172,14 @@ export default function DigitalMarketingHero() {
             <a
               data-wf--rt-border-button--variant="base"
               data-w-id="9067a903-cf07-9614-de57-af0aba677203"
-              href="/contact"
+              href={secondaryBtnLink}
               className="rt-button-body rt-nav-btn w-inline-block"
             >
               <div
                 className="rt-button-text rt-btn-color-nav"
                 style={{ color: "rgb(24, 51, 254)" }}
               >
-                View our work
+                {secondaryBtnText}
               </div>
               <div
                 className="rt-button-body-overlay rt-nav-overlay"
@@ -178,11 +203,12 @@ export default function DigitalMarketingHero() {
             }}
           >
             <Image
-              src="/Home3_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"
+              src={heroMain}
               loading="lazy"
               width={970}
               alt="taskopiya-home-two"
-             height={800} />
+              height={800}
+            />
           </div>
           <div
             data-w-id="9c7243c2-f09d-09f4-a76d-1bb89e12d14f"
@@ -195,23 +221,29 @@ export default function DigitalMarketingHero() {
             className="rt-hero-v3-phone-wrapper"
           >
             <Image
-              src="/Home3_files/691446321ac91daae7cf1d82_Mobile (1).png"
+              src={heroPhone}
               loading="lazy"
               sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 760px"
-              srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691446321ac91daae7cf1d82_Mobile%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/691446321ac91daae7cf1d82_Mobile%20(1).png 760w"
+              srcSet={`${heroPhone} 500w, ${heroPhone} 760w`}
               alt="Mobile (1)"
-             width={800} height={800} style={{ width: "100%", height: "auto" }} />
+              width={800}
+              height={800}
+              style={{ width: "100%", height: "auto" }}
+            />
           </div>
         </div>
       </div>
       <div className="rt-hero-v3-image">
         <Image
-          src="/Home3_files/69142d3301921d8eace15477_home three hero.webp"
+          src={bg}
           loading="lazy"
           sizes="(max-width: 3840px) 100vw, 3840px"
-          srcSet="https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero-p-500.png 500w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero-p-800.png 800w, https://cdn.prod.website-files.com/68c3feed3b3e541e7d5c098a/69142d3301921d8eace15477_home%20three%20hero.webp 3840w"
+          srcSet={`${bg} 500w, ${bg} 800w, ${bg} 3840w`}
           alt="home three hero"
-         width={800} height={800} style={{ width: "100%", height: "auto" }} />
+          width={800}
+          height={800}
+          style={{ width: "100%", height: "auto" }}
+        />
       </div>
     </section>
   );

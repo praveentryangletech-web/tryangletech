@@ -2,8 +2,28 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
+import { DigitalMarketingWhyUsSection } from "@/backend/services/services/services.types";
 
-export default function DigitalMarketingChooseUs() {
+interface DigitalMarketingChooseUsProps {
+  data?: DigitalMarketingWhyUsSection;
+}
+
+export default function DigitalMarketingChooseUs({ data }: DigitalMarketingChooseUsProps) {
+  const subBadgeText = data?.subBadgeText || "why tryangletech";
+  const headline = data?.headline || "You'll always know what's happening with your budget";
+  const description =
+    data?.description ||
+    "We provide complete transparency into every dollar spent across SEO, PPC, and paid social, ensuring maximum return and measurable revenue growth for your business.";
+  const buttonText = data?.buttonText || "Get Your Growth Audit";
+  const buttonLink = data?.buttonLink || "/contact";
+  const points = data?.points || [];
+  const point1 = points[0];
+  const point2 = points[1];
+
+  const imgMain = data?.images?.main || "/Home3_files/69253eb3631bda2ad958e90e_Taskopia-home-three-choose-3 (1).webp";
+  const imgCardOne = data?.images?.cardOne || "/Home3_files/6915609b657b80ae89e07f7c_taskopia-three-october.webp";
+  const imgCardTwo = data?.images?.cardTwo || "/Home3_files/69156a9c6eacd4f1bab9c4f9_taskopiya-home-three-choose-1.webp";
+
   return (
     <section className="rt-choose-v4 rt-overflow-hidden">
       <div className="w-layout-blockcontainer rt-container-main w-container">
@@ -13,17 +33,17 @@ export default function DigitalMarketingChooseUs() {
               data-w-id="efb93258-8b81-0384-03aa-317b4cacd67b"
               className="rt-sub-gap"
             >
-              <div className="rt-sub-text rt-sub-gredient">why tryangletech</div>
+              <div className="rt-sub-text rt-sub-gredient">{subBadgeText}</div>
             </div>
             <div className="rt-heading-para-gap">
               <ScrollTextReveal
                 as="h2"
-                text="You'll always know what's happening with your budget"
+                text={headline}
                 align="left"
               />
             </div>
             <p className="rt-gap-off">
-              We provide complete transparency into every dollar spent across SEO, PPC, and paid social, ensuring maximum return and measurable revenue growth for your business.
+              {description}
             </p>
             <div className="rt-choose-v4-left-inner" style={{ display: "flex", flexDirection: "column", gap: "24px", paddingTop: "24px" }}>
               <div
@@ -36,13 +56,10 @@ export default function DigitalMarketingChooseUs() {
                     width: "48px",
                     height: "48px",
                     borderRadius: "14px",
-                    // background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
-                    // border: "1px solid rgba(24, 51, 254, 0.16)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    // boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
                   }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,9 +68,11 @@ export default function DigitalMarketingChooseUs() {
                   </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div className="rt-text-style-h6" style={{ marginBottom: "6px" }}>Transparent ROI &amp; Reporting</div>
+                  <div className="rt-text-style-h6" style={{ marginBottom: "6px" }}>
+                    {point1?.title || "Transparent ROI & Reporting"}
+                  </div>
                   <p className="rt-gap-off">
-                    Real-time performance dashboards and weekly campaign optimization with clear, actionable revenue metrics.
+                    {point1?.desc || "Real-time performance dashboards and weekly campaign optimization with clear, actionable revenue metrics."}
                   </p>
                 </div>
               </div>
@@ -67,13 +86,10 @@ export default function DigitalMarketingChooseUs() {
                     width: "48px",
                     height: "48px",
                     borderRadius: "14px",
-                    // background: "linear-gradient(135deg, rgba(24, 51, 254, 0.08) 0%, rgba(99, 102, 241, 0.14) 100%)",
-                    // border: "1px solid rgba(24, 51, 254, 0.16)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
-                    // boxShadow: "0 2px 8px rgba(24, 51, 254, 0.06)",
                   }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1833fe" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,9 +100,11 @@ export default function DigitalMarketingChooseUs() {
                   </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div className="rt-text-style-h6" style={{ marginBottom: "6px" }}>Dedicated Growth Team</div>
+                  <div className="rt-text-style-h6" style={{ marginBottom: "6px" }}>
+                    {point2?.title || "Dedicated Growth Team"}
+                  </div>
                   <p className="rt-gap-off">
-                    SEO, Google Ads, and social media campaigns orchestrated seamlessly by one cross-channel team.
+                    {point2?.desc || "SEO, Google Ads, and social media campaigns orchestrated seamlessly by one cross-channel team."}
                   </p>
                 </div>
               </div>
@@ -97,10 +115,10 @@ export default function DigitalMarketingChooseUs() {
             >
               <Link
                 data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                href="/contact"
+                href={buttonLink}
                 className="rt-button-body w-inline-block"
               >
-                <div className="rt-button-text">Get Your Growth Audit</div>
+                <div className="rt-button-text">{buttonText}</div>
                 <div className="rt-button-body-overlay"></div>
               </Link>
             </div>
@@ -110,7 +128,7 @@ export default function DigitalMarketingChooseUs() {
               data-w-id="40e020f4-358f-684a-09cf-e2afb3b900de"
             >
               <Image
-                src="/Home3_files/69253eb3631bda2ad958e90e_Taskopia-home-three-choose-3 (1).webp"
+                src={imgMain}
                 loading="lazy"
                 alt="Taskopia-home-three-choose-3 (1)"
                 width={800}
@@ -123,7 +141,7 @@ export default function DigitalMarketingChooseUs() {
               className="rt-choose-v4-right-image-one"
             >
               <Image
-                src="/Home3_files/6915609b657b80ae89e07f7c_taskopia-three-october.webp"
+                src={imgCardOne}
                 loading="lazy"
                 alt="taskopia-three-october"
                 width={800}
@@ -136,7 +154,7 @@ export default function DigitalMarketingChooseUs() {
               className="rt-choose-v4-right-image-two rt-up-down"
             >
               <Image
-                src="/Home3_files/69156a9c6eacd4f1bab9c4f9_taskopiya-home-three-choose-1.webp"
+                src={imgCardTwo}
                 loading="lazy"
                 alt="taskopiya-home-three-choose-1"
                 width={800}

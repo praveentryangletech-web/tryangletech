@@ -4,6 +4,7 @@ import {
   WebDevContentDTO,
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
+  DigitalMarketingContentDTO,
 } from './services.types';
 
 
@@ -1005,6 +1006,187 @@ export const DEFAULT_CUSTOM_SOFTWARE_CONTENT: CustomSoftwareContentDTO = {
   isPublished: true,
   updatedAt: new Date().toISOString(),
 };
+
+export const DEFAULT_DIGITAL_MARKETING_CONTENT: DigitalMarketingContentDTO = {
+  id: 'service-digital-marketing',
+  slug: 'digital-marketing',
+  hero: {
+    subBadgeText: 'Digital Marketing',
+    headline: 'Get found online and turn visitors into customers',
+    subheadline:
+      'We help Ahmedabad businesses show up on Google, get noticed on social media, and turn that attention into actual sales - not just traffic numbers that look nice in a report.',
+    primaryBtnText: 'Get a Free Strategy Call',
+    primaryBtnLink: '/contact',
+    secondaryBtnText: 'View our work',
+    secondaryBtnLink: '/contact',
+    images: {
+      heroMain: '/Home3_files/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif',
+      heroPhone: '/Home3_files/691446321ac91daae7cf1d82_Mobile (1).png',
+      bg: '/Home3_files/69142d3301921d8eace15477_home three hero.webp',
+    },
+    marqueeLogos: [
+      { id: 'm-1', name: 'Logo 1', src: '/Home3_files/68ef27127d946b9cb9fdcbce_logo.svg' },
+      { id: 'm-2', name: 'Logo 2', src: '/Home3_files/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg' },
+      { id: 'm-3', name: 'Logo 3', src: '/Home3_files/68ef2712f0df798d907c8c07_Group 1597884747.svg' },
+      { id: 'm-4', name: 'Logo 4', src: '/Home3_files/68ef27122b527a12c7a225a7_Group 1597883493.svg' },
+      { id: 'm-5', name: 'Rezota', src: '/Home3_files/68ef2712bdcf3d7a4fee2f43_REZOTA.svg' },
+      { id: 'm-6', name: 'Logo 6', src: '/Home3_files/68ef271276a33d103013fa46_Group 1597884750.svg' },
+    ],
+  },
+  statement: {
+    subBadgeText: 'tryangletech',
+    statement: 'We craft full-funnel marketing strategies that turn your audience into paying customers.',
+  },
+  offerings: {
+    subBadgeText: 'our services',
+    headline: 'Powerful services that fuel real business growth',
+    cards: [
+      {
+        id: 'offering-1',
+        title: 'Search Engine Optimization',
+        desc: 'Rank on page 1 and stay there. Our technical SEO, content optimization, and link-building expertise delivers sustainable, long-term organic traffic that compounds over time. We conduct in-depth keyword research, optimize your site architecture, and build high-quality backlinks to ensure maximum visibility and a steady stream of qualified leads.',
+        images: [
+          '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp',
+          '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp',
+          '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp',
+        ],
+      },
+      {
+        id: 'offering-2',
+        title: 'Google Ads',
+        desc: 'Stop burning ad budget. Our team builds and continuously optimizes campaigns that bring in high-intent leads at the lowest possible cost-per-acquisition. By leveraging advanced targeting, A/B testing ad copy, and refining bidding strategies, we maximize your ROI and ensure your brand appears exactly when potential customers are ready to buy.',
+        images: [
+          '/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp',
+          '/Home3_files/690dad3509f6f587288a12d7_Taskopia-features-home-v3-7.webp',
+          '/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp',
+          '/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp',
+        ],
+      },
+      {
+        id: 'offering-3',
+        title: 'Meta Ads (Facebook & Instagram)',
+        desc: 'Reach your ideal audience with precision. We create thumb-stopping creatives and data-driven ad strategies to scale your brand on social platforms. From dynamic retargeting to lookalike audiences, our campaigns are designed to build brand awareness, foster engagement, and drive measurable conversions across Facebook and Instagram.',
+        images: [
+          '/Home3_files/690dad3581daca3524776a8e_Taskopia-features-home-v3-1.webp',
+          '/Home3_files/690dad35a7b833185701eb5a_Taskopia-features-home-v3-2.webp',
+          '/Home3_files/690dad35827ba1e2631d6c09_Taskopia-features-home-v3-3.webp',
+        ],
+      },
+      {
+        id: 'offering-4',
+        title: 'Social Media Marketing',
+        desc: 'Build a loyal community and elevate your brand presence. We manage your social channels with engaging content that sparks conversations and drives conversions. Our holistic approach includes community management, influencer partnerships, and strategic content calendars tailored to resonate with your target demographic and grow your follower base.',
+        images: [
+          '/Home3_files/690dad352e3eaaf91d055fe5_Taskopia-features-home-v3-icon.webp',
+          '/Home3_files/690dad3509f6f587288a12d7_Taskopia-features-home-v3-7.webp',
+          '/Home3_files/690dad35e28b189c556cc11e_Taskopia-features-home-v3-right.webp',
+          '/Home3_files/690dad35e3ae72cf7cacc7f0_Taskopia-features-home-v3-5.webp',
+        ],
+      },
+    ],
+  },
+  approach: {
+    subBadgeText: 'Our Approach',
+    headline: 'Marketing built around your business, not a template',
+    description:
+      'We start by understanding what you actually sell and who buys it. Then we build a plan around SEO, social media, and paid ads that fits your budget - not a one-size-fits-all package.',
+    image: '/Home3_files/690dc69fa56b486d2211f9af_taskopia-highlights-1.webp',
+    imageAlt: 'Our Approach Highlight Graphic',
+    features: [
+      {
+        id: 'approach-1',
+        title: 'SEO',
+        desc: "We optimize your site's content and structure so it ranks on Google for the searches that actually bring you customers.",
+        icon: '/Home3_files/6916b33016cea6a92e3f8264_specialiti-icon-2.svg',
+      },
+      {
+        id: 'approach-2',
+        title: 'Social Media & Ads',
+        desc: 'We run and manage your social presence and paid campaigns, so you get in front of people who are actually looking for what you offer.',
+        icon: '/Home3_files/6916b330bfe76dda628cf5ac_specialiti-icon-1.svg',
+      },
+    ],
+    buttonText: 'Book a Free Consultation',
+    buttonLink: '/contact',
+  },
+  whyUs: {
+    subBadgeText: 'why tryangletech',
+    headline: "You'll always know what's happening with your budget",
+    description:
+      'We provide complete transparency into every dollar spent across SEO, PPC, and paid social, ensuring maximum return and measurable revenue growth for your business.',
+    points: [
+      {
+        id: 'why-1',
+        title: 'Transparent ROI & Reporting',
+        desc: 'Real-time performance dashboards and weekly campaign optimization with clear, actionable revenue metrics.',
+      },
+      {
+        id: 'why-2',
+        title: 'Dedicated Growth Team',
+        desc: 'SEO, Google Ads, and social media campaigns orchestrated seamlessly by one cross-channel team.',
+      },
+    ],
+    buttonText: 'Get Your Growth Audit',
+    buttonLink: '/contact',
+    images: {
+      main: '/Home3_files/69253eb3631bda2ad958e90e_Taskopia-home-three-choose-3 (1).webp',
+      cardOne: '/Home3_files/6915609b657b80ae89e07f7c_taskopia-three-october.webp',
+      cardTwo: '/Home3_files/69156a9c6eacd4f1bab9c4f9_taskopiya-home-three-choose-1.webp',
+    },
+  },
+  stack: {
+    subBadgeText: 'marketing stack',
+    headline: 'We work with the tools your business already uses',
+    tools: [
+      { id: 'tool-1', name: 'Google Ads', icon: 'google-ads', category: 'Advertising' },
+      { id: 'tool-2', name: 'Google Analytics', icon: 'google-analytics', category: 'Analytics' },
+      { id: 'tool-3', name: 'Meta Ads', icon: 'meta-ads', category: 'Social Ads' },
+      { id: 'tool-4', name: 'Search Console', icon: 'search-console', category: 'SEO' },
+      { id: 'tool-5', name: 'LinkedIn Ads', icon: 'linkedin-ads', category: 'B2B Marketing' },
+      { id: 'tool-6', name: 'HubSpot', icon: 'hubspot', category: 'CRM & Automation' },
+      { id: 'tool-7', name: 'Semrush', icon: 'semrush', category: 'SEO Intelligence' },
+    ],
+  },
+  faqs: [
+    {
+      id: 'faq-1',
+      q: 'What digital marketing services do you offer?',
+      a: 'SEO, social media management, and paid ad campaigns (Google & Meta) - built around what makes sense for your business and budget.',
+    },
+    {
+      id: 'faq-2',
+      q: 'How soon will I see results from SEO?',
+      a: "SEO takes time. Most businesses start seeing real movement in rankings and traffic within 3 to 6 months, though we'll flag early wins as they come.",
+    },
+    {
+      id: 'faq-3',
+      q: 'How do you report on performance?',
+      a: "You get regular updates on what's working - rankings, traffic, leads - so you always know where things stand.",
+    },
+    {
+      id: 'faq-4',
+      q: 'Do you work with businesses outside Ahmedabad?',
+      a: "We're based in Ahmedabad and primarily serve local and India-wide clients. If you're outside India, reach out and we'll let you know if it's a fit.",
+    },
+  ],
+  metaTitle: 'Digital Marketing Company in Ahmedabad | SEO & Ads | Tryangle Tech',
+  metaDescription:
+    'Grow your business online with SEO, Google Ads, and social media marketing in Ahmedabad. Real leads, transparent reporting, and campaigns that actually work.',
+  keywords: [
+    'Digital Marketing Agency Ahmedabad',
+    'SEO Services Ahmedabad',
+    'Google Ads Management Ahmedabad',
+    'Social Media Marketing Gujarat',
+    'Performance Marketing Agency',
+    'PPC Agency Ahmedabad',
+  ],
+  canonicalUrl: 'https://tryangletech.com/service/digital-marketing',
+  ogImage: '/Home3_files/69142d3301921d8eace15477_home three hero.webp',
+  ogImageAlt: 'TryangleTech Digital Marketing preview banner',
+  isPublished: true,
+  updatedAt: new Date().toISOString(),
+};
+
 
 
 

@@ -13,3 +13,7 @@ export * from './mobile-application';
 // Custom Software Service Page CMS Tabs (/superadmin/services/custom-software)
 export * from './custom-software';
 
+// Digital Marketing Service Page CMS Tabs (/superadmin/services/digital-marketing)
+export * from './digital-marketing';
+
+

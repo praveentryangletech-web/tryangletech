@@ -1,32 +1,39 @@
 'use client';
 import React, { useState } from 'react';
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { DigitalMarketingFaqItem } from '@/backend/services/services/services.types';
 
-export default function DigitalMarketingFaq() {
+const DEFAULT_FAQS: DigitalMarketingFaqItem[] = [
+  {
+    q: 'What digital marketing services do you offer?',
+    a: 'SEO, social media management, and paid ad campaigns (Google & Meta) - built around what makes sense for your business and budget.',
+  },
+  {
+    q: 'How soon will I see results from SEO?',
+    a: "SEO takes time. Most businesses start seeing real movement in rankings and traffic within 3 to 6 months, though we'll flag early wins as they come.",
+  },
+  {
+    q: 'How do you report on performance?',
+    a: "You get regular updates on what's working - rankings, traffic, leads - so you always know where things stand.",
+  },
+  {
+    q: 'Do you work with businesses outside Ahmedabad?',
+    a: "We're based in Ahmedabad and primarily serve local and India-wide clients. If you're outside India, reach out and we'll let you know if it's a fit.",
+  },
+];
+
+interface DigitalMarketingFaqProps {
+  faqs?: DigitalMarketingFaqItem[];
+}
+
+export default function DigitalMarketingFaq({ faqs }: DigitalMarketingFaqProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  const faqs = [
-    {
-      q: 'What digital marketing services do you offer?',
-      a: 'SEO, social media management, and paid ad campaigns (Google & Meta) - built around what makes sense for your business and budget.',
-    },
-    {
-      q: 'How soon will I see results from SEO?',
-      a: "SEO takes time. Most businesses start seeing real movement in rankings and traffic within 3 to 6 months, though we'll flag early wins as they come.",
-    },
-    {
-      q: 'How do you report on performance?',
-      a: "You get regular updates on what's working - rankings, traffic, leads - so you always know where things stand.",
-    },
-    {
-      q: 'Do you work with businesses outside Ahmedabad?',
-      a: "We're based in Ahmedabad and primarily serve local and India-wide clients. If you're outside India, reach out and we'll let you know if it's a fit.",
-    },
-  ];
+  const list = faqs && faqs.length > 0 ? faqs : DEFAULT_FAQS;
 
   return (
     <>
@@ -52,7 +59,7 @@ export default function DigitalMarketingFaq() {
             <div
               data-w-id="4dd3e22b-253f-3566-2cec-7767aa6cde33"
               className="rt-faq-main rt-margin-auto">
-              {faqs.map(({ q, a }, idx) => {
+              {list.map(({ q, a }, idx) => {
                 const isOpen = openFaq === idx;
                 return (
                   <div
@@ -105,23 +112,6 @@ export default function DigitalMarketingFaq() {
         className="w-layout-hflex rt-section-line-wrap rt-margin-auto">
         <div style={{ width: '0%' }} className="rt-section-overlay"></div>
       </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.q,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.a
-              }
-            }))
-          })
-        }}
-      />
     </>
   );
 }

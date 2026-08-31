@@ -8,6 +8,7 @@ import {
   DEFAULT_WEB_DEV_CONTENT,
   DEFAULT_MOBILE_APP_CONTENT,
   DEFAULT_CUSTOM_SOFTWARE_CONTENT,
+  DEFAULT_DIGITAL_MARKETING_CONTENT,
 } from '@/backend/services/services/services.defaults';
 import {
   ServiceMainContentDTO,
@@ -22,6 +23,7 @@ import {
   WebDevContentDTO,
   MobileAppContentDTO,
   CustomSoftwareContentDTO,
+  DigitalMarketingContentDTO,
 } from '@/backend/services/services/services.types';
 
 export interface ServicesContextType {
@@ -362,7 +364,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
     setIsSubServiceLoading(true);
     const cleanSlug = slug.replace(/^service-/, '');
     let defaultData: any = DEFAULT_WEB_DEV_CONTENT;
-    if (cleanSlug === 'custom-software') {
+    if (cleanSlug === 'digital-marketing') {
+      defaultData = DEFAULT_DIGITAL_MARKETING_CONTENT;
+    } else if (cleanSlug === 'custom-software') {
       defaultData = DEFAULT_CUSTOM_SOFTWARE_CONTENT;
     } else if (cleanSlug === 'mobile-application') {
       defaultData = DEFAULT_MOBILE_APP_CONTENT;
@@ -581,6 +585,53 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
         }
         return copy;
       });
+    } else if (mediaPickerTarget.startsWith('digitalMarketing.')) {
+      const fieldPath = mediaPickerTarget.replace('digitalMarketing.', '');
+      setSubServiceData((prev: any) => {
+        if (!prev) return prev;
+        const copy = JSON.parse(JSON.stringify(prev));
+        if (fieldPath.startsWith('hero.images.')) {
+          const key = fieldPath.replace('hero.images.', '');
+          if (!copy.hero.images) copy.hero.images = {};
+          copy.hero.images[key] = url;
+        } else if (fieldPath.startsWith('hero.marqueeLogos.')) {
+          const parts = fieldPath.split('.');
+          const logoIdx = parseInt(parts[2], 10);
+          if (copy.hero?.marqueeLogos && copy.hero.marqueeLogos[logoIdx]) {
+            copy.hero.marqueeLogos[logoIdx].src = url;
+          }
+        } else if (fieldPath.startsWith('offerings.cards.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[2], 10);
+          const imgIdx = parseInt(parts[4], 10);
+          if (copy.offerings?.cards && copy.offerings.cards[cardIdx]) {
+            if (!copy.offerings.cards[cardIdx].images) copy.offerings.cards[cardIdx].images = [];
+            copy.offerings.cards[cardIdx].images[imgIdx] = url;
+          }
+        } else if (fieldPath === 'approach.image') {
+          if (!copy.approach) copy.approach = {};
+          copy.approach.image = url;
+        } else if (fieldPath.startsWith('approach.features.')) {
+          const parts = fieldPath.split('.');
+          const featIdx = parseInt(parts[2], 10);
+          if (copy.approach?.features && copy.approach.features[featIdx]) {
+            copy.approach.features[featIdx].icon = url;
+          }
+        } else if (fieldPath.startsWith('whyUs.images.')) {
+          const key = fieldPath.replace('whyUs.images.', '');
+          if (!copy.whyUs.images) copy.whyUs.images = {};
+          copy.whyUs.images[key] = url;
+        } else if (fieldPath.startsWith('stack.tools.')) {
+          const parts = fieldPath.split('.');
+          const toolIdx = parseInt(parts[2], 10);
+          if (copy.stack?.tools && copy.stack.tools[toolIdx]) {
+            copy.stack.tools[toolIdx].icon = url;
+          }
+        } else if (fieldPath === 'seo.ogImage') {
+          copy.ogImage = url;
+        }
+        return copy;
+      });
     }
     setIsMediaPickerOpen(false);
   };
@@ -601,7 +652,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
             id: slug,
             slug: cleanSlug,
             name:
-              cleanSlug === 'custom-software'
+              cleanSlug === 'digital-marketing'
+                ? 'Digital Marketing & Growth Strategy'
+                : cleanSlug === 'custom-software'
                 ? 'Custom Software & Enterprise Solutions'
                 : cleanSlug === 'mobile-application'
                 ? 'iOS & Android Mobile App Development'
@@ -610,7 +663,9 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
                 : cleanSlug,
             route: `/service/${cleanSlug}`,
             category:
-              cleanSlug === 'custom-software'
+              cleanSlug === 'digital-marketing'
+                ? 'Marketing & SEO'
+                : cleanSlug === 'custom-software'
                 ? 'Enterprise Engineering'
                 : cleanSlug === 'mobile-application'
                 ? 'Mobile & App'

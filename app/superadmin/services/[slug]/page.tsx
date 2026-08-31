@@ -36,6 +36,14 @@ import {
   CustomSoftwareTestimonialsTab,
   CustomSoftwareFaqsTab,
   CustomSoftwareSeoTab,
+  DigitalMarketingHeroTab,
+  DigitalMarketingStatementTab,
+  DigitalMarketingOfferingsTab,
+  DigitalMarketingApproachTab,
+  DigitalMarketingWhyUsTab,
+  DigitalMarketingStackTab,
+  DigitalMarketingFaqsTab,
+  DigitalMarketingSeoTab,
   SubServiceSkeleton,
   SaveIcon,
   ExternalLinkIcon,
@@ -55,6 +63,7 @@ function ServiceEditorInner() {
   const rawSlug = (params?.slug as string) || 'web-development';
   const slug = rawSlug.replace(/^service-/, '');
   const isMain = slug === 'main';
+  const isDigitalMarketing = slug === 'digital-marketing';
   const isMobileApp = slug === 'mobile-application';
   const isCustomSoftware = slug === 'custom-software';
 
@@ -160,7 +169,26 @@ function ServiceEditorInner() {
     { id: 'seo', label: '8. SEO & Social Meta' },
   ];
 
-  const tabs = isMain ? mainTabs : isCustomSoftware ? customSoftwareTabs : isMobileApp ? mobileAppTabs : webDevTabs;
+  const digitalMarketingTabs = [
+    { id: 'hero', label: '1. Hero & Branding' },
+    { id: 'statement', label: '2. Mission Statement' },
+    { id: 'offerings', label: '3. Services & Offerings' },
+    { id: 'approach', label: '4. Our Approach' },
+    { id: 'whyUs', label: '5. Why TryangleTech' },
+    { id: 'stack', label: '6. Marketing Stack' },
+    { id: 'faqs', label: '7. FAQs' },
+    { id: 'seo', label: '8. SEO & Social Meta' },
+  ];
+
+  const tabs = isMain
+    ? mainTabs
+    : isDigitalMarketing
+    ? digitalMarketingTabs
+    : isCustomSoftware
+    ? customSoftwareTabs
+    : isMobileApp
+    ? mobileAppTabs
+    : webDevTabs;
   const currentActiveTab = isMain ? activeTab : subActiveTab;
   const isLoading = isMain ? isMainLoading : isSubServiceLoading;
   const isSaving = isMain ? isMainSaving : isSubServiceSaving;
@@ -380,6 +408,33 @@ function ServiceEditorInner() {
                 isPublished={isPublished}
                 setIsPublished={setIsPublished}
               />
+            )}
+          </>
+        ) : isDigitalMarketing ? (
+          <>
+            {subActiveTab === 'hero' && (
+              <DigitalMarketingHeroTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'statement' && (
+              <DigitalMarketingStatementTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'offerings' && (
+              <DigitalMarketingOfferingsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'approach' && (
+              <DigitalMarketingApproachTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'whyUs' && (
+              <DigitalMarketingWhyUsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'stack' && (
+              <DigitalMarketingStackTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'faqs' && (
+              <DigitalMarketingFaqsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'seo' && (
+              <DigitalMarketingSeoTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
           </>
         ) : isCustomSoftware ? (

@@ -2,8 +2,13 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
+import { DigitalMarketingStackSection } from "@/backend/services/services/services.types";
 
-export default function DigitalMarketingToolsIntegration() {
+interface DigitalMarketingToolsIntegrationProps {
+  data?: DigitalMarketingStackSection;
+}
+
+export default function DigitalMarketingToolsIntegration({ data }: DigitalMarketingToolsIntegrationProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,6 +29,9 @@ export default function DigitalMarketingToolsIntegration() {
 
     return () => observer.disconnect();
   }, []);
+
+  const subBadgeText = data?.subBadgeText || "marketing stack";
+  const headline = data?.headline || "We work with the tools your business already uses";
 
   return (
     <section className="rt-tools-icon-v1" ref={sectionRef}>
@@ -58,10 +66,10 @@ export default function DigitalMarketingToolsIntegration() {
               className="rt-tools-iconheading rt-heading-bottom-gap reveal-on-scroll"
             >
               <div className="rt-sub-gap">
-                <div className="rt-sub-text rt-sub-gredient">marketing stack</div>
+                <div className="rt-sub-text rt-sub-gredient">{subBadgeText}</div>
               </div>
               <ScrollTextReveal
-                text="We work with the tools your business already uses"
+                text={headline}
                 align="center"
               />
             </div>
@@ -135,7 +143,10 @@ export default function DigitalMarketingToolsIntegration() {
               src="/Home3_files/690adbc5bfed3c0fa7e49213_Vector 1530.webp"
               loading="lazy"
               alt="taskopia-home-two-overlay-integration"
-             width={800} height={800} style={{ width: "100%", height: "auto" }} />
+              width={800}
+              height={800}
+              style={{ width: "100%", height: "auto" }}
+            />
           </div>
         </div>
       </div>

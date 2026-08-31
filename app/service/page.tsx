@@ -132,6 +132,23 @@ export default async function ServicePage() {
             }
           : {}),
       },
+      // 4. FAQPage Schema (AEO / LLM Engine Optimization)
+      ...(content.faqs && content.faqs.length > 0
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': `${pageUrl}#faq`,
+              mainEntity: content.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.a,
+                },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 

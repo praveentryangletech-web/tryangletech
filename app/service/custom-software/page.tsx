@@ -83,8 +83,8 @@ export default async function CustomSoftwarePage() {
           url: siteUrl,
           logo: `${siteUrl}/logo.png`,
           image: `${siteUrl}/logo.png`,
-          telephone: '+91-XXXXXXXXXX',
-          email: 'contact@tryangletech.com',
+          telephone: '+91 9033878806',
+          email: 'info@tryangletech.com',
           address: {
             '@type': 'PostalAddress',
             addressLocality: 'Ahmedabad',

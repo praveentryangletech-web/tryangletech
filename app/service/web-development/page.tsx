@@ -90,7 +90,7 @@ export default async function WebDevelopmentPage() {
           url: siteUrl,
           logo: `${siteUrl}/logo.png`,
           image: `${siteUrl}/logo.png`,
-          telephone: '+91-XXXXXXXXXX',
+          telephone: '+91 9033878806',
           email: 'contact@tryangletech.com',
           address: {
             '@type': 'PostalAddress',

@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { convertFileToWebp } from '@/app/superadmin/utils/imageOptimizer';
 import { UploadIcon, LibraryIcon, CameraPlaceholderIcon, CloseIcon } from './StandardSvgIcons';
 
@@ -38,20 +39,34 @@ export default function ImageFieldWithUpload({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [tempPreviewUrl, setTempPreviewUrl] = useState<string | null>(null);
+  const [imageLoadError, setImageLoadError] = useState(false);
+
+  // Reset load error state when value changes
+  useEffect(() => {
+    setImageLoadError(false);
+  }, [value]);
 
   const handleDeviceUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
     const rawFile = files[0];
 
+    // 1. Instantly display local object URL preview for 0ms response
+    try {
+      const localBlob = URL.createObjectURL(rawFile);
+      setTempPreviewUrl(localBlob);
+    } catch {}
+
     setIsUploading(true);
     setUploadError(null);
+    setImageLoadError(false);
 
     try {
-      // 1. Optimize / convert file to WebP client-side
+      // 2. Optimize / convert file to WebP client-side
       const file = await convertFileToWebp(rawFile);
 
-      // 2. Prepare FormData
+      // 3. Prepare FormData
       const formData = new FormData();
       formData.append('file', file);
 
@@ -66,7 +81,7 @@ export default function ImageFieldWithUpload({
       formData.append('customName', `${uploadPrefix}-${cleanBase || 'asset'}`);
       if (altValue) formData.append('altText', altValue);
 
-      // 3. Headers
+      // 4. Headers
       const headers: Record<string, string> = {};
       const adminKey = process.env.NEXT_PUBLIC_ADMIN_API_KEY || '';
       if (adminKey) headers['x-admin-key'] = adminKey;
@@ -78,7 +93,7 @@ export default function ImageFieldWithUpload({
         }
       } catch {}
 
-      // 4. Send upload request
+      // 5. Send upload request
       const res = await fetch('/api/superadmin/media', {
         method: 'POST',
         headers,
@@ -91,7 +106,7 @@ export default function ImageFieldWithUpload({
         throw new Error(data.error || 'Failed to upload image.');
       }
 
-      // 5. Update state
+      // 6. Update state
       onChange(data.url);
       if (!altValue && onAltChange && cleanBase) {
         const autoAlt = cleanBase.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -105,6 +120,16 @@ export default function ImageFieldWithUpload({
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
+
+  // Determine effective display image source with dynamic /api/media/ fallback
+  const effectiveSrc = React.useMemo(() => {
+    if (tempPreviewUrl) return tempPreviewUrl;
+    if (!value) return '';
+    if (imageLoadError && value.startsWith('/portfolio/')) {
+      return value.replace(/^\/portfolio\//, '/api/media/');
+    }
+    return value;
+  }, [tempPreviewUrl, value, imageLoadError]);
 
   return (
     <div
@@ -148,9 +173,9 @@ export default function ImageFieldWithUpload({
             disabled={isUploading}
             onClick={() => fileInputRef.current?.click()}
             style={{
-              backgroundColor: '#FFFFFF',
-              color: '#334155',
-              border: '1px solid #CBD5E1',
+              backgroundColor: '#EFF6FF',
+              color: 'var(--brand-blue, #1833fe)',
+              border: '1px solid #BFDBFE',
               borderRadius: '6px',
               padding: '4px 9px',
               fontSize: '0.725rem',
@@ -204,7 +229,10 @@ export default function ImageFieldWithUpload({
       <input
         type="text"
         value={value || ''}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          setTempPreviewUrl(null);
+          onChange(e.target.value);
+        }}
         placeholder={placeholder}
         style={{
           width: '100%',
@@ -268,11 +296,16 @@ export default function ImageFieldWithUpload({
           boxSizing: 'border-box',
         }}
       >
-        {value ? (
+        {effectiveSrc ? (
           <>
             <img
-              src={value}
+              src={effectiveSrc}
               alt={altValue || 'Preview'}
+              onError={() => {
+                if (!imageLoadError && value?.startsWith('/portfolio/')) {
+                  setImageLoadError(true);
+                }
+              }}
               style={{
                 width: '100%',
                 height: '100%',
@@ -280,9 +313,15 @@ export default function ImageFieldWithUpload({
                 display: 'block',
               }}
             />
+
+            {/* Clear Image Button */}
             <button
               type="button"
-              onClick={() => onChange('')}
+              onClick={() => {
+                setTempPreviewUrl(null);
+                setImageLoadError(false);
+                onChange('');
+              }}
               style={{
                 position: 'absolute',
                 top: '6px',
@@ -298,6 +337,7 @@ export default function ImageFieldWithUpload({
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'background-color 0.15s ease',
+                zIndex: 5,
               }}
               title="Clear Image"
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#DC2626')}
@@ -305,6 +345,36 @@ export default function ImageFieldWithUpload({
             >
               <CloseIcon size={12} color="#FFFFFF" />
             </button>
+
+            {/* Uploading In-Progress Overlay */}
+            {isUploading && (
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundColor: 'rgba(15, 23, 42, 0.55)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  color: '#FFFFFF',
+                  zIndex: 4,
+                }}
+              >
+                <div
+                  style={{
+                    width: '22px',
+                    height: '22px',
+                    border: '2.5px solid rgba(255,255,255,0.3)',
+                    borderTopColor: '#FFFFFF',
+                    borderRadius: '50%',
+                    animation: 'spin 0.8s linear infinite',
+                  }}
+                />
+                <span style={{ fontSize: '0.7rem', fontWeight: 700 }}>Uploading & Optimizing...</span>
+              </div>
+            )}
           </>
         ) : (
           <div

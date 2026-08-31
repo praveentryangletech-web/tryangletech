@@ -120,8 +120,8 @@ const nextConfig: NextConfig = {
       afterFiles: [],
       fallback: [
         {
-          source: '/portfolio/:filename',
-          destination: '/api/media/:filename',
+          source: '/portfolio/:filename*',
+          destination: '/api/media/:filename*',
         },
       ],
     };

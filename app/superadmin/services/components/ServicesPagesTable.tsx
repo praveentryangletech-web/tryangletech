@@ -164,9 +164,8 @@ export default function ServicesPagesTable({
           {/* Right Controls: Action Button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <Tooltip text="Edit the Main Services Overview page (/service)" position="top">
-              <button
-                type="button"
-                onClick={onOpenEditMain}
+              <Link
+                href="/superadmin/services/main"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -185,6 +184,7 @@ export default function ServicesPagesTable({
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap',
                   boxSizing: 'border-box',
+                  textDecoration: 'none',
                 }}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -192,7 +192,7 @@ export default function ServicesPagesTable({
                   <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                 </svg>
                 <span>Edit Main Services</span>
-              </button>
+              </Link>
             </Tooltip>
           </div>
         </div>
@@ -371,9 +371,8 @@ export default function ServicesPagesTable({
                         </Tooltip>
 
                         <Tooltip text="Edit Main Services in CMS Editor" position="top">
-                          <button
-                            type="button"
-                            onClick={onOpenEditMain}
+                          <Link
+                            href="/superadmin/services/main"
                             style={{
                               backgroundColor: 'var(--brand-blue, #1833fe)',
                               color: '#FFFFFF',
@@ -389,6 +388,8 @@ export default function ServicesPagesTable({
                               gap: '4px',
                               boxShadow: '0 2px 6px rgba(24, 51, 254, 0.2)',
                               whiteSpace: 'nowrap',
+                              textDecoration: 'none',
+                              boxSizing: 'border-box',
                             }}
                           >
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -396,7 +397,7 @@ export default function ServicesPagesTable({
                               <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                             </svg>
                             <span>Edit CMS</span>
-                          </button>
+                          </Link>
                         </Tooltip>
                       </div>
                     </td>
@@ -570,12 +571,8 @@ export default function ServicesPagesTable({
                           </Tooltip>
 
                           <Tooltip text="Dynamic CMS editor for this specific service type" position="top">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (onOpenEditService) onOpenEditService(sub);
-                                else onOpenEditMain();
-                              }}
+                            <Link
+                              href={`/superadmin/services/${sub.slug}`}
                               style={{
                                 backgroundColor: '#FFFFFF',
                                 color: 'var(--brand-blue, #1833fe)',
@@ -590,6 +587,8 @@ export default function ServicesPagesTable({
                                 alignItems: 'center',
                                 gap: '4px',
                                 whiteSpace: 'nowrap',
+                                textDecoration: 'none',
+                                boxSizing: 'border-box',
                               }}
                             >
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -597,7 +596,7 @@ export default function ServicesPagesTable({
                                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                               </svg>
                               <span>Edit</span>
-                            </button>
+                            </Link>
                           </Tooltip>
                         </div>
                       </td>

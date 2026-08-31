@@ -185,14 +185,14 @@ export const portfolioCategoryService = {
       ]);
 
       // Fetch entity counts (Portfolio projects or Blog posts)
-      let countsMap: Record<string, number> = {};
+      const countsMap: Record<string, number> = {};
       if (countRows && Array.isArray(countRows)) {
         countRows.forEach((r: any) => {
           if (r.category) countsMap[r.category.toLowerCase().trim()] = Number(r.count || 0);
         });
       }
 
-      let items: PortfolioCategoryItem[] = (categoryRows || []).map((r: any) => {
+      const items: PortfolioCategoryItem[] = (categoryRows || []).map((r: any) => {
         const nameClean = (r.name || '').toLowerCase().trim();
         const isDefault = nameClean === DEFAULT_CATEGORY.toLowerCase();
         const count = countsMap[nameClean] || 0;

@@ -35,7 +35,7 @@ class GeoCacheManager {
 
 export const geoCache = new GeoCacheManager();
 
-let isPageContentTableEnsured = false;
+const isPageContentTableEnsured = false;
 
 export const geoService = {
   /**

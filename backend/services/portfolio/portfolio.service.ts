@@ -98,7 +98,7 @@ class PortfolioCacheManager {
 
 export const portfolioCache = new PortfolioCacheManager();
 
-let isColumnsEnsured = false;
+const isColumnsEnsured = false;
 let isSeededInMemory = false;
 
 export function clearPortfolioCache(): void {

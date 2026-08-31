@@ -36,7 +36,7 @@ class HomeCacheManager {
 
 export const homeCache = new HomeCacheManager();
 
-let isPageContentTableEnsured = false;
+const isPageContentTableEnsured = false;
 
 export const homeService = {
   /**

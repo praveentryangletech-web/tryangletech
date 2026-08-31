@@ -23,6 +23,7 @@ import {
   SubServiceTechStackTab,
   SubServiceFaqsTab,
   SubServiceSeoTab,
+  SubServiceSkeleton,
 } from '../components';
 
 const SERVICE_TITLES: Record<string, string> = {
@@ -126,6 +127,60 @@ function ServiceEditorInner() {
     }
   };
 
+  const [subMediaPickerOpen, setSubMediaPickerOpen] = useState(false);
+  const [subPickerTarget, setSubPickerTarget] = useState<string>('');
+
+  const handleOpenAssetPicker = (target: string) => {
+    if (isMain) {
+      openAssetPicker(target);
+    } else {
+      setSubPickerTarget(target);
+      setSubMediaPickerOpen(true);
+    }
+  };
+
+  const handleSubSelectAsset = (url: string) => {
+    if (subPickerTarget.startsWith('subService.')) {
+      const fieldPath = subPickerTarget.replace('subService.', '');
+      setSubData((prev) => {
+        if (!prev) return prev;
+        const copy = JSON.parse(JSON.stringify(prev));
+        if (fieldPath === 'hero.imageRightOne') copy.hero.imageRightOne = url;
+        else if (fieldPath === 'hero.imageRightTwo') copy.hero.imageRightTwo = url;
+        else if (fieldPath === 'hero.imageBanner') copy.hero.imageBanner = url;
+        else if (fieldPath === 'hero.imageDot') copy.hero.imageDot = url;
+        else if (fieldPath === 'seo.ogImage') copy.ogImage = url;
+        else if (fieldPath.startsWith('speciality.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'icon') {
+            copy.speciality.cards[cardIdx].icon = url;
+          } else if (parts[2] === 'images') {
+            const imgIdx = parseInt(parts[3], 10);
+            if (!copy.speciality.cards[cardIdx].images) copy.speciality.cards[cardIdx].images = [];
+            copy.speciality.cards[cardIdx].images[imgIdx] = url;
+          }
+        } else if (fieldPath.startsWith('types.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'image') {
+            copy.types.cards[cardIdx].image = url;
+          } else if (parts[2] === 'smallImage') {
+            copy.types.cards[cardIdx].smallImage = url;
+          }
+        } else if (fieldPath.startsWith('techStack.')) {
+          const parts = fieldPath.split('.');
+          const techIdx = parseInt(parts[1], 10);
+          if (copy.techStack.items && copy.techStack.items[techIdx]) {
+            copy.techStack.items[techIdx].icon = url;
+          }
+        }
+        return copy;
+      });
+    }
+    setSubMediaPickerOpen(false);
+  };
+
   const mainTabs = [
     { id: 'hero', label: '1. Hero Header & Overview' },
     { id: 'cards', label: '2. Six Core Service Cards' },
@@ -139,25 +194,53 @@ function ServiceEditorInner() {
   const subTabs = [
     { id: 'hero', label: '1. Hero Header & Overview' },
     { id: 'speciality', label: '2. Capabilities & Features' },
-    { id: 'types', label: '3. Website Types' },
-    { id: 'techStack', label: '4. Tech Stack & Integrations' },
-    { id: 'faqs', label: '5. Dynamic FAQs & Accordion' },
-    { id: 'seo', label: '6. SEO, Social & Publication' },
+    { id: 'types', label: '3. Website Types We Build' },
+    { id: 'techStack', label: '4. Tech Stack & Tools' },
+    { id: 'faqs', label: '5. Dynamic Service FAQs' },
+    { id: 'seo', label: '6. SEO & Social Meta' },
   ];
 
-  const isSaving = isMain ? isMainSaving : isSubSaving;
+  const tabs = isMain ? mainTabs : subTabs;
+  const currentActiveTab = isMain ? activeTab : subActiveTab;
   const isLoading = isMain ? isMainLoading : isSubLoading;
+  const isSaving = isMain ? isMainSaving : isSubSaving;
 
   return (
-    <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
-      {/* Top Action Toolbar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '12px' }}>
+    <div
+      style={{
+        padding: '0 24px 48px 24px',
+        maxWidth: '1440px',
+        margin: '0 auto',
+        minHeight: '100vh',
+      }}
+    >
+      {/* Top Breadcrumb & Live Action Toolbar */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '12px',
+          padding: '14px 0 18px 0',
+          borderBottom: '1px solid #E2E8F0',
+          marginBottom: '20px',
+        }}
+      >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.825rem', color: '#64748B', fontWeight: 600 }}>
-            Live Landing Page:
-          </span>
-          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #DBEAFE' }}>
-            {serviceRoute}
+          <span
+            style={{
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              padding: '4px 10px',
+              borderRadius: '6px',
+              backgroundColor: '#EFF6FF',
+              color: 'var(--brand-blue, #1833fe)',
+              border: '1px solid #BFDBFE',
+              fontFamily: 'monospace',
+            }}
+          >
+            Live Landing Page: {serviceRoute}
           </span>
         </div>
 
@@ -170,99 +253,102 @@ function ServiceEditorInner() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              height: '38px',
-              padding: '0 14px',
+              padding: '8px 14px',
               borderRadius: '8px',
               border: '1px solid #CBD5E1',
               backgroundColor: '#FFFFFF',
               color: '#334155',
-              fontSize: '0.85rem',
+              fontSize: '0.825rem',
               fontWeight: 700,
               textDecoration: 'none',
+              transition: 'all 0.15s ease',
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-            <span>Live Preview</span>
+            <span>↗ Live Preview</span>
           </Link>
 
           <button
             type="button"
-            disabled={isSaving}
-            onClick={isMain ? () => saveMainServiceContent() : handleSaveSubService}
+            onClick={isMain ? saveMainServiceContent : handleSaveSubService}
+            disabled={isSaving || isLoading}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              height: '38px',
-              padding: '0 18px',
+              gap: '6px',
+              padding: '8px 18px',
               borderRadius: '8px',
               border: 'none',
-              backgroundColor: 'var(--brand-blue, #1833fe)',
+              backgroundColor: isSaving ? '#93C5FD' : 'var(--brand-blue, #1833fe)',
               color: '#FFFFFF',
-              fontSize: '0.85rem',
+              fontSize: '0.825rem',
               fontWeight: 700,
               cursor: isSaving ? 'not-allowed' : 'pointer',
-              boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
+              boxShadow: '0 2px 4px rgba(24, 51, 254, 0.2)',
+              transition: 'all 0.15s ease',
             }}
           >
-            {isSaving ? (
-              <>
-                <div
-                  style={{
-                    width: '14px',
-                    height: '14px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    borderTopColor: '#FFFFFF',
-                    borderRadius: '50%',
-                    animation: 'spin 0.8s linear infinite',
-                  }}
-                />
-                <span>Saving...</span>
-              </>
-            ) : (
-              <>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>Save Changes</span>
-              </>
-            )}
+            <span>{isSaving ? 'Saving Changes...' : '💾 Save Changes'}</span>
           </button>
         </div>
       </div>
 
-      {/* Notifications */}
+      {/* Success & Error Banner Alerts */}
       {successMessage && (
-        <div style={{ padding: '10px 16px', backgroundColor: '#ECFDF5', border: '1px solid #34D399', color: '#065F46', borderRadius: '8px', marginBottom: '1.25rem', fontSize: '0.825rem', fontWeight: 600 }}>
-          ✓ {successMessage}
-        </div>
-      )}
-      {errorMessage && (
-        <div style={{ padding: '10px 16px', backgroundColor: '#FEF2F2', border: '1px solid #F87171', color: '#991B1B', borderRadius: '8px', marginBottom: '1.25rem', fontSize: '0.825rem', fontWeight: 600 }}>
-          ⚠ {errorMessage}
+        <div
+          style={{
+            padding: '12px 18px',
+            backgroundColor: '#DCFCE7',
+            border: '1px solid #86EFAC',
+            borderRadius: '10px',
+            color: '#15803D',
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            marginBottom: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span>✓</span>
+          <span>{successMessage}</span>
         </div>
       )}
 
-      {/* Segmented Tab Navigation Bar */}
+      {errorMessage && (
+        <div
+          style={{
+            padding: '12px 18px',
+            backgroundColor: '#FEE2E2',
+            border: '1px solid #FCA5A5',
+            borderRadius: '10px',
+            color: '#B91C1C',
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            marginBottom: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span>✕</span>
+          <span>{errorMessage}</span>
+        </div>
+      )}
+
+      {/* Tab Navigation Pill Bar */}
       <div
-        className="no-scrollbar"
         style={{
           display: 'flex',
           gap: '6px',
+          borderBottom: '1px solid #E2E8F0',
+          paddingBottom: '12px',
+          marginBottom: '24px',
           overflowX: 'auto',
-          paddingBottom: '6px',
-          marginBottom: '20px',
-          borderBottom: '1.5px solid #CBD5E1',
+          scrollbarWidth: 'none',
         }}
       >
-        {(isMain ? mainTabs : subTabs).map((tab) => {
-          const currentActive = isMain ? activeTab : subActiveTab;
-          const isActive = currentActive === tab.id;
+        {tabs.map((tab) => {
+          const isActive = currentActiveTab === tab.id;
           return (
             <button
               key={tab.id}
@@ -290,22 +376,20 @@ function ServiceEditorInner() {
       {/* Tab Panels */}
       <div style={{ minHeight: '400px', backgroundColor: 'transparent' }}>
         {isLoading ? (
-          <div style={{ padding: '4rem', textAlign: 'center', color: '#64748B' }}>
-            <div style={{ fontSize: '1rem', fontWeight: 600 }}>Loading service content...</div>
-          </div>
+          <SubServiceSkeleton isMain={isMain} activeTab={currentActiveTab} />
         ) : isMain ? (
           <>
             {activeTab === 'hero' && (
-              <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={openAssetPicker} />
+              <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {activeTab === 'cards' && (
-              <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={openAssetPicker} />
+              <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {activeTab === 'highlights' && (
-              <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={openAssetPicker} />
+              <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {activeTab === 'tools' && (
-              <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={openAssetPicker} />
+              <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {activeTab === 'faqs' && (
               <ServiceFaqsTab faqs={faqs} setFaqs={setFaqs} />
@@ -314,7 +398,7 @@ function ServiceEditorInner() {
               <ServiceTestimonialsTab
                 testimonials={testimonials}
                 setTestimonials={setTestimonials}
-                onOpenAssetPicker={openAssetPicker}
+                onOpenAssetPicker={handleOpenAssetPicker}
               />
             )}
             {activeTab === 'seo' && (
@@ -333,33 +417,33 @@ function ServiceEditorInner() {
         ) : (
           <>
             {subActiveTab === 'hero' && (
-              <SubServiceHeroTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceHeroTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {subActiveTab === 'speciality' && (
-              <SubServiceSpecialityTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceSpecialityTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {subActiveTab === 'types' && (
-              <SubServiceTypesTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceTypesTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {subActiveTab === 'techStack' && (
-              <SubServiceTechStackTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceTechStackTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
             {subActiveTab === 'faqs' && (
               <SubServiceFaqsTab formData={subData} setFormData={setSubData as any} />
             )}
             {subActiveTab === 'seo' && (
-              <SubServiceSeoTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceSeoTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
             )}
           </>
         )}
       </div>
 
-      {/* Global Media Asset Picker Modal */}
+      {/* Global Media Asset Picker Modal for Main Services */}
       <HomeMediaPickerModal
-        isOpen={isMediaPickerOpen}
-        onClose={() => setIsMediaPickerOpen(false)}
-        onSelect={selectMediaAsset}
-        title="Select Asset for Services CMS"
+        isOpen={isMain ? isMediaPickerOpen : subMediaPickerOpen}
+        onClose={() => (isMain ? setIsMediaPickerOpen(false) : setSubMediaPickerOpen(false))}
+        onSelect={isMain ? selectMediaAsset : handleSubSelectAsset}
+        title={`Select Asset for ${serviceName}`}
       />
     </div>
   );

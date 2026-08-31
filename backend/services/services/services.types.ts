@@ -146,9 +146,13 @@ export interface WebDevHeroSection {
   primaryBtnLink: string;
   smallBadgeText: string;
   imageRightOne?: string;
+  imageRightOneAlt?: string;
   imageRightTwo?: string;
+  imageRightTwoAlt?: string;
   imageBanner?: string;
+  imageBannerAlt?: string;
   imageDot?: string;
+  imageDotAlt?: string;
 }
 
 export interface WebDevSpecialityCard {
@@ -156,7 +160,9 @@ export interface WebDevSpecialityCard {
   title: string;
   desc: string;
   icon?: string;
+  iconAlt?: string;
   images?: string[];
+  imagesAlt?: string[];
 }
 
 export interface WebDevSpecialitySection {
@@ -170,8 +176,13 @@ export interface WebDevTypeCard {
   title: string;
   desc: string;
   icon?: string;
+  iconAlt?: string;
   badge?: string;
   tags?: string[];
+  image?: string;
+  imageAlt?: string;
+  smallImage?: string;
+  smallImageAlt?: string;
 }
 
 export interface WebDevTypesSection {
@@ -185,6 +196,7 @@ export interface WebDevTechStackItem {
   name: string;
   category: string;
   icon?: string;
+  iconAlt?: string;
 }
 
 export interface WebDevTechStackSection {
@@ -211,6 +223,8 @@ export interface WebDevContentDTO {
   metaDescription: string;
   keywords: string[];
   canonicalUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
   isPublished?: boolean;
   updatedAt?: string;
   etag?: string;

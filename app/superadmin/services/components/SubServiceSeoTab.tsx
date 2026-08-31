@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
+import ImageFieldWithUpload from './ImageFieldWithUpload';
 
 interface SubServiceSeoTabProps {
   formData: WebDevContentDTO;
   setFormData: React.Dispatch<React.SetStateAction<WebDevContentDTO | null>>;
+  onOpenAssetPicker?: (target: string) => void;
 }
 
 const inputStyle: React.CSSProperties = {
@@ -42,7 +44,7 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '6px',
 };
 
-export default function SubServiceSeoTab({ formData, setFormData }: SubServiceSeoTabProps) {
+export default function SubServiceSeoTab({ formData, setFormData, onOpenAssetPicker }: SubServiceSeoTabProps) {
   const [keywordInput, setKeywordInput] = React.useState('');
 
   const handleAddKeyword = (e: React.KeyboardEvent | React.MouseEvent) => {
@@ -81,7 +83,7 @@ export default function SubServiceSeoTab({ formData, setFormData }: SubServiceSe
             6. SEO, Social Meta & Visibility
           </h3>
           <p style={{ margin: '3px 0 0 0', fontSize: '0.8rem', color: '#64748B' }}>
-            Configure search engine meta tags, OpenGraph previews, and public publication status.
+            Configure search engine meta tags, OpenGraph previews, social share graphics, alt text, and publication status.
           </p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -136,6 +138,39 @@ export default function SubServiceSeoTab({ formData, setFormData }: SubServiceSe
           onChange={(e) => setFormData((prev) => (prev ? { ...prev, metaDescription: e.target.value } : prev))}
           placeholder="Comprehensive meta description explaining services..."
           style={textareaStyle}
+        />
+      </div>
+
+      {/* Social Share Card & OpenGraph Image */}
+      <div
+        style={{
+          backgroundColor: '#FFFFFF',
+          borderRadius: '12px',
+          border: '1px solid #E2E8F0',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+        }}
+      >
+        <div>
+          <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>Social Share Card Graphic (OpenGraph / Twitter)</div>
+          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Displayed when this service page link is shared on LinkedIn, WhatsApp, Twitter, etc.</div>
+        </div>
+
+        <ImageFieldWithUpload
+          label="OpenGraph Social Share Banner"
+          recommendedDimensions="1200 × 630 px (1.91:1 Social Ratio)"
+          value={formData.ogImage || ''}
+          onChange={(url) => setFormData((prev) => (prev ? { ...prev, ogImage: url } : prev))}
+          altValue={formData.ogImageAlt || ''}
+          onAltChange={(alt) => setFormData((prev) => (prev ? { ...prev, ogImageAlt: alt } : prev))}
+          altLabel="OpenGraph Image Alt Text"
+          onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('subService.seo.ogImage') : undefined}
+          uploadPrefix="og-share-banner"
+          previewHeight={130}
+          placeholder="/service-1-assets/...webp"
         />
       </div>
 

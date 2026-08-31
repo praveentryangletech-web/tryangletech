@@ -8,14 +8,60 @@ import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.de
 const SA = '/service3-assets';
 
 function getBulletIcon(iconType?: string) {
-  if (iconType === 'performance') {
-    return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>;
-  } else if (iconType === 'seo') {
-    return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>;
-  } else if (iconType === 'responsive') {
-    return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></svg>;
+  switch (iconType) {
+    case 'performance':
+    case 'speed':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      );
+    case 'seo':
+    case 'search':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      );
+    case 'responsive':
+    case 'mobile':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" />
+          <line x1="12" y1="18" x2="12.01" y2="18" />
+        </svg>
+      );
+    case 'security':
+    case 'shield':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      );
+    case 'analytics':
+    case 'growth':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+      );
+    case 'support':
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      );
+    case 'custom':
+    default:
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      );
   }
-  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>;
 }
 
 export default function WebDevHero({ data }: { data?: WebDevHeroSection }) {
@@ -98,7 +144,7 @@ export default function WebDevHero({ data }: { data?: WebDevHeroSection }) {
                 <Image
                   src={hero.imageRightOne || "/service-1-assets/690acfecf91d77770201a6cb_taskopia-service-one-hero-1.webp"}
                   loading="lazy"
-                  alt="taskopia-service-one-hero-1"
+                  alt={hero.imageRightOneAlt || "taskopia-service-one-hero-1"}
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div
@@ -107,7 +153,7 @@ export default function WebDevHero({ data }: { data?: WebDevHeroSection }) {
                 <Image
                   src={hero.imageRightTwo || "/service-1-assets/6916b40c8e7ba2243876a27f_taskopiya-service-one-hero.avif"}
                   loading="lazy"
-                  alt="taskopiya-service-one-hero"
+                  alt={hero.imageRightTwoAlt || "taskopiya-service-one-hero"}
                   className="rt-shadow rt-border-radius-medium"
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
@@ -118,7 +164,7 @@ export default function WebDevHero({ data }: { data?: WebDevHeroSection }) {
           <Image
             src={hero.imageBanner || "/service-1-assets/6915cd620829878f7ea58178_taskopiya-about-banner.webp"}
             loading="lazy"
-            alt="taskopiya-about-banner"
+            alt={hero.imageBannerAlt || "taskopiya-about-banner"}
             width={800} height={800} style={{ width: "100%", height: "auto" }} />
         </div>
         <div
@@ -127,7 +173,7 @@ export default function WebDevHero({ data }: { data?: WebDevHeroSection }) {
           <Image
             src={hero.imageDot || "/service-1-assets/690ad30ba7100eb0c23fba01_taskopia-service-2-dot.webp"}
             loading="lazy"
-            alt="taskopia-service-2-dot"
+            alt={hero.imageDotAlt || "taskopia-service-2-dot"}
             width={800} height={800} style={{ width: "100%", height: "auto" }} />
         </div>
       </section>

@@ -766,32 +766,14 @@ function BlogEditorInner() {
           marginBottom: '1.25rem',
         }}
       >
-        <Link
-          href="/superadmin/blog"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            height: '38px',
-            padding: '0 14px',
-            borderRadius: '8px',
-            border: '1px solid #CBD5E1',
-            backgroundColor: '#FFFFFF',
-            color: '#334155',
-            fontSize: '0.825rem',
-            fontWeight: 700,
-            textDecoration: 'none',
-            boxSizing: 'border-box',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          <span>Back to Blog</span>
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.825rem', color: '#64748B', fontWeight: 600 }}>
+            {isEditMode ? 'Live Article Route:' : 'New Article Draft:'}
+          </span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #DBEAFE' }}>
+            {slug ? `/blog/${slug}` : '/blog/...'}
+          </span>
+        </div>
 
         {/* Top Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>

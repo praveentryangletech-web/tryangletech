@@ -150,7 +150,16 @@ function SuperadminServicesContent() {
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
         {/* Top Header & Action Toolbar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div>
+            <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', margin: 0 }}>
+              {currentSubName} CMS
+            </h1>
+            <p style={{ margin: '3px 0 0 0', fontSize: '0.8rem', color: '#64748B' }}>
+              Full dynamic control for <code style={{ color: 'var(--brand-blue, #1833fe)' }}>{currentSubRoute}</code> landing page
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <button
               type="button"
               onClick={() => setViewMode('list')}
@@ -175,65 +184,54 @@ function SuperadminServicesContent() {
             >
               ← Back to All Services
             </button>
-            <div>
-              <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', margin: 0 }}>
-                {currentSubName} CMS
-              </h1>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748B' }}>
-                Full dynamic control for <code style={{ color: 'var(--brand-blue, #1833fe)' }}>{currentSubRoute}</code> landing page
-              </p>
-            </div>
-          </div>
+            <Link
+              href={currentSubRoute}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                height: '38px',
+                padding: '0 14px',
+                borderRadius: '8px',
+                border: '1px solid #CBD5E1',
+                backgroundColor: '#FFFFFF',
+                color: '#334155',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              <span>Live Preview</span>
+            </Link>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Link
-                href={currentSubRoute}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  height: '38px',
-                  padding: '0 14px',
-                  borderRadius: '8px',
-                  border: '1px solid #CBD5E1',
-                  backgroundColor: '#FFFFFF',
-                  color: '#334155',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                <span>Live Preview</span>
-              </Link>
-
-              <button
-                type="button"
-                disabled={isSubServiceSaving}
-                onClick={() => saveSubServiceData()}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  height: '38px',
-                  padding: '0 18px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  backgroundColor: 'var(--brand-blue, #1833fe)',
-                  color: '#FFFFFF',
-                  fontSize: '0.85rem',
-                  fontWeight: 700,
-                  cursor: isSubServiceSaving ? 'not-allowed' : 'pointer',
-                  boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
-                }}
-              >
+            <button
+              type="button"
+              disabled={isSubServiceSaving}
+              onClick={() => saveSubServiceData()}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                height: '38px',
+                padding: '0 18px',
+                borderRadius: '8px',
+                border: 'none',
+                backgroundColor: 'var(--brand-blue, #1833fe)',
+                color: '#FFFFFF',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                cursor: isSubServiceSaving ? 'not-allowed' : 'pointer',
+                boxShadow: '0 4px 14px rgba(24, 51, 254, 0.25)',
+              }}
+            >
               {isSubServiceSaving ? (
                 <>
                   <div

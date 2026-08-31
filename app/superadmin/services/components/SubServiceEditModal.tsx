@@ -5,6 +5,17 @@ import Link from 'next/link';
 import { useServices } from '../../context/ServicesContext';
 import Tooltip from '@/app/superadmin/components/Tooltip';
 import { WebDevContentDTO, WebDevHeroBullet, WebDevFaqItem, WebDevTechStackItem } from '@/backend/services/services/services.types';
+import CustomDropdown, { DropdownOption } from '@/app/superadmin/components/CustomDropdown';
+
+const ICON_OPTIONS: DropdownOption<string>[] = [
+  { value: 'performance', label: '⚡ Performance' },
+  { value: 'seo', label: '🔍 Search / SEO' },
+  { value: 'responsive', label: '📱 Responsive' },
+  { value: 'security', label: '🛡️ Security' },
+  { value: 'analytics', label: '📊 Analytics' },
+  { value: 'support', label: '💬 Support' },
+  { value: 'custom', label: '★ Star / Quality' },
+];
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -495,16 +506,22 @@ export default function SubServiceEditModal() {
                               onChange={(e) => handleHeroBulletChange(idx, 'title', e.target.value)}
                               style={{ ...inputStyle, height: '38px', flex: 1, fontWeight: 700 }}
                             />
-                            <select
+                            <CustomDropdown
                               value={bullet.iconType || 'performance'}
-                              onChange={(e) => handleHeroBulletChange(idx, 'iconType', e.target.value)}
-                              style={{ ...inputStyle, height: '38px', width: '150px' }}
-                            >
-                              <option value="performance">⚡ Performance</option>
-                              <option value="seo">🔍 Search / SEO</option>
-                              <option value="responsive">📱 Responsive</option>
-                              <option value="custom">★ Star / Custom</option>
-                            </select>
+                              options={ICON_OPTIONS}
+                              onChange={(val) => handleHeroBulletChange(idx, 'iconType', val)}
+                              direction="down"
+                              size="sm"
+                              buttonStyle={{
+                                height: '38px',
+                                borderRadius: '8px',
+                                backgroundColor: '#FFFFFF',
+                                border: '1px solid #CBD5E1',
+                                fontSize: '0.8rem',
+                                fontWeight: 700,
+                                minWidth: '150px',
+                              }}
+                            />
                           </div>
                           <input
                             type="text"

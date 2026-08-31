@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { WebDevContentDTO, WebDevTechStackItem } from '@/backend/services/services/services.types';
+import ImageFieldWithUpload from './ImageFieldWithUpload';
 
 interface SubServiceTechStackTabProps {
   formData: WebDevContentDTO;
   setFormData: React.Dispatch<React.SetStateAction<WebDevContentDTO | null>>;
+  onOpenAssetPicker?: (target: string) => void;
 }
 
 const inputStyle: React.CSSProperties = {
@@ -29,7 +31,7 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '6px',
 };
 
-export default function SubServiceTechStackTab({ formData, setFormData }: SubServiceTechStackTabProps) {
+export default function SubServiceTechStackTab({ formData, setFormData, onOpenAssetPicker }: SubServiceTechStackTabProps) {
   const handleHeadingChange = (val: string) => {
     setFormData((prev) => {
       if (!prev) return prev;
@@ -37,7 +39,7 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
     });
   };
 
-  const handleTechItemChange = (index: number, field: keyof WebDevTechStackItem, val: string) => {
+  const handleTechItemChange = (index: number, field: string, val: string) => {
     setFormData((prev) => {
       if (!prev) return prev;
       const items = [...prev.techStack.items];
@@ -49,19 +51,18 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
   const handleAddTechItem = () => {
     setFormData((prev) => {
       if (!prev) return prev;
+      const newItem: WebDevTechStackItem = {
+        id: `tech-${Date.now()}`,
+        name: 'New Technology',
+        category: 'Development Tool',
+        icon: '',
+        iconAlt: 'Technology icon',
+      };
       return {
         ...prev,
         techStack: {
           ...prev.techStack,
-          items: [
-            ...prev.techStack.items,
-            {
-              id: `tech-${Date.now()}`,
-              name: 'Technology Name',
-              category: 'Category',
-              icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-            },
-          ],
+          items: [...prev.techStack.items, newItem],
         },
       };
     });
@@ -70,7 +71,7 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
   const handleRemoveTechItem = (index: number) => {
     setFormData((prev) => {
       if (!prev) return prev;
-      const items = prev.techStack.items.filter((_, i) => i !== index);
+      const items = prev.techStack.items.filter((_, idx) => idx !== index);
       return { ...prev, techStack: { ...prev.techStack, items } };
     });
   };
@@ -91,10 +92,10 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', margin: 0 }}>
-            4. Tech Stack & Integrations
+            4. Tech Stack & Integration Tools
           </h3>
           <p style={{ margin: '3px 0 0 0', fontSize: '0.8rem', color: '#64748B' }}>
-            Manage the frontend frameworks, backend technologies, databases, and cloud infrastructure displayed in the tech grid.
+            Showcase the core frameworks, backend architectures, CMS platforms, and databases used to engineer this service.
           </p>
         </div>
         <button
@@ -104,14 +105,15 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
+            padding: '8px 14px',
             backgroundColor: '#EFF6FF',
             color: 'var(--brand-blue, #1833fe)',
             border: '1px solid #BFDBFE',
-            padding: '7px 14px',
             borderRadius: '8px',
             fontSize: '0.8rem',
             fontWeight: 700,
             cursor: 'pointer',
+            transition: 'all 0.15s ease',
           }}
         >
           + Add Technology
@@ -132,7 +134,7 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
 
       {/* Technology Cards Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
-        {formData.techStack.items.map((tech, idx) => (
+        {(formData.techStack.items || []).map((tech, idx) => (
           <div
             key={tech.id || idx}
             style={{
@@ -142,7 +144,7 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
               padding: '16px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '10px',
+              gap: '12px',
               boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
             }}
           >
@@ -171,7 +173,7 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
               <input
                 type="text"
                 placeholder="e.g. Next.js"
-                value={tech.name}
+                value={tech.name || ''}
                 onChange={(e) => handleTechItemChange(idx, 'name', e.target.value)}
                 style={{ ...inputStyle, fontWeight: 700 }}
               />
@@ -182,22 +184,24 @@ export default function SubServiceTechStackTab({ formData, setFormData }: SubSer
               <input
                 type="text"
                 placeholder="e.g. React Framework"
-                value={tech.category}
+                value={tech.category || ''}
                 onChange={(e) => handleTechItemChange(idx, 'category', e.target.value)}
                 style={inputStyle}
               />
             </div>
 
-            <div>
-              <label style={labelStyle}>Icon SVG / Image URL</label>
-              <input
-                type="text"
-                placeholder="Icon URL"
-                value={tech.icon}
-                onChange={(e) => handleTechItemChange(idx, 'icon', e.target.value)}
-                style={{ ...inputStyle, fontSize: '0.775rem' }}
-              />
-            </div>
+            <ImageFieldWithUpload
+              label="Tech Brand Icon"
+              recommendedDimensions="64 × 64 px (SVG / Logo)"
+              value={tech.icon || ''}
+              onChange={(url) => handleTechItemChange(idx, 'icon', url)}
+              altValue={tech.iconAlt || ''}
+              onAltChange={(alt) => handleTechItemChange(idx, 'iconAlt', alt)}
+              onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker(`subService.techStack.${idx}.icon`) : undefined}
+              uploadPrefix={`tech-${idx + 1}-icon`}
+              previewHeight={75}
+              placeholder="/service-1-assets/...svg"
+            />
           </div>
         ))}
       </div>

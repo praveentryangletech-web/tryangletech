@@ -167,109 +167,7 @@ function SuperadminAboutContent() {
       {/* Tab Content Container (ONLY THIS AREA SHOWS SKELETON WHILE LOADING) */}
       <div style={{ backgroundColor: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
         {isLoading ? (
-          <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '16px',
-              border: '1px solid #E2E8F0',
-              padding: '2rem',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.02)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '22px',
-            }}
-          >
-            {/* Header Info */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #BFDBFE' }}>
-                Above the Fold
-              </span>
-            </div>
-
-            {/* Sub Badge & Headline (2-Column Inputs) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
-                  Overtitle / Sub-Badge Text
-                </label>
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
-                  Main Hero Headline *
-                </label>
-                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
-              </div>
-            </div>
-
-            {/* Intro Paragraph 1 */}
-            <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
-                Intro Paragraph 1 *
-              </label>
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
-            </div>
-
-            {/* Intro Paragraph 2 */}
-            <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#334155', marginBottom: '5px' }}>
-                Intro Paragraph 2 (Value Proposition)
-              </label>
-              <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
-            </div>
-
-            {/* Key Company Statistics Box */}
-            <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <div>
-                  <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>📊 Live Company Statistics</strong>
-                  <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: '#64748B' }}>
-                    Displayed directly below the hero intro text on the About page.
-                  </p>
-                </div>
-                <div
-                  style={{
-                    padding: '5px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #C7D2FE',
-                    backgroundColor: '#EEF2FF',
-                    color: '#4338CA',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                  }}
-                >
-                  + Add Stat
-                </div>
-              </div>
-
-              {/* 3 Stat Item Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
-                {[1, 2, 3].map((statIdx) => (
-                  <div key={statIdx} style={{ backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <div className="rt-skeleton-box" style={{ width: '50px', height: '12px', borderRadius: '4px' }} />
-                      <div className="rt-skeleton-box" style={{ width: '16px', height: '16px', borderRadius: '4px' }} />
-                    </div>
-                    <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
-                    <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Client Avatar Faces & Colors Box */}
-            <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
-              <strong style={{ fontSize: '0.875rem', color: '#0F172A', display: 'block', marginBottom: '12px' }}>
-                👥 Client Avatar Circles (Top Left Stack)
-              </strong>
-              <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                {[1, 2, 3].map((idx) => (
-                  <div key={idx} className="rt-skeleton-box" style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
-                ))}
-              </div>
-            </div>
-          </div>
+          <AboutTabSkeleton tab={activeTab} />
         ) : (
           <>
             {activeTab === 'hero' && (
@@ -328,3 +226,188 @@ export default function SuperadminAboutPage() {
     </AboutProvider>
   );
 }
+
+function AboutTabSkeleton({ tab }: { tab: string }) {
+  switch (tab) {
+    case 'hero':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+            <div className="rt-skeleton-box" style={{ width: '90px', height: '24px', borderRadius: '6px' }} />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '5px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+            </div>
+            <div>
+              <div className="rt-skeleton-box" style={{ width: '150px', height: '14px', marginBottom: '5px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+            </div>
+          </div>
+
+          <div>
+            <div className="rt-skeleton-box" style={{ width: '130px', height: '14px', marginBottom: '5px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+          </div>
+
+          <div>
+            <div className="rt-skeleton-box" style={{ width: '220px', height: '14px', marginBottom: '5px', borderRadius: '4px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px', border: '1px solid #CBD5E1' }} />
+          </div>
+
+          <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <div className="rt-skeleton-box" style={{ width: '180px', height: '16px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '80px', height: '26px', borderRadius: '6px' }} />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+              {[1, 2, 3].map((statIdx) => (
+                <div key={statIdx} style={{ backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div className="rt-skeleton-box" style={{ width: '50px', height: '12px', borderRadius: '4px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
+                  <div className="rt-skeleton-box" style={{ width: '100%', height: '36px', borderRadius: '6px' }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px' }}>
+            <div className="rt-skeleton-box" style={{ width: '240px', height: '16px', marginBottom: '12px', borderRadius: '4px' }} />
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              {[1, 2, 3].map((idx) => (
+                <div key={idx} className="rt-skeleton-box" style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+
+    case 'speciality':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          </div>
+          {[1, 2, 3].map((i) => (
+            <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div className="rt-skeleton-box" style={{ width: '200px', height: '18px', borderRadius: '4px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+              <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '8px' }} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '70px', borderRadius: '6px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '70px', borderRadius: '6px' }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+
+    case 'missionVision':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+            {[1, 2].map((i) => (
+              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div className="rt-skeleton-box" style={{ width: '150px', height: '18px', borderRadius: '4px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '80px', borderRadius: '8px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '120px', borderRadius: '8px' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case 'whyChooseUs':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div className="rt-skeleton-box" style={{ width: '36px', height: '36px', borderRadius: '8px' }} />
+                <div className="rt-skeleton-box" style={{ width: '140px', height: '16px', borderRadius: '4px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '40px', borderRadius: '6px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '50px', borderRadius: '6px' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case 'process':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div className="rt-skeleton-box" style={{ width: '60px', height: '16px', borderRadius: '4px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '40px', borderRadius: '6px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '6px' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case 'ctaBanner':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '8px' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+            <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          </div>
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '100px', borderRadius: '8px' }} />
+        </div>
+      );
+
+    case 'faqs':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+            <div className="rt-skeleton-box" style={{ width: '110px', height: '36px', borderRadius: '8px' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '40px', borderRadius: '6px' }} />
+                <div className="rt-skeleton-box" style={{ width: '100%', height: '60px', borderRadius: '6px' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case 'seo':
+    default:
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          <div className="rt-skeleton-box" style={{ width: '260px', height: '24px', borderRadius: '6px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '74px', borderRadius: '8px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+          <div className="rt-skeleton-box" style={{ width: '100%', height: '42px', borderRadius: '8px' }} />
+        </div>
+      );
+  }
+}
+

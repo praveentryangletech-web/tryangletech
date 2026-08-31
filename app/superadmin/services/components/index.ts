@@ -15,3 +15,5 @@ export { default as SubServiceTypesTab } from './SubServiceTypesTab';
 export { default as SubServiceTechStackTab } from './SubServiceTechStackTab';
 export { default as SubServiceFaqsTab } from './SubServiceFaqsTab';
 export { default as SubServiceSeoTab } from './SubServiceSeoTab';
+export { default as SubServiceSkeleton } from './SubServiceSkeleton';
+export { default as ImageFieldWithUpload } from './ImageFieldWithUpload';

@@ -49,19 +49,19 @@ export default function WebDevFeatures({ data }: { data?: WebDevSpecialitySectio
               <div className="rt-speciality-item-bottom rt-1">
                 <div data-w-id="550ba491-626c-ae49-18f3-0ae2fea45116">
                   <Image
-                    src="/service-1-assets/690af46ec3c652eb36481b92_taskopia-service-two-speclality-1.webp"
+                    src={card1.images?.[0] || "/service-1-assets/690af46ec3c652eb36481b92_taskopia-service-two-speclality-1.webp"}
                     loading="lazy"
-                    alt="taskopia-service-two-speclality-1"
+                    alt={card1.title || "taskopia-service-two-speclality-1"}
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div
                   data-w-id="f3df5baa-fd06-6053-f4e2-08d3035925e3"
                   className="rt-speciality-item-bottom-1">
                   <Image
-                    src="/service-1-assets/6916ee81d584787f4358140a_taskopiya-service-one-seamless-2.webp"
+                    src={card1.images?.[1] || "/service-1-assets/6916ee81d584787f4358140a_taskopiya-service-one-seamless-2.webp"}
                     loading="lazy"
                     data-w-id="6a5d4c4b-ca7f-3ed3-b5bd-bc1b1cf646b6"
-                    alt="taskopiya-service-one-seamless-2"
+                    alt={card1.title || "taskopiya-service-one-seamless-2"}
                     className="rt-border-radius-small rt-shadow"
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
@@ -88,24 +88,24 @@ export default function WebDevFeatures({ data }: { data?: WebDevSpecialitySectio
               <div className="rt-speciality-item-bottom rt-2">
                 <div data-w-id="4b53e202-3d68-4e02-968b-a7142e0b1331">
                   <Image
-                    src="/service-1-assets/690af46e49d21abec7c4c84e_taskopia-service-two-speclality-4.webp"
+                    src={card2.images?.[0] || "/service-1-assets/690af46e49d21abec7c4c84e_taskopia-service-two-speclality-4.webp"}
                     loading="lazy"
-                    alt="taskopia-service-two-speclality-4"
+                    alt={card2.title || "taskopia-service-two-speclality-4"}
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div className="rt-speciality-item-bottom-1 rt-change">
                   <Image
-                    src="/service-1-assets/6916ee3d48e50837b4bef350_taskopiya-service-one-seamless.webp"
+                    src={card2.images?.[1] || "/service-1-assets/6916ee3d48e50837b4bef350_taskopiya-service-one-seamless.webp"}
                     loading="lazy"
-                    alt="taskopiya-service-one-seamless"
+                    alt={card2.title || "taskopiya-service-one-seamless"}
                     className="rt-border-radius-small rt-shadow"
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
                 <div data-w-id="60af2a98-b52b-8db3-3b1b-8acaee57774c">
                   <Image
-                    src="/service-1-assets/690af46eda7a2f8b2df0dffa_taskopia-service-two-speclality-6.webp"
+                    src={card2.images?.[2] || "/service-1-assets/690af46eda7a2f8b2df0dffa_taskopia-service-two-speclality-6.webp"}
                     loading="lazy"
-                    alt="taskopia-service-two-speclality-6"
+                    alt={card2.title || "taskopia-service-two-speclality-6"}
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>
@@ -132,17 +132,17 @@ export default function WebDevFeatures({ data }: { data?: WebDevSpecialitySectio
                 data-w-id="0c53b07b-fe68-2f41-7085-9175bf7b851d"
                 className="rt-speciality-item-bottom rt-3">
                 <Image
-                  src="/service-1-assets/690af46ec3c652eb36481b95_taskopia-service-two-speclality-7.webp"
+                  src={card3.images?.[0] || "/service-1-assets/690af46ec3c652eb36481b95_taskopia-service-two-speclality-7.webp"}
                   loading="lazy"
-                  alt="taskopia-service-two-speclality-7"
+                  alt={card3.title || "taskopia-service-two-speclality-7"}
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 <div
                   data-w-id="1cbba0cf-8e7f-a948-68ff-f8a53e0e87ac"
                   className="rt-speciality-item-small-img rt-up-down">
                   <Image
-                    src="/service-1-assets/6916edd50bad7d0bc178eb08_Group 2085663575.png"
+                    src={card3.images?.[1] || "/service-1-assets/6916edd50bad7d0bc178eb08_Group 2085663575.png"}
                     loading="lazy"
-                    alt="taskopia-sarvise-v1-smart-automation"
+                    alt={card3.title || "taskopia-sarvise-v1-smart-automation"}
                     width={800} height={800} style={{ width: "100%", height: "auto" }} />
                 </div>
               </div>

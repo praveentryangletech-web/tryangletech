@@ -40,13 +40,15 @@ export function PortfolioProvider({
   initialProjects,
   initialCategories,
   initialLimit = 9,
+  initialCategory = "All",
 }: {
   children: ReactNode;
   initialProjects?: Project[];
   initialCategories?: string[];
   initialLimit?: number;
+  initialCategory?: string;
 }) {
-  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [activeFilter, setActiveFilter] = useState<string>(initialCategory);
   const [categoriesList, setCategoriesList] = useState<string[]>(() => {
     if (initialCategories && initialCategories.length > 0) return initialCategories;
     return DEFAULT_PORTFOLIO_CATEGORIES;

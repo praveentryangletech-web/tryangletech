@@ -406,11 +406,15 @@ export default function PortfolioGrid({
   initialProjects,
   initialCategories,
 }: PortfolioGridProps) {
+  const primaryCategory = categoryFilter && categoryFilter.length === 1 ? categoryFilter[0] : "All";
+  const fetchLimit = categoryFilter && categoryFilter.length > 1 ? 30 : (limit || 9);
+
   return (
     <PortfolioProvider
       initialProjects={initialProjects}
       initialCategories={initialCategories}
-      initialLimit={limit || 9}
+      initialLimit={fetchLimit}
+      initialCategory={primaryCategory}
     >
       <PortfolioGridContent
         limit={limit}

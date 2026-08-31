@@ -187,7 +187,7 @@ export default async function WebDevelopmentPage() {
         <WebDevFeatures data={content.speciality} />
         <WebDevServices />
         <WebDevIntegration />
-        <ProjectsSection hideFilter={true} categoryFilter={["Business Website", "E-Commerce Website", "Landing Website"]} />
+        <ProjectsSection hideFilter={true} categoryFilter={["Business Website", "E-Commerce", "Landing Website"]} />
         <WebDevPricing />
         <WebDevTechStack data={content.techStack} />
         <WebDevBottomFAQ faqs={content.faqs} />

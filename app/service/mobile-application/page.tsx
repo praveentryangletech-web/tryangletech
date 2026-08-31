@@ -182,7 +182,7 @@ export default async function MobileApplicationPage() {
         <MobileApplicationOurServices data={content.engineering} />
         <MobileApplicationCases data={content.advantage} />
         <MobileApplicationFeatures data={content.features} />
-        <ProjectsSection hideFilter={true} categoryFilter={["App Development"]} />
+        <ProjectsSection hideFilter={true} categoryFilter={["Mobile Application"]} />
         <MobileApplicationTestimonial data={content.testimonials} />
         <MobileApplicationFAQ faqs={content.faqs} />
       </main>

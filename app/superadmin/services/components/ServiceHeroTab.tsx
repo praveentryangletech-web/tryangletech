@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ServiceHeroSection } from '@/backend/services/services/services.types';
+import { ShieldIcon, PlusIcon, CloseIcon } from './StandardSvgIcons';
 
 interface ServiceHeroTabProps {
   hero: ServiceHeroSection;
@@ -186,7 +187,10 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
       <div style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
           <div>
-            <strong style={{ fontSize: '0.85rem', color: '#0F172A' }}>🛡️ Trust Indicators / Value Pills</strong>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <ShieldIcon size={16} color="var(--brand-blue, #1833fe)" />
+              <strong style={{ fontSize: '0.85rem', color: '#0F172A' }}>Trust Indicators & Value Pills</strong>
+            </div>
             <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: '#64748B' }}>
               Checked indicator badges shown below the action buttons.
             </p>
@@ -195,7 +199,10 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
             type="button"
             onClick={handleAddTrustBadge}
             style={{
-              padding: '4px 10px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '5px 12px',
               borderRadius: '6px',
               border: '1px solid #C7D2FE',
               backgroundColor: '#EEF2FF',
@@ -205,7 +212,8 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
               cursor: 'pointer',
             }}
           >
-            + Add Badge
+            <PlusIcon size={12} color="#4338CA" />
+            <span>Add Badge</span>
           </button>
         </div>
 
@@ -224,7 +232,9 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
                 boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
               }}
             >
-              <span style={{ color: '#16A34A', fontWeight: 800, flexShrink: 0 }}>✓</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <input
                 type="text"
                 value={badge}
@@ -255,7 +265,6 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
                   border: 'none',
                   color: '#EF4444',
                   cursor: 'pointer',
-                  fontSize: '12px',
                   padding: 0,
                   marginRight: '2px',
                   flexShrink: 0,
@@ -264,7 +273,7 @@ export default function ServiceHeroTab({ hero, setHero }: ServiceHeroTabProps) {
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#FEE2E2')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
               >
-                ✕
+                <CloseIcon size={12} color="#EF4444" />
               </button>
             </div>
           ))}

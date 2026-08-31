@@ -25,6 +25,7 @@ import {
   SubServiceSeoTab,
   SubServiceSkeleton,
 } from '../components';
+import { SaveIcon, ExternalLinkIcon } from '../components/StandardSvgIcons';
 
 const SERVICE_TITLES: Record<string, string> = {
   'main': 'Main Services Overview',
@@ -264,7 +265,8 @@ function ServiceEditorInner() {
               transition: 'all 0.15s ease',
             }}
           >
-            <span>↗ Live Preview</span>
+            <ExternalLinkIcon size={13} color="#334155" />
+            <span>Live Preview</span>
           </Link>
 
           <button
@@ -287,7 +289,8 @@ function ServiceEditorInner() {
               transition: 'all 0.15s ease',
             }}
           >
-            <span>{isSaving ? 'Saving Changes...' : '💾 Save Changes'}</span>
+            <SaveIcon size={14} color="#FFFFFF" />
+            <span>{isSaving ? 'Saving Changes...' : 'Save Changes'}</span>
           </button>
         </div>
       </div>
@@ -309,7 +312,9 @@ function ServiceEditorInner() {
             gap: '8px',
           }}
         >
-          <span>✓</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15803D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
           <span>{successMessage}</span>
         </div>
       )}
@@ -330,7 +335,11 @@ function ServiceEditorInner() {
             gap: '8px',
           }}
         >
-          <span>✕</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
           <span>{errorMessage}</span>
         </div>
       )}

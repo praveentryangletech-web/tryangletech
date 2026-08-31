@@ -4,15 +4,82 @@ import React from 'react';
 import { WebDevContentDTO, WebDevHeroBullet } from '@/backend/services/services/services.types';
 import ImageFieldWithUpload from './ImageFieldWithUpload';
 import CustomDropdown, { DropdownOption } from '@/app/superadmin/components/CustomDropdown';
+import {
+  ZapIcon,
+  SearchIcon,
+  ResponsiveIcon,
+  ShieldIcon,
+  AnalyticsIcon,
+  SupportIcon,
+  StarIcon,
+  LinkIcon,
+  ImageIcon,
+} from './StandardSvgIcons';
 
 const ICON_OPTIONS: DropdownOption<string>[] = [
-  { value: 'performance', label: '⚡ Performance' },
-  { value: 'seo', label: '🔍 Search / SEO' },
-  { value: 'responsive', label: '📱 Responsive' },
-  { value: 'security', label: '🛡️ Security' },
-  { value: 'analytics', label: '📊 Analytics' },
-  { value: 'support', label: '💬 Support' },
-  { value: 'custom', label: '★ Star / Quality' },
+  {
+    value: 'performance',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ZapIcon size={14} color="#1833FE" />
+        <span>Performance</span>
+      </span>
+    ),
+  },
+  {
+    value: 'seo',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <SearchIcon size={14} color="#1833FE" />
+        <span>Search / SEO</span>
+      </span>
+    ),
+  },
+  {
+    value: 'responsive',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ResponsiveIcon size={14} color="#1833FE" />
+        <span>Responsive</span>
+      </span>
+    ),
+  },
+  {
+    value: 'security',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ShieldIcon size={14} color="#1833FE" />
+        <span>Security</span>
+      </span>
+    ),
+  },
+  {
+    value: 'analytics',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <AnalyticsIcon size={14} color="#1833FE" />
+        <span>Analytics</span>
+      </span>
+    ),
+  },
+  {
+    value: 'support',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <SupportIcon size={14} color="#1833FE" />
+        <span>Support</span>
+      </span>
+    ),
+  },
+  {
+    value: 'custom',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <StarIcon size={14} color="#1833FE" />
+        <span>Star / Quality</span>
+      </span>
+    ),
+  },
 ];
 
 interface SubServiceHeroTabProps {
@@ -286,7 +353,7 @@ export default function SubServiceHeroTab({ formData, setFormData, onOpenAssetPi
       {/* CTA Buttons & Badges */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-          <span style={{ color: 'var(--brand-blue, #1833fe)', fontSize: '1rem' }}>🔗</span>
+          <LinkIcon size={16} color="var(--brand-blue, #1833fe)" />
           <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155' }}>Call-To-Action (CTA) Buttons & Badge</span>
         </div>
 
@@ -338,7 +405,7 @@ export default function SubServiceHeroTab({ formData, setFormData, onOpenAssetPi
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
-          <span style={{ color: 'var(--brand-blue, #1833fe)', fontSize: '1.1rem' }}>🖼️</span>
+          <ImageIcon size={18} color="var(--brand-blue, #1833fe)" />
           <div>
             <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>Hero Visual Assets & Accessibility (Alt Text)</div>
             <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Configure floating showcase graphics, hero background banner, and their descriptive alt attributes.</div>

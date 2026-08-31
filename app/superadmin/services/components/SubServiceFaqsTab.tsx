@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
+import { PlusIcon, TrashIcon } from './StandardSvgIcons';
 
 interface SubServiceFaqsTabProps {
   formData: WebDevContentDTO;
@@ -116,7 +117,8 @@ export default function SubServiceFaqsTab({ formData, setFormData }: SubServiceF
             cursor: 'pointer',
           }}
         >
-          + Add FAQ Item
+          <PlusIcon size={14} color="var(--brand-blue, #1833fe)" />
+          <span>Add FAQ Item</span>
         </button>
       </div>
 
@@ -144,6 +146,9 @@ export default function SubServiceFaqsTab({ formData, setFormData }: SubServiceF
                 type="button"
                 onClick={() => handleRemoveFaq(idx)}
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
                   background: 'transparent',
                   border: 'none',
                   color: '#EF4444',
@@ -152,7 +157,8 @@ export default function SubServiceFaqsTab({ formData, setFormData }: SubServiceF
                   cursor: 'pointer',
                 }}
               >
-                ✕ Remove
+                <TrashIcon size={12} color="#EF4444" />
+                <span>Remove</span>
               </button>
             </div>
 

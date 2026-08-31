@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 export interface DropdownOption<T = string | number> {
   value: T;
-  label?: string | number;
+  label?: React.ReactNode;
 }
 
 interface CustomDropdownProps<T = string | number> {

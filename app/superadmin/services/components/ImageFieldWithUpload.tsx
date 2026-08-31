@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { convertFileToWebp } from '@/app/superadmin/utils/imageOptimizer';
+import { UploadIcon, LibraryIcon, CameraPlaceholderIcon, CloseIcon } from './StandardSvgIcons';
 
 interface ImageFieldWithUploadProps {
   label: string;
@@ -147,18 +148,19 @@ export default function ImageFieldWithUpload({
               color: '#334155',
               border: '1px solid #CBD5E1',
               borderRadius: '6px',
-              padding: '3px 8px',
+              padding: '4px 9px',
               fontSize: '0.725rem',
               fontWeight: 700,
               cursor: isUploading ? 'not-allowed' : 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px',
+              gap: '5px',
               transition: 'all 0.15s ease',
             }}
             title="Upload directly from your computer"
           >
-            <span>{isUploading ? '⏳ Uploading...' : '📁 Upload'}</span>
+            <UploadIcon size={12} color="#1833FE" />
+            <span>{isUploading ? 'Uploading...' : 'Upload'}</span>
           </button>
 
           {onOpenLibrary && (
@@ -170,18 +172,19 @@ export default function ImageFieldWithUpload({
                 color: 'var(--brand-blue, #1833fe)',
                 border: '1px solid #BFDBFE',
                 borderRadius: '6px',
-                padding: '3px 8px',
+                padding: '4px 9px',
                 fontSize: '0.725rem',
                 fontWeight: 700,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '5px',
                 transition: 'all 0.15s ease',
               }}
               title="Pick an existing image from media library"
             >
-              <span>🖼️ Library</span>
+              <LibraryIcon size={12} color="#1833FE" />
+              <span>Library</span>
             </button>
           )}
         </div>
@@ -189,7 +192,7 @@ export default function ImageFieldWithUpload({
 
       {uploadError && (
         <div style={{ fontSize: '0.725rem', color: '#DC2626', fontWeight: 600 }}>
-          ⚠ {uploadError}
+          {uploadError}
         </div>
       )}
 
@@ -285,7 +288,6 @@ export default function ImageFieldWithUpload({
                 backgroundColor: 'rgba(15, 23, 42, 0.75)',
                 color: '#FFFFFF',
                 border: 'none',
-                fontSize: '12px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -296,7 +298,7 @@ export default function ImageFieldWithUpload({
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#DC2626')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(15, 23, 42, 0.75)')}
             >
-              ✕
+              <CloseIcon size={12} color="#FFFFFF" />
             </button>
           </>
         ) : (
@@ -307,7 +309,7 @@ export default function ImageFieldWithUpload({
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '4px',
+              gap: '6px',
               color: '#94A3B8',
               cursor: 'pointer',
               width: '100%',
@@ -316,7 +318,7 @@ export default function ImageFieldWithUpload({
               textAlign: 'center',
             }}
           >
-            <span style={{ fontSize: '1.25rem' }}>📷</span>
+            <CameraPlaceholderIcon size={24} color="#94A3B8" />
             <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748B' }}>
               No image selected
             </span>

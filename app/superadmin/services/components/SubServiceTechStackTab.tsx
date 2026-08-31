@@ -3,6 +3,7 @@
 import React from 'react';
 import { WebDevContentDTO, WebDevTechStackItem } from '@/backend/services/services/services.types';
 import ImageFieldWithUpload from './ImageFieldWithUpload';
+import { PlusIcon, TrashIcon } from './StandardSvgIcons';
 
 interface SubServiceTechStackTabProps {
   formData: WebDevContentDTO;
@@ -116,7 +117,8 @@ export default function SubServiceTechStackTab({ formData, setFormData, onOpenAs
             transition: 'all 0.15s ease',
           }}
         >
-          + Add Technology
+          <PlusIcon size={14} color="var(--brand-blue, #1833fe)" />
+          <span>Add Technology</span>
         </button>
       </div>
 
@@ -156,6 +158,9 @@ export default function SubServiceTechStackTab({ formData, setFormData, onOpenAs
                 type="button"
                 onClick={() => handleRemoveTechItem(idx)}
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
                   background: 'transparent',
                   border: 'none',
                   color: '#EF4444',
@@ -164,7 +169,8 @@ export default function SubServiceTechStackTab({ formData, setFormData, onOpenAs
                   cursor: 'pointer',
                 }}
               >
-                ✕ Remove
+                <TrashIcon size={12} color="#EF4444" />
+                <span>Remove</span>
               </button>
             </div>
 

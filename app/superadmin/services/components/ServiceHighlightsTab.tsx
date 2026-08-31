@@ -3,6 +3,7 @@
 import React from 'react';
 import HomeImageUploadField from '@/app/superadmin/home/components/HomeImageUploadField';
 import { ServiceHighlightsSection, ServiceHighlightPillar } from '@/backend/services/services/services.types';
+import { ImageIcon, StarIcon } from './StandardSvgIcons';
 
 interface ServiceHighlightsTabProps {
   highlights: ServiceHighlightsSection;
@@ -78,9 +79,12 @@ export default function ServiceHighlightsTab({ highlights, setHighlights, onOpen
 
       {/* Visual Mockup Images */}
       <div style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
-        <strong style={{ fontSize: '0.85rem', color: '#0F172A', display: 'block', marginBottom: '12px' }}>
-          🖼️ Left-Side Showcase Mockup Images
-        </strong>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+          <ImageIcon size={16} color="var(--brand-blue, #1833fe)" />
+          <strong style={{ fontSize: '0.85rem', color: '#0F172A' }}>
+            Left-Side Showcase Mockup Images
+          </strong>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
           <HomeImageUploadField
             label="Main Project Overview Mockup"
@@ -112,9 +116,12 @@ export default function ServiceHighlightsTab({ highlights, setHighlights, onOpen
 
       {/* 4 Value Pillars Grid */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>
-          💎 4 Core Value Pillars
-        </strong>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <StarIcon size={16} color="var(--brand-blue, #1833fe)" />
+          <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>
+            4 Core Value Pillars
+          </strong>
+        </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
           {(highlights.pillars || []).map((pillar, idx) => (
             <div

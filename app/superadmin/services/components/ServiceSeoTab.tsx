@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SearchIcon, PlusIcon, CloseIcon } from './StandardSvgIcons';
 
 interface ServiceSeoTabProps {
   metaTitle: string;
@@ -178,6 +179,9 @@ export default function ServiceSeoTab({
             type="button"
             onClick={handleAddKeyword}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               padding: '0 16px',
               borderRadius: '8px',
               border: 'none',
@@ -188,7 +192,8 @@ export default function ServiceSeoTab({
               cursor: 'pointer',
             }}
           >
-            + Add
+            <PlusIcon size={12} color="#FFFFFF" />
+            <span>Add</span>
           </button>
         </div>
 
@@ -213,9 +218,9 @@ export default function ServiceSeoTab({
               <button
                 type="button"
                 onClick={() => handleRemoveKeyword(kw)}
-                style={{ background: 'none', border: 'none', color: '#1D4ED8', cursor: 'pointer', fontSize: '12px', padding: 0, display: 'flex', alignItems: 'center' }}
+                style={{ background: 'none', border: 'none', color: '#1D4ED8', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
               >
-                ✕
+                <CloseIcon size={10} color="#1D4ED8" />
               </button>
             </span>
           ))}
@@ -224,8 +229,9 @@ export default function ServiceSeoTab({
 
       {/* Google SERP Live Preview Box */}
       <div style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
-        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '10px' }}>
-          🔍 Live Google Search Preview
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '10px' }}>
+          <SearchIcon size={14} color="#64748B" />
+          <span>Live Google Search Preview</span>
         </div>
         <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: '8px', padding: '14px', maxWidth: '600px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>

@@ -17,3 +17,4 @@ export { default as SubServiceFaqsTab } from './SubServiceFaqsTab';
 export { default as SubServiceSeoTab } from './SubServiceSeoTab';
 export { default as SubServiceSkeleton } from './SubServiceSkeleton';
 export { default as ImageFieldWithUpload } from './ImageFieldWithUpload';
+export * from './StandardSvgIcons';

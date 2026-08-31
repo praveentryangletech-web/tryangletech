@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import HomeImageUploadField from '@/app/superadmin/home/components/HomeImageUploadField';
 import { ServiceCardItem } from '@/backend/services/services/services.types';
+import { ImageIcon } from './StandardSvgIcons';
 
 interface ServiceCardsTabProps {
   servicesList: ServiceCardItem[];
@@ -155,8 +156,9 @@ export default function ServiceCardsTab({ servicesList, setServicesList, onOpenA
 
             {/* Mockup Images Selector */}
             <div style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>
-                🖼️ Mockup & Preview Images (Up to 3 Layered Assets)
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>
+                <ImageIcon size={14} color="#1833FE" />
+                <span>Mockup & Preview Images (Up to 3 Layered Assets)</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
                 {[0, 1, 2].map((imgIdx) => {

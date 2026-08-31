@@ -6,15 +6,80 @@ import { useServices } from '../../context/ServicesContext';
 import Tooltip from '@/app/superadmin/components/Tooltip';
 import { WebDevContentDTO, WebDevHeroBullet, WebDevFaqItem, WebDevTechStackItem } from '@/backend/services/services/services.types';
 import CustomDropdown, { DropdownOption } from '@/app/superadmin/components/CustomDropdown';
+import {
+  ZapIcon,
+  SearchIcon,
+  ResponsiveIcon,
+  ShieldIcon,
+  AnalyticsIcon,
+  SupportIcon,
+  StarIcon,
+} from './StandardSvgIcons';
 
 const ICON_OPTIONS: DropdownOption<string>[] = [
-  { value: 'performance', label: '⚡ Performance' },
-  { value: 'seo', label: '🔍 Search / SEO' },
-  { value: 'responsive', label: '📱 Responsive' },
-  { value: 'security', label: '🛡️ Security' },
-  { value: 'analytics', label: '📊 Analytics' },
-  { value: 'support', label: '💬 Support' },
-  { value: 'custom', label: '★ Star / Quality' },
+  {
+    value: 'performance',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ZapIcon size={14} color="#1833FE" />
+        <span>Performance</span>
+      </span>
+    ),
+  },
+  {
+    value: 'seo',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <SearchIcon size={14} color="#1833FE" />
+        <span>Search / SEO</span>
+      </span>
+    ),
+  },
+  {
+    value: 'responsive',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ResponsiveIcon size={14} color="#1833FE" />
+        <span>Responsive</span>
+      </span>
+    ),
+  },
+  {
+    value: 'security',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <ShieldIcon size={14} color="#1833FE" />
+        <span>Security</span>
+      </span>
+    ),
+  },
+  {
+    value: 'analytics',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <AnalyticsIcon size={14} color="#1833FE" />
+        <span>Analytics</span>
+      </span>
+    ),
+  },
+  {
+    value: 'support',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <SupportIcon size={14} color="#1833FE" />
+        <span>Support</span>
+      </span>
+    ),
+  },
+  {
+    value: 'custom',
+    label: (
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <StarIcon size={14} color="#1833FE" />
+        <span>Star / Quality</span>
+      </span>
+    ),
+  },
 ];
 
 const inputStyle: React.CSSProperties = {

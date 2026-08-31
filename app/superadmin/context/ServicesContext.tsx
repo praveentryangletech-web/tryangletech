@@ -6,6 +6,7 @@ import {
   DEFAULT_SERVICE_MAIN_CONTENT,
   DEFAULT_SERVICES_LIST,
   DEFAULT_WEB_DEV_CONTENT,
+  DEFAULT_MOBILE_APP_CONTENT,
 } from '@/backend/services/services/services.defaults';
 import {
   ServiceMainContentDTO,
@@ -18,6 +19,7 @@ import {
   ServiceTestimonialItem,
   ServicesPaginationInfo,
   WebDevContentDTO,
+  MobileAppContentDTO,
 } from '@/backend/services/services/services.types';
 
 export interface ServicesContextType {
@@ -33,12 +35,12 @@ export interface ServicesContextType {
   isSubServiceModalOpen: boolean;
   setIsSubServiceModalOpen: (open: boolean) => void;
   selectedSubService: ServicePageSummaryItem | null;
-  subServiceData: WebDevContentDTO | null;
-  setSubServiceData: React.Dispatch<React.SetStateAction<WebDevContentDTO | null>>;
+  subServiceData: any;
+  setSubServiceData: React.Dispatch<React.SetStateAction<any>>;
   isSubServiceLoading: boolean;
   isSubServiceSaving: boolean;
-  fetchSubServiceData: (slug: string) => Promise<void>;
-  saveSubServiceData: (slug?: string, data?: Partial<WebDevContentDTO>) => Promise<boolean>;
+  fetchSubServiceData: (slug: string) => Promise<any>;
+  saveSubServiceData: (slug?: string, data?: any) => Promise<boolean>;
 
   // Search & Filtering
   searchQuery: string;
@@ -116,7 +118,7 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
   // Sub-Service State
   const [isSubServiceModalOpen, setIsSubServiceModalOpen] = useState(false);
   const [selectedSubService, setSelectedSubService] = useState<ServicePageSummaryItem | null>(null);
-  const [subServiceData, setSubServiceData] = useState<WebDevContentDTO | null>(DEFAULT_WEB_DEV_CONTENT);
+  const [subServiceData, setSubServiceData] = useState<any>(DEFAULT_WEB_DEV_CONTENT);
   const [isSubServiceLoading, setIsSubServiceLoading] = useState(false);
   const [isSubServiceSaving, setIsSubServiceSaving] = useState(false);
 
@@ -352,7 +354,63 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
   };
 
   /**
-   * 5. Media Picker Handlers
+   * 5. Sub-Service Data Handlers
+   */
+  const fetchSubServiceData = useCallback(async (slug: string): Promise<any> => {
+    setIsSubServiceLoading(true);
+    const cleanSlug = slug.replace(/^service-/, '');
+    const isMobileApp = cleanSlug === 'mobile-application';
+    const defaultData = isMobileApp ? DEFAULT_MOBILE_APP_CONTENT : DEFAULT_WEB_DEV_CONTENT;
+
+    try {
+      const res = await apiClient.get<any>(`/api/superadmin/services/${cleanSlug}`, { useCache: false });
+      if (res.success && res.data) {
+        setSubServiceData(res.data);
+        return res.data;
+      } else {
+        setSubServiceData(defaultData);
+        return defaultData;
+      }
+    } catch (err: any) {
+      console.warn('[ServicesContext] Error fetching sub-service data, using default:', err);
+      setSubServiceData(defaultData);
+      return defaultData;
+    } finally {
+      setIsSubServiceLoading(false);
+    }
+  }, []);
+
+  const saveSubServiceData = async (slug?: string, data?: any): Promise<boolean> => {
+    setIsSubServiceSaving(true);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    try {
+      const targetSlug = slug || selectedSubService?.slug || 'web-development';
+      const targetData = data || subServiceData || {};
+      const cleanSlug = targetSlug.replace(/^service-/, '');
+      const res = await apiClient.put<any>(`/api/superadmin/services/${cleanSlug}`, targetData);
+      if (res.success && res.data) {
+        setSubServiceData(res.data);
+        const name = res.data.hero?.subBadgeText || (cleanSlug === 'mobile-application' ? 'Mobile Application' : 'Web Development');
+        setSuccessMessage(`✓ ${name} content saved live to database!`);
+        await fetchServicesList();
+        setTimeout(() => setSuccessMessage(''), 4000);
+        return true;
+      } else {
+        setErrorMessage(res.error || 'Failed to save service content.');
+        return false;
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Error saving service content.');
+      return false;
+    } finally {
+      setIsSubServiceSaving(false);
+    }
+  };
+
+  /**
+   * 6. Media Picker Handlers
    */
   const openAssetPicker = (target: string) => {
     setMediaPickerTarget(target);
@@ -404,13 +462,14 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
       });
     } else if (mediaPickerTarget.startsWith('subService.')) {
       const fieldPath = mediaPickerTarget.replace('subService.', '');
-      setSubServiceData((prev) => {
+      setSubServiceData((prev: any) => {
         if (!prev) return prev;
         const copy = JSON.parse(JSON.stringify(prev));
         if (fieldPath === 'hero.imageRightOne') copy.hero.imageRightOne = url;
         else if (fieldPath === 'hero.imageRightTwo') copy.hero.imageRightTwo = url;
         else if (fieldPath === 'hero.imageBanner') copy.hero.imageBanner = url;
         else if (fieldPath === 'hero.imageDot') copy.hero.imageDot = url;
+        else if (fieldPath === 'seo.ogImage') copy.ogImage = url;
         else if (fieldPath.startsWith('speciality.')) {
           const parts = fieldPath.split('.');
           const cardIdx = parseInt(parts[1], 10);
@@ -421,56 +480,51 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
             if (!copy.speciality.cards[cardIdx].images) copy.speciality.cards[cardIdx].images = [];
             copy.speciality.cards[cardIdx].images[imgIdx] = url;
           }
+        } else if (fieldPath.startsWith('types.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'image') copy.types.cards[cardIdx].image = url;
+          else if (parts[2] === 'smallImage') copy.types.cards[cardIdx].smallImage = url;
+        } else if (fieldPath.startsWith('techStack.')) {
+          const parts = fieldPath.split('.');
+          const techIdx = parseInt(parts[1], 10);
+          if (copy.techStack?.items && copy.techStack.items[techIdx]) {
+            copy.techStack.items[techIdx].icon = url;
+          }
+        }
+        return copy;
+      });
+    } else if (mediaPickerTarget.startsWith('mobileApp.')) {
+      const fieldPath = mediaPickerTarget.replace('mobileApp.', '');
+      setSubServiceData((prev: any) => {
+        if (!prev) return prev;
+        const copy = JSON.parse(JSON.stringify(prev));
+        if (fieldPath === 'hero.imageRightOne') copy.hero.imageRightOne = url;
+        else if (fieldPath === 'hero.imageRightTwo') copy.hero.imageRightTwo = url;
+        else if (fieldPath === 'hero.imageBanner') copy.hero.imageBanner = url;
+        else if (fieldPath === 'engineering.imageMain') copy.engineering.imageMain = url;
+        else if (fieldPath === 'engineering.imageMarquee') copy.engineering.imageMarquee = url;
+        else if (fieldPath === 'features.imageMain') copy.features.imageMain = url;
+        else if (fieldPath === 'seo.ogImage') copy.ogImage = url;
+        else if (fieldPath.startsWith('process.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'image') copy.process.cards[cardIdx].image = url;
+          else if (parts[2] === 'smallImage') copy.process.cards[cardIdx].smallImage = url;
+        } else if (fieldPath.startsWith('types.')) {
+          const parts = fieldPath.split('.');
+          const cardIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'image') copy.types.cards[cardIdx].image = url;
+          else if (parts[2] === 'smallImage') copy.types.cards[cardIdx].smallImage = url;
+        } else if (fieldPath.startsWith('testimonials.')) {
+          const parts = fieldPath.split('.');
+          const testIdx = parseInt(parts[1], 10);
+          if (parts[2] === 'avatar') copy.testimonials.items[testIdx].avatar = url;
         }
         return copy;
       });
     }
     setIsMediaPickerOpen(false);
-  };
-
-  /**
-   * 6. Sub-Service Data Handlers
-   */
-  const fetchSubServiceData = async (slug: string) => {
-    setIsSubServiceLoading(true);
-    try {
-      const cleanSlug = slug.replace(/^service-/, '');
-      const res = await apiClient.get<WebDevContentDTO>(`/api/superadmin/services/${cleanSlug}`);
-      if (res.success && res.data) {
-        setSubServiceData(res.data);
-      } else {
-        setSubServiceData(DEFAULT_WEB_DEV_CONTENT);
-      }
-    } catch (err: any) {
-      console.warn('[ServicesContext] Error fetching sub-service data, using default:', err);
-      setSubServiceData(DEFAULT_WEB_DEV_CONTENT);
-    } finally {
-      setIsSubServiceLoading(false);
-    }
-  };
-
-  const saveSubServiceData = async (slug?: string, data?: Partial<WebDevContentDTO>): Promise<boolean> => {
-    setIsSubServiceSaving(true);
-    try {
-      const targetSlug = slug || selectedSubService?.slug || 'web-development';
-      const targetData = data || subServiceData || {};
-      const cleanSlug = targetSlug.replace(/^service-/, '');
-      const res = await apiClient.put<WebDevContentDTO>(`/api/superadmin/services/${cleanSlug}`, targetData);
-      if (res.success && res.data) {
-        setSubServiceData(res.data);
-        setSuccessMessage(`✓ ${res.data.hero?.subBadgeText || 'Service'} content saved live to database!`);
-        setTimeout(() => setSuccessMessage(''), 3000);
-        return true;
-      } else {
-        setErrorMessage(res.error || 'Failed to save service content.');
-        return false;
-      }
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Error saving service content.');
-      return false;
-    } finally {
-      setIsSubServiceSaving(false);
-    }
   };
 
   const openEditMain = () => {
@@ -483,13 +537,18 @@ export function ServicesProvider({ children }: { children: ReactNode }) {
     if (slug === 'service-main' || slug === 'main') {
       openEditMain();
     } else {
+      const cleanSlug = slug.replace(/^service-/, '');
       const item = typeof serviceOrSlug === 'string'
-        ? servicesListSummary.find(s => s.slug === slug || s.id === slug) || {
+        ? servicesListSummary.find(s => s.slug === cleanSlug || s.id === slug) || {
             id: slug,
-            slug: slug.replace(/^service-/, ''),
-            name: slug === 'service-web-development' || slug === 'web-development' ? 'Website & Web Application Development' : slug,
-            route: `/service/${slug.replace(/^service-/, '')}`,
-            category: 'Engineering & Web',
+            slug: cleanSlug,
+            name: cleanSlug === 'mobile-application'
+              ? 'iOS & Android Mobile App Development'
+              : cleanSlug === 'web-development'
+              ? 'Website & Web Application Development'
+              : cleanSlug,
+            route: `/service/${cleanSlug}`,
+            category: cleanSlug === 'mobile-application' ? 'Mobile & App' : 'Engineering & Web',
             isMainPage: false,
             isPublished: true,
             updatedAt: new Date().toISOString(),

@@ -6,12 +6,15 @@ import {
   ServicesListResponse,
   ServicesListFilterOptions,
   WebDevContentDTO,
+  MobileAppContentDTO,
 } from './services.types';
 import {
   DEFAULT_SERVICE_MAIN_CONTENT,
   DEFAULT_SERVICES_LIST,
   DEFAULT_WEB_DEV_CONTENT,
+  DEFAULT_MOBILE_APP_CONTENT,
 } from './services.defaults';
+
 
 interface CachedEntry<T> {
   data: T;
@@ -186,6 +189,55 @@ export const servicesService = {
               DEFAULT_SERVICE_MAIN_CONTENT.keywords,
               item.isPublished
             );
+          } else if (item.slug === 'service-mobile-application') {
+            await db.$executeRawUnsafe(
+              `
+              INSERT INTO "PageContent" (
+                "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "whyChooseUs", "howWeWork", "techStack", "testimonials", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "createdAt", "updatedAt"
+              ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14, $15, $16::text[], $17, NOW(), NOW())
+              ON CONFLICT ("slug") DO NOTHING;
+            `,
+              item.slug,
+              item.pageType,
+              item.city,
+              item.region,
+              item.postalCode,
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.hero),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.process),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.types),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.advantage),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.features),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.engineering),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.testimonials),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.faqs),
+              DEFAULT_MOBILE_APP_CONTENT.metaTitle,
+              DEFAULT_MOBILE_APP_CONTENT.metaDescription,
+              DEFAULT_MOBILE_APP_CONTENT.keywords,
+              item.isPublished
+            );
+          } else if (item.slug === 'service-web-development') {
+            await db.$executeRawUnsafe(
+              `
+              INSERT INTO "PageContent" (
+                "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "techStack", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "createdAt", "updatedAt"
+              ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11, $12, $13::text[], $14, NOW(), NOW())
+              ON CONFLICT ("slug") DO NOTHING;
+            `,
+              item.slug,
+              item.pageType,
+              item.city,
+              item.region,
+              item.postalCode,
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.hero),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.speciality),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.types),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.techStack),
+              JSON.stringify(DEFAULT_WEB_DEV_CONTENT.faqs),
+              DEFAULT_WEB_DEV_CONTENT.metaTitle,
+              DEFAULT_WEB_DEV_CONTENT.metaDescription,
+              DEFAULT_WEB_DEV_CONTENT.keywords,
+              item.isPublished
+            );
           } else {
             await db.$executeRawUnsafe(
               `
@@ -204,6 +256,7 @@ export const servicesService = {
             );
           }
         }
+
       } catch (e) {
         console.warn('[ServicesService] Background PageContent table verification notice:', e);
       }
@@ -768,10 +821,256 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
   },
 
   /**
+   * Retrieve dynamic Mobile Application Sub-Service Page content with resilient caching
+   */
+  async getMobileAppContent(): Promise<MobileAppContentDTO> {
+    const cacheKey = 'sub_service_content_mobile_application';
+    const cached = servicesCache.get<MobileAppContentDTO>(cacheKey);
+    if (cached) {
+      return cached.data;
+    }
+
+    this.ensureTable();
+
+    try {
+      const rows = await db.$queryRaw<any[]>`
+        SELECT * FROM "PageContent"
+        WHERE "slug" = 'service-mobile-application' OR "slug" = 'mobile-application'
+        LIMIT 1
+      `;
+
+      if (!rows || rows.length === 0) {
+        // Seed default record in background
+        (async () => {
+          try {
+            await db.$executeRawUnsafe(
+              `
+              INSERT INTO "PageContent" (
+                "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "whyChooseUs", "howWeWork", "techStack", "testimonials", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "createdAt", "updatedAt"
+              ) VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14, $15, $16::text[], $17, NOW(), NOW())
+              ON CONFLICT ("slug") DO NOTHING;
+            `,
+              'service-mobile-application',
+              'SERVICE_SUB',
+              'iOS & Android Mobile App Development',
+              'Mobile Applications',
+              '/service/mobile-application',
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.hero),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.process),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.types),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.advantage),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.features),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.engineering),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.testimonials),
+              JSON.stringify(DEFAULT_MOBILE_APP_CONTENT.faqs),
+              DEFAULT_MOBILE_APP_CONTENT.metaTitle,
+              DEFAULT_MOBILE_APP_CONTENT.metaDescription,
+              DEFAULT_MOBILE_APP_CONTENT.keywords,
+              true
+            );
+          } catch (e) {
+            console.warn('[ServicesService] Notice during initial mobile-app seeding:', e);
+          }
+        })();
+
+        servicesCache.set(cacheKey, DEFAULT_MOBILE_APP_CONTENT);
+        return DEFAULT_MOBILE_APP_CONTENT;
+      }
+
+      const row = rows[0];
+
+      const dto: MobileAppContentDTO = {
+        id: row.slug || 'service-mobile-application',
+        slug: 'mobile-application',
+        hero: parseJsonSafe(row.hero, DEFAULT_MOBILE_APP_CONTENT.hero),
+        process: parseJsonSafe(row.about, DEFAULT_MOBILE_APP_CONTENT.process),
+        types: parseJsonSafe(row.services, DEFAULT_MOBILE_APP_CONTENT.types),
+        advantage: parseJsonSafe(row.whyChooseUs, DEFAULT_MOBILE_APP_CONTENT.advantage),
+        features: parseJsonSafe(row.howWeWork, DEFAULT_MOBILE_APP_CONTENT.features),
+        engineering: parseJsonSafe(row.techStack, DEFAULT_MOBILE_APP_CONTENT.engineering),
+        testimonials: parseJsonSafe(row.testimonials, DEFAULT_MOBILE_APP_CONTENT.testimonials),
+        faqs: parseJsonSafe(row.faqs, DEFAULT_MOBILE_APP_CONTENT.faqs),
+        metaTitle: row.metaTitle || DEFAULT_MOBILE_APP_CONTENT.metaTitle,
+        metaDescription: row.metaDescription || DEFAULT_MOBILE_APP_CONTENT.metaDescription,
+        keywords: Array.isArray(row.keywords) && row.keywords.length > 0 ? row.keywords : DEFAULT_MOBILE_APP_CONTENT.keywords,
+        canonicalUrl: DEFAULT_MOBILE_APP_CONTENT.canonicalUrl,
+        ogImage: DEFAULT_MOBILE_APP_CONTENT.ogImage,
+        ogImageAlt: DEFAULT_MOBILE_APP_CONTENT.ogImageAlt,
+        isPublished: row.isPublished ?? true,
+        updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
+      };
+
+      servicesCache.set(cacheKey, dto);
+      return dto;
+    } catch (err) {
+      console.warn('[ServicesService] Falling back to default mobile-app content:', err);
+      return DEFAULT_MOBILE_APP_CONTENT;
+    }
+  },
+
+  /**
+   * Update Mobile Application Sub-Service Page content in Supabase PostgreSQL
+   */
+  async updateMobileAppContent(payload: Partial<MobileAppContentDTO>): Promise<MobileAppContentDTO> {
+    this.ensureTable();
+
+    const current = await this.getMobileAppContent();
+
+    const updatedHero = payload.hero !== undefined ? payload.hero : current.hero;
+    const updatedProcess = payload.process !== undefined ? payload.process : current.process;
+    const updatedTypes = payload.types !== undefined ? payload.types : current.types;
+    const updatedAdvantage = payload.advantage !== undefined ? payload.advantage : current.advantage;
+    const updatedFeatures = payload.features !== undefined ? payload.features : current.features;
+    const updatedEngineering = payload.engineering !== undefined ? payload.engineering : current.engineering;
+    const updatedTestimonials = payload.testimonials !== undefined ? payload.testimonials : current.testimonials;
+    const updatedFaqs = payload.faqs !== undefined ? payload.faqs : current.faqs;
+    const updatedMetaTitle = payload.metaTitle !== undefined ? payload.metaTitle : current.metaTitle;
+    const updatedMetaDescription = payload.metaDescription !== undefined ? payload.metaDescription : current.metaDescription;
+    const updatedKeywords = payload.keywords !== undefined ? payload.keywords : current.keywords;
+    const updatedIsPublished = payload.isPublished !== undefined ? payload.isPublished : current.isPublished;
+
+    try {
+      await db.$executeRawUnsafe(
+        `
+        INSERT INTO "PageContent" (
+          "slug", "pageType", "city", "region", "postalCode", "hero", "about", "services", "whyChooseUs", "howWeWork", "techStack", "testimonials", "faqs", "metaTitle", "metaDescription", "keywords", "isPublished", "updatedAt"
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::jsonb, $9::jsonb, $10::jsonb, $11::jsonb, $12::jsonb, $13::jsonb, $14, $15, $16::text[], $17, NOW()
+        )
+        ON CONFLICT ("slug") DO UPDATE SET
+          "hero" = EXCLUDED."hero",
+          "about" = EXCLUDED."about",
+          "services" = EXCLUDED."services",
+          "whyChooseUs" = EXCLUDED."whyChooseUs",
+          "howWeWork" = EXCLUDED."howWeWork",
+          "techStack" = EXCLUDED."techStack",
+          "testimonials" = EXCLUDED."testimonials",
+          "faqs" = EXCLUDED."faqs",
+          "metaTitle" = EXCLUDED."metaTitle",
+          "metaDescription" = EXCLUDED."metaDescription",
+          "keywords" = EXCLUDED."keywords",
+          "isPublished" = EXCLUDED."isPublished",
+          "updatedAt" = NOW();
+      `,
+        'service-mobile-application',
+        'SERVICE_SUB',
+        'iOS & Android Mobile App Development',
+        'Mobile Applications',
+        '/service/mobile-application',
+        JSON.stringify(updatedHero),
+        JSON.stringify(updatedProcess),
+        JSON.stringify(updatedTypes),
+        JSON.stringify(updatedAdvantage),
+        JSON.stringify(updatedFeatures),
+        JSON.stringify(updatedEngineering),
+        JSON.stringify(updatedTestimonials),
+        JSON.stringify(updatedFaqs),
+        updatedMetaTitle,
+        updatedMetaDescription,
+        updatedKeywords,
+        updatedIsPublished
+      );
+    } catch (e) {
+      console.warn('[ServicesService] Error updating MobileApp PageContent in DB:', e);
+    }
+
+    // Invalidate micro-cache
+    servicesCache.clear();
+
+    return {
+      id: 'service-mobile-application',
+      slug: 'mobile-application',
+      hero: updatedHero,
+      process: updatedProcess,
+      types: updatedTypes,
+      advantage: updatedAdvantage,
+      features: updatedFeatures,
+      engineering: updatedEngineering,
+      testimonials: updatedTestimonials,
+      faqs: updatedFaqs,
+      metaTitle: updatedMetaTitle,
+      metaDescription: updatedMetaDescription,
+      keywords: updatedKeywords,
+      canonicalUrl: DEFAULT_MOBILE_APP_CONTENT.canonicalUrl,
+      ogImage: DEFAULT_MOBILE_APP_CONTENT.ogImage,
+      ogImageAlt: DEFAULT_MOBILE_APP_CONTENT.ogImageAlt,
+      isPublished: updatedIsPublished,
+      updatedAt: new Date().toISOString(),
+    };
+  },
+
+  /**
+   * Dynamic metadata for Mobile Application Sub-Service Page
+   */
+  async generateMobileAppMetadata(): Promise<Metadata> {
+    const data = await this.getMobileAppContent();
+    const title = data.metaTitle || DEFAULT_MOBILE_APP_CONTENT.metaTitle;
+    const description = data.metaDescription || DEFAULT_MOBILE_APP_CONTENT.metaDescription;
+    const keywords = data.keywords || DEFAULT_MOBILE_APP_CONTENT.keywords;
+    const canonical = data.canonicalUrl || 'https://tryangletech.com/service/mobile-application';
+    const ogImgUrl = data.ogImage || '/logo.png';
+    const ogImgAlt = data.ogImageAlt || title;
+
+    return {
+      title,
+      description,
+      keywords,
+      alternates: {
+        canonical,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonical,
+        siteName: 'TryangleTech',
+        type: 'website',
+        locale: 'en_US',
+        images: [
+          {
+            url: ogImgUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImgAlt,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [ogImgUrl],
+      },
+      other: {
+        'geo.region': 'IN-GJ',
+        'geo.placename': 'Ahmedabad',
+        'geo.position': '23.0225;72.5714',
+        'ICBM': '23.0225, 72.5714',
+        'rating': 'general',
+        'revisit-after': '7 days',
+      },
+    };
+  },
+
+  /**
    * Generic getSubServiceContent router
    */
-  async getSubServiceContent(slug: string): Promise<WebDevContentDTO> {
+  async getSubServiceContent(slug: string): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'mobile-application') {
+      return this.getMobileAppContent();
+    }
     if (cleanSlug === 'web-development') {
       return this.getWebDevContent();
     }
@@ -781,8 +1080,11 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
   /**
    * Generic updateSubServiceContent router
    */
-  async updateSubServiceContent(slug: string, payload: Partial<WebDevContentDTO>): Promise<WebDevContentDTO> {
+  async updateSubServiceContent(slug: string, payload: any): Promise<any> {
     const cleanSlug = slug.replace(/^service-/, '');
+    if (cleanSlug === 'mobile-application') {
+      return this.updateMobileAppContent(payload);
+    }
     if (cleanSlug === 'web-development') {
       return this.updateWebDevContent(payload);
     }
@@ -853,3 +1155,4 @@ function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
     };
   },
 };
+

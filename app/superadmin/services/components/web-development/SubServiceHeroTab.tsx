@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { WebDevContentDTO, WebDevHeroBullet } from '@/backend/services/services/services.types';
-import ImageFieldWithUpload from './ImageFieldWithUpload';
+import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
 import CustomDropdown, { DropdownOption } from '@/app/superadmin/components/CustomDropdown';
 import {
   ZapIcon,
@@ -14,7 +14,7 @@ import {
   StarIcon,
   LinkIcon,
   ImageIcon,
-} from './StandardSvgIcons';
+} from '../common/StandardSvgIcons';
 
 const ICON_OPTIONS: DropdownOption<string>[] = [
   {

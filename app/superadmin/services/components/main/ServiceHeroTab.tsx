@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ServiceHeroSection } from '@/backend/services/services/services.types';
-import { ShieldIcon, PlusIcon, CloseIcon } from './StandardSvgIcons';
+import { ShieldIcon, PlusIcon, CloseIcon } from '../common/StandardSvgIcons';
 
 interface ServiceHeroTabProps {
   hero: ServiceHeroSection;

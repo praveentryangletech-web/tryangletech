@@ -16,7 +16,7 @@ export default function SubServiceSkeleton({ isMain = false, activeTab }: SubSer
 }
 
 /**
- * 1. Sub-Service (e.g. Web Development) Tab-Aware Skeleton
+ * 1. Sub-Service (e.g. Web Development / Mobile App) Tab-Aware Skeleton
  */
 function SubServiceTabSkeleton({ tab }: { tab: string }) {
   switch (tab) {
@@ -133,6 +133,7 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
       );
 
     case 'speciality':
+    case 'process':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Header */}
@@ -241,6 +242,8 @@ function SubServiceTabSkeleton({ tab }: { tab: string }) {
       );
 
     case 'techStack':
+    case 'engineering':
+    case 'features':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Header */}

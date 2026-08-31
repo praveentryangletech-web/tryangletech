@@ -102,9 +102,9 @@ async function getActiveLocationSlugs(origin: string): Promise<Set<string>> {
 }
 
 // -------------------------------------------------------------
-// 4. MAIN EDGE MIDDLEWARE HANDLER
+// 4. MAIN NEXT.JS 16 PROXY FUNCTION
 // -------------------------------------------------------------
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // ===========================================================

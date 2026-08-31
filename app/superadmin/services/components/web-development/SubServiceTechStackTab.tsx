@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { WebDevContentDTO, WebDevTechStackItem } from '@/backend/services/services/services.types';
-import ImageFieldWithUpload from './ImageFieldWithUpload';
-import { PlusIcon, TrashIcon } from './StandardSvgIcons';
+import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
+import { PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
 
 interface SubServiceTechStackTabProps {
   formData: WebDevContentDTO;

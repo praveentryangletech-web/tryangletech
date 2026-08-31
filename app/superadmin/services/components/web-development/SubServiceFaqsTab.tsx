@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
-import { PlusIcon, TrashIcon } from './StandardSvgIcons';
+import { PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
 
 interface SubServiceFaqsTabProps {
   formData: WebDevContentDTO;

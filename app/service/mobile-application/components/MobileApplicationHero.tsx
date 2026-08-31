@@ -1,10 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import { MobileAppHeroSection } from '@/backend/services/services/services.types';
+import { DEFAULT_MOBILE_APP_CONTENT } from '@/backend/services/services/services.defaults';
 
-export default function MobileApplicationHero() {
+interface MobileApplicationHeroProps {
+  data?: MobileAppHeroSection;
+}
+
+export default function MobileApplicationHero({ data }: MobileApplicationHeroProps) {
+  const hero = data || DEFAULT_MOBILE_APP_CONTENT.hero;
+  const logos = (hero.logos && hero.logos.length > 0 ? hero.logos : DEFAULT_MOBILE_APP_CONTENT.hero.logos) || [];
+
+
   return (
     <>
       <section className="rt-hero-v7 rt-position-relative rt-overflow-hidden">
@@ -15,21 +25,21 @@ export default function MobileApplicationHero() {
                 <div
                   data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80b6"
                   className="rt-sub-text rt-sub-gredient">
-                  Mobile Application Development
+                  {hero.subBadgeText || 'Mobile Application Development'}
                 </div>
               </div>
               <div className="rt-hero-heading-gap rt-herding-v7-main">
                 <h1
                   data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80b8"
                   className="rt-gap-off">
-                  We build mobile apps that work great and help your business grow
+                  {hero.headline || 'We build mobile apps that work great and help your business grow'}
                 </h1>
               </div>
               <div
                 data-w-id="37c94178-77e1-7d98-94e1-aeaba36c80bc"
                 className="rt-hero-v7-para-wrap">
                 <p className="rt-gap-off">
-                  We turn your ideas into mobile apps for both iPhone and Android. Based in Ahmedabad, we build apps that are easy to use and designed to keep your customers coming back.
+                  {hero.subheadline || 'We turn your ideas into mobile apps for both iPhone and Android. Based in Ahmedabad, we build apps that are easy to use and designed to keep your customers coming back.'}
                 </p>
               </div>
               <div
@@ -37,9 +47,9 @@ export default function MobileApplicationHero() {
                 className="w-layout-hflex rt-hero-v7-button-wrap">
                 <Link
                   data-w-id="7f842da5-19d8-bbc8-1376-5a4231000dc8"
-                  href="/contact"
+                  href={hero.primaryBtnLink || '/contact'}
                   className="rt-button-body w-inline-block">
-                  <div className="rt-button-text">Start your app project</div>
+                  <div className="rt-button-text">{hero.primaryBtnText || 'Start your app project'}</div>
                   <div className="rt-button-body-overlay"></div>
                 </Link>
               </div>
@@ -47,143 +57,50 @@ export default function MobileApplicationHero() {
                 data-w-id="71a4d9bb-ed12-fffa-7ded-0324d6f48125"
                 className="rt-hero-v7-left-bottom rt-overflow-hidden rt-tab-display-none">
                 <div className="rt-text-style-h6 rt-hero-v7-left-text">
-                  Trusted by 350+ businesses
+                  {hero.trustText || 'Trusted by 350+ businesses'}
                 </div>
                 <div className="rt-text-marquee-wrapper rt-overflow-hidden">
                   <div className="rt-text-marquee-train">
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27127d946b9cb9fdcbce_logo.svg"
-                        loading="lazy"
-                        width={100}
-                        alt=""
-                        height={40} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
+                    {logos.map((logo, idx) => (
+                      <div key={`train1-${idx}`} className="rt-text-marquee-iteme">
+                        <Image
+                          src={logo.src}
+                          loading="lazy"
+                          width={logo.width || 200}
+                          height={logo.height || 80}
+                          alt={logo.alt || 'Client logo'}
+                          style={{ height: "30px", width: "auto" }}
+                        />
+                      </div>
+                    ))}
                   </div>
                   <div className="rt-text-marquee-train">
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27127d946b9cb9fdcbce_logo.svg"
-                        loading="lazy"
-                        width={100}
-                        alt=""
-                        height={40} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
+                    {logos.map((logo, idx) => (
+                      <div key={`train2-${idx}`} className="rt-text-marquee-iteme">
+                        <Image
+                          src={logo.src}
+                          loading="lazy"
+                          width={logo.width || 200}
+                          height={logo.height || 80}
+                          alt={logo.alt || 'Client logo'}
+                          style={{ height: "30px", width: "auto" }}
+                        />
+                      </div>
+                    ))}
                   </div>
                   <div className="rt-text-marquee-train">
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27127d946b9cb9fdcbce_logo.svg"
-                        loading="lazy"
-                        width={100}
-                        alt=""
-                        height={40} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
-                    <div className="rt-text-marquee-iteme">
-                      <Image
-                        src="/service-3-assets/68ef271276a33d103013fa46_Group 1597884750.svg"
-                        loading="lazy"
-                        alt=""
-                        width={200} height={80} style={{ height: "30px", width: "auto" }} />
-                    </div>
+                    {logos.map((logo, idx) => (
+                      <div key={`train3-${idx}`} className="rt-text-marquee-iteme">
+                        <Image
+                          src={logo.src}
+                          loading="lazy"
+                          width={logo.width || 200}
+                          height={logo.height || 80}
+                          alt={logo.alt || 'Client logo'}
+                          style={{ height: "30px", width: "auto" }}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -193,18 +110,18 @@ export default function MobileApplicationHero() {
                 data-w-id="821b55b3-a8cd-3cff-b821-5c6fb716e28e"
                 className="rt-hero-v7-right-one rt-overflow-hidden">
                 <Image
-                  src="/service-3-assets/69170015f37d357acf91bec7_taskopiya-service-3 (1).webp"
+                  src={hero.imageRightOne || "/service-3-assets/69170015f37d357acf91bec7_taskopiya-service-3 (1).webp"}
                   loading="lazy"
-                  alt="taskopiya-service-3 (1)"
+                  alt={hero.imageRightOneAlt || "taskopiya-service-3 (1)"}
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
               <div
                 data-w-id="5ff5999f-0cd2-c9e1-fdc1-ac73c3d8a152"
                 className="rt-hero-v7-right-two">
                 <Image
-                  src="/service-3-assets/69203729550f7640007a1251_taskopia-service-three.webp"
+                  src={hero.imageRightTwo || "/service-3-assets/69203729550f7640007a1251_taskopia-service-three.webp"}
                   loading="lazy"
-                  alt="taskopia-service-three"
+                  alt={hero.imageRightTwoAlt || "taskopia-service-three"}
                   width={800} height={800} style={{ width: "100%", height: "auto" }} />
               </div>
             </div>
@@ -212,9 +129,9 @@ export default function MobileApplicationHero() {
         </div>
         <div className="rt-hero-v7-image">
           <Image
-            src="/service-3-assets/6915d5eb6bd730eb6b764f99_taskopiya-service- two.webp"
+            src={hero.imageBanner || "/service-3-assets/6915d5eb6bd730eb6b764f99_taskopiya-service- two.webp"}
             loading="lazy"
-            alt="taskopiya-service- two"
+            alt={hero.imageBannerAlt || "taskopiya-service- two"}
             width={800} height={800} style={{ width: "100%", height: "auto" }} />
         </div>
         <div className="rt-hero-v7-over-lay-one"></div>

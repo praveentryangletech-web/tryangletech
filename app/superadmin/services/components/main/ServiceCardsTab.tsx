@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import HomeImageUploadField from '@/app/superadmin/home/components/HomeImageUploadField';
 import { ServiceCardItem } from '@/backend/services/services/services.types';
-import { ImageIcon } from './StandardSvgIcons';
+import { ImageIcon } from '../common/StandardSvgIcons';
 
 interface ServiceCardsTabProps {
   servicesList: ServiceCardItem[];

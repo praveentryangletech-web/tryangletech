@@ -3,7 +3,7 @@
 import React from 'react';
 import HomeImageUploadField from '@/app/superadmin/home/components/HomeImageUploadField';
 import { ServiceHighlightsSection, ServiceHighlightPillar } from '@/backend/services/services/services.types';
-import { ImageIcon, StarIcon } from './StandardSvgIcons';
+import { ImageIcon, StarIcon } from '../common/StandardSvgIcons';
 
 interface ServiceHighlightsTabProps {
   highlights: ServiceHighlightsSection;

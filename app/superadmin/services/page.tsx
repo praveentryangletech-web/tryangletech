@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ServicesProvider, useServices } from '../context/ServicesContext';
+import { ServicesProvider, useServices } from '@/app/superadmin/context/ServicesContext';
 import HomeMediaPickerModal from '@/app/superadmin/home/components/HomeMediaPickerModal';
 
 import {

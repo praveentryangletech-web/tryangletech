@@ -1,10 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from "next/image";
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { MobileAppFeaturesSection } from '@/backend/services/services/services.types';
+import { DEFAULT_MOBILE_APP_CONTENT } from '@/backend/services/services/services.defaults';
 
-export default function MobileApplicationFeatures() {
+interface MobileApplicationFeaturesProps {
+  data?: MobileAppFeaturesSection;
+}
+
+export default function MobileApplicationFeatures({ data }: MobileApplicationFeaturesProps) {
+  const features = data || DEFAULT_MOBILE_APP_CONTENT.features;
+  const items = (features.items && features.items.length > 0 ? features.items : DEFAULT_MOBILE_APP_CONTENT.features.items) || [];
+
+
   return (
     <>
       <section className="rt-feaures-v1 rt-position-relative rt-overflow-hidden" style={{ paddingBottom: 0 }}>
@@ -14,11 +24,11 @@ export default function MobileApplicationFeatures() {
               data-w-id="90bc93a4-7453-cf99-b117-5b196d3d4337"
               className="rt-sub-gap">
               <div className="rt-sub-text rt-sub-gredient">
-                what you get
+                {features.subBadgeText || 'what you get'}
               </div>
             </div>
             <ScrollTextReveal
-              text="Make work easier and help your business run better"
+              text={features.heading || 'Make work easier and help your business run better'}
               align="center"
             />
           </div>
@@ -26,71 +36,34 @@ export default function MobileApplicationFeatures() {
             data-w-id="8e33e015-0098-3931-b15d-9ef7d71eaaea"
             className="rt-feaures-v1-main">
             <Image
-              src="/service-3-assets/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"
+              src={features.imageMain || "/service-3-assets/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif"}
               loading="lazy"
-              alt="taskopiya-home-two"
+              alt={features.imageMainAlt || "taskopiya-home-two"}
               width={800} height={800} style={{ width: "100%", height: "auto" }} />
           </div>
           <div className="w-layout-grid rt-benefits-v2-card-wrap">
-            <div
-              data-w-id="6c812f82-28ff-1528-5a4b-fce6814a7d9e"
-              className="w-layout-vflex rt-benefits-v2-card">
-              <div className="rt-benefits-icon">
-                <Image
-                  width={38}
-                  height={38}
-                  alt="databaseicon-1"
-                  src="/service-3-assets/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg"
-                  loading="lazy"
-                />
+            {items.map((item, idx) => (
+              <div
+                key={item.id || idx}
+                data-w-id={idx === 0 ? "6c812f82-28ff-1528-5a4b-fce6814a7d9e" : idx === 1 ? "6c812f82-28ff-1528-5a4b-fce6814a7da6" : "6c812f82-28ff-1528-5a4b-fce6814a7dae"}
+                className="w-layout-vflex rt-benefits-v2-card">
+                <div className="rt-benefits-icon">
+                  <Image
+                    width={38}
+                    height={38}
+                    alt={item.iconAlt || item.title}
+                    src={item.icon || "/service-3-assets/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg"}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
+                  <div className="rt-text-style-h6">{item.title}</div>
+                  <p className="rt-gap-off">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
-              <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                <div className="rt-text-style-h6">Simple to Use</div>
-                <p className="rt-gap-off">
-                  We design apps that make sense to your users right from the start.
-                </p>
-              </div>
-            </div>
-            <div
-              data-w-id="6c812f82-28ff-1528-5a4b-fce6814a7da6"
-              className="w-layout-vflex rt-benefits-v2-card">
-              <div>
-                <Image
-                  width={38}
-                  height={38}
-                  alt=""
-                  src="/service-3-assets/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg"
-                  loading="lazy"
-                  className="rt-benefits-icon"
-                />
-              </div>
-              <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                <div className="rt-text-style-h6">Safe and Secure</div>
-                <p className="rt-gap-off">
-                  We protect your information so you and your users have peace of mind.
-                </p>
-              </div>
-            </div>
-            <div
-              data-w-id="6c812f82-28ff-1528-5a4b-fce6814a7dae"
-              className="w-layout-vflex rt-benefits-v2-card">
-              <div>
-                <Image
-                  width={42}
-                  height={38}
-                  alt=""
-                  src="/service-3-assets/6916ec6339f890a80905a69b_Vector (33).svg"
-                  loading="lazy"
-                  className="rt-benefits-icon"
-                />
-              </div>
-              <div className="w-layout-vflex rt-benefits-v2-card-text-wrap rt-mobile-text-center">
-                <div className="rt-text-style-h6">Works on Any Phone</div>
-                <p className="rt-gap-off">
-                  Your app will work perfectly on all mobile devices.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div

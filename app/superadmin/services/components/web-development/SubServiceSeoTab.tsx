@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
-import ImageFieldWithUpload from './ImageFieldWithUpload';
-import { PlusIcon, CloseIcon } from './StandardSvgIcons';
+import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
+import { PlusIcon, CloseIcon } from '../common/StandardSvgIcons';
 
 interface SubServiceSeoTabProps {
   formData: WebDevContentDTO;

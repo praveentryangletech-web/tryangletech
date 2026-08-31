@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { SearchIcon, PlusIcon, CloseIcon } from './StandardSvgIcons';
+import { SearchIcon, PlusIcon, CloseIcon } from '../common/StandardSvgIcons';
 
 interface ServiceSeoTabProps {
   metaTitle: string;

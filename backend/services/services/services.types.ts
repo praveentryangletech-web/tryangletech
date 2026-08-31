@@ -230,3 +230,173 @@ export interface WebDevContentDTO {
   etag?: string;
 }
 
+// ----------------------------------------------------
+// MOBILE APPLICATION SUB-SERVICE DTOs
+// ----------------------------------------------------
+
+export interface MobileAppLogoItem {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+export interface MobileAppHeroSection {
+  subBadgeText: string;
+  headline: string;
+  subheadline: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  trustText: string;
+  logos?: MobileAppLogoItem[];
+  imageRightOne: string;
+  imageRightOneAlt?: string;
+  imageRightTwo: string;
+  imageRightTwoAlt?: string;
+  imageBanner: string;
+  imageBannerAlt?: string;
+}
+
+export interface MobileAppProcessCard {
+  id: string;
+  title: string;
+  desc: string;
+  image: string;
+  imageAlt?: string;
+  smallImage?: string;
+  smallImageAlt?: string;
+}
+
+export interface MobileAppProcessSection {
+  subBadgeText: string;
+  heading: string;
+  cards: MobileAppProcessCard[];
+}
+
+export interface MobileAppTypeCard {
+  id: string;
+  title: string;
+  desc: string;
+  badge?: string;
+  image: string;
+  imageAlt?: string;
+  smallImage?: string;
+  smallImageAlt?: string;
+}
+
+export interface MobileAppTypesSection {
+  subBadgeText: string;
+  heading: string;
+  description?: string;
+  cards: MobileAppTypeCard[];
+}
+
+export interface MobileAppEngineeringPillar {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+}
+
+export interface MobileAppEngineeringSection {
+  subBadgeText: string;
+  heading: string;
+  description: string;
+  badgeTitle: string;
+  imageMain: string;
+  imageMainAlt?: string;
+  imageMarquee: string;
+  imageMarqueeAlt?: string;
+  pillars: MobileAppEngineeringPillar[];
+  ctaText: string;
+  ctaLink: string;
+}
+
+export interface MobileAppAdvantagePoint {
+  id: string;
+  title: string;
+  desc: string;
+  icon?: string;
+  iconAlt?: string;
+}
+
+export interface MobileAppAdvantageSection {
+  subBadgeText: string;
+  heading: string;
+  description: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  points: MobileAppAdvantagePoint[];
+  imageMain: string;
+  imageMainAlt?: string;
+  imageOverlay: string;
+  imageOverlayAlt?: string;
+  imageOverlay2: string;
+  imageOverlay2Alt?: string;
+  imageBadge: string;
+  imageBadgeAlt?: string;
+}
+
+export interface MobileAppFeatureItem {
+  id: string;
+  title: string;
+  desc: string;
+  icon: string;
+  iconAlt?: string;
+}
+
+export interface MobileAppFeaturesSection {
+  subBadgeText: string;
+  heading: string;
+  imageMain: string;
+  imageMainAlt?: string;
+  items: MobileAppFeatureItem[];
+}
+
+export interface MobileAppTestimonialItem {
+  id: string;
+  name: string;
+  role?: string;
+  company?: string;
+  avatar: string;
+  avatarAlt?: string;
+  rating: number;
+  highlight: string;
+  content: string;
+}
+
+export interface MobileAppTestimonialsSection {
+  subBadgeText: string;
+  heading: string;
+  items: MobileAppTestimonialItem[];
+}
+
+export interface MobileAppFaqItem {
+  id?: string;
+  q: string;
+  a: string;
+}
+
+export interface MobileAppContentDTO {
+  id: string;
+  slug: string;
+  hero: MobileAppHeroSection;
+  process: MobileAppProcessSection;
+  types: MobileAppTypesSection;
+  engineering: MobileAppEngineeringSection;
+  advantage: MobileAppAdvantageSection;
+  features: MobileAppFeaturesSection;
+  testimonials: MobileAppTestimonialsSection;
+  faqs: MobileAppFaqItem[];
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string[];
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  isPublished?: boolean;
+  updatedAt?: string;
+  etag?: string;
+}
+
+

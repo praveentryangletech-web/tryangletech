@@ -1,13 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
-import { ServicesProvider, useServices } from '../../context/ServicesContext';
+import { useParams } from 'next/navigation';
+import { ServicesProvider, useServices } from '@/app/superadmin/context/ServicesContext';
 import HomeMediaPickerModal from '@/app/superadmin/home/components/HomeMediaPickerModal';
-import { apiClient } from '@/app/superadmin/utils/apiClient';
-import { WebDevContentDTO } from '@/backend/services/services/services.types';
-import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.defaults';
 
 import {
   ServiceHeroTab,
@@ -23,9 +20,18 @@ import {
   SubServiceTechStackTab,
   SubServiceFaqsTab,
   SubServiceSeoTab,
+  MobileAppHeroTab,
+  MobileAppProcessTab,
+  MobileAppTypesTab,
+  MobileAppEngineeringTab,
+  MobileAppFeaturesTab,
+  MobileAppTestimonialsTab,
+  MobileAppFaqsTab,
+  MobileAppSeoTab,
   SubServiceSkeleton,
+  SaveIcon,
+  ExternalLinkIcon,
 } from '../components';
-import { SaveIcon, ExternalLinkIcon } from '../components/StandardSvgIcons';
 
 const SERVICE_TITLES: Record<string, string> = {
   'main': 'Main Services Overview',
@@ -38,9 +44,10 @@ const SERVICE_TITLES: Record<string, string> = {
 
 function ServiceEditorInner() {
   const params = useParams();
-  const router = useRouter();
-  const slug = (params?.slug as string) || 'web-development';
-  const isMain = slug === 'main' || slug === 'service-main';
+  const rawSlug = (params?.slug as string) || 'web-development';
+  const slug = rawSlug.replace(/^service-/, '');
+  const isMain = slug === 'main';
+  const isMobileApp = slug === 'mobile-application';
 
   const {
     activeTab,
@@ -70,116 +77,37 @@ function ServiceEditorInner() {
     isLoading: isMainLoading,
     isSaving: isMainSaving,
     saveMainServiceContent,
+    subServiceData,
+    setSubServiceData,
+    isSubServiceLoading,
+    isSubServiceSaving,
+    fetchSubServiceData,
+    saveSubServiceData,
+    successMessage,
+    errorMessage,
     isMediaPickerOpen,
     setIsMediaPickerOpen,
     openAssetPicker,
     selectMediaAsset,
   } = useServices();
 
-  const [subData, setSubData] = useState<WebDevContentDTO>(DEFAULT_WEB_DEV_CONTENT);
-  const [isSubLoading, setIsSubLoading] = useState(!isMain);
-  const [isSubSaving, setIsSubSaving] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
   const serviceName = SERVICE_TITLES[slug] || (isMain ? 'Main Services Overview' : 'Service Detail');
   const serviceRoute = isMain ? '/service' : `/service/${slug}`;
 
-  // Fetch Sub-Service Data on Mount
+  // Fetch Sub-Service Data on Mount / Slug Change via ServicesContext
   useEffect(() => {
     if (!isMain) {
-      setIsSubLoading(true);
-      (async () => {
-        try {
-          const res = await apiClient.get<WebDevContentDTO>(`/api/superadmin/services/${slug}`, { useCache: false });
-          if (res.success && res.data) {
-            setSubData(res.data);
-          } else {
-            setSubData(DEFAULT_WEB_DEV_CONTENT);
-          }
-        } catch (err: any) {
-          console.warn('[ServiceEditor] Error fetching sub-service data, using defaults:', err);
-          setSubData(DEFAULT_WEB_DEV_CONTENT);
-        } finally {
-          setIsSubLoading(false);
-        }
-      })();
+      fetchSubServiceData(slug);
     }
-  }, [slug, isMain]);
+  }, [slug, isMain, fetchSubServiceData]);
 
-  // Save Sub-Service
-  const handleSaveSubService = async () => {
-    setIsSubSaving(true);
-    setErrorMessage('');
-    setSuccessMessage('');
-    try {
-      const res = await apiClient.put<WebDevContentDTO>(`/api/superadmin/services/${slug}`, subData);
-      if (res.success && res.data) {
-        setSubData(res.data);
-        setSuccessMessage(`✓ ${serviceName} changes saved live to database!`);
-        setTimeout(() => setSuccessMessage(''), 3000);
-      } else {
-        setErrorMessage(res.error || 'Failed to save changes.');
-      }
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Error saving service content.');
-    } finally {
-      setIsSubSaving(false);
-    }
-  };
-
-  const [subMediaPickerOpen, setSubMediaPickerOpen] = useState(false);
-  const [subPickerTarget, setSubPickerTarget] = useState<string>('');
-
-  const handleOpenAssetPicker = (target: string) => {
+  // Handle Save Action via ServicesContext
+  const handleSave = () => {
     if (isMain) {
-      openAssetPicker(target);
+      saveMainServiceContent();
     } else {
-      setSubPickerTarget(target);
-      setSubMediaPickerOpen(true);
+      saveSubServiceData(slug, subServiceData);
     }
-  };
-
-  const handleSubSelectAsset = (url: string) => {
-    if (subPickerTarget.startsWith('subService.')) {
-      const fieldPath = subPickerTarget.replace('subService.', '');
-      setSubData((prev) => {
-        if (!prev) return prev;
-        const copy = JSON.parse(JSON.stringify(prev));
-        if (fieldPath === 'hero.imageRightOne') copy.hero.imageRightOne = url;
-        else if (fieldPath === 'hero.imageRightTwo') copy.hero.imageRightTwo = url;
-        else if (fieldPath === 'hero.imageBanner') copy.hero.imageBanner = url;
-        else if (fieldPath === 'hero.imageDot') copy.hero.imageDot = url;
-        else if (fieldPath === 'seo.ogImage') copy.ogImage = url;
-        else if (fieldPath.startsWith('speciality.')) {
-          const parts = fieldPath.split('.');
-          const cardIdx = parseInt(parts[1], 10);
-          if (parts[2] === 'icon') {
-            copy.speciality.cards[cardIdx].icon = url;
-          } else if (parts[2] === 'images') {
-            const imgIdx = parseInt(parts[3], 10);
-            if (!copy.speciality.cards[cardIdx].images) copy.speciality.cards[cardIdx].images = [];
-            copy.speciality.cards[cardIdx].images[imgIdx] = url;
-          }
-        } else if (fieldPath.startsWith('types.')) {
-          const parts = fieldPath.split('.');
-          const cardIdx = parseInt(parts[1], 10);
-          if (parts[2] === 'image') {
-            copy.types.cards[cardIdx].image = url;
-          } else if (parts[2] === 'smallImage') {
-            copy.types.cards[cardIdx].smallImage = url;
-          }
-        } else if (fieldPath.startsWith('techStack.')) {
-          const parts = fieldPath.split('.');
-          const techIdx = parseInt(parts[1], 10);
-          if (copy.techStack.items && copy.techStack.items[techIdx]) {
-            copy.techStack.items[techIdx].icon = url;
-          }
-        }
-        return copy;
-      });
-    }
-    setSubMediaPickerOpen(false);
   };
 
   const mainTabs = [
@@ -192,7 +120,7 @@ function ServiceEditorInner() {
     { id: 'seo', label: '7. SEO, Social & Publication' },
   ];
 
-  const subTabs = [
+  const webDevTabs = [
     { id: 'hero', label: '1. Hero Header & Overview' },
     { id: 'speciality', label: '2. Capabilities & Features' },
     { id: 'types', label: '3. Website Types We Build' },
@@ -201,10 +129,21 @@ function ServiceEditorInner() {
     { id: 'seo', label: '6. SEO & Social Meta' },
   ];
 
-  const tabs = isMain ? mainTabs : subTabs;
+  const mobileAppTabs = [
+    { id: 'hero', label: '1. Hero Header & Overview' },
+    { id: 'process', label: '2. Development Process' },
+    { id: 'types', label: '3. Mobile App Types' },
+    { id: 'engineering', label: '4. Engineering & Advantage' },
+    { id: 'features', label: '5. What You Get / Features' },
+    { id: 'testimonials', label: '6. Client Testimonials' },
+    { id: 'faqs', label: '7. Dynamic FAQs' },
+    { id: 'seo', label: '8. SEO & Social Meta' },
+  ];
+
+  const tabs = isMain ? mainTabs : isMobileApp ? mobileAppTabs : webDevTabs;
   const currentActiveTab = isMain ? activeTab : subActiveTab;
-  const isLoading = isMain ? isMainLoading : isSubLoading;
-  const isSaving = isMain ? isMainSaving : isSubSaving;
+  const isLoading = isMain ? isMainLoading : isSubServiceLoading;
+  const isSaving = isMain ? isMainSaving : isSubServiceSaving;
 
   return (
     <div
@@ -271,7 +210,7 @@ function ServiceEditorInner() {
 
           <button
             type="button"
-            onClick={isMain ? saveMainServiceContent : handleSaveSubService}
+            onClick={handleSave}
             disabled={isSaving || isLoading}
             style={{
               display: 'inline-flex',
@@ -389,16 +328,16 @@ function ServiceEditorInner() {
         ) : isMain ? (
           <>
             {activeTab === 'hero' && (
-              <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={handleOpenAssetPicker} />
+              <ServiceHeroTab hero={hero} setHero={setHero} onOpenAssetPicker={openAssetPicker} />
             )}
             {activeTab === 'cards' && (
-              <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={handleOpenAssetPicker} />
+              <ServiceCardsTab servicesList={servicesList} setServicesList={setServicesList} onOpenAssetPicker={openAssetPicker} />
             )}
             {activeTab === 'highlights' && (
-              <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={handleOpenAssetPicker} />
+              <ServiceHighlightsTab highlights={highlights} setHighlights={setHighlights} onOpenAssetPicker={openAssetPicker} />
             )}
             {activeTab === 'tools' && (
-              <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={handleOpenAssetPicker} />
+              <ServiceToolsTab tools={tools} setTools={setTools} onOpenAssetPicker={openAssetPicker} />
             )}
             {activeTab === 'faqs' && (
               <ServiceFaqsTab faqs={faqs} setFaqs={setFaqs} />
@@ -407,7 +346,7 @@ function ServiceEditorInner() {
               <ServiceTestimonialsTab
                 testimonials={testimonials}
                 setTestimonials={setTestimonials}
-                onOpenAssetPicker={handleOpenAssetPicker}
+                onOpenAssetPicker={openAssetPicker}
               />
             )}
             {activeTab === 'seo' && (
@@ -423,35 +362,62 @@ function ServiceEditorInner() {
               />
             )}
           </>
+        ) : isMobileApp ? (
+          <>
+            {subActiveTab === 'hero' && (
+              <MobileAppHeroTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'process' && (
+              <MobileAppProcessTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'types' && (
+              <MobileAppTypesTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'engineering' && (
+              <MobileAppEngineeringTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'features' && (
+              <MobileAppFeaturesTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'testimonials' && (
+              <MobileAppTestimonialsTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+            {subActiveTab === 'faqs' && (
+              <MobileAppFaqsTab formData={subServiceData} setFormData={setSubServiceData} />
+            )}
+            {subActiveTab === 'seo' && (
+              <MobileAppSeoTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
+            )}
+          </>
         ) : (
           <>
             {subActiveTab === 'hero' && (
-              <SubServiceHeroTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
+              <SubServiceHeroTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
             {subActiveTab === 'speciality' && (
-              <SubServiceSpecialityTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
+              <SubServiceSpecialityTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
             {subActiveTab === 'types' && (
-              <SubServiceTypesTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
+              <SubServiceTypesTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
             {subActiveTab === 'techStack' && (
-              <SubServiceTechStackTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
+              <SubServiceTechStackTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
             {subActiveTab === 'faqs' && (
-              <SubServiceFaqsTab formData={subData} setFormData={setSubData as any} />
+              <SubServiceFaqsTab formData={subServiceData} setFormData={setSubServiceData} />
             )}
             {subActiveTab === 'seo' && (
-              <SubServiceSeoTab formData={subData} setFormData={setSubData as any} onOpenAssetPicker={handleOpenAssetPicker} />
+              <SubServiceSeoTab formData={subServiceData} setFormData={setSubServiceData} onOpenAssetPicker={openAssetPicker} />
             )}
           </>
         )}
       </div>
 
-      {/* Global Media Asset Picker Modal for Main Services */}
+      {/* Global Media Asset Picker Modal */}
       <HomeMediaPickerModal
-        isOpen={isMain ? isMediaPickerOpen : subMediaPickerOpen}
-        onClose={() => (isMain ? setIsMediaPickerOpen(false) : setSubMediaPickerOpen(false))}
-        onSelect={isMain ? selectMediaAsset : handleSubSelectAsset}
+        isOpen={isMediaPickerOpen}
+        onClose={() => setIsMediaPickerOpen(false)}
+        onSelect={selectMediaAsset}
         title={`Select Asset for ${serviceName}`}
       />
     </div>

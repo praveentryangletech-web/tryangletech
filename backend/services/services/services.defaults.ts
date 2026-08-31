@@ -1,4 +1,5 @@
-import { ServiceMainContentDTO, ServicePageSummaryItem, WebDevContentDTO } from './services.types';
+import { ServiceMainContentDTO, ServicePageSummaryItem, WebDevContentDTO, MobileAppContentDTO } from './services.types';
+
 
 export const DEFAULT_SERVICES_LIST: ServicePageSummaryItem[] = [
   {
@@ -478,4 +479,289 @@ export const DEFAULT_WEB_DEV_CONTENT: WebDevContentDTO = {
   isPublished: true,
   updatedAt: new Date().toISOString(),
 };
+
+export const DEFAULT_MOBILE_APP_CONTENT: MobileAppContentDTO = {
+  id: 'service-mobile-application',
+  slug: 'mobile-application',
+  hero: {
+    subBadgeText: 'Mobile Application Development',
+    headline: 'We build mobile apps that work great and help your business grow',
+    subheadline:
+      'We turn your ideas into mobile apps for both iPhone and Android. Based in Ahmedabad, we build apps that are easy to use and designed to keep your customers coming back.',
+    primaryBtnText: 'Start your app project',
+    primaryBtnLink: '/contact',
+    trustText: 'Trusted by 350+ businesses',
+    logos: [
+      { src: '/service-3-assets/68ef27127d946b9cb9fdcbce_logo.svg', alt: 'Client logo 1', width: 100, height: 40 },
+      { src: '/service-3-assets/68ef2712221f1b7f58cfd9fe_Group 1597884746.svg', alt: 'Client logo 2', width: 200, height: 80 },
+      { src: '/service-3-assets/68ef2712f0df798d907c8c07_Group 1597884747.svg', alt: 'Client logo 3', width: 200, height: 80 },
+      { src: '/service-3-assets/68ef27122b527a12c7a225a7_Group 1597883493.svg', alt: 'Client logo 4', width: 200, height: 80 },
+      { src: '/service-3-assets/68ef2712bdcf3d7a4fee2f43_REZOTA.svg', alt: 'Rezota logo', width: 200, height: 80 },
+      { src: '/service-3-assets/68ef271276a33d103013fa46_Group 1597884750.svg', alt: 'Client logo 6', width: 200, height: 80 },
+    ],
+    imageRightOne: '/service-3-assets/69170015f37d357acf91bec7_taskopiya-service-3 (1).webp',
+    imageRightOneAlt: 'taskopiya-service-3 (1)',
+    imageRightTwo: '/service-3-assets/69203729550f7640007a1251_taskopia-service-three.webp',
+    imageRightTwoAlt: 'taskopia-service-three',
+    imageBanner: '/service-3-assets/6915d5eb6bd730eb6b764f99_taskopiya-service- two.webp',
+    imageBannerAlt: 'taskopiya-service- two',
+  },
+  process: {
+    subBadgeText: 'development process',
+    heading: 'How we build your mobile app from start to finish',
+    cards: [
+      {
+        id: 'process-1',
+        title: 'Intuitive UX/UI Design',
+        desc: 'We craft human-centric, aesthetically stunning mobile interfaces that keep users engaged and delighted.',
+        image: '/service-3-assets/69086c48e8613e3b874ea6f9_taskopia-service-three-image-simplified.webp',
+        imageAlt: 'taskopia-service-three-image-simplified',
+      },
+      {
+        id: 'process-2',
+        title: 'Transparent Communication',
+        desc: 'Direct access to your dedicated engineering team with regular milestone updates and on-time delivery.',
+        image: '/service-3-assets/69086d605e01e0ce0ecb4b9f_taskopia-service-three-image-simplified-8.webp',
+        imageAlt: 'taskopia-service-three-image-simplified-8',
+        smallImage: '/service-3-assets/69086dd1a451e7aadfd1b02b_Mask group (5).webp',
+        smallImageAlt: 'Mask group (5)',
+      },
+      {
+        id: 'process-3',
+        title: 'Robust Architecture & Security',
+        desc: 'Engineered with scalable backend pipelines, encrypted databases, and rock-solid codebases.',
+        image: '/service-3-assets/69086a437e0f8dd43b0a2a94_taskopia-service-three-image-simplified-6.webp',
+        imageAlt: 'taskopia-service-three-image-simplified-6',
+      },
+    ],
+  },
+  types: {
+    subBadgeText: 'mobile app types',
+    heading: 'Unveiling the Variety in Mobile App Types We Build',
+    description:
+      'From high-performance native iOS & Android flagships to cross-platform frameworks, enterprise workflows, and e-commerce apps.',
+    cards: [
+      {
+        id: 'type-1',
+        title: 'Native iOS & Android Apps',
+        desc: 'High-performance platform-exclusive apps engineered in Swift and Kotlin for maximum frame rates, 120Hz fluid animations, and deep device hardware integration.',
+        badge: 'Native',
+        image: '/Home2_files/6912f62c82b64389f32cf4f2_taskopia-benefits-home-two-1.webp',
+        imageAlt: 'Native iOS & Android Apps',
+        smallImage: '/Home2_files/6912f62cac10df5f2a6eba6b_Group 2085663570.webp',
+        smallImageAlt: 'iOS and Android performance badge',
+      },
+      {
+        id: 'type-2',
+        title: 'Cross-Platform Mobile Apps',
+        desc: 'Single-codebase efficiency with Flutter and React Native, delivering native-grade responsiveness across both iOS and Android with reduced time-to-market.',
+        badge: 'Cross-Platform',
+        image: '/Home2_files/6912f62c1b2810c6c1ca5837_taskopia-benefits-home-two-2.webp',
+        imageAlt: 'Cross-Platform Mobile Apps',
+        smallImage: '/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp',
+        smallImageAlt: 'Cross-platform sync badge',
+      },
+      {
+        id: 'type-3',
+        title: 'E-Commerce & On-Demand Apps',
+        desc: 'Frictionless shopping and delivery experiences with 1-tap Apple Pay and Google Pay checkouts, live GPS order tracking, and push engagement.',
+        badge: 'E-Commerce',
+        image: '/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp',
+        imageAlt: 'E-Commerce & On-Demand Apps',
+      },
+      {
+        id: 'type-4',
+        title: 'Enterprise & Field Operations Apps',
+        desc: 'Mission-critical mobile solutions for enterprise field teams, CRM/ERP workflows, offline-first data synchronization, biometric authentication, and role-based security access.',
+        badge: 'Enterprise',
+        image: '/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp',
+        imageAlt: 'Enterprise & Business Apps',
+        smallImage: '/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp',
+        smallImageAlt: 'Enterprise security badge',
+      },
+      {
+        id: 'type-5',
+        title: 'AI & Workflow Automation Apps',
+        desc: 'Smart mobile applications engineered to eliminate repetitive manual work with camera OCR scanning, automated data entry, intelligent task routing, and autonomous AI assistants.',
+        badge: 'AI Automation',
+        image: '/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp',
+        imageAlt: 'AI & Workflow Automation Apps',
+      },
+    ],
+  },
+  engineering: {
+    subBadgeText: 'mobile engineering',
+    heading: 'Scalable apps built for high-growth businesses',
+    description:
+      'We engineer high-performance mobile applications tailored to your business logic, ensuring flawless user experiences and long-term scalability.',
+    badgeTitle: 'Mobile app portfolio',
+    imageMain: '/service-3-assets/690843d741469dfe6381c86e_taskopia-service-one-our-image.webp',
+    imageMainAlt: 'taskopia-service-one-our-image',
+    imageMarquee: '/service-3-assets/690843d6663a57301c359099_taskopia-service-one-our-image-two.webp',
+    imageMarqueeAlt: 'taskopia-service-one-our-image-two',
+    pillars: [
+      {
+        id: 'pillar-ios',
+        title: 'Native iPhone',
+        desc: 'High-performance Apple applications built with Swift.',
+        icon: 'apple',
+      },
+      {
+        id: 'pillar-android',
+        title: 'Native Android',
+        desc: 'Scalable Google applications tailored for Android.',
+        icon: 'android',
+      },
+    ],
+    ctaText: 'Explore our portfolio',
+    ctaLink: '/portfolio',
+  },
+  advantage: {
+    subBadgeText: 'development advantage',
+    heading: 'High-performance apps delivered with zero stress',
+    description:
+      'We accelerate your time-to-market with agile development sprints, delivering robust, high-performance mobile applications without technical friction.',
+    primaryBtnText: 'Explore Benefits',
+    primaryBtnLink: '/contact',
+    points: [
+      {
+        id: 'adv-1',
+        title: 'Fast & Smooth Performance',
+        desc: 'Optimized for 60fps+ fluid responsiveness, fast loading, and rock-solid stability across every device.',
+        icon: '/service-3-assets/6916ef876682eed2b2fd5911_Vector (34).svg',
+        iconAlt: 'Fast and smooth performance icon',
+      },
+      {
+        id: 'adv-2',
+        title: 'Seamless Tool Integration',
+        desc: 'Effortlessly connects with your existing databases, third-party APIs, CRM platforms, and cloud services.',
+        icon: '/service-3-assets/6916f00db3051e5aed09bd3f_Group 2085663576.svg',
+        iconAlt: 'Tool integration icon',
+      },
+    ],
+    imageMain: '/service-3-assets/6904b11c6b4ad8773a03a11c_taskopia-service-three-why-choose (1).png',
+    imageMainAlt: 'taskopia-service-three-why-choose (1)',
+    imageOverlay: '/service-3-assets/6904b11c9c86bd80ff185a4b_Mask group (4).png',
+    imageOverlayAlt: 'Mask group (4)',
+    imageOverlay2: '/service-3-assets/6904b2880d8bf1cf10e7ab48_taskopia-service-three-why-choose-two.png',
+    imageOverlay2Alt: 'taskopia-service-three-why-choose-two',
+    imageBadge: '/service-3-assets/69087acd988708b2bfcb37de_Group 2085662995.webp',
+    imageBadgeAlt: 'taskopia-workflow badge',
+  },
+  features: {
+    subBadgeText: 'what you get',
+    heading: 'Make work easier and help your business run better',
+    imageMain: '/service-3-assets/6915c70b7c1f18f1e46e5094_taskopiya-home-two.avif',
+    imageMainAlt: 'taskopiya-home-two',
+    items: [
+      {
+        id: 'feat-1',
+        title: 'Simple to Use',
+        desc: 'We design apps that make sense to your users right from the start.',
+        icon: '/service-3-assets/6904af5ad9ca1a4322df6d9e_databaseicon-1.svg',
+        iconAlt: 'Simple to use database icon',
+      },
+      {
+        id: 'feat-2',
+        title: 'Safe and Secure',
+        desc: 'We protect your information so you and your users have peace of mind.',
+        icon: '/service-3-assets/6916f56a80d627cd0ce40bd7_690091602dd7aa7a0c1228ed_kloudera-pricing-icon.svg',
+        iconAlt: 'Safe and secure shield icon',
+      },
+      {
+        id: 'feat-3',
+        title: 'Works on Any Phone',
+        desc: 'Your app will work perfectly on all mobile devices.',
+        icon: '/service-3-assets/6916ec6339f890a80905a69b_Vector (33).svg',
+        iconAlt: 'Works on any phone vector icon',
+      },
+    ],
+  },
+  testimonials: {
+    subBadgeText: 'what people say',
+    heading: 'See what our clients think about us',
+    items: [
+      {
+        id: 'test-1',
+        name: 'Jonathan Keller',
+        role: 'Operations Lead',
+        company: 'Keller Logistics',
+        avatar: '/service-3-assets/68f20568d8c28959fddbf700_taskopia-testimonials-author-v1.webp',
+        avatarAlt: 'Jonathan Keller avatar',
+        rating: 5,
+        highlight: '“Great experience”',
+        content:
+          '“The team built an incredible app for us. The whole process was smooth from start to finish, and our users love the new mobile experience. We highly recommend them.”',
+      },
+      {
+        id: 'test-2',
+        name: 'Rebecca Lin',
+        role: 'E-Commerce Director',
+        company: 'Lin Store',
+        avatar: '/service-3-assets/68f20568de5d5f47117e47e5_taskopia-testimonials-author-v2.webp',
+        avatarAlt: 'Rebecca Lin avatar',
+        rating: 5,
+        highlight: '“Beautiful design”',
+        content:
+          '“This app completely changed our business. The smooth performance and clean look led to a huge increase in our sales.”',
+      },
+      {
+        id: 'test-3',
+        name: 'Mark Wilson',
+        role: 'Founder',
+        company: 'Wilson Tech',
+        avatar: '/service-3-assets/68f2056835f743b2678916ad_taskopia-testimonials-author-v3.webp',
+        avatarAlt: 'Mark Wilson avatar',
+        rating: 5,
+        highlight: '“Works on both phones”',
+        content:
+          '“They built a great app that works perfectly on both iPhone and Android. It saved us a lot of time and looks incredible.”',
+      },
+    ],
+  },
+  faqs: [
+    {
+      id: 'faq-1',
+      q: 'Do you build apps for both iPhone and Android?',
+      a: 'Yes, we can build apps that work on every type of phone so you can reach all your customers.',
+    },
+    {
+      id: 'faq-2',
+      q: 'How long does it take to build an app?',
+      a: 'It depends on what you need, but most apps take about three to six months to finish from start to launch.',
+    },
+    {
+      id: 'faq-3',
+      q: 'Do you keep working on the app after it launches?',
+      a: 'Yes we do. We offer support packages to make sure your app stays updated and secure as phone software changes.',
+    },
+    {
+      id: 'faq-4',
+      q: 'Can the app connect to my current systems?',
+      a: 'Yes, we can easily connect your new app to the databases and software your business already uses.',
+    },
+    {
+      id: 'faq-5',
+      q: 'Do you help put the app on the app stores?',
+      a: 'Yes, we take care of the whole process of getting your app approved and published so people can download it.',
+    },
+  ],
+  metaTitle: 'Mobile App Development Company in Ahmedabad | Tryangle Tech',
+  metaDescription:
+    'iOS and Android app development in Ahmedabad. From concept to App Store launch, built for real business growth.',
+  keywords: [
+    'Mobile App Development Ahmedabad',
+    'iOS App Development',
+    'Android App Development',
+    'Flutter Mobile Apps',
+    'React Native Agency',
+    'Ahmedabad App Developers',
+  ],
+  canonicalUrl: 'https://tryangletech.com/service/mobile-application',
+  ogImage: '/service-3-assets/69170015f37d357acf91bec7_taskopiya-service-3 (1).webp',
+  ogImageAlt: 'TryangleTech Mobile Application Development preview banner',
+  isPublished: true,
+  updatedAt: new Date().toISOString(),
+};
+
 

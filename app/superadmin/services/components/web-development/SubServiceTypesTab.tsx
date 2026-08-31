@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
-import ImageFieldWithUpload from './ImageFieldWithUpload';
+import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
 
 interface SubServiceTypesTabProps {
   formData: WebDevContentDTO;

@@ -2,7 +2,10 @@
 
 import React from "react";
 import ScrollTextReveal from "../../../common/ScrollTextReveal";
-import { GraphicsDesigningOfferingsSection } from "@/backend/services/services/services.types";
+import {
+  GraphicsDesigningOfferingsSection,
+  GraphicsDesigningOfferingCard,
+} from "@/backend/services/services/services.types";
 
 interface GraphicsDesigningFeaturesProps {
   data?: GraphicsDesigningOfferingsSection;
@@ -57,8 +60,9 @@ const DEFAULT_ICONS: Record<number, React.ReactNode> = {
 export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFeaturesProps) {
   const subBadgeText = data?.subBadgeText || "our design process";
   const headline = data?.headline || "A strategic approach to brilliant graphic design";
-  const cards = data?.cards && data.cards.length > 0 ? data.cards : [
+  const cards: GraphicsDesigningOfferingCard[] = data?.cards && data.cards.length > 0 ? data.cards : [
     {
+      id: "logo-design",
       title: "Logo Design",
       desc: "A memorable logo is the cornerstone of your brand. We craft distinctive, versatile logos along with complete brand guidelines, color systems, and scalable vector assets for digital and print.",
       points: [
@@ -68,6 +72,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
       ],
     },
     {
+      id: "brochure-design",
       title: "Brochure Design",
       desc: "Communicate your brand's core message and offerings with expertly structured corporate brochures, bi-folds, tri-folds, and product catalogs designed to engage stakeholders and drive conversions.",
       points: [
@@ -77,6 +82,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
       ],
     },
     {
+      id: "visiting-card-design",
       title: "Visiting Card Design",
       desc: "Make an unforgettable first impression at every networking opportunity with premium business card designs tailored to reflect your executive stature and distinct corporate brand identity.",
       points: [
@@ -86,6 +92,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
       ],
     },
     {
+      id: "letterhead-design",
       title: "Letterhead Design",
       desc: "Ensure your official business correspondence, proposals, invoices, and contracts project authority and trust with polished, cohesive corporate stationery suites and editable templates.",
       points: [
@@ -95,6 +102,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
       ],
     },
     {
+      id: "label-design",
       title: "Label Design",
       desc: "Make your retail products stand out on crowded shelves and online storefronts with striking, regulatory-compliant product labels, pouch packaging, bottle sleeves, and custom box artwork.",
       points: [
@@ -104,6 +112,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
       ],
     },
     {
+      id: "hoarding-design",
       title: "Hoarding Design",
       desc: "Capture massive attention across highways, airport transit hubs, and exhibition centers with large-format outdoor billboards, building wraps, and expo backdrops engineered for maximum impact.",
       points: [
@@ -146,7 +155,7 @@ export default function GraphicsDesigningFeatures({ data }: GraphicsDesigningFea
         >
           {cards.map((service, index) => (
             <div
-              key={service.id || index}
+              key={service.id || service.title || index}
               className="rt-feaures-v2-item rt-border-radius-medium rt-shadow"
               style={{
                 display: "flex",

@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from 'next';
 import { servicesService } from "@/backend/services/services";
 import WebflowInit from "../../common/WebflowInit";
 import ProjectsSection from "../../home/components/ProjectsSection";
@@ -13,6 +14,10 @@ import GraphicsDesigningAIAgents from './components/GraphicsDesigningAIAgents';
 import GraphicsDesigningFAQ from './components/GraphicsDesigningFAQ';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await servicesService.generateGraphicsDesigningMetadata();
+}
 
 export default async function GraphicsDesigningPage() {
   const content = await servicesService.getGraphicsDesigningContent();

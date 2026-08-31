@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from 'next';
 import { servicesService } from "@/backend/services/services";
 import CustomSoftwareHero from './components/CustomSoftwareHero';
 import CustomSoftwareServices from './components/CustomSoftwareServices';
@@ -12,6 +13,10 @@ import WebflowInit from "../../common/WebflowInit";
 import ProjectsSection from "../../home/components/ProjectsSection";
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await servicesService.generateCustomSoftwareMetadata();
+}
 
 export default async function CustomSoftwarePage() {
   const content = await servicesService.getCustomSoftwareContent();

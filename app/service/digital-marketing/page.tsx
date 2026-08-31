@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from 'next';
 import { servicesService } from "@/backend/services/services";
 import WebflowInit from "../../common/WebflowInit";
 import ProjectsSection from "../../home/components/ProjectsSection";
@@ -13,6 +14,10 @@ import DigitalMarketingToolsIntegration from "./components/DigitalMarketingTools
 import DigitalMarketingFaq from "./components/DigitalMarketingFaq";
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await servicesService.generateDigitalMarketingMetadata();
+}
 
 export default async function DigitalMarketingPage() {
   const content = await servicesService.getDigitalMarketingContent();

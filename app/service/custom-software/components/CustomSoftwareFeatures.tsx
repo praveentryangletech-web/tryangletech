@@ -1,9 +1,21 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import ScrollTextReveal from '../../../common/ScrollTextReveal';
+import { CustomSoftwareProcessSection } from '@/backend/services/services/services.types';
 
-export default function CustomSoftwareFeatures() {
+interface CustomSoftwareFeaturesProps {
+  data?: CustomSoftwareProcessSection;
+}
+
+export default function CustomSoftwareFeatures({ data }: CustomSoftwareFeaturesProps) {
   const sectionRef = useRef<HTMLElement>(null);
+
+  const subBadgeText = data?.subBadgeText || 'our development process';
+  const headline = data?.headline || 'Deliver projects on time through streamlined execution';
+  const description =
+    data?.description ||
+    'A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.';
+  const dynamicSteps = data?.steps || [];
 
   // Native Scroll Reveal Observer matching About page animation timing
   useEffect(() => {
@@ -26,7 +38,7 @@ export default function CustomSoftwareFeatures() {
     return () => observer.disconnect();
   }, []);
 
-  const steps = [
+  const defaultSteps = [
     {
       id: "step-1",
       column: "Discovery",
@@ -114,22 +126,38 @@ export default function CustomSoftwareFeatures() {
     },
   ];
 
+  const steps = defaultSteps.map((def, idx) => {
+    const dyn = dynamicSteps[idx];
+    if (!dyn) return def;
+    return {
+      ...def,
+      column: dyn.column || def.column,
+      stepNum: dyn.stepNum || def.stepNum,
+      title: dyn.title || def.title,
+      desc: dyn.desc || def.desc,
+      bg: dyn.bg || def.bg,
+      color: dyn.color || def.color,
+      descColor: dyn.descColor || def.descColor,
+      shadow: dyn.shadow || def.shadow,
+    };
+  });
+
   return (
     <section ref={sectionRef} className="rt-process-section" style={{ position: "relative", padding: "70px 0 80px 0", background: "transparent" }}>
       <div className="w-layout-blockcontainer rt-container-main w-container">
         {/* Section Header */}
         <div className="rt-tools-iconheading rt-features-v1-top rt-heading-entry" style={{ textAlign: "center", margin: "0 auto 28px auto" }}>
           <div className="rt-sub-gap" style={{ justifyContent: "center", marginBottom: "6px" }}>
-            <div className="rt-sub-text rt-sub-gredient">our development process</div>
+            <div className="rt-sub-text rt-sub-gredient">{subBadgeText}</div>
           </div>
           <ScrollTextReveal
-            text="Deliver projects on time through streamlined execution"
+            text={headline}
             align="center"
             className="rt-gap-off rt-desktop-text-center"
             style={{ fontSize: "clamp(24px, 3.5vw, 36px)", lineHeight: "1.25" }}
           />
           <p style={{ maxWidth: "660px", margin: "8px auto 0 auto", color: "#64748b", fontSize: "14.5px", lineHeight: "1.5" }}>
-            A disciplined 4-stage engineering lifecycle designed for speed, stability, and full transparency.
+            {description}
           </p>
         </div>
 

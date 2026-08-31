@@ -140,10 +140,13 @@ export default function GraphicsDesigningAboutTab({
             <div
               key={feat.id || idx}
               style={{
-                padding: '16px',
-                border: '1px solid #E2E8F0',
-                borderRadius: '8px',
-                backgroundColor: '#FFFFFF',
+                padding: '0',
+                border: 'none',
+                borderRadius: '0',
+                backgroundColor: 'transparent',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
               }}
             >
               <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0F172A', display: 'block', marginBottom: '12px' }}>

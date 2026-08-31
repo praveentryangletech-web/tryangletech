@@ -120,11 +120,14 @@ export default function GraphicsDesigningOfferingsTab({
             <div
               key={card.id || idx}
               style={{
-                padding: '20px',
-                border: '1px solid #E2E8F0',
-                borderRadius: '10px',
-                backgroundColor: '#FFFFFF',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                padding: '0',
+                border: 'none',
+                borderRadius: '0',
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>

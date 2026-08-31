@@ -207,7 +207,7 @@ export default function GraphicsDesigningHeroTab({
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
           {(hero.stats || []).map((stat: any, idx: number) => (
-            <div key={idx} style={{ padding: '12px', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F8FAFC' }}>
+            <div key={idx} style={{ padding: '0', border: 'none', borderRadius: '0', backgroundColor: 'transparent' }}>
               <label style={labelStyle}>Counter #{idx + 1}</label>
               <input
                 type="text"
@@ -237,77 +237,89 @@ export default function GraphicsDesigningHeroTab({
           Upload or select high-resolution mockup visuals for each column in the dynamic floating hero showcase.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
           <ImageFieldWithUpload
             label="Col 1 - Top Artwork"
             value={hero.images?.col1Img1 || ''}
             onChange={(val) => updateHeroImage('col1Img1', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col1Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 1 - Bottom Artwork"
             value={hero.images?.col1Img2 || ''}
             onChange={(val) => updateHeroImage('col1Img2', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col1Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 2 - Top Artwork"
             value={hero.images?.col2Img1 || ''}
             onChange={(val) => updateHeroImage('col2Img1', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col2Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 2 - Bottom Artwork"
             value={hero.images?.col2Img2 || ''}
             onChange={(val) => updateHeroImage('col2Img2', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col2Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 3 - Top Artwork"
             value={hero.images?.col3Img1 || ''}
             onChange={(val) => updateHeroImage('col3Img1', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col3Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 3 - Bottom Artwork"
             value={hero.images?.col3Img2 || ''}
             onChange={(val) => updateHeroImage('col3Img2', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col3Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Top Artwork"
             value={hero.images?.col4Img1 || ''}
             onChange={(val) => updateHeroImage('col4Img1', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Bottom Artwork"
             value={hero.images?.col4Img2 || ''}
             onChange={(val) => updateHeroImage('col4Img2', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Img2') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 4 - Floating Round Badge"
             value={hero.images?.col4Badge || ''}
             onChange={(val) => updateHeroImage('col4Badge', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col4Badge') : undefined}
           />
           <ImageFieldWithUpload
             label="Hero Atmospheric Background"
             value={hero.images?.bgImage || ''}
             onChange={(val) => updateHeroImage('bgImage', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.bgImage') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 5 - Top Artwork"
             value={hero.images?.col5Img1 || ''}
             onChange={(val) => updateHeroImage('col5Img1', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col5Img1') : undefined}
           />
           <ImageFieldWithUpload
             label="Col 5 - Bottom Artwork"
             value={hero.images?.col5Img2 || ''}
             onChange={(val) => updateHeroImage('col5Img2', val)}
+            previewHeight={90}
             onOpenLibrary={onOpenAssetPicker ? () => onOpenAssetPicker('graphicsDesigning.hero.images.col5Img2') : undefined}
           />
         </div>
@@ -342,19 +354,21 @@ export default function GraphicsDesigningHeroTab({
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '20px' }}>
           {(hero.marqueeLogos || []).map((logo: any, idx: number) => (
             <div
               key={logo.id || idx}
               style={{
-                padding: '16px',
-                border: '1px solid #E2E8F0',
-                borderRadius: '8px',
-                backgroundColor: '#FFFFFF',
-                position: 'relative',
+                padding: '0',
+                border: 'none',
+                borderRadius: '0',
+                backgroundColor: 'transparent',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '6px' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0F172A' }}>Logo #{idx + 1}</span>
                 <button
                   type="button"
@@ -372,7 +386,7 @@ export default function GraphicsDesigningHeroTab({
                 </button>
               </div>
 
-              <div style={{ marginBottom: '12px' }}>
+              <div>
                 <label style={labelStyle}>Partner Name / Alt</label>
                 <input
                   type="text"
@@ -387,6 +401,8 @@ export default function GraphicsDesigningHeroTab({
                 label="Logo SVG / PNG"
                 value={logo.src || ''}
                 onChange={(val) => updateMarqueeLogo(idx, 'src', val)}
+                previewHeight={70}
+                recommendedDimensions="400 × 200 px"
                 onOpenLibrary={
                   onOpenAssetPicker ? () => onOpenAssetPicker(`graphicsDesigning.hero.marqueeLogos.${idx}`) : undefined
                 }

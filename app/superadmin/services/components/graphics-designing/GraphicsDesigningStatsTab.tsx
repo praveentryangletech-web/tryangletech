@@ -100,10 +100,13 @@ export default function GraphicsDesigningStatsTab({
             <div
               key={stat.id || idx}
               style={{
-                padding: '20px',
-                border: '1px solid #E2E8F0',
-                borderRadius: '8px',
-                backgroundColor: '#FFFFFF',
+                padding: '0',
+                border: 'none',
+                borderRadius: '0',
+                backgroundColor: 'transparent',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
               }}
             >
               <span

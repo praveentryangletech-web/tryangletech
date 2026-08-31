@@ -150,15 +150,15 @@ function ServiceEditorInner() {
 
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '1.25rem 2rem 6rem 2rem', backgroundColor: 'transparent' }}>
-      {/* Top Header & Action Toolbar */}
+      {/* Top Action Toolbar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '12px' }}>
-        <div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', margin: 0 }}>
-            {serviceName} CMS
-          </h1>
-          <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748B' }}>
-            Full dynamic control for <code style={{ color: 'var(--brand-blue, #1833fe)' }}>{serviceRoute}</code> landing page
-          </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.825rem', color: '#64748B', fontWeight: 600 }}>
+            Live Landing Page:
+          </span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #DBEAFE' }}>
+            {serviceRoute}
+          </span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

@@ -3,6 +3,12 @@
 import React from 'react';
 import { DigitalMarketingContentDTO, DigitalMarketingFaqItem } from '@/backend/services/services/services.types';
 import { PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface DigitalMarketingFaqsTabProps {
   formData: DigitalMarketingContentDTO;
@@ -63,12 +69,12 @@ export default function DigitalMarketingFaqsTab({
   const addFaq = () => {
     setFormData((prev) => {
       if (!prev) return prev;
-      const copy = [...(prev.faqs || [])];
-      copy.push({
+      const newFaq = {
         id: `faq-${Date.now()}`,
-        q: 'New Question?',
-        a: 'Detailed explanation about marketing deliverables and performance expectations.',
-      });
+        q: '',
+        a: '',
+      };
+      const copy = [newFaq, ...(prev.faqs || [])];
       return { ...prev, faqs: copy };
     });
   };
@@ -83,43 +89,28 @@ export default function DigitalMarketingFaqsTab({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <div
         style={{
           backgroundColor: 'transparent',
           borderRadius: '0',
           border: 'none',
           padding: '0',
+          boxShadow: 'none',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
-          <div>
-            <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>
-              Frequently Asked Questions ({faqs.length})
-            </h3>
-            <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-              These FAQs are also structured for Google FAQPage Schema.org markup.
-            </span>
-          </div>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+            Dynamic FAQs ({faqs.length})
+          </h3>
           <button
             type="button"
             onClick={addFaq}
-            style={{
-              padding: '6px 12px',
-              borderRadius: '6px',
-              border: '1px solid #6366F1',
-              backgroundColor: '#EEF2FF',
-              color: '#4F46E5',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
+            style={standardAddButtonStyle}
+            {...standardAddButtonHover}
           >
             <PlusIcon style={{ width: '14px', height: '14px' }} />
-            Add FAQ
+            <span>Add FAQ</span>
           </button>
         </div>
 

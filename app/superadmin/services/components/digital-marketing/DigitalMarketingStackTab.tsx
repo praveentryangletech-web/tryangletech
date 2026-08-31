@@ -4,6 +4,12 @@ import React from 'react';
 import { DigitalMarketingContentDTO } from '@/backend/services/services/services.types';
 import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
 import { PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface DigitalMarketingStackTabProps {
   formData: DigitalMarketingContentDTO;
@@ -67,13 +73,13 @@ export default function DigitalMarketingStackTab({
   const addTool = () => {
     setFormData((prev) => {
       if (!prev) return prev;
-      const copy = [...(prev.stack?.tools || [])];
-      copy.push({
+      const newTool = {
         id: `tool-${Date.now()}`,
-        name: 'New Marketing Tool',
-        icon: 'tool-icon',
+        name: '',
+        icon: '',
         category: 'Analytics',
-      });
+      };
+      const copy = [newTool, ...(prev.stack?.tools || [])];
       return {
         ...prev,
         stack: { ...prev.stack, tools: copy },
@@ -115,38 +121,47 @@ export default function DigitalMarketingStackTab({
             paddingBottom: '12px',
           }}
         >
-          Marketing Stack &amp; Tool Integrations Header
+          Stack Section Header
         </h3>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           <div>
-            <label style={labelStyle}>Pill Badge Text</label>
+            <label style={labelStyle}>Pill Badge</label>
+            <input
+              style={inputStyle}
+              value={stack.badgePillText || ''}
+              onChange={(e) => handleHeaderChange('badgePillText', e.target.value)}
+              placeholder="e.g. MARKETING ENGINE"
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>Sub Badge</label>
             <input
               style={inputStyle}
               value={stack.subBadgeText || ''}
               onChange={(e) => handleHeaderChange('subBadgeText', e.target.value)}
-              placeholder="e.g. marketing stack"
+              placeholder="e.g. tools & platforms"
             />
           </div>
-          <div>
-            <label style={labelStyle}>Section Headline</label>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <label style={labelStyle}>Headline</label>
             <input
               style={inputStyle}
               value={stack.headline || ''}
               onChange={(e) => handleHeaderChange('headline', e.target.value)}
-              placeholder="e.g. We work with the tools your business already uses"
+              placeholder="e.g. Powered by Industry-Leading Tech Stack"
             />
           </div>
         </div>
       </div>
 
-      {/* 2. Tool Items List */}
+      {/* 2. Tools Grid */}
       <div
         style={{
           backgroundColor: 'transparent',
           borderRadius: '0',
           border: 'none',
           padding: '0',
+          boxShadow: 'none',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
@@ -156,22 +171,11 @@ export default function DigitalMarketingStackTab({
           <button
             type="button"
             onClick={addTool}
-            style={{
-              padding: '6px 12px',
-              borderRadius: '6px',
-              border: '1px solid #6366F1',
-              backgroundColor: '#EEF2FF',
-              color: '#4F46E5',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
+            style={standardAddButtonStyle}
+            {...standardAddButtonHover}
           >
             <PlusIcon style={{ width: '14px', height: '14px' }} />
-            Add Tool
+            <span>Add Tool</span>
           </button>
         </div>
 

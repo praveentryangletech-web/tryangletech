@@ -5,6 +5,12 @@ import React from 'react';
 import { DigitalMarketingContentDTO } from '@/backend/services/services/services.types';
 import ImageFieldWithUpload from '../common/ImageFieldWithUpload';
 import { LinkIcon, ImageIcon, PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface DigitalMarketingHeroTabProps {
   formData: DigitalMarketingContentDTO;
@@ -307,22 +313,11 @@ export default function DigitalMarketingHeroTab({
           <button
             type="button"
             onClick={addLogo}
-            style={{
-              padding: '6px 12px',
-              borderRadius: '6px',
-              border: '1px solid #6366F1',
-              backgroundColor: '#EEF2FF',
-              color: '#4F46E5',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
+            style={standardAddButtonStyle}
+            {...standardAddButtonHover}
           >
             <PlusIcon style={{ width: '14px', height: '14px' }} />
-            Add Logo
+            <span>Add Logo</span>
           </button>
         </div>
 

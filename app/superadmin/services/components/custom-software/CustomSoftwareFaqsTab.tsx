@@ -3,6 +3,12 @@
 import React from 'react';
 import { CustomSoftwareContentDTO, CustomSoftwareFaqItem } from '@/backend/services/services/services.types';
 import { PlusIcon, TrashIcon } from '../common/StandardSvgIcons';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface CustomSoftwareFaqsTabProps {
   formData: CustomSoftwareContentDTO;
@@ -53,14 +59,14 @@ export default function CustomSoftwareFaqsTab({
   const handleAddFaq = () => {
     const newFaq: CustomSoftwareFaqItem = {
       id: `faq-${Date.now()}`,
-      q: 'Frequently asked question about custom software?',
-      a: 'Provide a transparent, direct response answering client inquiries and concerns.',
+      q: '',
+      a: '',
     };
     setFormData((prev) => {
       if (!prev) return prev;
       return {
         ...prev,
-        faqs: [...(prev.faqs || []), newFaq],
+        faqs: [newFaq, ...(prev.faqs || [])],
       };
     });
   };
@@ -87,7 +93,7 @@ export default function CustomSoftwareFaqsTab({
 
   return (
     <div style={{ backgroundColor: 'transparent', border: 'none', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div style={{ backgroundColor: 'transparent', padding: '0', borderRadius: '0', border: 'none', boxShadow: 'none', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
           <div>
             <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>Frequently Asked Questions ({faqs.length})</h3>
@@ -96,9 +102,10 @@ export default function CustomSoftwareFaqsTab({
           <button
             type="button"
             onClick={handleAddFaq}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '8px', backgroundColor: '#EFF6FF', color: '#1D4ED8', border: '1px solid #BFDBFE', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer' }}
+            style={standardAddButtonStyle}
+            {...standardAddButtonHover}
           >
-            <PlusIcon /> Add Question
+            <PlusIcon /> <span>Add Question</span>
           </button>
         </div>
 
@@ -110,9 +117,10 @@ export default function CustomSoftwareFaqsTab({
                 <button
                   type="button"
                   onClick={() => handleRemoveFaq(idx)}
-                  style={{ background: 'none', border: 'none', color: '#EF4444', cursor: 'pointer', padding: '4px' }}
+                  style={standardDeleteButtonStyle}
+                  {...standardDeleteButtonHover}
                 >
-                  <TrashIcon />
+                  Delete
                 </button>
               </div>
 

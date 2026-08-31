@@ -2,6 +2,12 @@
 
 import React from 'react';
 import { GraphicsDesigningContentDTO } from '@/backend/services/services/services.types';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface GraphicsDesigningFaqsTabProps {
   formData: GraphicsDesigningContentDTO;
@@ -15,12 +21,12 @@ export default function GraphicsDesigningFaqsTab({
   const faqs = formData?.faqs || [];
 
   const addFaq = () => {
-    const list = [...faqs];
-    list.push({
+    const newFaq = {
       id: `faq-${Date.now()}`,
-      q: 'New Question?',
-      a: 'Detailed answer explaining your graphic design deliverables and workflow.',
-    });
+      q: '',
+      a: '',
+    };
+    const list = [newFaq, ...faqs];
     setFormData((prev) => ({
       ...prev,
       faqs: list,
@@ -81,18 +87,11 @@ export default function GraphicsDesigningFaqsTab({
         <button
           type="button"
           onClick={addFaq}
-          style={{
-            padding: '8px 16px',
-            backgroundColor: '#EFF6FF',
-            color: 'var(--brand-blue, #1833fe)',
-            border: '1px solid #BFDBFE',
-            borderRadius: '6px',
-            fontSize: '0.825rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-          }}
+          style={standardAddButtonStyle}
+          {...standardAddButtonHover}
         >
-          + Add FAQ Item
+          <span style={{ fontSize: '1rem', lineHeight: '1', fontWeight: 800 }}>+</span>
+          <span>Add FAQ Item</span>
         </button>
       </div>
 
@@ -114,14 +113,8 @@ export default function GraphicsDesigningFaqsTab({
               <button
                 type="button"
                 onClick={() => removeFaq(idx)}
-                style={{
-                  border: 'none',
-                  background: 'transparent',
-                  color: '#EF4444',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                }}
+                style={standardDeleteButtonStyle}
+                {...standardDeleteButtonHover}
               >
                 Delete
               </button>

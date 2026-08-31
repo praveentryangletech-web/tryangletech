@@ -3,6 +3,12 @@
 import React from 'react';
 import HomeImageUploadField from '@/app/superadmin/home/components/HomeImageUploadField';
 import { ServiceToolsSection, ServiceToolItem } from '@/backend/services/services/services.types';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface ServiceToolsTabProps {
   tools: ServiceToolsSection;
@@ -25,13 +31,13 @@ export default function ServiceToolsTab({ tools, setTools, onOpenAssetPicker }: 
     setTools((prev) => ({
       ...prev,
       tools: [
-        ...(prev.tools || []),
         {
           id: `t-${Date.now()}`,
-          name: 'New Technology',
-          icon: '/tech-icons/react.svg',
+          name: '',
+          icon: '',
           category: 'Engineering',
         },
+        ...(prev.tools || []),
       ],
     }));
   };
@@ -48,37 +54,32 @@ export default function ServiceToolsTab({ tools, setTools, onOpenAssetPicker }: 
       style={{
         backgroundColor: 'transparent',
         border: 'none',
-        padding: 0,
+        padding: '0',
+        borderRadius: '0',
         boxShadow: 'none',
         display: 'flex',
         flexDirection: 'column',
-        gap: '22px',
+        gap: '24px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '16px' }}>
         <div>
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', margin: 0 }}>
-            4. Tools, Frameworks & Integrations
-          </h3>
-          <p style={{ margin: '3px 0 0 0', fontSize: '0.785rem', color: '#64748B' }}>
-            Manage the technology logo grid displayed in the integration section on /service.
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+            Technology Stack & Integrations ({tools.tools?.length || 0})
+          </h2>
+          <p style={{ fontSize: '0.8rem', color: '#64748B', margin: '4px 0 0 0' }}>
+            Manage the dynamic tools and frameworks powering your engineering deliverables.
           </p>
         </div>
+
         <button
           type="button"
           onClick={handleAddTool}
-          style={{
-            padding: '6px 14px',
-            borderRadius: '8px',
-            border: '1px solid #C7D2FE',
-            backgroundColor: '#EEF2FF',
-            color: '#4338CA',
-            fontSize: '0.785rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-          }}
+          style={standardAddButtonStyle}
+          {...standardAddButtonHover}
         >
-          + Add Technology
+          <span style={{ fontSize: '1rem', lineHeight: '1', fontWeight: 800 }}>+</span>
+          <span>Add Technology</span>
         </button>
       </div>
 

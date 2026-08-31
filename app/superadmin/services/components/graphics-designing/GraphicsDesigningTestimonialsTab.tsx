@@ -3,6 +3,12 @@
 import React from 'react';
 import { GraphicsDesigningContentDTO } from '@/backend/services/services/services.types';
 import { ImageFieldWithUpload } from '../common';
+import {
+  standardAddButtonStyle,
+  standardAddButtonHover,
+  standardDeleteButtonStyle,
+  standardDeleteButtonHover,
+} from '../common/AdminButtonStyles';
 
 interface GraphicsDesigningTestimonialsTabProps {
   formData: GraphicsDesigningContentDTO;
@@ -137,18 +143,11 @@ export default function GraphicsDesigningTestimonialsTab({
           <button
             type="button"
             onClick={addTestimonial}
-            style={{
-              padding: '6px 14px',
-              backgroundColor: '#EFF6FF',
-              color: 'var(--brand-blue, #1833fe)',
-              border: '1px solid #BFDBFE',
-              borderRadius: '6px',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-            }}
+            style={standardAddButtonStyle}
+            {...standardAddButtonHover}
           >
-            + Add Testimonial
+            <span style={{ fontSize: '1rem', lineHeight: '1', fontWeight: 800 }}>+</span>
+            <span>Add Testimonial</span>
           </button>
         </div>
 
@@ -172,14 +171,8 @@ export default function GraphicsDesigningTestimonialsTab({
                 <button
                   type="button"
                   onClick={() => removeTestimonial(idx)}
-                  style={{
-                    border: 'none',
-                    background: 'transparent',
-                    color: '#EF4444',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                  }}
+                  style={standardDeleteButtonStyle}
+                  {...standardDeleteButtonHover}
                 >
                   Delete
                 </button>

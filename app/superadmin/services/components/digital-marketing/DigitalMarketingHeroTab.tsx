@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -91,12 +92,12 @@ export default function DigitalMarketingHeroTab({
   const addLogo = () => {
     setFormData((prev) => {
       if (!prev) return prev;
-      const copy = [...(prev.hero?.marqueeLogos || [])];
-      copy.push({
+      const newLogo = {
         id: `logo-${Date.now()}`,
-        name: `Brand Partner ${copy.length + 1}`,
-        src: '/Home3_files/68ef27127d946b9cb9fdcbce_logo.svg',
-      });
+        name: '',
+        src: '',
+      };
+      const copy = [newLogo, ...(prev.hero?.marqueeLogos || [])];
       return {
         ...prev,
         hero: { ...prev.hero, marqueeLogos: copy },

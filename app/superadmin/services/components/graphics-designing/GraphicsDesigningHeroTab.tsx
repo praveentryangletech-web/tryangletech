@@ -49,12 +49,12 @@ export default function GraphicsDesigningHeroTab({
   };
 
   const addMarqueeLogo = () => {
-    const logos = [...(hero?.marqueeLogos || [])];
-    logos.push({
+    const newLogo = {
       id: `logo-${Date.now()}`,
-      name: 'New Client Partner',
-      src: '/service-2-assets/68ef27127d946b9cb9fdcbce_logo.svg',
-    });
+      name: '',
+      src: '',
+    };
+    const logos = [newLogo, ...(hero?.marqueeLogos || [])];
     updateHeroField('marqueeLogos', logos);
   };
 
@@ -340,17 +340,41 @@ export default function GraphicsDesigningHeroTab({
             type="button"
             onClick={addMarqueeLogo}
             style={{
-              padding: '6px 14px',
+              padding: '7px 16px',
               backgroundColor: '#EFF6FF',
               color: 'var(--brand-blue, #1833fe)',
-              border: '1px solid #BFDBFE',
-              borderRadius: '6px',
+              border: '1.5px solid #BFDBFE',
+              borderRadius: '8px',
               fontSize: '0.8rem',
               fontWeight: 700,
               cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+              userSelect: 'none',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#DBEAFE';
+              e.currentTarget.style.borderColor = '#93C5FD';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 3px 8px rgba(24, 51, 254, 0.12)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#EFF6FF';
+              e.currentTarget.style.borderColor = '#BFDBFE';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'scale(0.95)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
             }}
           >
-            + Add Partner Logo
+            <span style={{ fontSize: '1rem', lineHeight: '1', fontWeight: 800 }}>+</span>
+            <span>Add Partner Logo</span>
           </button>
         </div>
 
@@ -366,6 +390,7 @@ export default function GraphicsDesigningHeroTab({
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '10px',
+                transition: 'all 0.2s ease',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '6px' }}>

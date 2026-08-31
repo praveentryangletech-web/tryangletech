@@ -291,44 +291,44 @@ export default function ServicesPagesTable({
                 {/* 1. PRIMARY MAIN SERVICES PAGE ROW */}
                 {mainPage && (
                   <tr className="admin-row-hover" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)', backgroundColor: '#F0FDF4' }}>
-                    <td style={{ padding: '0.65rem 0.4rem 0.65rem 1.25rem' }}>
+                    <td style={{ padding: '0.55rem 0.4rem 0.55rem 1.25rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#DCFCE7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#166534', flexShrink: 0 }}>
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <div style={{ width: '34px', height: '34px', borderRadius: '8px', backgroundColor: '#DCFCE7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#166534', flexShrink: 0 }}>
+                          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                             <polygon points="12 2 2 7 12 12 22 7 12 2" />
                             <polyline points="2 17 12 22 22 17" />
                             <polyline points="2 12 12 17 22 12" />
                           </svg>
                         </div>
                         <div style={{ minWidth: 0 }}>
-                          <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <div style={{ fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <span>Main Services Overview</span>
                             <span style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', backgroundColor: '#DCFCE7', color: '#166534', padding: '1px 6px', borderRadius: '4px' }}>
                               HUB
                             </span>
                           </div>
-                          <div style={{ fontSize: '0.725rem', color: '#166534', fontWeight: 600 }}>
-                            Core Services Landing Page & Overview Matrix
+                          <div style={{ fontSize: '0.7rem', color: '#166534', fontWeight: 600 }}>
+                            Core Services Landing Page
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td style={{ padding: '0.65rem 0.4rem' }}>
+                    <td style={{ padding: '0.55rem 0.4rem' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#166534', backgroundColor: '#DCFCE7', padding: '2px 8px', borderRadius: '6px' }}>
                         /service
                       </span>
                     </td>
-                    <td style={{ padding: '0.65rem 0.4rem' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#4338CA', backgroundColor: '#EEF2FF', padding: '3px 8px', borderRadius: '6px', border: '1px solid #C7D2FE' }}>
+                    <td style={{ padding: '0.55rem 0.4rem' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#4338CA', backgroundColor: '#EEF2FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #C7D2FE' }}>
                         Core Hub
                       </span>
                     </td>
-                    <td style={{ padding: '0.65rem 0.4rem' }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '3px 9px', borderRadius: '12px', fontSize: '0.725rem', fontWeight: 700, backgroundColor: '#DCFCE7', color: '#166534', border: '1px solid #BBF7D0' }}>
+                    <td style={{ padding: '0.55rem 0.4rem' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '2px 8px', borderRadius: '12px', fontSize: '0.725rem', fontWeight: 700, backgroundColor: '#DCFCE7', color: '#15803D', border: '1px solid #BBF7D0' }}>
                         ● Live Dynamic
                       </span>
                     </td>
-                    <td style={{ padding: '0.65rem 0.4rem' }}>
+                    <td style={{ padding: '0.55rem 0.4rem' }}>
                       <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#334155' }}>
                           Permanent
@@ -338,17 +338,17 @@ export default function ServicesPagesTable({
                         </span>
                       </div>
                     </td>
-                    <td style={{ padding: '0.65rem 1.25rem 0.65rem 0.4rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                      <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                        <Tooltip text="View live services page in new tab" position="top">
+                    <td style={{ padding: '0.55rem 1.25rem 0.55rem 0.4rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                      <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        <Tooltip text="View live main services overview page" position="top">
                           <Link
                             href="/service"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
-                              backgroundColor: '#EFF6FF',
-                              color: 'var(--brand-blue, #1833fe)',
-                              border: '1px solid #BFDBFE',
+                              backgroundColor: '#FFFFFF',
+                              border: '1px solid #CBD5E1',
+                              color: '#475569',
                               height: '30px',
                               padding: '0 8px',
                               borderRadius: '7px',
@@ -359,7 +359,10 @@ export default function ServicesPagesTable({
                               alignItems: 'center',
                               gap: '4px',
                               whiteSpace: 'nowrap',
+                              transition: 'all 0.15s ease',
                             }}
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F8FAFC')}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
                           >
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -374,11 +377,11 @@ export default function ServicesPagesTable({
                           <Link
                             href="/superadmin/services/main"
                             style={{
-                              backgroundColor: 'var(--brand-blue, #1833fe)',
-                              color: '#FFFFFF',
-                              border: 'none',
+                              backgroundColor: '#FFFFFF',
+                              color: 'var(--brand-blue, #1833fe)',
+                              border: '1px solid #BFDBFE',
                               height: '30px',
-                              padding: '0 9px',
+                              padding: '0 8px',
                               borderRadius: '7px',
                               fontSize: '0.75rem',
                               fontWeight: 700,
@@ -386,17 +389,19 @@ export default function ServicesPagesTable({
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '4px',
-                              boxShadow: '0 2px 6px rgba(24, 51, 254, 0.2)',
                               whiteSpace: 'nowrap',
                               textDecoration: 'none',
                               boxSizing: 'border-box',
+                              transition: 'all 0.15s ease',
                             }}
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#EFF6FF')}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
                           >
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M12 20h9" />
                               <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                             </svg>
-                            <span>Edit CMS</span>
+                            <span>Edit</span>
                           </Link>
                         </Tooltip>
                       </div>
@@ -470,7 +475,7 @@ export default function ServicesPagesTable({
 
                   return (
                     <tr key={sub.id} className="admin-row-hover" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
-                      <td style={{ padding: '0.65rem 0.4rem 0.65rem 1.25rem' }}>
+                      <td style={{ padding: '0.55rem 0.4rem 0.55rem 1.25rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <div style={{ width: '34px', height: '34px', borderRadius: '8px', backgroundColor: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: iconColor, flexShrink: 0 }}>
                             {iconSvg}
@@ -485,17 +490,17 @@ export default function ServicesPagesTable({
                           </div>
                         </div>
                       </td>
-                      <td style={{ padding: '0.65rem 0.4rem' }}>
+                      <td style={{ padding: '0.55rem 0.4rem' }}>
                         <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--brand-blue, #1833fe)', backgroundColor: '#EFF6FF', padding: '2px 8px', borderRadius: '6px', border: '1px solid #DBEAFE', display: 'inline-block' }}>
                           {sub.route}
                         </span>
                       </td>
-                      <td style={{ padding: '0.65rem 0.4rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#475569', backgroundColor: '#F8FAFC', padding: '3px 8px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
+                      <td style={{ padding: '0.55rem 0.4rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#475569', backgroundColor: '#F8FAFC', padding: '2px 8px', borderRadius: '6px', border: '1px solid #E2E8F0' }}>
                           {sub.category}
                         </span>
                       </td>
-                      <td style={{ padding: '0.65rem 0.4rem' }}>
+                      <td style={{ padding: '0.55rem 0.4rem' }}>
                         {onToggleStatus ? (
                           <Tooltip text={isPub ? 'Click to make this page a Draft' : 'Click to Publish this page Live'} position="top">
                             <button
@@ -528,7 +533,7 @@ export default function ServicesPagesTable({
                           </span>
                         )}
                       </td>
-                      <td style={{ padding: '0.65rem 0.4rem' }}>
+                      <td style={{ padding: '0.55rem 0.4rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                           <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#334155' }}>
                             {dateInfo.dateStr}
@@ -538,17 +543,17 @@ export default function ServicesPagesTable({
                           </span>
                         </div>
                       </td>
-                      <td style={{ padding: '0.65rem 1.25rem 0.65rem 0.4rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                      <td style={{ padding: '0.55rem 1.25rem 0.55rem 0.4rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                           <Tooltip text={`View ${sub.name} page in new tab`} position="top">
                             <Link
                               href={sub.route}
                               target="_blank"
                               rel="noopener noreferrer"
                               style={{
-                                backgroundColor: '#EFF6FF',
-                                color: 'var(--brand-blue, #1833fe)',
-                                border: '1px solid #BFDBFE',
+                                backgroundColor: '#FFFFFF',
+                                border: '1px solid #CBD5E1',
+                                color: '#475569',
                                 height: '30px',
                                 padding: '0 8px',
                                 borderRadius: '7px',
@@ -559,7 +564,10 @@ export default function ServicesPagesTable({
                                 alignItems: 'center',
                                 gap: '4px',
                                 whiteSpace: 'nowrap',
+                                transition: 'all 0.15s ease',
                               }}
+                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F8FAFC')}
+                              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
                             >
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -589,7 +597,10 @@ export default function ServicesPagesTable({
                                 whiteSpace: 'nowrap',
                                 textDecoration: 'none',
                                 boxSizing: 'border-box',
+                                transition: 'all 0.15s ease',
                               }}
+                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#EFF6FF')}
+                              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
                             >
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M12 20h9" />

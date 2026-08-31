@@ -210,8 +210,8 @@ export default function CustomSoftwareHeroTab({
       </div>
 
       {/* 2. Visual Graphic Slots */}
-      <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div style={{ backgroundColor: 'transparent', padding: '0', borderRadius: '0', border: 'none', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <ImageIcon /> Hero Visual Graphics
         </h3>
 

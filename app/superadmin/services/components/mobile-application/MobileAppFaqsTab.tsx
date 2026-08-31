@@ -122,22 +122,21 @@ export default function MobileAppFaqsTab({ formData, setFormData }: MobileAppFaq
       </div>
 
       {/* FAQs List */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {(formData.faqs || []).map((faq, idx) => (
           <div
             key={faq.id || idx}
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
-              padding: '18px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '0',
+              padding: '0',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <HelpIcon size={16} color="var(--brand-blue, #1833fe)" />
                 <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--brand-blue, #1833fe)' }}>

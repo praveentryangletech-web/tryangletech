@@ -394,17 +394,16 @@ export default function SubServiceHeroTab({ formData, setFormData, onOpenAssetPi
       {/* Hero Visual Assets & Alt Text */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '12px',
-          border: '1px solid #E2E8F0',
-          padding: '20px',
+          backgroundColor: 'transparent',
+          borderRadius: '0',
+          border: 'none',
+          padding: '0',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
           <ImageIcon size={18} color="var(--brand-blue, #1833fe)" />
           <div>
             <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>Hero Visual Assets & Accessibility (Alt Text)</div>

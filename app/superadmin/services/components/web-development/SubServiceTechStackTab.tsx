@@ -135,22 +135,21 @@ export default function SubServiceTechStackTab({ formData, setFormData, onOpenAs
       </div>
 
       {/* Technology Cards Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
         {(formData.techStack.items || []).map((tech, idx) => (
           <div
             key={tech.id || idx}
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
-              padding: '16px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '0',
+              padding: '0',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
               <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--brand-blue, #1833fe)' }}>
                 Tech #{idx + 1}
               </span>

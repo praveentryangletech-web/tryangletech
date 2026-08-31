@@ -244,11 +244,10 @@ export default function DigitalMarketingHeroTab({
       {/* 3. Hero Visual Assets */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '12px',
-          border: '1px solid #E2E8F0',
-          padding: '24px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+          backgroundColor: 'transparent',
+          borderRadius: '0',
+          border: 'none',
+          padding: '0',
         }}
       >
         <h3
@@ -257,7 +256,7 @@ export default function DigitalMarketingHeroTab({
             fontWeight: 800,
             color: '#0F172A',
             margin: '0 0 16px 0',
-            borderBottom: '1px solid #F1F5F9',
+            borderBottom: '1px solid #E2E8F0',
             paddingBottom: '12px',
             display: 'flex',
             alignItems: 'center',

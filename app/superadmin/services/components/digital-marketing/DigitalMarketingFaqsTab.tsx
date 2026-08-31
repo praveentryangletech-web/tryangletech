@@ -86,14 +86,13 @@ export default function DigitalMarketingFaqsTab({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '12px',
-          border: '1px solid #E2E8F0',
-          padding: '24px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+          backgroundColor: 'transparent',
+          borderRadius: '0',
+          border: 'none',
+          padding: '0',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#0F172A', margin: 0 }}>
               Frequently Asked Questions ({faqs.length})
@@ -124,21 +123,21 @@ export default function DigitalMarketingFaqsTab({
           </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {faqs.map((faq, idx) => (
             <div
               key={faq.id || idx}
               style={{
-                backgroundColor: '#F8FAFC',
-                padding: '16px',
-                borderRadius: '8px',
-                border: '1px solid #E2E8F0',
+                backgroundColor: 'transparent',
+                padding: '0',
+                borderRadius: '0',
+                border: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#4F46E5' }}>
                   Question #{idx + 1}
                 </span>

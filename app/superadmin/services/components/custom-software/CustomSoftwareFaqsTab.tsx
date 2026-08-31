@@ -102,10 +102,10 @@ export default function CustomSoftwareFaqsTab({
           </button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {faqs.map((faq, idx) => (
-            <div key={faq.id || idx} style={{ padding: '18px', borderRadius: '10px', border: '1px solid #E2E8F0', backgroundColor: '#F8FAFC', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div key={faq.id || idx} style={{ padding: '0', borderRadius: '0', border: 'none', backgroundColor: 'transparent', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#1E293B' }}>Question #{idx + 1}</span>
                 <button
                   type="button"

@@ -145,14 +145,13 @@ export default function SubServiceSeoTab({ formData, setFormData, onOpenAssetPic
       {/* Social Share Card & OpenGraph Image */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '12px',
-          border: '1px solid #E2E8F0',
-          padding: '20px',
+          backgroundColor: 'transparent',
+          borderRadius: '0',
+          border: 'none',
+          padding: '0',
           display: 'flex',
           flexDirection: 'column',
           gap: '14px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
         }}
       >
         <div>

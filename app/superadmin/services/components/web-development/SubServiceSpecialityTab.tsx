@@ -142,17 +142,16 @@ export default function SubServiceSpecialityTab({ formData, setFormData, onOpenA
             <div
               key={card.id || idx}
               style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #E2E8F0',
-                borderRadius: '12px',
-                padding: '20px',
+                backgroundColor: 'transparent',
+                border: 'none',
+                borderRadius: '0',
+                padding: '0',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '16px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '12px' }}>
                 <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--dark-indigo, #1a0b54)' }}>
                   Capability Card #{idx + 1}: {card.title || 'Untitled Card'}
                 </span>
@@ -198,7 +197,7 @@ export default function SubServiceSpecialityTab({ formData, setFormData, onOpenA
               </div>
 
               {/* Showcase Images for this Card */}
-              <div style={{ backgroundColor: '#F8FAFC', borderRadius: '10px', border: '1px solid #E2E8F0', padding: '14px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ backgroundColor: 'transparent', borderRadius: '0', border: 'none', padding: '0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#334155' }}>
                   Showcase Graphics & Alt Texts ({imageCount} Mockup Images)
                 </div>

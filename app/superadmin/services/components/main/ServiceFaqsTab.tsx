@@ -79,15 +79,15 @@ export default function ServiceFaqsTab({ faqs, setFaqs }: ServiceFaqsTabProps) {
             key={faq.id || idx}
             style={{
               backgroundColor: 'transparent',
-              border: '1px solid #CBD5E1',
-              borderRadius: '10px',
-              padding: '14px',
+              border: 'none',
+              borderRadius: '0',
+              padding: '0',
               display: 'flex',
               flexDirection: 'column',
-              gap: '8px',
+              gap: '12px',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span
                   style={{

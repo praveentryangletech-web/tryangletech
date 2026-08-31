@@ -288,10 +288,10 @@ export default function MobileAppSeoTab({ formData, setFormData, onOpenAssetPick
       {/* OpenGraph Social Image */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderRadius: '12px',
-          border: '1px solid #E2E8F0',
-          padding: '20px',
+          backgroundColor: 'transparent',
+          borderRadius: '0',
+          border: 'none',
+          padding: '0',
         }}
       >
         <ImageFieldWithUpload

@@ -105,10 +105,10 @@ export default function ImageFieldWithUpload({
   return (
     <div
       style={{
-        border: '1px solid #E2E8F0',
-        borderRadius: '10px',
-        padding: '14px',
-        backgroundColor: '#F8FAFC',
+        border: 'none',
+        borderRadius: '0',
+        padding: '0',
+        backgroundColor: 'transparent',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',

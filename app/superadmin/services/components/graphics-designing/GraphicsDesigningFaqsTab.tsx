@@ -96,19 +96,18 @@ export default function GraphicsDesigningFaqsTab({
         </button>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {faqs.map((faq, idx) => (
           <div
             key={faq.id || idx}
             style={{
-              padding: '20px',
-              border: '1px solid #E2E8F0',
-              borderRadius: '10px',
-              backgroundColor: '#FFFFFF',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+              padding: '0',
+              border: 'none',
+              borderRadius: '0',
+              backgroundColor: 'transparent',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid #E2E8F0', paddingBottom: '8px' }}>
               <span style={{ fontSize: '0.825rem', fontWeight: 800, color: '#0F172A' }}>
                 Question #{idx + 1}
               </span>

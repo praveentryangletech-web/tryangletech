@@ -3,6 +3,7 @@
 import React from 'react';
 import { WebDevContentDTO } from '@/backend/services/services/services.types';
 import ImageFieldWithUpload from './ImageFieldWithUpload';
+import { PlusIcon, CloseIcon } from './StandardSvgIcons';
 
 interface SubServiceSeoTabProps {
   formData: WebDevContentDTO;
@@ -190,6 +191,9 @@ export default function SubServiceSeoTab({ formData, setFormData, onOpenAssetPic
             type="button"
             onClick={handleAddKeyword}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               padding: '0 16px',
               borderRadius: '8px',
               border: 'none',
@@ -200,7 +204,8 @@ export default function SubServiceSeoTab({ formData, setFormData, onOpenAssetPic
               cursor: 'pointer',
             }}
           >
-            + Add
+            <PlusIcon size={12} color="#FFFFFF" />
+            <span>Add</span>
           </button>
         </div>
 
@@ -231,13 +236,12 @@ export default function SubServiceSeoTab({ formData, setFormData, onOpenAssetPic
                   border: 'none',
                   color: '#93C5FD',
                   cursor: 'pointer',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
                   padding: 0,
                   display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                ✕
+                <CloseIcon size={10} color="#93C5FD" />
               </button>
             </span>
           ))}

@@ -623,9 +623,49 @@ export const servicesService = {
         return DEFAULT_WEB_DEV_CONTENT;
       }
 
+function sanitizeWebDevDto(dto: WebDevContentDTO): WebDevContentDTO {
+  if (!dto || !dto.types || !Array.isArray(dto.types.cards)) return dto;
+
+  const sanitizedCards = dto.types.cards.map((c) => {
+    let img = c.image || '';
+    let smallImg = c.smallImage || '';
+
+    // Auto-heal legacy broken image hash paths to verified asset files
+    if (img.includes('6912f62cf1b1aa86d88c42b8')) {
+      img = '/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp';
+    } else if (img.includes('6912f62ce8b4d830b0ad3374')) {
+      img = '/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp';
+    } else if (img.includes('6912f62c1cfeb4f85e4ae225')) {
+      img = '/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp';
+    }
+
+    if (smallImg.includes('6912f62c64b4c79ca33cb2be')) {
+      smallImg = '/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp';
+    } else if (smallImg.includes('6912f62c5b367128f70fa464')) {
+      smallImg = '/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp';
+    } else if (smallImg.includes('6912f62c0bcaadfa08a4f910') || smallImg.includes('6912f62ccbead75494a37233')) {
+      smallImg = '';
+    }
+
+    return {
+      ...c,
+      image: img,
+      smallImage: smallImg,
+    };
+  });
+
+  return {
+    ...dto,
+    types: {
+      ...dto.types,
+      cards: sanitizedCards,
+    },
+  };
+}
+
       const row = rows[0];
 
-      const dto: WebDevContentDTO = {
+      const rawDto: WebDevContentDTO = {
         id: row.slug || 'service-web-development',
         slug: 'web-development',
         hero: parseJsonSafe(row.hero, DEFAULT_WEB_DEV_CONTENT.hero),
@@ -641,6 +681,7 @@ export const servicesService = {
         updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : new Date().toISOString(),
       };
 
+      const dto = sanitizeWebDevDto(rawDto);
       servicesCache.set(cacheKey, dto);
       return dto;
     } catch (err) {
@@ -757,6 +798,8 @@ export const servicesService = {
     const description = data.metaDescription || DEFAULT_WEB_DEV_CONTENT.metaDescription;
     const keywords = data.keywords || DEFAULT_WEB_DEV_CONTENT.keywords;
     const canonical = data.canonicalUrl || 'https://tryangletech.com/service/web-development';
+    const ogImgUrl = data.ogImage || '/logo.png';
+    const ogImgAlt = data.ogImageAlt || title;
 
     return {
       title,
@@ -783,12 +826,13 @@ export const servicesService = {
         url: canonical,
         siteName: 'TryangleTech',
         type: 'website',
+        locale: 'en_US',
         images: [
           {
-            url: '/logo.png',
+            url: ogImgUrl,
             width: 1200,
             height: 630,
-            alt: 'TryangleTech Web Development',
+            alt: ogImgAlt,
           },
         ],
       },
@@ -796,7 +840,15 @@ export const servicesService = {
         card: 'summary_large_image',
         title,
         description,
-        images: ['/logo.png'],
+        images: [ogImgUrl],
+      },
+      other: {
+        'geo.region': 'IN-GJ',
+        'geo.placename': 'Ahmedabad',
+        'geo.position': '23.0225;72.5714',
+        'ICBM': '23.0225, 72.5714',
+        'rating': 'general',
+        'revisit-after': '7 days',
       },
     };
   },

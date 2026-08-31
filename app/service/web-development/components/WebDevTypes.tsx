@@ -101,7 +101,7 @@ export default function WebDevTypes({ data }: { data?: WebDevTypesSection }) {
                 />
                 <div className="rt-benefits-small-image rt-2">
                   <Image
-                    src={card2.smallImage || "/Home2_files/6912f62c64b4c79ca33cb2be_Group 2085663571.webp"}
+                    src={card2.smallImage || "/Home2_files/6912f62c4093ef3c309029b2_Group 2085663571.webp"}
                     loading="lazy"
                     alt={card2.smallImageAlt || "E-commerce sales conversion metric badge"}
                     width={800}
@@ -124,7 +124,7 @@ export default function WebDevTypes({ data }: { data?: WebDevTypesSection }) {
               className="rt-benefits-item">
               <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
                 <Image
-                  src={card3.image || "/Home2_files/6912f62cf1b1aa86d88c42b8_taskopia-benefits-home-two-3.webp"}
+                  src={card3.image || "/Home2_files/6912f62ced71f28b5ad5a83d_taskopia-benefits-home-two-3.webp"}
                   loading="lazy"
                   alt={card3.imageAlt || card3.title || "Landing Page Websites"}
                   width={800}
@@ -161,23 +161,36 @@ export default function WebDevTypes({ data }: { data?: WebDevTypesSection }) {
             <div className="rt-benefits-item rt-bottom">
               <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
                 <Image
-                  src={card4.image || "/Home2_files/6912f62ce8b4d830b0ad3374_taskopia-benefits-home-two-4.webp"}
+                  src={card4.image || "/Home2_files/6912f62c90ad4e05a87a0932_taskopia-benefits-home-two-4.webp"}
                   loading="lazy"
                   alt={card4.imageAlt || card4.title || "SaaS & Custom Web Applications"}
                   width={800}
                   height={800}
                   style={{ width: "100%", height: "auto" }}
                 />
-                <div className="rt-benefits-small-image rt-3">
-                  <Image
-                    src={card4.smallImage || "/Home2_files/6912f62c5b367128f70fa464_Group 2085663573.webp"}
-                    loading="lazy"
-                    alt={card4.smallImageAlt || "Web app metrics badge"}
-                    width={800}
-                    height={800}
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                </div>
+                {card4.smallImage ? (
+                  <div className="rt-benefits-small-image rt-3">
+                    <Image
+                      src={card4.smallImage}
+                      loading="lazy"
+                      alt={card4.smallImageAlt || "Web app metrics badge"}
+                      width={800}
+                      height={800}
+                      style={{ width: "100%", height: "auto" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="rt-benefits-small-image rt-3">
+                    <Image
+                      src="/Home2_files/6912f62c37804ce44caffa0e_Group 2085663152.webp"
+                      loading="lazy"
+                      alt={card4.smallImageAlt || "Web app metrics badge"}
+                      width={800}
+                      height={800}
+                      style={{ width: "100%", height: "auto" }}
+                    />
+                  </div>
+                )}
               </div>
               <div className="rt-benefits-item-text">
                 <div className="rt-text-style-h6 rt-text-gradient">{card4.title}</div>
@@ -191,7 +204,7 @@ export default function WebDevTypes({ data }: { data?: WebDevTypesSection }) {
             <div className="rt-benefits-item rt-bottom">
               <div className="rt-blorder-color rt-border-radius-medium rt-overflow-hidden rt-position-relative">
                 <Image
-                  src={card5.image || "/Home2_files/6912f62c1cfeb4f85e4ae225_taskopia-benefits-home-two-5.webp"}
+                  src={card5.image || "/Home2_files/6912f62d672935141c7f8c81_taskopia-benefits-home-two-5.webp"}
                   loading="lazy"
                   alt={card5.imageAlt || card5.title || "Personal Websites & Blogs"}
                   width={800}

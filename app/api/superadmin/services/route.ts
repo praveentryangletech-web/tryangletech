@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { servicesService } from '@/backend/services/services';
 import { DEFAULT_SERVICE_MAIN_CONTENT } from '@/backend/services/services/services.defaults';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
+import { successResponse, paginatedResponse, errorResponse } from '@/backend/utils/apiResponse';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,10 +24,7 @@ export async function GET(request: NextRequest) {
         console.warn('[SuperadminServices] DB error, using default fallback:', dbErr);
         data = DEFAULT_SERVICE_MAIN_CONTENT;
       }
-      return NextResponse.json({
-        success: true,
-        data,
-      });
+      return successResponse(data, 'Main services content retrieved successfully.');
     }
 
     // 100% Database-Driven Paginated List
@@ -44,17 +42,15 @@ export async function GET(request: NextRequest) {
       category,
     });
 
-    return NextResponse.json({
-      success: true,
-      data: result.items,
-      pagination: result.pagination,
-      categories: result.categories,
-    });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch services data' },
-      { status: 500 }
+    return paginatedResponse(
+      result.items,
+      result.pagination,
+      { categories: result.categories },
+      'Services list retrieved successfully.'
     );
+  } catch (error: any) {
+    console.error('GET /api/superadmin/services error:', error);
+    return errorResponse(error?.message || 'Failed to fetch services data', 500);
   }
 }
 
@@ -71,16 +67,10 @@ export async function PUT(request: NextRequest) {
       revalidatePath('/', 'page');
     } catch {}
 
-    return NextResponse.json({
-      success: true,
-      data: updated,
-      message: 'Services content updated live successfully.',
-    });
+    return successResponse(updated, 'Services content updated live successfully.');
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to update services content' },
-      { status: 500 }
-    );
+    console.error('PUT /api/superadmin/services error:', error);
+    return errorResponse(error?.message || 'Failed to update services content', 500);
   }
 }
 
@@ -91,18 +81,17 @@ export async function PATCH(request: NextRequest) {
   try {
     const { slug, isPublished } = await request.json();
     if (!slug) {
-      return NextResponse.json({ success: false, error: 'Slug is required' }, { status: 400 });
+      return errorResponse('Slug is required for status update.', 400);
     }
 
     const success = await servicesService.toggleServiceStatus(slug, isPublished);
-    return NextResponse.json({
-      success,
-      message: success ? 'Service publication status updated live.' : 'Failed to update status.',
-    });
+    if (!success) {
+      return errorResponse('Failed to update publication status.', 500);
+    }
+
+    return successResponse({ slug, isPublished }, 'Service publication status updated live.');
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to patch service status' },
-      { status: 500 }
-    );
+    console.error('PATCH /api/superadmin/services error:', error);
+    return errorResponse(error?.message || 'Failed to patch service status', 500);
   }
 }

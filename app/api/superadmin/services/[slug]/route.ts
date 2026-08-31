@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { servicesService } from '@/backend/services/services';
 import { DEFAULT_WEB_DEV_CONTENT } from '@/backend/services/services/services.defaults';
 import { requireSuperadmin } from '@/backend/utils/authGuard';
+import { successResponse, errorResponse } from '@/backend/utils/apiResponse';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,15 +24,10 @@ export async function GET(
       data = DEFAULT_WEB_DEV_CONTENT;
     }
 
-    return NextResponse.json({
-      success: true,
-      data,
-    });
+    return successResponse(data, 'Sub-service data retrieved successfully.');
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch sub-service data' },
-      { status: 500 }
-    );
+    console.error('GET /api/superadmin/services/[slug] error:', error);
+    return errorResponse(error?.message || 'Failed to fetch sub-service data', 500);
   }
 }
 
@@ -54,15 +50,9 @@ export async function PUT(
       revalidatePath('/', 'page');
     } catch {}
 
-    return NextResponse.json({
-      success: true,
-      data: updated,
-      message: 'Service content updated live successfully.',
-    });
+    return successResponse(updated, 'Service content updated live successfully.');
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to update service content' },
-      { status: 500 }
-    );
+    console.error('PUT /api/superadmin/services/[slug] error:', error);
+    return errorResponse(error?.message || 'Failed to update service content', 500);
   }
 }

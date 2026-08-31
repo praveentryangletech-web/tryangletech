@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { servicesService } from '@/backend/services/services';
 import { DEFAULT_SERVICE_MAIN_CONTENT } from '@/backend/services/services/services.defaults';
+import { successResponse, errorResponse, notModifiedResponse } from '@/backend/utils/apiResponse';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,23 +18,23 @@ export async function GET(request: NextRequest) {
 
     const etag = (data as any)?.etag || '';
 
-    return NextResponse.json(
+    // 1. Check HTTP 304 Not Modified cache hit
+    if (clientEtag && etag && clientEtag === etag) {
+      return notModifiedResponse(etag, 'public, max-age=60, stale-while-revalidate=300');
+    }
+
+    // 2. Return standard success payload with cache headers
+    return successResponse(
+      data,
+      undefined,
+      200,
       {
-        success: true,
-        data,
-      },
-      {
-        status: 200,
-        headers: {
-          'ETag': etag,
-          'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
-        },
+        'ETag': etag,
+        'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
       }
     );
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch services' },
-      { status: 500 }
-    );
+    console.error('GET /api/services error:', error);
+    return errorResponse(error?.message || 'Failed to fetch services content', 500);
   }
 }

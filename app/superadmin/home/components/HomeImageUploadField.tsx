@@ -35,6 +35,11 @@ export default function HomeImageUploadField({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [hasLoadError, setHasLoadError] = useState(false);
+
+  React.useEffect(() => {
+    setHasLoadError(false);
+  }, [value]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;

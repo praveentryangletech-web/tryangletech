@@ -552,8 +552,12 @@ class MediaService {
     // 3. Try Cloudinary fallback if configured
     if (this.isCloudinaryConfigured) {
       try {
-        const baseName = path.basename(cleanFilename, path.extname(cleanFilename));
-        const ext = (path.extname(cleanFilename) || '.png').replace('.', '');
+        const rawExt = path.extname(cleanFilename).toLowerCase();
+        if (!rawExt || !ALLOWED_EXTENSIONS.has(rawExt)) {
+          return null;
+        }
+        const baseName = path.basename(cleanFilename, rawExt);
+        const ext = rawExt.replace('.', '');
         const cloudinaryUrl = `https://res.cloudinary.com/${this.cloudName}/image/upload/${CLOUDINARY_FOLDER}/${baseName}.${ext}`;
         const res = await fetch(cloudinaryUrl);
         if (res.ok) {

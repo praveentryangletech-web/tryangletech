@@ -21,6 +21,12 @@ export async function GET(
       return new NextResponse('Invalid filename', { status: 400 });
     }
 
+    const ext = path.extname(cleanFilename).toLowerCase();
+    const ALLOWED_EXTS = new Set(['.webp', '.png', '.jpg', '.jpeg', '.svg', '.gif', '.avif', '.ico']);
+    if (!ext || !ALLOWED_EXTS.has(ext)) {
+      return new NextResponse('Asset not found', { status: 404 });
+    }
+
     const asset = await mediaService.getAssetBuffer(cleanFilename);
     if (!asset) {
       return new NextResponse('Asset not found', { status: 404 });

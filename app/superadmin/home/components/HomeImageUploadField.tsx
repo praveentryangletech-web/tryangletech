@@ -184,7 +184,14 @@ export default function HomeImageUploadField({
             boxSizing: 'border-box',
           }}
         >
-          {isImg ? (
+          {hasLoadError ? (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px', padding: '4px' }}>
+              <span style={{ fontSize: '1rem' }}>⚠️</span>
+              <span style={{ fontSize: '0.62rem', color: '#DC2626', fontWeight: 700, textAlign: 'center', lineHeight: 1.1 }}>
+                Not Found
+              </span>
+            </div>
+          ) : isImg ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={value}
@@ -198,10 +205,14 @@ export default function HomeImageUploadField({
               }}
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
-                if (value.includes('/portfolio/') && !img.src.includes('/api/media/')) {
+                if (value && value.includes('/portfolio/') && !img.src.includes('/api/media/')) {
                   const filename = value.split('/').pop() || '';
-                  img.src = `/api/media/${encodeURIComponent(filename)}`;
+                  if (filename) {
+                    img.src = `/api/media/${encodeURIComponent(filename)}`;
+                    return;
+                  }
                 }
+                setHasLoadError(true);
               }}
             />
           ) : (

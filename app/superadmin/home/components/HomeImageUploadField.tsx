@@ -402,6 +402,46 @@ export default function HomeImageUploadField({
           ⚠ {uploadError}
         </span>
       )}
+
+      {hasLoadError && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '8px',
+            backgroundColor: '#FEF2F2',
+            border: '1px solid #FECACA',
+            borderRadius: '6px',
+            padding: '6px 10px',
+            fontSize: '0.75rem',
+            color: '#B91C1C',
+            fontWeight: 600,
+          }}
+        >
+          <span>⚠️ Image asset could not be loaded from storage or server.</span>
+          <button
+            type="button"
+            onClick={() => {
+              onChange('/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif');
+              setHasLoadError(false);
+            }}
+            style={{
+              padding: '3px 8px',
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #F87171',
+              borderRadius: '4px',
+              color: '#DC2626',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            Reset to Template Hero Image
+          </button>
+        </div>
+      )}
     </div>
   );
 }

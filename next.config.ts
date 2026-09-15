@@ -79,7 +79,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/(Taskopia_files|about-assets|service-2-assets|service3-assets|portfolio|images|fonts|icons)/:path*',
+        source: '/(Taskopia_files|about-assets|service-2-assets|service3-assets|images|fonts|icons)/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/portfolio/:file.:ext(webp|png|jpg|jpeg|svg|gif|avif|ico|WEBP|PNG|JPG|JPEG|SVG|GIF|AVIF|ICO)',
         headers: [
           {
             key: 'Cache-Control',
@@ -120,14 +129,14 @@ const nextConfig: NextConfig = {
       ],
       afterFiles: [
         {
-          source: '/portfolio/:filename*',
-          destination: '/api/media/:filename*',
+          source: '/portfolio/:file.:ext(webp|png|jpg|jpeg|svg|gif|avif|ico|WEBP|PNG|JPG|JPEG|SVG|GIF|AVIF|ICO)',
+          destination: '/api/media/:file.:ext',
         },
       ],
       fallback: [
         {
-          source: '/portfolio/:filename*',
-          destination: '/api/media/:filename*',
+          source: '/portfolio/:file.:ext(webp|png|jpg|jpeg|svg|gif|avif|ico|WEBP|PNG|JPG|JPEG|SVG|GIF|AVIF|ICO)',
+          destination: '/api/media/:file.:ext',
         },
       ],
     };

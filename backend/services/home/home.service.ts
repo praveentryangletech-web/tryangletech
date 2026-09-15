@@ -65,9 +65,17 @@ export const homeService = {
 
       if (rows && rows.length > 0) {
         const row = rows[0];
+        let heroData = row.hero ? (typeof row.hero === 'string' ? JSON.parse(row.hero) : row.hero) : DEFAULT_HOME_CONTENT.hero;
+        if (heroData && (heroData.dashboardImage === '/portfolio/tg-website-home-pi.webp' || !heroData.dashboardImage)) {
+          heroData = {
+            ...heroData,
+            dashboardImage: DEFAULT_HOME_CONTENT.hero.dashboardImage,
+          };
+        }
+
         const content: HomeContentDTO = {
           id: 'home_main_v1',
-          hero: row.hero ? (typeof row.hero === 'string' ? JSON.parse(row.hero) : row.hero) : DEFAULT_HOME_CONTENT.hero,
+          hero: heroData,
           services: row.services ? (typeof row.services === 'string' ? JSON.parse(row.services) : row.services) : DEFAULT_HOME_CONTENT.services,
           about: row.about ? (typeof row.about === 'string' ? JSON.parse(row.about) : row.about) : DEFAULT_HOME_CONTENT.about,
           whyChooseUs: row.whyChooseUs ? (typeof row.whyChooseUs === 'string' ? JSON.parse(row.whyChooseUs) : row.whyChooseUs) : DEFAULT_HOME_CONTENT.whyChooseUs,

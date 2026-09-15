@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from 'react';
 import NextImage, { ImageProps } from "next/image";
+import SafeImage from '@/app/common/SafeImage';
 
 const Image = ({ srcSet, ...props }: ImageProps & { srcSet?: string }) => {
   return <NextImage {...props} />;
@@ -39,11 +40,13 @@ export default function Hero({ hero: heroProp }: HeroProps) {
                         className={`rt-hero-v2-client-image rt-overflow-hidden ${idx > 0 ? 'rt-margin-left' : ''} rt-sub-image`}
                       >
                         {isImg ? (
-                          <Image
+                          <SafeImage
                             src={av}
+                            fallbackSrc="/Taskopia_files/68ff46366a330717f35394cb_kloudera-home-one-navbar-default-logo.svg"
                             alt={`Client ${idx + 1}`}
                             width={60}
                             height={60}
+                            unoptimized={true}
                             style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
                           />
                         ) : (
@@ -123,11 +126,16 @@ export default function Hero({ hero: heroProp }: HeroProps) {
             style={{ "transform": "translate3d(0px, 0%, 0px) scale3d(1, 1, 1)\n                  rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)", "transformStyle": "preserve-3d" }}
             className="rt-hero-v1-bottom">
             <div className="rt-hero-v1-image rt-overflow-hidden">
-              <Image
+              <SafeImage
                 src={hero.dashboardImage || "/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"}
+                fallbackSrc="/Taskopia_files/6915c8033293ed4e29e1f4ac_taskopia-hero-one-dashbord.avif"
                 loading="lazy"
                 alt={hero.dashboardImageAlt || "TryangleTech Digital Dashboard"}
-                height={669} width={800} style={{ width: "100%", height: "auto" }} />
+                height={669}
+                width={800}
+                unoptimized={true}
+                style={{ width: "100%", height: "auto" }}
+              />
             </div>
             <div className="rt-hero-v1-icon-1 rt-icon-on" style={{ "opacity": "1" }}>
               <Image
@@ -216,11 +224,13 @@ export default function Hero({ hero: heroProp }: HeroProps) {
                         className={`rt-hero-v2-client-image rt-overflow-hidden ${idx > 0 ? 'rt-margin-left' : ''} rt-sub-image`}
                       >
                         {isImg ? (
-                          <Image
+                          <SafeImage
                             src={av}
+                            fallbackSrc="/Taskopia_files/68ff46366a330717f35394cb_kloudera-home-one-navbar-default-logo.svg"
                             alt={`Client ${idx + 1}`}
                             width={60}
                             height={60}
+                            unoptimized={true}
                             style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
                           />
                         ) : (

@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   compress: true,
+  output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
@@ -117,7 +118,12 @@ const nextConfig: NextConfig = {
           destination: '/Home3_files/fonts.css',
         },
       ],
-      afterFiles: [],
+      afterFiles: [
+        {
+          source: '/portfolio/:filename*',
+          destination: '/api/media/:filename*',
+        },
+      ],
       fallback: [
         {
           source: '/portfolio/:filename*',

@@ -286,7 +286,7 @@ class MediaService {
           if (!assetMap.has(item.filename)) {
             assetMap.set(item.filename, {
               filename: item.filename,
-              url: `/portfolio/${item.filename}`,
+              url: `/api/media/${item.filename}`,
               altText: item.altText || '',
               size: item.size,
               updatedAt: new Date(item.updatedAt).toISOString(),
@@ -425,7 +425,7 @@ class MediaService {
 
       return {
         filename: targetFilename,
-        url: `/portfolio/${targetFilename}`,
+        url: `/api/media/${targetFilename}`,
         altText: altText.trim(),
         size: file.size,
       };
@@ -434,7 +434,7 @@ class MediaService {
     // ----------------------------------------------------
     // MODE 4: HYBRID (Default & Recommended)
     // ----------------------------------------------------
-    let finalUrl = `/portfolio/${targetFilename}`;
+    let finalUrl = `/api/media/${targetFilename}`;
 
     // 1. Try Cloudinary if credentials exist
     if (this.isCloudinaryConfigured) {
